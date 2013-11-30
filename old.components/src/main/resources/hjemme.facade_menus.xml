@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+  <!-- The profile menu -->
+  <bean id="profileMenu" class="nu.hjemme.web.menu.Menu" p:name="profile">
+    <property name="items">
+      <list>
+        <bean class="nu.hjemme.web.menu.MenuItem" p:choice="profile.login" p:target="login.do" />
+        <bean class="nu.hjemme.web.menu.MenuItem" p:choice="profile.show" p:target="profile.do" />
+        <bean class="nu.hjemme.web.menu.MenuItem" p:choice="profile.about" p:target="about.do" />
+      </list>
+    </property>
+  </bean>
+
+  <!-- The main menu -->
+  <bean id="mainMenu" class="nu.hjemme.web.menu.Menu" p:name="main">
+    <property name="items">
+      <list>
+        <ref local="users" />
+      </list>
+    </property>
+  </bean>
+
+  <bean id="users" class="nu.hjemme.web.menu.MenuItem" p:choice="user.choose" p:target="user.do">
+    <property name="children">
+      <list>
+        <bean class="nu.hjemme.web.menu.MenuItem" p:choice="user.show" p:target="user.do">
+          <property name="parameters">
+            <map key-type="java.lang.String" value-type="java.lang.String">
+              <entry key="user" value="tip" />
+            </map>
+          </property>
+        </bean>
+        <bean class="nu.hjemme.web.menu.MenuItem" p:choice="user.show" p:target="user.do">
+          <property name="parameters">
+            <map key-type="java.lang.String" value-type="java.lang.String">
+              <entry key="user" value="jactor" />
+            </map>
+          </property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+</beans>

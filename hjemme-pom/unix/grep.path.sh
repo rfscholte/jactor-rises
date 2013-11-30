@@ -1,0 +1,3 @@
+# Searches recursively after a filename, ignores svn and target folders...
+
+find . | grep $1 | grep /\.svn -v | grep /target -v | grep --color $1

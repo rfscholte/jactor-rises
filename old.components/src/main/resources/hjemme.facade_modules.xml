@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+  <bean id="hjemmeFacade" class="nu.hjemme.facade.HjemmeFacadeImpl">
+    <property name="environment" ref="environment" />
+  </bean>
+
+  <bean id="menuFacade" class="nu.hjemme.facade.menu.MenuFacadeImpl">
+    <property name="menus">
+      <list>
+        <ref bean="mainMenu" />
+        <ref bean="profileMenu" />
+      </list>
+    </property>
+  </bean>
+
+  <bean id="environment" class="nu.hjemme.module.Environment" init-method="init">
+    <property name="timeZone" value="Europe/Oslo" />
+    <property name="defaultLocale" ref="defaultLocale" />
+    <property name="passwordValidator" ref="passwordValidator" />
+  </bean>
+
+  <bean id="passwordValidator" class="nu.hjemme.module.support.PasswordValidator" init-method="init">
+    <property name="mandatoryPatterns" ref="passwordPatterns" />
+    <property name="errorPrefix" value="error.password" />
+    <property name="requiredLength" value="6" />
+  </bean>
+</beans>

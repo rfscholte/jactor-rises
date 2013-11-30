@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id = "mainMenu" class = "nu.hjemme.client.dto.MenuDto">
+        <property name = "name" value = "main" />
+        <property name = "menuItems">
+            <list>
+                <ref bean = "home" />
+                <ref bean = "jactor" />
+                <ref bean = "tip" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id = "profileMenu" class = "nu.hjemme.client.dto.MenuDto">
+        <property name = "name" value = "profile" />
+        <property name = "menuItems">
+            <list>
+                <ref bean = "about" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id = "home" class = "nu.hjemme.client.dto.MenuItemDto">
+        <property name = "description" value = "menu.main.home.desc" />
+        <property name = "menuItemTarget" value = "home.do" />
+        <property name = "name" value = "menu.main.home" />
+    </bean>
+
+    <bean id = "jactor" class = "nu.hjemme.client.dto.MenuItemDto">
+        <property name = "description" value = "menu.main.jactor.desc" />
+        <property name = "menuItemTarget" value = "user.do?choose=jactor" />
+        <property name = "name" value = "menu.main.jactor" />
+    </bean>
+
+    <bean id = "tip" class = "nu.hjemme.client.dto.MenuItemDto">
+        <property name = "description" value = "menu.main.tip.desc" />
+        <property name = "menuItemTarget" value = "user.do?choose=tip" />
+        <property name = "name" value = "menu.main.tip" />
+    </bean>
+
+    <bean id = "about" class = "nu.hjemme.client.dto.MenuItemDto">
+        <property name = "description" value = "menu.profile.about.desc" />
+        <property name = "menuItemTarget" value = "about.do" />
+        <property name = "name" value = "menu.profile.about" />
+    </bean>
+</beans>

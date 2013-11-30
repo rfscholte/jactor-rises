@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns = "http://maven.apache.org/POM/4.0.0" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>hjemme-pom</artifactId>
+        <groupId>nu.hjemme</groupId>
+        <version>1.0.16</version>
+    </parent>
+
+    <artifactId>hjemme</artifactId>
+    <name>hjemme</name>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <description>The main pom for hjemme.nu</description>
+
+    <url>http://www.hjemme.nu</url>
+
+    <modules>
+        <module>hjemme-client</module>
+        <module>hjemme-facade</module>
+        <module>hjemme-module</module>
+        <module>hjemme-test</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- www.hjemme.nu -->
+
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-client</artifactId>
+                <version>${hjemme-client-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-facade</artifactId>
+                <version>${hjemme-facade-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-module</artifactId>
+                <version>${hjemme-module-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-test</artifactId>
+                <version>${hjemme-test-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>${hsqldb-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>${javax.persistence-version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <properties>
+        <!-- Internal dependencies -->
+        <hjemme-client-version>1.0-SNAPSHOT</hjemme-client-version>
+        <hjemme-facade-version>1.0-SNAPSHOT</hjemme-facade-version>
+        <hjemme-module-version>1.0-SNAPSHOT</hjemme-module-version>
+        <hjemme-test-version>1.0-SNAPSHOT</hjemme-test-version>
+        <hsqldb-version>2.2.4</hsqldb-version>
+        <javax.persistence-version>1.0.2</javax.persistence-version>
+    </properties>
+</project>
