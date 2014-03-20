@@ -2,14 +2,16 @@ package nu.hjemme.module.domain;
 
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.dto.MenuItemDto;
-import nu.hjemme.test.RequirementsMatcher;
-import org.hamcrest.Matcher;
+import nu.hjemme.test.MatchBuilder;
+import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Test;
 
 import static nu.hjemme.test.CollectionTests.assertThatEqualsIsImplementedCorrect;
 import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -30,20 +32,15 @@ public class MenuItemTest {
 
         MenuItemTarget menuItemTarget = new MenuItem(menuItemDto).getMenuItemTarget();
 
-        assertThat(menuItemTarget, containsNoParameters());
-    }
-
-    private Matcher<MenuItemTarget> containsNoParameters() {
-        return new RequirementsMatcher<MenuItemTarget>("containsNoParameters") {
-
+        assertThat(menuItemTarget, new NotNullBuildMatching<MenuItemTarget>("Et menyvalg uten parametre") {
             @Override
-            protected void checkRequirementsFor(MenuItemTarget typeSafeItemToMatch) {
-                checkIf("Target", typeSafeItemToMatch.getTarget(), is(equalTo("target")));
-                checkIf("Parameters", typeSafeItemToMatch.getParameters(), is(notNullValue()));
-                checkIf("Parameters is empty", typeSafeItemToMatch.getParameters().isEmpty(),
-                        is(equalTo(true)));
+            public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
+                return matchBuilder
+                        .matches(menuItemTarget.getTarget(), is(equalTo("target")), "Target")
+                        .failIfMismatch(menuItemTarget.getParameters(), is(not(nullValue())), "Parameters")
+                        .matches(menuItemTarget.getParameters().isEmpty(), is(equalTo(true)), "Ingen parametre");
             }
-        };
+        });
     }
 
     @Test
@@ -55,23 +52,16 @@ public class MenuItemTest {
         MenuItem menuItem = new MenuItem(mockedMenuItemDto);
         MenuItemTarget menuItemTarget = menuItem.getMenuItemTarget();
 
-        assertThat(menuItemTarget, hasParametersConvertedFromString());
-    }
-
-    private Matcher<MenuItemTarget> hasParametersConvertedFromString() {
-        return new RequirementsMatcher<MenuItemTarget>("hasParametersConvertedFromString") {
-
+        assertThat(menuItemTarget, new NotNullBuildMatching<MenuItemTarget>("har parameter konvertert fra målstreng") {
             @Override
-            protected void checkRequirementsFor(MenuItemTarget menuItemTarget) {
-                checkIf("Target", menuItemTarget.getTarget(), is(equalTo("target")));
-                checkIf("Parameters", menuItemTarget.getParameters(), is(notNullValue()));
-                checkIf("Parameters.size()", menuItemTarget.getParameters().size(), is(equalTo(1)));
-                checkIf("Parameters.toString()",
-                        menuItemTarget.getParameters().iterator().next().toString(),
-                        is(equalTo("some=parameter"))
-                );
+            public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
+                return matchBuilder
+                        .matches(menuItemTarget.getTarget(), is(equalTo("target")), "målet uten parameter")
+                        .failIfMismatch(menuItemTarget.getParameters(), is(notNullValue()), "parametre")
+                        .matches(menuItemTarget.getParameters().size(), is(equalTo(1)), "antall parametre")
+                        .matches(menuItemTarget.getParameters().iterator().next().toString(), is(equalTo("some=parameter")), "parameteret");
             }
-        };
+        });
     }
 
     @Test
@@ -133,29 +123,30 @@ public class MenuItemTest {
     }
 
     @Test
-    public void willTellIfMenuItemHasChildWhichIsChosen() {
+    public void skalIkkeHaEtValgtMenyvalgHvisMalstrengenTilBarnetErUkjent() {
         MenuItemDto mockedMenuItemDto = MenuItemBuilderForJUnit.build().addChild("some child", "hit?dead=center").mockDto();
         MenuItem testMenuItem = new MenuItem(mockedMenuItemDto);
 
-        assertThat(testMenuItem, isChosenByMenuItemTarget());
+        assertThat(testMenuItem, new NotNullBuildMatching<MenuItem>("MenuItem som ikke har valgt barn") {
+            @Override
+            public MatchBuilder matches(MenuItem menuItem, MatchBuilder matchBuilder) {
+                return matchBuilder.matches(menuItem.isChildChosenBy(new MenuItemTarget("miss?some=where")),
+                        is(equalTo(false)), "is chosen by");
+            }
+        });
     }
 
-    private Matcher<MenuItem> isChosenByMenuItemTarget() {
-        return new RequirementsMatcher<MenuItem>("isChosenByMenuItemTarget") {
-            @Override
-            protected void checkRequirementsFor(MenuItem typeSafeItemToMatch) {
-                checkIf(
-                        "Should not be chosen",
-                        typeSafeItemToMatch.isChildChosenBy(new MenuItemTarget("miss?some=where")),
-                        is(equalTo(false))
-                );
+    @Test
+    public void skalHaEtValgtMenyvalgHvisMalstrengenTilBarnetErKjent() {
+        MenuItemDto mockedMenuItemDto = MenuItemBuilderForJUnit.build().addChild("some child", "hit?dead=center").mockDto();
+        MenuItem testMenuItem = new MenuItem(mockedMenuItemDto);
 
-                checkIf(
-                        "Should be chosen",
-                        typeSafeItemToMatch.isChildChosenBy(new MenuItemTarget("hit?dead=center")),
-                        is(equalTo(true))
-                );
+        assertThat(testMenuItem, new NotNullBuildMatching<MenuItem>("") {
+            @Override
+            public MatchBuilder matches(MenuItem menuItem, MatchBuilder matchBuilder) {
+                return matchBuilder.matches(menuItem.isChildChosenBy(new MenuItemTarget("hit?dead=center")),
+                        is(equalTo(true)), "is chosen by");
             }
-        };
+        });
     }
 }

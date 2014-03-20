@@ -1,7 +1,7 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.RequirementsMatcher;
-import org.hamcrest.Matcher;
+import nu.hjemme.test.MatchBuilder;
+import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Test;
 
 import static nu.hjemme.test.CollectionTests.assertThatEqualsIsImplementedCorrect;
@@ -40,16 +40,13 @@ public class ParameterTest {
     public void whenCreatedWithStringTheParameterShouldBeSplitByAnEqualSign() {
         Parameter parameter = new Parameter("some=where");
 
-        assertThat(parameter, isKeyValue("some", "where"));
-    }
-
-    private Matcher<Parameter> isKeyValue(final String key, final String value) {
-        return new RequirementsMatcher<Parameter>("key=" + key + "&value=" + value) {
+        assertThat(parameter, new NotNullBuildMatching<Parameter>("har splittet opp parameter i 'key/value'") {
             @Override
-            protected void checkRequirementsFor(Parameter typeSafeItemToMatch) {
-                checkIf("Key", typeSafeItemToMatch.getKey(), is(equalTo(key)));
-                checkIf("Value", typeSafeItemToMatch.getValue(), is(equalTo(value)));
+            public MatchBuilder matches(Parameter parameter, MatchBuilder matchBuilder) {
+                return matchBuilder
+                        .matches(parameter.getKey(), is(equalTo("some")), "key")
+                        .matches(parameter.getValue(), is(equalTo("where")), "value");
             }
-        };
+        });
     }
 }

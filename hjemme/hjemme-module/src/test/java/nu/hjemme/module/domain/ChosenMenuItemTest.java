@@ -1,8 +1,8 @@
 package nu.hjemme.module.domain;
 
 import nu.hjemme.client.datatype.MenuItemTarget;
-import nu.hjemme.test.RequirementsMatcher;
-import org.hamcrest.Matcher;
+import nu.hjemme.test.MatchBuilder;
+import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -38,17 +38,14 @@ public class ChosenMenuItemTest {
                 new MenuItemTarget("hit?something=hard")
         );
 
-        assertThat(testChosenMenuItem, hasNoChosenChild());
-    }
-
-    private Matcher<ChosenMenuItem> hasNoChosenChild() {
-        return new RequirementsMatcher<ChosenMenuItem>("hasNoChosenChild") {
+        assertThat(testChosenMenuItem, new NotNullBuildMatching<ChosenMenuItem>("chosen menu item med ingen valgte barn") {
             @Override
-            protected void checkRequirementsFor(ChosenMenuItem typeSafeItemToMatch) {
-                checkIf("Children", typeSafeItemToMatch.getChildren().size(), is(equalTo(2)));
-                checkIf("Child chosen", typeSafeItemToMatch.isChildChosen(), is(equalTo(false)));
+            public MatchBuilder matches(ChosenMenuItem chosenMenuItem, MatchBuilder matchBuilder) {
+                return matchBuilder
+                        .matches(chosenMenuItem.getChildren().size(), is(equalTo(2)), "ChosenMenuItem skal ha barn")
+                        .matches(chosenMenuItem.isChildChosen(), is(equalTo(false)), "Ingen barn skal være valgt");
             }
-        };
+        });
     }
 
     @Test
@@ -61,16 +58,13 @@ public class ChosenMenuItemTest {
                 new MenuItemTarget("hit?something=hard")
         );
 
-        assertThat(testChosenMenuItem, hasChosenChild());
-    }
-
-    private Matcher<ChosenMenuItem> hasChosenChild() {
-        return new RequirementsMatcher<ChosenMenuItem>("hasChosenChild") {
+        assertThat(testChosenMenuItem, new NotNullBuildMatching<ChosenMenuItem>("ChosenMenuItem med valgt barn") {
             @Override
-            protected void checkRequirementsFor(ChosenMenuItem typeSafeItemToMatch) {
-                checkIf("Children", typeSafeItemToMatch.getChildren().size(), is(equalTo(2)));
-                checkIf("Child chosen", typeSafeItemToMatch.isChildChosen(), is(equalTo(true)));
+            public MatchBuilder matches(ChosenMenuItem chosenMenuItem, MatchBuilder matchBuilder) {
+                return matchBuilder
+                        .matches(chosenMenuItem.getChildren().size(), is(equalTo(2)), "ChosenMenuItem skal ha barn")
+                        .matches(chosenMenuItem.isChildChosen(), is(equalTo(true)), "Et barn skal være valgt");
             }
-        };
+        });
     }
 }

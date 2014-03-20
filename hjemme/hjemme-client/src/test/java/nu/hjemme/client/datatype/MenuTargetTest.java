@@ -1,13 +1,15 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.RequirementsMatcher;
-import org.hamcrest.Matcher;
+import nu.hjemme.test.MatchBuilder;
+import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Test;
 
 import static nu.hjemme.test.CollectionTests.assertThatEqualsIsImplementedCorrect;
 import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
@@ -41,19 +43,15 @@ public class MenuTargetTest {
     public void willEncapsulateTheNameOfTheMenuAndTheTargetOnTheMenu() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("a target"), new Name("a menu"));
 
-        assertThat(menuTarget, hasNameAndTargetLike(new MenuItemTarget("a target"), new Name("a menu")));
-    }
-
-    private Matcher<MenuTarget> hasNameAndTargetLike(final MenuItemTarget menuItemTarget, final Name name) {
-        return new RequirementsMatcher<MenuTarget>("MenuTarget encapsulate name and target of a menu") {
+        assertThat(menuTarget, new NotNullBuildMatching<MenuTarget>("Et 'target' som inneholder navnet til menyen") {
             @Override
-            protected void checkRequirementsFor(MenuTarget typeSafeItemToMatch) {
-                checkIf("The name should be encapsulated", typeSafeItemToMatch.getMenuName(),
-                        is(equalTo(name)));
-
-                checkIf("The target should be encapsulated", typeSafeItemToMatch.getMenuItemTarget(),
-                        is(equalTo(menuItemTarget)));
+            public MatchBuilder matches(MenuTarget menuTarget, MatchBuilder matchBuilder) {
+                return matchBuilder
+                        .failIfMismatch(menuTarget.getMenuName(), is(not(nullValue())), "menuName")
+                        .matches(menuTarget.getMenuName().getName(), is(equalTo("a menu")), "menuName")
+                        .failIfMismatch(menuTarget.getMenuItemTarget(), is(not(nullValue())), "menuItemTarget")
+                        .matches(menuTarget.getMenuItemTarget().getTarget(), is(equalTo("a target")), "menuItemTarget");
             }
-        };
+        });
     }
 }

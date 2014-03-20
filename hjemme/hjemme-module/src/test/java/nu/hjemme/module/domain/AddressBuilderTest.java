@@ -1,7 +1,8 @@
 package nu.hjemme.module.domain;
 
 import nu.hjemme.client.datatype.Country;
-import nu.hjemme.test.RequirementsMatcher;
+import nu.hjemme.test.MatchBuilder;
+import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -71,15 +72,16 @@ public class AddressBuilderTest {
                 .appendZipCode(1234)
                 .build();
 
-        assertThat(address, new RequirementsMatcher<Address>("A domain with all properties set") {
+        assertThat(address, new NotNullBuildMatching<Address>("A domain with all properties set") {
             @Override
-            protected void checkRequirementsFor(Address addressToVerify) {
-                checkIf("Address line 1", addressToVerify.getAddressLine1(), is(equalTo("somewhere")));
-                checkIf("Address line 2", addressToVerify.getAddressLine2(), is(equalTo("somewhere else")));
-                checkIf("Address line 3", addressToVerify.getAddressLine3(), is(equalTo("way out there")));
-                checkIf("City", addressToVerify.getCity(), is(equalTo("some city")));
-                checkIf("Country", addressToVerify.getCountry(), is(equalTo(new Country("NO", "no"))));
-                checkIf("Zip Code", addressToVerify.getZipCode(), is(equalTo(1234)));
+            public MatchBuilder matches(Address address, MatchBuilder matchBuilder) {
+                return matchBuilder
+                        .matches(address.getAddressLine1(), is(equalTo("somewhere")), "Address line 1")
+                        .matches(address.getAddressLine2(), is(equalTo("somewhere else")), "Address line 2")
+                        .matches(address.getAddressLine3(), is(equalTo("way out there")), "Address line 3")
+                        .matches(address.getCity(), is(equalTo("some city")), "city")
+                        .matches(address.getCountry(), is(equalTo(new Country("NO", "no"))), "Country")
+                        .matches(address.getZipCode(), is(equalTo(1234)), "Zip code");
             }
         });
     }

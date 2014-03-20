@@ -6,20 +6,18 @@ import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.ChosenMenuItem;
 import nu.hjemme.facade.SpringCtx;
-import nu.hjemme.test.RequirementsMatcher;
-import org.hamcrest.Matcher;
+import nu.hjemme.test.MatchBuilder;
+import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -43,24 +41,21 @@ public class MenuFacadeFactoryIntegrationTest {
 
         List<ChosenMenuItem> chosenMenuItems = testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
 
-        assertThat(chosenMenuItems, is(aListWhichContainsCorrectChosenMenuItems()));
-    }
-
-    private Matcher<List<ChosenMenuItem>> aListWhichContainsCorrectChosenMenuItems() {
-        return new RequirementsMatcher<List<ChosenMenuItem>>("aListWhichContainsCorrectChosenMenuItems") {
+        assertThat(chosenMenuItems, new NotNullBuildMatching<List<ChosenMenuItem>>("En liste med test menyvalg fra test context") {
             @Override
-            protected void checkRequirementsFor(List<ChosenMenuItem> typeSafeItemToMatch) {
-                List<ChosenMenuItem> emptyList = new ArrayList<ChosenMenuItem>();
-                checkIf("Items", typeSafeItemToMatch, is(not(emptyList)));
+            public MatchBuilder matches(List<ChosenMenuItem> chosenMenuItems, MatchBuilder matchBuilder) {
+                matchBuilder.matches(chosenMenuItems.isEmpty(), is(equalTo(false)), "lista kan ikke være tom");
 
-                for (ChosenMenuItem chosenMenuItem : typeSafeItemToMatch) {
+                for (ChosenMenuItem chosenMenuItem : chosenMenuItems) {
                     if (new Name("testParent").equals(chosenMenuItem.getDescription().getItemName())) {
-                        checkIf("is child chosen", chosenMenuItem.isChildChosen(), is(equalTo(true)));
+                        matchBuilder.matches(chosenMenuItem.isChildChosen(), is(equalTo(true)), "testParent sitt barn skal vaere valgt");
                     } else {
-                        checkIf("is chosen", chosenMenuItem.isChosen(), is(equalTo(true)));
+                        matchBuilder.matches(chosenMenuItem.isChosen(), is(equalTo(true)), "menyvalget skal være valgt");
                     }
                 }
+
+                return matchBuilder;
             }
-        };
+        });
     }
 }
