@@ -12,11 +12,6 @@
     <url>http://www.hjemme.nu</url>
 
     <dependencies>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-        </dependency>
-
         <!-- test scope-->
         <dependency>
             <groupId>org.hamcrest</groupId>
