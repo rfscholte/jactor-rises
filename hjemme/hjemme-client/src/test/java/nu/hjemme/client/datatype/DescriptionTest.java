@@ -1,9 +1,10 @@
 package nu.hjemme.client.datatype;
 
+import nu.hjemme.test.EqualsMatching;
 import org.junit.Test;
 
-import static nu.hjemme.test.CollectionTests.assertThatEqualsIsImplementedCorrect;
 import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
+import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class DescriptionTest {
@@ -23,6 +24,10 @@ public class DescriptionTest {
         Description equal = new Description("some item", "some description");
         Description notEqual = new Description("some other item", "some other description");
 
-        assertThatEqualsIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new EqualsMatching(base)
+                        .isEqualTo(equal)
+                        .isNotEqualTo(notEqual)
+                        .isMatch()
+        );
     }
 }

@@ -1,15 +1,16 @@
 package nu.hjemme.client.datatype;
 
+import nu.hjemme.test.EqualsMatching;
 import org.junit.Test;
 
 import java.util.Locale;
 
-import static nu.hjemme.test.CollectionTests.assertThatEqualsIsImplementedCorrect;
 import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /** @author Tor Egil Jacobsen */
@@ -46,7 +47,11 @@ public class CountryTest {
         Country equal = new Country("NO", "no");
         Country notEqual = new Country("SE", "se");
 
-        assertThatEqualsIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new EqualsMatching(base)
+                        .isEqualTo(equal)
+                        .isNotEqualTo(notEqual)
+                        .isMatch()
+        );
     }
 
     @Test

@@ -1,14 +1,15 @@
 package nu.hjemme.client.datatype;
 
+import nu.hjemme.test.EqualsMatching;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Test;
 
-import static nu.hjemme.test.CollectionTests.assertThatEqualsIsImplementedCorrect;
 import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class ParameterTest {
@@ -28,7 +29,11 @@ public class ParameterTest {
         Parameter equal = new Parameter("param", "value");
         Parameter notEqual = new Parameter("another param", "value");
 
-        assertThatEqualsIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new EqualsMatching(base)
+                        .isEqualTo(equal)
+                        .isNotEqualTo(notEqual)
+                        .isMatch()
+        );
     }
 
     @Test

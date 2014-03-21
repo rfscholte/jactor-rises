@@ -1,12 +1,13 @@
 package nu.hjemme.client.datatype;
 
+import nu.hjemme.test.EqualsMatching;
 import org.junit.Test;
 
-import static nu.hjemme.test.CollectionTests.assertThatEqualsIsImplementedCorrect;
 import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class NameTest {
@@ -26,7 +27,11 @@ public class NameTest {
         Name equal = new Name("name");
         Name notEqual = new Name("another name");
 
-        assertThatEqualsIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new EqualsMatching(base)
+                        .isEqualTo(equal)
+                        .isNotEqualTo(notEqual)
+                        .isMatch()
+        );
     }
 
     @Test

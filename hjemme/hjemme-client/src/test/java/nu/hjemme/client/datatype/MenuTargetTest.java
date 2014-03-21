@@ -1,16 +1,17 @@
 package nu.hjemme.client.datatype;
 
+import nu.hjemme.test.EqualsMatching;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Test;
 
-import static nu.hjemme.test.CollectionTests.assertThatEqualsIsImplementedCorrect;
 import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class MenuTargetTest {
@@ -30,7 +31,11 @@ public class MenuTargetTest {
         MenuTarget equal = new MenuTarget(new MenuItemTarget("a target"), new Name("a menu"));
         MenuTarget notEqual = new MenuTarget(new MenuItemTarget("on target"), new Name("a menu"));
 
-        assertThatEqualsIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new EqualsMatching(base)
+                        .isEqualTo(equal)
+                        .isNotEqualTo(notEqual)
+                        .isMatch()
+        );
     }
 
     @Test

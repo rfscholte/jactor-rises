@@ -1,9 +1,10 @@
 package nu.hjemme.module.persistence;
 
+import nu.hjemme.test.EqualsMatching;
 import org.junit.Test;
 
-import static nu.hjemme.test.CollectionTests.assertThatEqualsIsImplementedCorrect;
 import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
+import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class BlogEntityTest {
@@ -37,6 +38,10 @@ public class BlogEntityTest {
         notEqual.setUserEntity(new UserEntity());
         notEqual.setBlogId(1L);
 
-        assertThatEqualsIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new EqualsMatching(base)
+                        .isEqualTo(equal)
+                        .isNotEqualTo(notEqual)
+                        .isMatch()
+        );
     }
 }                           

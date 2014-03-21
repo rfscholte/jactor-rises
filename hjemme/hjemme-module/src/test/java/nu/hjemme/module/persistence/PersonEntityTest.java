@@ -1,10 +1,11 @@
 package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.datatype.Name;
+import nu.hjemme.test.EqualsMatching;
 import org.junit.Test;
 
-import static nu.hjemme.test.CollectionTests.assertThatEqualsIsImplementedCorrect;
 import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
+import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class PersonEntityTest {
@@ -42,6 +43,10 @@ public class PersonEntityTest {
         notEqual.setAddress(new AddressEntity());
         notEqual.setPersonId(1L);
 
-        assertThatEqualsIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new EqualsMatching(base)
+                        .isEqualTo(equal)
+                        .isNotEqualTo(notEqual)
+                        .isMatch()
+        );
     }
 }

@@ -1,12 +1,13 @@
 package nu.hjemme.client.datatype;
 
+import nu.hjemme.test.EqualsMatching;
 import org.junit.Test;
 
-import static nu.hjemme.test.CollectionTests.assertThatEqualsIsImplementedCorrect;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class UserNameTest {
@@ -38,9 +39,13 @@ public class UserNameTest {
     @Test
     public void willImplementHashCodeAccordingToTheJavaSpecifications() {
         UserName base = new UserName("someone");
-        UserName equalToBase = new UserName("SOMEONE");
-        UserName notEqualToBase = new UserName("SOMEONE else");
+        UserName equal = new UserName("SOMEONE");
+        UserName notEqual = new UserName("SOMEONE else");
 
-        assertThatEqualsIsImplementedCorrect(base, equalToBase, notEqualToBase);
+        assertTrue(new EqualsMatching(base)
+                        .isEqualTo(equal)
+                        .isNotEqualTo(notEqual)
+                        .isMatch()
+        );
     }
 }
