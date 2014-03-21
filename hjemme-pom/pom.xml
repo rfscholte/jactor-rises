@@ -186,7 +186,7 @@
         <commons.lang.version>2.6</commons.lang.version>
         <jodatime.version>2.0</jodatime.version>
         <junit.version>4.8.2</junit.version>
-        <log4j.version>1.2.16</log4j.version>
+        <log4j.version>1.2.17</log4j.version>
         <org.codehause.mojo.version>2.2</org.codehause.mojo.version>
         <org.efaps.version>1.0.1</org.efaps.version>
         <org.hamcrest.version>1.3</org.hamcrest.version>
