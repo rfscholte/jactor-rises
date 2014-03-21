@@ -7,7 +7,7 @@
     <name>hjemme-pom</name>
     <packaging>pom</packaging>
     <version>1.0.16</version>
-    <description>The parent pom for the application at www.hjemme.nu</description>
+    <description>The parent pom for the applications of www.hjemme.nu</description>
 
     <url>http://www.hjemme.nu</url>
 
