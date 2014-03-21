@@ -2,7 +2,9 @@ package nu.hjemme.client.datatype;
 
 import nu.hjemme.test.EqualsMatching;
 import nu.hjemme.test.HashCodeMatching;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Locale;
 
@@ -11,23 +13,24 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 /** @author Tor Egil Jacobsen */
 public class CountryTest {
 
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     @Test
-    public void whenCreatingAnInstanceAnExceptionIsThrownWhenUsingValuesNotAccordingToISO3166() {
-        Country country;
+    public void skalFeileNarInstansieringInneholderAndreLandkoderEnnFraISO3166() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(Country.NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166);
 
-        try {
-            country = new Country("illegal", "gb");
-            fail(country + " should not represent a valid country code");
-        } catch (IllegalArgumentException iae) {
-            assertThat("The error message should not be null", iae.getMessage(), is(notNullValue()));
-        }
+        new Country("illegal", "gb");
+    }
 
-        country = new Country("NO", "no");
+    @Test
+    public void skalIkkeFeileNarInstansieringInneholderLandkoderEnnFraISO3166() {
+        Country country = new Country("NO", "no");
 
         assertThat("Country initialized", country, is(notNullValue()));
     }
@@ -64,27 +67,39 @@ public class CountryTest {
     }
 
     @Test
-    public void whenCreatingAnInstanceTheNameOfTheCountryCannotBeEmpty() {
+    public void skalFeileNarCountryCodeErNull() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(Country.THE_COUNTRY_CODE_CANNOT_BE_EMPTY);
 
-        try {
-            new Country("NO", null);
-            fail("The code for the locale cannot be null!");
-        } catch (IllegalArgumentException iae) {
-            assertThat("The error message should not be null", iae.getMessage(), is(notNullValue()));
-        }
-
-        try {
-            new Country("NO", "");
-            fail("The the code for the lovale cannot be empty!");
-        } catch (IllegalArgumentException iae) {
-            assertThat("The error message should not be null", iae.getMessage(), is(notNullValue()));
-        }
-
-        assertThat("Country initialized", new Country("NO", "no"), is(notNullValue()));
+        new Country(null, "NO");
     }
 
     @Test
-    public void whenCreatingAnInstanceTheLocaleCodeWillBeConvertedTaALocale() {
+    public void skalFeileNarCountryCodeErTom() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(Country.THE_COUNTRY_CODE_CANNOT_BE_EMPTY);
+
+        new Country("", "NO");
+    }
+
+    @Test
+    public void skalFeileNarLocaleCodeErNull() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(Country.CODE_FOR_JAVA_UTIL_LOCALE_MUST_BE_PROVIDED);
+
+        new Country("NO", null);
+    }
+
+    @Test
+    public void skalFeileNarLocaleCodeErTom() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(Country.CODE_FOR_JAVA_UTIL_LOCALE_MUST_BE_PROVIDED);
+
+        new Country("NO", "");
+    }
+
+    @Test
+    public void whenCreatingAnInstanceTheLocaleCodeWillBeConvertedToJavaUtilLocale() {
         Country country = new Country("NO", "no");
 
         assertThat("Code", country.getCountryCode(), is(equalTo("NO")));

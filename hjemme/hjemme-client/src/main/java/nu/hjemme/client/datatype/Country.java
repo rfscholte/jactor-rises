@@ -5,8 +5,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-import java.util.Arrays;
 import java.util.Locale;
+
+import static java.util.Arrays.asList;
 
 /**
  * Representing a country according to the ISO 3166 standard. In addition to the country, you must add a specific {@link
@@ -14,6 +15,10 @@ import java.util.Locale;
  * @author Tor Egil Jacobsen
  */
 public class Country {
+    private static final String VALID_COUNTRY_CODES = ", valid codes: ";
+    static final String CODE_FOR_JAVA_UTIL_LOCALE_MUST_BE_PROVIDED = "The code for a java.util.Locale must be provided.";
+    static final String NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166 = " is not a valid countryCode according to ISO 3166";
+    static final String THE_COUNTRY_CODE_CANNOT_BE_EMPTY = "The country code cannot be empty";
 
     private final String countryCode;
     private final Locale locale;
@@ -25,8 +30,8 @@ public class Country {
     }
 
     private void validate(String countryCode, String localeCode) {
-        Validate.notEmpty(countryCode, "The country code cannot be empty");
-        Validate.notEmpty(localeCode, "A countryCode for a java.util.Locale must be provided.");
+        Validate.notEmpty(countryCode, THE_COUNTRY_CODE_CANNOT_BE_EMPTY);
+        Validate.notEmpty(localeCode, CODE_FOR_JAVA_UTIL_LOCALE_MUST_BE_PROVIDED);
 
         String[] isoCountries = Locale.getISOCountries();
 
@@ -37,8 +42,8 @@ public class Country {
         }
 
         String errorMessage = countryCode +
-                " is not a valid countryCode for a country according to ISO 3166, valid codes: " +
-                Arrays.asList(isoCountries);
+                NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166 +
+                VALID_COUNTRY_CODES + asList(isoCountries);
 
         throw new IllegalArgumentException(errorMessage);
     }
