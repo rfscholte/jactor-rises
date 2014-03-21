@@ -2,7 +2,11 @@ package nu.hjemme.client.datatype;
 
 import nu.hjemme.test.EqualsMatching;
 import nu.hjemme.test.HashCodeMatching;
+import nu.hjemme.test.MatchBuilder;
+import nu.hjemme.test.NotNullBuildMatching;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Set;
 
@@ -11,10 +15,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 /** @author Tor Egil Jacobsen */
 public class MenuItemTargetTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
@@ -49,55 +55,56 @@ public class MenuItemTargetTest {
 
     @Test
     public void whenInitializingTheTargetCannotBeNull() {
-        try {
-            new MenuItemTarget(null);
-            fail("Illegal initialize");
-        } catch (IllegalArgumentException iae) {
-            assertThat("IllegalArgumentException", iae.getMessage(),
-                    is(equalTo(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY)));
-        }
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY);
+
+        new MenuItemTarget(null);
     }
 
     @Test
     public void whenInitializingTheTargetCannotBeEmpty() {
-        try {
-            new MenuItemTarget("");
-            fail("Illegal initialize");
-        } catch (IllegalArgumentException iae) {
-            assertThat("IllegalArgumentException", iae.getMessage(),
-                    is(equalTo(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY)));
-        }
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY);
+
+        new MenuItemTarget("");
     }
 
     @Test
     public void whenInitializedParametersAreReadFromTheTargetString() {
-        MenuItemTarget testMenuItemTarget = new MenuItemTarget("target?param=value");
-        assertThat("The target should not contain the parameter string", testMenuItemTarget.getTarget(),
-                is(equalTo("target")));
+        assertThat(new MenuItemTarget("target?param=value"), new NotNullBuildMatching<MenuItemTarget>("Lest parameter fra MenuItemTarget") {
+            @Override
+            public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
+                matchBuilder.matches(menuItemTarget.getTarget(), is(equalTo("target")), "malnavn skal vere uten parameterstreng");
+                Set<Parameter> parameters = menuItemTarget.getParameters();
 
-        Set<Parameter> parameters = testMenuItemTarget.getParameters();
+                matchBuilder.failIfMismatch(parameters.size(), is(equalTo(1)), "parameter fra malstreng");
+                Parameter parameter = parameters.iterator().next();
 
-        assertThat("A param should be added", parameters.size(), is(equalTo(1)));
-
-        Parameter parameter = parameters.iterator().next();
-        assertThat("Parameter", parameter.getKey(), is(equalTo("param")));
-        assertThat("Parameter value", parameter.getValue(), is(equalTo("value")));
+                return matchBuilder
+                        .matches(parameter.getKey(), is(equalTo("param")), "parameter")
+                        .matches(parameter.getValue(), is(equalTo("value")), "parameterverdi");
+            }
+        });
     }
 
-    @SuppressWarnings(value = "unchecked")
     @Test
     public void whenInitializedSeveralParametersAreReadFromTheTargetString() {
-        MenuItemTarget testMenuItemTarget = new MenuItemTarget("target?param=value,another=parameter");
-        assertThat("The target should not contain the parameter string", testMenuItemTarget.getTarget(),
-                is(equalTo("target")));
+        assertThat(new MenuItemTarget("target?param=value,another=parameter"), new NotNullBuildMatching<MenuItemTarget>("Leste parametre fra MenuItemTarget") {
+            @Override
+            public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
+                matchBuilder.matches(menuItemTarget.getTarget(), is(equalTo("target")), "malnavn skal vere uten parameterstreng");
+                Set<Parameter> parameters = menuItemTarget.getParameters();
 
-        Set<Parameter> parameters = testMenuItemTarget.getParameters();
+                matchBuilder.failIfMismatch(parameters.size(), is(equalTo(2)), "parametre fra malstreng");
+                Parameter parameter = parameters.iterator().next();
+                Parameter annetParameter = parameters.iterator().next();
 
-        assertThat("A param should be added", parameters.size(), is(equalTo(2)));
-
-        for (Parameter parameter : parameters) {
-            assertThat("Parameter", parameter.getKey(), is(anyOf(equalTo("param"), equalTo("another"))));
-            assertThat("Parameter value", parameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter"))));
-        }
+                return matchBuilder
+                        .matches(parameter.getKey(),  is(anyOf(equalTo("param"), equalTo("another"))), "parameternavn")
+                        .matches(parameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter"))), "parameterverdier")
+                        .matches(annetParameter.getKey(),  is(anyOf(equalTo("param"), equalTo("another"))), "parameternavn")
+                        .matches(annetParameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter"))), "parameterverdier");
+            }
+        });
     }
 }
