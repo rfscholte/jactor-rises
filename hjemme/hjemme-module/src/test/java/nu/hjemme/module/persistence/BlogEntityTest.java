@@ -1,9 +1,9 @@
 package nu.hjemme.module.persistence;
 
 import nu.hjemme.test.EqualsMatching;
+import nu.hjemme.test.HashCodeMatching;
 import org.junit.Test;
 
-import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
 import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
@@ -22,7 +22,11 @@ public class BlogEntityTest {
         notEqual.setUserEntity(new UserEntity());
         notEqual.setBlogId(1L);
 
-        assertThatHashCodeIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new HashCodeMatching(base)
+                        .isImplementedForEquality(equal)
+                        .isUniqueImplementation(notEqual)
+                        .isMatch()
+        );
     }
 
     @Test

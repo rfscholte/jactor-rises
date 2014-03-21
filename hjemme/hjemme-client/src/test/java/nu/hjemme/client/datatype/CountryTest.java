@@ -1,11 +1,11 @@
 package nu.hjemme.client.datatype;
 
 import nu.hjemme.test.EqualsMatching;
+import nu.hjemme.test.HashCodeMatching;
 import org.junit.Test;
 
 import java.util.Locale;
 
-import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -38,7 +38,11 @@ public class CountryTest {
         Country equal = new Country("NO", "no");
         Country notEqual = new Country("SE", "se");
 
-        assertThatHashCodeIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new HashCodeMatching(base)
+                        .isImplementedForEquality(equal)
+                        .isUniqueImplementation(notEqual)
+                        .isMatch()
+        );
     }
 
     @Test

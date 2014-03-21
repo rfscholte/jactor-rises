@@ -1,11 +1,11 @@
 package nu.hjemme.client.datatype;
 
 import nu.hjemme.test.EqualsMatching;
+import nu.hjemme.test.HashCodeMatching;
 import org.junit.Test;
 
 import java.util.Set;
 
-import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -22,7 +22,11 @@ public class MenuItemTargetTest {
         MenuItemTarget equal = new MenuItemTarget("target");
         MenuItemTarget notEqual = new MenuItemTarget("another target");
 
-        assertThatHashCodeIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new HashCodeMatching(base)
+                        .isImplementedForEquality(equal)
+                        .isUniqueImplementation(notEqual)
+                        .isMatch()
+        );
     }
 
     @Test

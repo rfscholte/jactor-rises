@@ -3,11 +3,11 @@ package nu.hjemme.module.domain;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.dto.MenuItemDto;
 import nu.hjemme.test.EqualsMatching;
+import nu.hjemme.test.HashCodeMatching;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Test;
 
-import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -85,7 +85,11 @@ public class MenuItemTest {
                 .addChild("childName", "childTarget?child=parameter")
                 .retrieveInstance();
 
-        assertThatHashCodeIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new HashCodeMatching(base)
+                        .isImplementedForEquality(equal)
+                        .isUniqueImplementation(notEqual)
+                        .isMatch()
+        );
     }
 
     @Test

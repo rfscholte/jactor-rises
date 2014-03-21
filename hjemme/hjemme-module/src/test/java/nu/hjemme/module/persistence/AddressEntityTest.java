@@ -2,9 +2,9 @@ package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.test.EqualsMatching;
+import nu.hjemme.test.HashCodeMatching;
 import org.junit.Test;
 
-import static nu.hjemme.test.CollectionTests.assertThatHashCodeIsImplementedCorrect;
 import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
@@ -33,7 +33,11 @@ public class AddressEntityTest {
         notEqual.setAddressLine2("some place");
         notEqual.setAddressLine3("in the distance");
 
-        assertThatHashCodeIsImplementedCorrect(base, equal, notEqual);
+        assertTrue(new HashCodeMatching(base)
+                        .isImplementedForEquality(equal)
+                        .isUniqueImplementation(notEqual)
+                        .isMatch()
+        );
     }
 
     @Test
