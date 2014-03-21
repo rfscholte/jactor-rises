@@ -2,12 +2,12 @@ package nu.hjemme.module.domain;
 
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.module.domain.base.DomainBuilder;
-import nu.hjemme.module.persistence.*;
+import nu.hjemme.module.persistence.AddressEntity;
 import nu.hjemme.module.persistence.mutable.MutableAddress;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
-public class AddressBuilder extends DomainBuilder<Address, MutableAddress> {
+public class AddressBuilder extends DomainBuilder<Address> {
     static final String ADDRESS_LINE_1_CANNOT_BE_EMPTY = "Address line 1 cannot be empty";
     static final String COUNTRY_CANNOT_BE_NULL = "A country must be provided";
     static final String ZIP_CODE_CANNOT_BE_NULL = "A Zip code must be provided";
@@ -45,22 +45,12 @@ public class AddressBuilder extends DomainBuilder<Address, MutableAddress> {
     }
 
     @Override
-    protected void validateMutableData() {
-        validate(mutableAddress);
-    }
-
-    @Override
     protected Address buildInstance() {
         return new Address(mutableAddress);
     }
 
     @Override
-    protected Address buildInstance(MutableAddress mutableAddress) {
-        return new Address(this.mutableAddress);
-    }
-
-    @Override
-    protected void validate(MutableAddress mutableAddress) {
+    protected void validate() {
         Validate.notEmpty(mutableAddress.getAddressLine1(), ADDRESS_LINE_1_CANNOT_BE_EMPTY);
         Validate.notNull(mutableAddress.getZipCode(), ZIP_CODE_CANNOT_BE_NULL);
         Validate.notNull(mutableAddress.getCountry(), COUNTRY_CANNOT_BE_NULL);

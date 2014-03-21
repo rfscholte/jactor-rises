@@ -1,91 +1,51 @@
 package nu.hjemme.module.domain.base;
 
-import org.junit.Rule;
+import nu.hjemme.test.MatchBuilder;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class DomainBuilderTest {
+    private TestDomainBuilder testDomainBuilder;
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
-    @Test
-    public void willFailIfTryingToBuildDomainWithMoreThanOneMutable() {
-        expectedException.expect(IllegalArgumentException.class);
-
-        TestDomainBuilder testDomainBuilder = new TestDomainBuilder();
-
-        Object mockedObject = mock(Object.class);
-        testDomainBuilder.build(mockedObject, mockedObject);
+    @Before
+    public void initForTesting() {
+        testDomainBuilder = new TestDomainBuilder();
     }
 
     @Test
-    public void willBuildWithoutArgumentWhenNoMutableDataIsProvided() {
-        TestDomainBuilder testDomainBuilder = new TestDomainBuilder();
+    public void skalByggeEtDomeneNarBuildMetodeKalles() {
+        assertThat("skal bygge domene", testDomainBuilder.build(), is(notNullValue()));
+    }
+
+    @Test
+    public void skalValidereDomeneVedByging() {
+        MatchBuilder matchBuilder = new MatchBuilder("Validering av domene ved bygging")
+                .matches(testDomainBuilder.validated, is(equalTo(false)), "before build");
+
         testDomainBuilder.build();
-        Spy spy = testDomainBuilder.getSpy();
 
-        assertThat("The sub classes should not be called with an argument", spy,
-                is(equalTo(Spy.INVOKED_WITHOUT_ARGUMENT)));
+        matchBuilder.matches(testDomainBuilder.validated, is(equalTo(true)), "after build");
+        assertTrue(matchBuilder.isMatch());
     }
 
-    @Test
-    public void willBuildInstancedWithArgumentWhenMutableDataIsProvided() {
-        TestDomainBuilder testDomainBuilder = new TestDomainBuilder();
-        testDomainBuilder.build(mock(Object.class));
-        Spy spy = testDomainBuilder.getSpy();
-
-        assertThat("The sub classes should not be called with an argument", spy,
-                is(equalTo(Spy.INVOKED_WITH_ARGUMENT)));
-    }
-
-    @Test
-    public void willBuildInstanceWithoutArgumentWhenMutableDataIsNotProvided() {
-        TestDomainBuilder testDomainBuilder = new TestDomainBuilder();
-        testDomainBuilder.build();
-        Spy spy = testDomainBuilder.getSpy();
-
-        assertThat("The sub classes should not be called with an argument", spy,
-                is(equalTo(Spy.INVOKED_WITHOUT_ARGUMENT)));
-    }
-
-    private class TestDomainBuilder extends DomainBuilder<Object, Object> {
-        private Spy spy = Spy.NOT_INVOKED;
+    private static class TestDomainBuilder extends DomainBuilder<DomainBuilderTest> {
+        boolean validated;
 
         @Override
-        protected Object buildInstance() {
-            spy = Spy.INVOKED_WITHOUT_ARGUMENT;
-            return new Object();
+        protected DomainBuilderTest buildInstance() {
+            return new DomainBuilderTest();
         }
 
         @Override
-        protected Object buildInstance(Object o) {
-            spy = Spy.INVOKED_WITH_ARGUMENT;
-            return o;
+        protected void validate() {
+            validated = true;
         }
-
-        @Override
-        protected void validate(Object o) {
-            spy = Spy.INVOKED_WITH_ARGUMENT;
-        }
-
-        @Override
-        protected void validateMutableData() {
-            spy = Spy.INVOKED_WITHOUT_ARGUMENT;
-        }
-
-        Spy getSpy() {
-            return spy;
-        }
-    }
-
-    private enum Spy {
-        INVOKED_WITH_ARGUMENT, INVOKED_WITHOUT_ARGUMENT, NOT_INVOKED
     }
 }

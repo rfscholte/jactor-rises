@@ -9,7 +9,7 @@ import nu.hjemme.module.persistence.mutable.MutableBlogEntry;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntryBuilder extends DomainBuilder<BlogEntry, MutableBlogEntry> {
+public class BlogEntryBuilder extends DomainBuilder<BlogEntry> {
     static final String THE_ENTRY_MUST_BELONG_TO_A_BLOG = "The blog entry must belong to a blog";
     static final String THE_ENTRY_CANNOT_BE_EMPTY = "The entry field cannot be empty";
     static final String THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE = "The entry must be created by someone";
@@ -38,22 +38,12 @@ public class BlogEntryBuilder extends DomainBuilder<BlogEntry, MutableBlogEntry>
     }
 
     @Override
-    protected void validateMutableData() {
-        validate(mutableBlogEntry);
-    }
-
-    @Override
     protected BlogEntry buildInstance() {
         return new BlogEntry(mutableBlogEntry);
     }
 
     @Override
-    protected BlogEntry buildInstance(MutableBlogEntry mutableBlogEntry) {
-        return new BlogEntry(mutableBlogEntry);
-    }
-
-    @Override
-    protected void validate(MutableBlogEntry mutableBlogEntry) {
+    protected void validate() {
         Validate.notEmpty(mutableBlogEntry.getEntry(), THE_ENTRY_CANNOT_BE_EMPTY);
         Validate.notNull(mutableBlogEntry.getCreatorName(), THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
         Validate.notNull(mutableBlogEntry.getBlog(), THE_ENTRY_MUST_BELONG_TO_A_BLOG);

@@ -7,7 +7,7 @@ import nu.hjemme.module.persistence.mutable.MutableGuestBook;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookBuilder extends DomainBuilder<GuestBook, MutableGuestBook> {
+public class GuestBookBuilder extends DomainBuilder<GuestBook> {
     static final String THE_GUEST_BOOK_MUST_BELONG_TO_A_USER = "The guest book must belong to a user";
     static final String THE_TITLE_CANNOT_BE_EMPTY = "The title cannot be empty";
 
@@ -29,19 +29,9 @@ public class GuestBookBuilder extends DomainBuilder<GuestBook, MutableGuestBook>
     }
 
     @Override
-    protected GuestBook buildInstance(MutableGuestBook mutableGuestBook) {
-        return new GuestBook(mutableGuestBook);
-    }
-
-    @Override
-    protected void validate(MutableGuestBook mutableGuestBook) {
+    protected void validate() {
         Validate.notEmpty(mutableGuestBook.getTitle(), THE_TITLE_CANNOT_BE_EMPTY);
         Validate.notNull(mutableGuestBook.getUser(), THE_GUEST_BOOK_MUST_BELONG_TO_A_USER);
-    }
-
-    @Override
-    protected void validateMutableData() {
-        validate(mutableGuestBook);
     }
 
     public static GuestBookBuilder init() {

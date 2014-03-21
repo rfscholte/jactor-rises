@@ -9,7 +9,7 @@ import nu.hjemme.module.persistence.mutable.MutableGuestBookEntry;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntryBuilder extends DomainBuilder<GuestBookEntry, MutableGuestBookEntry> {
+public class GuestBookEntryBuilder extends DomainBuilder<GuestBookEntry> {
     static final String THE_ENTRY_MUST_BELONG_TO_A_GUEST_BOOK = "The entry must belong to a guest book";
     static final String THE_ENTRY_CANNOT_BE_EMPTY = "The entry cannot be empty";
     static final String THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE = "The entry must be created by someone";
@@ -38,22 +38,12 @@ public class GuestBookEntryBuilder extends DomainBuilder<GuestBookEntry, Mutable
     }
 
     @Override
-    protected void validateMutableData() {
-        validate(mutableGuestBookEntry);
-    }
-
-    @Override
     protected GuestBookEntry buildInstance() {
         return new GuestBookEntry(mutableGuestBookEntry);
     }
 
     @Override
-    protected GuestBookEntry buildInstance(MutableGuestBookEntry mutableGuestBookEntry) {
-        return new GuestBookEntry(mutableGuestBookEntry);
-    }
-
-    @Override
-    protected void validate(MutableGuestBookEntry mutableGuestBookEntry) {
+    protected void validate() {
         Validate.notEmpty(mutableGuestBookEntry.getEntry(), THE_ENTRY_CANNOT_BE_EMPTY);
         Validate.notNull(mutableGuestBookEntry.getGuestBook(), THE_ENTRY_MUST_BELONG_TO_A_GUEST_BOOK);
         Validate.notNull(mutableGuestBookEntry.getCreatorName(), THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);

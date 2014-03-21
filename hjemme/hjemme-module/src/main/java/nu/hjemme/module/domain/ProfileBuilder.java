@@ -7,7 +7,7 @@ import nu.hjemme.module.persistence.mutable.MutableProfile;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
-public class ProfileBuilder extends DomainBuilder<Profile, MutableProfile> {
+public class ProfileBuilder extends DomainBuilder<Profile> {
     static final String AN_ADDRESS_MUST_BE_PRESENT = "An address must be present";
     static final String THE_FIRST_NAME_CANNOT_BE_NULL = "The first cannot be null";
     static final String THE_LAST_NAME_CANNOT_BE_NULL = "The last cannot be null";
@@ -20,20 +20,10 @@ public class ProfileBuilder extends DomainBuilder<Profile, MutableProfile> {
     }
 
     @Override
-    protected Profile buildInstance(MutableProfile mutableProfile) {
-        return new Profile(mutableProfile);
-    }
-
-    @Override
-    protected void validate(MutableProfile mutableProfile) {
+    protected void validate() {
         Validate.notNull(mutableProfile.getFirstName(), THE_FIRST_NAME_CANNOT_BE_NULL);
         Validate.notNull(mutableProfile.getLastName(), THE_LAST_NAME_CANNOT_BE_NULL);
         Validate.notNull(mutableProfile.getAddress(), AN_ADDRESS_MUST_BE_PRESENT);
-    }
-
-    @Override
-    protected void validateMutableData() {
-        validate(mutableProfile);
     }
 
     public static ProfileBuilder init() {
@@ -61,7 +51,7 @@ public class ProfileBuilder extends DomainBuilder<Profile, MutableProfile> {
     }
 
     public MutableProfile retrieveMutableProfile() {
-        validateMutableData();
+        validate();
         return buildInstance().getMutableProfile();
     }
 }
