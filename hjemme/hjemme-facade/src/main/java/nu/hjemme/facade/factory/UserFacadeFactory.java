@@ -8,9 +8,19 @@ import nu.hjemme.module.UserFacadeImpl;
  * @author Tor Egil Jacobsen
  */
 public class UserFacadeFactory extends AbstractFacadeFactory<UserFacade> {
+    private volatile UserFacade userFacade;
+
+    private UserFacade initFacade() {
+        if (userFacade == null) {
+            userFacade = new UserFacadeImpl();
+        }
+
+        return userFacade;
+    }
+
     @Override
     UserFacade getFacade() {
-        return new UserFacadeImpl();
+        return initFacade();
     }
 
     @Override
