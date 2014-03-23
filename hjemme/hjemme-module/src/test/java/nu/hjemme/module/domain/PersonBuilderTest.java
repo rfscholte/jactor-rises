@@ -2,7 +2,6 @@ package nu.hjemme.module.domain;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.module.persistence.AddressEntity;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -13,17 +12,6 @@ import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
 public class PersonBuilderTest {
-
-    private static String nameErrorMsg;
-
-    @BeforeClass
-    public static void retrieveNameErrorMessage() {
-        try {
-            new Name("");
-        } catch (IllegalArgumentException iae) {
-            nameErrorMsg = iae.getMessage();
-        }
-    }
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -39,13 +27,25 @@ public class PersonBuilderTest {
     @Test
     public void willNotBuildPersonDomainWithAnEmptyFirstName() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(nameErrorMsg);
+        expectedException.expectMessage(hentFeilmeldingFraName());
 
         PersonBuilder.init()
                 .appendFirstName("")
                 .appendLastName("some last name")
                 .appendAddress(new AddressEntity())
                 .build();
+    }
+
+    public String hentFeilmeldingFraName() {
+        String nameErrorMessage = null;
+
+        try {
+            new Name("");
+        } catch (IllegalArgumentException iae) {
+            nameErrorMessage = iae.getMessage();
+        }
+
+        return nameErrorMessage;
     }
 
     @Test
@@ -59,7 +59,7 @@ public class PersonBuilderTest {
     @Test
     public void willNotBuildPersonDomainWithAnEmptyLastName() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(nameErrorMsg);
+        expectedException.expectMessage(hentFeilmeldingFraName());
 
         PersonBuilder.init()
                 .appendFirstName("some first name")

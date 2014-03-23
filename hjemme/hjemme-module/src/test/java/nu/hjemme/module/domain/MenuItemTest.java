@@ -132,7 +132,7 @@ public class MenuItemTest {
     }
 
     @Test
-    public void skalIkkeHaEtValgtMenyvalgHvisMalstrengenTilBarnetErUkjent() {
+    public void skalIkkeHaEtValgtMenyvalgNarsMalstrengenTilBarnetErUkjent() {
         MenuItemDto mockedMenuItemDto = MenuItemBuilderForJUnit.build().addChild("some child", "hit?dead=center").mockDto();
         MenuItem testMenuItem = new MenuItem(mockedMenuItemDto);
 
@@ -146,7 +146,7 @@ public class MenuItemTest {
     }
 
     @Test
-    public void skalHaEtValgtMenyvalgHvisMalstrengenTilBarnetErKjent() {
+    public void skalHaEtValgtMenyvalgNarMalstrengenTilBarnetErKjent() {
         MenuItemDto mockedMenuItemDto = MenuItemBuilderForJUnit.build().addChild("some child", "hit?dead=center").mockDto();
         MenuItem testMenuItem = new MenuItem(mockedMenuItemDto);
 

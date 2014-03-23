@@ -2,7 +2,6 @@ package nu.hjemme.module.domain;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.module.persistence.AddressEntity;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,17 +15,6 @@ public class ProfileBuilderTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
-
-    private static String nameErrorMsg;
-
-    @BeforeClass
-    public static void retrieveNameErrorMessage() {
-        try {
-            new Name("");
-        } catch (IllegalArgumentException iae) {
-            nameErrorMsg = iae.getMessage();
-        }
-    }
 
     @Test
     public void willNotBuildProfileDomainWithoutFirstName() {
@@ -43,7 +31,7 @@ public class ProfileBuilderTest {
     @Test
     public void willNotBuildProfileDomainWithAnEmptyFirstName() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(nameErrorMsg);
+        expectedException.expectMessage(hentFeilmeldingFraName());
 
         ProfileBuilder.init()
                 .appendFirstName("")
@@ -51,6 +39,18 @@ public class ProfileBuilderTest {
                 .appendAddress(new AddressEntity())
                 .appendDescription("description field will not be validated")
                 .build();
+    }
+
+    public String hentFeilmeldingFraName() {
+        String nameErrorMessage = null;
+
+        try {
+            new Name("");
+        } catch (IllegalArgumentException iae) {
+            nameErrorMessage = iae.getMessage();
+        }
+
+        return nameErrorMessage;
     }
 
     @Test
@@ -68,7 +68,7 @@ public class ProfileBuilderTest {
     @Test
     public void willNotBuildProfileDomainWithAnEmptyLastName() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(nameErrorMsg);
+        expectedException.expectMessage(hentFeilmeldingFraName());
 
         ProfileBuilder.init()
                 .appendFirstName("some first name")
