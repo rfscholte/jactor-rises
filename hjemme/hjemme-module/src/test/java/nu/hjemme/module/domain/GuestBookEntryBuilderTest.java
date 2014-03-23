@@ -3,7 +3,6 @@ package nu.hjemme.module.domain;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.module.persistence.GuestBookEntity;
 import nu.hjemme.module.persistence.PersonEntity;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,19 +15,9 @@ import static org.junit.Assert.assertThat;
 /** @author Tor Egil Jacobsen */
 public class GuestBookEntryBuilderTest {
 
-    private static String nameErrorMessage;
-
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    @BeforeClass
-    public static void retrieveNameErrorMessage() {
-        try {
-            new Name("");
-        } catch (IllegalArgumentException iae) {
-            nameErrorMessage = iae.getMessage();
-        }
-    }
     @Test
     public void willNotBuildGuestBookEntryWithoutAnEntry() {
         expectedException.expect(IllegalArgumentException.class);
@@ -71,13 +60,25 @@ public class GuestBookEntryBuilderTest {
     @Test
     public void willNotBuildGuestBookEntryWithAnEmptyNameOfTheCreator() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(nameErrorMessage);
+        expectedException.expectMessage(hentFeilmeldingFraName());
 
         GuestBookEntryBuilder.init()
                 .appendEntry("some entry")
                 .appendCreatorName("")
                 .appendGuestBook(new GuestBookEntity())
                 .build();
+    }
+
+    public String hentFeilmeldingFraName() {
+        String nameErrorMessage = null;
+
+        try {
+            new Name("");
+        } catch (IllegalArgumentException iae) {
+            nameErrorMessage = iae.getMessage();
+        }
+
+        return nameErrorMessage;
     }
 
     @Test

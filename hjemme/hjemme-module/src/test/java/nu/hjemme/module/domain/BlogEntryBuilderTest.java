@@ -3,7 +3,6 @@ package nu.hjemme.module.domain;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.module.persistence.BlogEntity;
 import nu.hjemme.module.persistence.PersonEntity;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -18,17 +17,6 @@ public class BlogEntryBuilderTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
-
-    private static String nameErrorMessage;
-
-    @BeforeClass
-    public static void retrieveNameErrorMessage() {
-        try {
-            new Name("");
-        } catch (IllegalArgumentException iae) {
-            nameErrorMessage = iae.getMessage();
-        }
-    }
 
     @Test
     public void willNotBuildBlogEntryWithoutTheEntry() {
@@ -57,9 +45,21 @@ public class BlogEntryBuilderTest {
     @Test
     public void willNotBuildBlogEntryWithAnEmptyCreatorName() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(nameErrorMessage);
+        expectedException.expectMessage(hentFeilmeldingFraName());
 
         BlogEntryBuilder.init().appendEntry("some entry").appendCreatorName("").appendBlog(new BlogEntity()).build();
+    }
+
+    public String hentFeilmeldingFraName() {
+        String nameErrorMessage = null;
+
+        try {
+            new Name("");
+        } catch (IllegalArgumentException iae) {
+            nameErrorMessage = iae.getMessage();
+        }
+
+        return nameErrorMessage;
     }
 
     @Test
