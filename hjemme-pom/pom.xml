@@ -6,7 +6,7 @@
     <artifactId>hjemme-pom</artifactId>
     <name>hjemme-pom</name>
     <packaging>pom</packaging>
-    <version>1.0.17</version>
+    <version>1.0.18</version>
     <description>The parent pom for the applications of www.hjemme.nu</description>
 
     <url>http://www.hjemme.nu</url>
@@ -104,8 +104,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 
