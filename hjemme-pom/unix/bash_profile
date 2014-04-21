@@ -4,8 +4,8 @@ function wcgrep {													# fun: wcgrep
 }															# fun: wcgrep
 
 # System variables
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home	# var: miljøvariabel for filsti til gjeldende javaversjon
-export M2_HOME=/Users/jactor/apache-maven-3.2.1					# var: hjemmeomrade til maven
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home	# var: hjemmekatalogen til gjeldende jdk
+export M2_HOME=/usr/lib/apache-maven-3.2.1						# var: hjemmeomrade til maven
 export PATH=$PATH:$M2_HOME/bin							# var: bin mappa til maven er en del av PATH
 export WAR=hjemme.war								# var: miljøvariabel for navn på web archive for hjemme
 export WS=$HOME/ws									# var: miljøvariabel for filsti til workspace
