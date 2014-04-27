@@ -1,11 +1,11 @@
 package nu.hjemme.client.datatype;
 
 import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.util.Locale;
+import java.util.Objects;
 
 import static java.util.Arrays.asList;
 
@@ -60,10 +60,7 @@ public class Country {
 
         Country country = (Country) obj;
 
-        return new EqualsBuilder()
-                .append(getCountryCode(), country.getCountryCode())
-                .append(getLocale(), country.getLocale())
-                .isEquals();
+        return Objects.equals(getCountryCode(), country.getCountryCode()) && Objects.equals(getLocale(), country.getLocale());
     }
 
     @Override

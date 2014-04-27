@@ -1,9 +1,11 @@
 package nu.hjemme.client.datatype;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+
+import java.util.Objects;
+
+import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
 public class Description {
@@ -17,7 +19,7 @@ public class Description {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(itemName).append(description).toHashCode();
+        return hash(itemName, description);
     }
 
     @Override
@@ -32,10 +34,7 @@ public class Description {
 
         Description description = (Description) o;
 
-        return new EqualsBuilder()
-                .append(this.itemName, description.getItemName())
-                .append(this.description, description.getDescription())
-                .isEquals();
+        return Objects.equals(itemName, description.getItemName()) && Objects.equals(this.description, description.getDescription());
     }
 
     @Override

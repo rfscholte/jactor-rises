@@ -1,17 +1,16 @@
 package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.domain.GuestBook;
-import nu.hjemme.module.persistence.base.PersistentBean;
 import nu.hjemme.module.persistence.mutable.MutableGuestBook;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import java.util.Objects;
 
+import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.GuestBookMetadata.GUEST_BOOK_ID;
 import static nu.hjemme.module.persistence.meta.GuestBookMetadata.TITLE;
 import static nu.hjemme.module.persistence.meta.GuestBookMetadata.USER;
@@ -21,6 +20,8 @@ public class GuestBookEntity extends PersistentBean implements MutableGuestBook 
 
     @Id
     @Column(name = GUEST_BOOK_ID)
+    // brukes av hibernate
+    @SuppressWarnings("unused")
     void setGuestBookId(Long guestBookId) {
         setId(guestBookId);
     }
@@ -28,7 +29,7 @@ public class GuestBookEntity extends PersistentBean implements MutableGuestBook 
     @Column(name = TITLE)
     private String title;
 
-    @OneToOne(mappedBy = USER)
+    @OneToMany(mappedBy = USER)
     private UserEntity user;
 
     public GuestBookEntity() {
@@ -52,20 +53,12 @@ public class GuestBookEntity extends PersistentBean implements MutableGuestBook 
 
         GuestBookEntity that = (GuestBookEntity) o;
 
-        return new EqualsBuilder()
-                .append(getId(), that.getId())
-                .append(getTitle(), that.getTitle())
-                .append(getUser(), that.getUser())
-                .isEquals();
+        return Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getUser(), that.getUser());
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
-                .append(getTitle())
-                .append(getUser())
-                .toHashCode();
+        return hash(getTitle(), getUser());
     }
 
     @Override

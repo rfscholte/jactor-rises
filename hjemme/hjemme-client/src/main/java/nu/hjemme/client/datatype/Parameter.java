@@ -1,7 +1,8 @@
 package nu.hjemme.client.datatype;
 
 import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.EqualsBuilder;
+
+import java.util.Objects;
 
 /** @author Tor Egil Jacobsen */
 public class Parameter {
@@ -39,10 +40,7 @@ public class Parameter {
 
         Parameter parameter = (Parameter) o;
 
-        return new EqualsBuilder()
-                .append(name, parameter.name)
-                .append(value, parameter.value)
-                .isEquals();
+        return Objects.equals(name, parameter.name) && Objects.equals(value, parameter.value);
     }
 
     @Override

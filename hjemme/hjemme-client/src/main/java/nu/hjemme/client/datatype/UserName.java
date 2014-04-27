@@ -1,7 +1,8 @@
 package nu.hjemme.client.datatype;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import java.util.Objects;
+
+import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
 public class UserName extends Name {
@@ -22,15 +23,11 @@ public class UserName extends Name {
         String thisName = getName() != null ? getName().toUpperCase() : null;
         String thatName = ((UserName) obj).getName().toUpperCase();
 
-        return new EqualsBuilder()
-                .append(thisName, thatName)
-                .isEquals();
+        return Objects.equals(thisName, thatName);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .append(getName() != null ? getName().toUpperCase() : null)
-                .toHashCode();
+        return hash(getName() != null ? getName().toUpperCase() : null);
     }
 }

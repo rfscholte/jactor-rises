@@ -22,7 +22,6 @@ public class ProfileEntityTest {
         notEqual.addFirstName("some other first name");
         notEqual.addLastName("some other last name");
         notEqual.addAddressEntity(new AddressEntity());
-        notEqual.setProfileId(1L);
 
         assertTrue(new HashCodeMatching(base)
                         .isImplementedForEquality(equal)

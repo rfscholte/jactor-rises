@@ -36,10 +36,8 @@ public class GuestBookEntryEntityTest {
         base.setEntry("some entry");
         base.setCreatorName("some creator");
         base.setGuestBookEntity(new GuestBookEntity());
-        base.setEntryId(1L);
 
         GuestBookEntryEntity equal = new GuestBookEntryEntity(base);
-        equal.setEntryId(1L);
 
         GuestBookEntryEntity notEqual = new GuestBookEntryEntity();
         notEqual.setEntry("some other entry");

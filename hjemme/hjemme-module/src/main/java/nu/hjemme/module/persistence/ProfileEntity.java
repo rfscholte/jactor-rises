@@ -2,15 +2,14 @@ package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Profile;
-import nu.hjemme.module.persistence.base.PersistentBean;
 import nu.hjemme.module.persistence.mutable.MutableProfile;
 import nu.hjemme.module.persistence.mutable.MutableUser;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import java.util.Objects;
 
+import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.ProfileMetadata.DESCRIPTION;
 import static nu.hjemme.module.persistence.meta.ProfileMetadata.PERSON_ID;
 import static nu.hjemme.module.persistence.meta.ProfileMetadata.PROFILE_ID;
@@ -20,6 +19,8 @@ import static nu.hjemme.module.persistence.meta.ProfileMetadata.USER_ID;
 public class ProfileEntity extends PersistentBean implements MutableProfile {
     @Id
     @Column(name = PROFILE_ID)
+    // brukes av hibernate
+    @SuppressWarnings("unused")
     void setProfileId(Long profileId) {
         setId(profileId);
     }
@@ -81,26 +82,16 @@ public class ProfileEntity extends PersistentBean implements MutableProfile {
 
         ProfileEntity that = (ProfileEntity) o;
 
-        return new EqualsBuilder()
-                .append(getId(), that.getId())
-                .append(getAddress(), that.getAddress())
-                .append(getDescription(), that.getDescription())
-                .append(getFirstName(), that.getFirstName())
-                .append(getLastName(), that.getLastName())
-                .append(getUser(), that.getUser())
-                .isEquals();
+        return Objects.equals(getAddress(), that.getAddress()) &&
+                Objects.equals(getDescription(), that.getDescription()) &&
+                Objects.equals(getFirstName(), that.getFirstName()) &&
+                Objects.equals(getLastName(), that.getLastName()) &&
+                Objects.equals(getUser(), that.getUser());
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
-                .append(getAddress())
-                .append(getDescription())
-                .append(getFirstName())
-                .append(getLastName())
-                .append(getUser())
-                .toHashCode();
+        return hash(getDescription(), getAddress(), getFirstName(), getLastName(), getUser());
     }
 
     @Override

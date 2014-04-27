@@ -13,7 +13,6 @@ public class AddressEntityTest {
     @Test
     public void willHaveCorrectImplementedHashCode() {
         AddressEntity base = new AddressEntity();
-        base.setAddressId(1L);
         base.setAddressLine1("somewhere");
         base.setZipCode(1234);
         base.setCountry(new Country("NO", "no"));
@@ -22,10 +21,14 @@ public class AddressEntityTest {
         base.setAddressLine3("way out there");
 
         AddressEntity equal = new AddressEntity(base);
-        equal.setAddressId(1L);
+        equal.setAddressLine1("somewhere");
+        equal.setZipCode(1234);
+        equal.setCountry(new Country("NO", "no"));
+        equal.setCity("some city");
+        equal.setAddressLine2("somewhere else");
+        equal.setAddressLine3("way out there");
 
         AddressEntity notEqual = new AddressEntity();
-        notEqual.setAddressId(2L);
         notEqual.setAddressLine1("somewhere else");
         notEqual.setZipCode(5678);
         notEqual.setCountry(new Country("SE", "se"));
