@@ -1,8 +1,8 @@
 package nu.hjemme.facade.factory;
 
+import nu.hjemme.business.MenuFacadeImpl;
 import nu.hjemme.client.MenuFacade;
 import nu.hjemme.client.dto.MenuDto;
-import nu.hjemme.module.MenuFacadeImpl;
 
 import java.util.List;
 

@@ -40,8 +40,8 @@
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
-                <artifactId>hjemme-module</artifactId>
-                <version>${hjemme-module-version}</version>
+                <artifactId>hjemme-business</artifactId>
+                <version>${hjemme-business-version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
@@ -65,7 +65,7 @@
         <!-- Internal dependencies -->
         <hjemme-client-version>1.0-SNAPSHOT</hjemme-client-version>
         <hjemme-facade-version>1.0-SNAPSHOT</hjemme-facade-version>
-        <hjemme-module-version>1.0-SNAPSHOT</hjemme-module-version>
+        <hjemme-business-version>1.0-SNAPSHOT</hjemme-business-version>
         <hjemme-test-version>1.0-SNAPSHOT</hjemme-test-version>
         <javax.persistence-version>1.0.2</javax.persistence-version>
     </properties>

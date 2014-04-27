@@ -25,7 +25,7 @@
         </dependency>
         <dependency>
             <groupId>nu.hjemme</groupId>
-            <artifactId>hjemme-module</artifactId>
+            <artifactId>hjemme-business</artifactId>
         </dependency>
 
         <!-- Third party -->
