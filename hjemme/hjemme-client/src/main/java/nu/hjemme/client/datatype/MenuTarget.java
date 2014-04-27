@@ -1,9 +1,10 @@
 package nu.hjemme.client.datatype;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+
+import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
 public class MenuTarget {
@@ -35,7 +36,7 @@ public class MenuTarget {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(menuItemTarget).append(menuName).toHashCode();
+        return hash(menuItemTarget, menuName);
     }
 
     @Override

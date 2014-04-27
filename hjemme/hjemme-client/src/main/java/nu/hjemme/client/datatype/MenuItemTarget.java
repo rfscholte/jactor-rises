@@ -2,7 +2,6 @@ package nu.hjemme.client.datatype;
 
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
+import static java.util.Objects.hash;
 
 /**
  * A bean representing the target of a menu item
@@ -23,7 +23,7 @@ public class MenuItemTarget {
 
     static final String THE_TARGET_CANNOT_BE_EMPTY = "The target cannot be empty";
 
-    private final Set<Parameter> parameters = new HashSet<Parameter>();
+    private final Set<Parameter> parameters = new HashSet<>();
     private final String target;
 
     public MenuItemTarget(String target) {
@@ -64,7 +64,7 @@ public class MenuItemTarget {
 
     private List<Parameter> findSeveralParametersFrom(String parametersAsString) {
         String[] severalParameters = parametersAsString.split(COMMA);
-        List<Parameter> parameterList = new ArrayList<Parameter>(severalParameters.length);
+        List<Parameter> parameterList = new ArrayList<>(severalParameters.length);
 
         for (String parameterAndValue : severalParameters) {
             parameterList.add(new Parameter(parameterAndValue));
@@ -93,7 +93,7 @@ public class MenuItemTarget {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(target).append(parameters).toHashCode();
+        return hash(target, parameters);
     }
 
     @Override
