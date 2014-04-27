@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
 class MenuItemBuilderForJUnit {
     private String itemName = "test item";
     private String menuItemTarget = "a target";
-    private List<MenuItemDto> children = new ArrayList<MenuItemDto>();
+    private List<MenuItemDto> children = new ArrayList<>();
 
     private MenuItemBuilderForJUnit() {
     }
@@ -22,7 +22,7 @@ class MenuItemBuilderForJUnit {
     }
 
     private MenuItemDto mockDto(String itemName, String menuItemTarget) {
-        return mockDto(itemName, menuItemTarget, new ArrayList<MenuItemDto>());
+        return mockDto(itemName, menuItemTarget, new ArrayList<>());
     }
 
     MenuItem retrieveInstance() {

@@ -8,7 +8,7 @@ import nu.hjemme.module.persistence.mutable.MutableGuestBook;
 public class GuestBook extends PersistentDomainBean<MutableGuestBook> implements nu.hjemme.client.domain.GuestBook {
 
     public GuestBook(MutableGuestBook mutableGuestBook) {
-         super(mutableGuestBook);
+        super(mutableGuestBook);
     }
 
     @Override

@@ -5,7 +5,7 @@ import nu.hjemme.client.domain.Address;
 import nu.hjemme.module.persistence.mutable.MutableProfile;
 
 /** @author Tor Egil Jacobsen */
-public class Profile implements nu.hjemme.client.domain.Profile{
+public class Profile implements nu.hjemme.client.domain.Profile {
     private final MutableProfile mutableProfile;
 
     public Profile(MutableProfile mutableProfile) {

@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class Menu {
     private final Name menuName;
-    private final List<MenuItem> menuItems = new ArrayList<MenuItem>();
+    private final List<MenuItem> menuItems = new ArrayList<>();
 
     public Menu(MenuDto menuDto) {
         Validate.notEmpty(menuDto.getMenuItems(), "There must be provided at least one menu item");
@@ -37,7 +37,7 @@ public class Menu {
     }
 
     public List<nu.hjemme.client.domain.ChosenMenuItem> retrieveChosenMenuItemBy(MenuItemTarget menuItemTarget) {
-        List<nu.hjemme.client.domain.ChosenMenuItem> chosenMenuItems = new ArrayList<nu.hjemme.client.domain.ChosenMenuItem>(menuItems.size());
+        List<nu.hjemme.client.domain.ChosenMenuItem> chosenMenuItems = new ArrayList<>(menuItems.size());
 
         for (MenuItem menuItem : menuItems) {
             chosenMenuItems.add(new ChosenMenuItem(menuItem, menuItemTarget));

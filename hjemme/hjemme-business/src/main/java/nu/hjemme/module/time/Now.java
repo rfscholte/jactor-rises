@@ -11,10 +11,10 @@ public class Now {
     }
 
     public static LocalDateTime retrieveDateTime() {
-        return instance.retrieveDateTimeFromInstance();
+        return instance.retrieveTheDateTime();
     }
 
-    protected LocalDateTime retrieveDateTimeFromInstance() {
+    protected LocalDateTime retrieveTheDateTime() {
         return new LocalDateTime();
     }
 

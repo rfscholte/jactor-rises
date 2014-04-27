@@ -12,7 +12,7 @@ import static nu.hjemme.module.dao.UserDao.initTip;
 
 /** @author Tor Egil Jacobsen */
 public class UserFacadeImpl implements UserFacade {
-    private static final Map<UserName, User> STANDARD_USERS = new HashMap<UserName, User>(2);
+    private static final Map<UserName, User> STANDARD_USERS = new HashMap<>(2);
 
     public UserFacadeImpl() {
         initStandardUsers();

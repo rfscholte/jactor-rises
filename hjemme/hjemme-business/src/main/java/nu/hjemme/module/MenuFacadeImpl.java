@@ -14,7 +14,7 @@ import java.util.Map;
 
 /** The {@link MenuFacade} */
 public class MenuFacadeImpl implements MenuFacade {
-    private Map<Name, Menu> menusByName = new HashMap<Name, Menu>();
+    private Map<Name, Menu> menusByName = new HashMap<>();
 
     public MenuFacadeImpl(List<MenuDto> menus) {
         Validate.notEmpty(menus, "Menus must be provided");

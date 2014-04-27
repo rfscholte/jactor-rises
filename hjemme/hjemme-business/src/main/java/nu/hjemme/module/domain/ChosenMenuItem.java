@@ -19,7 +19,7 @@ public class ChosenMenuItem implements nu.hjemme.client.domain.ChosenMenuItem {
     }
 
     private List<nu.hjemme.client.domain.ChosenMenuItem> createChosenItemsBy(List<MenuItem> children) {
-        List<nu.hjemme.client.domain.ChosenMenuItem> chosenMenuItems = new ArrayList<nu.hjemme.client.domain.ChosenMenuItem>(children.size());
+        List<nu.hjemme.client.domain.ChosenMenuItem> chosenMenuItems = new ArrayList<>(children.size());
 
         for (MenuItem child : children) {
             chosenMenuItems.add(new ChosenMenuItem(child, chosenMenuItemTarget));

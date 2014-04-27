@@ -9,8 +9,11 @@ import nu.hjemme.module.persistence.PersonEntity;
 public interface MutableGuestBookEntry extends GuestBookEntry {
 
     void setCreator(PersonEntity creator);
+
     void setCreatorName(Name name);
+
     void setEntry(String entry);
+
     void setGuestBookEntity(GuestBookEntity guestBookEntity);
 
 }

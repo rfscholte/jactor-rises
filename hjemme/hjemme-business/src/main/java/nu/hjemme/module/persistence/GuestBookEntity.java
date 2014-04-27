@@ -81,7 +81,7 @@ public class GuestBookEntity extends PersistentBean implements MutableGuestBook 
     }
 
     @Override
-   public void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 

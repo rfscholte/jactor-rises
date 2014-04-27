@@ -12,7 +12,7 @@ public class NowMock extends Now {
         Now mockedNow = mock(Now.class);
 
         LocalDateTime localDateTimeAsPureDate = new LocalDateTime(new LocalTime());
-        when(mockedNow.retrieveDateTimeFromInstance()).thenReturn(localDateTimeAsPureDate);
+        when(mockedNow.retrieveTheDateTime()).thenReturn(localDateTimeAsPureDate);
 
         setInstance(mockedNow);
     }
