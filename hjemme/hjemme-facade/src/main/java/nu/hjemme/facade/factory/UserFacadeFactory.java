@@ -1,7 +1,7 @@
 package nu.hjemme.facade.factory;
 
+import nu.hjemme.business.UserFacadeImpl;
 import nu.hjemme.client.UserFacade;
-import nu.hjemme.module.UserFacadeImpl;
 
 /**
  * A factory bean to initiate the {@link nu.hjemme.client.UserFacade} as a singleton using the springframework.
