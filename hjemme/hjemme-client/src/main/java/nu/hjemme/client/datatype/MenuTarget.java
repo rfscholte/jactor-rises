@@ -1,8 +1,9 @@
 package nu.hjemme.client.datatype;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+
+import java.util.Objects;
 
 import static java.util.Objects.hash;
 
@@ -28,10 +29,7 @@ public class MenuTarget {
 
         MenuTarget menuTarget = (MenuTarget) o;
 
-        return new EqualsBuilder()
-                .append(menuItemTarget, menuTarget.menuItemTarget)
-                .append(menuName, menuTarget.menuName)
-                .isEquals();
+        return Objects.equals(menuItemTarget, menuTarget.menuItemTarget) && Objects.equals(menuName, menuTarget.menuName);
     }
 
     @Override

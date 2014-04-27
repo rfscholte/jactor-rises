@@ -1,6 +1,6 @@
 package nu.hjemme.client.datatype;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
+import java.util.Objects;
 
 import static java.util.Objects.hash;
 
@@ -23,9 +23,7 @@ public class UserName extends Name {
         String thisName = getName() != null ? getName().toUpperCase() : null;
         String thatName = ((UserName) obj).getName().toUpperCase();
 
-        return new EqualsBuilder()
-                .append(thisName, thatName)
-                .isEquals();
+        return Objects.equals(thisName, thatName);
     }
 
     @Override

@@ -1,12 +1,12 @@
 package nu.hjemme.client.datatype;
 
 import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.EqualsBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
@@ -85,10 +85,7 @@ public class MenuItemTarget {
 
         MenuItemTarget menuItemTarget = (MenuItemTarget) obj;
 
-        return new EqualsBuilder()
-                .append(target, menuItemTarget.target)
-                .append(parameters, menuItemTarget.parameters)
-                .isEquals();
+        return Objects.equals(target, menuItemTarget.target) && Objects.equals(parameters, menuItemTarget.parameters);
     }
 
     @Override
