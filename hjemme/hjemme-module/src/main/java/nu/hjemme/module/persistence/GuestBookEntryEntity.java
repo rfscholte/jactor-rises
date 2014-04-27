@@ -3,7 +3,6 @@ package nu.hjemme.module.persistence;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBookEntry;
 import nu.hjemme.module.persistence.mutable.MutableGuestBookEntry;
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.LocalDateTime;
@@ -11,6 +10,7 @@ import org.joda.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.Objects;
 
 import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.GuestEntryMetadata.CREATED_BY;
@@ -25,6 +25,8 @@ public class GuestBookEntryEntity extends PersistentEntry implements MutableGues
 
     @Id
     @Column(name = ENTRY_ID)
+    // brukes av hibernate
+    @SuppressWarnings("unused")
     public void setEntryId(Long id) {
         setId(id);
     }
@@ -77,11 +79,7 @@ public class GuestBookEntryEntity extends PersistentEntry implements MutableGues
 
         GuestBookEntryEntity that = (GuestBookEntryEntity) o;
 
-        return new EqualsBuilder()
-                .append(getId(), that.getId())
-                .appendSuper(harSammePersonSkrevetEnTeksSomErLikTekstenTil(that))
-                .append(getGuestBook(), that.getGuestBook())
-                .isEquals();
+        return harSammePersonSkrevetEnTeksSomErLikTekstenTil(that) && Objects.equals(getGuestBook(), that.getGuestBook());
     }
 
     @Override

@@ -4,13 +4,13 @@ import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.module.persistence.mutable.MutableProfile;
 import nu.hjemme.module.persistence.mutable.MutableUser;
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.util.Objects;
 
 import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.UserMetadata.PASSWORD;
@@ -22,6 +22,8 @@ public class UserEntity extends PersistentBean implements MutableUser {
 
     @Id
     @Column(name = USER_ID)
+    // brukes av hibernate
+    @SuppressWarnings("unused")
     void setUserId(Long userId) {
         setId(userId);
     }
@@ -58,12 +60,7 @@ public class UserEntity extends PersistentBean implements MutableUser {
 
         UserEntity userEntity = (UserEntity) o;
 
-        return new EqualsBuilder()
-                .append(getId(), userEntity.getId())
-                .append(getPassword(), userEntity.getPassword())
-                .append(getProfile(), userEntity.getProfile())
-                .append(getUserName(), userEntity.getUserName())
-                .isEquals();
+        return Objects.equals(getPassword(), userEntity.getPassword()) && Objects.equals(getProfile(), userEntity.getProfile()) && Objects.equals(getUserName(), userEntity.getUserName());
     }
 
     @Override

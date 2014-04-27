@@ -3,13 +3,13 @@ package nu.hjemme.module.persistence;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Person;
 import nu.hjemme.module.persistence.mutable.MutablePerson;
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.Objects;
 
 import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.PersonMetadata.ADDRESS;
@@ -22,6 +22,8 @@ public class PersonEntity extends PersistentBean implements MutablePerson {
 
     @Id
     @Column(name = PERSON_ID)
+    // brukes av hibernate
+    @SuppressWarnings("unused")
     void setPersonId(Long personId) {
         setId(personId);
     }
@@ -59,12 +61,7 @@ public class PersonEntity extends PersistentBean implements MutablePerson {
 
         PersonEntity personEntity = (PersonEntity) o;
 
-        return new EqualsBuilder()
-                .append(getId(), personEntity.getId())
-                .append(getFirstName(), personEntity.getFirstName())
-                .append(getLastName(), personEntity.getLastName())
-                .append(getAddress(), personEntity.getAddress())
-                .isEquals();
+        return Objects.equals(getFirstName(), personEntity.getFirstName()) && Objects.equals(getLastName(), personEntity.getLastName()) && Objects.equals(getAddress(), personEntity.getAddress());
     }
 
     @Override

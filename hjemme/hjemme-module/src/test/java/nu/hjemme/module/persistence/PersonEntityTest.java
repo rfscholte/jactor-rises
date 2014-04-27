@@ -44,7 +44,6 @@ public class PersonEntityTest {
         notEqual.setFirstName(new Name("some other first name"));
         notEqual.setLastName(new Name("some other last name"));
         notEqual.setAddress(new AddressEntity());
-        notEqual.setPersonId(1L);
 
         assertTrue(new EqualsMatching(base)
                         .isEqualTo(equal)

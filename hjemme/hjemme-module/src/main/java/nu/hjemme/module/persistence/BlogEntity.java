@@ -3,7 +3,6 @@ package nu.hjemme.module.persistence;
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.module.persistence.mutable.MutableBlog;
 import nu.hjemme.module.persistence.mutable.MutableUser;
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.LocalDate;
@@ -11,6 +10,7 @@ import org.joda.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.Objects;
 
 import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.BlogMetadata.BLOG_ID;
@@ -23,6 +23,8 @@ public class BlogEntity extends PersistentBean implements MutableBlog {
 
     @Id
     @Column(name = BLOG_ID)
+    // brukes av hibernate
+    @SuppressWarnings("unused")
     void setBlogId(Long blogId) {
         setId(blogId);
     }
@@ -60,10 +62,8 @@ public class BlogEntity extends PersistentBean implements MutableBlog {
 
         BlogEntity that = (BlogEntity) o;
 
-        return new EqualsBuilder()
-                .append(getTitle(), that.getTitle())
-                .append(getUser(), that.getUser())
-                .isEquals();
+        return Objects.equals(getTitle(), that.getTitle()) &&
+                Objects.equals(getUser(), that.getUser());
     }
 
     @Override

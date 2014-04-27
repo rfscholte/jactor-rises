@@ -2,10 +2,11 @@ package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Entry;
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.LocalDateTime;
+
+import java.util.Objects;
 
 import static java.util.Objects.hash;
 
@@ -28,17 +29,12 @@ public abstract class PersistentEntry extends PersistentBean implements Entry {
         creator = entry.getCreator() != null ? new PersonEntity(entry.getCreator()) : null;
     }
 
-
     /**
      * @param entry sjekkes om entry teksten er lik på de to instansene.
      * @return <code>true</code> hvis tekstene stemmer overens.
      */
     protected boolean harSammePersonSkrevetEnTeksSomErLikTekstenTil(Entry entry) {
-        return new EqualsBuilder()
-                .append(getEntry(), entry.getEntry())
-                .append(getCreatorName(), entry.getCreatorName())
-                .append(getCreator(), entry.getCreator())
-                .isEquals();
+        return Objects.equals(getEntry(), entry.getEntry()) && Objects.equals(getCreatorName(), entry.getCreatorName()) && Objects.equals(getCreator(), entry.getCreator());
     }
 
     @Override
@@ -83,7 +79,7 @@ public abstract class PersistentEntry extends PersistentBean implements Entry {
         this.createdName = createdBy;
     }
 
-   public void setEntry(String entry) {
+    public void setEntry(String entry) {
         this.entry = entry;
     }
 

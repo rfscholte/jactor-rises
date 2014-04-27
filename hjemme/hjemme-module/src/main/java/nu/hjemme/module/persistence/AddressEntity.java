@@ -3,12 +3,12 @@ package nu.hjemme.module.persistence;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
 import nu.hjemme.module.persistence.mutable.MutableAddress;
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import java.util.Objects;
 
 import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.AddressMetadata.ADDRESS_ID;
@@ -24,8 +24,8 @@ public class AddressEntity extends PersistentBean implements MutableAddress {
 
     @Id
     @Column(name = ADDRESS_ID)
+    // brukes av hibernate
     @SuppressWarnings("unused")
-        // brukes av hibernate
     void setAddressId(Long addressId) {
         setId(addressId);
     }
@@ -73,14 +73,12 @@ public class AddressEntity extends PersistentBean implements MutableAddress {
 
         AddressEntity that = (AddressEntity) o;
 
-        return new EqualsBuilder()
-                .append(getAddressLine1(), that.getAddressLine1())
-                .append(getAddressLine2(), that.getAddressLine2())
-                .append(getAddressLine3(), that.getAddressLine3())
-                .append(getCity(), that.getCity())
-                .append(getCountry(), that.getCountry())
-                .append(getZipCode(), that.getZipCode())
-                .isEquals();
+        return Objects.equals(getAddressLine1(), that.getAddressLine1()) &&
+                Objects.equals(getAddressLine2(), that.getAddressLine2()) &&
+                Objects.equals(getAddressLine3(), that.getAddressLine3()) &&
+                Objects.equals(getCity(), that.getCity()) &&
+                Objects.equals(getCountry(), that.getCountry()) &&
+                Objects.equals(getZipCode(), that.getZipCode());
     }
 
     @Override

@@ -2,13 +2,13 @@ package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.domain.GuestBook;
 import nu.hjemme.module.persistence.mutable.MutableGuestBook;
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.Objects;
 
 import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.GuestBookMetadata.GUEST_BOOK_ID;
@@ -20,8 +20,8 @@ public class GuestBookEntity extends PersistentBean implements MutableGuestBook 
 
     @Id
     @Column(name = GUEST_BOOK_ID)
+    // brukes av hibernate
     @SuppressWarnings("unused")
-        // brukes av hibernate
     void setGuestBookId(Long guestBookId) {
         setId(guestBookId);
     }
@@ -53,11 +53,7 @@ public class GuestBookEntity extends PersistentBean implements MutableGuestBook 
 
         GuestBookEntity that = (GuestBookEntity) o;
 
-        return new EqualsBuilder()
-                .append(getId(), that.getId())
-                .append(getTitle(), that.getTitle())
-                .append(getUser(), that.getUser())
-                .isEquals();
+        return Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getUser(), that.getUser());
     }
 
     @Override

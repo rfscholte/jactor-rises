@@ -44,7 +44,6 @@ public class UserEntityTest {
         notEqual.setUserName(new UserName("some other user"));
         notEqual.setProfileEntity(new ProfileEntity());
         notEqual.setPassword("some other password");
-        notEqual.setUserId(1L);
 
         assertTrue(new EqualsMatching(base)
                         .isEqualTo(equal)

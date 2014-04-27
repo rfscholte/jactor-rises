@@ -24,7 +24,6 @@ public class BlogEntityTest {
         BlogEntity notEqual = new BlogEntity();
         notEqual.setTitle("another title");
         notEqual.setUserEntity(new UserEntity());
-        notEqual.setBlogId(1L);
 
         assertTrue(new HashCodeMatching(base)
                         .isImplementedForEquality(equal)
@@ -44,7 +43,6 @@ public class BlogEntityTest {
         BlogEntity notEqual = new BlogEntity();
         notEqual.setTitle("another title");
         notEqual.setUserEntity(new UserEntity());
-        notEqual.setBlogId(1L);
 
         assertTrue(new EqualsMatching(base)
                         .isEqualTo(equal)
