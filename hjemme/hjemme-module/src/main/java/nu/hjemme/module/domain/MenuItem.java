@@ -6,17 +6,18 @@ import nu.hjemme.client.domain.PickChosenMenuItem;
 import nu.hjemme.client.dto.MenuItemDto;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.hash;
+
 /** @author Tor Egil Jacobsen */
 public class MenuItem implements nu.hjemme.client.domain.MenuItem, PickChosenMenuItem {
     private Description description;
-    private List<MenuItem> children = new ArrayList<MenuItem>();
+    private List<MenuItem> children = new ArrayList<>();
     private MenuItemTarget menuItemTarget;
 
     public MenuItem(MenuItemDto menuItem) {
@@ -50,11 +51,7 @@ public class MenuItem implements nu.hjemme.client.domain.MenuItem, PickChosenMen
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .append(getChildren())
-                .append(getDescription())
-                .append(getMenuItemTarget())
-                .toHashCode();
+        return hash(getChildren(), getDescription(), getMenuItemTarget());
     }
 
     @Override

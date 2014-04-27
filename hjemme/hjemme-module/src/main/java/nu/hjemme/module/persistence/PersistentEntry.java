@@ -1,13 +1,13 @@
-package nu.hjemme.module.persistence.base;
+package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Entry;
-import nu.hjemme.module.persistence.PersonEntity;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.LocalDateTime;
+
+import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
 public abstract class PersistentEntry extends PersistentBean implements Entry {
@@ -28,31 +28,17 @@ public abstract class PersistentEntry extends PersistentBean implements Entry {
         creator = entry.getCreator() != null ? new PersonEntity(entry.getCreator()) : null;
     }
 
-    @Override
-    public abstract boolean equals(Object o);
 
     /**
-     * @param entry to be checked for equality. There is not performed a null check on the argument.
-     * @return <code>true</code> if this instance is equal to the other instance.
+     * @param entry sjekkes om entry teksten er lik på de to instansene.
+     * @return <code>true</code> hvis tekstene stemmer overens.
      */
-    protected boolean isEqualTo(Entry entry) {
+    protected boolean harSammePersonSkrevetEnTeksSomErLikTekstenTil(Entry entry) {
         return new EqualsBuilder()
-                .append(getCreationTime(), entry.getCreationTime())
                 .append(getEntry(), entry.getEntry())
                 .append(getCreatorName(), entry.getCreatorName())
                 .append(getCreator(), entry.getCreator())
                 .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
-                .append(getCreationTime())
-                .append(getEntry())
-                .append(getCreatorName())
-                .append(getCreator())
-                .toHashCode();
     }
 
     @Override
@@ -64,6 +50,14 @@ public abstract class PersistentEntry extends PersistentBean implements Entry {
                 .append(getCreator())
                 .toString();
     }
+
+    @Override
+    public int hashCode() {
+        return hash(getEntry(), getCreatorName(), getCreator());
+    }
+
+    @Override
+    public abstract boolean equals(Object o);
 
     @Override
     public LocalDateTime getCreationTime() {
@@ -83,11 +77,6 @@ public abstract class PersistentEntry extends PersistentBean implements Entry {
     @Override
     public PersonEntity getCreator() {
         return creator;
-    }
-
-    @Override
-    protected void setId(Object id) {
-        super.setId(id);
     }
 
     public void setCreatorName(Name createdBy) {

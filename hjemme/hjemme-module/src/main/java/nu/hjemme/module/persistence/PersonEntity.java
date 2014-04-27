@@ -2,10 +2,8 @@ package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Person;
-import nu.hjemme.module.persistence.base.PersistentBean;
 import nu.hjemme.module.persistence.mutable.MutablePerson;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -13,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.PersonMetadata.ADDRESS;
 import static nu.hjemme.module.persistence.meta.PersonMetadata.FIRST_NAME;
 import static nu.hjemme.module.persistence.meta.PersonMetadata.LAST_NAME;
@@ -70,12 +69,7 @@ public class PersonEntity extends PersistentBean implements MutablePerson {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
-                .append(getAddress())
-                .append(getFirstName())
-                .append(getLastName())
-                .toHashCode();
+        return hash(getAddress(), getFirstName(), getLastName());
     }
 
     @Override

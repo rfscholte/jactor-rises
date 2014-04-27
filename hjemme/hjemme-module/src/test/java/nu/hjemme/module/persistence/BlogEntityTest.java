@@ -11,11 +11,15 @@ public class BlogEntityTest {
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
+        UserEntity userEntity = new UserEntity();
+
         BlogEntity base = new BlogEntity();
         base.setTitle("title");
-        base.setUserEntity(new UserEntity());
+        base.setUserEntity(userEntity);
 
         BlogEntity equal = new BlogEntity(base);
+        equal.setTitle("title");
+        equal.setUserEntity(userEntity);
 
         BlogEntity notEqual = new BlogEntity();
         notEqual.setTitle("another title");

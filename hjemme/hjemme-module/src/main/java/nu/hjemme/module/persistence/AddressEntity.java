@@ -2,16 +2,15 @@ package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
-import nu.hjemme.module.persistence.base.PersistentBean;
 import nu.hjemme.module.persistence.mutable.MutableAddress;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 
+import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.AddressMetadata.ADDRESS_ID;
 import static nu.hjemme.module.persistence.meta.AddressMetadata.ADDRESS_LINE_1;
 import static nu.hjemme.module.persistence.meta.AddressMetadata.ADDRESS_LINE_2;
@@ -25,6 +24,8 @@ public class AddressEntity extends PersistentBean implements MutableAddress {
 
     @Id
     @Column(name = ADDRESS_ID)
+    @SuppressWarnings("unused")
+        // brukes av hibernate
     void setAddressId(Long addressId) {
         setId(addressId);
     }
@@ -73,7 +74,6 @@ public class AddressEntity extends PersistentBean implements MutableAddress {
         AddressEntity that = (AddressEntity) o;
 
         return new EqualsBuilder()
-                .append(getId(), that.getId())
                 .append(getAddressLine1(), that.getAddressLine1())
                 .append(getAddressLine2(), that.getAddressLine2())
                 .append(getAddressLine3(), that.getAddressLine3())
@@ -85,15 +85,7 @@ public class AddressEntity extends PersistentBean implements MutableAddress {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
-                .append(getAddressLine1())
-                .append(getAddressLine2())
-                .append(getAddressLine3())
-                .append(getCity())
-                .append(getCountry())
-                .append(getZipCode())
-                .toHashCode();
+        return hash(getAddressLine1(), getAddressLine2(), getAddressLine3(), getCity(), getCountry(), getZipCode());
     }
 
     @Override

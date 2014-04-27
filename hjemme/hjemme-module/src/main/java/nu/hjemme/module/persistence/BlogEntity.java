@@ -1,11 +1,9 @@
 package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.domain.Blog;
-import nu.hjemme.module.persistence.base.PersistentBean;
 import nu.hjemme.module.persistence.mutable.MutableBlog;
 import nu.hjemme.module.persistence.mutable.MutableUser;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.LocalDate;
@@ -14,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.BlogMetadata.BLOG_ID;
 import static nu.hjemme.module.persistence.meta.BlogMetadata.CREATED;
 import static nu.hjemme.module.persistence.meta.BlogMetadata.TITLE;
@@ -62,7 +61,6 @@ public class BlogEntity extends PersistentBean implements MutableBlog {
         BlogEntity that = (BlogEntity) o;
 
         return new EqualsBuilder()
-                .append(getId(), that.getId())
                 .append(getTitle(), that.getTitle())
                 .append(getUser(), that.getUser())
                 .isEquals();
@@ -70,11 +68,7 @@ public class BlogEntity extends PersistentBean implements MutableBlog {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
-                .append(getTitle())
-                .append(getUser())
-                .toHashCode();
+        return hash(getTitle(), getUser());
     }
 
     @Override

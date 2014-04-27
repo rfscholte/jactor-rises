@@ -2,11 +2,9 @@ package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
-import nu.hjemme.module.persistence.base.PersistentBean;
 import nu.hjemme.module.persistence.mutable.MutableProfile;
 import nu.hjemme.module.persistence.mutable.MutableUser;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -14,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.UserMetadata.PASSWORD;
 import static nu.hjemme.module.persistence.meta.UserMetadata.USER_ID;
 import static nu.hjemme.module.persistence.meta.UserMetadata.USER_NAME;
@@ -69,12 +68,7 @@ public class UserEntity extends PersistentBean implements MutableUser {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
-                .append(getPassword())
-                .append(getProfile())
-                .append(getUserName())
-                .toHashCode();
+        return hash(getPassword(), getProfile(), getUserName());
     }
 
     @Override

@@ -2,10 +2,8 @@ package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.BlogEntry;
-import nu.hjemme.module.persistence.base.PersistentEntry;
 import nu.hjemme.module.persistence.mutable.MutableBlogEntry;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.LocalDateTime;
@@ -15,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.BlogEntryMetadata.BLOG;
 import static nu.hjemme.module.persistence.meta.BlogEntryMetadata.CREATED_BY;
 import static nu.hjemme.module.persistence.meta.BlogEntryMetadata.CREATION_TIME;
@@ -81,8 +80,7 @@ public class BlogEntryEntity extends PersistentEntry implements MutableBlogEntry
         BlogEntryEntity that = (BlogEntryEntity) o;
 
         return new EqualsBuilder()
-                .append(getId(), that.getId())
-                .appendSuper(isEqualTo(that))
+                .appendSuper(harSammePersonSkrevetEnTeksSomErLikTekstenTil(that))
                 .append(getBlog(), that.getBlog())
                 .isEquals();
     }
@@ -90,10 +88,7 @@ public class BlogEntryEntity extends PersistentEntry implements MutableBlogEntry
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
-                .append(getBlog().hashCode())
-                .toHashCode();
+        return hash(super.hashCode(), getBlog(), getEntry());
     }
 
     /** {@inheritDoc} */

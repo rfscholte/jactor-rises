@@ -21,8 +21,6 @@ public class GuestBookEntityTest {
         notEqual.setTitle("another title");
         notEqual.setUser(new UserEntity());
 
-        notEqual.setGuestBookId(1L);
-
         assertTrue(new HashCodeMatching(base)
                         .isImplementedForEquality(equal)
                         .isUniqueImplementation(notEqual)

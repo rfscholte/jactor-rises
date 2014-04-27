@@ -2,15 +2,14 @@ package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Profile;
-import nu.hjemme.module.persistence.base.PersistentBean;
 import nu.hjemme.module.persistence.mutable.MutableProfile;
 import nu.hjemme.module.persistence.mutable.MutableUser;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 
+import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.ProfileMetadata.DESCRIPTION;
 import static nu.hjemme.module.persistence.meta.ProfileMetadata.PERSON_ID;
 import static nu.hjemme.module.persistence.meta.ProfileMetadata.PROFILE_ID;
@@ -19,7 +18,9 @@ import static nu.hjemme.module.persistence.meta.ProfileMetadata.USER_ID;
 /** @author Tor Egil Jacobsen */
 public class ProfileEntity extends PersistentBean implements MutableProfile {
     @Id
-    @Column(name = PROFILE_ID)
+    @Column(name = PROFILE_ID)   /**/
+    @SuppressWarnings("unused")
+        // brukes av hibernate
     void setProfileId(Long profileId) {
         setId(profileId);
     }
@@ -93,14 +94,7 @@ public class ProfileEntity extends PersistentBean implements MutableProfile {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
-                .append(getAddress())
-                .append(getDescription())
-                .append(getFirstName())
-                .append(getLastName())
-                .append(getUser())
-                .toHashCode();
+        return hash(getDescription(), getAddress(), getFirstName(), getLastName(), getUser());
     }
 
     @Override

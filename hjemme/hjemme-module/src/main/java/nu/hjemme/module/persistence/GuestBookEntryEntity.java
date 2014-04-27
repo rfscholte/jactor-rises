@@ -2,10 +2,8 @@ package nu.hjemme.module.persistence;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBookEntry;
-import nu.hjemme.module.persistence.base.PersistentEntry;
 import nu.hjemme.module.persistence.mutable.MutableGuestBookEntry;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.LocalDateTime;
@@ -14,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import static java.util.Objects.hash;
 import static nu.hjemme.module.persistence.meta.GuestEntryMetadata.CREATED_BY;
 import static nu.hjemme.module.persistence.meta.GuestEntryMetadata.CREATION_TIME;
 import static nu.hjemme.module.persistence.meta.GuestEntryMetadata.CREATOR;
@@ -80,17 +79,14 @@ public class GuestBookEntryEntity extends PersistentEntry implements MutableGues
 
         return new EqualsBuilder()
                 .append(getId(), that.getId())
-                .appendSuper(isEqualTo(that))
+                .appendSuper(harSammePersonSkrevetEnTeksSomErLikTekstenTil(that))
                 .append(getGuestBook(), that.getGuestBook())
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
-                .append(getGuestBook())
-                .toHashCode();
+        return hash(super.hashCode(), getGuestBook());
     }
 
     @Override
