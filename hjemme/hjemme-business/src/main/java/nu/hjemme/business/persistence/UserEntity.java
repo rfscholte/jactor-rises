@@ -1,7 +1,5 @@
 package nu.hjemme.business.persistence;
 
-import nu.hjemme.business.persistence.mutable.MutableProfile;
-import nu.hjemme.business.persistence.mutable.MutableUser;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -18,7 +16,7 @@ import static nu.hjemme.business.persistence.meta.UserMetadata.USER_ID;
 import static nu.hjemme.business.persistence.meta.UserMetadata.USER_NAME;
 
 /** @author Tor Egil Jacobsen */
-public class UserEntity extends PersistentBean implements MutableUser {
+public class UserEntity extends PersistentBean implements User {
 
     @Id
     @Column(name = USER_ID)
@@ -92,22 +90,15 @@ public class UserEntity extends PersistentBean implements MutableUser {
         return profileEntity;
     }
 
-    @Override
     public void setPassword(String password) {
         this.password = password;
     }
 
-    @Override
     public void setUserName(UserName userName) {
         this.userName = userName;
     }
 
-    @Override
-    public <T extends MutableProfile> void setProfileEntity(T mutableProfile) {
-        this.profileEntity = (ProfileEntity) mutableProfile;
-    }
-
-    public MutableUser getMutableUser() {
-        return profileEntity.getMutableUser();
+    public void setProfileEntity(ProfileEntity profileEntity) {
+        this.profileEntity = profileEntity;
     }
 }

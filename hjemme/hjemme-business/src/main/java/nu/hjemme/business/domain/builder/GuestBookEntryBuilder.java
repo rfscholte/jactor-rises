@@ -1,10 +1,10 @@
-package nu.hjemme.business.domain;
+package nu.hjemme.business.domain.builder;
 
+import nu.hjemme.business.domain.GuestBookEntry;
 import nu.hjemme.business.domain.base.DomainBuilder;
 import nu.hjemme.business.persistence.GuestBookEntity;
 import nu.hjemme.business.persistence.GuestBookEntryEntity;
 import nu.hjemme.business.persistence.PersonEntity;
-import nu.hjemme.business.persistence.mutable.MutableGuestBookEntry;
 import nu.hjemme.client.datatype.Name;
 import org.apache.commons.lang.Validate;
 
@@ -14,39 +14,39 @@ public class GuestBookEntryBuilder extends DomainBuilder<GuestBookEntry> {
     static final String THE_ENTRY_CANNOT_BE_EMPTY = "The entry cannot be empty";
     static final String THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE = "The entry must be created by someone";
 
-    private MutableGuestBookEntry mutableGuestBookEntry = new GuestBookEntryEntity();
+    private GuestBookEntryEntity guestBookEntryEntity = new GuestBookEntryEntity();
 
     public GuestBookEntryBuilder appendCreatorName(String creator) {
-        mutableGuestBookEntry.setCreatorName(new Name(creator));
+        guestBookEntryEntity.setCreatorName(new Name(creator));
         return this;
     }
 
     public GuestBookEntryBuilder appendEntry(String entry) {
-        mutableGuestBookEntry.setEntry(entry);
+        guestBookEntryEntity.setEntry(entry);
         return this;
     }
 
     public GuestBookEntryBuilder appendGuestBook(GuestBookEntity guestBookEntity) {
-        mutableGuestBookEntry.setGuestBookEntity(guestBookEntity);
+        guestBookEntryEntity.setGuestBookEntity(guestBookEntity);
         return this;
     }
 
     public GuestBookEntryBuilder appendCreator(PersonEntity creator) {
-        mutableGuestBookEntry.setCreator(creator);
-        mutableGuestBookEntry.setCreatorName(creator.getFirstName());
+        guestBookEntryEntity.setCreator(creator);
+        guestBookEntryEntity.setCreatorName(creator.getFirstName());
         return this;
     }
 
     @Override
     protected GuestBookEntry buildInstance() {
-        return new GuestBookEntry(mutableGuestBookEntry);
+        return new GuestBookEntry(guestBookEntryEntity);
     }
 
     @Override
     protected void validate() {
-        Validate.notEmpty(mutableGuestBookEntry.getEntry(), THE_ENTRY_CANNOT_BE_EMPTY);
-        Validate.notNull(mutableGuestBookEntry.getGuestBook(), THE_ENTRY_MUST_BELONG_TO_A_GUEST_BOOK);
-        Validate.notNull(mutableGuestBookEntry.getCreatorName(), THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
+        Validate.notEmpty(guestBookEntryEntity.getEntry(), THE_ENTRY_CANNOT_BE_EMPTY);
+        Validate.notNull(guestBookEntryEntity.getGuestBook(), THE_ENTRY_MUST_BELONG_TO_A_GUEST_BOOK);
+        Validate.notNull(guestBookEntryEntity.getCreatorName(), THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
     }
 
     public static GuestBookEntryBuilder init() {

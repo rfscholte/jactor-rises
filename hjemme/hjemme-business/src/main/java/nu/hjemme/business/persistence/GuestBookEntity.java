@@ -1,7 +1,7 @@
 package nu.hjemme.business.persistence;
 
-import nu.hjemme.business.persistence.mutable.MutableGuestBook;
 import nu.hjemme.client.domain.GuestBook;
+import nu.hjemme.client.domain.User;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -16,7 +16,7 @@ import static nu.hjemme.business.persistence.meta.GuestBookMetadata.TITLE;
 import static nu.hjemme.business.persistence.meta.GuestBookMetadata.USER;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntity extends PersistentBean implements MutableGuestBook {
+public class GuestBookEntity extends PersistentBean implements GuestBook {
 
     @Id
     @Column(name = GUEST_BOOK_ID)
@@ -70,22 +70,18 @@ public class GuestBookEntity extends PersistentBean implements MutableGuestBook 
                 .toString();
     }
 
-    @Override
     public String getTitle() {
         return title;
     }
 
-    @Override
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    @Override
     public void setTitle(String title) {
         this.title = title;
     }
 
-    @Override
     public void setUser(UserEntity user) {
         this.user = user;
     }

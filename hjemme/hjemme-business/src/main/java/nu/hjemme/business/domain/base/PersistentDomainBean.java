@@ -1,15 +1,15 @@
 package nu.hjemme.business.domain.base;
 
 /** @author Tor Egil Jacobsen */
-public class PersistentDomainBean<Mutable> {
+public class PersistentDomainBean<Entity> {
 
-    private final Mutable mutable;
+    private final Entity entity;
 
-    protected PersistentDomainBean(Mutable mutable) {
-        this.mutable = mutable;
+    protected PersistentDomainBean(Entity entity) {
+        this.entity = entity;
     }
 
-    protected Mutable getMutable() {
-        return mutable;
+    protected Entity getEntity() {
+        return entity;
     }
 }

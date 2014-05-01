@@ -1,6 +1,5 @@
 package nu.hjemme.business.persistence;
 
-import nu.hjemme.business.persistence.mutable.MutablePerson;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Person;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -18,7 +17,7 @@ import static nu.hjemme.business.persistence.meta.PersonMetadata.LAST_NAME;
 import static nu.hjemme.business.persistence.meta.PersonMetadata.PERSON_ID;
 
 /** @author Tor Egil Jacobsen */
-public class PersonEntity extends PersistentBean implements MutablePerson {
+public class PersonEntity extends PersistentBean implements Person {
 
     @Id
     @Column(name = PERSON_ID)

@@ -1,10 +1,10 @@
-package nu.hjemme.business.domain;
+package nu.hjemme.business.domain.builder;
 
+import nu.hjemme.business.domain.BlogEntry;
 import nu.hjemme.business.domain.base.DomainBuilder;
 import nu.hjemme.business.persistence.BlogEntity;
 import nu.hjemme.business.persistence.BlogEntryEntity;
 import nu.hjemme.business.persistence.PersonEntity;
-import nu.hjemme.business.persistence.mutable.MutableBlogEntry;
 import nu.hjemme.client.datatype.Name;
 import org.apache.commons.lang.Validate;
 
@@ -14,39 +14,39 @@ public class BlogEntryBuilder extends DomainBuilder<BlogEntry> {
     static final String THE_ENTRY_CANNOT_BE_EMPTY = "The entry field cannot be empty";
     static final String THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE = "The entry must be created by someone";
 
-    private MutableBlogEntry mutableBlogEntry = new BlogEntryEntity();
+    private BlogEntryEntity blogEntryEntity = new BlogEntryEntity();
 
     public BlogEntryBuilder appendCreatorName(String creatorName) {
-        mutableBlogEntry.setCreatorName(new Name(creatorName));
+        blogEntryEntity.setCreatorName(new Name(creatorName));
         return this;
     }
 
     public BlogEntryBuilder appendCreator(PersonEntity creator) {
-        mutableBlogEntry.setCreator(creator);
-        mutableBlogEntry.setCreatorName(creator.getFirstName());
+        blogEntryEntity.setCreator(creator);
+        blogEntryEntity.setCreatorName(creator.getFirstName());
         return this;
     }
 
     public BlogEntryBuilder appendEntry(String entry) {
-        mutableBlogEntry.setEntry(entry);
+        blogEntryEntity.setEntry(entry);
         return this;
     }
 
     public BlogEntryBuilder appendBlog(BlogEntity blogEntity) {
-        mutableBlogEntry.setBlogEntity(blogEntity);
+        blogEntryEntity.setBlogEntity(blogEntity);
         return this;
     }
 
     @Override
     protected BlogEntry buildInstance() {
-        return new BlogEntry(mutableBlogEntry);
+        return new BlogEntry(blogEntryEntity);
     }
 
     @Override
     protected void validate() {
-        Validate.notEmpty(mutableBlogEntry.getEntry(), THE_ENTRY_CANNOT_BE_EMPTY);
-        Validate.notNull(mutableBlogEntry.getCreatorName(), THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
-        Validate.notNull(mutableBlogEntry.getBlog(), THE_ENTRY_MUST_BELONG_TO_A_BLOG);
+        Validate.notEmpty(blogEntryEntity.getEntry(), THE_ENTRY_CANNOT_BE_EMPTY);
+        Validate.notNull(blogEntryEntity.getCreatorName(), THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
+        Validate.notNull(blogEntryEntity.getBlog(), THE_ENTRY_MUST_BELONG_TO_A_BLOG);
     }
 
     public static BlogEntryBuilder init() {

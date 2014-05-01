@@ -1,6 +1,5 @@
 package nu.hjemme.business.persistence;
 
-import nu.hjemme.business.persistence.mutable.MutableAddress;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -20,7 +19,7 @@ import static nu.hjemme.business.persistence.meta.AddressMetadata.COUNTRY;
 import static nu.hjemme.business.persistence.meta.AddressMetadata.ZIP_CODE;
 
 /** @author Tor Egil Jacobsen */
-public class AddressEntity extends PersistentBean implements MutableAddress {
+public class AddressEntity extends PersistentBean implements Address {
 
     @Id
     @Column(name = ADDRESS_ID)
@@ -124,7 +123,6 @@ public class AddressEntity extends PersistentBean implements MutableAddress {
         return addressLine3;
     }
 
-    @Override
     public String getCity() {
         return city;
     }

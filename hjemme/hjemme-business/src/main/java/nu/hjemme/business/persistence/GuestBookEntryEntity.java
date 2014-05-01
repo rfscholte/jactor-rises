@@ -1,6 +1,5 @@
 package nu.hjemme.business.persistence;
 
-import nu.hjemme.business.persistence.mutable.MutableGuestBookEntry;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBookEntry;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -21,7 +20,7 @@ import static nu.hjemme.business.persistence.meta.GuestEntryMetadata.ENTRY_ID;
 import static nu.hjemme.business.persistence.meta.GuestEntryMetadata.GUEST_BOOK;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntryEntity extends PersistentEntry implements MutableGuestBookEntry {
+public class GuestBookEntryEntity extends PersistentEntry implements GuestBookEntry {
 
     @Id
     @Column(name = ENTRY_ID)
@@ -100,7 +99,6 @@ public class GuestBookEntryEntity extends PersistentEntry implements MutableGues
         return guestBookEntity;
     }
 
-    @Override
     public void setGuestBookEntity(GuestBookEntity guestBookEntity) {
         this.guestBookEntity = guestBookEntity;
     }

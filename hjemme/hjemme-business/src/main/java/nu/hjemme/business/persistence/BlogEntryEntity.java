@@ -1,8 +1,6 @@
 package nu.hjemme.business.persistence;
 
-import nu.hjemme.business.persistence.mutable.MutableBlogEntry;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.BlogEntry;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.LocalDateTime;
@@ -22,7 +20,7 @@ import static nu.hjemme.business.persistence.meta.BlogEntryMetadata.ENTRY;
 import static nu.hjemme.business.persistence.meta.BlogEntryMetadata.ENTRY_ID;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntryEntity extends PersistentEntry implements MutableBlogEntry {
+public class BlogEntryEntity extends PersistentEntry {
 
     @Id
     @Column(name = ENTRY_ID)
@@ -61,10 +59,9 @@ public class BlogEntryEntity extends PersistentEntry implements MutableBlogEntry
         super();
     }
 
-    /** @param blogEntry will be used to create the instance... */
-    public BlogEntryEntity(BlogEntry blogEntry) {
-        super(blogEntry);
-        blogEntity = new BlogEntity(blogEntry.getBlog());
+    public BlogEntryEntity(BlogEntryEntity blogEntryEntity) {
+        super(blogEntryEntity);
+        blogEntity = blogEntryEntity.getBlog();
     }
 
     @Override
@@ -97,12 +94,10 @@ public class BlogEntryEntity extends PersistentEntry implements MutableBlogEntry
                 .toString();
     }
 
-    @Override
     public BlogEntity getBlog() {
         return blogEntity;
     }
 
-    @Override
     public void setBlogEntity(BlogEntity blogEntity) {
         this.blogEntity = blogEntity;
     }

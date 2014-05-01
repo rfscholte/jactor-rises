@@ -1,8 +1,5 @@
 package nu.hjemme.business.persistence;
 
-import nu.hjemme.business.persistence.mutable.MutableBlog;
-import nu.hjemme.business.persistence.mutable.MutableUser;
-import nu.hjemme.client.domain.Blog;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.LocalDate;
@@ -19,7 +16,7 @@ import static nu.hjemme.business.persistence.meta.BlogMetadata.TITLE;
 import static nu.hjemme.business.persistence.meta.BlogMetadata.USER;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntity extends PersistentBean implements MutableBlog {
+public class BlogEntity extends PersistentBean {
 
     @Id
     @Column(name = BLOG_ID)
@@ -43,11 +40,10 @@ public class BlogEntity extends PersistentBean implements MutableBlog {
         created = new LocalDate();
     }
 
-    /** @param blog will be used to create the instance... */
-    public BlogEntity(Blog blog) {
-        created = blog.getCreated();
-        title = blog.getTitle();
-        userEntity = blog.getUser() != null ? new UserEntity(blog.getUser()) : null;
+    public BlogEntity(BlogEntity blogEntity) {
+        created = blogEntity.getCreated();
+        title = blogEntity.getTitle();
+        userEntity = blogEntity.getUser();
     }
 
     @Override
@@ -81,33 +77,23 @@ public class BlogEntity extends PersistentBean implements MutableBlog {
                 .toString();
     }
 
-    @Override
     public LocalDate getCreated() {
         return created;
     }
 
-    @Override
     public String getTitle() {
         return title;
     }
 
-    @Override
     public UserEntity getUser() {
         return userEntity;
     }
 
-    @Override
     public void setTitle(String title) {
         this.title = title;
     }
 
-    @Override
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
-    }
-
-    @Override
-    public MutableUser getMutableUser() {
-        return userEntity;
     }
 }

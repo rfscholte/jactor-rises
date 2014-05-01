@@ -1,5 +1,6 @@
-package nu.hjemme.business.domain;
+package nu.hjemme.business.domain.builder;
 
+import nu.hjemme.business.domain.Address;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.NotNullBuildMatching;
