@@ -1,6 +1,6 @@
 package nu.hjemme.business.domain;
 
-import nu.hjemme.business.domain.base.PersistentDomainBean;
+import nu.hjemme.business.domain.base.PersistentBean;
 import nu.hjemme.business.persistence.BlogEntryEntity;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Blog;
@@ -8,7 +8,7 @@ import nu.hjemme.client.domain.Person;
 import org.joda.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntry extends PersistentDomainBean<BlogEntryEntity> implements nu.hjemme.client.domain.BlogEntry {
+public class BlogEntry extends PersistentBean<BlogEntryEntity> implements nu.hjemme.client.domain.BlogEntry {
 
     public BlogEntry(BlogEntryEntity blogEntryEntity) {
         super(blogEntryEntity);

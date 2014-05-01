@@ -17,7 +17,7 @@ import static nu.hjemme.business.persistence.meta.PersonMetadata.LAST_NAME;
 import static nu.hjemme.business.persistence.meta.PersonMetadata.PERSON_ID;
 
 /** @author Tor Egil Jacobsen */
-public class PersonEntity extends PersistentBean implements Person {
+public class PersonEntity extends PersistentEntity implements Person {
 
     @Id
     @Column(name = PERSON_ID)

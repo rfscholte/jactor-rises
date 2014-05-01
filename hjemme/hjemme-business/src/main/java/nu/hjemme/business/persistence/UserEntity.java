@@ -16,7 +16,7 @@ import static nu.hjemme.business.persistence.meta.UserMetadata.USER_ID;
 import static nu.hjemme.business.persistence.meta.UserMetadata.USER_NAME;
 
 /** @author Tor Egil Jacobsen */
-public class UserEntity extends PersistentBean implements User {
+public class UserEntity extends PersistentEntity implements User {
 
     @Id
     @Column(name = USER_ID)

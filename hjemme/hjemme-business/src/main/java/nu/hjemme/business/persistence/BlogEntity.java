@@ -16,7 +16,7 @@ import static nu.hjemme.business.persistence.meta.BlogMetadata.TITLE;
 import static nu.hjemme.business.persistence.meta.BlogMetadata.USER;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntity extends PersistentBean {
+public class BlogEntity extends PersistentEntity {
 
     @Id
     @Column(name = BLOG_ID)

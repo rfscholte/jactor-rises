@@ -19,7 +19,7 @@ import static nu.hjemme.business.persistence.meta.AddressMetadata.COUNTRY;
 import static nu.hjemme.business.persistence.meta.AddressMetadata.ZIP_CODE;
 
 /** @author Tor Egil Jacobsen */
-public class AddressEntity extends PersistentBean implements Address {
+public class AddressEntity extends PersistentEntity implements Address {
 
     @Id
     @Column(name = ADDRESS_ID)
