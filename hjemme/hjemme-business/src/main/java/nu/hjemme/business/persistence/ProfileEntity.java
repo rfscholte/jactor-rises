@@ -1,7 +1,5 @@
 package nu.hjemme.business.persistence;
 
-import nu.hjemme.business.persistence.mutable.MutableProfile;
-import nu.hjemme.business.persistence.mutable.MutableUser;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Profile;
 
@@ -16,7 +14,7 @@ import static nu.hjemme.business.persistence.meta.ProfileMetadata.PROFILE_ID;
 import static nu.hjemme.business.persistence.meta.ProfileMetadata.USER_ID;
 
 /** @author Tor Egil Jacobsen */
-public class ProfileEntity extends PersistentBean implements MutableProfile {
+public class ProfileEntity extends PersistentBean implements Profile {
     @Id
     @Column(name = PROFILE_ID)
     // brukes av hibernate
@@ -35,9 +33,11 @@ public class ProfileEntity extends PersistentBean implements MutableProfile {
     private UserEntity userEntity;
 
     public ProfileEntity() {
+        personEntity = new PersonEntity();
     }
 
     public ProfileEntity(Profile profile) {
+        this();
         description = profile.getDescription();
         initPersonEntity();
         personEntity.setAddress(profile.getAddress() != null ? new AddressEntity(profile.getAddress()) : null);
@@ -46,21 +46,15 @@ public class ProfileEntity extends PersistentBean implements MutableProfile {
         userEntity = profile.getUser() != null ? new UserEntity(profile.getUser()) : null;
     }
 
-    @Override
     public void addLastName(String lastName) {
-        initPersonEntity();
         personEntity.setLastName(new Name(lastName));
     }
 
-    @Override
     public void addFirstName(String firstName) {
-        initPersonEntity();
         personEntity.setFirstName(new Name(firstName));
     }
 
-    @Override
     public void addAddressEntity(AddressEntity addressEntity) {
-        initPersonEntity();
         personEntity.setAddress(addressEntity);
     }
 
@@ -119,13 +113,7 @@ public class ProfileEntity extends PersistentBean implements MutableProfile {
         return personEntity != null ? personEntity.getLastName() : null;
     }
 
-    @Override
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public MutableUser getMutableUser() {
-        return userEntity.getMutableUser();
     }
 }

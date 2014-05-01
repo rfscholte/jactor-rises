@@ -1,7 +1,7 @@
 package nu.hjemme.business.dao;
 
-import nu.hjemme.business.domain.ProfileBuilder;
-import nu.hjemme.business.domain.UserBuilder;
+import nu.hjemme.business.domain.builder.ProfileBuilder;
+import nu.hjemme.business.domain.builder.UserBuilder;
 import nu.hjemme.business.persistence.AddressEntity;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.User;
@@ -33,7 +33,7 @@ public final class UserDao {
                         .appendLastName(JACOBSEN)
                         .appendFirstName("Tor Egil")
                         .appendAddress(HOME)
-                        .retrieveMutableProfile())
+                        .getValidatedProfileEntity())
                 .build();
     }
 
@@ -46,7 +46,7 @@ public final class UserDao {
                         .appendLastName(JACOBSEN)
                         .appendFirstName("Tor Egil")
                         .appendAddress(HOME)
-                        .retrieveMutableProfile())
+                        .getValidatedProfileEntity())
                 .build();
     }
 }

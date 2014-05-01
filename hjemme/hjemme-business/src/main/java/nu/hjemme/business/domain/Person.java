@@ -1,29 +1,29 @@
 package nu.hjemme.business.domain;
 
 import nu.hjemme.business.domain.base.PersistentDomainBean;
-import nu.hjemme.business.persistence.mutable.MutablePerson;
+import nu.hjemme.business.persistence.PersonEntity;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Address;
 
 /** @author Tor Egil Jacobsen */
-public class Person extends PersistentDomainBean<MutablePerson> implements nu.hjemme.client.domain.Person {
+public class Person extends PersistentDomainBean<PersonEntity> implements nu.hjemme.client.domain.Person {
 
-    public Person(MutablePerson mutablePerson) {
-        super(mutablePerson);
+    public Person(PersonEntity personEntity) {
+        super(personEntity);
     }
 
     @Override
     public Name getFirstName() {
-        return getMutable().getFirstName();
+        return getEntity().getFirstName();
     }
 
     @Override
     public Name getLastName() {
-        return getMutable().getLastName();
+        return getEntity().getLastName();
     }
 
     @Override
     public Address getAddress() {
-        return getMutable().getAddress();
+        return new nu.hjemme.business.domain.Address(getEntity().getAddress());
     }
 }

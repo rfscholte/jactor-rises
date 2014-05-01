@@ -1,5 +1,6 @@
-package nu.hjemme.business.domain;
+package nu.hjemme.business.domain.builder;
 
+import nu.hjemme.business.domain.BlogEntry;
 import nu.hjemme.business.persistence.BlogEntity;
 import nu.hjemme.business.persistence.PersonEntity;
 import nu.hjemme.client.datatype.Name;

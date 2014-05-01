@@ -1,43 +1,39 @@
 package nu.hjemme.business.domain;
 
-import nu.hjemme.business.persistence.mutable.MutableProfile;
+import nu.hjemme.business.persistence.ProfileEntity;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Address;
 
 /** @author Tor Egil Jacobsen */
 public class Profile implements nu.hjemme.client.domain.Profile {
-    private final MutableProfile mutableProfile;
+    private final ProfileEntity profileEntity;
 
-    public Profile(MutableProfile mutableProfile) {
-        this.mutableProfile = mutableProfile;
+    public Profile(ProfileEntity profileEntity) {
+        this.profileEntity = profileEntity;
     }
 
     @Override
     public String getDescription() {
-        return mutableProfile.getDescription();
+        return profileEntity.getDescription();
     }
 
     @Override
-    public nu.hjemme.client.domain.User getUser() {
-        return new User(mutableProfile.getMutableUser());
+    public User getUser() {
+        return new User(profileEntity.getUser());
     }
 
     @Override
     public Name getFirstName() {
-        return mutableProfile.getFirstName();
+        return profileEntity.getFirstName();
     }
 
     @Override
     public Name getLastName() {
-        return mutableProfile.getLastName();
+        return profileEntity.getLastName();
     }
 
     @Override
     public Address getAddress() {
-        return mutableProfile.getAddress();
-    }
-
-    public MutableProfile getMutableProfile() {
-        return mutableProfile;
+        return profileEntity.getAddress();
     }
 }

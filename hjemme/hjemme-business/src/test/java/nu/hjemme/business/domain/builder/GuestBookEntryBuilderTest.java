@@ -1,5 +1,6 @@
-package nu.hjemme.business.domain;
+package nu.hjemme.business.domain.builder;
 
+import nu.hjemme.business.domain.GuestBookEntry;
 import nu.hjemme.business.persistence.GuestBookEntity;
 import nu.hjemme.business.persistence.PersonEntity;
 import nu.hjemme.client.datatype.Name;

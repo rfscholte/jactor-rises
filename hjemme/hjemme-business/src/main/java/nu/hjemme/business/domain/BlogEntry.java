@@ -1,41 +1,41 @@
 package nu.hjemme.business.domain;
 
 import nu.hjemme.business.domain.base.PersistentDomainBean;
-import nu.hjemme.business.persistence.mutable.MutableBlogEntry;
+import nu.hjemme.business.persistence.BlogEntryEntity;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.client.domain.Person;
 import org.joda.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntry extends PersistentDomainBean<MutableBlogEntry> implements nu.hjemme.client.domain.BlogEntry {
+public class BlogEntry extends PersistentDomainBean<BlogEntryEntity> implements nu.hjemme.client.domain.BlogEntry {
 
-    public BlogEntry(MutableBlogEntry mutableBlogEntry) {
-        super(mutableBlogEntry);
+    public BlogEntry(BlogEntryEntity blogEntryEntity) {
+        super(blogEntryEntity);
     }
 
     @Override
     public Blog getBlog() {
-        return getMutable().getBlog();
+        return new nu.hjemme.business.domain.Blog(getEntity().getBlog());
     }
 
     @Override
     public LocalDateTime getCreationTime() {
-        return getMutable().getCreationTime();
+        return getEntity().getCreationTime();
     }
 
     @Override
     public String getEntry() {
-        return getMutable().getEntry();
+        return getEntity().getEntry();
     }
 
     @Override
     public Name getCreatorName() {
-        return getMutable().getCreatorName();
+        return getEntity().getCreatorName();
     }
 
     @Override
     public Person getCreator() {
-        return getMutable().getCreator();
+        return new nu.hjemme.business.domain.Person(getEntity().getCreator());
     }
 }

@@ -1,5 +1,6 @@
-package nu.hjemme.business.domain;
+package nu.hjemme.business.domain.builder;
 
+import nu.hjemme.business.domain.Blog;
 import nu.hjemme.business.persistence.UserEntity;
 import org.junit.Rule;
 import org.junit.Test;

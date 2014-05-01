@@ -1,5 +1,6 @@
-package nu.hjemme.business.domain;
+package nu.hjemme.business.domain.builder;
 
+import nu.hjemme.business.domain.Profile;
 import nu.hjemme.business.persistence.AddressEntity;
 import nu.hjemme.client.datatype.Name;
 import org.junit.Rule;

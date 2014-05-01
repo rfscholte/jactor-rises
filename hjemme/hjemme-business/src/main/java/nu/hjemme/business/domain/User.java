@@ -1,29 +1,29 @@
 package nu.hjemme.business.domain;
 
 import nu.hjemme.business.domain.base.PersistentDomainBean;
-import nu.hjemme.business.persistence.mutable.MutableUser;
+import nu.hjemme.business.persistence.UserEntity;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.Profile;
 
 /** @author Tor Egil Jacobsen */
-public class User extends PersistentDomainBean<MutableUser> implements nu.hjemme.client.domain.User {
+public class User extends PersistentDomainBean<UserEntity> implements nu.hjemme.client.domain.User {
 
-    public User(MutableUser mutableUser) {
-        super(mutableUser);
+    public User(UserEntity userEntity) {
+        super(userEntity);
     }
 
     @Override
     public String getPassword() {
-        return getMutable().getPassword();
+        return getEntity().getPassword();
     }
 
     @Override
     public UserName getUserName() {
-        return getMutable().getUserName();
+        return getEntity().getUserName();
     }
 
     @Override
     public Profile getProfile() {
-        return getMutable().getProfile();
+        return getEntity().getProfile();
     }
 }
