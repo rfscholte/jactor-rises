@@ -1,10 +1,11 @@
 package nu.hjemme.client.domain;
 
 import nu.hjemme.client.datatype.Name;
+import nu.hjemme.client.domain.base.Persistent;
 import org.joda.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
-public interface Entry {
+public interface Entry extends Persistent {
 
     /** @return creation time of an entry */
     LocalDateTime getCreationTime();

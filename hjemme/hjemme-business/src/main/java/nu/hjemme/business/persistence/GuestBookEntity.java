@@ -16,7 +16,7 @@ import static nu.hjemme.business.persistence.meta.GuestBookMetadata.TITLE;
 import static nu.hjemme.business.persistence.meta.GuestBookMetadata.USER;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntity extends PersistentBean implements GuestBook {
+public class GuestBookEntity extends PersistentEntity implements GuestBook {
 
     @Id
     @Column(name = GUEST_BOOK_ID)

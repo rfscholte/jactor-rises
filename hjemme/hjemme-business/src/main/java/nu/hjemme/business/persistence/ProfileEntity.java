@@ -14,7 +14,7 @@ import static nu.hjemme.business.persistence.meta.ProfileMetadata.PROFILE_ID;
 import static nu.hjemme.business.persistence.meta.ProfileMetadata.USER_ID;
 
 /** @author Tor Egil Jacobsen */
-public class ProfileEntity extends PersistentBean implements Profile {
+public class ProfileEntity extends PersistentEntity implements Profile {
     @Id
     @Column(name = PROFILE_ID)
     // brukes av hibernate

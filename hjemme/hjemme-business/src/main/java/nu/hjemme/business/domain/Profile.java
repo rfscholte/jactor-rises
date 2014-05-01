@@ -1,11 +1,12 @@
 package nu.hjemme.business.domain;
 
+import nu.hjemme.business.persistence.PersistentEntity;
 import nu.hjemme.business.persistence.ProfileEntity;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Address;
 
 /** @author Tor Egil Jacobsen */
-public class Profile implements nu.hjemme.client.domain.Profile {
+public class Profile extends PersistentEntity implements nu.hjemme.client.domain.Profile {
     private final ProfileEntity profileEntity;
 
     public Profile(ProfileEntity profileEntity) {
