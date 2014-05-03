@@ -1,4 +1,4 @@
-package nu.hjemme.business;
+package nu.hjemme.business.facade;
 
 import nu.hjemme.client.UserFacade;
 import nu.hjemme.client.datatype.UserName;

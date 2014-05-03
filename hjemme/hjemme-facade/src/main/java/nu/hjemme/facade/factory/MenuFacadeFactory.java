@@ -1,6 +1,6 @@
 package nu.hjemme.facade.factory;
 
-import nu.hjemme.business.MenuFacadeImpl;
+import nu.hjemme.business.facade.MenuFacadeImpl;
 import nu.hjemme.client.MenuFacade;
 import nu.hjemme.client.dto.MenuDto;
 

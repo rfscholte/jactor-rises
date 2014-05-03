@@ -28,7 +28,7 @@
             <artifactId>hjemme-business</artifactId>
         </dependency>
 
-        <!-- Third party -->
+        <!-- Third party
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -48,6 +48,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
+        </dependency> -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
 
         <!-- Test scope -->
