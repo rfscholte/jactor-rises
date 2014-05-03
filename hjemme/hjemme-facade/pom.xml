@@ -15,7 +15,7 @@
     <name>hjemme-facade</name>
 
     <description>
-        The facade role is to make the client come to life with the logic from the module project.
+        The facade role is to make the client come to life with the logic from the hjemme-business module.
     </description>
 
     <dependencies>
