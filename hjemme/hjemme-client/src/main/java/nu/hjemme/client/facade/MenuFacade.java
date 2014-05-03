@@ -1,4 +1,4 @@
-package nu.hjemme.client;
+package nu.hjemme.client.facade;
 
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.domain.ChosenMenuItem;

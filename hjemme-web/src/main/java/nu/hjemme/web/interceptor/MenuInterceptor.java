@@ -1,7 +1,7 @@
 package nu.hjemme.web.interceptor;
 
-import nu.hjemme.client.MenuFacade;
 import nu.hjemme.client.datatype.MenuTarget;
+import nu.hjemme.client.facade.MenuFacade;
 import nu.hjemme.web.dto.ChosenMenuItemDto;
 import nu.hjemme.web.dto.MenuDto;
 import nu.hjemme.web.dto.MenuItemTargetDto;

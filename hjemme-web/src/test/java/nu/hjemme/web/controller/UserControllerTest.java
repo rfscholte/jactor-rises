@@ -1,8 +1,8 @@
 package nu.hjemme.web.controller;
 
-import nu.hjemme.client.UserFacade;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
+import nu.hjemme.client.facade.UserFacade;
 import nu.hjemme.web.dto.UserDto;
 import nu.hjemme.web.html.ParameterConstants;
 import org.junit.Before;

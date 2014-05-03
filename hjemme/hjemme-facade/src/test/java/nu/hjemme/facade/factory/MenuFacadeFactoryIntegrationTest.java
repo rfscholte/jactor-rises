@@ -1,10 +1,10 @@
 package nu.hjemme.facade.factory;
 
-import nu.hjemme.client.MenuFacade;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.ChosenMenuItem;
+import nu.hjemme.client.facade.MenuFacade;
 import nu.hjemme.facade.SpringCtx;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.NotNullBuildMatching;
