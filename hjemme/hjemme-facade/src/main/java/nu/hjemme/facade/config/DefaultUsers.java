@@ -2,7 +2,7 @@ package nu.hjemme.facade.config;
 
 import nu.hjemme.business.domain.builder.ProfileBuilder;
 import nu.hjemme.business.domain.builder.UserBuilder;
-import nu.hjemme.business.persistence.AddressEntity;
+import nu.hjemme.business.domain.persistence.AddressEntity;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.User;
 

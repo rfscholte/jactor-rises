@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.User;
-import nu.hjemme.business.persistence.ProfileEntity;
+import nu.hjemme.business.domain.persistence.ProfileEntity;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

@@ -1,11 +1,11 @@
 package nu.hjemme.business.domain;
 
-import nu.hjemme.business.domain.base.PersistentBean;
-import nu.hjemme.business.persistence.AddressEntity;
+import nu.hjemme.business.domain.base.PersistentDomain;
+import nu.hjemme.business.domain.persistence.AddressEntity;
 import nu.hjemme.client.datatype.Country;
 
 /** @author Tor Egil Jacobsen */
-public class Address extends PersistentBean<AddressEntity> implements nu.hjemme.client.domain.Address {
+public class Address extends PersistentDomain<AddressEntity> implements nu.hjemme.client.domain.Address {
 
     public Address(AddressEntity addressEntity) {
         super(addressEntity);

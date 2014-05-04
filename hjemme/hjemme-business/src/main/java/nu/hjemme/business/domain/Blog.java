@@ -1,12 +1,12 @@
 package nu.hjemme.business.domain;
 
-import nu.hjemme.business.domain.base.PersistentBean;
-import nu.hjemme.business.persistence.BlogEntity;
+import nu.hjemme.business.domain.base.PersistentDomain;
+import nu.hjemme.business.domain.persistence.BlogEntity;
 import nu.hjemme.client.domain.User;
 import org.joda.time.LocalDate;
 
 /** @author Tor Egil Jacobsen */
-public class Blog extends PersistentBean<BlogEntity> implements nu.hjemme.client.domain.Blog {
+public class Blog extends PersistentDomain<BlogEntity> implements nu.hjemme.client.domain.Blog {
 
     private User user;
 
