@@ -1,4 +1,4 @@
-package nu.hjemme.facade.factory.config;
+package nu.hjemme.facade.config;
 
 import nu.hjemme.business.domain.builder.ProfileBuilder;
 import nu.hjemme.business.domain.builder.UserBuilder;

@@ -5,7 +5,6 @@ import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.ChosenMenuItem;
 import nu.hjemme.client.service.MenuFacade;
-import nu.hjemme.facade.factory.config.HjemmeAppContext;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Test;

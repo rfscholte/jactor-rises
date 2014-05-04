@@ -8,6 +8,7 @@ public class MenuItemDto {
     private final List<MenuItemDto> children = new ArrayList<>();
     private final String menuItemTarget;
     private final String name;
+    private String beskrivelse;
 
     public MenuItemDto(String name, String menuItemTarget) {
         this.name = name;
@@ -19,6 +20,11 @@ public class MenuItemDto {
         return this;
     }
 
+    public MenuItemDto medBeskrivelseSom(String beskrivelse) {
+        this.beskrivelse = beskrivelse;
+        return this;
+    }
+
     public String getName() {
         return name;
     }
@@ -27,8 +33,8 @@ public class MenuItemDto {
         return menuItemTarget;
     }
 
-    public String getDescription() {
-        return null;
+    public String getBeskrivelse() {
+        return beskrivelse;
     }
 
     public List<MenuItemDto> getChildren() {

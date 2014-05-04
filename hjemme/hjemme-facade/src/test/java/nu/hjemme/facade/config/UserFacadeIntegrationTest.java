@@ -2,7 +2,6 @@ package nu.hjemme.facade.config;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.service.UserFacade;
-import nu.hjemme.facade.factory.config.HjemmeAppContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
