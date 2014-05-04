@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns = "http://www.springframework.org/schema/beans" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation = "http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+       xmlns:context = "http://www.springframework.org/schema/context"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <import resource = "classpath:hjemme.web-menus.xml" />
+    <!-- To automatically search classpath for beans with annotaions as configuration -->
+    <context:annotation-config />
 
-    <bean class = "nu.hjemme.facade.factory.UserFacadeFactory" />
-
-    <bean class = "nu.hjemme.facade.factory.MenuFacadeFactory">
-        <property name = "menus">
-            <list>
-                <ref bean = "mainMenu" />
-                <ref bean = "profileMenu" />
-            </list>
-        </property>
-    </bean>
+    <bean id = "hjemme.appContext" class = "nu.hjemme.facade.config.HjemmeAppContext" />
+    <bean id = "hjemme.webContext" class = "nu.hjemme.web.config.HjemmeWebContext" />
 </beans>

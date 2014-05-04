@@ -1,4 +1,4 @@
-package nu.hjemme.facade.factory.config;
+package nu.hjemme.facade.config;
 
 import nu.hjemme.business.service.MenuFacadeImpl;
 import nu.hjemme.business.service.UserFacadeImpl;

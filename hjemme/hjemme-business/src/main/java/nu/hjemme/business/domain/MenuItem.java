@@ -22,7 +22,7 @@ public class MenuItem implements nu.hjemme.client.domain.MenuItem, PickChosenMen
 
     public MenuItem(MenuItemDto menuItem) {
         Validate.notNull(menuItem, "A MenuItemDto must be provided");
-        description = new Description(menuItem.getName(), menuItem.getDescription());
+        description = new Description(menuItem.getName(), menuItem.getBeskrivelse());
         menuItemTarget = new MenuItemTarget(menuItem.getMenuItemTarget());
         addChildren(menuItem.getChildren());
     }
