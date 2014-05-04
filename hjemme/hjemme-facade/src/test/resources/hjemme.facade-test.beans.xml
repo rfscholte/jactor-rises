@@ -11,8 +11,6 @@
         </property>
     </bean>
 
-    <bean id = "userFacade" class = "nu.hjemme.facade.factory.UserFacadeFactory" />
-
     <bean id = "testMenu" class = "nu.hjemme.client.dto.MenuDto">
         <property name = "name" value = "testMenu" />
         <property name = "menuItems">
