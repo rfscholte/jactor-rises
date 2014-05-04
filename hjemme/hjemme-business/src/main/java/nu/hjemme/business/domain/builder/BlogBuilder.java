@@ -2,8 +2,8 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.Blog;
 import nu.hjemme.business.domain.base.DomainBuilder;
-import nu.hjemme.business.persistence.BlogEntity;
-import nu.hjemme.business.persistence.UserEntity;
+import nu.hjemme.business.domain.persistence.BlogEntity;
+import nu.hjemme.business.domain.persistence.UserEntity;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */

@@ -1,8 +1,8 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.BlogEntry;
-import nu.hjemme.business.persistence.BlogEntity;
-import nu.hjemme.business.persistence.PersonEntity;
+import nu.hjemme.business.domain.persistence.BlogEntity;
+import nu.hjemme.business.domain.persistence.PersonEntity;
 import nu.hjemme.client.datatype.Name;
 import org.junit.Rule;
 import org.junit.Test;

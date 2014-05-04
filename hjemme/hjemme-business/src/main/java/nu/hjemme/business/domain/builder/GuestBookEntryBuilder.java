@@ -2,9 +2,9 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.GuestBookEntry;
 import nu.hjemme.business.domain.base.DomainBuilder;
-import nu.hjemme.business.persistence.GuestBookEntity;
-import nu.hjemme.business.persistence.GuestBookEntryEntity;
-import nu.hjemme.business.persistence.PersonEntity;
+import nu.hjemme.business.domain.persistence.GuestBookEntity;
+import nu.hjemme.business.domain.persistence.GuestBookEntryEntity;
+import nu.hjemme.business.domain.persistence.PersonEntity;
 import nu.hjemme.client.datatype.Name;
 import org.apache.commons.lang.Validate;
 

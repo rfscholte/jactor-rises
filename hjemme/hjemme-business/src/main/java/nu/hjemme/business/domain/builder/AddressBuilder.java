@@ -2,7 +2,7 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.Address;
 import nu.hjemme.business.domain.base.DomainBuilder;
-import nu.hjemme.business.persistence.AddressEntity;
+import nu.hjemme.business.domain.persistence.AddressEntity;
 import nu.hjemme.client.datatype.Country;
 import org.apache.commons.lang.Validate;
 
