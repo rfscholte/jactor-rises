@@ -5,22 +5,23 @@ import java.util.List;
 
 /** @author Tor Egil Jacobsen */
 public class MenuDto {
-    private String name;
-    private List<MenuItemDto> menuItems = new ArrayList<MenuItemDto>();
+    private final String name;
+    private final List<MenuItemDto> menuItems = new ArrayList<>();
+
+    public MenuDto(String name) {
+        this.name = name;
+    }
+
+    public MenuDto leggTil(MenuItemDto menuItemDto) {
+        menuItems.add(menuItemDto);
+        return this;
+    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<MenuItemDto> getMenuItems() {
         return menuItems;
-    }
-
-    public void setMenuItems(List<MenuItemDto> menuItems) {
-        this.menuItems = menuItems;
     }
 }

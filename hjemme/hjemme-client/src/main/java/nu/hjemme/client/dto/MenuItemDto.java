@@ -5,40 +5,33 @@ import java.util.List;
 
 /** @author Tor Egil Jacobsen */
 public class MenuItemDto {
-    private String name;
-    private String menuItemTarget;
-    private String description;
-    private List<MenuItemDto> children = new ArrayList<MenuItemDto>();
+    private final List<MenuItemDto> children = new ArrayList<>();
+    private final String menuItemTarget;
+    private final String name;
+
+    public MenuItemDto(String name, String menuItemTarget) {
+        this.name = name;
+        this.menuItemTarget = menuItemTarget;
+    }
+
+    public MenuItemDto leggTilBarn(MenuItemDto barn) {
+        children.add(barn);
+        return this;
+    }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getMenuItemTarget() {
         return menuItemTarget;
     }
 
-    public void setMenuItemTarget(String menuItemTarget) {
-        this.menuItemTarget = menuItemTarget;
-    }
-
     public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+        return null;
     }
 
     public List<MenuItemDto> getChildren() {
         return children;
-    }
-
-    public void setChildren(List<MenuItemDto> children) {
-        this.children = children;
     }
 }

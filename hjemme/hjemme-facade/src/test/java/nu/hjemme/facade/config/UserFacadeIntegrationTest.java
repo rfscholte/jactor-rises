@@ -16,7 +16,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = HjemmeAppContext.class, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {HjemmeAppContext.class, HjemmeTestMenus.class}, loader = AnnotationConfigContextLoader.class)
 public class UserFacadeIntegrationTest {
 
     @Resource
