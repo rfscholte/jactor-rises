@@ -1,7 +1,7 @@
 package nu.hjemme.facade.factory;
 
 import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.client.facade.UserFacade;
+import nu.hjemme.client.service.UserFacade;
 import nu.hjemme.facade.SpringCtx;
 import org.junit.Test;
 import org.junit.runner.RunWith;

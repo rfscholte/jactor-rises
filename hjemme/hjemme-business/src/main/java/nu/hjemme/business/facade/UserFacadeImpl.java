@@ -2,7 +2,7 @@ package nu.hjemme.business.facade;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
-import nu.hjemme.client.facade.UserFacade;
+import nu.hjemme.client.service.UserFacade;
 
 import java.util.HashMap;
 import java.util.Map;
