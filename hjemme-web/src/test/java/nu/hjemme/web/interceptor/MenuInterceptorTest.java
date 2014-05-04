@@ -1,7 +1,7 @@
 package nu.hjemme.web.interceptor;
 
-import nu.hjemme.client.MenuFacade;
 import nu.hjemme.client.datatype.MenuTarget;
+import nu.hjemme.client.service.MenuFacade;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

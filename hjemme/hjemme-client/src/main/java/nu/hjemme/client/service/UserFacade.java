@@ -1,4 +1,4 @@
-package nu.hjemme.client;
+package nu.hjemme.client.service;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;

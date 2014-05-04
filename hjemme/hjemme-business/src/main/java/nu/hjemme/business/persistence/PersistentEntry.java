@@ -30,8 +30,9 @@ public abstract class PersistentEntry extends PersistentEntity implements Entry 
     }
 
     /**
-     * @param entry sjekkes om entry teksten er lik på de to instansene.
-     * @return <code>true</code> hvis tekstene stemmer overens.
+     * @param entry sjekkes om entry teksten er lik på de to instansene og er skrevet av samme person. NB! En person kan bruke mange {@link PersistentEntry#getCreatorName()}
+     * og disse vil bli behandlet som forskjellige personer.
+     * @return <code>true</code> hvis tekstene stemmer overens og er fra samme person.
      */
     protected boolean harSammePersonSkrevetEnTeksSomErLikTekstenTil(Entry entry) {
         return Objects.equals(getEntry(), entry.getEntry()) && Objects.equals(getCreatorName(), entry.getCreatorName()) && Objects.equals(getCreator(), entry.getCreator());

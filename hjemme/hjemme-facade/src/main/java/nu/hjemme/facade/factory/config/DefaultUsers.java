@@ -1,4 +1,4 @@
-package nu.hjemme.business.dao;
+package nu.hjemme.facade.factory.config;
 
 import nu.hjemme.business.domain.builder.ProfileBuilder;
 import nu.hjemme.business.domain.builder.UserBuilder;
@@ -6,9 +6,14 @@ import nu.hjemme.business.persistence.AddressEntity;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.User;
 
-/** @author Tor Egil Jacobsen */
-public final class UserDao {
+/**
+ * @author Tor Egil Jacobsen
+ */
+public class DefaultUsers {
     private static final AddressEntity HOME;
+    private static final String JACOBSEN = "Jacobsen";
+    private static final User JACTOR;
+    private static final User TIP;
 
     static {
         HOME = new AddressEntity();
@@ -16,18 +21,10 @@ public final class UserDao {
         HOME.setCity("Rud");
         HOME.setZipCode(1351);
         HOME.setCountry(new Country("NO", "no"));
-    }
 
-    private static final String DEMONSTRATION_USER = "only a demonstration user";
-    private static final String JACOBSEN = "Jacobsen";
-
-    private UserDao() {
-    }
-
-    public static User initJactor() {
-        return UserBuilder.init()
+        JACTOR = UserBuilder.init()
                 .appendUserName("jactor")
-                .appendPassword(DEMONSTRATION_USER)
+                .appendPassword("demo")
                 .appendProfile(ProfileBuilder.init()
                         .appendDescription("jactor.desc")
                         .appendLastName(JACOBSEN)
@@ -35,12 +32,10 @@ public final class UserDao {
                         .appendAddress(HOME)
                         .getValidatedProfileEntity())
                 .build();
-    }
 
-    public static User initTip() {
-        return UserBuilder.init()
+        TIP = UserBuilder.init()
                 .appendUserName("tip")
-                .appendPassword(DEMONSTRATION_USER)
+                .appendPassword("demo")
                 .appendProfile(ProfileBuilder.init()
                         .appendDescription("tip.desc")
                         .appendLastName(JACOBSEN)
@@ -48,5 +43,13 @@ public final class UserDao {
                         .appendAddress(HOME)
                         .getValidatedProfileEntity())
                 .build();
+    }
+
+    public static User getJactor() {
+        return JACTOR;
+    }
+
+    public static User getTip() {
+        return TIP;
     }
 }

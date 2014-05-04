@@ -1,17 +1,18 @@
-package nu.hjemme.facade.factory;
+package nu.hjemme.facade.config;
 
-import nu.hjemme.client.MenuFacade;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.ChosenMenuItem;
-import nu.hjemme.facade.SpringCtx;
+import nu.hjemme.client.service.MenuFacade;
+import nu.hjemme.facade.factory.config.HjemmeAppContext;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,11 +22,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-        SpringCtx.HJEMME_FACADE_TEST_BEANS
-})
-public class MenuFacadeFactoryIntegrationTest {
-
+@ContextConfiguration(classes = {HjemmeAppContext.class, HjemmeTestMenus.class}, loader = AnnotationConfigContextLoader.class)
+public class MenuFacadeIntegrationTest {
     @Resource
     MenuFacade testMenuFacade;
 
@@ -58,4 +56,5 @@ public class MenuFacadeFactoryIntegrationTest {
             }
         });
     }
+
 }

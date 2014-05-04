@@ -15,7 +15,9 @@
     <name>hjemme-facade</name>
 
     <description>
-        The facade role is to make the client come to life with the logic from the module project.
+        The role of hjemme-facade is to make the client come to life with the logic from the hjemme-business module.
+        This is done by an annotation driven spring context and this context must be implemented in the modules which
+        are dependent on the project called hjemme.
     </description>
 
     <dependencies>
@@ -31,34 +33,20 @@
         <!-- Third party -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
         </dependency>
 
         <!-- Test scope -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <artifactId>hjemme-test</artifactId>
             <groupId>nu.hjemme</groupId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- to be deleted -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

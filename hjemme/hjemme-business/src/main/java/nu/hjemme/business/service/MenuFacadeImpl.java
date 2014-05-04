@@ -1,11 +1,11 @@
-package nu.hjemme.business;
+package nu.hjemme.business.service;
 
 import nu.hjemme.business.domain.Menu;
-import nu.hjemme.client.MenuFacade;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.ChosenMenuItem;
 import nu.hjemme.client.dto.MenuDto;
+import nu.hjemme.client.service.MenuFacade;
 import org.apache.commons.lang.Validate;
 
 import java.util.HashMap;

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>hjemme-pom</artifactId>
         <groupId>nu.hjemme</groupId>
-        <version>1.0.18</version>
+        <version>1.0.19</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -16,7 +16,7 @@
     <name>hjemme-web</name>
     <packaging>war</packaging>
     <description>
-        The hjemme-web project uses hjemme.facade to bring the module a life on the internet.
+        The hjemme-web module uses hjemme.facade to bring hjemme-business to life on the internet.
     </description>
 
     <dependencies>
