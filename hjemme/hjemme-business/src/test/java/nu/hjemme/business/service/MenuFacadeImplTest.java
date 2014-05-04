@@ -1,4 +1,4 @@
-package nu.hjemme.business.facade;
+package nu.hjemme.business.service;
 
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;

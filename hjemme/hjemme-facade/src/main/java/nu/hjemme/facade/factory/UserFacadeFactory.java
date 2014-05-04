@@ -1,6 +1,6 @@
 package nu.hjemme.facade.factory;
 
-import nu.hjemme.business.facade.UserFacadeImpl;
+import nu.hjemme.business.service.UserFacadeImpl;
 import nu.hjemme.client.service.UserFacade;
 
 /**
