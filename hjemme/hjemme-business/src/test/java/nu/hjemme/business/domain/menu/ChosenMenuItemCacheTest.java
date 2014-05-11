@@ -1,6 +1,9 @@
 package nu.hjemme.business.domain.menu;
 
 import nu.hjemme.client.datatype.MenuItemTarget;
+import nu.hjemme.client.datatype.MenuTarget;
+import nu.hjemme.client.datatype.Name;
+import nu.hjemme.client.domain.menu.ChosenMenuItem;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Before;
@@ -16,48 +19,59 @@ import static org.mockito.Mockito.mock;
 
 public class ChosenMenuItemCacheTest {
     private ChosenMenuItemCache testChosenMenuItemCache;
+    private MenuTarget etStedPaHovedmenyen;
+    private MenuTarget etAnnetStedPaHovedmenyen;
 
     @Before
     public void initForTesting() {
         testChosenMenuItemCache = new ChosenMenuItemCache();
     }
 
+    @Before
+    public void initEtStedPaHovedmenyen() {
+        etStedPaHovedmenyen = new MenuTarget(new MenuItemTarget("somewhere"), new Name("main.menu"));
+    }
+
+    @Before
+    public void initEtAnnetStedPaHovedmenyen() {
+        etAnnetStedPaHovedmenyen = new MenuTarget(new MenuItemTarget("somewhere else"), new Name("main.menu"));
+    }
+
+
     @Test
-    public void skalIkkeHaMenuItemTargetCachetPaInstansSomIkkeInneholderCache() {
-        assertThat("Ingen chosen menu item skal være cachet", testChosenMenuItemCache.harCacheAv(new MenuItemTarget("somewhere")), is(equalTo(false)));
+    public void skalIkkeHaMenuTargetCachetPaInstansSomIkkeInneholderCache() {
+        assertThat("Ingen chosen menu item skal være cachet", testChosenMenuItemCache.harCacheAv(etStedPaHovedmenyen), is(equalTo(false)));
     }
 
     @Test
-    public void skalIkkeHaMenuItemTargetCacheNarEtAnnetMenuItemTargetErCachet() {
-        testChosenMenuItemCache.cache(new MenuItemTarget("somewhere"), new ArrayList<>());
-        assertThat("Ingen chosen menu item skal være cachet", testChosenMenuItemCache.harCacheAv(new MenuItemTarget("somewhere else")), is(equalTo(false)));
+    public void skalIkkeHaMenuTargetCacheNarEtAnnetMenuTargetErCachet() {
+        testChosenMenuItemCache.cache(etStedPaHovedmenyen, new ArrayList<>());
+        assertThat("Ingen chosen menu item skal være cachet", testChosenMenuItemCache.harCacheAv(etAnnetStedPaHovedmenyen), is(equalTo(false)));
     }
 
     @Test
-    public void skalHaMenuItemTargetCachetNarNarMenuItemTargetSomBesOmErLiktCache() {
-        testChosenMenuItemCache.cache(new MenuItemTarget("somewhere"), new ArrayList<>());
-        assertThat("Ingen chosen menu item skal være cachet", testChosenMenuItemCache.harCacheAv(new MenuItemTarget("somewhere")), is(equalTo(true)));
+    public void skalHaMenuTargetCachetNarNarMenuTargetSomBesOmErLiktCache() {
+        testChosenMenuItemCache.cache(etStedPaHovedmenyen, new ArrayList<>());
+        assertThat("Ingen chosen menu item skal være cachet", testChosenMenuItemCache.harCacheAv(etStedPaHovedmenyen), is(equalTo(true)));
     }
 
     @Test
     @SuppressWarnings("unchecked")
-    public void skalCacheListeAvChosenMenuItemsBasertPaMenuItemTarget() {
+    public void skalCacheListeAvChosenMenuItemsBasertPaMenuTarget() {
         assertThat(testChosenMenuItemCache, new NotNullBuildMatching<ChosenMenuItemCache>("Caching basert pa menu item target") {
             @Override
-            public MatchBuilder matches(ChosenMenuItemCache typeToTest, MatchBuilder matchBuilder) {
+            public MatchBuilder matches(ChosenMenuItemCache chosenMenuItemCache, MatchBuilder matchBuilder) {
                 List<ChosenMenuItem> eiListeAvChosenMenuItems = mock(List.class);
                 List<ChosenMenuItem> eiAnnenListeAvChosenMenuItems = mock(List.class);
-                MenuItemTarget malForEiListe = new MenuItemTarget("malForEiListe");
-                MenuItemTarget malForEiAnnenListe = new MenuItemTarget("malForEiAnnenListe");
 
-                testChosenMenuItemCache.cache(malForEiListe, eiListeAvChosenMenuItems);
-                testChosenMenuItemCache.cache(malForEiAnnenListe, eiAnnenListeAvChosenMenuItems);
+                testChosenMenuItemCache.cache(etStedPaHovedmenyen, eiListeAvChosenMenuItems);
+                testChosenMenuItemCache.cache(etAnnetStedPaHovedmenyen, eiAnnenListeAvChosenMenuItems);
 
                 return matchBuilder
-                        .matches(typeToTest.hentFor(malForEiListe), is(equalTo(eiListeAvChosenMenuItems)), "cache av " + malForEiListe)
-                        .matches(typeToTest.hentFor(malForEiAnnenListe), is(equalTo(eiAnnenListeAvChosenMenuItems)), "cache av " + malForEiAnnenListe);
+                        .matches(chosenMenuItemCache.hentFor(etStedPaHovedmenyen), is(equalTo(eiListeAvChosenMenuItems)), "cache av " + etStedPaHovedmenyen)
+                        .matches(chosenMenuItemCache.hentFor(etAnnetStedPaHovedmenyen), is(equalTo(eiAnnenListeAvChosenMenuItems)),
+                                "cache av " + etAnnetStedPaHovedmenyen);
             }
         });
-
     }
 }

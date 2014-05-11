@@ -3,7 +3,7 @@ package nu.hjemme.business.service;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.ChosenMenuItem;
+import nu.hjemme.client.domain.menu.ChosenMenuItem;
 import nu.hjemme.client.dto.MenuDto;
 import nu.hjemme.client.dto.MenuItemDto;
 import org.junit.Rule;

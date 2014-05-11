@@ -1,32 +1,33 @@
 package nu.hjemme.business.domain.menu;
 
-import nu.hjemme.client.datatype.MenuItemTarget;
+import nu.hjemme.client.datatype.MenuTarget;
+import nu.hjemme.client.domain.menu.ChosenMenuItem;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Simple caching mechanism for a list of {@link nu.hjemme.business.domain.menu.ChosenMenuItem} by {@link nu.hjemme.client.datatype.MenuItemTarget}
+ * Simple caching mechanism for a list of {@link nu.hjemme.business.domain.menu.ChosenMenuItem} by {@link nu.hjemme.client.datatype.MenuTarget}
  * @author Tor Egil Jacobsen
  */
 public class ChosenMenuItemCache {
 
-    private final Map<MenuItemTarget, List<ChosenMenuItem>> chosenMenuItemCache;
+    private final Map<MenuTarget, List<ChosenMenuItem>> chosenMenuItemCache;
 
     public ChosenMenuItemCache() {
         chosenMenuItemCache = new HashMap<>();
     }
 
-    public boolean harCacheAv(MenuItemTarget menuItemTarget) {
+    public boolean harCacheAv(MenuTarget menuItemTarget) {
         return chosenMenuItemCache.containsKey(menuItemTarget);
     }
 
-    public void cache(MenuItemTarget menuItemTarget, List<ChosenMenuItem> listeAvChosenMenuItem) {
+    public void cache(MenuTarget menuItemTarget, List<ChosenMenuItem> listeAvChosenMenuItem) {
         chosenMenuItemCache.put(menuItemTarget, listeAvChosenMenuItem);
     }
 
-    public List<ChosenMenuItem> hentFor(MenuItemTarget menuItemTarget) {
+    public List<ChosenMenuItem> hentFor(MenuTarget menuItemTarget) {
         return chosenMenuItemCache.get(menuItemTarget);
     }
 }

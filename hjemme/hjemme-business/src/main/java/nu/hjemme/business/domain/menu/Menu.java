@@ -36,8 +36,8 @@ public class Menu {
                 .toString();
     }
 
-    public List<nu.hjemme.client.domain.ChosenMenuItem> retrieveChosenMenuItemBy(MenuItemTarget menuItemTarget) {
-        List<nu.hjemme.client.domain.ChosenMenuItem> chosenMenuItems = new ArrayList<>(menuItems.size());
+    public List<nu.hjemme.client.domain.menu.ChosenMenuItem> retrieveChosenMenuItemBy(MenuItemTarget menuItemTarget) {
+        List<nu.hjemme.client.domain.menu.ChosenMenuItem> chosenMenuItems = new ArrayList<>(menuItems.size());
 
         for (MenuItem menuItem : menuItems) {
             chosenMenuItems.add(new ChosenMenuItem(menuItem, menuItemTarget));

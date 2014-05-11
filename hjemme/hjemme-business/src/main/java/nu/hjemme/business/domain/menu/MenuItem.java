@@ -15,7 +15,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class MenuItem implements nu.hjemme.client.domain.MenuItem, PickChosenMenuItem {
+public class MenuItem implements nu.hjemme.client.domain.menu.MenuItem, PickChosenMenuItem {
     private Description description;
     private List<MenuItem> children = new ArrayList<>();
     private MenuItemTarget menuItemTarget;
@@ -79,7 +79,7 @@ public class MenuItem implements nu.hjemme.client.domain.MenuItem, PickChosenMen
     }
 
     /** {@inheritDoc */
-    public List<? extends nu.hjemme.client.domain.MenuItem> getChildren() {
+    public List<? extends nu.hjemme.client.domain.menu.MenuItem> getChildren() {
         return children;
     }
 
