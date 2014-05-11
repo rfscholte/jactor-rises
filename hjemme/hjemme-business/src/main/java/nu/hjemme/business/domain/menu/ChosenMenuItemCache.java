@@ -19,8 +19,8 @@ public class ChosenMenuItemCache {
         chosenMenuItemCache = new HashMap<>();
     }
 
-    public boolean harCacheAv(MenuTarget menuItemTarget) {
-        return chosenMenuItemCache.containsKey(menuItemTarget);
+    public boolean harCacheAv(MenuTarget menuTarget) {
+        return chosenMenuItemCache.containsKey(menuTarget);
     }
 
     public void cache(MenuTarget menuItemTarget, List<ChosenMenuItem> listeAvChosenMenuItem) {
