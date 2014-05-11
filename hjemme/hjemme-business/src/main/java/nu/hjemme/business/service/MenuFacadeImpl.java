@@ -1,6 +1,6 @@
 package nu.hjemme.business.service;
 
-import nu.hjemme.business.domain.Menu;
+import nu.hjemme.business.domain.menu.Menu;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.ChosenMenuItem;
