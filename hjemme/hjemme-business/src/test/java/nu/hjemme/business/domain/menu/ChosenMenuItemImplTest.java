@@ -9,18 +9,18 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class ChosenMenuItemTest {
+public class ChosenMenuItemImplTest {
 
     @Test
     public void willDetermineIfMenuItemIsChosen() {
-        ChosenMenuItem testChosenMenuItem = new ChosenMenuItem(
+        ChosenMenuItemImpl testChosenMenuItem = new ChosenMenuItemImpl(
                 MenuItemBuilderForJUnit.build().menuItemTarget("hit?something=else").retrieveInstance(),
                 new MenuItemTarget("hit?something=hard")
         );
 
         assertThat("Is chosen", testChosenMenuItem.isChosen(), is(equalTo(false)));
 
-        testChosenMenuItem = new ChosenMenuItem(
+        testChosenMenuItem = new ChosenMenuItemImpl(
                 MenuItemBuilderForJUnit.build().menuItemTarget("hit?something=hard").retrieveInstance(),
                 new MenuItemTarget("hit?something=hard")
         );
@@ -30,7 +30,7 @@ public class ChosenMenuItemTest {
 
     @Test
     public void willCreateChosenMenuItemChildrenWhoAreNotChosenFromTheChildrenOfTheMenuItem() {
-        ChosenMenuItem testChosenMenuItem = new ChosenMenuItem(
+        ChosenMenuItemImpl testChosenMenuItem = new ChosenMenuItemImpl(
                 MenuItemBuilderForJUnit.build()
                         .addChild("first test child", "hit?not=much")
                         .addChild("second test child", "hit?miss=all")
@@ -38,9 +38,9 @@ public class ChosenMenuItemTest {
                 new MenuItemTarget("hit?something=hard")
         );
 
-        assertThat(testChosenMenuItem, new NotNullBuildMatching<ChosenMenuItem>("chosen menu item med ingen valgte barn") {
+        assertThat(testChosenMenuItem, new NotNullBuildMatching<ChosenMenuItemImpl>("chosen menu item med ingen valgte barn") {
             @Override
-            public MatchBuilder matches(ChosenMenuItem chosenMenuItem, MatchBuilder matchBuilder) {
+            public MatchBuilder matches(ChosenMenuItemImpl chosenMenuItem, MatchBuilder matchBuilder) {
                 return matchBuilder
                         .matches(chosenMenuItem.getChildren().size(), is(equalTo(2)), "ChosenMenuItem skal ha barn")
                         .matches(chosenMenuItem.isChildChosen(), is(equalTo(false)), "Ingen barn skal være valgt");
@@ -50,7 +50,7 @@ public class ChosenMenuItemTest {
 
     @Test
     public void willCreateChosenMenuItemChildrenWhereThereIsOneChosenChildFromTheChildrenOfTheMenuItem() {
-        ChosenMenuItem testChosenMenuItem = new ChosenMenuItem(
+        ChosenMenuItemImpl testChosenMenuItem = new ChosenMenuItemImpl(
                 MenuItemBuilderForJUnit.build()
                         .addChild("first test child", "hit?not=much")
                         .addChild("second test child", "hit?something=hard")
@@ -58,9 +58,9 @@ public class ChosenMenuItemTest {
                 new MenuItemTarget("hit?something=hard")
         );
 
-        assertThat(testChosenMenuItem, new NotNullBuildMatching<ChosenMenuItem>("ChosenMenuItem med valgt barn") {
+        assertThat(testChosenMenuItem, new NotNullBuildMatching<ChosenMenuItemImpl>("ChosenMenuItem med valgt barn") {
             @Override
-            public MatchBuilder matches(ChosenMenuItem chosenMenuItem, MatchBuilder matchBuilder) {
+            public MatchBuilder matches(ChosenMenuItemImpl chosenMenuItem, MatchBuilder matchBuilder) {
                 return matchBuilder
                         .matches(chosenMenuItem.getChildren().size(), is(equalTo(2)), "ChosenMenuItem skal ha barn")
                         .matches(chosenMenuItem.isChildChosen(), is(equalTo(true)), "Et barn skal være valgt");

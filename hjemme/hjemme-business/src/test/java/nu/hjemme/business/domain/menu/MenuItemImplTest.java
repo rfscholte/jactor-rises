@@ -18,11 +18,11 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 /** @author Tor Egil Jacobsen */
-public class MenuItemTest {
+public class MenuItemImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void willReceiveExceptionIfNoTargetIsSetForTheMenuItemWhenTheMenuItemTargetIsGathered() {
-        new MenuItem(mock(MenuItemDto.class));
+        new MenuItemImpl(mock(MenuItemDto.class));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class MenuItemTest {
                 .menuItemTarget("target")
                 .mockDto();
 
-        MenuItemTarget menuItemTarget = new MenuItem(menuItemDto).getMenuItemTarget();
+        MenuItemTarget menuItemTarget = new MenuItemImpl(menuItemDto).getMenuItemTarget();
 
         assertThat(menuItemTarget, new NotNullBuildMatching<MenuItemTarget>("Et menyvalg uten parametre") {
             @Override
@@ -50,7 +50,7 @@ public class MenuItemTest {
                 .menuItemTarget("target?some=parameter")
                 .mockDto();
 
-        MenuItem menuItem = new MenuItem(mockedMenuItemDto);
+        MenuItemImpl menuItem = new MenuItemImpl(mockedMenuItemDto);
         MenuItemTarget menuItemTarget = menuItem.getMenuItemTarget();
 
         assertThat(menuItemTarget, new NotNullBuildMatching<MenuItemTarget>("har parameter konvertert fra målstreng") {
@@ -67,19 +67,19 @@ public class MenuItemTest {
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
-        MenuItem base = MenuItemBuilderForJUnit.build()
+        MenuItemImpl base = MenuItemBuilderForJUnit.build()
                 .itemName("itemName")
                 .menuItemTarget("target?some=parameter")
                 .addChild("childName", "childTarget?child=parameter")
                 .retrieveInstance();
 
-        MenuItem equal = MenuItemBuilderForJUnit.build()
+        MenuItemImpl equal = MenuItemBuilderForJUnit.build()
                 .itemName("itemName")
                 .menuItemTarget("target?some=parameter")
                 .addChild("childName", "childTarget?child=parameter")
                 .retrieveInstance();
 
-        MenuItem notEqual = MenuItemBuilderForJUnit.build()
+        MenuItemImpl notEqual = MenuItemBuilderForJUnit.build()
                 .itemName("another itemName")
                 .menuItemTarget("target?some=parameter")
                 .addChild("childName", "childTarget?child=parameter")
@@ -94,19 +94,19 @@ public class MenuItemTest {
 
     @Test
     public void willHaveCorrectImplementedEquals() {
-        MenuItem base = MenuItemBuilderForJUnit.build()
+        MenuItemImpl base = MenuItemBuilderForJUnit.build()
                 .itemName("itemName")
                 .menuItemTarget("target?some=parameter")
                 .addChild("childName", "childTarget?child=parameter")
                 .retrieveInstance();
 
-        MenuItem equal = MenuItemBuilderForJUnit.build()
+        MenuItemImpl equal = MenuItemBuilderForJUnit.build()
                 .itemName("itemName")
                 .menuItemTarget("target?some=parameter")
                 .addChild("childName", "childTarget?child=parameter")
                 .retrieveInstance();
 
-        MenuItem notEqual = MenuItemBuilderForJUnit.build()
+        MenuItemImpl notEqual = MenuItemBuilderForJUnit.build()
                 .itemName("another itemName")
                 .menuItemTarget("target?some=parameter")
                 .addChild("childName", "childTarget?child=parameter")
@@ -122,7 +122,7 @@ public class MenuItemTest {
     @Test
     public void willTellIfMenuItemIsChosen() {
         MenuItemDto mockedMenuItemDto = MenuItemBuilderForJUnit.build().menuItemTarget("hit?dead=center").mockDto();
-        MenuItem testMenuItem = new MenuItem(mockedMenuItemDto);
+        MenuItemImpl testMenuItem = new MenuItemImpl(mockedMenuItemDto);
 
         assertThat("Should not be chosen", testMenuItem.isChosenBy(new MenuItemTarget("miss?some=where")),
                 is(equalTo(false)));
@@ -134,11 +134,11 @@ public class MenuItemTest {
     @Test
     public void skalIkkeHaEtValgtMenyvalgNarsMalstrengenTilBarnetErUkjent() {
         MenuItemDto mockedMenuItemDto = MenuItemBuilderForJUnit.build().addChild("some child", "hit?dead=center").mockDto();
-        MenuItem testMenuItem = new MenuItem(mockedMenuItemDto);
+        MenuItemImpl testMenuItem = new MenuItemImpl(mockedMenuItemDto);
 
-        assertThat(testMenuItem, new NotNullBuildMatching<MenuItem>("MenuItem som ikke har valgt barn") {
+        assertThat(testMenuItem, new NotNullBuildMatching<MenuItemImpl>("MenuItem som ikke har valgt barn") {
             @Override
-            public MatchBuilder matches(MenuItem menuItem, MatchBuilder matchBuilder) {
+            public MatchBuilder matches(MenuItemImpl menuItem, MatchBuilder matchBuilder) {
                 return matchBuilder.matches(menuItem.isChildChosenBy(new MenuItemTarget("miss?some=where")),
                         is(equalTo(false)), "is chosen by");
             }
@@ -148,11 +148,11 @@ public class MenuItemTest {
     @Test
     public void skalHaEtValgtMenyvalgNarMalstrengenTilBarnetErKjent() {
         MenuItemDto mockedMenuItemDto = MenuItemBuilderForJUnit.build().addChild("some child", "hit?dead=center").mockDto();
-        MenuItem testMenuItem = new MenuItem(mockedMenuItemDto);
+        MenuItemImpl testMenuItem = new MenuItemImpl(mockedMenuItemDto);
 
-        assertThat(testMenuItem, new NotNullBuildMatching<MenuItem>("") {
+        assertThat(testMenuItem, new NotNullBuildMatching<MenuItemImpl>("") {
             @Override
-            public MatchBuilder matches(MenuItem menuItem, MatchBuilder matchBuilder) {
+            public MatchBuilder matches(MenuItemImpl menuItem, MatchBuilder matchBuilder) {
                 return matchBuilder.matches(menuItem.isChildChosenBy(new MenuItemTarget("hit?dead=center")),
                         is(equalTo(true)), "is chosen by");
             }

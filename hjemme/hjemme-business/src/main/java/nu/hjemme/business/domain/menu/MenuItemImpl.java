@@ -15,12 +15,12 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class MenuItem implements nu.hjemme.client.domain.menu.MenuItem, PickChosenMenuItem {
+public class MenuItemImpl implements nu.hjemme.client.domain.menu.MenuItem, PickChosenMenuItem {
     private Description description;
-    private List<MenuItem> children = new ArrayList<>();
+    private List<MenuItemImpl> children = new ArrayList<>();
     private MenuItemTarget menuItemTarget;
 
-    public MenuItem(MenuItemDto menuItem) {
+    public MenuItemImpl(MenuItemDto menuItem) {
         Validate.notNull(menuItem, "A MenuItemDto must be provided");
         description = new Description(menuItem.getName(), menuItem.getBeskrivelse());
         menuItemTarget = new MenuItemTarget(menuItem.getMenuItemTarget());
@@ -29,7 +29,7 @@ public class MenuItem implements nu.hjemme.client.domain.menu.MenuItem, PickChos
 
     private void addChildren(List<MenuItemDto> children) {
         for (MenuItemDto menuItemDto : children) {
-            this.children.add(new MenuItem(menuItemDto));
+            this.children.add(new MenuItemImpl(menuItemDto));
         }
     }
 
@@ -40,7 +40,7 @@ public class MenuItem implements nu.hjemme.client.domain.menu.MenuItem, PickChos
 
     @Override
     public boolean isChildChosenBy(MenuItemTarget menuItemTarget) {
-        for (MenuItem menuItem : children) {
+        for (MenuItemImpl menuItem : children) {
             if (menuItem.isChosenBy(menuItemTarget)) {
                 return true;
             }
@@ -64,7 +64,7 @@ public class MenuItem implements nu.hjemme.client.domain.menu.MenuItem, PickChos
             return false;
         }
 
-        MenuItem other = (MenuItem) o;
+        MenuItemImpl other = (MenuItemImpl) o;
 
         return Objects.equals(getChildren(), other.getChildren()) && Objects.equals(getDescription(), other.getDescription()) && Objects.equals(getMenuItemTarget(), other.getMenuItemTarget());
     }
@@ -83,7 +83,7 @@ public class MenuItem implements nu.hjemme.client.domain.menu.MenuItem, PickChos
         return children;
     }
 
-    List<MenuItem> getChildrenImpls() {
+    List<MenuItemImpl> getChildrenImpls() {
         return children;
     }
 

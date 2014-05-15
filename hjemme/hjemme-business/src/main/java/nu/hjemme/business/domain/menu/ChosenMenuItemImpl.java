@@ -7,22 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** @author Tor Egil Jacobsen */
-public class ChosenMenuItem implements nu.hjemme.client.domain.menu.ChosenMenuItem {
+public class ChosenMenuItemImpl implements nu.hjemme.client.domain.menu.ChosenMenuItem {
     private final List<nu.hjemme.client.domain.menu.ChosenMenuItem> chosenChildren;
-    private final MenuItem menuItem;
+    private final MenuItemImpl menuItem;
     private final MenuItemTarget chosenMenuItemTarget;
 
-    public ChosenMenuItem(MenuItem menuItem, MenuItemTarget chosenMenuItemTarget) {
+    public ChosenMenuItemImpl(MenuItemImpl menuItem, MenuItemTarget chosenMenuItemTarget) {
         this.menuItem = menuItem;
         this.chosenMenuItemTarget = chosenMenuItemTarget;
         this.chosenChildren = createChosenItemsBy(menuItem.getChildrenImpls());
     }
 
-    private List<nu.hjemme.client.domain.menu.ChosenMenuItem> createChosenItemsBy(List<MenuItem> children) {
+    private List<nu.hjemme.client.domain.menu.ChosenMenuItem> createChosenItemsBy(List<MenuItemImpl> children) {
         List<nu.hjemme.client.domain.menu.ChosenMenuItem> chosenMenuItems = new ArrayList<>(children.size());
 
-        for (MenuItem child : children) {
-            chosenMenuItems.add(new ChosenMenuItem(child, chosenMenuItemTarget));
+        for (MenuItemImpl child : children) {
+            chosenMenuItems.add(new ChosenMenuItemImpl(child, chosenMenuItemTarget));
         }
 
         return chosenMenuItems;

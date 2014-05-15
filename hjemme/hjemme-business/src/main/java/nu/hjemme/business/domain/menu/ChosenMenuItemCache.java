@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Simple caching mechanism for a list of {@link nu.hjemme.business.domain.menu.ChosenMenuItem} by {@link nu.hjemme.client.datatype.MenuTarget}
+ * Simple caching mechanism for a list of {@link ChosenMenuItemImpl} by {@link nu.hjemme.client.datatype.MenuTarget}
  * @author Tor Egil Jacobsen
  */
 public class ChosenMenuItemCache {

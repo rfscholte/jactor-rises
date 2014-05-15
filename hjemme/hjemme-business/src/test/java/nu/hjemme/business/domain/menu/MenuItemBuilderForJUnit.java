@@ -25,8 +25,8 @@ class MenuItemBuilderForJUnit {
         return mockDto(itemName, menuItemTarget, new ArrayList<>());
     }
 
-    MenuItem retrieveInstance() {
-        return new MenuItem(mockDto());
+    MenuItemImpl retrieveInstance() {
+        return new MenuItemImpl(mockDto());
     }
 
     private MenuItemDto mockDto(String itemName, String menuItemTarget, List<MenuItemDto> children) {
