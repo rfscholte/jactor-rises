@@ -1,7 +1,8 @@
-package nu.hjemme.facade.config;
+package nu.hjemme.facade.service;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.service.UserFacade;
+import nu.hjemme.facade.config.HjemmeAppContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,7 +16,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HjemmeAppContext.class, HjemmeTestMenus.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {HjemmeAppContext.class, MenuFacadeIntegrationTest.HjemmeTestMenus.class}, loader = AnnotationConfigContextLoader.class)
 public class UserFacadeIntegrationTest {
 
     @Resource

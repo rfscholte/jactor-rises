@@ -1,14 +1,19 @@
-package nu.hjemme.facade.config;
+package nu.hjemme.facade.service;
 
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.ChosenMenuItem;
+import nu.hjemme.client.dto.MenuDto;
+import nu.hjemme.client.dto.MenuItemDto;
 import nu.hjemme.client.service.MenuFacade;
+import nu.hjemme.facade.config.HjemmeAppContext;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.NotNullBuildMatching;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -21,7 +26,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HjemmeAppContext.class, HjemmeTestMenus.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {HjemmeAppContext.class, MenuFacadeIntegrationTest.HjemmeTestMenus.class}, loader = AnnotationConfigContextLoader.class)
 public class MenuFacadeIntegrationTest {
     @Resource
     MenuFacade testMenuFacade;
@@ -56,4 +61,19 @@ public class MenuFacadeIntegrationTest {
         });
     }
 
+    /**
+     * @author Tor Egil Jacobsen
+     */
+    @Configuration
+    public static class HjemmeTestMenus {
+        @Bean
+        @SuppressWarnings("unused") // brukes av spring
+        public MenuDto createTestMenu() {
+            return new MenuDto("testMenu")
+                    .leggTil(new MenuItemDto("testParent", "bullseye")
+                                    .leggTilBarn(new MenuItemDto("testChild", "bullseye?some=where"))
+                    );
+
+        }
+    }
 }
