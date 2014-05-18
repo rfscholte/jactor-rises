@@ -1,7 +1,7 @@
 package nu.hjemme.web.config;
 
-import nu.hjemme.client.dto.MenuDto;
-import nu.hjemme.client.dto.MenuItemDto;
+import nu.hjemme.client.domain.menu.dto.MenuDto;
+import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import org.springframework.context.annotation.Bean;
 
 /**
