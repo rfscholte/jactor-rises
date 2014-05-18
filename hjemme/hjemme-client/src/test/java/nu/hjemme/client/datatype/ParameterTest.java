@@ -21,8 +21,8 @@ public class ParameterTest {
         Parameter notEqual = new Parameter("another param", "value");
 
         assertTrue(new HashCodeMatching(base)
-                        .isImplementedForEquality(equal)
-                        .isUniqueImplementation(notEqual)
+                        .hasImplementionForEquality(equal)
+                        .hasImplementationForUniqeness(notEqual)
                         .isMatch()
         );
     }

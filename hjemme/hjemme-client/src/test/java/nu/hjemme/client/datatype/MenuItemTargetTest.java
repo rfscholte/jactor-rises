@@ -29,8 +29,8 @@ public class MenuItemTargetTest {
         MenuItemTarget notEqual = new MenuItemTarget("another target");
 
         assertTrue(new HashCodeMatching(base)
-                        .isImplementedForEquality(equal)
-                        .isUniqueImplementation(notEqual)
+                        .hasImplementionForEquality(equal)
+                        .hasImplementationForUniqeness(notEqual)
                         .isMatch()
         );
     }
@@ -100,9 +100,9 @@ public class MenuItemTargetTest {
                 Parameter annetParameter = parameters.iterator().next();
 
                 return matchBuilder
-                        .matches(parameter.getKey(),  is(anyOf(equalTo("param"), equalTo("another"))), "parameternavn")
+                        .matches(parameter.getKey(), is(anyOf(equalTo("param"), equalTo("another"))), "parameternavn")
                         .matches(parameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter"))), "parameterverdier")
-                        .matches(annetParameter.getKey(),  is(anyOf(equalTo("param"), equalTo("another"))), "parameternavn")
+                        .matches(annetParameter.getKey(), is(anyOf(equalTo("param"), equalTo("another"))), "parameternavn")
                         .matches(annetParameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter"))), "parameterverdier");
             }
         });

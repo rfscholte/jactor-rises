@@ -4,7 +4,7 @@ import nu.hjemme.business.domain.menu.MenuImpl;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.ChosenMenuItem;
-import nu.hjemme.client.dto.MenuDto;
+import nu.hjemme.client.domain.menu.Menu;
 import nu.hjemme.client.service.MenuFacade;
 import org.apache.commons.lang.Validate;
 
@@ -14,14 +14,14 @@ import java.util.Map;
 
 /** The {@link MenuFacade} */
 public class MenuFacadeImpl implements MenuFacade {
-    private Map<Name, MenuImpl> menusByName = new HashMap<>();
+    private Map<Name, Menu> menusByName = new HashMap<>();
 
-    public MenuFacadeImpl(List<MenuDto> menus) {
+    public MenuFacadeImpl(List<Menu> menus) {
         Validate.notEmpty(menus, "Menus must be provided");
 
-        for (MenuDto menuDto : menus) {
-            Name menuName = new Name(menuDto.getName());
-            menusByName.put(menuName, new MenuImpl(menuDto));
+        for (Menu menu : menus) {
+            Name menuName = menu.getName();
+            menusByName.put(menuName, new MenuImpl(menu));
         }
     }
 

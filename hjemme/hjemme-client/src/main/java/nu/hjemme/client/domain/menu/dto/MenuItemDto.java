@@ -1,10 +1,14 @@
-package nu.hjemme.client.dto;
+package nu.hjemme.client.domain.menu.dto;
+
+import nu.hjemme.client.datatype.Description;
+import nu.hjemme.client.datatype.MenuItemTarget;
+import nu.hjemme.client.domain.menu.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** @author Tor Egil Jacobsen */
-public class MenuItemDto {
+public class MenuItemDto implements MenuItem {
     private final List<MenuItemDto> children = new ArrayList<>();
     private final String menuItemTarget;
     private final String name;
@@ -29,15 +33,18 @@ public class MenuItemDto {
         return name;
     }
 
-    public String getMenuItemTarget() {
-        return menuItemTarget;
+    @Override
+    public Description getDescription() {
+        return new Description(name, beskrivelse);
     }
 
-    public String getBeskrivelse() {
-        return beskrivelse;
+    @Override
+    public MenuItemTarget getMenuItemTarget() {
+        return new MenuItemTarget(menuItemTarget);
     }
 
-    public List<MenuItemDto> getChildren() {
+    @Override
+    public List<? extends MenuItem> getChildren() {
         return children;
     }
 }

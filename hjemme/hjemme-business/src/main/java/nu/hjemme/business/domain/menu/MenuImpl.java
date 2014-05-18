@@ -4,8 +4,7 @@ import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.ChosenMenuItem;
 import nu.hjemme.client.domain.menu.Menu;
-import nu.hjemme.client.dto.MenuDto;
-import nu.hjemme.client.dto.MenuItemDto;
+import nu.hjemme.client.domain.menu.MenuItem;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -21,12 +20,12 @@ public class MenuImpl implements Menu {
     private final Name menuName;
     private final List<MenuItemImpl> menuItems = new ArrayList<>();
 
-    public MenuImpl(MenuDto menuDto) {
-        Validate.notEmpty(menuDto.getMenuItems(), "There must be provided at least one menu item");
-        this.menuName = new Name(menuDto.getName());
+    public MenuImpl(Menu menu) {
+        Validate.notEmpty(menu.getMenuItems(), "There must be provided at least one menu item");
+        this.menuName = menu.getName();
 
-        for (MenuItemDto menuItemDto : menuDto.getMenuItems()) {
-            menuItems.add(new MenuItemImpl(menuItemDto));
+        for (MenuItem menuItem : menu.getMenuItems()) {
+            menuItems.add(new MenuItemImpl(menuItem));
         }
     }
 
@@ -47,5 +46,15 @@ public class MenuImpl implements Menu {
         }
 
         return chosenMenuItems;
+    }
+
+    @Override
+    public Name getName() {
+        return menuName;
+    }
+
+    @Override
+    public List<? extends MenuItem> getMenuItems() {
+        return menuItems;
     }
 }

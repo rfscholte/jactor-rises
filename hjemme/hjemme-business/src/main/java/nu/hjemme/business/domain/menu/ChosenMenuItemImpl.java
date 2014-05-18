@@ -3,8 +3,8 @@ package nu.hjemme.business.domain.menu;
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.MenuItemTarget;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** @author Tor Egil Jacobsen */
 public class ChosenMenuItemImpl implements nu.hjemme.client.domain.menu.ChosenMenuItem {
@@ -19,13 +19,7 @@ public class ChosenMenuItemImpl implements nu.hjemme.client.domain.menu.ChosenMe
     }
 
     private List<nu.hjemme.client.domain.menu.ChosenMenuItem> createChosenItemsBy(List<MenuItemImpl> children) {
-        List<nu.hjemme.client.domain.menu.ChosenMenuItem> chosenMenuItems = new ArrayList<>(children.size());
-
-        for (MenuItemImpl child : children) {
-            chosenMenuItems.add(new ChosenMenuItemImpl(child, chosenMenuItemTarget));
-        }
-
-        return chosenMenuItems;
+        return children.stream().map(child -> new ChosenMenuItemImpl(child, chosenMenuItemTarget)).collect(Collectors.toList());
     }
 
     @Override

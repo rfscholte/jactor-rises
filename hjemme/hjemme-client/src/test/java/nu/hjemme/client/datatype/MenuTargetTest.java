@@ -23,8 +23,8 @@ public class MenuTargetTest {
         MenuTarget notEqual = new MenuTarget(new MenuItemTarget("on target"), new Name("a menu"));
 
         assertTrue(new HashCodeMatching(base)
-                        .isImplementedForEquality(equal)
-                        .isUniqueImplementation(notEqual)
+                        .hasImplementionForEquality(equal)
+                        .hasImplementationForUniqeness(notEqual)
                         .isMatch()
         );
     }

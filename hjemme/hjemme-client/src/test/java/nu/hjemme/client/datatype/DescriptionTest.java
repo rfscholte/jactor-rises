@@ -16,8 +16,8 @@ public class DescriptionTest {
         Description notEqual = new Description("some other item", "some other description");
 
         assertTrue(new HashCodeMatching(base)
-                        .isImplementedForEquality(equal)
-                        .isUniqueImplementation(notEqual)
+                        .hasImplementionForEquality(equal)
+                        .hasImplementationForUniqeness(notEqual)
                         .isMatch()
         );
     }
