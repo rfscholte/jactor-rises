@@ -10,14 +10,22 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
 public class MenuItemImpl implements MenuItem {
-    private Description description;
-    private List<MenuItemImpl> children = new ArrayList<>();
-    private MenuItemTarget menuItemTarget;
+    private static MenuItemImpl newInstanceCreator = new MenuItemImpl();
+
+    private final Description description;
+    private final List<MenuItemImpl> children = new ArrayList<>();
+    private final MenuItemTarget menuItemTarget;
+
+    public MenuItemImpl() {
+        description = new Description("na", "new instance creator");
+        menuItemTarget = null;
+    }
 
     public MenuItemImpl(MenuItem menuItem) {
         Validate.notNull(menuItem, "A MenuItem must be provided");
@@ -27,9 +35,7 @@ public class MenuItemImpl implements MenuItem {
     }
 
     private void addChildren(List<? extends MenuItem> children) {
-        for (MenuItem child : children) {
-            this.children.add(new MenuItemImpl(child));
-        }
+        this.children.addAll(children.stream().map(MenuItemImpl::newInstance).collect(Collectors.toList()));
     }
 
     public boolean isChosenBy(MenuItemTarget menuItemTarget) {
@@ -44,6 +50,10 @@ public class MenuItemImpl implements MenuItem {
         }
 
         return false;
+    }
+
+    protected MenuItemImpl createInstance(MenuItem menuItem) {
+        return new MenuItemImpl(menuItem);
     }
 
     @Override
@@ -95,5 +105,9 @@ public class MenuItemImpl implements MenuItem {
     @Override
     public MenuItemTarget getMenuItemTarget() {
         return menuItemTarget;
+    }
+
+    static MenuItemImpl newInstance(MenuItem menuItem) {
+        return newInstanceCreator.createInstance(menuItem);
     }
 }

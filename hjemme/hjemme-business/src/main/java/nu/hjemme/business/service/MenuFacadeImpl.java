@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** The {@link MenuFacade} */
+/** The implementation of {@link MenuFacade} */
 public class MenuFacadeImpl implements MenuFacade {
     private Map<Name, Menu> menusByName = new HashMap<>();
 
@@ -21,17 +21,21 @@ public class MenuFacadeImpl implements MenuFacade {
 
         for (Menu menu : menus) {
             Name menuName = menu.getName();
-            menusByName.put(menuName, new MenuImpl(menu));
+            menusByName.put(menuName, MenuImpl.newInstance(menu));
         }
     }
 
     /** {@inheritDoc} */
     @Override
     public List<ChosenMenuItem> retrieveChosenMenuItemBy(MenuTarget menuTarget) {
-        Name name = menuTarget.getMenuName();
-        Validate.notNull(name, "The name of a menu must be provided!");
-        Validate.isTrue(menusByName.containsKey(name), name + " is an unknown menu. Known:" + menusByName.keySet());
+        Name name = throwIllegalArgumentExceptionIfUnknown(menuTarget.getMenuName());
 
         return menusByName.get(name).retrieveChosenMenuItemsBy(menuTarget.getMenuItemTarget());
+    }
+
+    private Name throwIllegalArgumentExceptionIfUnknown(Name name) {
+        Validate.isTrue(menusByName.containsKey(name), name + " is an unknown configuration. Configured menu names: " + menusByName.keySet());
+
+        return name;
     }
 }

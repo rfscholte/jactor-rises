@@ -1,34 +1,38 @@
 package nu.hjemme.business.service;
 
-import nu.hjemme.business.domain.menu.MenuItemImpl;
+import nu.hjemme.business.domain.menu.MenuImpl;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.ChosenMenuItem;
 import nu.hjemme.client.domain.menu.Menu;
-import nu.hjemme.client.domain.menu.MenuItem;
-import nu.hjemme.test.MatchBuilder;
-import nu.hjemme.test.NotNullBuildMatching;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.stubbing.Answer;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class MenuFacadeImplTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
+
+    @Mock
+    static private MenuImpl mockedMenuImpl;
+
+    @Before
+    public void replaceMenuImplCreator() {
+        new MenuImplCreation();
+    }
 
     @Test
     public void willThrowExceptionIfProvidedMenusAreNull() {
@@ -45,46 +49,52 @@ public class MenuFacadeImplTest {
     @Test
     public void willFailWhenMenuIsUnknown() {
         expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("unknown configuration");
+        expectedException.expectMessage("known.menu");
+        expectedException.expectMessage("unknown.menu");
 
-        Menu mockedMenu = mock(Menu.class);
-        MenuFacadeImpl testMenuFacadeImpl = new MenuFacadeImpl(asList(mockedMenu));
-        MenuItemImpl mockedMenuItem = mock(MenuItemImpl.class);
+        MenuItemTarget somewhere = new MenuItemTarget("somewhere");
+        Name knownMenu = new Name("known.menu");
 
-        when(mockedMenu.getMenuItems()).thenAnswer(somListe(mockedMenuItem));
-        when(mockedMenu.getName()).thenReturn(new Name("known menu"));
-        when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("somewhere"));
+        when(mockedMenuImpl.getName()).thenReturn(knownMenu);
 
+        MenuFacadeImpl testMenuFacadeImpl = new MenuFacadeImpl(asList(mockedMenuImpl));
         testMenuFacadeImpl.retrieveChosenMenuItemBy(
-                new MenuTarget(new MenuItemTarget("anywhere"), new Name("unknown menu"))
+                new MenuTarget(somewhere, new Name("unknown.menu"))
         );
     }
 
     @Test
     public void willFindKnownMenuItems() {
-        Menu mockedMenu = mock(Menu.class);
-        MenuItemImpl mockedMenuItem = mock(MenuItemImpl.class);
+        MenuItemTarget somewhere = new MenuItemTarget("somewhere");
+        Name knownMenu = new Name("known.menu");
 
-        when(mockedMenu.getMenuItems()).thenAnswer(somListe(mockedMenuItem));
-        when(mockedMenu.getName()).thenReturn(new Name("known menu"));
-        when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("somewhere"));
+        when(mockedMenuImpl.getName()).thenReturn(knownMenu);
 
-        MenuFacadeImpl testMenuFacadeImpl = new MenuFacadeImpl(asList(mockedMenu));
+        MenuFacadeImpl testMenuFacadeImpl = new MenuFacadeImpl(asList(mockedMenuImpl));
+        testMenuFacadeImpl.retrieveChosenMenuItemBy(new MenuTarget(somewhere, knownMenu));
 
-        List<ChosenMenuItem> items = testMenuFacadeImpl.retrieveChosenMenuItemBy(
-                new MenuTarget(new MenuItemTarget("somewhere"), new Name("known menu"))
-        );
-
-        assertThat(items, new NotNullBuildMatching<List<ChosenMenuItem>>("a list of chosen menu items") {
-            @Override
-            public MatchBuilder matches(List<ChosenMenuItem> chosenItems, MatchBuilder matchBuilder) {
-                matchBuilder.failIfMismatch(chosenItems.size(), is(equalTo(1)), "size of chosen items");
-
-                return matchBuilder.matches(chosenItems.iterator().next().getMenuItemTarget(), is(equalTo(new MenuItemTarget("somewhere"))), "chosen items menu item target");
-            }
-        });
+        verify(mockedMenuImpl).retrieveChosenMenuItemsBy(somewhere);
     }
 
-    private Answer<List<? extends MenuItem>> somListe(MenuItemImpl mockedMenuItem) {
-        return invocation -> new ArrayList<>(asList(mockedMenuItem));
+    @After
+    public void replaceMenuItemImplCreatorWithOriginalCreator() {
+        MenuImplCreation.returnOriginalCreator();
+    }
+
+    static class MenuImplCreation extends MenuImpl {
+
+        MenuImplCreation() {
+            MenuImpl.setNewInstanceCreator(this);
+        }
+
+        @Override
+        protected MenuImpl createInstance(Menu menu) {
+            return mockedMenuImpl;
+        }
+
+        static void returnOriginalCreator() {
+            MenuImpl.setNewInstanceCreator(new MenuImpl());
+        }
     }
 }
