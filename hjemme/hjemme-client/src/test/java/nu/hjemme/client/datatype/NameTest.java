@@ -19,8 +19,8 @@ public class NameTest {
         Name notEqual = new Name("another name");
 
         assertTrue(new HashCodeMatching(base)
-                        .isImplementedForEquality(equal)
-                        .isUniqueImplementation(notEqual)
+                        .hasImplementionForEquality(equal)
+                        .hasImplementationForUniqeness(notEqual)
                         .isMatch()
         );
     }

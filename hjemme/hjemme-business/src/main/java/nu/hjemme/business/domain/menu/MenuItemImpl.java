@@ -1,9 +1,8 @@
-package nu.hjemme.business.domain;
+package nu.hjemme.business.domain.menu;
 
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.MenuItemTarget;
-import nu.hjemme.client.domain.PickChosenMenuItem;
-import nu.hjemme.client.dto.MenuItemDto;
+import nu.hjemme.client.domain.menu.MenuItem;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -15,32 +14,30 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class MenuItem implements nu.hjemme.client.domain.MenuItem, PickChosenMenuItem {
+public class MenuItemImpl implements MenuItem {
     private Description description;
-    private List<MenuItem> children = new ArrayList<>();
+    private List<MenuItemImpl> children = new ArrayList<>();
     private MenuItemTarget menuItemTarget;
 
-    public MenuItem(MenuItemDto menuItem) {
-        Validate.notNull(menuItem, "A MenuItemDto must be provided");
-        description = new Description(menuItem.getName(), menuItem.getBeskrivelse());
-        menuItemTarget = new MenuItemTarget(menuItem.getMenuItemTarget());
+    public MenuItemImpl(MenuItem menuItem) {
+        Validate.notNull(menuItem, "A MenuItem must be provided");
+        description = menuItem.getDescription();
+        menuItemTarget = menuItem.getMenuItemTarget();
         addChildren(menuItem.getChildren());
     }
 
-    private void addChildren(List<MenuItemDto> children) {
-        for (MenuItemDto menuItemDto : children) {
-            this.children.add(new MenuItem(menuItemDto));
+    private void addChildren(List<? extends MenuItem> children) {
+        for (MenuItem child : children) {
+            this.children.add(new MenuItemImpl(child));
         }
     }
 
-    @Override
     public boolean isChosenBy(MenuItemTarget menuItemTarget) {
         return this.menuItemTarget.equals(menuItemTarget);
     }
 
-    @Override
     public boolean isChildChosenBy(MenuItemTarget menuItemTarget) {
-        for (MenuItem menuItem : children) {
+        for (MenuItemImpl menuItem : children) {
             if (menuItem.isChosenBy(menuItemTarget)) {
                 return true;
             }
@@ -64,7 +61,7 @@ public class MenuItem implements nu.hjemme.client.domain.MenuItem, PickChosenMen
             return false;
         }
 
-        MenuItem other = (MenuItem) o;
+        MenuItemImpl other = (MenuItemImpl) o;
 
         return Objects.equals(getChildren(), other.getChildren()) && Objects.equals(getDescription(), other.getDescription()) && Objects.equals(getMenuItemTarget(), other.getMenuItemTarget());
     }
@@ -79,11 +76,12 @@ public class MenuItem implements nu.hjemme.client.domain.MenuItem, PickChosenMen
     }
 
     /** {@inheritDoc */
-    public List<? extends nu.hjemme.client.domain.MenuItem> getChildren() {
+    @Override
+    public List<? extends nu.hjemme.client.domain.menu.MenuItem> getChildren() {
         return children;
     }
 
-    List<MenuItem> getChildrenImpls() {
+    List<MenuItemImpl> getChildrenImpls() {
         return children;
     }
 

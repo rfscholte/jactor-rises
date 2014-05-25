@@ -24,8 +24,8 @@ public class GuestBookEntryEntityTest {
         notEqual.setGuestBookEntity(new GuestBookEntity());
 
         assertTrue(new HashCodeMatching(base)
-                        .isImplementedForEquality(equal)
-                        .isUniqueImplementation(notEqual)
+                        .hasImplementionForEquality(equal)
+                        .hasImplementationForUniqeness(notEqual)
                         .isMatch()
         );
     }

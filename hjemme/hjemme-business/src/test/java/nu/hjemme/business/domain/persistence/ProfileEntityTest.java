@@ -24,8 +24,8 @@ public class ProfileEntityTest {
         notEqual.addAddressEntity(new AddressEntity());
 
         assertTrue(new HashCodeMatching(base)
-                        .isImplementedForEquality(equal)
-                        .isUniqueImplementation(notEqual)
+                        .hasImplementionForEquality(equal)
+                        .hasImplementationForUniqeness(notEqual)
                         .isMatch()
         );
     }

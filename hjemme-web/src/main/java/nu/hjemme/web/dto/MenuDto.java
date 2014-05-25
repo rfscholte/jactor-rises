@@ -1,6 +1,6 @@
 package nu.hjemme.web.dto;
 
-import nu.hjemme.client.domain.ChosenMenuItem;
+import nu.hjemme.client.domain.menu.ChosenMenuItem;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,35 +1,29 @@
-package nu.hjemme.business.domain;
+package nu.hjemme.business.domain.menu;
 
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.MenuItemTarget;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** @author Tor Egil Jacobsen */
-public class ChosenMenuItem implements nu.hjemme.client.domain.ChosenMenuItem {
-    private final List<nu.hjemme.client.domain.ChosenMenuItem> chosenChildren;
-    private final MenuItem menuItem;
+public class ChosenMenuItemImpl implements nu.hjemme.client.domain.menu.ChosenMenuItem {
+    private final List<nu.hjemme.client.domain.menu.ChosenMenuItem> chosenChildren;
+    private final MenuItemImpl menuItem;
     private final MenuItemTarget chosenMenuItemTarget;
 
-    public ChosenMenuItem(MenuItem menuItem, MenuItemTarget chosenMenuItemTarget) {
+    public ChosenMenuItemImpl(MenuItemImpl menuItem, MenuItemTarget chosenMenuItemTarget) {
         this.menuItem = menuItem;
         this.chosenMenuItemTarget = chosenMenuItemTarget;
         this.chosenChildren = createChosenItemsBy(menuItem.getChildrenImpls());
     }
 
-    private List<nu.hjemme.client.domain.ChosenMenuItem> createChosenItemsBy(List<MenuItem> children) {
-        List<nu.hjemme.client.domain.ChosenMenuItem> chosenMenuItems = new ArrayList<>(children.size());
-
-        for (MenuItem child : children) {
-            chosenMenuItems.add(new ChosenMenuItem(child, chosenMenuItemTarget));
-        }
-
-        return chosenMenuItems;
+    private List<nu.hjemme.client.domain.menu.ChosenMenuItem> createChosenItemsBy(List<MenuItemImpl> children) {
+        return children.stream().map(child -> new ChosenMenuItemImpl(child, chosenMenuItemTarget)).collect(Collectors.toList());
     }
 
     @Override
-    public List<nu.hjemme.client.domain.ChosenMenuItem> getChildren() {
+    public List<nu.hjemme.client.domain.menu.ChosenMenuItem> getChildren() {
         return chosenChildren;
     }
 
@@ -54,7 +48,7 @@ public class ChosenMenuItem implements nu.hjemme.client.domain.ChosenMenuItem {
     }
 
     @Override
-    public nu.hjemme.client.domain.MenuItem getMenuItem() {
+    public nu.hjemme.client.domain.menu.MenuItem getMenuItem() {
         return menuItem;
     }
 }
