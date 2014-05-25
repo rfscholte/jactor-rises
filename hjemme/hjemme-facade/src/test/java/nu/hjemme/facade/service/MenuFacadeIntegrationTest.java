@@ -4,13 +4,15 @@ import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.ChosenMenuItem;
-import nu.hjemme.client.dto.MenuDto;
-import nu.hjemme.client.dto.MenuItemDto;
+import nu.hjemme.client.domain.menu.dto.MenuDto;
+import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeAppContext;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.NotNullBuildMatching;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,8 +33,12 @@ public class MenuFacadeIntegrationTest {
     @Resource
     MenuFacade testMenuFacade;
 
-    @Test(expected = IllegalArgumentException.class)
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
+    @Test
     public void whenFindingMenuItemsAndTheNameIsUnknownTheMethodWillFail() {
+        expectedException.expect(IllegalArgumentException.class);
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("some target"), new Name("unknown"));
         testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
     }

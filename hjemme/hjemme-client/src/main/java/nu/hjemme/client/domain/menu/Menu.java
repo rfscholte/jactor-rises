@@ -16,7 +16,7 @@ public interface Menu {
     Name getName();
 
     /**
-     * @return the menu items to this menu
+     * @return the menu items of this menu
      */
     List<? extends MenuItem> getMenuItems();
 

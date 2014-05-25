@@ -11,22 +11,31 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A {@link MenuImpl} that contains a collection of {@link MenuItemImpl}s.
  * @author Tor Egil Jacobsen
  */
 public class MenuImpl implements Menu {
+    private static MenuImpl newInstanceCreator = new MenuImpl();
+
     private final Name menuName;
     private final List<MenuItemImpl> menuItems = new ArrayList<>();
+
+    public MenuImpl() {
+        this.menuName = new Name("new instance creator");
+    }
 
     public MenuImpl(Menu menu) {
         Validate.notEmpty(menu.getMenuItems(), "There must be provided at least one menu item");
         this.menuName = menu.getName();
 
-        for (MenuItem menuItem : menu.getMenuItems()) {
-            menuItems.add(new MenuItemImpl(menuItem));
-        }
+        menuItems.addAll(menu.getMenuItems().stream().map(MenuItemImpl::newInstance).collect(Collectors.toList()));
+    }
+
+    protected MenuImpl createInstance(Menu menu) {
+        return new MenuImpl(menu);
     }
 
     @Override
@@ -41,9 +50,7 @@ public class MenuImpl implements Menu {
     public List<ChosenMenuItem> retrieveChosenMenuItemsBy(MenuItemTarget menuItemTarget) {
         List<ChosenMenuItem> chosenMenuItems = new ArrayList<>(menuItems.size());
 
-        for (MenuItemImpl menuItem : menuItems) {
-            chosenMenuItems.add(new ChosenMenuItemImpl(menuItem, menuItemTarget));
-        }
+        chosenMenuItems.addAll(menuItems.stream().map(menuItem -> new ChosenMenuItemImpl(menuItem, menuItemTarget)).collect(Collectors.toList()));
 
         return chosenMenuItems;
     }
@@ -56,5 +63,13 @@ public class MenuImpl implements Menu {
     @Override
     public List<? extends MenuItem> getMenuItems() {
         return menuItems;
+    }
+
+    public static MenuImpl newInstance(Menu menu) {
+        return newInstanceCreator.createInstance(menu);
+    }
+
+    public static void setNewInstanceCreator(MenuImpl newInstanceCreator) {
+        MenuImpl.newInstanceCreator = newInstanceCreator;
     }
 }
