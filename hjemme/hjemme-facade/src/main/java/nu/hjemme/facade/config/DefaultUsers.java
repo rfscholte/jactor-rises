@@ -1,7 +1,7 @@
 package nu.hjemme.facade.config;
 
-import nu.hjemme.business.domain.builder.ProfileBuilder;
-import nu.hjemme.business.domain.builder.UserBuilder;
+import nu.hjemme.business.domain.builder.ProfileDomainBuilder;
+import nu.hjemme.business.domain.builder.UserDomainBuilder;
 import nu.hjemme.business.domain.persistence.AddressEntity;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.User;
@@ -22,10 +22,10 @@ public class DefaultUsers {
         HOME.setZipCode(1351);
         HOME.setCountry(new Country("NO", "no"));
 
-        JACTOR = UserBuilder.init()
+        JACTOR = UserDomainBuilder.init()
                 .appendUserName("jactor")
                 .appendPassword("demo")
-                .appendProfile(ProfileBuilder.init()
+                .appendProfile(ProfileDomainBuilder.init()
                         .appendDescription("jactor.desc")
                         .appendLastName(JACOBSEN)
                         .appendFirstName("Tor Egil")
@@ -33,10 +33,10 @@ public class DefaultUsers {
                         .getValidatedProfileEntity())
                 .build();
 
-        TIP = UserBuilder.init()
+        TIP = UserDomainBuilder.init()
                 .appendUserName("tip")
                 .appendPassword("demo")
-                .appendProfile(ProfileBuilder.init()
+                .appendProfile(ProfileDomainBuilder.init()
                         .appendDescription("tip.desc")
                         .appendLastName(JACOBSEN)
                         .appendFirstName("Tor Egil")

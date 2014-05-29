@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntryEntityTest {
+public class GuestBookEntryDomainEntityTest {
 
     @Test
     public void willHaveCorrectImplementedHashCode() {

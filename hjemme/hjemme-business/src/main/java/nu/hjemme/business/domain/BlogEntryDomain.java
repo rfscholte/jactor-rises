@@ -1,23 +1,23 @@
 package nu.hjemme.business.domain;
 
 import nu.hjemme.business.domain.base.PersistentDomain;
-import nu.hjemme.business.domain.persistence.GuestBookEntryEntity;
+import nu.hjemme.business.domain.persistence.BlogEntryEntity;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.GuestBook;
+import nu.hjemme.client.domain.Blog;
+import nu.hjemme.client.domain.BlogEntry;
 import nu.hjemme.client.domain.Person;
 import org.joda.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntry extends PersistentDomain<GuestBookEntryEntity>
-        implements nu.hjemme.client.domain.GuestBookEntry {
+public class BlogEntryDomain extends PersistentDomain<BlogEntryEntity> implements BlogEntry {
 
-    public GuestBookEntry(GuestBookEntryEntity guestBookEntryEntity) {
-        super(guestBookEntryEntity);
+    public BlogEntryDomain(BlogEntryEntity blogEntryEntity) {
+        super(blogEntryEntity);
     }
 
     @Override
-    public GuestBook getGuestBook() {
-        return getEntity().getGuestBook();
+    public Blog getBlog() {
+        return new BlogDomain(getEntity().getBlog());
     }
 
     @Override
@@ -37,6 +37,6 @@ public class GuestBookEntry extends PersistentDomain<GuestBookEntryEntity>
 
     @Override
     public Person getCreator() {
-        return getEntity().getCreator();
+        return new PersonDomain(getEntity().getCreator());
     }
 }

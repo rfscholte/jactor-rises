@@ -2,12 +2,13 @@ package nu.hjemme.business.domain;
 
 import nu.hjemme.business.domain.base.PersistentDomain;
 import nu.hjemme.business.domain.persistence.GuestBookEntity;
+import nu.hjemme.client.domain.GuestBook;
 import nu.hjemme.client.domain.User;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBook extends PersistentDomain<GuestBookEntity> implements nu.hjemme.client.domain.GuestBook {
+public class GuestBookDomain extends PersistentDomain<GuestBookEntity> implements GuestBook {
 
-    public GuestBook(GuestBookEntity guestBookEntity) {
+    public GuestBookDomain(GuestBookEntity guestBookEntity) {
         super(guestBookEntity);
     }
 
