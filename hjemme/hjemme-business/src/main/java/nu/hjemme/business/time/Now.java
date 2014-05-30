@@ -1,6 +1,6 @@
 package nu.hjemme.business.time;
 
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
 public class Now {
@@ -15,7 +15,7 @@ public class Now {
     }
 
     protected LocalDateTime retrieveTheDateTime() {
-        return new LocalDateTime();
+        return LocalDateTime.now();
     }
 
     protected static void setInstance(Now instance) {

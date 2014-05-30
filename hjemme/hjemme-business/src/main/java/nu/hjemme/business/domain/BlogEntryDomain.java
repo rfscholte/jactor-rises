@@ -6,7 +6,8 @@ import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.client.domain.BlogEntry;
 import nu.hjemme.client.domain.Person;
-import org.joda.time.LocalDateTime;
+
+import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
 public class BlogEntryDomain extends PersistentDomain<BlogEntryEntity> implements BlogEntry {

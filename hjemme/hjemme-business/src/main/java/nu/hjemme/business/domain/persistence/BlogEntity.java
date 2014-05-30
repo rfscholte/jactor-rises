@@ -3,11 +3,11 @@ package nu.hjemme.business.domain.persistence;
 import nu.hjemme.business.domain.base.PersistentEntity;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.joda.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
@@ -29,7 +29,7 @@ public class BlogEntity extends PersistentEntity {
 
     // Add persistence type
     @Column(name = CREATED)
-    private LocalDate created;
+    private LocalDateTime created;
 
     @Column(name = TITLE)
     private String title;
@@ -38,7 +38,7 @@ public class BlogEntity extends PersistentEntity {
     private UserEntity userEntity;
 
     public BlogEntity() {
-        created = new LocalDate();
+        created = LocalDateTime.now();
     }
 
     public BlogEntity(BlogEntity blogEntity) {
@@ -78,7 +78,7 @@ public class BlogEntity extends PersistentEntity {
                 .toString();
     }
 
-    public LocalDate getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 

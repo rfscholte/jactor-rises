@@ -1,7 +1,8 @@
 package nu.hjemme.client.domain;
 
 import nu.hjemme.client.domain.base.Persistent;
-import org.joda.time.LocalDate;
+
+import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
 public interface Blog extends Persistent {
@@ -9,6 +10,6 @@ public interface Blog extends Persistent {
 
     User getUser();
 
-    LocalDate getCreated();
+    LocalDateTime getCreated();
 
 }

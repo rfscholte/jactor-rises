@@ -4,7 +4,8 @@ import nu.hjemme.business.domain.base.PersistentDomain;
 import nu.hjemme.business.domain.persistence.BlogEntity;
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.client.domain.User;
-import org.joda.time.LocalDate;
+
+import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
 public class BlogDomain extends PersistentDomain<BlogEntity> implements Blog {
@@ -27,7 +28,7 @@ public class BlogDomain extends PersistentDomain<BlogEntity> implements Blog {
     }
 
     @Override
-    public LocalDate getCreated() {
+    public LocalDateTime getCreated() {
         return getEntity().getCreated();
     }
 }

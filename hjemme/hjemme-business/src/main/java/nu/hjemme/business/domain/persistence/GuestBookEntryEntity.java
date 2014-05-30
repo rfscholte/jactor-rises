@@ -4,11 +4,11 @@ import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBookEntry;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.joda.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static java.util.Objects.hash;

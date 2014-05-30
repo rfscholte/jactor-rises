@@ -6,7 +6,8 @@ import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBook;
 import nu.hjemme.client.domain.GuestBookEntry;
 import nu.hjemme.client.domain.Person;
-import org.joda.time.LocalDateTime;
+
+import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
 public class GuestBookEntryDomain extends PersistentDomain<GuestBookEntryEntity> implements GuestBookEntry {
