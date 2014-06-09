@@ -9,11 +9,12 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author Tor Egil Jacobsen
  */
 public class Name implements Comparable<Name> {
+    static final String A_NAME_MUST_BE_GIVEN = "A name must be given";
 
     private String name;
 
     public Name(String name) {
-        Validate.notEmpty(name, "A name must be given");
+        Validate.notEmpty(name, A_NAME_MUST_BE_GIVEN);
         this.name = name;
     }
 

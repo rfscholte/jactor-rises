@@ -14,9 +14,7 @@
 
     <name>hjemme-business</name>
 
-    <description>
-        The internal logic of hjemme.
-    </description>
+    <description>The internal logic of hjemme.</description>
 
     <dependencies>
         <dependency>
@@ -32,10 +30,6 @@
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
         </dependency>
 
         <!-- Test scope -->

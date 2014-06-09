@@ -2,7 +2,9 @@ package nu.hjemme.client.datatype;
 
 import nu.hjemme.test.EqualsMatching;
 import nu.hjemme.test.HashCodeMatching;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -11,6 +13,9 @@ import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class NameTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
@@ -43,13 +48,19 @@ public class NameTest {
         assertThat("Name", new Name("another name").toString(), is(equalTo("Name[another name]")));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void whenInitializingTheMenuNameCannotBeNull() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(Name.A_NAME_MUST_BE_GIVEN);
+
         new Name(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void whenInitializingTheMenuNameCannotBeEmpty() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(Name.A_NAME_MUST_BE_GIVEN);
+
         new Name("");
     }
 

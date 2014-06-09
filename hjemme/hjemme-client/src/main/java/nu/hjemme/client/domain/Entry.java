@@ -2,7 +2,8 @@ package nu.hjemme.client.domain;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.base.Persistent;
-import org.joda.time.LocalDateTime;
+
+import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
 public interface Entry extends Persistent {

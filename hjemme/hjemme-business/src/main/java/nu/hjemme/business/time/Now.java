@@ -1,24 +1,28 @@
 package nu.hjemme.business.time;
 
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
 public class Now {
-    private static Now instance;
+    private static final Object SYNC = new Object();
+
+    private static volatile Now instance;
 
     static {
         instance = new Now();
     }
 
-    public static LocalDateTime retrieveDateTime() {
-        return instance.retrieveTheDateTime();
+    public static LocalDateTime asDateTime() {
+        return instance.nowAsDateTime();
     }
 
-    protected LocalDateTime retrieveTheDateTime() {
-        return new LocalDateTime();
+    protected LocalDateTime nowAsDateTime() {
+        return LocalDateTime.now();
     }
 
     protected static void setInstance(Now instance) {
-        Now.instance = instance;
+        synchronized (SYNC) {
+            Now.instance = instance;
+        }
     }
 }

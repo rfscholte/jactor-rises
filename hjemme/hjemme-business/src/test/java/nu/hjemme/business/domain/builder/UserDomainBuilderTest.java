@@ -1,6 +1,6 @@
 package nu.hjemme.business.domain.builder;
 
-import nu.hjemme.business.domain.User;
+import nu.hjemme.business.domain.UserDomain;
 import nu.hjemme.business.domain.persistence.ProfileEntity;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class UserBuilderTest {
+public class UserDomainBuilderTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -19,38 +19,38 @@ public class UserBuilderTest {
     @Test
     public void willNotBuildUserDomainWithoutUserName() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(UserBuilder.THE_USER_NAME_CANNOT_BE_NULL);
+        expectedException.expectMessage(UserDomainBuilder.THE_USER_NAME_CANNOT_BE_NULL);
 
-        UserBuilder.init().build();
+        UserDomainBuilder.init().build();
     }
 
     @Test
     public void willNotBuildUserDomainWithoutProfile() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(UserBuilder.THE_USER_MUST_HAVE_A_PROFILE);
+        expectedException.expectMessage(UserDomainBuilder.THE_USER_MUST_HAVE_A_PROFILE);
 
-        UserBuilder.init().appendUserName("some user").build();
+        UserDomainBuilder.init().appendUserName("some user").build();
     }
 
     @Test
     public void willNotBuildUserDomainWithoutPassword() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(UserBuilder.THE_PASSWORD_FIELD_CANNOT_BE_EMPTY);
+        expectedException.expectMessage(UserDomainBuilder.THE_PASSWORD_FIELD_CANNOT_BE_EMPTY);
 
-        UserBuilder.init().appendUserName("some user").appendProfile(new ProfileEntity()).build();
+        UserDomainBuilder.init().appendUserName("some user").appendProfile(new ProfileEntity()).build();
     }
 
     @Test
     public void willNotBuildUserDomainWithAnEmptyPassword() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(UserBuilder.THE_PASSWORD_FIELD_CANNOT_BE_EMPTY);
+        expectedException.expectMessage(UserDomainBuilder.THE_PASSWORD_FIELD_CANNOT_BE_EMPTY);
 
-        UserBuilder.init().appendUserName("some user").appendProfile(new ProfileEntity()).appendPassword("").build();
+        UserDomainBuilder.init().appendUserName("some user").appendProfile(new ProfileEntity()).appendPassword("").build();
     }
 
     @Test
     public void willBuildUserDomainWithAllRequiredProperties() {
-        User userEntity = UserBuilder.init()
+        UserDomain userEntity = UserDomainBuilder.init()
                 .appendUserName("some user")
                 .appendProfile(new ProfileEntity())
                 .appendPassword("password")

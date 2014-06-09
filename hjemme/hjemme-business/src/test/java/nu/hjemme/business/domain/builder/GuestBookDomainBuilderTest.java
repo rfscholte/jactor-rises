@@ -1,6 +1,6 @@
 package nu.hjemme.business.domain.builder;
 
-import nu.hjemme.business.domain.GuestBook;
+import nu.hjemme.business.domain.GuestBookDomain;
 import nu.hjemme.business.domain.persistence.UserEntity;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookBuilderTest {
+public class GuestBookDomainBuilderTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -19,34 +19,34 @@ public class GuestBookBuilderTest {
     @Test
     public void willNotBuildGuestBookWithoutTheTitleOfTheGuestBook() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(GuestBookBuilder.THE_TITLE_CANNOT_BE_EMPTY);
+        expectedException.expectMessage(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_EMPTY);
 
-        GuestBookBuilder.init().appendUser(new UserEntity()).build();
+        GuestBookDomainBuilder.init().appendUser(new UserEntity()).build();
     }
 
     @Test
     public void willNotBuildGuestBookWithAnEmptyTitleOfTheGuestBook() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(GuestBookBuilder.THE_TITLE_CANNOT_BE_EMPTY);
+        expectedException.expectMessage(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_EMPTY);
 
-        GuestBookBuilder.init().appendTitle("").appendUser(new UserEntity()).build();
+        GuestBookDomainBuilder.init().appendTitle("").appendUser(new UserEntity()).build();
     }
 
     @Test
     public void willNotBuildGuestBookWithoutTheUserWhoIsTheOwnerOfTheGuestBook() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(GuestBookBuilder.THE_GUEST_BOOK_MUST_BELONG_TO_A_USER);
+        expectedException.expectMessage(GuestBookDomainBuilder.THE_GUEST_BOOK_MUST_BELONG_TO_A_USER);
 
-        GuestBookBuilder.init().appendTitle("some title").build();
+        GuestBookDomainBuilder.init().appendTitle("some title").build();
     }
 
     @Test
     public void willBuildGuestBookWhenAllRequiredFieldsAreSet() throws Exception {
-        GuestBook guestBook = GuestBookBuilder.init()
+        GuestBookDomain guestBookDomain = GuestBookDomainBuilder.init()
                 .appendTitle("some title")
                 .appendUser(new UserEntity())
                 .build();
 
-        assertThat("GuestBook", guestBook, is(notNullValue()));
+        assertThat("GuestBook", guestBookDomain, is(notNullValue()));
     }
 }

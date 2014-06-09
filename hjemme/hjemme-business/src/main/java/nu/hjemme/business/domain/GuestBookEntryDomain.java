@@ -4,14 +4,15 @@ import nu.hjemme.business.domain.base.PersistentDomain;
 import nu.hjemme.business.domain.persistence.GuestBookEntryEntity;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBook;
+import nu.hjemme.client.domain.GuestBookEntry;
 import nu.hjemme.client.domain.Person;
-import org.joda.time.LocalDateTime;
+
+import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntry extends PersistentDomain<GuestBookEntryEntity>
-        implements nu.hjemme.client.domain.GuestBookEntry {
+public class GuestBookEntryDomain extends PersistentDomain<GuestBookEntryEntity> implements GuestBookEntry {
 
-    public GuestBookEntry(GuestBookEntryEntity guestBookEntryEntity) {
+    public GuestBookEntryDomain(GuestBookEntryEntity guestBookEntryEntity) {
         super(guestBookEntryEntity);
     }
 
