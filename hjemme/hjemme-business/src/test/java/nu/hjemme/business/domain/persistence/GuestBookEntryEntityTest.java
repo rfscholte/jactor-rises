@@ -1,13 +1,26 @@
 package nu.hjemme.business.domain.persistence;
 
+import nu.hjemme.business.time.NowAsPureDate;
 import nu.hjemme.test.EqualsMatching;
 import nu.hjemme.test.HashCodeMatching;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntryDomainEntityTest {
+public class GuestBookEntryEntityTest {
+
+    @Before
+    public void mockNow() {
+        new NowAsPureDate();
+    }
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
@@ -49,5 +62,20 @@ public class GuestBookEntryDomainEntityTest {
                         .isNotEqualTo(notEqual)
                         .isMatch()
         );
+    }
+
+    @Test
+    public void skalHaTidspunktForOpprettelseSattVedBrukAvNoArgsConstructor() {
+        GuestBookEntryEntity guestBookEntryEntity = new GuestBookEntryEntity();
+
+        assertThat("Creation time", guestBookEntryEntity.getCreationTime(), is(equalTo(
+                LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0)
+        )));
+
+    }
+
+    @After
+    public void removeNowAsPureDate() {
+        NowAsPureDate.removeNowAsPureDate();
     }
 }

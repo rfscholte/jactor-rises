@@ -1,6 +1,7 @@
 package nu.hjemme.business.domain.persistence;
 
 import nu.hjemme.business.domain.base.PersistentEntity;
+import nu.hjemme.business.time.Now;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -38,7 +39,7 @@ public class BlogEntity extends PersistentEntity {
     private UserEntity userEntity;
 
     public BlogEntity() {
-        created = LocalDateTime.now();
+        created = Now.asDateTime();
     }
 
     public BlogEntity(BlogEntity blogEntity) {

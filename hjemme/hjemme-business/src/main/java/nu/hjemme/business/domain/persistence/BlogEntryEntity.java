@@ -35,7 +35,7 @@ public class BlogEntryEntity extends PersistentEntry {
 
     @Column(name = CREATION_TIME)
     // @Type(type = PersistenceTypes.PERSISTENT_LOCAL_DATE_TIME)
-    public void setCreationTime(LocalDateTime created) {
+    public void setCreationTime(/**/LocalDateTime created) {
         super.setCreationTime(created);
     }
 
@@ -56,7 +56,6 @@ public class BlogEntryEntity extends PersistentEntry {
     }
 
     public BlogEntryEntity() {
-        super();
     }
 
     public BlogEntryEntity(BlogEntryEntity blogEntryEntity) {

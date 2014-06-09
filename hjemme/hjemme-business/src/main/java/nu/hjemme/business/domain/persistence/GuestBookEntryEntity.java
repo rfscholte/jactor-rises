@@ -34,7 +34,6 @@ public class GuestBookEntryEntity extends PersistentEntry implements GuestBookEn
     private GuestBookEntity guestBookEntity;
 
     @Column(name = CREATION_TIME)
-    // @Type(type = PersistenceTypes.PERSISTENT_LOCAL_DATE_TIME)
     public void setCreationTime(LocalDateTime created) {
         super.setCreationTime(created);
     }

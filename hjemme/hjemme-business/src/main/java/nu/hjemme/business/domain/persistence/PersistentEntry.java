@@ -1,6 +1,7 @@
 package nu.hjemme.business.domain.persistence;
 
 import nu.hjemme.business.domain.base.PersistentEntity;
+import nu.hjemme.business.time.Now;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Entry;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -20,6 +21,7 @@ public abstract class PersistentEntry extends PersistentEntity implements Entry 
     private String entry;
 
     protected PersistentEntry() {
+        creationTime = Now.asDateTime();
     }
 
     /** @param entry will be used to create the instance... */
@@ -43,9 +45,9 @@ public abstract class PersistentEntry extends PersistentEntity implements Entry 
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
                 .append(getCreationTime())
-                .append(getEntry())
                 .append(getCreatorName())
                 .append(getCreator())
+                .append(getEntry())
                 .toString();
     }
 
