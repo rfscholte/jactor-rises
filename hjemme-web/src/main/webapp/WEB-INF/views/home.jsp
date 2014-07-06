@@ -24,8 +24,7 @@
             <li><a href="http://www.junit.org/" target="_blanc">JUnit</a> <fmt:message key="page.home.junit" /></li>
             <li><a href="http://www.mockito.org/" target="_blanc">Mockito</a> <fmt:message key="page.home.mockito" /></li>
             <li><a href="http://code.google.com/p/hamcrest/" target="_blanc">Hamcrest</a> <fmt:message key="page.home.hamcrest" /></li>
-            <li><a href="http://www.joda.org/" target="_blanc">Joda</a> <fmt:message key="page.home.joda" /></li>
-            <li><a href="https//www.bitbucket.org/" target="_blanc">Joda</a> <fmt:message key="page.home.git" /></li>
+            <li><a href="https//www.bitbucket.org/" target="_blanc">Bitbucket</a> <fmt:message key="page.home.git" /></li>
         </ul>
     </p>
 </div>
