@@ -14,6 +14,7 @@ public class PersistentDomainTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersistentDomain.ENTITETEN_PÅ_DOMENEOBJEKTET_KAN_IKKE_VAERE_NULL);
 
-        new PersistentDomain<>(null);
+        //noinspection unchecked
+        new PersistentDomain(null) {};
     }
 }

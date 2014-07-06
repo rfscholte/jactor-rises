@@ -14,7 +14,7 @@ public class PersistentEntityTest {
 
     @Before
     public void initForTesting() {
-        testPersistentEntity = new PersistentEntity();
+        testPersistentEntity = new TestPersistentEntity();
     }
 
     @Test
@@ -22,17 +22,21 @@ public class PersistentEntityTest {
         testPersistentEntity.setId(101L);
         String string = testPersistentEntity.toString();
 
-        assertThat(string, allOf(containsString("PersistentEntity"), containsString("101")));
+        assertThat(string, allOf(containsString("TestPersistentEntity"), containsString("101")));
     }
 
     @Test
     public void skalReturnereTrueNarDatabaseIdErSattPaaBeggeInstanserSamtOmDeErLike() {
         testPersistentEntity.setId(101L);
-        PersistentEntity other = new PersistentEntity();
+        PersistentEntity other = new PersistentEntity() {};
         other.setId(101L);
 
         assertThat("Persistente bønner skal ha lik dbid: " + testPersistentEntity.getId(),
                 testPersistentEntity.erIdIkkeNullSamtLikIdPaa(other), is(equalTo(true))
         );
+    }
+
+    private static class TestPersistentEntity extends PersistentEntity {
+
     }
 }
