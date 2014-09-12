@@ -3,7 +3,7 @@ package nu.hjemme.business.domain.base;
 import nu.hjemme.client.domain.base.Persistent;
 
 /** @author Tor Egil Jacobsen */
-public class PersistentEntity implements Persistent {
+public abstract class PersistentEntity implements Persistent {
     private Long id;
 
     public boolean erIdIkkeNullSamtLikIdPaa(PersistentEntity other) {
