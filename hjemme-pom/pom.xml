@@ -6,7 +6,7 @@
     <artifactId>hjemme-pom</artifactId>
     <name>hjemme-pom</name>
     <packaging>pom</packaging>
-    <version>1.0.21</version>
+    <version>1.0.22</version>
     <description>The parent pom of www.hjemme.nu</description>
 
     <url>http://www.hjemme.nu</url>
@@ -71,6 +71,21 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${org.springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.faces</groupId>
+                <artifactId>jsf-api</artifactId>
+                <version>${jsf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${org.slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${org.slf4j.version}</version>
             </dependency>
 
             <!-- testing -->
@@ -189,6 +204,7 @@
     <properties>
         <!-- External dependencies -->
         <commons.lang.version>2.6</commons.lang.version>
+        <jsf.version>2.0</jsf.version>
         <junit.version>4.11</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <org.aspectj.version>1.8.0</org.aspectj.version>
