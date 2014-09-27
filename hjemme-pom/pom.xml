@@ -6,7 +6,7 @@
     <artifactId>hjemme-pom</artifactId>
     <name>hjemme-pom</name>
     <packaging>pom</packaging>
-    <version>1.0.21</version>
+    <version>1.0.22</version>
     <description>The parent pom of www.hjemme.nu</description>
 
     <url>http://www.hjemme.nu</url>
@@ -191,13 +191,13 @@
         <commons.lang.version>2.6</commons.lang.version>
         <junit.version>4.11</junit.version>
         <log4j.version>1.2.17</log4j.version>
-        <org.aspectj.version>1.8.0</org.aspectj.version>
+        <org.aspectj.version>1.8.2</org.aspectj.version>
         <org.codehause.mojo.version>2.2</org.codehause.mojo.version>
         <org.efaps.version>1.0.1</org.efaps.version>
         <org.hamcrest.version>1.3</org.hamcrest.version>
         <org.mockito.version>1.9.5</org.mockito.version>
         <org.slf4j.version>1.7.7</org.slf4j.version>
-        <org.springframework.version>4.0.4.RELEASE</org.springframework.version>
+        <org.springframework.version>4.1.0.RELEASE</org.springframework.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
