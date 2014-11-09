@@ -3,7 +3,7 @@ package nu.hjemme.client.datatype;
 import nu.hjemme.test.EqualsMatching;
 import nu.hjemme.test.HashCodeMatching;
 import nu.hjemme.test.MatchBuilder;
-import nu.hjemme.test.NotNullBuildMatching;
+import nu.hjemme.test.TypeSafeBuildMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -71,7 +71,7 @@ public class MenuItemTargetTest {
 
     @Test
     public void whenInitializedParametersAreReadFromTheTargetString() {
-        assertThat(new MenuItemTarget("target?param=value"), new NotNullBuildMatching<MenuItemTarget>("Lest parameter fra MenuItemTarget") {
+        assertThat(new MenuItemTarget("target?param=value"), new TypeSafeBuildMatcher<MenuItemTarget>("Lest parameter fra MenuItemTarget") {
             @Override
             public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
                 matchBuilder.matches(menuItemTarget.getTarget(), is(equalTo("target")), "malnavn skal vere uten parameterstreng");
@@ -89,7 +89,7 @@ public class MenuItemTargetTest {
 
     @Test
     public void whenInitializedSeveralParametersAreReadFromTheTargetString() {
-        assertThat(new MenuItemTarget("target?param=value,another=parameter"), new NotNullBuildMatching<MenuItemTarget>("Leste parametre fra MenuItemTarget") {
+        assertThat(new MenuItemTarget("target?param=value,another=parameter"), new TypeSafeBuildMatcher<MenuItemTarget>("Leste parametre fra MenuItemTarget") {
             @Override
             public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
                 matchBuilder.matches(menuItemTarget.getTarget(), is(equalTo("target")), "malnavn skal vere uten parameterstreng");
