@@ -9,7 +9,7 @@ import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeAppContext;
 import nu.hjemme.test.MatchBuilder;
-import nu.hjemme.test.NotNullBuildMatching;
+import nu.hjemme.test.TypeSafeBuildMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -49,7 +49,7 @@ public class MenuFacadeIntegrationTest {
 
         List<ChosenMenuItem> chosenMenuItems = testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
 
-        assertThat(chosenMenuItems, new NotNullBuildMatching<List<ChosenMenuItem>>("En liste med test menyvalg fra test context") {
+        assertThat(chosenMenuItems, new TypeSafeBuildMatcher<List<ChosenMenuItem>>("En liste med test menyvalg fra test context") {
             @Override
             public MatchBuilder matches(List<ChosenMenuItem> chosenMenuItems, MatchBuilder matchBuilder) {
                 matchBuilder.matches(chosenMenuItems.isEmpty(), is(equalTo(false)), "lista kan ikke være tom");

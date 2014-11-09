@@ -5,7 +5,7 @@ import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.ChosenMenuItem;
 import nu.hjemme.test.MatchBuilder;
-import nu.hjemme.test.NotNullBuildMatching;
+import nu.hjemme.test.TypeSafeBuildMatcher;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,7 +58,7 @@ public class ChosenMenuItemCacheTest {
     @Test
     @SuppressWarnings("unchecked")
     public void skalCacheListeAvChosenMenuItemsBasertPaMenuTarget() {
-        assertThat(testChosenMenuItemCache, new NotNullBuildMatching<ChosenMenuItemCache>("Caching basert pa menu item target") {
+        assertThat(testChosenMenuItemCache, new TypeSafeBuildMatcher<ChosenMenuItemCache>("Caching basert pa menu item target") {
             @Override
             public MatchBuilder matches(ChosenMenuItemCache chosenMenuItemCache, MatchBuilder matchBuilder) {
                 List<ChosenMenuItem> eiListeAvChosenMenuItems = mock(List.class);
