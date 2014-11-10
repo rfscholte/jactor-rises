@@ -3,7 +3,7 @@ package nu.hjemme.client.datatype;
 import nu.hjemme.test.EqualsMatching;
 import nu.hjemme.test.HashCodeMatching;
 import nu.hjemme.test.MatchBuilder;
-import nu.hjemme.test.NotNullBuildMatching;
+import nu.hjemme.test.TypeSafeBuildMatcher;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -52,7 +52,7 @@ public class MenuTargetTest {
     public void willEncapsulateTheNameOfTheMenuAndTheTargetOnTheMenu() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("a target"), new Name("a menu"));
 
-        assertThat(menuTarget, new NotNullBuildMatching<MenuTarget>("Et 'target' som inneholder navnet til menyen") {
+        assertThat(menuTarget, new TypeSafeBuildMatcher<MenuTarget>("Et 'target' som inneholder navnet til menyen") {
             @Override
             public MatchBuilder matches(MenuTarget menuTarget, MatchBuilder matchBuilder) {
                 return matchBuilder

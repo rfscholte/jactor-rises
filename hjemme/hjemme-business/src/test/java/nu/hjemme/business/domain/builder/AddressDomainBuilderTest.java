@@ -3,7 +3,7 @@ package nu.hjemme.business.domain.builder;
 import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.test.MatchBuilder;
-import nu.hjemme.test.NotNullBuildMatching;
+import nu.hjemme.test.TypeSafeBuildMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -73,7 +73,7 @@ public class AddressDomainBuilderTest {
                 .appendZipCode(1234)
                 .build();
 
-        assertThat(addressDomain, new NotNullBuildMatching<AddressDomain>("A domain with all properties set") {
+        assertThat(addressDomain, new TypeSafeBuildMatcher<AddressDomain>("A domain with all properties set") {
             @Override
             public MatchBuilder matches(AddressDomain addressDomain, MatchBuilder matchBuilder) {
                 return matchBuilder

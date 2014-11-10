@@ -3,7 +3,7 @@ package nu.hjemme.client.datatype;
 import nu.hjemme.test.EqualsMatching;
 import nu.hjemme.test.HashCodeMatching;
 import nu.hjemme.test.MatchBuilder;
-import nu.hjemme.test.NotNullBuildMatching;
+import nu.hjemme.test.TypeSafeBuildMatcher;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -49,7 +49,7 @@ public class ParameterTest {
     public void whenCreatedWithStringTheParameterShouldBeSplitByAnEqualSign() {
         Parameter parameter = new Parameter("some=where");
 
-        assertThat(parameter, new NotNullBuildMatching<Parameter>("har splittet opp parameter i 'key/value'") {
+        assertThat(parameter, new TypeSafeBuildMatcher<Parameter>("har splittet opp parameter i 'key/value'") {
             @Override
             public MatchBuilder matches(Parameter parameter, MatchBuilder matchBuilder) {
                 return matchBuilder
