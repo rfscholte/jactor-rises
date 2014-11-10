@@ -8,8 +8,6 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -56,9 +54,7 @@ public class MenuTargetTest {
             @Override
             public MatchBuilder matches(MenuTarget menuTarget, MatchBuilder matchBuilder) {
                 return matchBuilder
-                        .failIfMismatch(menuTarget.getMenuName(), is(not(nullValue())), "menuName")
                         .matches(menuTarget.getMenuName().getName(), is(equalTo("a menu")), "menuName")
-                        .failIfMismatch(menuTarget.getMenuItemTarget(), is(not(nullValue())), "menuItemTarget")
                         .matches(menuTarget.getMenuItemTarget().getTarget(), is(equalTo("a target")), "menuItemTarget");
             }
         });

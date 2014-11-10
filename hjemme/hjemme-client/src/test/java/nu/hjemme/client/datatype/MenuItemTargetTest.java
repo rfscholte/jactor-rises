@@ -70,17 +70,27 @@ public class MenuItemTargetTest {
     }
 
     @Test
-    public void whenInitializedParametersAreReadFromTheTargetString() {
+    public void willNotContainParametersWhenTheTargetDoesNotContainQuestionMark() {
+        assertThat(new MenuItemTarget("targetparam=value"), new TypeSafeBuildMatcher<MenuItemTarget>("Leste parametre fra MenuItemTarget") {
+            @Override
+            public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
+                return matchBuilder
+                        .matches(menuItemTarget.getTarget(), is(equalTo("targetparam=value")), "target uten ? skal tolkes som et rent mål")
+                        .matches(menuItemTarget.getParameters().isEmpty(), is(equalTo(true)), "ingen parametre");
+            }
+        });
+    }
+
+    @Test
+    public void willContainOneParameterWhenTheTargetContainsQuestionMarkNameEqualValue() {
         assertThat(new MenuItemTarget("target?param=value"), new TypeSafeBuildMatcher<MenuItemTarget>("Lest parameter fra MenuItemTarget") {
             @Override
             public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
-                matchBuilder.matches(menuItemTarget.getTarget(), is(equalTo("target")), "malnavn skal vere uten parameterstreng");
                 Set<Parameter> parameters = menuItemTarget.getParameters();
-
-                matchBuilder.failIfMismatch(parameters.size(), is(equalTo(1)), "parameter fra malstreng");
                 Parameter parameter = parameters.iterator().next();
 
                 return matchBuilder
+                        .matches(menuItemTarget.getTarget(), is(equalTo("target")), "malnavn skal vere uten parameterstreng")
                         .matches(parameter.getKey(), is(equalTo("param")), "parameter")
                         .matches(parameter.getValue(), is(equalTo("value")), "parameterverdi");
             }
@@ -88,18 +98,16 @@ public class MenuItemTargetTest {
     }
 
     @Test
-    public void whenInitializedSeveralParametersAreReadFromTheTargetString() {
+    public void willContainTwoParametersWhenTheTargetContainsTwoQuestionMarksWithNameEqualValueSeperatedByComma() {
         assertThat(new MenuItemTarget("target?param=value,another=parameter"), new TypeSafeBuildMatcher<MenuItemTarget>("Leste parametre fra MenuItemTarget") {
             @Override
             public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
-                matchBuilder.matches(menuItemTarget.getTarget(), is(equalTo("target")), "malnavn skal vere uten parameterstreng");
                 Set<Parameter> parameters = menuItemTarget.getParameters();
-
-                matchBuilder.failIfMismatch(parameters.size(), is(equalTo(2)), "parametre fra malstreng");
                 Parameter parameter = parameters.iterator().next();
                 Parameter annetParameter = parameters.iterator().next();
 
                 return matchBuilder
+                        .matches(menuItemTarget.getTarget(), is(equalTo("target")), "malnavn skal vere uten parameterstreng")
                         .matches(parameter.getKey(), is(anyOf(equalTo("param"), equalTo("another"))), "parameternavn")
                         .matches(parameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter"))), "parameterverdier")
                         .matches(annetParameter.getKey(), is(anyOf(equalTo("param"), equalTo("another"))), "parameternavn")
