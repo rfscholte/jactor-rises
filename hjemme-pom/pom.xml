@@ -201,9 +201,10 @@
         </plugins>
     </build>
 
+    <!-- External dependencies -->
     <properties>
-        <!-- External dependencies -->
         <commons.lang.version>2.6</commons.lang.version>
+        <javax.persistence-version>1.0.2</javax.persistence-version>
         <jsf.version>2.0</jsf.version>
         <junit.version>4.11</junit.version>
         <log4j.version>1.2.17</log4j.version>
