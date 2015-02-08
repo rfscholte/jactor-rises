@@ -25,9 +25,15 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home			
 export M2_HOME=/usr/lib/apache-maven-3.2.1										# var: hjemmeomrade til maven
 export PATH=$PATH:$M2_HOME/bin												# var: bin mappa til maven er en del av PATH
 export WS=$HOME/ws													# var: miljøvariabel for filsti til workspace
+setopt correctall													# opt: zsh-option som foreslar rettelser av kommandoer som har skriveleif
+setopt allexport													# opt: zsh option for a legge til historikk for kommandoer
+HISTFILE=~/.histfile													# opt: historikkfil i zsh
+HISTSIZE=1000														# opt: storrelse på historikkfil i zsh
+SAVEHIST=1000														# opt: antall kommandoer i historikkfil i zsh
+setopt appendhistory extendedglob allexport automenu promptsubst histsavenodups						# opt: zsh-options...
 
 # PROMT text i konsollvindu
-PROMPT=$'%B%* %w%b %{\e[32m%}%n@%m (#%h): %{\e[33m%}%3c%{\e[32m%}>%{\e[33m%}%{\e[0m%} '
+PROMPT=$'%B%* %w%b %{\e[32m%}%n@%m (#%h): %{\e[33m%}%3c%{\e[32m%}>%{\e[33m%}%{\e[0m%} '					# opt: promt text i konsollvindu
  
 # Alias, navigering
 alias apps='cd /Applications'												# navigasjon: /Applications
