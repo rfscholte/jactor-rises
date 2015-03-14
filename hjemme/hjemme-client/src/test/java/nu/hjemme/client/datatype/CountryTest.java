@@ -1,18 +1,17 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Locale;
 
+import static nu.hjemme.test.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static nu.hjemme.test.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class CountryTest {
@@ -41,11 +40,7 @@ public class CountryTest {
         Country equal = new Country("NO", "no");
         Country notEqual = new Country("SE", "se");
 
-        assertTrue(new HashCodeMatching(base)
-                        .hasImplementionForEquality(equal)
-                        .hasImplementationForUniqeness(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
@@ -54,11 +49,7 @@ public class CountryTest {
         Country equal = new Country("NO", "no");
         Country notEqual = new Country("SE", "se");
 
-        assertTrue(new EqualsMatching(base)
-                        .isEqualTo(equal)
-                        .isNotEqualTo(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
     @Test

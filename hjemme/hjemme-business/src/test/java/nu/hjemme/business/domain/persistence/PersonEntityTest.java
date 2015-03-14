@@ -1,11 +1,11 @@
 package nu.hjemme.business.domain.persistence;
 
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static nu.hjemme.test.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static nu.hjemme.test.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
 public class PersonEntityTest {
@@ -24,11 +24,7 @@ public class PersonEntityTest {
         notEqual.setLastName(new Name("some other last name"));
         notEqual.setAddress(new AddressEntity());
 
-        assertTrue(new HashCodeMatching(base)
-                        .hasImplementionForEquality(equal)
-                        .hasImplementationForUniqeness(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
@@ -45,10 +41,6 @@ public class PersonEntityTest {
         notEqual.setLastName(new Name("some other last name"));
         notEqual.setAddress(new AddressEntity());
 
-        assertTrue(new EqualsMatching(base)
-                        .isEqualTo(equal)
-                        .isNotEqualTo(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 }

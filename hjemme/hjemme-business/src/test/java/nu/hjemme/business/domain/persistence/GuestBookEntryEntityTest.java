@@ -1,18 +1,17 @@
 package nu.hjemme.business.domain.persistence;
 
 import nu.hjemme.business.time.NowAsPureDate;
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 
+import static nu.hjemme.test.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static nu.hjemme.test.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class GuestBookEntryEntityTest {
@@ -36,11 +35,7 @@ public class GuestBookEntryEntityTest {
         notEqual.setCreatorName("some other creator");
         notEqual.setGuestBookEntity(new GuestBookEntity());
 
-        assertTrue(new HashCodeMatching(base)
-                        .hasImplementionForEquality(equal)
-                        .hasImplementationForUniqeness(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
@@ -57,11 +52,7 @@ public class GuestBookEntryEntityTest {
         notEqual.setCreatorName("some other creator");
         notEqual.setGuestBookEntity(new GuestBookEntity());
 
-        assertTrue(new EqualsMatching(base)
-                        .isEqualTo(equal)
-                        .isNotEqualTo(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
     @Test

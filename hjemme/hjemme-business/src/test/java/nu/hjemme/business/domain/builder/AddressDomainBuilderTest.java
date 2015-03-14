@@ -8,8 +8,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static nu.hjemme.test.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
@@ -77,12 +77,12 @@ public class AddressDomainBuilderTest {
             @Override
             public MatchBuilder matches(AddressDomain addressDomain, MatchBuilder matchBuilder) {
                 return matchBuilder
-                        .matches(addressDomain.getAddressLine1(), is(equalTo("somewhere")), "Address line 1")
-                        .matches(addressDomain.getAddressLine2(), is(equalTo("somewhere else")), "Address line 2")
-                        .matches(addressDomain.getAddressLine3(), is(equalTo("way out there")), "Address line 3")
-                        .matches(addressDomain.getCity(), is(equalTo("some city")), "city")
-                        .matches(addressDomain.getCountry(), is(equalTo(new Country("NO", "no"))), "Country")
-                        .matches(addressDomain.getZipCode(), is(equalTo(1234)), "Zip code");
+                        .matches(addressDomain.getAddressLine1(), is(equalTo("somewhere"), "Address line 1"))
+                        .matches(addressDomain.getAddressLine2(), is(equalTo("somewhere else"), "Address line 2"))
+                        .matches(addressDomain.getAddressLine3(), is(equalTo("way out there"), "Address line 3"))
+                        .matches(addressDomain.getCity(), is(equalTo("some city"), "city"))
+                        .matches(addressDomain.getCountry(), is(equalTo(new Country("NO", "no")), "Country"))
+                        .matches(addressDomain.getZipCode(), is(equalTo(1234), "Zip code"));
             }
         });
     }

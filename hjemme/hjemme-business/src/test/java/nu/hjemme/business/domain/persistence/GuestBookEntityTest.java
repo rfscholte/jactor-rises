@@ -1,10 +1,10 @@
 package nu.hjemme.business.domain.persistence;
 
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static nu.hjemme.test.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static nu.hjemme.test.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
 public class GuestBookEntityTest {
@@ -21,11 +21,7 @@ public class GuestBookEntityTest {
         notEqual.setTitle("another title");
         notEqual.setUser(new UserEntity());
 
-        assertTrue(new HashCodeMatching(base)
-                        .hasImplementionForEquality(equal)
-                        .hasImplementationForUniqeness(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
@@ -40,10 +36,6 @@ public class GuestBookEntityTest {
         notEqual.setTitle("another title");
         notEqual.setUser(new UserEntity());
 
-        assertTrue(new EqualsMatching(base)
-                        .isEqualTo(equal)
-                        .isNotEqualTo(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 }

@@ -1,10 +1,10 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static nu.hjemme.test.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static nu.hjemme.test.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
 public class DescriptionTest {
@@ -15,11 +15,7 @@ public class DescriptionTest {
         Description equal = new Description("some item", "some description");
         Description notEqual = new Description("some other item", "some other description");
 
-        assertTrue(new HashCodeMatching(base)
-                        .hasImplementionForEquality(equal)
-                        .hasImplementationForUniqeness(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
@@ -28,10 +24,6 @@ public class DescriptionTest {
         Description equal = new Description("some item", "some description");
         Description notEqual = new Description("some other item", "some other description");
 
-        assertTrue(new EqualsMatching(base)
-                        .isEqualTo(equal)
-                        .isNotEqualTo(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 }

@@ -23,8 +23,8 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static nu.hjemme.test.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,7 +44,7 @@ public class MenuFacadeIntegrationTest {
     }
 
     @Test
-    public void whenFindingMenuItemsAndTheNameIsKnownAListOfMenuItemsWillBeReturned() {
+    public void whenFindingMenuItemsAndTheNameIsKnownTheListOfMenuItemsWillBeReturned() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("bullseye?some=where"), new Name("testMenu"));
 
         List<ChosenMenuItem> chosenMenuItems = testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
@@ -52,13 +52,13 @@ public class MenuFacadeIntegrationTest {
         assertThat(chosenMenuItems, new TypeSafeBuildMatcher<List<ChosenMenuItem>>("En liste med test menyvalg fra test context") {
             @Override
             public MatchBuilder matches(List<ChosenMenuItem> chosenMenuItems, MatchBuilder matchBuilder) {
-                matchBuilder.matches(chosenMenuItems.isEmpty(), is(equalTo(false)), "lista kan ikke være tom");
+                matchBuilder.matches(chosenMenuItems.isEmpty(), is(equalTo(false), "lista kan ikke være tom"));
 
                 for (ChosenMenuItem chosenMenuItem : chosenMenuItems) {
                     if (new Name("testParent").equals(chosenMenuItem.getDescription().getItemName())) {
-                        matchBuilder.matches(chosenMenuItem.isChildChosen(), is(equalTo(true)), "testParent sitt barn skal vaere valgt");
+                        matchBuilder.matches(chosenMenuItem.isChildChosen(), is(equalTo(true), "testParent sitt barn skal vaere valgt"));
                     } else {
-                        matchBuilder.matches(chosenMenuItem.isChosen(), is(equalTo(true)), "menyvalget skal være valgt");
+                        matchBuilder.matches(chosenMenuItem.isChosen(), is(equalTo(true), "menyvalget skal være valgt"));
                     }
                 }
 
