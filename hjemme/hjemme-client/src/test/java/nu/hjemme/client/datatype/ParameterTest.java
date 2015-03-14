@@ -1,15 +1,14 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.EqualsMatcher;
-import nu.hjemme.test.HashCodeMatcher;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.TypeSafeBuildMatcher;
 import org.junit.Test;
 
+import static nu.hjemme.test.DescriptionMatcher.is;
+import static nu.hjemme.test.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static nu.hjemme.test.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class ParameterTest {
@@ -20,11 +19,7 @@ public class ParameterTest {
         Parameter equal = new Parameter("param", "value");
         Parameter notEqual = new Parameter("another param", "value");
 
-        assertTrue(new HashCodeMatcher(base)
-                        .hasImplementionForEquality(equal)
-                        .hasImplementationForUniqeness(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
@@ -33,11 +28,7 @@ public class ParameterTest {
         Parameter equal = new Parameter("param", "value");
         Parameter notEqual = new Parameter("another param", "value");
 
-        assertTrue(new EqualsMatcher(base)
-                        .isEqualTo(equal)
-                        .isNotEqualTo(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
     @Test
@@ -53,8 +44,8 @@ public class ParameterTest {
             @Override
             public MatchBuilder matches(Parameter parameter, MatchBuilder matchBuilder) {
                 return matchBuilder
-                        .matches(parameter.getKey(), is(equalTo("some")), "key")
-                        .matches(parameter.getValue(), is(equalTo("where")), "value");
+                        .matches(parameter.getKey(), is(equalTo("some"), "key"))
+                        .matches(parameter.getValue(), is(equalTo("where"), "value"));
             }
         });
     }

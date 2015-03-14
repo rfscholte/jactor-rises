@@ -1,7 +1,5 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.EqualsMatcher;
-import nu.hjemme.test.HashCodeMatcher;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.TypeSafeBuildMatcher;
 import org.junit.Rule;
@@ -10,11 +8,12 @@ import org.junit.rules.ExpectedException;
 
 import java.util.Set;
 
+import static nu.hjemme.test.DescriptionMatcher.is;
+import static nu.hjemme.test.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static nu.hjemme.test.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /** @author Tor Egil Jacobsen */
 public class MenuItemTargetTest {
@@ -28,11 +27,7 @@ public class MenuItemTargetTest {
         MenuItemTarget equal = new MenuItemTarget("target");
         MenuItemTarget notEqual = new MenuItemTarget("another target");
 
-        assertTrue(new HashCodeMatcher(base)
-                        .hasImplementionForEquality(equal)
-                        .hasImplementationForUniqeness(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
@@ -41,16 +36,12 @@ public class MenuItemTargetTest {
         MenuItemTarget equal = new MenuItemTarget("target");
         MenuItemTarget notEqual = new MenuItemTarget("another target");
 
-        assertTrue(new EqualsMatcher(base)
-                        .isEqualTo(equal)
-                        .isNotEqualTo(notEqual)
-                        .isMatch()
-        );
+        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
     @Test
     public void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
-        assertThat("toString", new MenuItemTarget("hit?with=parameter").toString(), is(equalTo("hit?with=parameter")));
+        assertThat(new MenuItemTarget("hit?with=parameter").toString(), is(equalTo("hit?with=parameter"), "toString"));
     }
 
     @Test
@@ -75,8 +66,8 @@ public class MenuItemTargetTest {
             @Override
             public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
                 return matchBuilder
-                        .matches(menuItemTarget.getTarget(), is(equalTo("targetparam=value")), "target uten ? skal tolkes som et rent mål")
-                        .matches(menuItemTarget.getParameters().isEmpty(), is(equalTo(true)), "ingen parametre");
+                        .matches(menuItemTarget.getTarget(), is(equalTo("targetparam=value"), "target uten ? skal tolkes som et rent mål"))
+                        .matches(menuItemTarget.getParameters().isEmpty(), is(equalTo(true), "ingen parametre"));
             }
         });
     }
@@ -90,9 +81,9 @@ public class MenuItemTargetTest {
                 Parameter parameter = parameters.iterator().next();
 
                 return matchBuilder
-                        .matches(menuItemTarget.getTarget(), is(equalTo("target")), "malnavn skal vere uten parameterstreng")
-                        .matches(parameter.getKey(), is(equalTo("param")), "parameter")
-                        .matches(parameter.getValue(), is(equalTo("value")), "parameterverdi");
+                        .matches(menuItemTarget.getTarget(), is(equalTo("target"), "malnavn skal vere uten parameterstreng"))
+                        .matches(parameter.getKey(), is(equalTo("param"), "parameter"))
+                        .matches(parameter.getValue(), is(equalTo("value"), "parameterverdi"));
             }
         });
     }
@@ -107,11 +98,11 @@ public class MenuItemTargetTest {
                 Parameter annetParameter = parameters.iterator().next();
 
                 return matchBuilder
-                        .matches(menuItemTarget.getTarget(), is(equalTo("target")), "malnavn skal vere uten parameterstreng")
-                        .matches(parameter.getKey(), is(anyOf(equalTo("param"), equalTo("another"))), "parameternavn")
-                        .matches(parameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter"))), "parameterverdier")
-                        .matches(annetParameter.getKey(), is(anyOf(equalTo("param"), equalTo("another"))), "parameternavn")
-                        .matches(annetParameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter"))), "parameterverdier");
+                        .matches(menuItemTarget.getTarget(), is(equalTo("target"), "malnavn skal vere uten parameterstreng"))
+                        .matches(parameter.getKey(), is(anyOf(equalTo("param"), equalTo("another")), "parameternavn"))
+                        .matches(parameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter")), "parameterverdier"))
+                        .matches(annetParameter.getKey(), is(anyOf(equalTo("param"), equalTo("another")), "parameternavn"))
+                        .matches(annetParameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter")), "parameterverdier"));
             }
         });
     }
