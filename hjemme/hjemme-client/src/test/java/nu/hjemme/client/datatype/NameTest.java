@@ -1,7 +1,7 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
+import nu.hjemme.test.EqualsMatcher;
+import nu.hjemme.test.HashCodeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -23,7 +23,7 @@ public class NameTest {
         Name equal = new Name("name");
         Name notEqual = new Name("another name");
 
-        assertTrue(new HashCodeMatching(base)
+        assertTrue(new HashCodeMatcher(base)
                         .hasImplementionForEquality(equal)
                         .hasImplementationForUniqeness(notEqual)
                         .isMatch()
@@ -36,7 +36,7 @@ public class NameTest {
         Name equal = new Name("name");
         Name notEqual = new Name("another name");
 
-        assertTrue(new EqualsMatching(base)
+        assertTrue(new EqualsMatcher(base)
                         .isEqualTo(equal)
                         .isNotEqualTo(notEqual)
                         .isMatch()

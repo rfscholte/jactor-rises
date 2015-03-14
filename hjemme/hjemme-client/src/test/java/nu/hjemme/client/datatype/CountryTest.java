@@ -1,7 +1,7 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
+import nu.hjemme.test.EqualsMatcher;
+import nu.hjemme.test.HashCodeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -41,7 +41,7 @@ public class CountryTest {
         Country equal = new Country("NO", "no");
         Country notEqual = new Country("SE", "se");
 
-        assertTrue(new HashCodeMatching(base)
+        assertTrue(new HashCodeMatcher(base)
                         .hasImplementionForEquality(equal)
                         .hasImplementationForUniqeness(notEqual)
                         .isMatch()
@@ -54,7 +54,7 @@ public class CountryTest {
         Country equal = new Country("NO", "no");
         Country notEqual = new Country("SE", "se");
 
-        assertTrue(new EqualsMatching(base)
+        assertTrue(new EqualsMatcher(base)
                         .isEqualTo(equal)
                         .isNotEqualTo(notEqual)
                         .isMatch()

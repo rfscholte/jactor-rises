@@ -2,8 +2,8 @@ package nu.hjemme.business.domain.menu;
 
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.domain.menu.MenuItem;
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
+import nu.hjemme.test.EqualsMatcher;
+import nu.hjemme.test.HashCodeMatcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -43,7 +43,7 @@ public class MenuItemImplTest {
         MenuItemImpl equal = new MenuItemImpl(mockedMenuItem);
         MenuItemImpl unequal = new MenuItemImpl(mockedUnequal);
 
-        assertTrue(new HashCodeMatching(base)
+        assertTrue(new HashCodeMatcher(base)
                         .hasImplementionForEquality(equal)
                         .hasImplementationForUniqeness(unequal)
                         .isMatch()
@@ -69,7 +69,7 @@ public class MenuItemImplTest {
         MenuItemImpl equal = new MenuItemImpl(mockedMenuItem);
         MenuItemImpl unequal = new MenuItemImpl(mockedUnequal);
 
-        assertTrue(new EqualsMatching(base)
+        assertTrue(new EqualsMatcher(base)
                         .isEqualTo(equal)
                         .isNotEqualTo(unequal)
                         .isMatch()

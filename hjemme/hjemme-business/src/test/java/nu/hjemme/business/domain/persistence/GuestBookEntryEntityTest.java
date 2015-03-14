@@ -1,8 +1,8 @@
 package nu.hjemme.business.domain.persistence;
 
 import nu.hjemme.business.time.NowAsPureDate;
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
+import nu.hjemme.test.EqualsMatcher;
+import nu.hjemme.test.HashCodeMatcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class GuestBookEntryEntityTest {
         notEqual.setCreatorName("some other creator");
         notEqual.setGuestBookEntity(new GuestBookEntity());
 
-        assertTrue(new HashCodeMatching(base)
+        assertTrue(new HashCodeMatcher(base)
                         .hasImplementionForEquality(equal)
                         .hasImplementationForUniqeness(notEqual)
                         .isMatch()
@@ -57,7 +57,7 @@ public class GuestBookEntryEntityTest {
         notEqual.setCreatorName("some other creator");
         notEqual.setGuestBookEntity(new GuestBookEntity());
 
-        assertTrue(new EqualsMatching(base)
+        assertTrue(new EqualsMatcher(base)
                         .isEqualTo(equal)
                         .isNotEqualTo(notEqual)
                         .isMatch()

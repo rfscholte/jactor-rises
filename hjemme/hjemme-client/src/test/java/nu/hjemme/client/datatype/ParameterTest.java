@@ -1,7 +1,7 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
+import nu.hjemme.test.EqualsMatcher;
+import nu.hjemme.test.HashCodeMatcher;
 import nu.hjemme.test.MatchBuilder;
 import nu.hjemme.test.TypeSafeBuildMatcher;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class ParameterTest {
         Parameter equal = new Parameter("param", "value");
         Parameter notEqual = new Parameter("another param", "value");
 
-        assertTrue(new HashCodeMatching(base)
+        assertTrue(new HashCodeMatcher(base)
                         .hasImplementionForEquality(equal)
                         .hasImplementationForUniqeness(notEqual)
                         .isMatch()
@@ -33,7 +33,7 @@ public class ParameterTest {
         Parameter equal = new Parameter("param", "value");
         Parameter notEqual = new Parameter("another param", "value");
 
-        assertTrue(new EqualsMatching(base)
+        assertTrue(new EqualsMatcher(base)
                         .isEqualTo(equal)
                         .isNotEqualTo(notEqual)
                         .isMatch()

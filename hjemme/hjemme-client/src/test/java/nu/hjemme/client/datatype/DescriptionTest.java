@@ -1,7 +1,7 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
+import nu.hjemme.test.EqualsMatcher;
+import nu.hjemme.test.HashCodeMatcher;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -15,7 +15,7 @@ public class DescriptionTest {
         Description equal = new Description("some item", "some description");
         Description notEqual = new Description("some other item", "some other description");
 
-        assertTrue(new HashCodeMatching(base)
+        assertTrue(new HashCodeMatcher(base)
                         .hasImplementionForEquality(equal)
                         .hasImplementationForUniqeness(notEqual)
                         .isMatch()
@@ -28,7 +28,7 @@ public class DescriptionTest {
         Description equal = new Description("some item", "some description");
         Description notEqual = new Description("some other item", "some other description");
 
-        assertTrue(new EqualsMatching(base)
+        assertTrue(new EqualsMatcher(base)
                         .isEqualTo(equal)
                         .isNotEqualTo(notEqual)
                         .isMatch()

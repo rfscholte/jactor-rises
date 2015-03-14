@@ -1,8 +1,8 @@
 package nu.hjemme.business.domain.persistence;
 
 import nu.hjemme.client.datatype.Country;
-import nu.hjemme.test.EqualsMatching;
-import nu.hjemme.test.HashCodeMatching;
+import nu.hjemme.test.EqualsMatcher;
+import nu.hjemme.test.HashCodeMatcher;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -36,7 +36,7 @@ public class AddressEntityTest {
         notEqual.setAddressLine2("some place");
         notEqual.setAddressLine3("in the distance");
 
-        assertTrue(new HashCodeMatching(base)
+        assertTrue(new HashCodeMatcher(base)
                         .hasImplementionForEquality(equal)
                         .hasImplementationForUniqeness(notEqual)
                         .isMatch()
@@ -63,7 +63,7 @@ public class AddressEntityTest {
         notEqual.setAddressLine2("some place");
         notEqual.setAddressLine3("in the distance");
 
-        assertTrue(new EqualsMatching(base)
+        assertTrue(new EqualsMatcher(base)
                         .isEqualTo(equal)
                         .isNotEqualTo(notEqual)
                         .isMatch()

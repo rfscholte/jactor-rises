@@ -1,6 +1,6 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.EqualsMatching;
+import nu.hjemme.test.EqualsMatcher;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -42,7 +42,7 @@ public class UserNameTest {
         UserName equal = new UserName("SOMEONE");
         UserName notEqual = new UserName("SOMEONE else");
 
-        assertTrue(new EqualsMatching(base)
+        assertTrue(new EqualsMatcher(base)
                         .isEqualTo(equal)
                         .isNotEqualTo(notEqual)
                         .isMatch()
