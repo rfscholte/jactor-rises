@@ -38,7 +38,7 @@ public class DomainBuilderTest {
         });
     }
 
-    private static class TestDomainBuilder extends DomainBuilder<DomainBuilderTest> {
+    private class TestDomainBuilder extends DomainBuilder<DomainBuilderTest> {
         boolean validated;
 
         @Override

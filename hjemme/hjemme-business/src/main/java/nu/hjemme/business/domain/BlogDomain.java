@@ -1,9 +1,9 @@
 package nu.hjemme.business.domain;
 
 import nu.hjemme.business.domain.base.PersistentDomain;
-import nu.hjemme.business.domain.persistence.BlogEntity;
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.client.domain.User;
+import nu.hjemme.persistence.BlogEntity;
 
 import java.time.LocalDateTime;
 

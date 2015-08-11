@@ -1,9 +1,9 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.GuestBookEntryDomain;
-import nu.hjemme.business.domain.persistence.GuestBookEntity;
-import nu.hjemme.business.domain.persistence.PersonEntity;
 import nu.hjemme.client.datatype.Name;
+import nu.hjemme.persistence.GuestBookEntity;
+import nu.hjemme.persistence.PersonEntity;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

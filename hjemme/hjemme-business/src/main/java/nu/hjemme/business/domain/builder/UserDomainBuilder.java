@@ -2,9 +2,9 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.UserDomain;
 import nu.hjemme.business.domain.base.DomainBuilder;
-import nu.hjemme.business.domain.persistence.ProfileEntity;
-import nu.hjemme.business.domain.persistence.UserEntity;
 import nu.hjemme.client.datatype.UserName;
+import nu.hjemme.persistence.ProfileEntity;
+import nu.hjemme.persistence.UserEntity;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */

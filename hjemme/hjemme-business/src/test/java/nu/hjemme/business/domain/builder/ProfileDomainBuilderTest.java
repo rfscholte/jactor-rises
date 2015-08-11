@@ -1,8 +1,8 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.ProfileDomain;
-import nu.hjemme.business.domain.persistence.AddressEntity;
 import nu.hjemme.client.datatype.Name;
+import nu.hjemme.persistence.AddressEntity;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

@@ -1,9 +1,9 @@
 package nu.hjemme.business.domain;
 
 import nu.hjemme.business.domain.base.PersistentDomain;
-import nu.hjemme.business.domain.persistence.UserEntity;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.Profile;
+import nu.hjemme.persistence.UserEntity;
 
 /** @author Tor Egil Jacobsen */
 public class UserDomain extends PersistentDomain<UserEntity> implements nu.hjemme.client.domain.User {

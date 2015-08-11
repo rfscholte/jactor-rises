@@ -1,11 +1,11 @@
 package nu.hjemme.business.domain;
 
 import nu.hjemme.business.domain.base.PersistentDomain;
-import nu.hjemme.business.domain.persistence.BlogEntryEntity;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.client.domain.BlogEntry;
 import nu.hjemme.client.domain.Person;
+import nu.hjemme.persistence.BlogEntryEntity;
 
 import java.time.LocalDateTime;
 

@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain;
 
 import nu.hjemme.business.domain.base.PersistentDomain;
-import nu.hjemme.business.domain.persistence.AddressEntity;
+import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
 

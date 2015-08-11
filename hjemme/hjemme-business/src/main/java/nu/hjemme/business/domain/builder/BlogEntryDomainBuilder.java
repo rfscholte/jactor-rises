@@ -2,10 +2,10 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.BlogEntryDomain;
 import nu.hjemme.business.domain.base.DomainBuilder;
-import nu.hjemme.business.domain.persistence.BlogEntity;
-import nu.hjemme.business.domain.persistence.BlogEntryEntity;
-import nu.hjemme.business.domain.persistence.PersonEntity;
 import nu.hjemme.client.datatype.Name;
+import nu.hjemme.persistence.BlogEntity;
+import nu.hjemme.persistence.BlogEntryEntity;
+import nu.hjemme.persistence.PersonEntity;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
