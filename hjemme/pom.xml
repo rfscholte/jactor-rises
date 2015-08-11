@@ -19,14 +19,14 @@
 
     <modules>
         <module>hjemme-client</module>
-        <module>hjemme-facade</module>
         <module>hjemme-business</module>
+        <module>hjemme-facade</module>
+        <module>hjemme-persistence</module>
         <module>hjemme-test</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
-
             <!-- www.hjemme.nu -->
 
             <dependency>
@@ -36,12 +36,17 @@
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
-                <artifactId>hjemme-facade</artifactId>
+                <artifactId>hjemme-business</artifactId>
                 <version>${hjemme-version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
-                <artifactId>hjemme-business</artifactId>
+                <artifactId>hjemme-persistence</artifactId>
+                <version>${hjemme-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-facade</artifactId>
                 <version>${hjemme-version}</version>
             </dependency>
             <dependency>
@@ -49,6 +54,8 @@
                 <artifactId>hjemme-test</artifactId>
                 <version>${hjemme-version}</version>
             </dependency>
+
+            <!-- third party -->
             <dependency>
                 <groupId>javax.persistence</groupId>
                 <artifactId>persistence-api</artifactId>

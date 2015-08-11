@@ -17,7 +17,7 @@ function filelog() {													# fun: (git) lister ut commits fra tidspunkt so
 }															# fun: (git)
 															# fun:
 precmd () {														# fun: genererer tittel pa konsollvindu (kjores for hver kommando)
-        print -Pn "\033]0;$(git rev-parse --abbrev-ref HEAD 2> /dev/null)\007"						# fun:
+        print -Pn "\033]0;On\ branch:\ $(git rev-parse --abbrev-ref HEAD 2> /dev/null)\007"						# fun:
 }															# fun:
 															# fun:
 # System variables
@@ -36,9 +36,9 @@ setopt appendhistory extendedglob allexport automenu promptsubst histsavenodups	
 PROMPT=$'%B%* %w%b %{\e[32m%}%n@%m (#%h): %{\e[33m%}%3c%{\e[32m%}>%{\e[33m%}%{\e[0m%} '					# opt: promt text i konsollvindu
 
 # Alias, git
-alias stat='git status'												# cmd: sjekk status til lokalt git repo
-alias bran='git branch'												# cmd: vis lokale feature brancher til git repo
-alias co='git checkout'												# cmd: chekcout featurebranch (fra git server hvis --track origin -b er med, eller switch til lokal branch)
+alias stat='git status'													# cmd: sjekk status til lokalt git repo
+alias bra='git branch'													# cmd: vis lokale feature brancher til git repo
+alias co='git checkout'													# cmd: chekcout featurebranch (fra git server hvis --track origin -b er med, eller switch til lokal branch)
 alias fet='git fetch -p'												# cmd: fetch med prune fra git server
 alias log="git log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(magenta bold)%d%Creset %s %Cgreen(%cr) %C(blue bold)<%an>%Creset' --abbrev-commit"			# cmd: logger commits i git med hash og farger ++
 alias merge='git merge'													# cmd: merge branch med git
@@ -52,6 +52,7 @@ alias hbu='cd $WS/hjemme/hjemme/hjemme-business'									# navigasjon: hjemme-bu
 alias hcl='cd $WS/hjemme/hjemme/hjemme-client'										# navigasjon: hjemme-client
 alias hfa='cd $WS/hjemme/hjemme/hjemme-facade'										# navigasjon: hjemme-facade
 alias hje='cd $WS/hjemme/hjemme'											# navigasjon: hjemme
+alias hpe='cd $WS/hjemme/hjemme/hjemme-persistence'									# navigasjon: hjemme-persistence (database)
 alias hwe='cd $WS/hjemme/hjemme-web/'											# navigasjon: hjemme-web<
 alias hwj='cd $WS/hjemme/hjemme-web-jsf/'										# navigasjon: hjemme-web-jsf
 alias hpo='cd $WS/hjemme/hjemme-pom'											# navigasjon: hjemme-pom
@@ -88,7 +89,6 @@ alias env.grep='env | grep -i'												# cmd: case insensitive grepping av mi
 alias find.txt='find . -name "*.txt" | xargs grep --color'								# cmd: soker etter tekststreng i txt filer
 alias find.java='find . -name "*.java" | xargs grep --color'								# cmd: soker etter tekststreng i java filer
 alias fun='more $HOME/.zshrc | grep -v fun= | grep "# fun:"'								# cmd: list alle funksjonser (de som har kommentarene 'fun:') i .zshrc
-alias glog="git log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(magenta bold)%d%Creset %s %Cgreen(%cr) %C(blue bold)<%an>%Creset' --abbrev-commit"		# cmd: logger commits i git med hash og farger ++
 alias grep.cmd='grep -e "# cmd:" -e "# var:" -e "# opt:"'								# cmd: grep etter alias som er kommandoer og variabler i .zshrc
 alias grep='grep --color'												# cmd: filtrer ord (og farglegg treff)
 alias grep.no.down='grep -v -i \"Download'										# cmd: grep alt utenom "Downloading" og "downloaded"

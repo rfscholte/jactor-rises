@@ -5,5 +5,5 @@ package nu.hjemme.client.domain.base;
  * @author Tor Egil Jacobsen
  */
 public interface Persistent {
-    public Long getId();
+    Long getId();
 }
