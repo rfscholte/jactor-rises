@@ -1,11 +1,11 @@
 package nu.hjemme.business.domain.base;
 
-import nu.hjemme.test.MatchBuilder;
-import nu.hjemme.test.TypeSafeBuildMatcher;
+import nu.hjemme.test.matcher.MatchBuilder;
+import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Before;
 import org.junit.Test;
 
-import static nu.hjemme.test.DescriptionMatcher.is;
+import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;

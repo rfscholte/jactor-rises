@@ -4,15 +4,15 @@ import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.ChosenMenuItem;
-import nu.hjemme.test.MatchBuilder;
-import nu.hjemme.test.TypeSafeBuildMatcher;
+import nu.hjemme.test.matcher.MatchBuilder;
+import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static nu.hjemme.test.DescriptionMatcher.is;
+import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;

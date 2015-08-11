@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 
-import static nu.hjemme.test.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static nu.hjemme.test.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

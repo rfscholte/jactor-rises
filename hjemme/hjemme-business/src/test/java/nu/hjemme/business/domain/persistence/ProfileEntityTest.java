@@ -2,8 +2,8 @@ package nu.hjemme.business.domain.persistence;
 
 import org.junit.Test;
 
-import static nu.hjemme.test.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static nu.hjemme.test.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */

@@ -6,8 +6,8 @@ import org.junit.rules.ExpectedException;
 
 import java.util.Locale;
 
-import static nu.hjemme.test.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static nu.hjemme.test.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;

@@ -1,16 +1,16 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.MatchBuilder;
-import nu.hjemme.test.TypeSafeBuildMatcher;
+import nu.hjemme.test.matcher.MatchBuilder;
+import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Set;
 
-import static nu.hjemme.test.DescriptionMatcher.is;
-import static nu.hjemme.test.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static nu.hjemme.test.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static nu.hjemme.test.matcher.DescriptionMatcher.is;
+import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;

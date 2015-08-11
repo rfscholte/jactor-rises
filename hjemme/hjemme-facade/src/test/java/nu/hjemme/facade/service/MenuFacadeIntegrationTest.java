@@ -8,8 +8,8 @@ import nu.hjemme.client.domain.menu.dto.MenuDto;
 import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeAppContext;
-import nu.hjemme.test.MatchBuilder;
-import nu.hjemme.test.TypeSafeBuildMatcher;
+import nu.hjemme.test.matcher.MatchBuilder;
+import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -23,7 +23,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static nu.hjemme.test.DescriptionMatcher.is;
+import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
