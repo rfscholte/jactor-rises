@@ -36,18 +36,17 @@ setopt appendhistory extendedglob allexport automenu promptsubst histsavenodups	
 PROMPT=$'%B%* %w%b %{\e[32m%}%n@%m (#%h): %{\e[33m%}%3c%{\e[32m%}>%{\e[33m%}%{\e[0m%} '					# opt: promt text i konsollvindu
 
 # Alias, git
-alias branch='git branch'												# cmd: vis lokale feature brancher til git repo
-alias checkout='git checkout'												# cmd: chekcout featurebranch (fra git server hvis --track origin -b er med, eller switch til lokal branch)
-alias fetch='git fetch -p'												# cmd: fetch med prune fra git server
+alias stat='git status'												# cmd: sjekk status til lokalt git repo
+alias bran='git branch'												# cmd: vis lokale feature brancher til git repo
+alias co='git checkout'												# cmd: chekcout featurebranch (fra git server hvis --track origin -b er med, eller switch til lokal branch)
+alias fet='git fetch -p'												# cmd: fetch med prune fra git server
 alias log="git log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(magenta bold)%d%Creset %s %Cgreen(%cr) %C(blue bold)<%an>%Creset' --abbrev-commit"			# cmd: logger commits i git med hash og farger ++
 alias merge='git merge'													# cmd: merge branch med git
 alias pull='git pull --rebase -p'											# cmd: pull med rebase og prune fra git repo
 alias push='git push'													# cmd: push committer til git server
-alias status='git status'												# cmd: sjekk status til lokalt git repo
 
 # Alias, navigering
 alias apps='cd /Applications'												# navigasjon: /Applications
-alias cd..='..'														# navigasjon: navigering ned ei mappe og list ut innholdet av denne mappa
 alias ..='cd .. && la'													# navigasjon: navigering ned ei mappe og list ut innholdet av denne mappa
 alias hbu='cd $WS/hjemme/hjemme/hjemme-business'									# navigasjon: hjemme-business
 alias hcl='cd $WS/hjemme/hjemme/hjemme-client'										# navigasjon: hjemme-client
