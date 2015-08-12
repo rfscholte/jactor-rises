@@ -39,19 +39,19 @@ public class ChosenMenuItemCacheTest {
 
     @Test
     public void skalIkkeHaMenuTargetCachetPaInstansSomIkkeInneholderCache() {
-        assertThat(testChosenMenuItemCache.harCacheAv(etStedPaHovedmenyen), is(equalTo(false), "chosen item cached"));
+        assertThat(testChosenMenuItemCache.isCached(etStedPaHovedmenyen), is(equalTo(false), "chosen item cached"));
     }
 
     @Test
     public void skalIkkeHaMenuTargetCacheNarEtAnnetMenuTargetErCachet() {
         testChosenMenuItemCache.cache(etStedPaHovedmenyen, new ArrayList<>());
-        assertThat(testChosenMenuItemCache.harCacheAv(etAnnetStedPaHovedmenyen), is(equalTo(false), "not chosen menu cached"));
+        assertThat(testChosenMenuItemCache.isCached(etAnnetStedPaHovedmenyen), is(equalTo(false), "not chosen menu cached"));
     }
 
     @Test
     public void skalHaMenuTargetCachetNarNarMenuTargetSomBesOmErLiktCache() {
         testChosenMenuItemCache.cache(etStedPaHovedmenyen, new ArrayList<>());
-        assertThat(testChosenMenuItemCache.harCacheAv(etStedPaHovedmenyen), is(equalTo(true), "chosen from menu"));
+        assertThat(testChosenMenuItemCache.isCached(etStedPaHovedmenyen), is(equalTo(true), "chosen from menu"));
     }
 
     @Test
@@ -66,8 +66,8 @@ public class ChosenMenuItemCacheTest {
                 testChosenMenuItemCache.cache(etAnnetStedPaHovedmenyen, eiAnnenListeAvChosenMenuItems);
 
                 return matchBuilder
-                        .matches(chosenMenuItemCache.hentFor(etStedPaHovedmenyen), is(equalTo(eiListeAvChosenMenuItems), "cache av " + etStedPaHovedmenyen))
-                        .matches(chosenMenuItemCache.hentFor(etAnnetStedPaHovedmenyen), is(equalTo(eiAnnenListeAvChosenMenuItems), "cache av " + etAnnetStedPaHovedmenyen));
+                        .matches(chosenMenuItemCache.retrieveBy(etStedPaHovedmenyen), is(equalTo(eiListeAvChosenMenuItems), "cache av " + etStedPaHovedmenyen))
+                        .matches(chosenMenuItemCache.retrieveBy(etAnnetStedPaHovedmenyen), is(equalTo(eiAnnenListeAvChosenMenuItems), "cache av " + etAnnetStedPaHovedmenyen));
 
             }
         });

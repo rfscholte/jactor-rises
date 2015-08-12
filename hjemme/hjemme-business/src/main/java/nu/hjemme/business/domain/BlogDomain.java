@@ -1,6 +1,5 @@
 package nu.hjemme.business.domain;
 
-import nu.hjemme.business.domain.base.PersistentDomain;
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.BlogEntity;

@@ -1,7 +1,6 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.ProfileDomain;
-import nu.hjemme.business.domain.base.DomainBuilder;
 import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.ProfileEntity;
 import org.apache.commons.lang.Validate;

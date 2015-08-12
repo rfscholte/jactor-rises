@@ -49,7 +49,7 @@ public class ChosenMenuItemAspectIntegrationTest {
 
     @Test
     public void skalSjekkeAtMenyBlirCachet() {
-        when(mockedChosenMenuItemCache.harCacheAv(any(MenuTarget.class))).thenReturn(false).thenReturn(true);
+        when(mockedChosenMenuItemCache.isCached(any(MenuTarget.class))).thenReturn(false).thenReturn(true);
         MenuTarget somewhereOnMyMenu = new MenuTarget(new MenuItemTarget("somewhere"), new Name("my.menu"));
 
         menuFacade.retrieveChosenMenuItemBy(somewhereOnMyMenu);
@@ -57,7 +57,7 @@ public class ChosenMenuItemAspectIntegrationTest {
         menuFacade.retrieveChosenMenuItemBy(somewhereOnMyMenu);
 
         verify(mockedChosenMenuItemCache).cache(eq(somewhereOnMyMenu), anyListOf(ChosenMenuItem.class));
-        verify(mockedChosenMenuItemCache, times(2)).hentFor(somewhereOnMyMenu);
+        verify(mockedChosenMenuItemCache, times(2)).retrieveBy(somewhereOnMyMenu);
     }
 
     @Configuration

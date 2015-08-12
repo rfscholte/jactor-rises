@@ -30,8 +30,8 @@ public class ChosenMenuItemAspect {
         MenuTarget menuTarget = (MenuTarget) proceedingJoinPoint.getArgs()[0];
         Object listeMedChosenMenuItems;
 
-        if (chosenMenuItemCache.harCacheAv(menuTarget)) {
-            listeMedChosenMenuItems = chosenMenuItemCache.hentFor(menuTarget);
+        if (chosenMenuItemCache.isCached(menuTarget)) {
+            listeMedChosenMenuItems = chosenMenuItemCache.retrieveBy(menuTarget);
         } else {
             listeMedChosenMenuItems = proceedingJoinPoint.proceed();
             chosenMenuItemCache.cache(menuTarget, (java.util.List<nu.hjemme.client.domain.menu.ChosenMenuItem>) listeMedChosenMenuItems);

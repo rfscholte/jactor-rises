@@ -73,12 +73,14 @@ public class MenuItemImpl implements MenuItem {
 
         MenuItemImpl other = (MenuItemImpl) o;
 
-        return Objects.equals(getChildren(), other.getChildren()) && Objects.equals(getDescription(), other.getDescription()) && Objects.equals(getMenuItemTarget(), other.getMenuItemTarget());
+        return Objects.equals(getChildren(), other.getChildren()) &&
+                Objects.equals(getDescription(), other.getDescription()) &&
+                Objects.equals(getMenuItemTarget(), other.getMenuItemTarget());
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.NO_FIELD_NAMES_STYLE)
                 .append(getDescription())
                 .append(getChildren())
                 .append(getMenuItemTarget())
@@ -87,7 +89,7 @@ public class MenuItemImpl implements MenuItem {
 
     /** {@inheritDoc */
     @Override
-    public List<? extends nu.hjemme.client.domain.menu.MenuItem> getChildren() {
+    public List<? extends MenuItem> getChildren() {
         return children;
     }
 

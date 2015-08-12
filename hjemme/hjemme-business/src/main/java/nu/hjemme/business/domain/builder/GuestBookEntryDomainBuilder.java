@@ -1,7 +1,6 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.GuestBookEntryDomain;
-import nu.hjemme.business.domain.base.DomainBuilder;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.persistence.GuestBookEntity;
 import nu.hjemme.persistence.GuestBookEntryEntity;

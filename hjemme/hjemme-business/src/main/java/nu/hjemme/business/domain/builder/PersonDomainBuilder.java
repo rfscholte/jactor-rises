@@ -1,7 +1,6 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.PersonDomain;
-import nu.hjemme.business.domain.base.DomainBuilder;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.PersonEntity;

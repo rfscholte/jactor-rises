@@ -1,4 +1,4 @@
-package nu.hjemme.business.domain.base;
+package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;

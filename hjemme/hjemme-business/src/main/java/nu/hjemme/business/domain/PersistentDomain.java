@@ -1,4 +1,4 @@
-package nu.hjemme.business.domain.base;
+package nu.hjemme.business.domain;
 
 import nu.hjemme.client.domain.base.Persistent;
 import org.apache.commons.lang.Validate;

@@ -1,4 +1,4 @@
-package nu.hjemme.business.domain.base;
+package nu.hjemme.business.domain.builder;
 
 /** The base builder from which to build valid domains. */
 public abstract class DomainBuilder<Domain> {

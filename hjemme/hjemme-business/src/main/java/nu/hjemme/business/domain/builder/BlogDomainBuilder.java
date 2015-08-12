@@ -1,7 +1,6 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.BlogDomain;
-import nu.hjemme.business.domain.base.DomainBuilder;
 import nu.hjemme.persistence.BlogEntity;
 import nu.hjemme.persistence.UserEntity;
 import org.apache.commons.lang.Validate;

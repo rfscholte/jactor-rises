@@ -19,7 +19,7 @@ public class ChosenMenuItemCache {
         chosenMenuItemCache = new HashMap<>();
     }
 
-    public boolean harCacheAv(MenuTarget menuTarget) {
+    public boolean isCached(MenuTarget menuTarget) {
         return chosenMenuItemCache.containsKey(menuTarget);
     }
 
@@ -27,7 +27,7 @@ public class ChosenMenuItemCache {
         chosenMenuItemCache.put(menuItemTarget, listeAvChosenMenuItem);
     }
 
-    public List<ChosenMenuItem> hentFor(MenuTarget menuItemTarget) {
+    public List<ChosenMenuItem> retrieveBy(MenuTarget menuItemTarget) {
         return chosenMenuItemCache.get(menuItemTarget);
     }
 }
