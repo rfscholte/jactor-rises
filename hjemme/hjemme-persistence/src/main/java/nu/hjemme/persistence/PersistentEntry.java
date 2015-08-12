@@ -12,7 +12,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public abstract class PersistentEntry extends PersistentEntity implements Entry {
+public abstract class PersistentEntry extends PersistentEntity<Long> implements Entry {
 
     private LocalDateTime creationTime;
     private Name createdName;

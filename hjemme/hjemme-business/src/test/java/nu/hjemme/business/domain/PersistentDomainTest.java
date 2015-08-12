@@ -18,12 +18,12 @@ public class PersistentDomainTest {
         new TestPersistentDomain();
     }
 
-    private class TestPersistentDomain extends PersistentDomain<TestPersistentEntity> {
+    private class TestPersistentDomain extends PersistentDomain<TestPersistentEntity, Long> {
         private TestPersistentDomain() {
             super(null);
         }
     }
 
-    private class TestPersistentEntity extends PersistentEntity {
+    private class TestPersistentEntity extends PersistentEntity<Long> {
     }
 }

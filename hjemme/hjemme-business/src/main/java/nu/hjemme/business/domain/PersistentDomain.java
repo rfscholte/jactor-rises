@@ -1,10 +1,10 @@
 package nu.hjemme.business.domain;
 
-import nu.hjemme.client.domain.base.Persistent;
+import nu.hjemme.client.domain.Persistent;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
-public abstract class PersistentDomain<Entity extends Persistent> implements Persistent {
+public abstract class PersistentDomain<Entity extends Persistent<T>, T> implements Persistent<T> {
     static final String ENTITETEN_PÅ_DOMENEOBJEKTET_KAN_IKKE_VAERE_NULL = "Entiteten på domeneobjektet kan ikke være null!";
 
     private final Entity entity;
@@ -19,7 +19,7 @@ public abstract class PersistentDomain<Entity extends Persistent> implements Per
     }
 
     @Override
-    public Long getId() {
+    public T getId() {
         return entity.getId();
     }
 }

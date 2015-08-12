@@ -14,7 +14,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntity extends PersistentEntity implements GuestBook {
+public class GuestBookEntity extends PersistentEntity<Long> implements GuestBook {
 
     @Id
     @Column(name = GuestBookMetadata.GUEST_BOOK_ID)

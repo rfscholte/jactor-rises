@@ -1,9 +1,7 @@
 package nu.hjemme.client.domain;
 
-import nu.hjemme.client.domain.base.Persistent;
-
 /** @author Tor Egil Jacobsen */
-public interface GuestBook extends Persistent {
+public interface GuestBook extends Persistent<Long> {
 
     String getTitle();
 

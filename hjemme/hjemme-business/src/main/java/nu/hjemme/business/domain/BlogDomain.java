@@ -7,7 +7,7 @@ import nu.hjemme.persistence.BlogEntity;
 import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
-public class BlogDomain extends PersistentDomain<BlogEntity> implements Blog {
+public class BlogDomain extends PersistentDomain<BlogEntity, Long> implements Blog {
 
     private User user;
 

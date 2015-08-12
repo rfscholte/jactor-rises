@@ -5,7 +5,7 @@ import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
 
 /** @author Tor Egil Jacobsen */
-public class AddressDomain extends PersistentDomain<AddressEntity> implements Address {
+public class AddressDomain extends PersistentDomain<AddressEntity, Long> implements Address {
 
     public AddressDomain(AddressEntity addressEntity) {
         super(addressEntity);

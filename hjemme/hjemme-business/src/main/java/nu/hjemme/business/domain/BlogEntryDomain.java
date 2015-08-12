@@ -9,7 +9,7 @@ import nu.hjemme.persistence.BlogEntryEntity;
 import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntryDomain extends PersistentDomain<BlogEntryEntity> implements BlogEntry {
+public class BlogEntryDomain extends PersistentDomain<BlogEntryEntity, Long> implements BlogEntry {
 
     public BlogEntryDomain(BlogEntryEntity blogEntryEntity) {
         super(blogEntryEntity);

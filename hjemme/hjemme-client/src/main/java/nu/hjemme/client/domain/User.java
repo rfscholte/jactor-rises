@@ -1,10 +1,9 @@
 package nu.hjemme.client.domain;
 
 import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.client.domain.base.Persistent;
 
 /** @author Tor Egil Jacobsen */
-public interface User extends Persistent {
+public interface User extends Persistent<Long> {
 
     String getPassword();
 

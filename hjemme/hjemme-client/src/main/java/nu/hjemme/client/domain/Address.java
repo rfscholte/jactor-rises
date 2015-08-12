@@ -1,10 +1,9 @@
 package nu.hjemme.client.domain;
 
 import nu.hjemme.client.datatype.Country;
-import nu.hjemme.client.domain.base.Persistent;
 
 /** @author Tor Egil Jacobsen */
-public interface Address extends Persistent {
+public interface Address extends Persistent<Long> {
 
     String getAddressLine1();
 

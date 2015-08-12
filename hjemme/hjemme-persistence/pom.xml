@@ -13,13 +13,20 @@
     <packaging>jar</packaging>
 
     <name>hjemme-persistence</name>
-
     <description>The database access of hjemme.</description>
 
     <dependencies>
         <dependency>
             <groupId>nu.hjemme</groupId>
             <artifactId>hjemme-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
         </dependency>
 
         <!-- Third party -->

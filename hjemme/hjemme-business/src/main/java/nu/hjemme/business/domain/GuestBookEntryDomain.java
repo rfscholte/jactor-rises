@@ -9,7 +9,7 @@ import nu.hjemme.persistence.GuestBookEntryEntity;
 import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntryDomain extends PersistentDomain<GuestBookEntryEntity> implements GuestBookEntry {
+public class GuestBookEntryDomain extends PersistentDomain<GuestBookEntryEntity, Long> implements GuestBookEntry {
 
     public GuestBookEntryDomain(GuestBookEntryEntity guestBookEntryEntity) {
         super(guestBookEntryEntity);

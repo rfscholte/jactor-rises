@@ -1,12 +1,11 @@
 package nu.hjemme.client.domain;
 
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.base.Persistent;
 
 import java.time.LocalDateTime;
 
 /** @author Tor Egil Jacobsen */
-public interface Entry extends Persistent {
+public interface Entry extends Persistent<Long> {
 
     /** @return creation time of an entry */
     LocalDateTime getCreationTime();

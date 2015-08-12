@@ -6,7 +6,7 @@ import nu.hjemme.client.domain.Profile;
 import nu.hjemme.persistence.ProfileEntity;
 
 /** @author Tor Egil Jacobsen */
-public class ProfileDomain extends PersistentDomain<ProfileEntity> implements Profile {
+public class ProfileDomain extends PersistentDomain<ProfileEntity, Long> implements Profile {
 
     public ProfileDomain(ProfileEntity profileEntity) {
         super(profileEntity);

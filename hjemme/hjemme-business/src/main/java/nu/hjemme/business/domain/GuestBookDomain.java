@@ -5,7 +5,7 @@ import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.GuestBookEntity;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookDomain extends PersistentDomain<GuestBookEntity> implements GuestBook {
+public class GuestBookDomain extends PersistentDomain<GuestBookEntity, Long> implements GuestBook {
 
     public GuestBookDomain(GuestBookEntity guestBookEntity) {
         super(guestBookEntity);

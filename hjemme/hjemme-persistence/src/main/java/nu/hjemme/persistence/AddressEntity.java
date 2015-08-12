@@ -13,7 +13,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class AddressEntity extends PersistentEntity implements Address {
+public class AddressEntity extends PersistentEntity<Long> implements Address {
 
     @Id
     @Column(name = AddressMetadata.ADDRESS_ID)

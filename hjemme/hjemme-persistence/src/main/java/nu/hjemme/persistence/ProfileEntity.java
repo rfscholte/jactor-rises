@@ -11,7 +11,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class ProfileEntity extends PersistentEntity implements Profile {
+public class ProfileEntity extends PersistentEntity<Long> implements Profile {
     @Id
     @Column(name = ProfileMetadata.PROFILE_ID)
     // brukes av hibernate

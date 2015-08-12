@@ -14,7 +14,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntity extends PersistentEntity {
+public class BlogEntity extends PersistentEntity<Long> {
 
     @Id
     @Column(name = BlogMetadata.BLOG_ID)

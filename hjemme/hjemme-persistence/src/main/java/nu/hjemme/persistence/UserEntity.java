@@ -14,7 +14,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class UserEntity extends PersistentEntity implements User {
+public class UserEntity extends PersistentEntity<Long> implements User {
 
     @Id
     @Column(name = UserMetadata.USER_ID)

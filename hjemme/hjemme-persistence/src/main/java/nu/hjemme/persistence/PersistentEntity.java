@@ -1,10 +1,10 @@
 package nu.hjemme.persistence;
 
-import nu.hjemme.client.domain.base.Persistent;
+import nu.hjemme.client.domain.Persistent;
 
 /** @author Tor Egil Jacobsen */
-public abstract class PersistentEntity implements Persistent {
-    private Long id;
+public abstract class PersistentEntity<T> implements Persistent<T> {
+    private T id;
 
     public boolean erIdIkkeNullSamtLikIdPaa(PersistentEntity other) {
         return id != null && id.equals(other.getId());
@@ -16,11 +16,11 @@ public abstract class PersistentEntity implements Persistent {
     }
 
     @Override
-    public Long getId() {
+    public T getId() {
         return id;
     }
 
-    protected void setId(Long id) {
+    protected void setId(T id) {
         this.id = id;
     }
 }
