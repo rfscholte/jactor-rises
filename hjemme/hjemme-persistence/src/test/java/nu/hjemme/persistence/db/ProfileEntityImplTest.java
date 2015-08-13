@@ -1,5 +1,7 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
+import nu.hjemme.persistence.db.AddressEntityImpl;
+import nu.hjemme.persistence.db.ProfileEntityImpl;
 import org.junit.Test;
 
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
@@ -7,38 +9,38 @@ import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccor
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class ProfileEntityTest {
+public class ProfileEntityImplTest {
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
-        ProfileEntity base = new ProfileEntity();
+        ProfileEntityImpl base = new ProfileEntityImpl();
         base.addFirstName("some first name");
         base.addLastName("some last name");
-        base.addAddressEntity(new AddressEntity());
+        base.addAddressEntity(new AddressEntityImpl());
 
-        ProfileEntity equal = new ProfileEntity(base);
+        ProfileEntityImpl equal = new ProfileEntityImpl(base);
 
-        ProfileEntity notEqual = new ProfileEntity();
+        ProfileEntityImpl notEqual = new ProfileEntityImpl();
         notEqual.addFirstName("some other first name");
         notEqual.addLastName("some other last name");
-        notEqual.addAddressEntity(new AddressEntity());
+        notEqual.addAddressEntity(new AddressEntityImpl());
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
     public void willHaveCorrectImplementedEquals() {
-        ProfileEntity base = new ProfileEntity();
+        ProfileEntityImpl base = new ProfileEntityImpl();
         base.addFirstName("some first name");
         base.addLastName("some last name");
-        base.addAddressEntity(new AddressEntity());
+        base.addAddressEntity(new AddressEntityImpl());
 
-        ProfileEntity equal = new ProfileEntity(base);
+        ProfileEntityImpl equal = new ProfileEntityImpl(base);
 
-        ProfileEntity notEqual = new ProfileEntity();
+        ProfileEntityImpl notEqual = new ProfileEntityImpl();
         notEqual.addFirstName("some other first name");
         notEqual.addLastName("some other last name");
-        notEqual.addAddressEntity(new AddressEntity());
+        notEqual.addAddressEntity(new AddressEntityImpl());
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }

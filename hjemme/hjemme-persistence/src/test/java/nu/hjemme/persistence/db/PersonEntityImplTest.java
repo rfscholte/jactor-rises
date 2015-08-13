@@ -1,6 +1,8 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
+import nu.hjemme.persistence.db.AddressEntityImpl;
+import nu.hjemme.persistence.db.PersonEntityImpl;
 import org.junit.Test;
 
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
@@ -8,38 +10,38 @@ import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccor
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class PersonEntityTest {
+public class PersonEntityImplTest {
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
-        PersonEntity base = new PersonEntity();
+        PersonEntityImpl base = new PersonEntityImpl();
         base.setFirstName(new Name("some first name"));
         base.setLastName(new Name("some last name"));
-        base.setAddress(new AddressEntity());
+        base.setAddress(new AddressEntityImpl());
 
-        PersonEntity equal = new PersonEntity(base);
+        PersonEntityImpl equal = new PersonEntityImpl(base);
 
-        PersonEntity notEqual = new PersonEntity();
+        PersonEntityImpl notEqual = new PersonEntityImpl();
         notEqual.setFirstName(new Name("some other first name"));
         notEqual.setLastName(new Name("some other last name"));
-        notEqual.setAddress(new AddressEntity());
+        notEqual.setAddress(new AddressEntityImpl());
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
     public void willHaveCorrectImplementedEquals() {
-        PersonEntity base = new PersonEntity();
+        PersonEntityImpl base = new PersonEntityImpl();
         base.setFirstName(new Name("some first name"));
         base.setLastName(new Name("some last name"));
-        base.setAddress(new AddressEntity());
+        base.setAddress(new AddressEntityImpl());
 
-        PersonEntity equal = new PersonEntity(base);
+        PersonEntityImpl equal = new PersonEntityImpl(base);
 
-        PersonEntity notEqual = new PersonEntity();
+        PersonEntityImpl notEqual = new PersonEntityImpl();
         notEqual.setFirstName(new Name("some other first name"));
         notEqual.setLastName(new Name("some other last name"));
-        notEqual.setAddress(new AddressEntity());
+        notEqual.setAddress(new AddressEntityImpl());
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }

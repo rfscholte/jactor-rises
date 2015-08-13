@@ -1,4 +1,4 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.domain.Persistent;
 

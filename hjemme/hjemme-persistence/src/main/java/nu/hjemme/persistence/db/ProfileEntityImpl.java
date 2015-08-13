@@ -1,7 +1,8 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Profile;
+import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.meta.ProfileMetadata;
 
 import javax.persistence.Column;
@@ -11,7 +12,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class ProfileEntity extends PersistentEntity<Long> implements Profile {
+public class ProfileEntityImpl extends PersistentEntity<Long> implements Profile {
     @Id
     @Column(name = ProfileMetadata.PROFILE_ID)
     // brukes av hibernate
@@ -21,7 +22,7 @@ public class ProfileEntity extends PersistentEntity<Long> implements Profile {
     }
 
     @Column(name = ProfileMetadata.PERSON_ID)
-    private PersonEntity personEntity;
+    private PersonEntityImpl personEntity;
 
     @Column(name = ProfileMetadata.DESCRIPTION)
     private String description;
@@ -29,18 +30,18 @@ public class ProfileEntity extends PersistentEntity<Long> implements Profile {
     @Column(name = ProfileMetadata.USER_ID)
     private UserEntity userEntity;
 
-    public ProfileEntity() {
-        personEntity = new PersonEntity();
+    public ProfileEntityImpl() {
+        personEntity = new PersonEntityImpl();
     }
 
-    public ProfileEntity(Profile profile) {
+    public ProfileEntityImpl(Profile profile) {
         this();
         description = profile.getDescription();
         initPersonEntity();
-        personEntity.setAddress(profile.getAddress() != null ? new AddressEntity(profile.getAddress()) : null);
+        personEntity.setAddress(profile.getAddress() != null ? new AddressEntityImpl(profile.getAddress()) : null);
         personEntity.setFirstName(profile.getFirstName());
         personEntity.setLastName(profile.getLastName());
-        userEntity = profile.getUser() != null ? new UserEntity(profile.getUser()) : null;
+        userEntity = profile.getUser() != null ? new UserEntityImpl(profile.getUser()) : null;
     }
 
     public void addLastName(String lastName) {
@@ -51,13 +52,13 @@ public class ProfileEntity extends PersistentEntity<Long> implements Profile {
         personEntity.setFirstName(new Name(firstName));
     }
 
-    public void addAddressEntity(AddressEntity addressEntity) {
+    public void addAddressEntity(AddressEntityImpl addressEntity) {
         personEntity.setAddress(addressEntity);
     }
 
     private void initPersonEntity() {
         if (personEntity == null) {
-            personEntity = new PersonEntity();
+            personEntity = new PersonEntityImpl();
         }
     }
 
@@ -71,7 +72,7 @@ public class ProfileEntity extends PersistentEntity<Long> implements Profile {
             return false;
         }
 
-        ProfileEntity that = (ProfileEntity) o;
+        ProfileEntityImpl that = (ProfileEntityImpl) o;
 
         return Objects.equals(getAddress(), that.getAddress()) &&
                 Objects.equals(getDescription(), that.getDescription()) &&
@@ -86,7 +87,7 @@ public class ProfileEntity extends PersistentEntity<Long> implements Profile {
     }
 
     @Override
-    public AddressEntity getAddress() {
+    public AddressEntityImpl getAddress() {
         return personEntity != null ? personEntity.getAddress() : null;
     }
 

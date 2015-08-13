@@ -1,5 +1,8 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
+import nu.hjemme.persistence.db.BlogEntityImpl;
+import nu.hjemme.persistence.db.BlogEntryEntityImpl;
+import nu.hjemme.persistence.db.PersonEntityImpl;
 import nu.hjemme.persistence.time.NowAsPureDate;
 import org.junit.After;
 import org.junit.Before;
@@ -14,7 +17,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntryEntityTest {
+public class BlogEntryEntityImplTest {
 
     @Before
     public void mockNow() {
@@ -23,17 +26,17 @@ public class BlogEntryEntityTest {
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
-        BlogEntryEntity base = new BlogEntryEntity();
+        BlogEntryEntityImpl base = new BlogEntryEntityImpl();
         base.setEntry("entry");
-        base.setBlogEntity(new BlogEntity());
-        base.setCreator(new PersonEntity());
+        base.setBlogEntity(new BlogEntityImpl());
+        base.setCreator(new PersonEntityImpl());
 
-        BlogEntryEntity equal = new BlogEntryEntity(base);
+        BlogEntryEntityImpl equal = new BlogEntryEntityImpl(base);
 
-        BlogEntryEntity notEqual = new BlogEntryEntity();
+        BlogEntryEntityImpl notEqual = new BlogEntryEntityImpl();
         notEqual.setEntry("not the same entry");
-        notEqual.setBlogEntity(new BlogEntity());
-        notEqual.setCreator(new PersonEntity());
+        notEqual.setBlogEntity(new BlogEntityImpl());
+        notEqual.setCreator(new PersonEntityImpl());
         notEqual.setCreatorName("someone");
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
@@ -41,17 +44,17 @@ public class BlogEntryEntityTest {
 
     @Test
     public void willHaveCorrectImplementedEquals() {
-        BlogEntryEntity base = new BlogEntryEntity();
+        BlogEntryEntityImpl base = new BlogEntryEntityImpl();
         base.setEntry("entry");
-        base.setBlogEntity(new BlogEntity());
-        base.setCreator(new PersonEntity());
+        base.setBlogEntity(new BlogEntityImpl());
+        base.setCreator(new PersonEntityImpl());
 
-        BlogEntryEntity equal = new BlogEntryEntity(base);
+        BlogEntryEntityImpl equal = new BlogEntryEntityImpl(base);
 
-        BlogEntryEntity notEqual = new BlogEntryEntity();
+        BlogEntryEntityImpl notEqual = new BlogEntryEntityImpl();
         notEqual.setEntry("not the same entry");
-        notEqual.setBlogEntity(new BlogEntity());
-        notEqual.setCreator(new PersonEntity());
+        notEqual.setBlogEntity(new BlogEntityImpl());
+        notEqual.setCreator(new PersonEntityImpl());
         notEqual.setCreatorName("someone");
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
@@ -59,7 +62,7 @@ public class BlogEntryEntityTest {
 
     @Test
     public void skalHaTidspunktForOpprettelseSattVedBrukAvNoArgsConstructor() {
-        BlogEntryEntity blogEntryEntity = new BlogEntryEntity();
+        BlogEntryEntityImpl blogEntryEntity = new BlogEntryEntityImpl();
 
         assertThat("Creation time", blogEntryEntity.getCreationTime(), is(equalTo(
                 LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0)

@@ -1,7 +1,8 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
+import nu.hjemme.persistence.client.AddressEntity;
 import nu.hjemme.persistence.meta.AddressMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -13,7 +14,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class AddressEntity extends PersistentEntity<Long> implements Address {
+public class AddressEntityImpl extends PersistentEntity<Long> implements AddressEntity {
 
     @Id
     @Column(name = AddressMetadata.ADDRESS_ID)
@@ -41,11 +42,11 @@ public class AddressEntity extends PersistentEntity<Long> implements Address {
     @Column(name = AddressMetadata.CITY)
     private String city;
 
-    public AddressEntity() {
+    public AddressEntityImpl() {
     }
 
     /** @param address is used to create an entity */
-    public AddressEntity(Address address) {
+    public AddressEntityImpl(Address address) {
         addressLine1 = address.getAddressLine1();
         addressLine2 = address.getAddressLine2();
         addressLine3 = address.getAddressLine3();
@@ -64,7 +65,7 @@ public class AddressEntity extends PersistentEntity<Long> implements Address {
             return false;
         }
 
-        AddressEntity that = (AddressEntity) o;
+        AddressEntityImpl that = (AddressEntityImpl) o;
 
         return Objects.equals(getAddressLine1(), that.getAddressLine1()) &&
                 Objects.equals(getAddressLine2(), that.getAddressLine2()) &&

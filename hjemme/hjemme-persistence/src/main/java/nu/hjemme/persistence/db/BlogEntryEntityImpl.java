@@ -1,6 +1,8 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
+import nu.hjemme.persistence.client.BlogEntity;
+import nu.hjemme.persistence.client.BlogEntryEntity;
 import nu.hjemme.persistence.meta.BlogEntryMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -15,7 +17,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntryEntity extends PersistentEntry {
+public class BlogEntryEntityImpl extends PersistentEntryImpl implements BlogEntryEntity {
 
     @Id
     @Column(name = BlogEntryMetadata.ENTRY_ID)
@@ -46,14 +48,14 @@ public class BlogEntryEntity extends PersistentEntry {
 
     @OneToMany
     @Column(name = BlogEntryMetadata.CREATOR)
-    public void setCreator(PersonEntity creator) {
+    public void setCreator(PersonEntityImpl creator) {
         super.setCreator(creator);
     }
 
-    public BlogEntryEntity() {
+    public BlogEntryEntityImpl() {
     }
 
-    public BlogEntryEntity(BlogEntryEntity blogEntryEntity) {
+    public BlogEntryEntityImpl(BlogEntryEntity blogEntryEntity) {
         super(blogEntryEntity);
         blogEntity = blogEntryEntity.getBlog();
     }
@@ -68,7 +70,7 @@ public class BlogEntryEntity extends PersistentEntry {
             return false;
         }
 
-        BlogEntryEntity that = (BlogEntryEntity) o;
+        BlogEntryEntityImpl that = (BlogEntryEntityImpl) o;
 
         return harSammePersonSkrevetEnTeksSomErLikTekstenTil(that) && Objects.equals(getBlog(), that.getBlog());
     }
@@ -88,11 +90,12 @@ public class BlogEntryEntity extends PersistentEntry {
                 .toString();
     }
 
+    @Override
     public BlogEntity getBlog() {
         return blogEntity;
     }
 
-    public void setBlogEntity(BlogEntity blogEntity) {
+    public void setBlogEntity(BlogEntityImpl blogEntity) {
         this.blogEntity = blogEntity;
     }
 }

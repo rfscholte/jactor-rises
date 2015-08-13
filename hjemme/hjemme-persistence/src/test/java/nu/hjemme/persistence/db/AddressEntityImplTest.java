@@ -1,6 +1,7 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Country;
+import nu.hjemme.persistence.db.AddressEntityImpl;
 import org.junit.Test;
 
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
@@ -8,11 +9,11 @@ import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccor
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class AddressEntityTest {
+public class AddressEntityImplTest {
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
-        AddressEntity base = new AddressEntity();
+        AddressEntityImpl base = new AddressEntityImpl();
         base.setAddressLine1("somewhere");
         base.setZipCode(1234);
         base.setCountry(new Country("NO", "no"));
@@ -20,7 +21,7 @@ public class AddressEntityTest {
         base.setAddressLine2("somewhere else");
         base.setAddressLine3("way out there");
 
-        AddressEntity equal = new AddressEntity(base);
+        AddressEntityImpl equal = new AddressEntityImpl(base);
         equal.setAddressLine1("somewhere");
         equal.setZipCode(1234);
         equal.setCountry(new Country("NO", "no"));
@@ -28,7 +29,7 @@ public class AddressEntityTest {
         equal.setAddressLine2("somewhere else");
         equal.setAddressLine3("way out there");
 
-        AddressEntity notEqual = new AddressEntity();
+        AddressEntityImpl notEqual = new AddressEntityImpl();
         notEqual.setAddressLine1("somewhere else");
         notEqual.setZipCode(5678);
         notEqual.setCountry(new Country("SE", "se"));
@@ -41,7 +42,7 @@ public class AddressEntityTest {
 
     @Test
     public void willHaveCorrectImplementedEquals() {
-        AddressEntity base = new AddressEntity();
+        AddressEntityImpl base = new AddressEntityImpl();
         base.setAddressLine1("somewhere");
         base.setZipCode(1234);
         base.setCountry(new Country("NO", "no"));
@@ -49,9 +50,9 @@ public class AddressEntityTest {
         base.setAddressLine2("somewhere else");
         base.setAddressLine3("way out there");
 
-        AddressEntity equal = new AddressEntity(base);
+        AddressEntityImpl equal = new AddressEntityImpl(base);
 
-        AddressEntity notEqual = new AddressEntity();
+        AddressEntityImpl notEqual = new AddressEntityImpl();
         notEqual.setAddressLine1("somewhere else");
         notEqual.setZipCode(5678);
         notEqual.setCountry(new Country("SE", "se"));

@@ -1,7 +1,8 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBookEntry;
+import nu.hjemme.persistence.client.GuestBookEntryEntity;
 import nu.hjemme.persistence.meta.GuestEntryMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -15,7 +16,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntryEntity extends PersistentEntry implements GuestBookEntry {
+public class GuestBookEntryEntityImpl extends PersistentEntryImpl implements GuestBookEntryEntity {
 
     @Id
     @Column(name = GuestEntryMetadata.ENTRY_ID)
@@ -26,7 +27,7 @@ public class GuestBookEntryEntity extends PersistentEntry implements GuestBookEn
     }
 
     @OneToMany(mappedBy = GuestEntryMetadata.GUEST_BOOK)
-    private GuestBookEntity guestBookEntity;
+    private GuestBookEntityImpl guestBookEntity;
 
     @Column(name = GuestEntryMetadata.CREATION_TIME)
     public void setCreationTime(LocalDateTime created) {
@@ -45,18 +46,18 @@ public class GuestBookEntryEntity extends PersistentEntry implements GuestBookEn
 
     @OneToMany
     @Column(name = GuestEntryMetadata.CREATOR)
-    public void setCreator(PersonEntity creator) {
+    public void setCreator(PersonEntityImpl creator) {
         super.setCreator(creator);
     }
 
-    public GuestBookEntryEntity() {
+    public GuestBookEntryEntityImpl() {
         super();
     }
 
-    public GuestBookEntryEntity(GuestBookEntry guestBookEntry) {
+    public GuestBookEntryEntityImpl(GuestBookEntry guestBookEntry) {
         super(guestBookEntry);
         guestBookEntity = guestBookEntry.getGuestBook() != null ?
-                new GuestBookEntity(guestBookEntry.getGuestBook()) : null;
+                new GuestBookEntityImpl(guestBookEntry.getGuestBook()) : null;
 
     }
 
@@ -70,7 +71,7 @@ public class GuestBookEntryEntity extends PersistentEntry implements GuestBookEn
             return false;
         }
 
-        GuestBookEntryEntity that = (GuestBookEntryEntity) o;
+        GuestBookEntryEntityImpl that = (GuestBookEntryEntityImpl) o;
 
         return harSammePersonSkrevetEnTeksSomErLikTekstenTil(that) && Objects.equals(getGuestBook(), that.getGuestBook());
     }
@@ -89,11 +90,11 @@ public class GuestBookEntryEntity extends PersistentEntry implements GuestBookEn
     }
 
     @Override
-    public GuestBookEntity getGuestBook() {
+    public GuestBookEntityImpl getGuestBook() {
         return guestBookEntity;
     }
 
-    public void setGuestBookEntity(GuestBookEntity guestBookEntity) {
+    public void setGuestBookEntity(GuestBookEntityImpl guestBookEntity) {
         this.guestBookEntity = guestBookEntity;
     }
 }

@@ -1,7 +1,8 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
+import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.meta.UserMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -14,7 +15,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class UserEntity extends PersistentEntity<Long> implements User {
+public class UserEntityImpl extends PersistentEntity<Long> implements UserEntity {
 
     @Id
     @Column(name = UserMetadata.USER_ID)
@@ -32,16 +33,16 @@ public class UserEntity extends PersistentEntity<Long> implements User {
     private UserName userName;
 
     @OneToOne(mappedBy = "profileEntity")
-    private ProfileEntity profileEntity;
+    private ProfileEntityImpl profileEntity;
 
-    public UserEntity() {
+    public UserEntityImpl() {
     }
 
     /** @param user is used to create an entity */
-    public UserEntity(User user) {
+    public UserEntityImpl(User user) {
         password = user.getPassword();
         userName = user.getUserName();
-        profileEntity = user.getProfile() != null ? new ProfileEntity(user.getProfile()) : null;
+        profileEntity = user.getProfile() != null ? new ProfileEntityImpl(user.getProfile()) : null;
     }
 
     @Override
@@ -84,7 +85,7 @@ public class UserEntity extends PersistentEntity<Long> implements User {
     }
 
     @Override
-    public ProfileEntity getProfile() {
+    public ProfileEntityImpl getProfile() {
         return profileEntity;
     }
 
@@ -96,7 +97,7 @@ public class UserEntity extends PersistentEntity<Long> implements User {
         this.userName = userName;
     }
 
-    public void setProfileEntity(ProfileEntity profileEntity) {
+    public void setProfileEntity(ProfileEntityImpl profileEntity) {
         this.profileEntity = profileEntity;
     }
 }

@@ -1,5 +1,7 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
+import nu.hjemme.persistence.client.BlogEntity;
+import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.meta.BlogMetadata;
 import nu.hjemme.persistence.time.Now;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -14,7 +16,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntity extends PersistentEntity<Long> {
+public class BlogEntityImpl extends PersistentEntity<Long> implements BlogEntity {
 
     @Id
     @Column(name = BlogMetadata.BLOG_ID)
@@ -34,11 +36,11 @@ public class BlogEntity extends PersistentEntity<Long> {
     @OneToMany(mappedBy = BlogMetadata.USER)
     private UserEntity userEntity;
 
-    public BlogEntity() {
+    public BlogEntityImpl() {
         created = Now.asDateTime();
     }
 
-    public BlogEntity(BlogEntity blogEntity) {
+    public BlogEntityImpl(BlogEntityImpl blogEntity) {
         created = blogEntity.getCreated();
         title = blogEntity.getTitle();
         userEntity = blogEntity.getUser();
@@ -54,7 +56,7 @@ public class BlogEntity extends PersistentEntity<Long> {
             return false;
         }
 
-        BlogEntity that = (BlogEntity) o;
+        BlogEntityImpl that = (BlogEntityImpl) o;
 
         return Objects.equals(getTitle(), that.getTitle()) &&
                 Objects.equals(getUser(), that.getUser());

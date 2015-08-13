@@ -1,4 +1,4 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
 
 public class PersistentEntityTest {
-    private PersistentEntity testPersistentEntity;
+    private PersistentEntity<Long> testPersistentEntity;
 
     @Before
     public void initForTesting() {
@@ -28,7 +28,7 @@ public class PersistentEntityTest {
     @Test
     public void skalReturnereTrueNarDatabaseIdErSattPaaBeggeInstanserSamtOmDeErLike() {
         testPersistentEntity.setId(101L);
-        PersistentEntity other = new PersistentEntity() {};
+        PersistentEntity<Long> other = new PersistentEntity<Long>() {};
         other.setId(101L);
 
         assertThat("Persistente bønner skal ha lik dbid: " + testPersistentEntity.getId(),
@@ -36,7 +36,7 @@ public class PersistentEntityTest {
         );
     }
 
-    private class TestPersistentEntity extends PersistentEntity {
+    private class TestPersistentEntity extends PersistentEntity<Long> {
 
     }
 }

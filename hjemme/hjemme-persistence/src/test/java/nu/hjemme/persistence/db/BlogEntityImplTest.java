@@ -1,5 +1,7 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
+import nu.hjemme.persistence.db.BlogEntityImpl;
+import nu.hjemme.persistence.db.UserEntityImpl;
 import nu.hjemme.persistence.time.NowAsPureDate;
 import org.junit.After;
 import org.junit.Before;
@@ -14,7 +16,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntityTest {
+public class BlogEntityImplTest {
 
     @Before
     public void mockNow() {
@@ -23,41 +25,41 @@ public class BlogEntityTest {
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
-        UserEntity userEntity = new UserEntity();
+        UserEntityImpl userEntity = new UserEntityImpl();
 
-        BlogEntity base = new BlogEntity();
+        BlogEntityImpl base = new BlogEntityImpl();
         base.setTitle("title");
         base.setUserEntity(userEntity);
 
-        BlogEntity equal = new BlogEntity(base);
+        BlogEntityImpl equal = new BlogEntityImpl(base);
         equal.setTitle("title");
         equal.setUserEntity(userEntity);
 
-        BlogEntity notEqual = new BlogEntity();
+        BlogEntityImpl notEqual = new BlogEntityImpl();
         notEqual.setTitle("another title");
-        notEqual.setUserEntity(new UserEntity());
+        notEqual.setUserEntity(new UserEntityImpl());
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
     public void willHaveCorrectImplementedEquals() {
-        BlogEntity base = new BlogEntity();
+        BlogEntityImpl base = new BlogEntityImpl();
         base.setTitle("title");
-        base.setUserEntity(new UserEntity());
+        base.setUserEntity(new UserEntityImpl());
 
-        BlogEntity equal = new BlogEntity(base);
+        BlogEntityImpl equal = new BlogEntityImpl(base);
 
-        BlogEntity notEqual = new BlogEntity();
+        BlogEntityImpl notEqual = new BlogEntityImpl();
         notEqual.setTitle("another title");
-        notEqual.setUserEntity(new UserEntity());
+        notEqual.setUserEntity(new UserEntityImpl());
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
     @Test
     public void skalHaTidspunktForOpprettelseSattVedBrukAvNoArgsConstructor() {
-        BlogEntity testBlogEntity = new BlogEntity();
+        BlogEntityImpl testBlogEntity = new BlogEntityImpl();
         assertThat("Opprettet tidspunkt: ", testBlogEntity.getCreated(), is(equalTo(
                 LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0)
         )));

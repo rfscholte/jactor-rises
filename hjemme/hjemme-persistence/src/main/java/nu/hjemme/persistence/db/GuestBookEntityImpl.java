@@ -1,7 +1,9 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.domain.GuestBook;
 import nu.hjemme.client.domain.User;
+import nu.hjemme.persistence.client.GuestBookEntity;
+import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.meta.GuestBookMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -14,7 +16,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntity extends PersistentEntity<Long> implements GuestBook {
+public class GuestBookEntityImpl extends PersistentEntity<Long> implements GuestBookEntity {
 
     @Id
     @Column(name = GuestBookMetadata.GUEST_BOOK_ID)
@@ -30,13 +32,13 @@ public class GuestBookEntity extends PersistentEntity<Long> implements GuestBook
     @OneToMany(mappedBy = GuestBookMetadata.USER)
     private UserEntity user;
 
-    public GuestBookEntity() {
+    public GuestBookEntityImpl() {
     }
 
     /** @param guestbook will be used to create the instance... */
-    public GuestBookEntity(GuestBook guestbook) {
+    public GuestBookEntityImpl(GuestBook guestbook) {
         title = guestbook.getTitle();
-        user = guestbook.getUser() != null ? new UserEntity(guestbook.getUser()) : null;
+        user = guestbook.getUser() != null ? new UserEntityImpl(guestbook.getUser()) : null;
     }
 
     @Override
@@ -49,7 +51,7 @@ public class GuestBookEntity extends PersistentEntity<Long> implements GuestBook
             return false;
         }
 
-        GuestBookEntity that = (GuestBookEntity) o;
+        GuestBookEntityImpl that = (GuestBookEntityImpl) o;
 
         return Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getUser(), that.getUser());
     }

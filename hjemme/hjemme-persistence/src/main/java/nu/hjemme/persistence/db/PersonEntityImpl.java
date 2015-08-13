@@ -1,7 +1,8 @@
-package nu.hjemme.persistence;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Person;
+import nu.hjemme.persistence.client.PersonEntity;
 import nu.hjemme.persistence.meta.PersonMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -14,7 +15,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class PersonEntity extends PersistentEntity<Long> implements Person {
+public class PersonEntityImpl extends PersistentEntity<Long> implements PersonEntity {
 
     @Id
     @Column(name = PersonMetadata.PERSON_ID)
@@ -33,14 +34,14 @@ public class PersonEntity extends PersistentEntity<Long> implements Person {
     private Name lastName;
 
     @OneToMany(mappedBy = PersonMetadata.ADDRESS)
-    private AddressEntity address;
+    private AddressEntityImpl address;
 
-    public PersonEntity() {
+    public PersonEntityImpl() {
     }
 
     /** @param person will be used to create an entity */
-    public PersonEntity(Person person) {
-        address = person.getAddress() != null ? new AddressEntity(person.getAddress()) : null;
+    public PersonEntityImpl(Person person) {
+        address = person.getAddress() != null ? new AddressEntityImpl(person.getAddress()) : null;
         firstName = person.getFirstName();
         lastName = person.getLastName();
     }
@@ -55,7 +56,7 @@ public class PersonEntity extends PersistentEntity<Long> implements Person {
             return false;
         }
 
-        PersonEntity personEntity = (PersonEntity) o;
+        PersonEntityImpl personEntity = (PersonEntityImpl) o;
 
         return Objects.equals(getFirstName(), personEntity.getFirstName()) && Objects.equals(getLastName(), personEntity.getLastName()) && Objects.equals(getAddress(), personEntity.getAddress());
     }
@@ -76,7 +77,7 @@ public class PersonEntity extends PersistentEntity<Long> implements Person {
     }
 
     @Override
-    public AddressEntity getAddress() {
+    public AddressEntityImpl getAddress() {
         return address;
     }
 
@@ -98,7 +99,7 @@ public class PersonEntity extends PersistentEntity<Long> implements Person {
         this.lastName = lastName;
     }
 
-    public void setAddress(AddressEntity address) {
+    public void setAddress(AddressEntityImpl address) {
         this.address = address;
     }
 }
