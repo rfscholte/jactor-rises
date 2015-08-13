@@ -2,8 +2,8 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.UserDomain;
 import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.persistence.ProfileEntity;
-import nu.hjemme.persistence.UserEntity;
+import nu.hjemme.persistence.client.UserEntity;
+import nu.hjemme.persistence.client.ProfileEntity;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
@@ -12,7 +12,7 @@ public class UserDomainBuilder extends DomainBuilder<UserDomain> {
     static final String THE_USER_MUST_HAVE_A_PROFILE = "The user must have a profile";
     static final String THE_USER_NAME_CANNOT_BE_NULL = "The user name cannot be null";
 
-    private final UserEntity userEntity = new UserEntity();
+    private final UserEntity userEntity = newInstance(UserEntity.class);
 
     public UserDomainBuilder appendUserName(String userName) {
         userEntity.setUserName(new UserName(userName));

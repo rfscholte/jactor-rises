@@ -2,8 +2,8 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.GuestBookEntryDomain;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.persistence.GuestBookEntity;
-import nu.hjemme.persistence.PersonEntity;
+import nu.hjemme.persistence.db.GuestBookEntityImpl;
+import nu.hjemme.persistence.db.PersonEntityImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -24,7 +24,7 @@ public class GuestBookDomainEntryBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
 
-        GuestBookEntryDomainBuilder.init().appendCreatorName("some creator").appendGuestBook(new GuestBookEntity()).build();
+        GuestBookEntryDomainBuilder.init().appendCreatorName("some creator").appendGuestBook(new GuestBookEntityImpl()).build();
     }
 
     @Test
@@ -35,7 +35,7 @@ public class GuestBookDomainEntryBuilderTest {
         GuestBookEntryDomainBuilder.init()
                 .appendEntry("")
                 .appendCreatorName("some creator")
-                .appendGuestBook(new GuestBookEntity())
+                .appendGuestBook(new GuestBookEntityImpl())
                 .build();
     }
 
@@ -54,7 +54,7 @@ public class GuestBookDomainEntryBuilderTest {
 
         GuestBookEntryDomainBuilder.init()
                 .appendEntry("some entry")
-                .appendGuestBook(new GuestBookEntity())
+                .appendGuestBook(new GuestBookEntityImpl())
                 .build();
     }
 
@@ -66,7 +66,7 @@ public class GuestBookDomainEntryBuilderTest {
         GuestBookEntryDomainBuilder.init()
                 .appendEntry("some entry")
                 .appendCreatorName("")
-                .appendGuestBook(new GuestBookEntity())
+                .appendGuestBook(new GuestBookEntityImpl())
                 .build();
     }
 
@@ -87,7 +87,7 @@ public class GuestBookDomainEntryBuilderTest {
         GuestBookEntryDomain guestBookEntryDomain = GuestBookEntryDomainBuilder.init()
                 .appendEntry("some entry")
                 .appendCreatorName("some creator")
-                .appendGuestBook(new GuestBookEntity())
+                .appendGuestBook(new GuestBookEntityImpl())
                 .build();
 
         assertThat("GuestBookEntryEntity", guestBookEntryDomain, is(notNullValue()));
@@ -95,13 +95,13 @@ public class GuestBookDomainEntryBuilderTest {
 
     @Test
     public void willSetCreatorNameWhenCreatorIsAppended() {
-        PersonEntity creator = new PersonEntity();
+        PersonEntityImpl creator = new PersonEntityImpl();
         creator.setFirstName(new Name("some creator"));
 
         GuestBookEntryDomain guestBookEntryDomain = GuestBookEntryDomainBuilder.init()
                 .appendEntry("some entry")
                 .appendCreator(creator)
-                .appendGuestBook(new GuestBookEntity())
+                .appendGuestBook(new GuestBookEntityImpl())
                 .build();
 
         assertThat("CreatorName", guestBookEntryDomain.getCreatorName(), is(equalTo(new Name("some creator"))));

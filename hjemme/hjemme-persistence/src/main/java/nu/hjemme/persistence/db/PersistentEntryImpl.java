@@ -3,6 +3,7 @@ package nu.hjemme.persistence.db;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Entry;
 import nu.hjemme.persistence.client.EntryEntity;
+import nu.hjemme.persistence.client.PersonEntity;
 import nu.hjemme.persistence.time.Now;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -17,7 +18,7 @@ public abstract class PersistentEntryImpl extends PersistentEntity<Long> impleme
 
     private LocalDateTime creationTime;
     private Name createdName;
-    private PersonEntityImpl creator;
+    private PersonEntity creator;
     private String entry;
 
     protected PersistentEntryImpl() {
@@ -75,7 +76,7 @@ public abstract class PersistentEntryImpl extends PersistentEntity<Long> impleme
     }
 
     @Override
-    public PersonEntityImpl getCreator() {
+    public PersonEntity getCreator() {
         return creator;
     }
 
@@ -87,7 +88,7 @@ public abstract class PersistentEntryImpl extends PersistentEntity<Long> impleme
         this.entry = entry;
     }
 
-    public void setCreator(PersonEntityImpl originator) {
+    public void setCreator(PersonEntity originator) {
         this.creator = originator;
     }
 

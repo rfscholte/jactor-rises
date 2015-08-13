@@ -2,7 +2,7 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.client.datatype.Country;
-import nu.hjemme.persistence.AddressEntity;
+import nu.hjemme.persistence.client.AddressEntity;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
@@ -11,7 +11,7 @@ public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
     static final String COUNTRY_CANNOT_BE_NULL = "A country must be provided";
     static final String ZIP_CODE_CANNOT_BE_NULL = "A Zip code must be provided";
 
-    private AddressEntity addressEntity = new AddressEntity();
+    private AddressEntity addressEntity = newInstance(AddressEntity.class);
 
     public AddressDomainBuilder appendCity(String city) {
         addressEntity.setCity(city);

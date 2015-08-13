@@ -1,7 +1,5 @@
 package nu.hjemme.persistence.db;
 
-import nu.hjemme.persistence.db.AddressEntityImpl;
-import nu.hjemme.persistence.db.ProfileEntityImpl;
 import org.junit.Test;
 
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;

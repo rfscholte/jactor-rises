@@ -2,8 +2,8 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.BlogEntryDomain;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.persistence.BlogEntity;
-import nu.hjemme.persistence.PersonEntity;
+import nu.hjemme.persistence.db.BlogEntityImpl;
+import nu.hjemme.persistence.db.PersonEntityImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -24,7 +24,7 @@ public class BlogEntryDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
 
-        BlogEntryDomainBuilder.init().appendCreatorName("some creator").appendBlog(new BlogEntity()).build();
+        BlogEntryDomainBuilder.init().appendCreatorName("some creator").appendBlog(new BlogEntityImpl()).build();
     }
 
     @Test
@@ -32,7 +32,7 @@ public class BlogEntryDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
 
-        BlogEntryDomainBuilder.init().appendEntry("").appendCreatorName("some creator").appendBlog(new BlogEntity()).build();
+        BlogEntryDomainBuilder.init().appendEntry("").appendCreatorName("some creator").appendBlog(new BlogEntityImpl()).build();
     }
 
     @Test
@@ -40,7 +40,7 @@ public class BlogEntryDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogEntryDomainBuilder.THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
 
-        BlogEntryDomainBuilder.init().appendEntry("some entry").appendBlog(new BlogEntity()).build();
+        BlogEntryDomainBuilder.init().appendEntry("some entry").appendBlog(new BlogEntityImpl()).build();
     }
 
     @Test
@@ -48,7 +48,7 @@ public class BlogEntryDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(hentFeilmeldingFraName());
 
-        BlogEntryDomainBuilder.init().appendEntry("some entry").appendCreatorName("").appendBlog(new BlogEntity()).build();
+        BlogEntryDomainBuilder.init().appendEntry("some entry").appendCreatorName("").appendBlog(new BlogEntityImpl()).build();
     }
 
     public String hentFeilmeldingFraName() {
@@ -76,7 +76,7 @@ public class BlogEntryDomainBuilderTest {
         BlogEntryDomain guestBookEntryEntity = BlogEntryDomainBuilder.init()
                 .appendEntry("some entry")
                 .appendCreatorName("some creator")
-                .appendBlog(new BlogEntity())
+                .appendBlog(new BlogEntityImpl())
                 .build();
 
         assertThat("BlogEntry", guestBookEntryEntity, is(notNullValue()));
@@ -84,13 +84,13 @@ public class BlogEntryDomainBuilderTest {
 
     @Test
     public void willSetCreatorNameWhenCreatorIsAppended() {
-        PersonEntity creator = new PersonEntity();
+        PersonEntityImpl creator = new PersonEntityImpl();
         creator.setFirstName(new Name("some creator"));
 
         BlogEntryDomain blogEntryDomain = BlogEntryDomainBuilder.init()
                 .appendEntry("some entry")
                 .appendCreator(creator)
-                .appendBlog(new BlogEntity())
+                .appendBlog(new BlogEntityImpl())
                 .build();
 
         assertThat("CreatorName", blogEntryDomain.getCreatorName(), is(equalTo(new Name("some creator"))));

@@ -2,6 +2,7 @@ package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBookEntry;
+import nu.hjemme.persistence.client.GuestBookEntity;
 import nu.hjemme.persistence.client.GuestBookEntryEntity;
 import nu.hjemme.persistence.meta.GuestEntryMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -27,7 +28,7 @@ public class GuestBookEntryEntityImpl extends PersistentEntryImpl implements Gue
     }
 
     @OneToMany(mappedBy = GuestEntryMetadata.GUEST_BOOK)
-    private GuestBookEntityImpl guestBookEntity;
+    private GuestBookEntity guestBookEntity;
 
     @Column(name = GuestEntryMetadata.CREATION_TIME)
     public void setCreationTime(LocalDateTime created) {
@@ -90,11 +91,12 @@ public class GuestBookEntryEntityImpl extends PersistentEntryImpl implements Gue
     }
 
     @Override
-    public GuestBookEntityImpl getGuestBook() {
+    public GuestBookEntity getGuestBook() {
         return guestBookEntity;
     }
 
-    public void setGuestBookEntity(GuestBookEntityImpl guestBookEntity) {
+    @Override
+    public void setGuestBookEntity(GuestBookEntity guestBookEntity) {
         this.guestBookEntity = guestBookEntity;
     }
 }

@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.BlogDomain;
-import nu.hjemme.persistence.UserEntity;
+import nu.hjemme.persistence.db.UserEntityImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -21,7 +21,7 @@ public class BlogDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogDomainBuilder.THE_BLOG_MUST_HAVE_A_TITLE);
 
-        BlogDomainBuilder.init().appendUser(new UserEntity()).build();
+        BlogDomainBuilder.init().appendUser(new UserEntityImpl()).build();
     }
 
     @Test
@@ -29,7 +29,7 @@ public class BlogDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogDomainBuilder.THE_BLOG_MUST_HAVE_A_TITLE);
 
-        BlogDomainBuilder.init().appendTitle("").appendUser(new UserEntity()).build();
+        BlogDomainBuilder.init().appendTitle("").appendUser(new UserEntityImpl()).build();
     }
 
     @Test
@@ -42,7 +42,7 @@ public class BlogDomainBuilderTest {
 
     @Test
     public void skalByggeMedTittelOgBruker() {
-        BlogDomain guestBookEntryEntity = BlogDomainBuilder.init().appendTitle("title").appendUser(new UserEntity()).build();
+        BlogDomain guestBookEntryEntity = BlogDomainBuilder.init().appendTitle("title").appendUser(new UserEntityImpl()).build();
 
         assertThat("BlogEntity", guestBookEntryEntity, is(notNullValue()));
     }

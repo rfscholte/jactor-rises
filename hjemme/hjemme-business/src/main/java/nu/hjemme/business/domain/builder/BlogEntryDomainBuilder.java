@@ -2,9 +2,9 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.BlogEntryDomain;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.persistence.BlogEntity;
-import nu.hjemme.persistence.BlogEntryEntity;
-import nu.hjemme.persistence.PersonEntity;
+import nu.hjemme.persistence.db.BlogEntityImpl;
+import nu.hjemme.persistence.db.BlogEntryEntityImpl;
+import nu.hjemme.persistence.db.PersonEntityImpl;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
@@ -13,14 +13,14 @@ public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
     static final String THE_ENTRY_CANNOT_BE_EMPTY = "The entry field cannot be empty";
     static final String THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE = "The entry must be created by someone";
 
-    private BlogEntryEntity blogEntryEntity = new BlogEntryEntity();
+    private BlogEntryEntityImpl blogEntryEntity = new BlogEntryEntityImpl();
 
     public BlogEntryDomainBuilder appendCreatorName(String creatorName) {
         blogEntryEntity.setCreatorName(new Name(creatorName));
         return this;
     }
 
-    public BlogEntryDomainBuilder appendCreator(PersonEntity creator) {
+    public BlogEntryDomainBuilder appendCreator(PersonEntityImpl creator) {
         blogEntryEntity.setCreator(creator);
         blogEntryEntity.setCreatorName(creator.getFirstName());
         return this;
@@ -31,7 +31,7 @@ public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
         return this;
     }
 
-    public BlogEntryDomainBuilder appendBlog(BlogEntity blogEntity) {
+    public BlogEntryDomainBuilder appendBlog(BlogEntityImpl blogEntity) {
         blogEntryEntity.setBlogEntity(blogEntity);
         return this;
     }

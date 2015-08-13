@@ -1,8 +1,8 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.ProfileDomain;
-import nu.hjemme.persistence.AddressEntity;
-import nu.hjemme.persistence.ProfileEntity;
+import nu.hjemme.persistence.db.AddressEntityImpl;
+import nu.hjemme.persistence.db.ProfileEntityImpl;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
@@ -11,7 +11,7 @@ public class ProfileDomainBuilder extends DomainBuilder<ProfileDomain> {
     static final String THE_FIRST_NAME_CANNOT_BE_NULL = "The first cannot be null";
     static final String THE_LAST_NAME_CANNOT_BE_NULL = "The last cannot be null";
 
-    private ProfileEntity profileEntity = new ProfileEntity();
+    private ProfileEntityImpl profileEntity = new ProfileEntityImpl();
 
     @Override
     protected ProfileDomain buildInstance() {
@@ -39,7 +39,7 @@ public class ProfileDomainBuilder extends DomainBuilder<ProfileDomain> {
         return this;
     }
 
-    public ProfileDomainBuilder appendAddress(AddressEntity addressEntity) {
+    public ProfileDomainBuilder appendAddress(AddressEntityImpl addressEntity) {
         profileEntity.addAddressEntity(addressEntity);
         return this;
     }
@@ -49,7 +49,7 @@ public class ProfileDomainBuilder extends DomainBuilder<ProfileDomain> {
         return this;
     }
 
-    public ProfileEntity getValidatedProfileEntity() {
+    public ProfileEntityImpl getValidatedProfileEntity() {
         validate();
         return profileEntity;
     }

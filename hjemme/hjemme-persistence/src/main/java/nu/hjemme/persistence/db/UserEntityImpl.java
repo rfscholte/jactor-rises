@@ -2,6 +2,7 @@ package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
+import nu.hjemme.persistence.client.ProfileEntity;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.meta.UserMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -33,7 +34,7 @@ public class UserEntityImpl extends PersistentEntity<Long> implements UserEntity
     private UserName userName;
 
     @OneToOne(mappedBy = "profileEntity")
-    private ProfileEntityImpl profileEntity;
+    private ProfileEntity profileEntity;
 
     public UserEntityImpl() {
     }
@@ -85,19 +86,22 @@ public class UserEntityImpl extends PersistentEntity<Long> implements UserEntity
     }
 
     @Override
-    public ProfileEntityImpl getProfile() {
+    public ProfileEntity getProfile() {
         return profileEntity;
     }
 
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @Override
     public void setUserName(UserName userName) {
         this.userName = userName;
     }
 
-    public void setProfileEntity(ProfileEntityImpl profileEntity) {
+    @Override
+    public void setProfileEntity(ProfileEntity profileEntity) {
         this.profileEntity = profileEntity;
     }
 }

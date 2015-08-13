@@ -2,8 +2,8 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.PersonDomain;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.persistence.AddressEntity;
-import nu.hjemme.persistence.PersonEntity;
+import nu.hjemme.persistence.db.AddressEntityImpl;
+import nu.hjemme.persistence.db.PersonEntityImpl;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
@@ -12,9 +12,9 @@ public class PersonDomainBuilder extends DomainBuilder<PersonDomain> {
     static final String THE_FIRST_NAME_CANNOT_BE_NULL = "The first cannot be null";
     static final String THE_LAST_NAME_CANNOT_BE_NULL = "The last cannot be null";
 
-    private PersonEntity personEntity = new PersonEntity();
+    private PersonEntityImpl personEntity = new PersonEntityImpl();
 
-    public PersonDomainBuilder appendAddress(AddressEntity addressEntity) {
+    public PersonDomainBuilder appendAddress(AddressEntityImpl addressEntity) {
         personEntity.setAddress(addressEntity);
         return this;
     }

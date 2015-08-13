@@ -2,7 +2,7 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.ProfileDomain;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.persistence.AddressEntity;
+import nu.hjemme.persistence.db.AddressEntityImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -24,7 +24,7 @@ public class ProfileDomainBuilderTest {
 
         ProfileDomainBuilder.init()
                 .appendLastName("some last name")
-                .appendAddress(new AddressEntity())
+                .appendAddress(new AddressEntityImpl())
                 .appendDescription("description field will not be validated")
                 .build();
     }
@@ -37,7 +37,7 @@ public class ProfileDomainBuilderTest {
         ProfileDomainBuilder.init()
                 .appendFirstName("")
                 .appendLastName("some last name")
-                .appendAddress(new AddressEntity())
+                .appendAddress(new AddressEntityImpl())
                 .appendDescription("description field will not be validated")
                 .build();
     }
@@ -61,7 +61,7 @@ public class ProfileDomainBuilderTest {
 
         ProfileDomainBuilder.init()
                 .appendFirstName("some first name")
-                .appendAddress(new AddressEntity())
+                .appendAddress(new AddressEntityImpl())
                 .appendDescription("description field will not be validated")
                 .build();
     }
@@ -74,7 +74,7 @@ public class ProfileDomainBuilderTest {
         ProfileDomainBuilder.init()
                 .appendFirstName("some first name")
                 .appendLastName("")
-                .appendAddress(new AddressEntity())
+                .appendAddress(new AddressEntityImpl())
                 .appendDescription("description field will not be validated")
                 .build();
     }
@@ -96,7 +96,7 @@ public class ProfileDomainBuilderTest {
         ProfileDomain profileDomain = ProfileDomainBuilder.init()
                 .appendFirstName("some first name")
                 .appendLastName("some last name")
-                .appendAddress(new AddressEntity())
+                .appendAddress(new AddressEntityImpl())
                 .appendDescription("description field will not be validated")
                 .build();
 

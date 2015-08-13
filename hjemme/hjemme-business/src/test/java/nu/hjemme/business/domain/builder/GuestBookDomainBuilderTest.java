@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.GuestBookDomain;
-import nu.hjemme.persistence.UserEntity;
+import nu.hjemme.persistence.db.UserEntityImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -21,7 +21,7 @@ public class GuestBookDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_EMPTY);
 
-        GuestBookDomainBuilder.init().appendUser(new UserEntity()).build();
+        GuestBookDomainBuilder.init().appendUser(new UserEntityImpl()).build();
     }
 
     @Test
@@ -29,7 +29,7 @@ public class GuestBookDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_EMPTY);
 
-        GuestBookDomainBuilder.init().appendTitle("").appendUser(new UserEntity()).build();
+        GuestBookDomainBuilder.init().appendTitle("").appendUser(new UserEntityImpl()).build();
     }
 
     @Test
@@ -44,7 +44,7 @@ public class GuestBookDomainBuilderTest {
     public void willBuildGuestBookWhenAllRequiredFieldsAreSet() throws Exception {
         GuestBookDomain guestBookDomain = GuestBookDomainBuilder.init()
                 .appendTitle("some title")
-                .appendUser(new UserEntity())
+                .appendUser(new UserEntityImpl())
                 .build();
 
         assertThat("GuestBook", guestBookDomain, is(notNullValue()));

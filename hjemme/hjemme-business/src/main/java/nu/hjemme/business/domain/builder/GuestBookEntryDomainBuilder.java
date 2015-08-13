@@ -2,9 +2,9 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.GuestBookEntryDomain;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.persistence.GuestBookEntity;
-import nu.hjemme.persistence.GuestBookEntryEntity;
-import nu.hjemme.persistence.PersonEntity;
+import nu.hjemme.persistence.client.GuestBookEntity;
+import nu.hjemme.persistence.client.GuestBookEntryEntity;
+import nu.hjemme.persistence.client.PersonEntity;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
@@ -13,7 +13,7 @@ public class GuestBookEntryDomainBuilder extends DomainBuilder<GuestBookEntryDom
     static final String THE_ENTRY_CANNOT_BE_EMPTY = "The entry cannot be empty";
     static final String THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE = "The entry must be created by someone";
 
-    private GuestBookEntryEntity guestBookEntryEntity = new GuestBookEntryEntity();
+    private GuestBookEntryEntity guestBookEntryEntity = newInstance(GuestBookEntryEntity.class);
 
     public GuestBookEntryDomainBuilder appendCreatorName(String creator) {
         guestBookEntryEntity.setCreatorName(new Name(creator));

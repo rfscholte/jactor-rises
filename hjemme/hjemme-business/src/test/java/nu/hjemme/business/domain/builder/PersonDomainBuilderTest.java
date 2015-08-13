@@ -2,7 +2,7 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.PersonDomain;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.persistence.AddressEntity;
+import nu.hjemme.persistence.db.AddressEntityImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,7 +22,7 @@ public class PersonDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersonDomainBuilder.THE_FIRST_NAME_CANNOT_BE_NULL);
 
-        PersonDomainBuilder.init().appendLastName("some last name").appendAddress(new AddressEntity()).build();
+        PersonDomainBuilder.init().appendLastName("some last name").appendAddress(new AddressEntityImpl()).build();
     }
 
     @Test
@@ -33,7 +33,7 @@ public class PersonDomainBuilderTest {
         PersonDomainBuilder.init()
                 .appendFirstName("")
                 .appendLastName("some last name")
-                .appendAddress(new AddressEntity())
+                .appendAddress(new AddressEntityImpl())
                 .build();
     }
 
@@ -54,7 +54,7 @@ public class PersonDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersonDomainBuilder.THE_LAST_NAME_CANNOT_BE_NULL);
 
-        PersonDomainBuilder.init().appendFirstName("some first name").appendAddress(new AddressEntity()).build();
+        PersonDomainBuilder.init().appendFirstName("some first name").appendAddress(new AddressEntityImpl()).build();
     }
 
     @Test
@@ -65,7 +65,7 @@ public class PersonDomainBuilderTest {
         PersonDomainBuilder.init()
                 .appendFirstName("some first name")
                 .appendLastName("")
-                .appendAddress(new AddressEntity())
+                .appendAddress(new AddressEntityImpl())
                 .build();
     }
 
@@ -82,7 +82,7 @@ public class PersonDomainBuilderTest {
         PersonDomain personDomain = PersonDomainBuilder.init()
                 .appendFirstName("some first name")
                 .appendLastName("some last name")
-                .appendAddress(new AddressEntity())
+                .appendAddress(new AddressEntityImpl())
                 .build();
 
         assertThat("Person", personDomain, is(notNullValue()));

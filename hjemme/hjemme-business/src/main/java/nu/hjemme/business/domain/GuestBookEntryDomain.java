@@ -4,7 +4,7 @@ import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBook;
 import nu.hjemme.client.domain.GuestBookEntry;
 import nu.hjemme.client.domain.Person;
-import nu.hjemme.persistence.GuestBookEntryEntity;
+import nu.hjemme.persistence.client.GuestBookEntryEntity;
 
 import java.time.LocalDateTime;
 

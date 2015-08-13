@@ -2,6 +2,7 @@ package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Profile;
+import nu.hjemme.persistence.client.ProfileEntity;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.meta.ProfileMetadata;
 
@@ -12,7 +13,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class ProfileEntityImpl extends PersistentEntity<Long> implements Profile {
+public class ProfileEntityImpl extends PersistentEntity<Long> implements ProfileEntity {
     @Id
     @Column(name = ProfileMetadata.PROFILE_ID)
     // brukes av hibernate

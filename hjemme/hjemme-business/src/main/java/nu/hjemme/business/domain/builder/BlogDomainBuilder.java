@@ -1,8 +1,8 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.BlogDomain;
-import nu.hjemme.persistence.BlogEntity;
-import nu.hjemme.persistence.UserEntity;
+import nu.hjemme.persistence.client.BlogEntity;
+import nu.hjemme.persistence.client.UserEntity;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
@@ -10,7 +10,7 @@ public class BlogDomainBuilder extends DomainBuilder<BlogDomain> {
     static final String THE_BLOG_MUST_BELONG_TO_A_USER = "The blog must belong to a user";
     static final String THE_BLOG_MUST_HAVE_A_TITLE = "The blog must have a title";
 
-    private BlogEntity blogEntity = new BlogEntity();
+    private BlogEntity blogEntity = newInstance(BlogEntity.class);
 
     public BlogDomainBuilder appendTitle(String title) {
         blogEntity.setTitle(title);

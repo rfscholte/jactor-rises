@@ -3,12 +3,12 @@ package nu.hjemme.business.domain;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Address;
 import nu.hjemme.client.domain.Profile;
-import nu.hjemme.persistence.ProfileEntity;
+import nu.hjemme.persistence.db.ProfileEntityImpl;
 
 /** @author Tor Egil Jacobsen */
-public class ProfileDomain extends PersistentDomain<ProfileEntity, Long> implements Profile {
+public class ProfileDomain extends PersistentDomain<ProfileEntityImpl, Long> implements Profile {
 
-    public ProfileDomain(ProfileEntity profileEntity) {
+    public ProfileDomain(ProfileEntityImpl profileEntity) {
         super(profileEntity);
     }
 

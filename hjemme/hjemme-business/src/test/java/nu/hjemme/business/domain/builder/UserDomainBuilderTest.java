@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.UserDomain;
-import nu.hjemme.persistence.ProfileEntity;
+import nu.hjemme.persistence.db.ProfileEntityImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -37,7 +37,7 @@ public class UserDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(UserDomainBuilder.THE_PASSWORD_FIELD_CANNOT_BE_EMPTY);
 
-        UserDomainBuilder.init().appendUserName("some user").appendProfile(new ProfileEntity()).build();
+        UserDomainBuilder.init().appendUserName("some user").appendProfile(new ProfileEntityImpl()).build();
     }
 
     @Test
@@ -45,14 +45,14 @@ public class UserDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(UserDomainBuilder.THE_PASSWORD_FIELD_CANNOT_BE_EMPTY);
 
-        UserDomainBuilder.init().appendUserName("some user").appendProfile(new ProfileEntity()).appendPassword("").build();
+        UserDomainBuilder.init().appendUserName("some user").appendProfile(new ProfileEntityImpl()).appendPassword("").build();
     }
 
     @Test
     public void willBuildUserDomainWithAllRequiredProperties() {
         UserDomain userEntity = UserDomainBuilder.init()
                 .appendUserName("some user")
-                .appendProfile(new ProfileEntity())
+                .appendProfile(new ProfileEntityImpl())
                 .appendPassword("password")
                 .build();
 
