@@ -1,8 +1,8 @@
 package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.persistence.client.BlogEntity;
-import nu.hjemme.persistence.client.BlogEntryEntity;
+import nu.hjemme.persistence.BlogEntity;
+import nu.hjemme.persistence.BlogEntryEntity;
 import nu.hjemme.persistence.meta.BlogEntryMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

@@ -2,8 +2,8 @@ package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
-import nu.hjemme.persistence.client.ProfileEntity;
-import nu.hjemme.persistence.client.UserEntity;
+import nu.hjemme.persistence.ProfileEntity;
+import nu.hjemme.persistence.UserEntity;
 import nu.hjemme.persistence.meta.UserMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

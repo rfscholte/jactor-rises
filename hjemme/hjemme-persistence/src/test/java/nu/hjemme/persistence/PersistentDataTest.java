@@ -1,8 +1,6 @@
 package nu.hjemme.persistence;
 
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.Person;
-import nu.hjemme.persistence.client.PersonEntity;
 import nu.hjemme.persistence.db.PersonEntityImpl;
 import org.junit.After;
 import org.junit.Rule;

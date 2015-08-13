@@ -2,8 +2,7 @@ package nu.hjemme.business.domain;
 
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.client.domain.User;
-import nu.hjemme.persistence.client.BlogEntity;
-import nu.hjemme.persistence.db.BlogEntityImpl;
+import nu.hjemme.persistence.BlogEntity;
 
 import java.time.LocalDateTime;
 

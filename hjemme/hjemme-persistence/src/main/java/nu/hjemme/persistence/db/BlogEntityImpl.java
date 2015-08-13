@@ -1,7 +1,7 @@
 package nu.hjemme.persistence.db;
 
-import nu.hjemme.persistence.client.BlogEntity;
-import nu.hjemme.persistence.client.UserEntity;
+import nu.hjemme.persistence.BlogEntity;
+import nu.hjemme.persistence.UserEntity;
 import nu.hjemme.persistence.meta.BlogMetadata;
 import nu.hjemme.persistence.time.Now;
 import org.apache.commons.lang.builder.ToStringBuilder;

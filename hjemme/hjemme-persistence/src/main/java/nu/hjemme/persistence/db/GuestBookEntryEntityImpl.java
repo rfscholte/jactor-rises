@@ -2,8 +2,8 @@ package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBookEntry;
-import nu.hjemme.persistence.client.GuestBookEntity;
-import nu.hjemme.persistence.client.GuestBookEntryEntity;
+import nu.hjemme.persistence.GuestBookEntity;
+import nu.hjemme.persistence.GuestBookEntryEntity;
 import nu.hjemme.persistence.meta.GuestEntryMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

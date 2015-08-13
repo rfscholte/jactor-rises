@@ -2,8 +2,8 @@ package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Profile;
-import nu.hjemme.persistence.client.ProfileEntity;
-import nu.hjemme.persistence.client.UserEntity;
+import nu.hjemme.persistence.ProfileEntity;
+import nu.hjemme.persistence.UserEntity;
 import nu.hjemme.persistence.meta.ProfileMetadata;
 
 import javax.persistence.Column;

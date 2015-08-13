@@ -2,7 +2,7 @@ package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Person;
-import nu.hjemme.persistence.client.PersonEntity;
+import nu.hjemme.persistence.PersonEntity;
 import nu.hjemme.persistence.meta.PersonMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

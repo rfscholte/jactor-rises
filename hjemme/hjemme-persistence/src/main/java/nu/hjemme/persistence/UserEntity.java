@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.client;
+package nu.hjemme.persistence;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;

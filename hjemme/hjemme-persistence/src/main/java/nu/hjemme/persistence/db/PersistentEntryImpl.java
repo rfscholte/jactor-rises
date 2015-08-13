@@ -2,8 +2,8 @@ package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Entry;
-import nu.hjemme.persistence.client.EntryEntity;
-import nu.hjemme.persistence.client.PersonEntity;
+import nu.hjemme.persistence.EntryEntity;
+import nu.hjemme.persistence.PersonEntity;
 import nu.hjemme.persistence.time.Now;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
