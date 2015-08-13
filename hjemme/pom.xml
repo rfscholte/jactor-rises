@@ -27,8 +27,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- www.hjemme.nu -->
-
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-client</artifactId>
@@ -53,13 +51,6 @@
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-test</artifactId>
                 <version>${hjemme-version}</version>
-            </dependency>
-
-            <!-- third party -->
-            <dependency>
-                <groupId>javax.persistence</groupId>
-                <artifactId>persistence-api</artifactId>
-                <version>${javax.persistence-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

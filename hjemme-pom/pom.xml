@@ -53,6 +53,11 @@
                 <version>${commons.lang-version}</version>
             </dependency>
             <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>${javax.persistence-version}</version>
+            </dependency>
+            <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>jstl</artifactId>
                 <version>${javax.servlet.jstl-version}</version>
