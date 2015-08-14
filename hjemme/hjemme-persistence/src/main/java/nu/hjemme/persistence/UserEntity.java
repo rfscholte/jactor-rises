@@ -1,5 +1,6 @@
 package nu.hjemme.persistence;
 
+import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
 
@@ -12,4 +13,6 @@ public interface UserEntity extends User {
     void setProfileEntity(ProfileEntity profile);
 
     void setPassword(String password);
+
+    void setEmailAddress(EmailAddress emailAddress);
 }

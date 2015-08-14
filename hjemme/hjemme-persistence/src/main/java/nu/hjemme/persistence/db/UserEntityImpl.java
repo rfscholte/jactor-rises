@@ -1,5 +1,6 @@
 package nu.hjemme.persistence.db;
 
+import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.ProfileEntity;
@@ -18,6 +19,7 @@ import static java.util.Objects.hash;
 /** @author Tor Egil Jacobsen */
 public class UserEntityImpl extends PersistentEntity<Long> implements UserEntity {
 
+
     @Id
     @Column(name = UserMetadata.USER_ID)
     // brukes av hibernate
@@ -25,7 +27,6 @@ public class UserEntityImpl extends PersistentEntity<Long> implements UserEntity
     void setUserId(Long userId) {
         setId(userId);
     }
-
     @Column(name = UserMetadata.PASSWORD)
     private String password;
 
@@ -35,6 +36,9 @@ public class UserEntityImpl extends PersistentEntity<Long> implements UserEntity
 
     @OneToOne(mappedBy = "profileEntity")
     private ProfileEntity profileEntity;
+
+    @Column(name = UserMetadata.EMAIL)
+    private EmailAddress emailAddress;
 
     public UserEntityImpl() {
     }
@@ -91,8 +95,18 @@ public class UserEntityImpl extends PersistentEntity<Long> implements UserEntity
     }
 
     @Override
+    public EmailAddress getEmailAddress() {
+        return emailAddress;
+    }
+
+    @Override
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public void setEmailAddress(EmailAddress emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package nu.hjemme.business.domain;
 
+import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.Profile;
 import nu.hjemme.client.domain.User;
@@ -25,5 +26,10 @@ public class UserDomain extends PersistentDomain<UserEntity, Long> implements Us
     @Override
     public Profile getProfile() {
         return getEntity().getProfile();
+    }
+
+    @Override
+    public EmailAddress getEmailAddress() {
+        return getEntity().getEmailAddress();
     }
 }

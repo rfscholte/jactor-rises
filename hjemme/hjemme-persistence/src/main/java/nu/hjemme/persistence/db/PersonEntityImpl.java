@@ -8,12 +8,16 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
 
+@Entity
+@Table(name = "T_PERSON")
 /** @author Tor Egil Jacobsen */
 public class PersonEntityImpl extends PersistentEntity<Long> implements PersonEntity {
 
