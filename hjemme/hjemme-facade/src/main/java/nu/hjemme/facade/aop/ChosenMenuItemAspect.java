@@ -19,7 +19,7 @@ public class ChosenMenuItemAspect {
         chosenMenuItemCache = new ChosenMenuItemCache();
     }
 
-    @Pointcut("execution(* nu.hjemme.client.service.MenuFacade.*(..))")
+    @Pointcut("execution(* nu.hjemme.client.service.MenuFacade.retrieveChosenMenuItemBy(..))")
     @SuppressWarnings("unused") // Brukes av spring og aspect j
     public void menuCaching() {
     }
