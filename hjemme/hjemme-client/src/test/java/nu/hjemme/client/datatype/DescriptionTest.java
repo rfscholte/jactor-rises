@@ -1,12 +1,20 @@
 package nu.hjemme.client.datatype;
 
+import nu.hjemme.test.matcher.DescriptionMatcher;
+import nu.hjemme.test.matcher.MatchBuilder;
+import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
+import org.hamcrest.Matcher;
 import org.junit.Test;
 
+import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
-/** @author Tor Egil Jacobsen */
 public class DescriptionTest {
 
     @Test
@@ -25,5 +33,15 @@ public class DescriptionTest {
         Description notEqual = new Description("some other item", "some other description");
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
+    }
+
+    @Test
+    public void willInitWithoutName() {
+        assertThat(new Description("some description"), new TypeSafeBuildMatcher<Description>("will initialize without name") {
+
+            @Override public MatchBuilder matches(Description typeToTest, MatchBuilder matchBuilder) {
+                return matchBuilder.matches(typeToTest.toString(), is(equalTo("some description"), "toString"));
+            }
+        });
     }
 }

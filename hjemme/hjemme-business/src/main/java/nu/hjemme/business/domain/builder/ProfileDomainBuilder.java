@@ -1,6 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.ProfileDomain;
+import nu.hjemme.client.datatype.Description;
 import nu.hjemme.persistence.db.AddressEntityImpl;
 import nu.hjemme.persistence.db.ProfileEntityImpl;
 import org.apache.commons.lang.Validate;
@@ -45,7 +46,7 @@ public class ProfileDomainBuilder extends DomainBuilder<ProfileDomain> {
     }
 
     public ProfileDomainBuilder appendDescription(String description) {
-        profileEntity.setDescription(description);
+        profileEntity.setDescription(new Description(description));
         return this;
     }
 

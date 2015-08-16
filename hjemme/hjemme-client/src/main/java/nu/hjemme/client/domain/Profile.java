@@ -1,8 +1,10 @@
 package nu.hjemme.client.domain;
 
-/** @author Tor Egil Jacobsen */
+import nu.hjemme.client.datatype.Description;
+
 public interface Profile extends Person {
-    String getDescription();
+
+    Description getDescription();
 
     User getUser();
 }

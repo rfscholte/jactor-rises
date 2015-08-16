@@ -32,7 +32,7 @@ public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
     }
 
     public BlogEntryDomainBuilder appendBlog(BlogEntityImpl blogEntity) {
-        blogEntryEntity.setBlogEntity(blogEntity);
+        blogEntryEntity.setBlog(blogEntity);
         return this;
     }
 
