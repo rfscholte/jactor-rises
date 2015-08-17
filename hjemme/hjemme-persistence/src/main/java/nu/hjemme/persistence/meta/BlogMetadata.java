@@ -5,11 +5,8 @@ package nu.hjemme.persistence.meta;
  * @@author Tor Egil Jacobsen
  */
 public final class BlogMetadata {
-    private BlogMetadata() {
-    }
+    private BlogMetadata() {}
 
-    /** The primary key for a blog */
-    public static final String BLOG_ID = "BLOG_ID";
     /** The creation time of the blog */
     public static final String CREATED = "CREATION_TIME";
     /** The title of the blog */
