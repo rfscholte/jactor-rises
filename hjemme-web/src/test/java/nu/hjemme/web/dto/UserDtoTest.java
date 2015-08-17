@@ -1,5 +1,6 @@
 package nu.hjemme.web.dto;
 
+import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.Address;
@@ -60,7 +61,7 @@ public class UserDtoTest {
         when(mockedUser.getUserName()).thenReturn(new UserName("user"));
         when(mockedUser.getProfile()).thenReturn(mockedProfile);
         when(mockedProfile.getAddress()).thenReturn(mockedAddress);
-        when(mockedProfile.getDescription()).thenReturn("description");
+        when(mockedProfile.getDescription()).thenReturn(new Description("description"));
         when(mockedProfile.getFirstName()).thenReturn(new Name("John"));
         when(mockedProfile.getLastName()).thenReturn(new Name("Smith"));
         when(mockedAddress.getAddressLine1()).thenReturn("address line 1");
