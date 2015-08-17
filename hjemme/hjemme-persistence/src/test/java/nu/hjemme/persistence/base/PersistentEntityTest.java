@@ -2,6 +2,7 @@ package nu.hjemme.persistence.base;
 
 import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.Name;
+import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Before;
@@ -69,6 +70,14 @@ public class PersistentEntityTest {
 
     @Test public void willConvertFromEmailAddress() {
         assertThat(testPersistentEntity.convertFrom(new EmailAddress("some@where.com")), is(equalTo("some@where.com"), "EmailAddress->String"));
+    }
+
+    @Test public void willConvertToUserName() {
+        assertThat(testPersistentEntity.convertTo("jactor", UserName.class), is(equalTo(new UserName("jactor")), "String->UserName"));
+    }
+
+    @Test public void willConvertFromUserName() {
+        assertThat(testPersistentEntity.convertFrom(new UserName("jactor")), is(equalTo("jactor"), "UserName->String"));
     }
 
     private class TestPersistentEntity extends PersistentEntity<Long> {
