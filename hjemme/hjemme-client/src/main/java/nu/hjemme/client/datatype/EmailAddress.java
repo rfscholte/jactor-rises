@@ -46,8 +46,13 @@ public class EmailAddress {
                 .isEquals();
     }
 
+
+    public String asString() {
+        return prefix + AT + suffix;
+    }
+
     @Override
     public String toString() {
-        return EmailAddress.class.getSimpleName() + "[" + prefix + AT + suffix + "]";
+        return EmailAddress.class.getSimpleName() + "[" + asString() + "]";
     }
 }
