@@ -22,20 +22,18 @@ import java.util.Map;
  */
 @Configuration
 @EnableAspectJAutoProxy
-public class HjemmeAppContext {
+public class HjemmeBeanContext {
 
-    public HjemmeAppContext() {
+    public HjemmeBeanContext() {
         Locale.setDefault(Locale.ENGLISH);
     }
 
-    @Bean(name = "hjemme.menuFacade")
-    @SuppressWarnings("unused") // brukes av spring
+    @Bean(name = "hjemme.menuFacade") @SuppressWarnings("unused") // brukes av spring
     public MenuFacade menuFacade(List<Menu> menus) {
         return new MenuFacadeImpl(menus);
     }
 
-    @Bean(name = "hjemme.userFacade")
-    @SuppressWarnings("unused") // brukes av spring
+    @Bean(name = "hjemme.userFacade") @SuppressWarnings("unused") // brukes av spring
     public UserFacade userFacade() {
         Map<UserName, User> defaultUsers = new HashMap<>();
         defaultUsers.put(DefaultUsers.getJactor().getUserName(), DefaultUsers.getJactor());
@@ -44,8 +42,7 @@ public class HjemmeAppContext {
         return new UserFacadeImpl(defaultUsers);
     }
 
-    @Bean(name = "hjemme.aop.chosenMenuItems")
-    @SuppressWarnings("unused") // brukes av spring
+    @Bean(name = "hjemme.aop.chosenMenuItems") @SuppressWarnings("unused") // brukes av spring
     public ChosenMenuItemAspect chosenMenuItemAspect() {
         return new ChosenMenuItemAspect();
     }

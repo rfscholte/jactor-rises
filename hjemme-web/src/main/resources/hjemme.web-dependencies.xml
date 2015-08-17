@@ -7,6 +7,6 @@
     <!-- To automatically search classpath for beans with annotaions as configuration -->
     <context:annotation-config />
 
-    <bean id = "hjemme.appContext" class = "nu.hjemme.facade.config.HjemmeAppContext" />
+    <bean id = "hjemme.appContext" class = "nu.hjemme.facade.config.HjemmeBeanContext" />
     <bean id = "hjemme.webContext" class = "nu.hjemme.web.config.HjemmeWebContext" />
 </beans>
