@@ -6,7 +6,7 @@
     <parent>
         <artifactId>hjemme-pom</artifactId>
         <groupId>nu.hjemme</groupId>
-        <version>1.0.25</version>
+        <version>1.0.26</version>
     </parent>
 
     <artifactId>hjemme</artifactId>
@@ -18,20 +18,34 @@
     <url>http://www.hjemme.nu</url>
 
     <modules>
-        <module>hjemme-client</module>
         <module>hjemme-business</module>
+        <module>hjemme-client</module>
+        <module>hjemme-config</module>
         <module>hjemme-facade</module>
         <module>hjemme-persistence</module>
         <module>hjemme-test</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>nu.hjemme</groupId>
-                <artifactId>hjemme-client</artifactId>
-                <version>${hjemme-version}</version>
-            </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-business</artifactId>
@@ -39,12 +53,22 @@
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
-                <artifactId>hjemme-persistence</artifactId>
+                <artifactId>hjemme-client</artifactId>
+                <version>${hjemme-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-config</artifactId>
                 <version>${hjemme-version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-facade</artifactId>
+                <version>${hjemme-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-persistence</artifactId>
                 <version>${hjemme-version}</version>
             </dependency>
             <dependency>

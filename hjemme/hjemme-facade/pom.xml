@@ -23,26 +23,46 @@
     <dependencies>
         <dependency>
             <groupId>nu.hjemme</groupId>
+            <artifactId>hjemme-business</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>nu.hjemme</groupId>
             <artifactId>hjemme-client</artifactId>
         </dependency>
         <dependency>
             <groupId>nu.hjemme</groupId>
-            <artifactId>hjemme-business</artifactId>
+            <artifactId>hjemme-config</artifactId>
         </dependency>
 
         <!-- Third party -->
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.8.0</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
         </dependency>
         <dependency>
-        <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework-version}</version>
         </dependency>
 
         <!-- Test scope -->
