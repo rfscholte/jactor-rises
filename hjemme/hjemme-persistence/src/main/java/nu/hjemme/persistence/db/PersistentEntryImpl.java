@@ -4,6 +4,7 @@ import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Entry;
 import nu.hjemme.persistence.EntryEntity;
 import nu.hjemme.persistence.PersonEntity;
+import nu.hjemme.persistence.base.PersistentEntity;
 import nu.hjemme.persistence.time.Now;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -52,47 +53,41 @@ public abstract class PersistentEntryImpl extends PersistentEntity<Long> impleme
                 .toString();
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return hash(getEntry(), getCreatorName(), getCreator());
     }
 
-    @Override
-    public abstract boolean equals(Object o);
+    @Override public abstract boolean equals(Object o);
 
-    @Override
-    public LocalDateTime getCreationTime() {
+    @Override public LocalDateTime getCreationTime() {
         return creationTime;
     }
 
-    @Override
-    public String getEntry() {
+    @Override public String getEntry() {
         return entry;
     }
 
-    @Override
-    public Name getCreatorName() {
+    @Override public Name getCreatorName() {
         return createdName;
     }
 
-    @Override
-    public PersonEntity getCreator() {
+    @Override public PersonEntity getCreator() {
         return creator;
     }
 
-    public void setCreatorName(Name createdBy) {
+    @Override public void setCreatorName(Name createdBy) {
         this.createdName = createdBy;
     }
 
-    public void setEntry(String entry) {
+    @Override public void setEntry(String entry) {
         this.entry = entry;
     }
 
-    public void setCreator(PersonEntity originator) {
+    @Override public void setCreator(PersonEntity originator) {
         this.creator = originator;
     }
 
-    public void setCreationTime(LocalDateTime creationTime) {
+    @Override public void setCreationTime(LocalDateTime creationTime) {
         this.creationTime = creationTime;
     }
 }

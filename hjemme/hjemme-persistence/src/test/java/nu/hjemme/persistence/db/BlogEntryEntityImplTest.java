@@ -1,8 +1,5 @@
 package nu.hjemme.persistence.db;
 
-import nu.hjemme.persistence.db.BlogEntityImpl;
-import nu.hjemme.persistence.db.BlogEntryEntityImpl;
-import nu.hjemme.persistence.db.PersonEntityImpl;
 import nu.hjemme.persistence.time.NowAsPureDate;
 import org.junit.After;
 import org.junit.Before;
@@ -28,14 +25,14 @@ public class BlogEntryEntityImplTest {
     public void willHaveCorrectImplementedHashCode() {
         BlogEntryEntityImpl base = new BlogEntryEntityImpl();
         base.setEntry("entry");
-        base.setBlogEntity(new BlogEntityImpl());
+        base.setBlog(new BlogEntityImpl());
         base.setCreator(new PersonEntityImpl());
 
         BlogEntryEntityImpl equal = new BlogEntryEntityImpl(base);
 
         BlogEntryEntityImpl notEqual = new BlogEntryEntityImpl();
         notEqual.setEntry("not the same entry");
-        notEqual.setBlogEntity(new BlogEntityImpl());
+        notEqual.setBlog(new BlogEntityImpl());
         notEqual.setCreator(new PersonEntityImpl());
         notEqual.setCreatorName("someone");
 
@@ -46,14 +43,14 @@ public class BlogEntryEntityImplTest {
     public void willHaveCorrectImplementedEquals() {
         BlogEntryEntityImpl base = new BlogEntryEntityImpl();
         base.setEntry("entry");
-        base.setBlogEntity(new BlogEntityImpl());
+        base.setBlog(new BlogEntityImpl());
         base.setCreator(new PersonEntityImpl());
 
         BlogEntryEntityImpl equal = new BlogEntryEntityImpl(base);
 
         BlogEntryEntityImpl notEqual = new BlogEntryEntityImpl();
         notEqual.setEntry("not the same entry");
-        notEqual.setBlogEntity(new BlogEntityImpl());
+        notEqual.setBlog(new BlogEntityImpl());
         notEqual.setCreator(new PersonEntityImpl());
         notEqual.setCreatorName("someone");
 

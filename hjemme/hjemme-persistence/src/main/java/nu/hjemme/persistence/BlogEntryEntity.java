@@ -9,4 +9,6 @@ public interface BlogEntryEntity extends BlogEntry {
 
     @Override
     BlogEntity getBlog();
+
+    void setBlog(BlogEntity blog);
 }
