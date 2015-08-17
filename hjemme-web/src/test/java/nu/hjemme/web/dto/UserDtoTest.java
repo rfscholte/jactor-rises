@@ -17,19 +17,12 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-/** @author Tor Egil Jacobsen */
 public class UserDtoTest {
-    @Mock
-    Address mockedAddress;
+    @Mock private Address mockedAddress;
+    @Mock private User mockedUser;
+    @Mock private Profile mockedProfile;
 
-    @Mock
-    User mockedUser;
-
-    @Mock
-    Profile mockedProfile;
-
-    @Test
-    public void willGetTheAddress() {
+    @Test public void willGetTheAddress() {
         mockUserInstance();
         UserDto testUserDto = new UserDto(mockedUser);
 
@@ -39,16 +32,14 @@ public class UserDtoTest {
         assertThat("Zip code", testUserDto.getZipCode(), is(equalTo(1234)));
     }
 
-    @Test
-    public void willGetTheUser() {
+    @Test public void willGetTheUser() {
         mockUserInstance();
         UserDto testUserDto = new UserDto(mockedUser);
 
         assertThat("User name", testUserDto.getUserName(), is(equalTo("user")));
     }
 
-    @Test
-    public void willGetTheProfile() {
+    @Test public void willGetTheProfile() {
         mockUserInstance();
         UserDto testUserDto = new UserDto(mockedUser);
 
