@@ -42,6 +42,6 @@ public class UserDto {
     }
 
     public String getDescription() {
-        return user.getProfile().getDescription();
+        return user.getProfile().getDescription().toString();
     }
 }
