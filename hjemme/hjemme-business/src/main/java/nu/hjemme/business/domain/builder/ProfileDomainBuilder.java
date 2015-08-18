@@ -1,8 +1,8 @@
 package nu.hjemme.business.domain.builder;
 
+import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.business.domain.ProfileDomain;
 import nu.hjemme.client.datatype.Description;
-import nu.hjemme.persistence.db.AddressEntityImpl;
 import nu.hjemme.persistence.db.ProfileEntityImpl;
 import org.apache.commons.lang.Validate;
 
@@ -14,20 +14,14 @@ public class ProfileDomainBuilder extends DomainBuilder<ProfileDomain> {
 
     private ProfileEntityImpl profileEntity = new ProfileEntityImpl();
 
-    @Override
-    protected ProfileDomain buildInstance() {
+    @Override protected ProfileDomain buildInstance() {
         return new ProfileDomain(profileEntity);
     }
 
-    @Override
-    protected void validate() {
+    @Override protected void validate() {
         Validate.notNull(profileEntity.getFirstName(), THE_FIRST_NAME_CANNOT_BE_NULL);
         Validate.notNull(profileEntity.getLastName(), THE_LAST_NAME_CANNOT_BE_NULL);
         Validate.notNull(profileEntity.getAddress(), AN_ADDRESS_MUST_BE_PRESENT);
-    }
-
-    public static ProfileDomainBuilder init() {
-        return new ProfileDomainBuilder();
     }
 
     public ProfileDomainBuilder appendLastName(String lastName) {
@@ -40,18 +34,17 @@ public class ProfileDomainBuilder extends DomainBuilder<ProfileDomain> {
         return this;
     }
 
-    public ProfileDomainBuilder appendAddress(AddressEntityImpl addressEntity) {
-        profileEntity.addAddressEntity(addressEntity);
+    public ProfileDomainBuilder appendAddress(AddressDomain address) {
+        profileEntity.addAddressEntity(address.getEntity());
         return this;
+    }
+
+    public ProfileDomainBuilder appendAddress(AddressDomainBuilder address) {
+        return appendAddress(address.get());
     }
 
     public ProfileDomainBuilder appendDescription(String description) {
         profileEntity.setDescription(new Description(description));
         return this;
-    }
-
-    public ProfileEntityImpl getValidatedProfileEntity() {
-        validate();
-        return profileEntity;
     }
 }

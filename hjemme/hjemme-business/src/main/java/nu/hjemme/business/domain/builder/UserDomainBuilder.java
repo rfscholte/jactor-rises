@@ -1,9 +1,9 @@
 package nu.hjemme.business.domain.builder;
 
+import nu.hjemme.business.domain.ProfileDomain;
 import nu.hjemme.business.domain.UserDomain;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.ProfileEntity;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
@@ -15,17 +15,26 @@ public class UserDomainBuilder extends DomainBuilder<UserDomain> {
     private final UserEntity userEntity = newInstance(UserEntity.class);
 
     public UserDomainBuilder appendUserName(String userName) {
-        userEntity.setUserName(new UserName(userName));
+        userEntity.setUserName(userName);
         return this;
     }
 
-    public UserDomainBuilder appendProfile(ProfileEntity profile) {
-        userEntity.setProfileEntity(profile);
+    public UserDomainBuilder appendProfile(ProfileDomain profile) {
+        userEntity.setProfileEntity(profile.getEntity());
         return this;
+    }
+
+    public UserDomainBuilder appendProfile(ProfileDomainBuilder profile) {
+        return appendProfile(profile.get());
     }
 
     public UserDomainBuilder appendPassword(String password) {
         userEntity.setPassword(password);
+        return this;
+    }
+
+    public UserDomainBuilder appendEmailAddress(String emailAddress) {
+        userEntity.setEmailAddress(emailAddress);
         return this;
     }
 
@@ -39,9 +48,5 @@ public class UserDomainBuilder extends DomainBuilder<UserDomain> {
         Validate.notNull(userEntity.getUserName(), THE_USER_NAME_CANNOT_BE_NULL);
         Validate.notNull(userEntity.getProfile(), THE_USER_MUST_HAVE_A_PROFILE);
         Validate.notEmpty(userEntity.getPassword(), THE_PASSWORD_FIELD_CANNOT_BE_EMPTY);
-    }
-
-    public static UserDomainBuilder init() {
-        return new UserDomainBuilder();
     }
 }
