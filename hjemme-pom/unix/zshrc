@@ -1,6 +1,6 @@
 # funksjoner
 function wcgrep {													# fun: wcgrep
-    grep -R $1 * | grep -v target | grep -v .git | grep -v "~" | grep -v ".pyc" | grep -v Binary | grep --color -n $1	# fun: wcgrep
+    grep -R $1 * | grep -v target | grep -v \.git | grep -v "~" | grep -v ".pyc" | grep -v Binary | grep --color -n $1	# fun: wcgrep
 }															# fun: wcgrep
 															# fun:
 function grath {													# fun: grath
@@ -17,7 +17,7 @@ function filelog() {													# fun: (git) lister ut commits fra tidspunkt so
 }															# fun: (git)
 															# fun:
 precmd () {														# fun: genererer tittel pa konsollvindu (kjores for hver kommando)
-        print -Pn "\033]0;On\ branch:\ $(git rev-parse --abbrev-ref HEAD 2> /dev/null)\007"						# fun:
+        print -Pn "\033]0;On\ branch:\ $(git rev-parse --abbrev-ref HEAD 2> /dev/null)\007"				# fun:
 }															# fun:
 															# fun:
 # System variables
