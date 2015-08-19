@@ -103,6 +103,7 @@ alias cmd='more $HOME/.zshrc | grep "# cmd:"'										# cmd: list alle alias fo
 alias cmd.git='fun | grep "# fun: (git)" && cmd | grep git'								# cmd: lister alle funksjoner/kommandoer som har noe med git
 alias cmd.grep='cmd | grep '												# cmd: grepper alle kommandoer i zshrc
 alias con='more $HOME/.zshrc | grep -e "# var:" -e "# opt:"'								# cmd: list all configurasjon i .zshrc
+alias con.grep='con | grep -i'												# cmd: grepper alle konfigureringer i zshrc
 alias env.grep='env | grep -i'												# cmd: case insensitive grepping av miljovariabler
 alias files.hide='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'				# cmd: skjul "hidden files" fra Finder (Mac Os X)
 alias files.show='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'				# cmd: vis "hidden files" fra Finder (Mac Os X)
