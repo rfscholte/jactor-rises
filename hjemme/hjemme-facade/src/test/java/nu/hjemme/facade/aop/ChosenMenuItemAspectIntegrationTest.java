@@ -10,6 +10,7 @@ import nu.hjemme.client.domain.menu.dto.MenuDto;
 import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
+import nu.hjemme.facade.config.HjemmeDbContext;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,7 +32,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HjemmeBeanContext.class, ChosenMenuItemAspectIntegrationTest.MockedMenuConfiguration.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {HjemmeBeanContext.class, ChosenMenuItemAspectIntegrationTest.MockedMenuConfiguration.class, HjemmeDbContext.class})
 public class ChosenMenuItemAspectIntegrationTest {
 
     private ChosenMenuItemCache mockedChosenMenuItemCache;

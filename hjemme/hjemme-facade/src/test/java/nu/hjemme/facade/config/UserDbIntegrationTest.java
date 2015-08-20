@@ -38,8 +38,6 @@ public class UserDbIntegrationTest {
                         .withPasswordAs("demo")
                         .withEmailAddressAs("helt@hjemme")
                         .with(aProfile().withDescriptionAs("description")
-                                        .withFirstNameAs("Kristian")
-                                        .withLastNameAs("Jacobsen")
                                         .with(anAddress().withAddressLine1As("Hjemme")
                                                         .withCityAs("Dirdal")
                                                         .withCountryAs("NO", "no")
@@ -58,9 +56,7 @@ public class UserDbIntegrationTest {
                 return matchBuilder
                         .matches(typeToTest.getEmailAddress(), is(equalTo(new EmailAddress("helt", "hjemme")), "user.emailAddress"))
                         .matches(typeToTest.getPassword(), is(equalTo("demo"), "user.password"))
-                        .matches(typeToTest.getProfile().getDescription(), is(equalTo(new Description("description")), "profile.description"))
-                        .matches(typeToTest.getProfile().getFirstName(), is(equalTo(new Name("Kristian")), "profile.firstName"))
-                        .matches(typeToTest.getProfile().getLastName(), is(equalTo(new Name("Jacobsen")), "profile.lastName"));
+                        .matches(typeToTest.getProfile().getDescription(), is(equalTo(new Description("description")), "profile.description"));
             }
         });
 

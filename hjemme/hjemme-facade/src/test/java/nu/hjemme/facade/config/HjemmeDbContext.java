@@ -9,6 +9,9 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Properties;
 
 @Configuration
@@ -18,7 +21,7 @@ public class HjemmeDbContext {
     public DataSource dataSourceFromHsqldb() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
-                .setName("hjemme-db")
+                .setName("hjemme-db" + System.currentTimeMillis())
                 .addScript("classpath:create.db.sql")
                 .addScript("classpath:create.default.users.sql")
                 .build();

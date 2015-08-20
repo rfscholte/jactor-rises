@@ -68,8 +68,8 @@
 
         <!-- Test scope -->
         <dependency>
-            <artifactId>hjemme-test</artifactId>
             <groupId>nu.hjemme</groupId>
+            <artifactId>hjemme-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

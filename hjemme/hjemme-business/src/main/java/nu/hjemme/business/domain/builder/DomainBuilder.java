@@ -22,7 +22,7 @@ public abstract class DomainBuilder<Domain> {
     }
 
     protected <T> T newInstance(Class<T> persistentClass) {
-        return PersistentData.getInstance().provideFor(persistentClass);
+        return PersistentData.getInstance().provideEntityFor(persistentClass);
     }
 
     public static UserDomainBuilder aUser() {
@@ -51,7 +51,8 @@ public abstract class DomainBuilder<Domain> {
 
     public enum Build {
         ADDRESS(AddressDomainBuilder.class),
-        PROFILE(ProfileDomainBuilder.class);
+        PROFILE(ProfileDomainBuilder.class),
+        USER(UserDomainBuilder.class);
 
 
         final Class builderClass;

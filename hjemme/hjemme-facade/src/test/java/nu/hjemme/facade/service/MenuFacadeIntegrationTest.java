@@ -8,6 +8,7 @@ import nu.hjemme.client.domain.menu.dto.MenuDto;
 import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
+import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Ignore;
@@ -29,7 +30,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HjemmeBeanContext.class, MenuFacadeIntegrationTest.HjemmeTestMenus.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {HjemmeBeanContext.class, MenuFacadeIntegrationTest.HjemmeTestMenus.class, HjemmeDbContext.class})
 public class MenuFacadeIntegrationTest {
     @Resource @SuppressWarnings("unused") // initialized by spring
     private MenuFacade testMenuFacade;
