@@ -1,5 +1,6 @@
 package nu.hjemme.persistence.base;
 
+import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.datatype.UserName;
@@ -46,38 +47,23 @@ public class PersistentEntityTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersistentEntity.class.toString());
 
-        testPersistentEntity.convertTo(new TestPersistentEntity(), PersistentEntity.class);
+        testPersistentEntity.convert(new TestPersistentEntity(), PersistentEntity.class);
     }
 
-    @Test public void willThrowIllegalArgumentExceptionWhenConvertFromClassTypeIsUnknown() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(PersistentEntity.class.toString());
-
-        testPersistentEntity.convertFrom(new TestPersistentEntity());
+    @Test public void willConvertName() {
+        assertThat(testPersistentEntity.convert("jacobsen", Name.class), is(equalTo(new Name("jacobsen")), "String->Name"));
     }
 
-    @Test public void willConvertFromName() {
-        assertThat(testPersistentEntity.convertFrom(new Name("jacobsen")), is(equalTo("jacobsen"), "Name->String"));
+    @Test public void willConvertEmailAddress() {
+        assertThat(testPersistentEntity.convert("some@where.com", EmailAddress.class), is(equalTo(new EmailAddress("some", "where.com")), "String->EmailAddress"));
     }
 
-    @Test public void willConvertToName() {
-        assertThat(testPersistentEntity.convertTo("jacobsen", Name.class), is(equalTo(new Name("jacobsen")), "String->Name"));
+    @Test public void willConvertUserName() {
+        assertThat(testPersistentEntity.convert("jactor", UserName.class), is(equalTo(new UserName("jactor")), "String->UserName"));
     }
 
-    @Test public void willConvertToEmailAddress() {
-        assertThat(testPersistentEntity.convertTo("some@where.com", EmailAddress.class), is(equalTo(new EmailAddress("some", "where.com")), "String->EmailAddress"));
-    }
-
-    @Test public void willConvertFromEmailAddress() {
-        assertThat(testPersistentEntity.convertFrom(new EmailAddress("some@where.com")), is(equalTo("some@where.com"), "EmailAddress->String"));
-    }
-
-    @Test public void willConvertToUserName() {
-        assertThat(testPersistentEntity.convertTo("jactor", UserName.class), is(equalTo(new UserName("jactor")), "String->UserName"));
-    }
-
-    @Test public void willConvertFromUserName() {
-        assertThat(testPersistentEntity.convertFrom(new UserName("jactor")), is(equalTo("jactor"), "UserName->String"));
+    @Test public void willConvertDescription() {
+        assertThat(testPersistentEntity.convert("description", Description.class), is(equalTo(new Description("description")), "String->Description"));
     }
 
     private class TestPersistentEntity extends PersistentEntity<Long> {
