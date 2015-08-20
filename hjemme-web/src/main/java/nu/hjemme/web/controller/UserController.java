@@ -33,7 +33,7 @@ public class UserController {
         }
 
         UserName userName = userNameDto.getUserName();
-        User user = userFacade.retrieveBy(userName);
+        User user = userFacade.findUsing(userName);
 
         if (user == null) {
             return;

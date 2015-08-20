@@ -27,19 +27,16 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
 
-    @Mock
-    UserFacade mockedUserFacade;
+    @Mock private UserFacade mockedUserFacade;
 
     private UserController testUserController;
 
-    @Before
-    public void setUpUserController() {
+    @Before public void setUpUserController() {
         testUserController = new UserController();
         testUserController.setUserFacade(mockedUserFacade);
     }
 
-    @Test
-    public void willNotRetrieveUserByUserNameIfTheUserNameInTheWebRequestIsNullOrAnEmptyString() {
+    @Test public void willNotRetrieveUserByUserNameIfTheUserNameInTheWebRequestIsNullOrAnEmptyString() {
         Map<String, String[]> params = new HashMap<String, String[]>();
 
         WebRequest mockedWebRequest = mock(WebRequest.class);
@@ -47,32 +44,30 @@ public class UserControllerTest {
 
         testUserController.doUser(mock(ModelMap.class), mockedWebRequest);
 
-        verify(mockedUserFacade, atMost(0)).retrieveBy(any(UserName.class));
+        verify(mockedUserFacade, atMost(0)).findUsing(any(UserName.class));
 
         String[] value = {" \n\t "};
         params.put("choose", value);
 
         testUserController.doUser(mock(ModelMap.class), mockedWebRequest);
 
-        verify(mockedUserFacade, atMost(0)).retrieveBy(any(UserName.class));
+        verify(mockedUserFacade, atMost(0)).findUsing(any(UserName.class));
     }
 
-    @Test
-    public void willRetrieveTheUserIfChooseParameterExist() {
+    @Test public void willRetrieveTheUserIfChooseParameterExist() {
         WebRequest mockedWebRequest = mock(WebRequest.class);
         ModelMap mockedModelMap = mock(ModelMap.class);
         User mockedUser = mock(User.class);
 
         when(mockedWebRequest.getParameter(ParameterConstants.CHOOSE_USER)).thenReturn("user");
-        when(mockedUserFacade.retrieveBy(new UserName("user"))).thenReturn(mockedUser);
+        when(mockedUserFacade.findUsing(new UserName("user"))).thenReturn(mockedUser);
 
         testUserController.doUser(mockedModelMap, mockedWebRequest);
 
         verify(mockedModelMap, atLeastOnce()).put(eq(ControllerValues.ATTRIBUTE_USER), any(UserDto.class));
     }
 
-    @Test
-    public void willNotPutTheUserOnTheModelIfNotFound() {
+    @Test public void willNotPutTheUserOnTheModelIfNotFound() {
         WebRequest mockedWebRequest = mock(WebRequest.class);
         ModelMap mockedModelMap = mock(ModelMap.class);
 
@@ -81,7 +76,7 @@ public class UserControllerTest {
         params.put("choose", value);
 
         when(mockedWebRequest.getParameterMap()).thenReturn(params);
-        when(mockedUserFacade.retrieveBy(new UserName("user"))).thenReturn(null);
+        when(mockedUserFacade.findUsing(new UserName("user"))).thenReturn(null);
 
         testUserController.doUser(mockedModelMap, mockedWebRequest);
 
