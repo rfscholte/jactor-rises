@@ -17,9 +17,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * @author Tor Egil Jacobsen
- */
 @Configuration
 @EnableAspectJAutoProxy
 public class HjemmeBeanContext {

@@ -1,2 +1,13 @@
-INSERT INTO T_USER (USER_NAME, PASSWORD, EMAIL, EMAILUSR) VALUES ('jactor', 'turbo', 'tor.egil.jacobsen@gmail.com', '0');
-INSERT INTO T_USER (USER_NAME, PASSWORD, EMAIL, EMAILUSR) VALUES ('tip', 'boonlarp', 'suthatip.jacobsen@gmail.com', '0');
+INSERT INTO T_USER (USER_NAME, PASSWORD, EMAIL, EMAIL_AS_NAME) VALUES ('jactor', 'demo', 'tor.egil.jacobsen@gmail.com', 0);
+INSERT INTO T_USER (USER_NAME, PASSWORD, EMAIL, EMAIL_AS_NAME) VALUES ('tip', 'demo', 'suthatip.jacobsen@gmail.com', 0);
+
+INSERT INTO T_PROFILE(DESCRIPTION) VALUES ('jactor.desc');
+INSERT INTO T_PROFILE(DESCRIPTION) VALUES ('tip.desc');
+
+UPDATE T_USER SET PROFILE_ID = (
+    SELECT ID FROM T_PROFILE WHERE DESCRIPTION = 'jactor.desc'
+) WHERE USER_NAME = 'jactor';
+
+UPDATE T_USER SET PROFILE_ID = (
+    SELECT ID FROM T_PROFILE WHERE DESCRIPTION = 'tip.desc'
+) WHERE USER_NAME = 'tip';

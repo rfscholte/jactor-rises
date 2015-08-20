@@ -30,7 +30,7 @@ public class PersistentData {
         try {
             return subTypes.iterator().next().newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            throw new IllegalStateException("unable to create instance of " + persistentInterface + " from " + subTypes);
+            throw new IllegalStateException("unable to create instance of " + persistentInterface + " from " + subTypes, e);
         }
     }
 

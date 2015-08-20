@@ -2,7 +2,6 @@ package nu.hjemme.persistence;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Person;
-import nu.hjemme.persistence.db.AddressEntityImpl;
 
 public interface PersonEntity extends Person {
     @Override AddressEntity getAddress();
@@ -11,6 +10,6 @@ public interface PersonEntity extends Person {
 
     void setLastName(Name lastName);
 
-    void setAddress(AddressEntityImpl address);
+    void setAddress(AddressEntity address);
 
 }

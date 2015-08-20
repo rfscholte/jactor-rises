@@ -1,48 +1,52 @@
 package nu.hjemme.facade.config;
 
-import nu.hjemme.business.domain.builder.ProfileDomainBuilder;
-import nu.hjemme.business.domain.builder.UserDomainBuilder;
-import nu.hjemme.persistence.db.AddressEntityImpl;
-import nu.hjemme.client.datatype.Country;
+import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.client.domain.User;
+
+import static nu.hjemme.business.domain.builder.DomainBuilder.aProfile;
+import static nu.hjemme.business.domain.builder.DomainBuilder.aUser;
+import static nu.hjemme.business.domain.builder.DomainBuilder.anAddress;
 
 /**
  * @author Tor Egil Jacobsen
  */
 public class DefaultUsers {
-    private static final AddressEntityImpl HOME;
+    private static final AddressDomain HOME;
     private static final String JACOBSEN = "Jacobsen";
     private static final User JACTOR;
     private static final User TIP;
 
     static {
-        HOME = new AddressEntityImpl();
-        HOME.setAddressLine1("Haganjordet 1");
-        HOME.setCity("Rud");
-        HOME.setZipCode(1351);
-        HOME.setCountry(new Country("NO", "no"));
+        HOME = anAddress()
+                .withAddressLine1As("Haganjordet 1")
+                .withCityAs("Rud")
+                .withZipCodeAs(1351)
+                .withCountryAs("NO", "no")
+                .get();
 
-        JACTOR = UserDomainBuilder.init()
-                .appendUserName("jactor")
-                .appendPassword("demo")
-                .appendProfile(ProfileDomainBuilder.init()
-                        .appendDescription("jactor.desc")
-                        .appendLastName(JACOBSEN)
-                        .appendFirstName("Tor Egil")
-                        .appendAddress(HOME)
-                        .getValidatedProfileEntity())
-                .build();
+        JACTOR = aUser()
+                .withUserNameAs("jactor")
+                .withPasswordAs("demo")
+                .with(
+                        aProfile()
+                                .withDescriptionAs("jactor.desc")
+                                .withLastNameAs(JACOBSEN)
+                                .withFirstNameAs("Tor Egil")
+                                .with(HOME)
+                                .get()
+                ).get();
 
-        TIP = UserDomainBuilder.init()
-                .appendUserName("tip")
-                .appendPassword("demo")
-                .appendProfile(ProfileDomainBuilder.init()
-                        .appendDescription("tip.desc")
-                        .appendLastName(JACOBSEN)
-                        .appendFirstName("Tor Egil")
-                        .appendAddress(HOME)
-                        .getValidatedProfileEntity())
-                .build();
+        TIP = aUser()
+                .withUserNameAs("tip")
+                .withPasswordAs("demo")
+                .with(
+                        aProfile()
+                                .withDescriptionAs("tip.desc")
+                                .withLastNameAs(JACOBSEN)
+                                .withFirstNameAs("Tor Egil")
+                                .with(HOME)
+                                .get()
+                ).get();
     }
 
     public static User getJactor() {

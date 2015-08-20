@@ -2,6 +2,7 @@ package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Person;
+import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.PersonEntity;
 import nu.hjemme.persistence.base.PersistentEntity;
 import nu.hjemme.persistence.meta.PersistentMetadata;
@@ -26,12 +27,12 @@ public class PersonEntityImpl extends PersistentEntity<Long> implements PersonEn
 
     @Column(name = PersonMetadata.FIRST_NAME) private Name firstName;
     @Column(name = PersonMetadata.LAST_NAME) private Name lastName;
-    @OneToMany(mappedBy = PersonMetadata.ADDRESS) private AddressEntityImpl address;
+    @OneToMany(mappedBy = PersonMetadata.ADDRESS) private AddressEntity address;
 
     public PersonEntityImpl() {
     }
 
-    /** @param person will be used to create an entity */
+    /** @param person to use */
     public PersonEntityImpl(Person person) {
         address = person.getAddress() != null ? new AddressEntityImpl(person.getAddress()) : null;
         firstName = person.getFirstName();
@@ -59,7 +60,7 @@ public class PersonEntityImpl extends PersistentEntity<Long> implements PersonEn
                 .toString();
     }
 
-    @Override public AddressEntityImpl getAddress() {
+    @Override public AddressEntity getAddress() {
         return address;
     }
 
@@ -79,7 +80,7 @@ public class PersonEntityImpl extends PersistentEntity<Long> implements PersonEn
         this.lastName = lastName;
     }
 
-    @Override public void setAddress(AddressEntityImpl address) {
+    @Override public void setAddress(AddressEntity address) {
         this.address = address;
     }
 

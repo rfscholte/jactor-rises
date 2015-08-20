@@ -7,5 +7,5 @@ import nu.hjemme.client.domain.Profile;
  * @author Tor Egil Jacobsen
  */
 public interface ProfileEntity extends Profile {
-    void setDescription(Description descritpion);
+    void setDescription(String descritpion);
 }

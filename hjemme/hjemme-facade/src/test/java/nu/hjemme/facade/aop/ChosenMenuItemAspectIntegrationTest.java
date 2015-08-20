@@ -30,7 +30,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@Ignore // todo: wait for profile as an entity
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HjemmeBeanContext.class, ChosenMenuItemAspectIntegrationTest.MockedMenuConfiguration.class}, loader = AnnotationConfigContextLoader.class)
 public class ChosenMenuItemAspectIntegrationTest {

@@ -16,4 +16,6 @@ public final class UserMetadata {
     public static final String EMAIL = "EMAIL";
     /** If the user uses the email address as an user name */
     public static final String EMAIL_AS_NAME = "EMAIL_AS_NAME";
+    /** Foreign key to the profile */
+    public static final String PROFILE_ID = "PROFILE_ID";
 }
