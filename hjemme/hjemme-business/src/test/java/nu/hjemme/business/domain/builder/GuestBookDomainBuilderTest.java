@@ -21,7 +21,7 @@ public class GuestBookDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_EMPTY);
 
-        GuestBookDomainBuilder.init().appendUser(new UserEntityImpl()).build();
+        GuestBookDomainBuilder.init().with(new UserEntityImpl()).get();
     }
 
     @Test
@@ -29,7 +29,7 @@ public class GuestBookDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_EMPTY);
 
-        GuestBookDomainBuilder.init().appendTitle("").appendUser(new UserEntityImpl()).build();
+        GuestBookDomainBuilder.init().withTitleAs("").with(new UserEntityImpl()).get();
     }
 
     @Test
@@ -37,15 +37,15 @@ public class GuestBookDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookDomainBuilder.THE_GUEST_BOOK_MUST_BELONG_TO_A_USER);
 
-        GuestBookDomainBuilder.init().appendTitle("some title").build();
+        GuestBookDomainBuilder.init().withTitleAs("some title").get();
     }
 
     @Test
     public void willBuildGuestBookWhenAllRequiredFieldsAreSet() throws Exception {
         GuestBookDomain guestBookDomain = GuestBookDomainBuilder.init()
-                .appendTitle("some title")
-                .appendUser(new UserEntityImpl())
-                .build();
+                .withTitleAs("some title")
+                .with(new UserEntityImpl())
+                .get();
 
         assertThat("GuestBook", guestBookDomain, is(notNullValue()));
     }

@@ -22,35 +22,35 @@ public class AddressDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY);
 
-        anAddress().appendZipCode(1234).appendCountry("NO", "no").get();
+        anAddress().withZipCodeAs(1234).withCountryAs("NO", "no").get();
     }
 
     @Test public void willNotBuildDomainWithAnEmptyAddressLine1() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY);
 
-        anAddress().appendAddressLine1("").appendZipCode(1234).appendCountry("NO", "no").get();
+        anAddress().withAddressLine1As("").withZipCodeAs(1234).withCountryAs("NO", "no").get();
     }
 
     @Test public void willNotBuildDomainWithoutZipCode() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.ZIP_CODE_CANNOT_BE_NULL);
 
-        anAddress().appendAddressLine1("somewhere").appendCountry("NO", "no").get();
+        anAddress().withAddressLine1As("somewhere").withCountryAs("NO", "no").get();
     }
 
     @Test public void willNotBuildDomainWithoutCountry() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.COUNTRY_CANNOT_BE_NULL);
 
-        anAddress().appendAddressLine1("somewhere").appendZipCode(1234).get();
+        anAddress().withAddressLine1As("somewhere").withZipCodeAs(1234).get();
     }
 
     @Test public void willBuildValidatedDomain() {
         AddressDomain addressDomain = anAddress()
-                .appendAddressLine1("somewhere")
-                .appendZipCode(1234)
-                .appendCountry("NO", "no")
+                .withAddressLine1As("somewhere")
+                .withZipCodeAs(1234)
+                .withCountryAs("NO", "no")
                 .get();
 
         assertThat("Address", addressDomain, is(notNullValue()));
@@ -58,12 +58,12 @@ public class AddressDomainBuilderTest {
 
     @Test public void whenBuildingAnAddressAllAddressLinesAndItsCityCanAlsoBeAppended() {
         AddressDomain addressDomain = anAddress()
-                .appendAddressLine1("somewhere")
+                .withAddressLine1As("somewhere")
                 .appendAddressLine2("somewhere else")
                 .appendAddressLine3("way out there")
-                .appendCity("some city")
-                .appendCountry("NO", "no")
-                .appendZipCode(1234)
+                .withCityAs("some city")
+                .withCountryAs("NO", "no")
+                .withZipCodeAs(1234)
                 .get();
 
         assertThat(addressDomain, new TypeSafeBuildMatcher<AddressDomain>("A domain with all properties set") {

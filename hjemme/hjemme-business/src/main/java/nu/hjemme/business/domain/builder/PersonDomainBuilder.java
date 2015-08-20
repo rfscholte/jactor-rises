@@ -6,7 +6,6 @@ import nu.hjemme.persistence.db.AddressEntityImpl;
 import nu.hjemme.persistence.db.PersonEntityImpl;
 import org.apache.commons.lang.Validate;
 
-/** @author Tor Egil Jacobsen */
 public class PersonDomainBuilder extends DomainBuilder<PersonDomain> {
     static final String AN_ADDRESS_MUST_BE_PRESENT = "An address must be present";
     static final String THE_FIRST_NAME_CANNOT_BE_NULL = "The first cannot be null";
@@ -14,34 +13,32 @@ public class PersonDomainBuilder extends DomainBuilder<PersonDomain> {
 
     private PersonEntityImpl personEntity = new PersonEntityImpl();
 
-    public PersonDomainBuilder appendAddress(AddressEntityImpl addressEntity) {
+    public PersonDomainBuilder with(AddressEntityImpl addressEntity) {
         personEntity.setAddress(addressEntity);
         return this;
     }
 
-    public PersonDomainBuilder appendFirstName(String firstName) {
+    public PersonDomainBuilder withFirstNameAs(String firstName) {
         personEntity.setFirstName(new Name(firstName));
         return this;
     }
 
-    public PersonDomainBuilder appendLastName(String lastName) {
+    public PersonDomainBuilder withLastNameAs(String lastName) {
         personEntity.setLastName(new Name(lastName));
         return this;
     }
 
-    @Override
-    protected PersonDomain buildInstance() {
+    @Override protected PersonDomain initDomain() {
         return new PersonDomain(personEntity);
     }
 
-    @Override
-    protected void validate() {
+    @Override protected void validate() {
         Validate.notNull(personEntity.getFirstName(), THE_FIRST_NAME_CANNOT_BE_NULL);
         Validate.notNull(personEntity.getLastName(), THE_LAST_NAME_CANNOT_BE_NULL);
         Validate.notNull(personEntity.getAddress(), AN_ADDRESS_MUST_BE_PRESENT);
     }
 
-    public static PersonDomainBuilder init() {
+    static PersonDomainBuilder init() {
         return new PersonDomainBuilder();
     }
 }

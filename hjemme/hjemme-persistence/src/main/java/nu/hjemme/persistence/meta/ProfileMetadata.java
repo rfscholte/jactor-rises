@@ -4,6 +4,9 @@ package nu.hjemme.persistence.meta;
 public final class ProfileMetadata {
     private ProfileMetadata() {}
 
+    /** The database table for a profile */
+    public static final String PROFILE_TABLE = "T_PROFILE";
+
     /** The description of a proile */
     public static final String DESCRIPTION = "DESCRIPTION";
     /** The id to the person the profile belongs to */

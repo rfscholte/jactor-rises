@@ -2,7 +2,6 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.ProfileDomain;
 import nu.hjemme.business.domain.UserDomain;
-import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.UserEntity;
 import org.apache.commons.lang.Validate;
 
@@ -14,32 +13,32 @@ public class UserDomainBuilder extends DomainBuilder<UserDomain> {
 
     private final UserEntity userEntity = newInstance(UserEntity.class);
 
-    public UserDomainBuilder appendUserName(String userName) {
+    public UserDomainBuilder withUserNameAs(String userName) {
         userEntity.setUserName(userName);
         return this;
     }
 
-    public UserDomainBuilder appendProfile(ProfileDomain profile) {
+    public UserDomainBuilder with(ProfileDomain profile) {
         userEntity.setProfileEntity(profile.getEntity());
         return this;
     }
 
-    public UserDomainBuilder appendProfile(ProfileDomainBuilder profile) {
-        return appendProfile(profile.get());
+    public UserDomainBuilder with(ProfileDomainBuilder profile) {
+        return with(profile.get());
     }
 
-    public UserDomainBuilder appendPassword(String password) {
+    public UserDomainBuilder withPasswordAs(String password) {
         userEntity.setPassword(password);
         return this;
     }
 
-    public UserDomainBuilder appendEmailAddress(String emailAddress) {
+    public UserDomainBuilder withEmailAddressAs(String emailAddress) {
         userEntity.setEmailAddress(emailAddress);
         return this;
     }
 
     @Override
-    protected UserDomain buildInstance() {
+    protected UserDomain initDomain() {
         return new UserDomain(userEntity);
     }
 

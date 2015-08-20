@@ -12,17 +12,17 @@ public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
 
     private AddressEntity addressEntity = newInstance(AddressEntity.class);
 
-    public AddressDomainBuilder appendCity(String city) {
+    public AddressDomainBuilder withCityAs(String city) {
         addressEntity.setCity(city);
         return this;
     }
 
-    public AddressDomainBuilder appendCountry(String code, String locale) {
+    public AddressDomainBuilder withCountryAs(String code, String locale) {
         addressEntity.setCountry(new Country(code, locale));
         return this;
     }
 
-    public AddressDomainBuilder appendAddressLine1(String addressLine1) {
+    public AddressDomainBuilder withAddressLine1As(String addressLine1) {
         addressEntity.setAddressLine1(addressLine1);
         return this;
     }
@@ -37,12 +37,12 @@ public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
         return this;
     }
 
-    public AddressDomainBuilder appendZipCode(Integer zipCode) {
+    public AddressDomainBuilder withZipCodeAs(Integer zipCode) {
         addressEntity.setZipCode(zipCode);
         return this;
     }
 
-    @Override protected AddressDomain buildInstance() {
+    @Override protected AddressDomain initDomain() {
         return new AddressDomain(addressEntity);
     }
 

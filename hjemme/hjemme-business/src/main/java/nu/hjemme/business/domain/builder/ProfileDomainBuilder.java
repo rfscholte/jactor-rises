@@ -2,7 +2,6 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.business.domain.ProfileDomain;
-import nu.hjemme.client.datatype.Description;
 import nu.hjemme.persistence.db.ProfileEntityImpl;
 import org.apache.commons.lang.Validate;
 
@@ -14,7 +13,7 @@ public class ProfileDomainBuilder extends DomainBuilder<ProfileDomain> {
 
     private ProfileEntityImpl profileEntity = new ProfileEntityImpl();
 
-    @Override protected ProfileDomain buildInstance() {
+    @Override protected ProfileDomain initDomain() {
         return new ProfileDomain(profileEntity);
     }
 
@@ -24,27 +23,27 @@ public class ProfileDomainBuilder extends DomainBuilder<ProfileDomain> {
         Validate.notNull(profileEntity.getAddress(), AN_ADDRESS_MUST_BE_PRESENT);
     }
 
-    public ProfileDomainBuilder appendLastName(String lastName) {
+    public ProfileDomainBuilder withLastNameAs(String lastName) {
         profileEntity.addLastName(lastName);
         return this;
     }
 
-    public ProfileDomainBuilder appendFirstName(String firstName) {
+    public ProfileDomainBuilder withFirstNameAs(String firstName) {
         profileEntity.addFirstName(firstName);
         return this;
     }
 
-    public ProfileDomainBuilder appendAddress(AddressDomain address) {
+    public ProfileDomainBuilder with(AddressDomain address) {
         profileEntity.addAddressEntity(address.getEntity());
         return this;
     }
 
-    public ProfileDomainBuilder appendAddress(AddressDomainBuilder address) {
-        return appendAddress(address.get());
+    public ProfileDomainBuilder with(AddressDomainBuilder address) {
+        return with(address.get());
     }
 
-    public ProfileDomainBuilder appendDescription(String description) {
-        profileEntity.setDescription(new Description(description));
+    public ProfileDomainBuilder withDescriptionAs(String description) {
+        profileEntity.setDescription(description);
         return this;
     }
 }

@@ -11,7 +11,7 @@ public class PersistentDomainTest {
 
     @Test public void skalFeileHvisEtDomeneInstansieresMedEntitetSomErNull() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(PersistentDomain.ENTITETEN_PÅ_DOMENEOBJEKTET_KAN_IKKE_VAERE_NULL);
+        expectedException.expectMessage(PersistentDomain.THE_ENTITY_ON_THE_DOMAIN_CANNOT_BE_NULL);
 
         new TestPersistentDomain();
     }

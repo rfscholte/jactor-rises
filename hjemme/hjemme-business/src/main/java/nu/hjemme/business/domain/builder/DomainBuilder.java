@@ -9,7 +9,7 @@ import java.util.Set;
 public abstract class DomainBuilder<Domain> {
     private static final Set BUILDS_NOT_TO_VALIDATE = new HashSet<>();
 
-    abstract protected Domain buildInstance();
+    abstract protected Domain initDomain();
 
     abstract protected void validate();
 
@@ -18,7 +18,7 @@ public abstract class DomainBuilder<Domain> {
             validate();
         }
 
-        return buildInstance();
+        return initDomain();
     }
 
     protected <T> T newInstance(Class<T> persistentClass) {

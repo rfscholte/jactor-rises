@@ -14,4 +14,6 @@ public final class UserMetadata {
     public static final String USER_NAME = "USER_NAME";
     /** The email address to the the user */
     public static final String EMAIL = "EMAIL";
+    /** If the user uses the email address as an user name */
+    public static final String EMAIL_AS_NAME = "EMAIL_AS_NAME";
 }

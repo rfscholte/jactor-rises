@@ -32,4 +32,8 @@ public class UserDomain extends PersistentDomain<UserEntity, Long> implements Us
     public EmailAddress getEmailAddress() {
         return getEntity().getEmailAddress();
     }
+
+    @Override public boolean isUserNameEmailAddress() {
+        return getEntity().isUserNameEmailAddress();
+    }
 }
