@@ -3,7 +3,7 @@ package nu.hjemme.facade.service;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.service.UserFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
-import nu.hjemme.facade.config.HjemmeDbContext;
+import nu.hjemme.persistence.config.HjemmeDbContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

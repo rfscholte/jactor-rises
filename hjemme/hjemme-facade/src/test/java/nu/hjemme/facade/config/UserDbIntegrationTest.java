@@ -2,8 +2,8 @@ package nu.hjemme.facade.config;
 
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.EmailAddress;
-import nu.hjemme.client.datatype.Name;
 import nu.hjemme.persistence.UserEntity;
+import nu.hjemme.persistence.config.HjemmeDbContext;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.hibernate.Session;

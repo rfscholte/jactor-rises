@@ -10,16 +10,14 @@ import nu.hjemme.client.domain.menu.dto.MenuDto;
 import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
-import nu.hjemme.facade.config.HjemmeDbContext;
+import nu.hjemme.persistence.config.HjemmeDbContext;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.annotation.Resource;
 

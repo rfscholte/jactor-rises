@@ -1,5 +1,7 @@
-package nu.hjemme.facade.config;
+package nu.hjemme.persistence.config;
 
+import nu.hjemme.persistence.dao.UserDao;
+import nu.hjemme.persistence.dao.UserDaoDb;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,9 +11,6 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 
 import javax.sql.DataSource;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Properties;
 
 @Configuration
@@ -43,11 +42,16 @@ public class HjemmeDbContext {
         return sessionFactory;
     }
 
-    @Bean @SuppressWarnings("unused") // used by spring
+    @Bean(name = "txManager") @SuppressWarnings("unused") // used by spring
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(sessionFactory);
 
         return txManager;
+    }
+
+    @Bean(name = "hjemme.persistence.userDao") @SuppressWarnings("unused") // used by spring
+    public UserDao userDao(SessionFactory sessionFactory) {
+        return new UserDaoDb(sessionFactory);
     }
 }
