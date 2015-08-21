@@ -15,14 +15,14 @@ public class UserEntityImplTest {
     @Test
     public void willHaveCorrectImplementedHashCode() {
         UserEntityImpl base = new UserEntityImpl();
-        base.setUserName(new UserName("some user"));
+        base.setUserName("some user");
         base.setProfileEntity(new ProfileEntityImpl());
         base.setPassword("some password");
 
         UserEntityImpl equal = new UserEntityImpl(base);
 
         UserEntityImpl notEqual = new UserEntityImpl();
-        notEqual.setUserName(new UserName("some other user"));
+        notEqual.setUserName("some other user");
         notEqual.setProfileEntity(new ProfileEntityImpl());
         notEqual.setPassword("some other password");
 
@@ -32,14 +32,14 @@ public class UserEntityImplTest {
     @Test
     public void willHaveCorrectImplementedEquals() {
         UserEntityImpl base = new UserEntityImpl();
-        base.setUserName(new UserName("some user"));
+        base.setUserName("some user");
         base.setProfileEntity(new ProfileEntityImpl());
         base.setPassword("some password");
 
         UserEntityImpl equal = new UserEntityImpl(base);
 
         UserEntityImpl notEqual = new UserEntityImpl();
-        notEqual.setUserName(new UserName("some other user"));
+        notEqual.setUserName("some other user");
         notEqual.setProfileEntity(new ProfileEntityImpl());
         notEqual.setPassword("some other password");
 

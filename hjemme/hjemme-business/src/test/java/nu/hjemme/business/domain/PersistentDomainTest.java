@@ -1,19 +1,17 @@
 package nu.hjemme.business.domain;
 
-import nu.hjemme.persistence.db.PersistentEntity;
+import nu.hjemme.persistence.base.PersistentEntity;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class PersistentDomainTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+    @Rule public ExpectedException expectedException = ExpectedException.none();
 
-    @Test
-    public void skalFeileHvisEtDomeneInstansieresMedEntitetSomErNull() {
+    @Test public void skalFeileHvisEtDomeneInstansieresMedEntitetSomErNull() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(PersistentDomain.ENTITETEN_PÅ_DOMENEOBJEKTET_KAN_IKKE_VAERE_NULL);
+        expectedException.expectMessage(PersistentDomain.THE_ENTITY_ON_THE_DOMAIN_CANNOT_BE_NULL);
 
         new TestPersistentDomain();
     }
@@ -25,5 +23,8 @@ public class PersistentDomainTest {
     }
 
     private class TestPersistentEntity extends PersistentEntity<Long> {
+        @Override public Long getId() {
+            throw new UnsupportedOperationException("bean is only for testing");
+        }
     }
 }

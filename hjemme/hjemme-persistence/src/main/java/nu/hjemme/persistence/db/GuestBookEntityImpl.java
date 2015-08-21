@@ -4,11 +4,15 @@ import nu.hjemme.client.domain.GuestBook;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.GuestBookEntity;
 import nu.hjemme.persistence.UserEntity;
+import nu.hjemme.persistence.base.PersistentEntity;
 import nu.hjemme.persistence.meta.GuestBookMetadata;
+import nu.hjemme.persistence.meta.PersistentMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.Objects;
@@ -18,22 +22,13 @@ import static java.util.Objects.hash;
 /** @author Tor Egil Jacobsen */
 public class GuestBookEntityImpl extends PersistentEntity<Long> implements GuestBookEntity {
 
-    @Id
-    @Column(name = GuestBookMetadata.GUEST_BOOK_ID)
-    // brukes av hibernate
-    @SuppressWarnings("unused")
-    void setGuestBookId(Long guestBookId) {
-        setId(guestBookId);
-    }
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) @SuppressWarnings("unused") // used by persistence engine
+    private Long id;
 
-    @Column(name = GuestBookMetadata.TITLE)
-    private String title;
+    @Column(name = GuestBookMetadata.TITLE) private String title;
+    @OneToMany(mappedBy = GuestBookMetadata.USER) private UserEntity user;
 
-    @OneToMany(mappedBy = GuestBookMetadata.USER)
-    private UserEntity user;
-
-    public GuestBookEntityImpl() {
-    }
+    public GuestBookEntityImpl() { }
 
     /** @param guestbook will be used to create the instance... */
     public GuestBookEntityImpl(GuestBook guestbook) {
@@ -41,8 +36,7 @@ public class GuestBookEntityImpl extends PersistentEntity<Long> implements Guest
         user = guestbook.getUser() != null ? new UserEntityImpl(guestbook.getUser()) : null;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    @Override public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -56,13 +50,11 @@ public class GuestBookEntityImpl extends PersistentEntity<Long> implements Guest
         return Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getUser(), that.getUser());
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return hash(getTitle(), getUser());
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
                 .appendSuper(super.toString())
                 .append(getTitle())
@@ -70,19 +62,23 @@ public class GuestBookEntityImpl extends PersistentEntity<Long> implements Guest
                 .toString();
     }
 
-    public String getTitle() {
+    @Override public String getTitle() {
         return title;
     }
 
-    public User getUser() {
+    @Override public User getUser() {
         return user;
     }
 
-    public void setTitle(String title) {
+    @Override public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setUser(UserEntity user) {
+    @Override public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    @Override public Long getId() {
+        return id;
     }
 }

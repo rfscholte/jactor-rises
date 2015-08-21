@@ -20,6 +20,10 @@
             <groupId>nu.hjemme</groupId>
             <artifactId>hjemme-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>nu.hjemme</groupId>
+            <artifactId>hjemme-config</artifactId>
+        </dependency>
 
         <!-- Third party -->
         <dependency>
@@ -27,12 +31,12 @@
             <artifactId>commons-lang</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
+            <artifactId>hibernate-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -42,11 +46,25 @@
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
 
         <!-- Test scope -->
         <dependency>
             <groupId>nu.hjemme</groupId>
             <artifactId>hjemme-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

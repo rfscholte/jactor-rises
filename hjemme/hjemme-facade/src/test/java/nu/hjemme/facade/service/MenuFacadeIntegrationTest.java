@@ -7,7 +7,8 @@ import nu.hjemme.client.domain.menu.ChosenMenuItem;
 import nu.hjemme.client.domain.menu.dto.MenuDto;
 import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import nu.hjemme.client.service.MenuFacade;
-import nu.hjemme.facade.config.HjemmeAppContext;
+import nu.hjemme.facade.config.HjemmeBeanContext;
+import nu.hjemme.persistence.config.HjemmeDbContext;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Rule;
@@ -18,7 +19,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,23 +28,20 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HjemmeAppContext.class, MenuFacadeIntegrationTest.HjemmeTestMenus.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {HjemmeBeanContext.class, MenuFacadeIntegrationTest.HjemmeTestMenus.class, HjemmeDbContext.class})
 public class MenuFacadeIntegrationTest {
-    @Resource
-    MenuFacade testMenuFacade;
+    @Resource @SuppressWarnings("unused") // initialized by spring
+    private MenuFacade testMenuFacade;
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+    @Rule public ExpectedException expectedException = ExpectedException.none();
 
-    @Test
-    public void whenFindingMenuItemsAndTheNameIsUnknownTheMethodWillFail() {
+    @Test public void whenFindingMenuItemsAndTheNameIsUnknownTheMethodWillFail() {
         expectedException.expect(IllegalArgumentException.class);
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("some target"), new Name("unknown"));
         testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
     }
 
-    @Test
-    public void whenFindingMenuItemsAndTheNameIsKnownTheListOfMenuItemsWillBeReturned() {
+    @Test public void whenFindingMenuItemsAndTheNameIsKnownTheListOfMenuItemsWillBeReturned() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("bullseye?some=where"), new Name("testMenu"));
 
         List<ChosenMenuItem> chosenMenuItems = testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
@@ -72,8 +69,7 @@ public class MenuFacadeIntegrationTest {
      */
     @Configuration
     public static class HjemmeTestMenus {
-        @Bean
-        @SuppressWarnings("unused") // brukes av spring
+        @Bean @SuppressWarnings("unused") // brukes av spring
         public MenuDto createTestMenu() {
             return new MenuDto("testMenu")
                     .leggTil(new MenuItemDto("testParent", "bullseye")

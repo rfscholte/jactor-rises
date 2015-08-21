@@ -24,7 +24,7 @@ public class GuestBookDomainEntryBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
 
-        GuestBookEntryDomainBuilder.init().appendCreatorName("some creator").appendGuestBook(new GuestBookEntityImpl()).build();
+        GuestBookEntryDomainBuilder.init().withCreatorNameAs("some creator").with(new GuestBookEntityImpl()).get();
     }
 
     @Test
@@ -33,10 +33,10 @@ public class GuestBookDomainEntryBuilderTest {
         expectedException.expectMessage(GuestBookEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
 
         GuestBookEntryDomainBuilder.init()
-                .appendEntry("")
-                .appendCreatorName("some creator")
-                .appendGuestBook(new GuestBookEntityImpl())
-                .build();
+                .withEntryAs("")
+                .withCreatorNameAs("some creator")
+                .with(new GuestBookEntityImpl())
+                .get();
     }
 
     @Test
@@ -44,7 +44,7 @@ public class GuestBookDomainEntryBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookEntryDomainBuilder.THE_ENTRY_MUST_BELONG_TO_A_GUEST_BOOK);
 
-        GuestBookEntryDomainBuilder.init().appendEntry("some entry").appendCreatorName("some creator").build();
+        GuestBookEntryDomainBuilder.init().withEntryAs("some entry").withCreatorNameAs("some creator").get();
     }
 
     @Test
@@ -53,9 +53,9 @@ public class GuestBookDomainEntryBuilderTest {
         expectedException.expectMessage(GuestBookEntryDomainBuilder.THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
 
         GuestBookEntryDomainBuilder.init()
-                .appendEntry("some entry")
-                .appendGuestBook(new GuestBookEntityImpl())
-                .build();
+                .withEntryAs("some entry")
+                .with(new GuestBookEntityImpl())
+                .get();
     }
 
     @Test
@@ -64,10 +64,10 @@ public class GuestBookDomainEntryBuilderTest {
         expectedException.expectMessage(hentFeilmeldingFraName());
 
         GuestBookEntryDomainBuilder.init()
-                .appendEntry("some entry")
-                .appendCreatorName("")
-                .appendGuestBook(new GuestBookEntityImpl())
-                .build();
+                .withEntryAs("some entry")
+                .withCreatorNameAs("")
+                .with(new GuestBookEntityImpl())
+                .get();
     }
 
     public String hentFeilmeldingFraName() {
@@ -85,10 +85,10 @@ public class GuestBookDomainEntryBuilderTest {
     @Test
     public void willBuildGuestBookEntryWhenAllRequiredFieldsAreSet() {
         GuestBookEntryDomain guestBookEntryDomain = GuestBookEntryDomainBuilder.init()
-                .appendEntry("some entry")
-                .appendCreatorName("some creator")
-                .appendGuestBook(new GuestBookEntityImpl())
-                .build();
+                .withEntryAs("some entry")
+                .withCreatorNameAs("some creator")
+                .with(new GuestBookEntityImpl())
+                .get();
 
         assertThat("GuestBookEntryEntity", guestBookEntryDomain, is(notNullValue()));
     }
@@ -99,10 +99,10 @@ public class GuestBookDomainEntryBuilderTest {
         creator.setFirstName(new Name("some creator"));
 
         GuestBookEntryDomain guestBookEntryDomain = GuestBookEntryDomainBuilder.init()
-                .appendEntry("some entry")
-                .appendCreator(creator)
-                .appendGuestBook(new GuestBookEntityImpl())
-                .build();
+                .withEntryAs("some entry")
+                .with(creator)
+                .with(new GuestBookEntityImpl())
+                .get();
 
         assertThat("CreatorName", guestBookEntryDomain.getCreatorName(), is(equalTo(new Name("some creator"))));
     }

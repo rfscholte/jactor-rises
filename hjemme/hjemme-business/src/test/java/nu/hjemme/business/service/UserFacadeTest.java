@@ -1,40 +1,49 @@
 package nu.hjemme.business.service;
 
+import nu.hjemme.business.domain.builder.DomainBuilderValidations;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
+import nu.hjemme.persistence.dao.UserDao;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import static nu.hjemme.business.domain.builder.DomainBuilder.Build.USER;
+import static nu.hjemme.business.domain.builder.DomainBuilder.aUser;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-/** @author Tor Egil Jacobsen */
+@RunWith(MockitoJUnitRunner.class)
 public class UserFacadeTest {
+    @Rule public DomainBuilderValidations domainBuilderValidations = DomainBuilderValidations.init().skipValidationOn(USER);
+
+    @InjectMocks
     private UserFacadeImpl testUserFacadeImpl;
 
-    @Before
-    public void initForTesting() {
-        Map<UserName, User> defaultUser = new HashMap<>();
-        defaultUser.put(new UserName("jactor"), mock(User.class));
+    @Mock
+    private UserDao userDaoMock;
 
-        testUserFacadeImpl = new UserFacadeImpl(defaultUser);
+    @Before
+    public void mockDefaultUser() {
+        when(userDaoMock.findUsing(new UserName("jactor"))).thenReturn(aUser().get().getEntity());
     }
 
     @Test
-    public void willGetStandardUser() {
-        User user = testUserFacadeImpl.retrieveBy(new UserName("jactor"));
+    public void willFindDefauldUser() {
+        User user = testUserFacadeImpl.findUsing(new UserName("jactor"));
         assertThat("Standard user", user, is(notNullValue()));
     }
 
     @Test
-    public void willNotGetUnknownUser() {
-        User user = testUserFacadeImpl.retrieveBy(new UserName("someone"));
+    public void willNotFindUnknownUser() {
+        User user = testUserFacadeImpl.findUsing(new UserName("someone"));
         assertThat("UserImpl", user, is(nullValue()));
     }
 }

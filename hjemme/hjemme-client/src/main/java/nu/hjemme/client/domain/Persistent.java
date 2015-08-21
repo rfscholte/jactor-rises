@@ -1,9 +1,9 @@
 package nu.hjemme.client.domain;
 
 /**
- * Et domene som lagres til database må ha en identifaktor som identifiserer den i databasen. Denne bestemmer dette.
+ * Any persistent domain must have an identifier in the persistent layer
  * @author Tor Egil Jacobsen
  */
-public interface Persistent<T> {
-    T getId();
+public interface Persistent<Id> {
+    Id getId();
 }

@@ -5,8 +5,7 @@ package nu.hjemme.persistence.meta;
  * @author Tor Egil Jacobsen
  */
 public final class BlogEntryMetadata {
-    private BlogEntryMetadata() {
-    }
+    private BlogEntryMetadata() {}
 
     /** The creation time of an entry */
     public static final String CREATION_TIME = "CREATION_TIME";
@@ -16,8 +15,6 @@ public final class BlogEntryMetadata {
     public static final String CREATOR = "CREATOR";
     /** The entry */
     public static final String ENTRY = "ENTRY";
-    /** The primary key of an entry */
-    public static final String ENTRY_ID = "ENTRY_ID";
     /** The primary key of the blog which the entry belongs to */
     public static final String BLOG = "BLOG_ID";
 

@@ -1,6 +1,6 @@
 # funksjoner
 function wcgrep {													# fun: wcgrep
-    grep -R $1 * | grep -v target | grep -v .git | grep -v "~" | grep -v ".pyc" | grep -v Binary | grep --color -n $1	# fun: wcgrep
+    grep -R $1 * | grep -v target | grep -v \.git | grep -v "~" | grep -v ".pyc" | grep -v Binary | grep --color -n $1	# fun: wcgrep
 }															# fun: wcgrep
 															# fun:
 function grath {													# fun: grath
@@ -17,7 +17,7 @@ function filelog() {													# fun: (git) lister ut commits fra tidspunkt so
 }															# fun: (git)
 															# fun:
 precmd () {														# fun: genererer tittel pa konsollvindu (kjores for hver kommando)
-        print -Pn "\033]0;On\ branch:\ $(git rev-parse --abbrev-ref HEAD 2> /dev/null)\007"						# fun:
+        print -Pn "\033]0;On\ branch:\ $(git rev-parse --abbrev-ref HEAD 2> /dev/null)\007"				# fun:
 }															# fun:
 															# fun:
 # System variables
@@ -103,6 +103,7 @@ alias cmd='more $HOME/.zshrc | grep "# cmd:"'										# cmd: list alle alias fo
 alias cmd.git='fun | grep "# fun: (git)" && cmd | grep git'								# cmd: lister alle funksjoner/kommandoer som har noe med git
 alias cmd.grep='cmd | grep '												# cmd: grepper alle kommandoer i zshrc
 alias con='more $HOME/.zshrc | grep -e "# var:" -e "# opt:"'								# cmd: list all configurasjon i .zshrc
+alias con.grep='con | grep -i'												# cmd: grepper alle konfigureringer i zshrc
 alias env.grep='env | grep -i'												# cmd: case insensitive grepping av miljovariabler
 alias files.hide='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'				# cmd: skjul "hidden files" fra Finder (Mac Os X)
 alias files.show='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'				# cmd: vis "hidden files" fra Finder (Mac Os X)

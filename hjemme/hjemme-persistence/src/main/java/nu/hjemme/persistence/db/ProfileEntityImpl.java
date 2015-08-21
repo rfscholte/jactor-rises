@@ -1,35 +1,39 @@
 package nu.hjemme.persistence.db;
 
+import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Profile;
+import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.ProfileEntity;
 import nu.hjemme.persistence.UserEntity;
+import nu.hjemme.persistence.base.PersistentEntity;
+import nu.hjemme.persistence.meta.PersistentMetadata;
 import nu.hjemme.persistence.meta.ProfileMetadata;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
 
-/** @author Tor Egil Jacobsen */
+@Entity
+@Table(name = ProfileMetadata.PROFILE_TABLE)
 public class ProfileEntityImpl extends PersistentEntity<Long> implements ProfileEntity {
-    @Id
-    @Column(name = ProfileMetadata.PROFILE_ID)
-    // brukes av hibernate
-    @SuppressWarnings("unused")
-    void setProfileId(Long profileId) {
-        setId(profileId);
-    }
 
-    @Column(name = ProfileMetadata.PERSON_ID)
-    private PersonEntityImpl personEntity;
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) @SuppressWarnings("unused") // used by persistence engine
+    private Long id;
 
-    @Column(name = ProfileMetadata.DESCRIPTION)
-    private String description;
-
-    @Column(name = ProfileMetadata.USER_ID)
-    private UserEntity userEntity;
+    @Transient private PersonEntityImpl personEntity;
+    @Column(name = ProfileMetadata.DESCRIPTION) private String description;
+    @OneToOne(mappedBy = "profileEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL) private UserEntityImpl userEntity;
 
     public ProfileEntityImpl() {
         personEntity = new PersonEntityImpl();
@@ -37,7 +41,7 @@ public class ProfileEntityImpl extends PersistentEntity<Long> implements Profile
 
     public ProfileEntityImpl(Profile profile) {
         this();
-        description = profile.getDescription();
+        description = (profile.getDescription() != null ? profile.getDescription().getDescription() : null);
         initPersonEntity();
         personEntity.setAddress(profile.getAddress() != null ? new AddressEntityImpl(profile.getAddress()) : null);
         personEntity.setFirstName(profile.getFirstName());
@@ -53,7 +57,7 @@ public class ProfileEntityImpl extends PersistentEntity<Long> implements Profile
         personEntity.setFirstName(new Name(firstName));
     }
 
-    public void addAddressEntity(AddressEntityImpl addressEntity) {
+    public void addAddressEntity(AddressEntity addressEntity) {
         personEntity.setAddress(addressEntity);
     }
 
@@ -63,56 +67,44 @@ public class ProfileEntityImpl extends PersistentEntity<Long> implements Profile
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        ProfileEntityImpl that = (ProfileEntityImpl) o;
-
-        return Objects.equals(getAddress(), that.getAddress()) &&
-                Objects.equals(getDescription(), that.getDescription()) &&
-                Objects.equals(getFirstName(), that.getFirstName()) &&
-                Objects.equals(getLastName(), that.getLastName()) &&
-                Objects.equals(getUser(), that.getUser());
+    @Override public boolean equals(Object o) {
+        return this == o || o != null && getClass() == o.getClass() &&
+                Objects.equals(getAddress(), ((ProfileEntityImpl) o).getAddress()) &&
+                Objects.equals(getDescription(), ((ProfileEntityImpl) o).getDescription()) &&
+                Objects.equals(getFirstName(), ((ProfileEntityImpl) o).getFirstName()) &&
+                Objects.equals(getLastName(), ((ProfileEntityImpl) o).getLastName()) &&
+                Objects.equals(getUser(), ((ProfileEntityImpl) o).getUser());
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return hash(getDescription(), getAddress(), getFirstName(), getLastName(), getUser());
     }
 
-    @Override
-    public AddressEntityImpl getAddress() {
+    @Override public AddressEntity getAddress() {
         return personEntity != null ? personEntity.getAddress() : null;
     }
 
-    @Override
-    public String getDescription() {
-        return description;
+    @Override public Description getDescription() {
+        return convert(description, Description.class);
     }
 
-    @Override
-    public UserEntity getUser() {
+    @Override public UserEntity getUser() {
         return userEntity;
     }
 
-    @Override
-    public Name getFirstName() {
+    @Override public Name getFirstName() {
         return personEntity != null ? personEntity.getFirstName() : null;
     }
 
-    @Override
-    public Name getLastName() {
+    @Override public Name getLastName() {
         return personEntity != null ? personEntity.getLastName() : null;
     }
 
-    public void setDescription(String description) {
+    @Override public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override public Long getId() {
+        return id;
     }
 }

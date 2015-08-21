@@ -8,11 +8,13 @@ import nu.hjemme.client.domain.User;
  * @author Tor Egil Jacobsen
  */
 public interface UserEntity extends User {
-    void setUserName(UserName userName);
+    void setUserName(String userName);
 
     void setProfileEntity(ProfileEntity profile);
 
     void setPassword(String password);
 
-    void setEmailAddress(EmailAddress emailAddress);
+    void setEmailAddress(String emailAddress);
+
+    void setUserNameAsEmailAddress();
 }

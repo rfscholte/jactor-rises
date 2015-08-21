@@ -22,7 +22,7 @@ public class PersonDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersonDomainBuilder.THE_FIRST_NAME_CANNOT_BE_NULL);
 
-        PersonDomainBuilder.init().appendLastName("some last name").appendAddress(new AddressEntityImpl()).build();
+        PersonDomainBuilder.init().withLastNameAs("some last name").with(new AddressEntityImpl()).get();
     }
 
     @Test
@@ -31,10 +31,10 @@ public class PersonDomainBuilderTest {
         expectedException.expectMessage(hentFeilmeldingFraName());
 
         PersonDomainBuilder.init()
-                .appendFirstName("")
-                .appendLastName("some last name")
-                .appendAddress(new AddressEntityImpl())
-                .build();
+                .withFirstNameAs("")
+                .withLastNameAs("some last name")
+                .with(new AddressEntityImpl())
+                .get();
     }
 
     public String hentFeilmeldingFraName() {
@@ -54,7 +54,7 @@ public class PersonDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersonDomainBuilder.THE_LAST_NAME_CANNOT_BE_NULL);
 
-        PersonDomainBuilder.init().appendFirstName("some first name").appendAddress(new AddressEntityImpl()).build();
+        PersonDomainBuilder.init().withFirstNameAs("some first name").with(new AddressEntityImpl()).get();
     }
 
     @Test
@@ -63,10 +63,10 @@ public class PersonDomainBuilderTest {
         expectedException.expectMessage(hentFeilmeldingFraName());
 
         PersonDomainBuilder.init()
-                .appendFirstName("some first name")
-                .appendLastName("")
-                .appendAddress(new AddressEntityImpl())
-                .build();
+                .withFirstNameAs("some first name")
+                .withLastNameAs("")
+                .with(new AddressEntityImpl())
+                .get();
     }
 
     @Test
@@ -74,16 +74,16 @@ public class PersonDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersonDomainBuilder.AN_ADDRESS_MUST_BE_PRESENT);
 
-        PersonDomainBuilder.init().appendFirstName("some first name").appendLastName("some last name").build();
+        PersonDomainBuilder.init().withFirstNameAs("some first name").withLastNameAs("some last name").get();
     }
 
     @Test
     public void willBuildPersonDomainWhenAllFieldsAreSet() throws Exception {
         PersonDomain personDomain = PersonDomainBuilder.init()
-                .appendFirstName("some first name")
-                .appendLastName("some last name")
-                .appendAddress(new AddressEntityImpl())
-                .build();
+                .withFirstNameAs("some first name")
+                .withLastNameAs("some last name")
+                .with(new AddressEntityImpl())
+                .get();
 
         assertThat("Person", personDomain, is(notNullValue()));
     }

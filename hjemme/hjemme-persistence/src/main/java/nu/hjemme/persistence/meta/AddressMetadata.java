@@ -2,11 +2,8 @@ package nu.hjemme.persistence.meta;
 
 /** @author Tor Egil Jacobsen */
 public final class AddressMetadata {
-    private AddressMetadata() {
-    }
+    private AddressMetadata() {}
 
-    /** The primary key for an address */
-    public static final String ADDRESS_ID = "ADDRESS_ID";
     /** The country where the address is located */
     public static final String COUNTRY = "COUNTRY";
     /** The zip code of the address */

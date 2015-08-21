@@ -8,70 +8,63 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static nu.hjemme.business.domain.builder.DomainBuilder.anAddress;
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-/** @author Tor Egil Jacobsen */
 public class AddressDomainBuilderTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+    @Rule public ExpectedException expectedException = ExpectedException.none();
 
-    @Test
-    public void willNotBuildDomainWithoutAddressLine1() {
+    @Test public void willNotBuildDomainWithoutAddressLine1() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY);
 
-        AddressDomainBuilder.init().appendZipCode(1234).appendCountry("NO", "no").build();
+        anAddress().withZipCodeAs(1234).withCountryAs("NO", "no").get();
     }
 
-    @Test
-    public void willNotBuildDomainWithAnEmptyAddressLine1() {
+    @Test public void willNotBuildDomainWithAnEmptyAddressLine1() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY);
 
-        AddressDomainBuilder.init().appendAddressLine1("").appendZipCode(1234).appendCountry("NO", "no").build();
+        anAddress().withAddressLine1As("").withZipCodeAs(1234).withCountryAs("NO", "no").get();
     }
 
-    @Test
-    public void willNotBuildDomainWithoutZipCode() {
+    @Test public void willNotBuildDomainWithoutZipCode() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.ZIP_CODE_CANNOT_BE_NULL);
 
-        AddressDomainBuilder.init().appendAddressLine1("somewhere").appendCountry("NO", "no").build();
+        anAddress().withAddressLine1As("somewhere").withCountryAs("NO", "no").get();
     }
 
-    @Test
-    public void willNotBuildDomainWithoutCountry() {
+    @Test public void willNotBuildDomainWithoutCountry() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.COUNTRY_CANNOT_BE_NULL);
 
-        AddressDomainBuilder.init().appendAddressLine1("somewhere").appendZipCode(1234).build();
+        anAddress().withAddressLine1As("somewhere").withZipCodeAs(1234).get();
     }
 
-    @Test
-    public void willBuildValidatedDomain() {
-        AddressDomain addressDomain = AddressDomainBuilder.init()
-                .appendAddressLine1("somewhere")
-                .appendZipCode(1234)
-                .appendCountry("NO", "no")
-                .build();
+    @Test public void willBuildValidatedDomain() {
+        AddressDomain addressDomain = anAddress()
+                .withAddressLine1As("somewhere")
+                .withZipCodeAs(1234)
+                .withCountryAs("NO", "no")
+                .get();
 
         assertThat("Address", addressDomain, is(notNullValue()));
     }
 
-    @Test
-    public void whenBuildingAnAddressAllAddressLinesAndItsCityCanAlsoBeAppended() {
-        AddressDomain addressDomain = AddressDomainBuilder.init()
-                .appendAddressLine1("somewhere")
+    @Test public void whenBuildingAnAddressAllAddressLinesAndItsCityCanAlsoBeAppended() {
+        AddressDomain addressDomain = anAddress()
+                .withAddressLine1As("somewhere")
                 .appendAddressLine2("somewhere else")
                 .appendAddressLine3("way out there")
-                .appendCity("some city")
-                .appendCountry("NO", "no")
-                .appendZipCode(1234)
-                .build();
+                .withCityAs("some city")
+                .withCountryAs("NO", "no")
+                .withZipCodeAs(1234)
+                .get();
 
         assertThat(addressDomain, new TypeSafeBuildMatcher<AddressDomain>("A domain with all properties set") {
             @Override

@@ -1,7 +1,5 @@
 package nu.hjemme.persistence.db;
 
-import nu.hjemme.persistence.db.BlogEntityImpl;
-import nu.hjemme.persistence.db.UserEntityImpl;
 import nu.hjemme.persistence.time.NowAsPureDate;
 import org.junit.After;
 import org.junit.Before;
@@ -18,13 +16,11 @@ import static org.junit.Assert.assertThat;
 /** @author Tor Egil Jacobsen */
 public class BlogEntityImplTest {
 
-    @Before
-    public void mockNow() {
+    @Before public void mockNow() {
         new NowAsPureDate();
     }
 
-    @Test
-    public void willHaveCorrectImplementedHashCode() {
+    @Test public void willHaveCorrectImplementedHashCode() {
         UserEntityImpl userEntity = new UserEntityImpl();
 
         BlogEntityImpl base = new BlogEntityImpl();
@@ -42,8 +38,7 @@ public class BlogEntityImplTest {
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
-    @Test
-    public void willHaveCorrectImplementedEquals() {
+    @Test public void willHaveCorrectImplementedEquals() {
         BlogEntityImpl base = new BlogEntityImpl();
         base.setTitle("title");
         base.setUserEntity(new UserEntityImpl());
@@ -57,16 +52,14 @@ public class BlogEntityImplTest {
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
-    @Test
-    public void skalHaTidspunktForOpprettelseSattVedBrukAvNoArgsConstructor() {
+    @Test public void skalHaTidspunktForOpprettelseSattVedBrukAvNoArgsConstructor() {
         BlogEntityImpl testBlogEntity = new BlogEntityImpl();
         assertThat("Opprettet tidspunkt: ", testBlogEntity.getCreated(), is(equalTo(
                 LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0)
         )));
     }
 
-    @After
-    public void removeNowAsPureDate() {
+    @After public void removeNowAsPureDate() {
         NowAsPureDate.removeNowAsPureDate();
     }
 }

@@ -13,4 +13,6 @@ public interface User extends Persistent<Long> {
     Profile getProfile();
 
     EmailAddress getEmailAddress();
+
+    boolean isUserNameEmailAddress();
 }

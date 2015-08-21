@@ -1,7 +1,5 @@
 package nu.hjemme.persistence.db;
 
-import nu.hjemme.persistence.db.GuestBookEntityImpl;
-import nu.hjemme.persistence.db.UserEntityImpl;
 import org.junit.Test;
 
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
@@ -11,8 +9,7 @@ import static org.junit.Assert.assertThat;
 /** @author Tor Egil Jacobsen */
 public class GuestBookEntityImplTest {
 
-    @Test
-    public void willHaveCorrectImplementedHashCode() {
+    @Test public void willHaveCorrectImplementedHashCode() {
         GuestBookEntityImpl base = new GuestBookEntityImpl();
         base.setTitle("title");
         base.setUser(new UserEntityImpl());
@@ -26,8 +23,7 @@ public class GuestBookEntityImplTest {
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
-    @Test
-    public void willHaveCorrectImplementedEquals() {
+    @Test public void willHaveCorrectImplementedEquals() {
         GuestBookEntityImpl base = new GuestBookEntityImpl();
         base.setTitle("title");
         base.setUser(new UserEntityImpl());
