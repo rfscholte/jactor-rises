@@ -2,7 +2,7 @@ package nu.hjemme.persistence.dao;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.db.UserEntityImpl;
+import nu.hjemme.persistence.db.DefaultUserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -17,7 +17,7 @@ public class UserDaoDb implements UserDao {
     }
 
     @Override public UserEntity findUsing(UserName userName) {
-        return (UserEntity) session().createCriteria(UserEntityImpl.class).add(eq("userName", userName.getName())).uniqueResult();
+        return (UserEntity) session().createCriteria(DefaultUserEntity.class).add(eq("userName", userName.getName())).uniqueResult();
     }
 
     @Override public void save(UserEntity userEntity) {

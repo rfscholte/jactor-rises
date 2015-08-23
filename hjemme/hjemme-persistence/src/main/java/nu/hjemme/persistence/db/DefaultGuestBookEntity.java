@@ -4,7 +4,7 @@ import nu.hjemme.client.domain.GuestBook;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.GuestBookEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.base.PersistentEntityImpl;
+import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.GuestBookMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -15,18 +15,17 @@ import java.util.Objects;
 
 import static java.util.Objects.hash;
 
-/** @author Tor Egil Jacobsen */
-public class GuestBookEntityImpl extends PersistentEntityImpl implements GuestBookEntity {
+public class DefaultGuestBookEntity extends DefaultPersistentEntity implements GuestBookEntity {
 
     @Column(name = GuestBookMetadata.TITLE) private String title;
     @OneToMany(mappedBy = GuestBookMetadata.USER) private UserEntity user;
 
-    public GuestBookEntityImpl() { }
+    public DefaultGuestBookEntity() { }
 
     /** @param guestbook will be used to create the instance... */
-    public GuestBookEntityImpl(GuestBook guestbook) {
+    public DefaultGuestBookEntity(GuestBook guestbook) {
         title = guestbook.getTitle();
-        user = guestbook.getUser() != null ? new UserEntityImpl(guestbook.getUser()) : null;
+        user = guestbook.getUser() != null ? new DefaultUserEntity(guestbook.getUser()) : null;
     }
 
     @Override public boolean equals(Object o) {
@@ -38,7 +37,7 @@ public class GuestBookEntityImpl extends PersistentEntityImpl implements GuestBo
             return false;
         }
 
-        GuestBookEntityImpl that = (GuestBookEntityImpl) o;
+        DefaultGuestBookEntity that = (DefaultGuestBookEntity) o;
 
         return Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getUser(), that.getUser());
     }

@@ -17,19 +17,19 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 @Embeddable
-public class PersistentEntryEmbeddable implements PersistentEntry {
+public class DefaultPersistentEntry implements PersistentEntry {
     private static final LocalDateTimeConverter TIME_CONVERTER = new LocalDateTimeConverter();
 
     private Date creationTime;
     private PersonEntity creator;
     private String entry;
 
-    public PersistentEntryEmbeddable() {
+    public DefaultPersistentEntry() {
         creationTime = Now.asJavaUtilDate();
     }
 
     /** @param entry will be used to create the instance... */
-    public PersistentEntryEmbeddable(Entry entry) {
+    public DefaultPersistentEntry(Entry entry) {
         creationTime = TIME_CONVERTER.convertFrom(entry.getCreationTime());
         this.entry = entry.getEntry();
         creator = entry.getCreator() != null ? PersistentData.getInstance().provideInstanceFor(PersonEntity.class, entry.getCreator()) : null;
@@ -37,9 +37,9 @@ public class PersistentEntryEmbeddable implements PersistentEntry {
 
     @Override public boolean equals(Object obj) {
         return this == obj || obj != null && getClass() == obj.getClass() &&
-                Objects.equals(creationTime, ((PersistentEntryEmbeddable) obj).creationTime) &&
-                Objects.equals(entry, ((PersistentEntryEmbeddable) obj).entry) &&
-                Objects.equals(creator, ((PersistentEntryEmbeddable) obj).creator);
+                Objects.equals(creationTime, ((DefaultPersistentEntry) obj).creationTime) &&
+                Objects.equals(entry, ((DefaultPersistentEntry) obj).entry) &&
+                Objects.equals(creator, ((DefaultPersistentEntry) obj).creator);
     }
 
     @Override

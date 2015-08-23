@@ -14,46 +14,46 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntityImplTest {
+public class DefaultBlogEntityTest {
 
     @Before public void mockNow() {
         new NowAsPureDate();
     }
 
     @Test public void willHaveCorrectImplementedHashCode() {
-        UserEntityImpl userEntity = new UserEntityImpl();
+        DefaultUserEntity userEntity = new DefaultUserEntity();
 
-        BlogEntityImpl base = new BlogEntityImpl();
+        DefaultBlogEntity base = new DefaultBlogEntity();
         base.setTitle("title");
         base.setUserEntity(userEntity);
 
-        BlogEntityImpl equal = new BlogEntityImpl(base);
+        DefaultBlogEntity equal = new DefaultBlogEntity(base);
         equal.setTitle("title");
         equal.setUserEntity(userEntity);
 
-        BlogEntityImpl notEqual = new BlogEntityImpl();
+        DefaultBlogEntity notEqual = new DefaultBlogEntity();
         notEqual.setTitle("another title");
-        notEqual.setUserEntity(new UserEntityImpl());
+        notEqual.setUserEntity(new DefaultUserEntity());
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
-        BlogEntityImpl base = new BlogEntityImpl();
+        DefaultBlogEntity base = new DefaultBlogEntity();
         base.setTitle("title");
-        base.setUserEntity(new UserEntityImpl());
+        base.setUserEntity(new DefaultUserEntity());
 
-        BlogEntityImpl equal = new BlogEntityImpl(base);
+        DefaultBlogEntity equal = new DefaultBlogEntity(base);
 
-        BlogEntityImpl notEqual = new BlogEntityImpl();
+        DefaultBlogEntity notEqual = new DefaultBlogEntity();
         notEqual.setTitle("another title");
-        notEqual.setUserEntity(new UserEntityImpl());
+        notEqual.setUserEntity(new DefaultUserEntity());
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
     @Test public void skalHaTidspunktForOpprettelseSattVedBrukAvNoArgsConstructor() {
-        BlogEntityImpl testBlogEntity = new BlogEntityImpl();
+        DefaultBlogEntity testBlogEntity = new DefaultBlogEntity();
         assertThat("Opprettet tidspunkt: ", testBlogEntity.getCreated(), is(equalTo(
                 LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0)
         )));

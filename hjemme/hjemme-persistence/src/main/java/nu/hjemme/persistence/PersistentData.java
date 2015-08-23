@@ -2,20 +2,19 @@ package nu.hjemme.persistence;
 
 import nu.hjemme.persistence.dao.UserDao;
 import nu.hjemme.persistence.dao.UserDaoDb;
-import nu.hjemme.persistence.db.AddressEntityImpl;
-import nu.hjemme.persistence.db.BlogEntityImpl;
-import nu.hjemme.persistence.db.BlogEntryEntityImpl;
-import nu.hjemme.persistence.db.GuestBookEntityImpl;
-import nu.hjemme.persistence.db.GuestBookEntryEntityImpl;
-import nu.hjemme.persistence.db.PersistentEntryEmbeddable;
-import nu.hjemme.persistence.db.PersonEntityImpl;
-import nu.hjemme.persistence.db.UserEntityImpl;
+import nu.hjemme.persistence.db.DefaultAddressEntity;
+import nu.hjemme.persistence.db.DefaultBlogEntity;
+import nu.hjemme.persistence.db.DefaultBlogEntryEntity;
+import nu.hjemme.persistence.db.DefaultGuestBookEntity;
+import nu.hjemme.persistence.db.DefaultGuestBookEntryEntity;
+import nu.hjemme.persistence.db.DefaultPersistentEntry;
+import nu.hjemme.persistence.db.DefaultPersonEntity;
+import nu.hjemme.persistence.db.DefaultUserEntity;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import static java.util.Arrays.asList;
 
@@ -94,14 +93,14 @@ public class PersistentData {
     }
 
     static {
-        put(AddressEntity.class, AddressEntityImpl.class);
-        put(BlogEntity.class, BlogEntityImpl.class);
-        put(BlogEntryEntity.class, BlogEntryEntityImpl.class);
-        put(GuestBookEntity.class, GuestBookEntityImpl.class);
-        put(GuestBookEntryEntity.class, GuestBookEntryEntityImpl.class);
-        put(PersistentEntry.class, PersistentEntryEmbeddable.class);
-        put(PersonEntity.class, PersonEntityImpl.class);
-        put(UserEntity.class, UserEntityImpl.class);
+        put(AddressEntity.class, DefaultAddressEntity.class);
+        put(BlogEntity.class, DefaultBlogEntity.class);
+        put(BlogEntryEntity.class, DefaultBlogEntryEntity.class);
+        put(GuestBookEntity.class, DefaultGuestBookEntity.class);
+        put(GuestBookEntryEntity.class, DefaultGuestBookEntryEntity.class);
+        put(PersistentEntry.class, DefaultPersistentEntry.class);
+        put(PersonEntity.class, DefaultPersonEntity.class);
+        put(UserEntity.class, DefaultUserEntity.class);
         put(UserDao.class, UserDaoDb.class);
     }
 }

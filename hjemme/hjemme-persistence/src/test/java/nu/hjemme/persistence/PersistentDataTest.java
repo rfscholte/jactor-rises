@@ -2,7 +2,7 @@ package nu.hjemme.persistence;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Person;
-import nu.hjemme.persistence.db.PersonEntityImpl;
+import nu.hjemme.persistence.db.DefaultPersonEntity;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,11 +32,11 @@ public class PersistentDataTest {
     }
 
     @Test public void willFindImplementationOfInterface() {
-        assertThat(PersistentData.getInstance().provideInstanceFor(PersonEntity.class), is(instanceOf(PersonEntityImpl.class), "personEntity"));
+        assertThat(PersistentData.getInstance().provideInstanceFor(PersonEntity.class), is(instanceOf(DefaultPersonEntity.class), "personEntity"));
     }
 
     @Test public void willFindImplementationOfInterfaceUsingConstructorArguments() {
-        assertThat(PersistentData.getInstance().provideInstanceFor(PersonEntity.class, mock(Person.class)), is(instanceOf(PersonEntityImpl.class), "personEntity"));
+        assertThat(PersistentData.getInstance().provideInstanceFor(PersonEntity.class, mock(Person.class)), is(instanceOf(DefaultPersonEntity.class), "personEntity"));
     }
 
     @After public void resetInstance() {

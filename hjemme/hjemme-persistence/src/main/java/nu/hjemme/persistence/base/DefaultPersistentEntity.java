@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @MappedSuperclass
-public abstract class PersistentEntityImpl implements Persistent<Long>, PersistentEntitiy {
+public abstract class DefaultPersistentEntity implements Persistent<Long>, PersistentEntitiy {
 
     private static Map<Class<?>, TypeConverter> dataTypeConverters = initKnownConverters();
 

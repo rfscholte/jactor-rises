@@ -5,7 +5,7 @@ import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.ProfileEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.base.PersistentEntityImpl;
+import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.UserMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -23,21 +23,21 @@ import static java.util.Objects.hash;
 
 @Entity
 @Table(name = UserMetadata.USER_TABLE)
-public class UserEntityImpl extends PersistentEntityImpl implements UserEntity {
+public class DefaultUserEntity extends DefaultPersistentEntity implements UserEntity {
 
     @Column(name = UserMetadata.PASSWORD, nullable = false) private String password; // the user password
     @Column(name = UserMetadata.USER_NAME, nullable = false) private String userName; // the user name
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) @JoinColumn(name = UserMetadata.PROFILE_ID) private ProfileEntityImpl profileEntity; // the profile to the user
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) @JoinColumn(name = UserMetadata.PROFILE_ID) private DefaultProfileEntity profileEntity; // the profile to the user
     @Column(name = UserMetadata.EMAIL) private String emailAddress; // the email address to the user
     @Column(name = UserMetadata.EMAIL_AS_NAME, nullable = false) private boolean userNameIsEmailAddress; // if the user uses the email address as the user name
 
-    public UserEntityImpl() { }
+    public DefaultUserEntity() { }
 
     /** @param user is used to create an entity */
-    public UserEntityImpl(User user) {
+    public DefaultUserEntity(User user) {
         password = user.getPassword();
         userName = user.getUserName() != null ? user.getUserName().getName() : null;
-        profileEntity = user.getProfile() != null ? new ProfileEntityImpl(user.getProfile()) : null;
+        profileEntity = user.getProfile() != null ? new DefaultProfileEntity(user.getProfile()) : null;
     }
 
     @Override public boolean equals(Object o) {
@@ -59,9 +59,9 @@ public class UserEntityImpl extends PersistentEntityImpl implements UserEntity {
                 .toString();
     }
 
-    private ProfileEntityImpl cast(ProfileEntity profileEntity) {
-        if (profileEntity instanceof ProfileEntityImpl) {
-            return (ProfileEntityImpl) profileEntity;
+    private DefaultProfileEntity cast(ProfileEntity profileEntity) {
+        if (profileEntity instanceof DefaultProfileEntity) {
+            return (DefaultProfileEntity) profileEntity;
         }
 
         throw new IllegalArgumentException("unknown entity: " + profileEntity.getClass());

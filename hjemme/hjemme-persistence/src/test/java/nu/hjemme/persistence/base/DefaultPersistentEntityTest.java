@@ -19,7 +19,7 @@ import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
 
-public class PersistentEntityImplTest {
+public class DefaultPersistentEntityTest {
     private TestPersistentEntity testPersistentEntity;
 
     @Rule public ExpectedException expectedException = ExpectedException.none();
@@ -36,9 +36,9 @@ public class PersistentEntityImplTest {
 
     @Test public void willThrowIllegalArgumentExceptionWhenDataTypeIsUnknown() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(PersistentEntityImpl.class.toString());
+        expectedException.expectMessage(DefaultPersistentEntity.class.toString());
 
-        testPersistentEntity.convertTo(new TestPersistentEntity(), PersistentEntityImpl.class);
+        testPersistentEntity.convertTo(new TestPersistentEntity(), DefaultPersistentEntity.class);
     }
 
     @Test public void willConvertName() {
@@ -69,7 +69,7 @@ public class PersistentEntityImplTest {
         });
     }
 
-    private class TestPersistentEntity extends PersistentEntityImpl {
+    private class TestPersistentEntity extends DefaultPersistentEntity {
 
         public TestPersistentEntity setId(Long id) {
             super.id = id;

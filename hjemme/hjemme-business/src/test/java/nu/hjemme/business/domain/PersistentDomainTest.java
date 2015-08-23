@@ -1,6 +1,6 @@
 package nu.hjemme.business.domain;
 
-import nu.hjemme.persistence.base.PersistentEntityImpl;
+import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,7 +16,7 @@ public class PersistentDomainTest {
         new TestPersistentDomain();
     }
 
-    private class TestPersistentDomain extends PersistentDomain<PersistentEntityImpl, Long> {
+    private class TestPersistentDomain extends PersistentDomain<DefaultPersistentEntity, Long> {
         private TestPersistentDomain() {
             super(null);
         }

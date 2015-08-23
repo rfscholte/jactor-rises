@@ -7,38 +7,38 @@ import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccor
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class ProfileEntityImplTest {
+public class DefaultProfileEntityTest {
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
-        ProfileEntityImpl base = new ProfileEntityImpl();
+        DefaultProfileEntity base = new DefaultProfileEntity();
         base.addFirstName("some first name");
         base.addLastName("some last name");
-        base.setAddressEntity(new AddressEntityImpl());
+        base.setAddressEntity(new DefaultAddressEntity());
 
-        ProfileEntityImpl equal = new ProfileEntityImpl(base);
+        DefaultProfileEntity equal = new DefaultProfileEntity(base);
 
-        ProfileEntityImpl notEqual = new ProfileEntityImpl();
+        DefaultProfileEntity notEqual = new DefaultProfileEntity();
         notEqual.addFirstName("some other first name");
         notEqual.addLastName("some other last name");
-        notEqual.setAddressEntity(new AddressEntityImpl());
+        notEqual.setAddressEntity(new DefaultAddressEntity());
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
     public void willHaveCorrectImplementedEquals() {
-        ProfileEntityImpl base = new ProfileEntityImpl();
+        DefaultProfileEntity base = new DefaultProfileEntity();
         base.addFirstName("some first name");
         base.addLastName("some last name");
-        base.setAddressEntity(new AddressEntityImpl());
+        base.setAddressEntity(new DefaultAddressEntity());
 
-        ProfileEntityImpl equal = new ProfileEntityImpl(base);
+        DefaultProfileEntity equal = new DefaultProfileEntity(base);
 
-        ProfileEntityImpl notEqual = new ProfileEntityImpl();
+        DefaultProfileEntity notEqual = new DefaultProfileEntity();
         notEqual.addFirstName("some other first name");
         notEqual.addLastName("some other last name");
-        notEqual.setAddressEntity(new AddressEntityImpl());
+        notEqual.setAddressEntity(new DefaultAddressEntity());
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }

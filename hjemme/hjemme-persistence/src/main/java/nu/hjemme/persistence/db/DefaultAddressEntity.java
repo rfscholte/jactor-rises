@@ -3,7 +3,7 @@ package nu.hjemme.persistence.db;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
 import nu.hjemme.persistence.AddressEntity;
-import nu.hjemme.persistence.base.PersistentEntityImpl;
+import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.AddressMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -17,7 +17,7 @@ import static java.util.Objects.hash;
 
 @Entity
 @Table(name = AddressMetadata.TABLE)
-public class AddressEntityImpl extends PersistentEntityImpl implements AddressEntity {
+public class DefaultAddressEntity extends DefaultPersistentEntity implements AddressEntity {
 
     @Column(name = AddressMetadata.COUNTRY) private String country;
     @Column(name = AddressMetadata.ZIP_CODE) private Integer zipCode;
@@ -26,26 +26,28 @@ public class AddressEntityImpl extends PersistentEntityImpl implements AddressEn
     @Column(name = AddressMetadata.ADDRESS_LINE_3) private String addressLine3;
     @Column(name = AddressMetadata.CITY) private String city;
 
-    public AddressEntityImpl() { }
+    public DefaultAddressEntity() { }
 
     /** @param address to copy */
-    public AddressEntityImpl(Address address) {
-        addressLine1 = address.getAddressLine1();
-        addressLine2 = address.getAddressLine2();
-        addressLine3 = address.getAddressLine3();
-        city = address.getCity();
-        country = convertFrom(address.getCountry(), Country.class);
-        zipCode = address.getZipCode();
+    public DefaultAddressEntity(Address address) {
+        if (address != null) {
+            addressLine1 = address.getAddressLine1();
+            addressLine2 = address.getAddressLine2();
+            addressLine3 = address.getAddressLine3();
+            city = address.getCity();
+            country = convertFrom(address.getCountry(), Country.class);
+            zipCode = address.getZipCode();
+        }
     }
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
-                Objects.equals(addressLine1, ((AddressEntityImpl) o).addressLine1) &&
-                Objects.equals(addressLine2, ((AddressEntityImpl) o).addressLine2) &&
-                Objects.equals(addressLine3, ((AddressEntityImpl) o).addressLine3) &&
-                Objects.equals(city, ((AddressEntityImpl) o).city) &&
-                Objects.equals(country, ((AddressEntityImpl) o).country) &&
-                Objects.equals(zipCode, ((AddressEntityImpl) o).zipCode);
+                Objects.equals(addressLine1, ((DefaultAddressEntity) o).addressLine1) &&
+                Objects.equals(addressLine2, ((DefaultAddressEntity) o).addressLine2) &&
+                Objects.equals(addressLine3, ((DefaultAddressEntity) o).addressLine3) &&
+                Objects.equals(city, ((DefaultAddressEntity) o).city) &&
+                Objects.equals(country, ((DefaultAddressEntity) o).country) &&
+                Objects.equals(zipCode, ((DefaultAddressEntity) o).zipCode);
     }
 
     @Override public int hashCode() {

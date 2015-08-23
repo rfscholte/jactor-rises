@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class GuestBookEntryEntityImplTest {
+public class DefaultGuestBookEntryEntityTest {
 
     @Rule public NowAsPureDateRule nowAsPureDateRule = NowAsPureDateRule.init();
 
@@ -24,23 +24,23 @@ public class GuestBookEntryEntityImplTest {
     }
 
     @Test public void willHaveCorrectImplementedHashCode() {
-        PersistentEntry persistentEntry = new PersistentEntryEmbeddable();
+        PersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
         persistentEntry.setCreator(aCreatorNamed("some creator"));
 
-        PersistentEntry otherPersistentEntry = new PersistentEntryEmbeddable();
+        PersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
         otherPersistentEntry.setEntry("some other entry");
         otherPersistentEntry.setCreator(aCreatorNamed("some other creator"));
 
-        GuestBookEntryEntityImpl base = new GuestBookEntryEntityImpl();
+        DefaultGuestBookEntryEntity base = new DefaultGuestBookEntryEntity();
         base.setPersistentEntry(persistentEntry);
-        base.setGuestBook(new GuestBookEntityImpl());
+        base.setGuestBook(new DefaultGuestBookEntity());
 
-        GuestBookEntryEntityImpl equal = new GuestBookEntryEntityImpl(base);
+        DefaultGuestBookEntryEntity equal = new DefaultGuestBookEntryEntity(base);
 
-        GuestBookEntryEntityImpl notEqual = new GuestBookEntryEntityImpl();
+        DefaultGuestBookEntryEntity notEqual = new DefaultGuestBookEntryEntity();
         notEqual.setPersistentEntry(otherPersistentEntry);
-        notEqual.setGuestBook(new GuestBookEntityImpl());
+        notEqual.setGuestBook(new DefaultGuestBookEntity());
 
         System.out.println("base    " + base);
         System.out.println("equal   " + equal);
@@ -51,36 +51,36 @@ public class GuestBookEntryEntityImplTest {
 
 
     @Test public void willHaveCorrectImplementedEquals() {
-        PersistentEntry persistentEntry = new PersistentEntryEmbeddable();
+        PersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
         persistentEntry.setCreator(aCreatorNamed("some creator"));
 
-        PersistentEntry otherPersistentEntry = new PersistentEntryEmbeddable();
+        PersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
         otherPersistentEntry.setEntry("some other entry");
         otherPersistentEntry.setCreator(aCreatorNamed("some other creator"));
 
-        GuestBookEntryEntityImpl base = new GuestBookEntryEntityImpl();
+        DefaultGuestBookEntryEntity base = new DefaultGuestBookEntryEntity();
         base.setPersistentEntry(persistentEntry);
-        base.setGuestBook(new GuestBookEntityImpl());
+        base.setGuestBook(new DefaultGuestBookEntity());
 
-        GuestBookEntryEntityImpl equal = new GuestBookEntryEntityImpl(base);
+        DefaultGuestBookEntryEntity equal = new DefaultGuestBookEntryEntity(base);
 
-        GuestBookEntryEntityImpl notEqual = new GuestBookEntryEntityImpl();
+        DefaultGuestBookEntryEntity notEqual = new DefaultGuestBookEntryEntity();
         notEqual.setPersistentEntry(otherPersistentEntry);
-        notEqual.setGuestBook(new GuestBookEntityImpl());
+        notEqual.setGuestBook(new DefaultGuestBookEntity());
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
     static PersonEntity aCreatorNamed(String creator) {
-        PersonEntityImpl personEntity = new PersonEntityImpl();
+        DefaultPersonEntity personEntity = new DefaultPersonEntity();
         personEntity.setFirstName(new Name(creator));
 
         return personEntity;
     }
 
     @Test public void skalHaTidspunktForOpprettelseSattVedBrukAvNoArgsConstructor() {
-        GuestBookEntryEntityImpl guestBookEntryEntity = new GuestBookEntryEntityImpl();
+        DefaultGuestBookEntryEntity guestBookEntryEntity = new DefaultGuestBookEntryEntity();
 
         assertThat("Creation time", guestBookEntryEntity.getEntry().getCreationTime(), is(equalTo(NowAsPureDate.asDateTime())));
     }

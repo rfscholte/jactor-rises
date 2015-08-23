@@ -7,11 +7,11 @@ import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccor
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class AddressEntityImplTest {
+public class DefaultAddressEntityTest {
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
-        AddressEntityImpl base = new AddressEntityImpl();
+        DefaultAddressEntity base = new DefaultAddressEntity();
         base.setAddressLine1("somewhere");
         base.setZipCode(1234);
         base.setCountry("NO$no");
@@ -19,7 +19,7 @@ public class AddressEntityImplTest {
         base.setAddressLine2("somewhere else");
         base.setAddressLine3("way out there");
 
-        AddressEntityImpl equal = new AddressEntityImpl(base);
+        DefaultAddressEntity equal = new DefaultAddressEntity(base);
         equal.setAddressLine1("somewhere");
         equal.setZipCode(1234);
         equal.setCountry("NO$no");
@@ -27,7 +27,7 @@ public class AddressEntityImplTest {
         equal.setAddressLine2("somewhere else");
         equal.setAddressLine3("way out there");
 
-        AddressEntityImpl notEqual = new AddressEntityImpl();
+        DefaultAddressEntity notEqual = new DefaultAddressEntity();
         notEqual.setAddressLine1("somewhere else");
         notEqual.setZipCode(5678);
         notEqual.setCountry("SE$se");
@@ -40,7 +40,7 @@ public class AddressEntityImplTest {
 
     @Test
     public void willHaveCorrectImplementedEquals() {
-        AddressEntityImpl base = new AddressEntityImpl();
+        DefaultAddressEntity base = new DefaultAddressEntity();
         base.setAddressLine1("somewhere");
         base.setZipCode(1234);
         base.setCountry("NO$no");
@@ -48,7 +48,7 @@ public class AddressEntityImplTest {
         base.setAddressLine2("somewhere else");
         base.setAddressLine3("way out there");
 
-        AddressEntityImpl equal = new AddressEntityImpl(base);
+        DefaultAddressEntity equal = new DefaultAddressEntity(base);
         equal.setAddressLine1("somewhere");
         equal.setZipCode(1234);
         equal.setCountry("NO$no");
@@ -56,7 +56,7 @@ public class AddressEntityImplTest {
         equal.setAddressLine2("somewhere else");
         equal.setAddressLine3("way out there");
 
-        AddressEntityImpl notEqual = new AddressEntityImpl();
+        DefaultAddressEntity notEqual = new DefaultAddressEntity();
         notEqual.setAddressLine1("somewhere else");
         notEqual.setZipCode(5678);
         notEqual.setCountry("SE$se");

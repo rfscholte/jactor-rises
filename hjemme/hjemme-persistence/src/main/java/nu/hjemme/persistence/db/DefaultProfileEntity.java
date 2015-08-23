@@ -6,7 +6,7 @@ import nu.hjemme.client.domain.Profile;
 import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.ProfileEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.base.PersistentEntityImpl;
+import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.ProfileMetadata;
 
 import javax.persistence.CascadeType;
@@ -24,25 +24,25 @@ import static java.util.Objects.hash;
 
 @Entity
 @Table(name = ProfileMetadata.PROFILE_TABLE)
-public class ProfileEntityImpl extends PersistentEntityImpl implements ProfileEntity {
+public class DefaultProfileEntity extends DefaultPersistentEntity implements ProfileEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = ProfileMetadata.ADDRESS_ID) private AddressEntityImpl addressEntity;
-    @Transient private PersonEntityImpl personEntity;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = ProfileMetadata.ADDRESS_ID) private DefaultAddressEntity addressEntity;
+    @Transient private DefaultPersonEntity personEntity;
     @Column(name = ProfileMetadata.DESCRIPTION) private String description;
-    @OneToOne(mappedBy = "profileEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL) private UserEntityImpl userEntity;
+    @OneToOne(mappedBy = "profileEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL) private DefaultUserEntity userEntity;
 
-    public ProfileEntityImpl() {
-        personEntity = new PersonEntityImpl();
+    public DefaultProfileEntity() {
+        personEntity = new DefaultPersonEntity();
     }
 
-    public ProfileEntityImpl(Profile profile) {
+    public DefaultProfileEntity(Profile profile) {
         this();
         description = convertFrom(profile.getDescription(), Description.class);
-        addressEntity = new AddressEntityImpl(profile.getAddress());
+        addressEntity = new DefaultAddressEntity(profile.getAddress());
         initPersonEntity();
         personEntity.setFirstName(profile.getFirstName());
         personEntity.setLastName(profile.getLastName());
-        userEntity = profile.getUser() != null ? new UserEntityImpl(profile.getUser()) : null;
+        userEntity = profile.getUser() != null ? new DefaultUserEntity(profile.getUser()) : null;
     }
 
     public void addLastName(String lastName) {
@@ -55,15 +55,15 @@ public class ProfileEntityImpl extends PersistentEntityImpl implements ProfileEn
 
     private void initPersonEntity() {
         if (personEntity == null) {
-            personEntity = new PersonEntityImpl();
+            personEntity = new DefaultPersonEntity();
         }
     }
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
-                Objects.equals(getAddress(), ((ProfileEntityImpl) o).getAddress()) &&
-                Objects.equals(description, ((ProfileEntityImpl) o).description) &&
-                Objects.equals(getUser(), ((ProfileEntityImpl) o).getUser());
+                Objects.equals(getAddress(), ((DefaultProfileEntity) o).getAddress()) &&
+                Objects.equals(description, ((DefaultProfileEntity) o).description) &&
+                Objects.equals(getUser(), ((DefaultProfileEntity) o).getUser());
     }
 
     @Override public int hashCode() {
@@ -90,8 +90,8 @@ public class ProfileEntityImpl extends PersistentEntityImpl implements ProfileEn
         return personEntity != null ? personEntity.getLastName() : null;
     }
 
-    public void setAddressEntity(AddressEntity addressEntity) {
-        this.addressEntity = (AddressEntityImpl) addressEntity;
+    @Override public void setAddressEntity(AddressEntity addressEntity) {
+        this.addressEntity = (DefaultAddressEntity) addressEntity;
     }
 
     @Override public void setDescription(String description) {

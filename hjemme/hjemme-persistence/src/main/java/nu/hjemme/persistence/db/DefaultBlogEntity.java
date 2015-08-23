@@ -2,7 +2,7 @@ package nu.hjemme.persistence.db;
 
 import nu.hjemme.persistence.BlogEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.base.PersistentEntityImpl;
+import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.BlogMetadata;
 import nu.hjemme.persistence.time.Now;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -16,17 +16,17 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntityImpl extends PersistentEntityImpl implements BlogEntity {
+public class DefaultBlogEntity extends DefaultPersistentEntity implements BlogEntity {
 
     @Column(name = BlogMetadata.CREATED) private LocalDateTime created;
     @Column(name = BlogMetadata.TITLE) private String title;
     @ManyToOne @Column(name = BlogMetadata.USER) private UserEntity userEntity;
 
-    public BlogEntityImpl() {
+    public DefaultBlogEntity() {
         created = Now.asDateTime();
     }
 
-    public BlogEntityImpl(BlogEntityImpl blogEntity) {
+    public DefaultBlogEntity(DefaultBlogEntity blogEntity) {
         created = blogEntity.getCreated();
         title = blogEntity.getTitle();
         userEntity = blogEntity.getUser();

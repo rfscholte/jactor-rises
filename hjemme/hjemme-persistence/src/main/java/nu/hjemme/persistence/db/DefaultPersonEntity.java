@@ -4,7 +4,7 @@ import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Person;
 import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.PersonEntity;
-import nu.hjemme.persistence.base.PersistentEntityImpl;
+import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.PersonMetadata;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -16,18 +16,18 @@ import javax.persistence.OneToMany;
 import static java.util.Objects.hash;
 
 //@Table(name = "T_PERSON")
-public class PersonEntityImpl extends PersistentEntityImpl implements PersonEntity {
+public class DefaultPersonEntity extends DefaultPersistentEntity implements PersonEntity {
 
     @Column(name = PersonMetadata.FIRST_NAME) private Name firstName;
     @Column(name = PersonMetadata.LAST_NAME) private Name lastName;
     @OneToMany(mappedBy = PersonMetadata.ADDRESS) private AddressEntity address;
 
-    public PersonEntityImpl() {
+    public DefaultPersonEntity() {
     }
 
     /** @param person to use */
-    public PersonEntityImpl(Person person) {
-        address = person.getAddress() != null ? new AddressEntityImpl(person.getAddress()) : null;
+    public DefaultPersonEntity(Person person) {
+        address = person.getAddress() != null ? new DefaultAddressEntity(person.getAddress()) : null;
         firstName = person.getFirstName();
         lastName = person.getLastName();
     }

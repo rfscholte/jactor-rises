@@ -4,11 +4,11 @@ import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Address;
 import nu.hjemme.client.domain.Profile;
-import nu.hjemme.persistence.db.ProfileEntityImpl;
+import nu.hjemme.persistence.db.DefaultProfileEntity;
 
-public class ProfileDomain extends PersistentDomain<ProfileEntityImpl, Long> implements Profile {
+public class ProfileDomain extends PersistentDomain<DefaultProfileEntity, Long> implements Profile {
 
-    public ProfileDomain(ProfileEntityImpl profileEntity) {
+    public ProfileDomain(DefaultProfileEntity profileEntity) {
         super(profileEntity);
     }
 

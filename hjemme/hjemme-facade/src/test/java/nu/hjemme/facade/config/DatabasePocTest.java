@@ -3,7 +3,7 @@ package nu.hjemme.facade.config;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.UserEntity;
 import nu.hjemme.persistence.config.HjemmeDbContext;
-import nu.hjemme.persistence.db.UserEntityImpl;
+import nu.hjemme.persistence.db.DefaultUserEntity;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.hibernate.Session;
@@ -59,7 +59,7 @@ public class DatabasePocTest {
     @Test public void willReadDatabaseValues() {
         createUserInTheDatabaseWith(new UserName("testing"));
         session().flush();
-        UserEntity user = (UserEntity) session().createCriteria(UserEntityImpl.class).add(eq("emailAddress", "testing@svada.lada")).uniqueResult();
+        UserEntity user = (UserEntity) session().createCriteria(DefaultUserEntity.class).add(eq("emailAddress", "testing@svada.lada")).uniqueResult();
 
         assertThat(user, new TypeSafeBuildMatcher<UserEntity>("entity read from databaser") {
             @Override public MatchBuilder matches(UserEntity typeToTest, MatchBuilder matchBuilder) {
@@ -70,7 +70,7 @@ public class DatabasePocTest {
     }
 
     private void createUserInTheDatabaseWith(UserName userName) {
-        UserEntityImpl userEntity = new UserEntityImpl();
+        DefaultUserEntity userEntity = new DefaultUserEntity();
         userEntity.setEmailAddress(userName.getName() + "@svada.lada");
         userEntity.setPassword(userName.getName());
         userEntity.setUserName(userName.getName());

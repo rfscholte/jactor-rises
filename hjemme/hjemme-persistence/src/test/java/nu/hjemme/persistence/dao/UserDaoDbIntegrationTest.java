@@ -2,7 +2,7 @@ package nu.hjemme.persistence.dao;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.config.HjemmeDbContext;
-import nu.hjemme.persistence.db.UserEntityImpl;
+import nu.hjemme.persistence.db.DefaultUserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
@@ -33,7 +33,7 @@ public class UserDaoDbIntegrationTest {
     }
 
     @Test public void willPersistAndFindUserWithDao() {
-        UserEntityImpl userEntity = new UserEntityImpl();
+        DefaultUserEntity userEntity = new DefaultUserEntity();
         userEntity.setUserName("me");
         userEntity.setPassword("demo");
         session().save(userEntity);

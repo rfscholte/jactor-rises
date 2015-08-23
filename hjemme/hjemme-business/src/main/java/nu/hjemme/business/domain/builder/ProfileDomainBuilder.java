@@ -2,14 +2,14 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.business.domain.ProfileDomain;
-import nu.hjemme.persistence.db.ProfileEntityImpl;
+import nu.hjemme.persistence.db.DefaultProfileEntity;
 import org.apache.commons.lang.Validate;
 
 /** @author Tor Egil Jacobsen */
 public class ProfileDomainBuilder extends DomainBuilder<ProfileDomain> {
     static final String AN_ADDRESS_MUST_BE_PRESENT = "An address must be present";
 
-    private ProfileEntityImpl profileEntity = new ProfileEntityImpl();
+    private DefaultProfileEntity profileEntity = new DefaultProfileEntity();
 
     @Override protected ProfileDomain initDomain() {
         return new ProfileDomain(profileEntity);

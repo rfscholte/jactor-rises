@@ -7,32 +7,32 @@ import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccor
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntityImplTest {
+public class DefaultGuestBookEntityTest {
 
     @Test public void willHaveCorrectImplementedHashCode() {
-        GuestBookEntityImpl base = new GuestBookEntityImpl();
+        DefaultGuestBookEntity base = new DefaultGuestBookEntity();
         base.setTitle("title");
-        base.setUser(new UserEntityImpl());
+        base.setUser(new DefaultUserEntity());
 
-        GuestBookEntityImpl equal = new GuestBookEntityImpl(base);
+        DefaultGuestBookEntity equal = new DefaultGuestBookEntity(base);
 
-        GuestBookEntityImpl notEqual = new GuestBookEntityImpl();
+        DefaultGuestBookEntity notEqual = new DefaultGuestBookEntity();
         notEqual.setTitle("another title");
-        notEqual.setUser(new UserEntityImpl());
+        notEqual.setUser(new DefaultUserEntity());
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
-        GuestBookEntityImpl base = new GuestBookEntityImpl();
+        DefaultGuestBookEntity base = new DefaultGuestBookEntity();
         base.setTitle("title");
-        base.setUser(new UserEntityImpl());
+        base.setUser(new DefaultUserEntity());
 
-        GuestBookEntityImpl equal = new GuestBookEntityImpl(base);
+        DefaultGuestBookEntity equal = new DefaultGuestBookEntity(base);
 
-        GuestBookEntityImpl notEqual = new GuestBookEntityImpl();
+        DefaultGuestBookEntity notEqual = new DefaultGuestBookEntity();
         notEqual.setTitle("another title");
-        notEqual.setUser(new UserEntityImpl());
+        notEqual.setUser(new DefaultUserEntity());
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }

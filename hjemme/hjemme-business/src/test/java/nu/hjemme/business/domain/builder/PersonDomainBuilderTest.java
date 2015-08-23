@@ -2,7 +2,7 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.PersonDomain;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.persistence.db.AddressEntityImpl;
+import nu.hjemme.persistence.db.DefaultAddressEntity;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,7 +22,7 @@ public class PersonDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersonDomainBuilder.THE_FIRST_NAME_CANNOT_BE_NULL);
 
-        PersonDomainBuilder.init().withLastNameAs("some last name").with(new AddressEntityImpl()).get();
+        PersonDomainBuilder.init().withLastNameAs("some last name").with(new DefaultAddressEntity()).get();
     }
 
     @Test
@@ -33,7 +33,7 @@ public class PersonDomainBuilderTest {
         PersonDomainBuilder.init()
                 .withFirstNameAs("")
                 .withLastNameAs("some last name")
-                .with(new AddressEntityImpl())
+                .with(new DefaultAddressEntity())
                 .get();
     }
 
@@ -54,7 +54,7 @@ public class PersonDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersonDomainBuilder.THE_LAST_NAME_CANNOT_BE_NULL);
 
-        PersonDomainBuilder.init().withFirstNameAs("some first name").with(new AddressEntityImpl()).get();
+        PersonDomainBuilder.init().withFirstNameAs("some first name").with(new DefaultAddressEntity()).get();
     }
 
     @Test
@@ -65,7 +65,7 @@ public class PersonDomainBuilderTest {
         PersonDomainBuilder.init()
                 .withFirstNameAs("some first name")
                 .withLastNameAs("")
-                .with(new AddressEntityImpl())
+                .with(new DefaultAddressEntity())
                 .get();
     }
 
@@ -82,7 +82,7 @@ public class PersonDomainBuilderTest {
         PersonDomain personDomain = PersonDomainBuilder.init()
                 .withFirstNameAs("some first name")
                 .withLastNameAs("some last name")
-                .with(new AddressEntityImpl())
+                .with(new DefaultAddressEntity())
                 .get();
 
         assertThat("Person", personDomain, is(notNullValue()));

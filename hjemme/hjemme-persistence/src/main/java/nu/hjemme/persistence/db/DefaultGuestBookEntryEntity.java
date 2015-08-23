@@ -5,7 +5,7 @@ import nu.hjemme.client.domain.GuestBookEntry;
 import nu.hjemme.persistence.GuestBookEntity;
 import nu.hjemme.persistence.GuestBookEntryEntity;
 import nu.hjemme.persistence.PersistentEntry;
-import nu.hjemme.persistence.base.PersistentEntityImpl;
+import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.GuestBookEntryMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -19,8 +19,7 @@ import java.util.Objects;
 
 import static java.util.Objects.hash;
 
-/** @author Tor Egil Jacobsen */
-public class GuestBookEntryEntityImpl extends PersistentEntityImpl implements GuestBookEntryEntity {
+public class DefaultGuestBookEntryEntity extends DefaultPersistentEntity implements GuestBookEntryEntity {
     @OneToMany(mappedBy = GuestBookEntryMetadata.GUEST_BOOK) private GuestBookEntity guestBookEntity;
 
     @Embedded
@@ -33,13 +32,13 @@ public class GuestBookEntryEntityImpl extends PersistentEntityImpl implements Gu
     })
     private PersistentEntry persistentEntry;
 
-    public GuestBookEntryEntityImpl() {
-        persistentEntry = new PersistentEntryEmbeddable();
+    public DefaultGuestBookEntryEntity() {
+        persistentEntry = new DefaultPersistentEntry();
     }
 
-    public GuestBookEntryEntityImpl(GuestBookEntry guestBookEntry) {
-        guestBookEntity = guestBookEntry.getGuestBook() != null ? new GuestBookEntityImpl(guestBookEntry.getGuestBook()) : null;
-        persistentEntry = new PersistentEntryEmbeddable(guestBookEntry.getEntry());
+    public DefaultGuestBookEntryEntity(GuestBookEntry guestBookEntry) {
+        guestBookEntity = guestBookEntry.getGuestBook() != null ? new DefaultGuestBookEntity(guestBookEntry.getGuestBook()) : null;
+        persistentEntry = new DefaultPersistentEntry(guestBookEntry.getEntry());
     }
 
     @Override public void setPersistentEntry(PersistentEntry persistentEntry) {

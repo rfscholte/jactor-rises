@@ -3,7 +3,7 @@ package nu.hjemme.persistence.db;
 import nu.hjemme.persistence.BlogEntity;
 import nu.hjemme.persistence.BlogEntryEntity;
 import nu.hjemme.persistence.PersistentEntry;
-import nu.hjemme.persistence.base.PersistentEntityImpl;
+import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.BlogEntryMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -17,8 +17,7 @@ import java.util.Objects;
 
 import static java.util.Objects.hash;
 
-/** @author Tor Egil Jacobsen */
-public class BlogEntryEntityImpl extends PersistentEntityImpl implements BlogEntryEntity {
+public class DefaultBlogEntryEntity extends DefaultPersistentEntity implements BlogEntryEntity {
 
     @ManyToOne() @Column(name = BlogEntryMetadata.BLOG) private BlogEntity blogEntity;
 
@@ -30,11 +29,11 @@ public class BlogEntryEntityImpl extends PersistentEntityImpl implements BlogEnt
             @AttributeOverride(name = "entry", column = @Column(name = BlogEntryMetadata.ENTRY))
     }) private PersistentEntry persistentEntry;
 
-    public BlogEntryEntityImpl() {
-        persistentEntry = new PersistentEntryEmbeddable();
+    public DefaultBlogEntryEntity() {
+        persistentEntry = new DefaultPersistentEntry();
     }
 
-    public BlogEntryEntityImpl(BlogEntryEntity blogEntryEntity) {
+    public DefaultBlogEntryEntity(BlogEntryEntity blogEntryEntity) {
         blogEntity = blogEntryEntity.getBlog();
         persistentEntry = blogEntryEntity.getEntry();
     }

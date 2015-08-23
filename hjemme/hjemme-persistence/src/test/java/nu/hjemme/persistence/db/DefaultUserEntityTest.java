@@ -1,8 +1,5 @@
 package nu.hjemme.persistence.db;
 
-import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.persistence.db.ProfileEntityImpl;
-import nu.hjemme.persistence.db.UserEntityImpl;
 import org.junit.Test;
 
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
@@ -10,20 +7,20 @@ import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccor
 import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
-public class UserEntityImplTest {
+public class DefaultUserEntityTest {
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
-        UserEntityImpl base = new UserEntityImpl();
+        DefaultUserEntity base = new DefaultUserEntity();
         base.setUserName("some user");
-        base.setProfileEntity(new ProfileEntityImpl());
+        base.setProfileEntity(new DefaultProfileEntity());
         base.setPassword("some password");
 
-        UserEntityImpl equal = new UserEntityImpl(base);
+        DefaultUserEntity equal = new DefaultUserEntity(base);
 
-        UserEntityImpl notEqual = new UserEntityImpl();
+        DefaultUserEntity notEqual = new DefaultUserEntity();
         notEqual.setUserName("some other user");
-        notEqual.setProfileEntity(new ProfileEntityImpl());
+        notEqual.setProfileEntity(new DefaultProfileEntity());
         notEqual.setPassword("some other password");
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
@@ -31,16 +28,16 @@ public class UserEntityImplTest {
 
     @Test
     public void willHaveCorrectImplementedEquals() {
-        UserEntityImpl base = new UserEntityImpl();
+        DefaultUserEntity base = new DefaultUserEntity();
         base.setUserName("some user");
-        base.setProfileEntity(new ProfileEntityImpl());
+        base.setProfileEntity(new DefaultProfileEntity());
         base.setPassword("some password");
 
-        UserEntityImpl equal = new UserEntityImpl(base);
+        DefaultUserEntity equal = new DefaultUserEntity(base);
 
-        UserEntityImpl notEqual = new UserEntityImpl();
+        DefaultUserEntity notEqual = new DefaultUserEntity();
         notEqual.setUserName("some other user");
-        notEqual.setProfileEntity(new ProfileEntityImpl());
+        notEqual.setProfileEntity(new DefaultProfileEntity());
         notEqual.setPassword("some other password");
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
