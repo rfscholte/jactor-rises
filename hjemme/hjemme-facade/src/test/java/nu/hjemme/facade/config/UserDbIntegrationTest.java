@@ -87,10 +87,10 @@ public class UserDbIntegrationTest {
                 Address address = typeToTest.getProfile().getAddress();
 
                 return matchBuilder
-                        .matches(address.getAddressLine1(), is(equalTo("hjemme"), "address line 1"))
+                        .matches(address.getAddressLine1(), is(equalTo("Hjemme"), "address line 1"))
                         .matches(address.getAddressLine2(), is(nullValue(), "address line 2"))
                         .matches(address.getAddressLine3(), is(nullValue(), "address line 3"))
-                        .matches(address.getCity(), is(equalTo("dirdal"), "city"))
+                        .matches(address.getCity(), is(equalTo("Dirdal"), "city"))
                         .matches(address.getCountry(), is(equalTo(new Country("NO", "no")), "country"))
                         .matches(address.getZipCode(), is(equalTo(1234), "zip code"));
             }

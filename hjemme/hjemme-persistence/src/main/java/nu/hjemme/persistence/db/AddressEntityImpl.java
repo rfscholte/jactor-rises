@@ -9,14 +9,17 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
 
-/** @author Tor Egil Jacobsen */
+@Entity
+@Table(name = AddressMetadata.TABLE)
 public class AddressEntityImpl extends PersistentEntityImpl implements AddressEntity {
 
-    @Column(name = AddressMetadata.COUNTRY) private Country country;
+    @Column(name = AddressMetadata.COUNTRY) private String country;
     @Column(name = AddressMetadata.ZIP_CODE) private Integer zipCode;
     @Column(name = AddressMetadata.ADDRESS_LINE_1) private String addressLine1;
     @Column(name = AddressMetadata.ADDRESS_LINE_2) private String addressLine2;
@@ -31,22 +34,22 @@ public class AddressEntityImpl extends PersistentEntityImpl implements AddressEn
         addressLine2 = address.getAddressLine2();
         addressLine3 = address.getAddressLine3();
         city = address.getCity();
-        country = address.getCountry();
+        country = convertFrom(address.getCountry(), Country.class);
         zipCode = address.getZipCode();
     }
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
-                Objects.equals(getAddressLine1(), ((AddressEntity) o).getAddressLine1()) &&
-                Objects.equals(getAddressLine2(), ((AddressEntity) o).getAddressLine2()) &&
-                Objects.equals(getAddressLine3(), ((AddressEntity) o).getAddressLine3()) &&
-                Objects.equals(getCity(), ((AddressEntity) o).getCity()) &&
-                Objects.equals(getCountry(), ((AddressEntity) o).getCountry()) &&
-                Objects.equals(getZipCode(), ((AddressEntity) o).getZipCode());
+                Objects.equals(addressLine1, ((AddressEntityImpl) o).addressLine1) &&
+                Objects.equals(addressLine2, ((AddressEntityImpl) o).addressLine2) &&
+                Objects.equals(addressLine3, ((AddressEntityImpl) o).addressLine3) &&
+                Objects.equals(city, ((AddressEntityImpl) o).city) &&
+                Objects.equals(country, ((AddressEntityImpl) o).country) &&
+                Objects.equals(zipCode, ((AddressEntityImpl) o).zipCode);
     }
 
     @Override public int hashCode() {
-        return hash(getAddressLine1(), getAddressLine2(), getAddressLine3(), getCity(), getCountry(), getZipCode());
+        return hash(addressLine1, addressLine2, addressLine3, city, country, zipCode);
     }
 
     @Override public String toString() {
@@ -62,7 +65,7 @@ public class AddressEntityImpl extends PersistentEntityImpl implements AddressEn
     }
 
     @Override public Country getCountry() {
-        return country;
+        return convertTo(country, Country.class);
     }
 
     @Override public Integer getZipCode() {
@@ -85,7 +88,7 @@ public class AddressEntityImpl extends PersistentEntityImpl implements AddressEn
         return city;
     }
 
-    @Override public void setCountry(Country country) {
+    @Override public void setCountry(String country) {
         this.country = country;
     }
 

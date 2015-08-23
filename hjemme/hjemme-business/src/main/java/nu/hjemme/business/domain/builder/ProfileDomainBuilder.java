@@ -20,7 +20,7 @@ public class ProfileDomainBuilder extends DomainBuilder<ProfileDomain> {
     }
 
     public ProfileDomainBuilder with(AddressDomain address) {
-        profileEntity.addAddressEntity(address.getEntity());
+        profileEntity.setAddressEntity(address.getEntity());
         return this;
     }
 

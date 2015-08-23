@@ -13,7 +13,7 @@ import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsin
 import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GuestBookEntryEntityImplTest {
 
@@ -41,6 +41,10 @@ public class GuestBookEntryEntityImplTest {
         GuestBookEntryEntityImpl notEqual = new GuestBookEntryEntityImpl();
         notEqual.setPersistentEntry(otherPersistentEntry);
         notEqual.setGuestBook(new GuestBookEntityImpl());
+
+        System.out.println("base    " + base);
+        System.out.println("equal   " + equal);
+        System.out.println("unequal " + notEqual);
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }

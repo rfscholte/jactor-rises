@@ -1,7 +1,9 @@
 package nu.hjemme.persistence.db;
 
+import nu.hjemme.persistence.BlogEntryEntity;
 import nu.hjemme.persistence.PersistentEntry;
 import nu.hjemme.persistence.time.NowAsPureDateRule;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -12,6 +14,11 @@ import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
 public class BlogEntryEntityImplTest {
+    private BlogEntryEntityImpl blogEntryEntityToTest;
+
+    @Before public void initBlogEntryEntity() {
+        blogEntryEntityToTest = new BlogEntryEntityImpl();
+    }
 
     @Rule public NowAsPureDateRule nowAsPureDateRule = NowAsPureDateRule.init();
 
@@ -24,17 +31,16 @@ public class BlogEntryEntityImplTest {
         otherPersistentEntry.setEntry("some other entry");
         otherPersistentEntry.setCreator(aCreatorNamed("some other creator"));
 
-        BlogEntryEntityImpl base = new BlogEntryEntityImpl();
-        base.setPersistentEntry(persistentEntry);
-        base.setBlog(new BlogEntityImpl());
+        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
+        blogEntryEntityToTest.setBlog(new BlogEntityImpl());
 
-        BlogEntryEntityImpl equal = new BlogEntryEntityImpl(base);
+        BlogEntryEntity equal = new BlogEntryEntityImpl(blogEntryEntityToTest);
 
-        BlogEntryEntityImpl notEqual = new BlogEntryEntityImpl();
-        base.setPersistentEntry(otherPersistentEntry);
+        BlogEntryEntity notEqual = new BlogEntryEntityImpl();
+        blogEntryEntityToTest.setPersistentEntry(otherPersistentEntry);
         notEqual.setBlog(new BlogEntityImpl());
 
-        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(blogEntryEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
@@ -46,16 +52,15 @@ public class BlogEntryEntityImplTest {
         otherPersistentEntry.setEntry("some other entry");
         otherPersistentEntry.setCreator(aCreatorNamed("some other creator"));
 
-        BlogEntryEntityImpl base = new BlogEntryEntityImpl();
-        base.setPersistentEntry(persistentEntry);
-        base.setBlog(new BlogEntityImpl());
+        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
+        blogEntryEntityToTest.setBlog(new BlogEntityImpl());
 
-        BlogEntryEntityImpl equal = new BlogEntryEntityImpl(base);
+        BlogEntryEntity equal = new BlogEntryEntityImpl(blogEntryEntityToTest);
 
-        BlogEntryEntityImpl notEqual = new BlogEntryEntityImpl();
-        base.setPersistentEntry(otherPersistentEntry);
+        BlogEntryEntity notEqual = new BlogEntryEntityImpl();
+        blogEntryEntityToTest.setPersistentEntry(otherPersistentEntry);
         notEqual.setBlog(new BlogEntityImpl());
 
-        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(blogEntryEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 }

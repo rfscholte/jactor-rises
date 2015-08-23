@@ -1,11 +1,11 @@
 package nu.hjemme.persistence.base;
 
-import java.util.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Date;
 
 public class LocalDateTimeConverter implements TypeConverter<LocalDateTime, Date> {
-    @Override public LocalDateTime convert(Date from) {
+    @Override public LocalDateTime convertTo(Date from) {
         Date date = from;
 
         if (from instanceof java.sql.Date) {
@@ -16,5 +16,9 @@ public class LocalDateTimeConverter implements TypeConverter<LocalDateTime, Date
         }
 
         return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    }
+
+    @Override public Date convertFrom(LocalDateTime localDateTime) {
+        return localDateTime != null ? Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()) : null;
     }
 }

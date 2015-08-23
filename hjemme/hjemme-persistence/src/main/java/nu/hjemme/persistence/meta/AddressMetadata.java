@@ -4,6 +4,8 @@ package nu.hjemme.persistence.meta;
 public final class AddressMetadata {
     private AddressMetadata() {}
 
+    public static final String TABLE = "T_ADDRESS";
+
     /** The country where the address is located */
     public static final String COUNTRY = "COUNTRY";
     /** The zip code of the address */

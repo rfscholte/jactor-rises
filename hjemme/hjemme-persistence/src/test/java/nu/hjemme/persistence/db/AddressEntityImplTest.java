@@ -1,7 +1,5 @@
 package nu.hjemme.persistence.db;
 
-import nu.hjemme.client.datatype.Country;
-import nu.hjemme.persistence.db.AddressEntityImpl;
 import org.junit.Test;
 
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
@@ -16,7 +14,7 @@ public class AddressEntityImplTest {
         AddressEntityImpl base = new AddressEntityImpl();
         base.setAddressLine1("somewhere");
         base.setZipCode(1234);
-        base.setCountry(new Country("NO", "no"));
+        base.setCountry("NO$no");
         base.setCity("some city");
         base.setAddressLine2("somewhere else");
         base.setAddressLine3("way out there");
@@ -24,7 +22,7 @@ public class AddressEntityImplTest {
         AddressEntityImpl equal = new AddressEntityImpl(base);
         equal.setAddressLine1("somewhere");
         equal.setZipCode(1234);
-        equal.setCountry(new Country("NO", "no"));
+        equal.setCountry("NO$no");
         equal.setCity("some city");
         equal.setAddressLine2("somewhere else");
         equal.setAddressLine3("way out there");
@@ -32,7 +30,7 @@ public class AddressEntityImplTest {
         AddressEntityImpl notEqual = new AddressEntityImpl();
         notEqual.setAddressLine1("somewhere else");
         notEqual.setZipCode(5678);
-        notEqual.setCountry(new Country("SE", "se"));
+        notEqual.setCountry("SE$se");
         notEqual.setCity("some other city");
         notEqual.setAddressLine2("some place");
         notEqual.setAddressLine3("in the distance");
@@ -45,17 +43,23 @@ public class AddressEntityImplTest {
         AddressEntityImpl base = new AddressEntityImpl();
         base.setAddressLine1("somewhere");
         base.setZipCode(1234);
-        base.setCountry(new Country("NO", "no"));
+        base.setCountry("NO$no");
         base.setCity("some city");
         base.setAddressLine2("somewhere else");
         base.setAddressLine3("way out there");
 
         AddressEntityImpl equal = new AddressEntityImpl(base);
+        equal.setAddressLine1("somewhere");
+        equal.setZipCode(1234);
+        equal.setCountry("NO$no");
+        equal.setCity("some city");
+        equal.setAddressLine2("somewhere else");
+        equal.setAddressLine3("way out there");
 
         AddressEntityImpl notEqual = new AddressEntityImpl();
         notEqual.setAddressLine1("somewhere else");
         notEqual.setZipCode(5678);
-        notEqual.setCountry(new Country("SE", "se"));
+        notEqual.setCountry("SE$se");
         notEqual.setCity("some other city");
         notEqual.setAddressLine2("some place");
         notEqual.setAddressLine3("in the distance");

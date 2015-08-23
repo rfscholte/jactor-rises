@@ -14,14 +14,14 @@ public class ProfileEntityImplTest {
         ProfileEntityImpl base = new ProfileEntityImpl();
         base.addFirstName("some first name");
         base.addLastName("some last name");
-        base.addAddressEntity(new AddressEntityImpl());
+        base.setAddressEntity(new AddressEntityImpl());
 
         ProfileEntityImpl equal = new ProfileEntityImpl(base);
 
         ProfileEntityImpl notEqual = new ProfileEntityImpl();
         notEqual.addFirstName("some other first name");
         notEqual.addLastName("some other last name");
-        notEqual.addAddressEntity(new AddressEntityImpl());
+        notEqual.setAddressEntity(new AddressEntityImpl());
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
@@ -31,14 +31,14 @@ public class ProfileEntityImplTest {
         ProfileEntityImpl base = new ProfileEntityImpl();
         base.addFirstName("some first name");
         base.addLastName("some last name");
-        base.addAddressEntity(new AddressEntityImpl());
+        base.setAddressEntity(new AddressEntityImpl());
 
         ProfileEntityImpl equal = new ProfileEntityImpl(base);
 
         ProfileEntityImpl notEqual = new ProfileEntityImpl();
         notEqual.addFirstName("some other first name");
         notEqual.addLastName("some other last name");
-        notEqual.addAddressEntity(new AddressEntityImpl());
+        notEqual.setAddressEntity(new AddressEntityImpl());
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }

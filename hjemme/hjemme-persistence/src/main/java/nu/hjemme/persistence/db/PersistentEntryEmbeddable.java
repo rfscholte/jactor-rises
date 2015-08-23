@@ -4,7 +4,6 @@ import nu.hjemme.client.domain.Entry;
 import nu.hjemme.persistence.PersistentData;
 import nu.hjemme.persistence.PersistentEntry;
 import nu.hjemme.persistence.PersonEntity;
-import nu.hjemme.persistence.base.DateConverter;
 import nu.hjemme.persistence.base.LocalDateTimeConverter;
 import nu.hjemme.persistence.time.Now;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -20,7 +19,6 @@ import static java.util.Objects.hash;
 @Embeddable
 public class PersistentEntryEmbeddable implements PersistentEntry {
     private static final LocalDateTimeConverter TIME_CONVERTER = new LocalDateTimeConverter();
-    private static final DateConverter DATE_CONVERTER = new DateConverter();
 
     private Date creationTime;
     private PersonEntity creator;
@@ -32,13 +30,16 @@ public class PersistentEntryEmbeddable implements PersistentEntry {
 
     /** @param entry will be used to create the instance... */
     public PersistentEntryEmbeddable(Entry entry) {
-        creationTime = DATE_CONVERTER.convert(entry.getCreationTime());
+        creationTime = TIME_CONVERTER.convertFrom(entry.getCreationTime());
         this.entry = entry.getEntry();
         creator = entry.getCreator() != null ? PersistentData.getInstance().provideInstanceFor(PersonEntity.class, entry.getCreator()) : null;
     }
 
-    public boolean haveSameEntryTextAndCreatorAs(Entry entry) {
-        return Objects.equals(getEntry(), entry.getEntry()) && Objects.equals(getCreator(), entry.getCreator());
+    @Override public boolean equals(Object obj) {
+        return this == obj || obj != null && getClass() == obj.getClass() &&
+                Objects.equals(creationTime, ((PersistentEntryEmbeddable) obj).creationTime) &&
+                Objects.equals(entry, ((PersistentEntryEmbeddable) obj).entry) &&
+                Objects.equals(creator, ((PersistentEntryEmbeddable) obj).creator);
     }
 
     @Override
@@ -71,6 +72,6 @@ public class PersistentEntryEmbeddable implements PersistentEntry {
     }
 
     @Override public LocalDateTime getCreationTime() {
-        return TIME_CONVERTER.convert(creationTime);
+        return TIME_CONVERTER.convertTo(creationTime);
     }
 }

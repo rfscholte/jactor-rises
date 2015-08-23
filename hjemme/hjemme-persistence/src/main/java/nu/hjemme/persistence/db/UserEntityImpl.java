@@ -72,7 +72,7 @@ public class UserEntityImpl extends PersistentEntityImpl implements UserEntity {
     }
 
     @Override public UserName getUserName() {
-        return convert(userName, UserName.class);
+        return convertTo(userName, UserName.class);
     }
 
     @Override public ProfileEntity getProfile() {
@@ -80,7 +80,7 @@ public class UserEntityImpl extends PersistentEntityImpl implements UserEntity {
     }
 
     @Override public EmailAddress getEmailAddress() {
-        return convert(emailAddress, EmailAddress.class);
+        return convertTo(emailAddress, EmailAddress.class);
     }
 
     @Override public boolean isUserNameEmailAddress() {

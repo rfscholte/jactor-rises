@@ -73,6 +73,7 @@ public class DatabasePocTest {
         UserEntityImpl userEntity = new UserEntityImpl();
         userEntity.setEmailAddress(userName.getName() + "@svada.lada");
         userEntity.setPassword(userName.getName());
+        userEntity.setUserName(userName.getName());
 
         session().save(userEntity);
     }

@@ -48,8 +48,8 @@ public class GuestBookEntryEntityImpl extends PersistentEntityImpl implements Gu
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
-                persistentEntry.haveSameEntryTextAndCreatorAs(((GuestBookEntryEntity) o).getEntry()) &&
-                Objects.equals(getGuestBook(), ((GuestBookEntryEntity) o).getGuestBook());
+                Objects.equals(persistentEntry, ((GuestBookEntryEntity) o).getEntry()) &&
+                Objects.equals(guestBookEntity, ((GuestBookEntryEntity) o).getGuestBook());
     }
 
     @Override public int hashCode() {
@@ -58,8 +58,8 @@ public class GuestBookEntryEntityImpl extends PersistentEntityImpl implements Gu
 
     @Override public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .appendSuper(super.toString())
                 .append(getGuestBook())
+                .append(getEntry())
                 .toString();
     }
 

@@ -49,23 +49,23 @@ public class PersistentEntityImplTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersistentEntityImpl.class.toString());
 
-        testPersistentEntity.convert(new TestPersistentEntity(), PersistentEntityImpl.class);
+        testPersistentEntity.convertTo(new TestPersistentEntity(), PersistentEntityImpl.class);
     }
 
     @Test public void willConvertName() {
-        assertThat(testPersistentEntity.convert("jacobsen", Name.class), is(equalTo(new Name("jacobsen")), "String->Name"));
+        assertThat(testPersistentEntity.convertTo("jacobsen", Name.class), is(equalTo(new Name("jacobsen")), "String->Name"));
     }
 
     @Test public void willConvertEmailAddress() {
-        assertThat(testPersistentEntity.convert("some@where.com", EmailAddress.class), is(equalTo(new EmailAddress("some", "where.com")), "String->EmailAddress"));
+        assertThat(testPersistentEntity.convertTo("some@where.com", EmailAddress.class), is(equalTo(new EmailAddress("some", "where.com")), "String->EmailAddress"));
     }
 
     @Test public void willConvertUserName() {
-        assertThat(testPersistentEntity.convert("jactor", UserName.class), is(equalTo(new UserName("jactor")), "String->UserName"));
+        assertThat(testPersistentEntity.convertTo("jactor", UserName.class), is(equalTo(new UserName("jactor")), "String->UserName"));
     }
 
     @Test public void willConvertDescription() {
-        assertThat(testPersistentEntity.convert("description", Description.class), is(equalTo(new Description("description")), "String->Description"));
+        assertThat(testPersistentEntity.convertTo("description", Description.class), is(equalTo(new Description("description")), "String->Description"));
     }
 
     @Test public void willUpdateEntityWithCreatedByAndCreationTime() {
@@ -81,14 +81,9 @@ public class PersistentEntityImplTest {
     }
 
     private class TestPersistentEntity extends PersistentEntityImpl {
-        private Long id;
-
-        @Override public Long getId() {
-            return id;
-        }
 
         public TestPersistentEntity setId(Long id) {
-            this.id = id;
+            super.id = id;
             return this;
         }
     }

@@ -41,7 +41,8 @@ public class BlogEntryEntityImpl extends PersistentEntityImpl implements BlogEnt
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
-                persistentEntry.haveSameEntryTextAndCreatorAs(((BlogEntryEntity) o).getEntry()) && Objects.equals(getBlog(), ((BlogEntryEntity) o).getBlog());
+                Objects.equals(persistentEntry, ((BlogEntryEntity) o).getEntry()) &&
+                Objects.equals(blogEntity, ((BlogEntryEntity) o).getBlog());
     }
 
     /** {@inheritDoc} */
@@ -51,9 +52,7 @@ public class BlogEntryEntityImpl extends PersistentEntityImpl implements BlogEnt
 
     /** {@inheritDoc} */
     @Override public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(getBlog())
-                .toString();
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append(getBlog()).append(getEntry()).toString();
     }
 
     @Override public BlogEntity getBlog() {

@@ -1,7 +1,6 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.AddressDomain;
-import nu.hjemme.client.datatype.Country;
 import nu.hjemme.persistence.AddressEntity;
 import org.apache.commons.lang.Validate;
 
@@ -18,7 +17,7 @@ public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
     }
 
     public AddressDomainBuilder withCountryAs(String code, String locale) {
-        addressEntity.setCountry(new Country(code, locale));
+        addressEntity.setCountry(code + "$" + locale);
         return this;
     }
 
