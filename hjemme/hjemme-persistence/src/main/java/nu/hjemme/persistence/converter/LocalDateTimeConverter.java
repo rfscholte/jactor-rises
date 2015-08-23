@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.base;
+package nu.hjemme.persistence.converter;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

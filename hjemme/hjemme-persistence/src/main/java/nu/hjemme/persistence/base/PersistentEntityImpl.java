@@ -7,6 +7,13 @@ import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.Persistent;
 import nu.hjemme.persistence.PersistentEntitiy;
+import nu.hjemme.persistence.converter.CountryConverter;
+import nu.hjemme.persistence.converter.DescriptionConverter;
+import nu.hjemme.persistence.converter.EmailAddressConverter;
+import nu.hjemme.persistence.converter.LocalDateTimeConverter;
+import nu.hjemme.persistence.converter.NameConverter;
+import nu.hjemme.persistence.converter.TypeConverter;
+import nu.hjemme.persistence.converter.UserNameConverter;
 import nu.hjemme.persistence.meta.PersistentMetadata;
 import nu.hjemme.persistence.time.Now;
 import org.hibernate.annotations.Type;
@@ -31,10 +38,6 @@ public abstract class PersistentEntityImpl implements Persistent<Long>, Persiste
 
     @Column(name = PersistentMetadata.CREATION_TIME) @Type(type = "timestamp") protected Date creationTime;
     @Column(name = PersistentMetadata.CREATED_BY) protected String createdBy;
-
-    public boolean isIdPresentAndEqualTo(PersistentEntityImpl other) {
-        return getId() != null && getId().equals(other.getId());
-    }
 
     @Override
     public void createInstanceWith(String createdBy) {

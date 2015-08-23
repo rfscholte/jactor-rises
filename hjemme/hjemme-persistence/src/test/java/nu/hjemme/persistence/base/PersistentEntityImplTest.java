@@ -34,17 +34,6 @@ public class PersistentEntityImplTest {
         assertThat(string, allOf(containsString("TestPersistentEntity"), containsString("101")));
     }
 
-    @Test public void willTellWhenIdIsPresentAndTheSameOnBothInstances() {
-        assertThat(testPersistentEntity.setId(101L), new TypeSafeBuildMatcher<TestPersistentEntity>("checking of id is the same") {
-            @Override public MatchBuilder matches(TestPersistentEntity typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(typeToTest.isIdPresentAndEqualTo(new TestPersistentEntity().setId(null)), is(equalTo(false), "other id is null"))
-                        .matches(typeToTest.isIdPresentAndEqualTo(new TestPersistentEntity().setId(100L)), is(equalTo(false), "other id is 100"))
-                        .matches(typeToTest.isIdPresentAndEqualTo(new TestPersistentEntity().setId(101L)), is(equalTo(true), "other id is 101"));
-            }
-        });
-    }
-
     @Test public void willThrowIllegalArgumentExceptionWhenDataTypeIsUnknown() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersistentEntityImpl.class.toString());

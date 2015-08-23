@@ -4,7 +4,7 @@ import nu.hjemme.client.domain.Entry;
 import nu.hjemme.persistence.PersistentData;
 import nu.hjemme.persistence.PersistentEntry;
 import nu.hjemme.persistence.PersonEntity;
-import nu.hjemme.persistence.base.LocalDateTimeConverter;
+import nu.hjemme.persistence.converter.LocalDateTimeConverter;
 import nu.hjemme.persistence.time.Now;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

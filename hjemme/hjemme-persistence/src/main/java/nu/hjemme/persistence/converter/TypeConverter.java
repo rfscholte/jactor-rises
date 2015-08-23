@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.base;
+package nu.hjemme.persistence.converter;
 
 public interface TypeConverter<To, From> {
     To convertTo(From from);
