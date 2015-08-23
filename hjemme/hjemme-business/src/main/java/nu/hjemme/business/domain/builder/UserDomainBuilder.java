@@ -11,7 +11,7 @@ public class UserDomainBuilder extends DomainBuilder<UserDomain> {
     static final String THE_USER_MUST_HAVE_A_PROFILE = "The user must have a profile";
     static final String THE_USER_NAME_CANNOT_BE_NULL = "The user name cannot be null";
 
-    private final UserEntity userEntity = newInstance(UserEntity.class);
+    private final UserEntity userEntity = newInstanceOf(UserEntity.class);
 
     public UserDomainBuilder withUserNameAs(String userName) {
         userEntity.setUserName(userName);

@@ -42,6 +42,7 @@ public class UserDaoDbIntegrationTest {
     @Test public void willPersistAndFindUserWithDao() {
         UserEntityImpl userEntity = new UserEntityImpl();
         userEntity.setUserName("me");
+        userEntity.setPassword("demo");
         session().save(userEntity);
 
         session().flush();

@@ -10,7 +10,7 @@ public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
     static final String COUNTRY_CANNOT_BE_NULL = "A country must be provided";
     static final String ZIP_CODE_CANNOT_BE_NULL = "A Zip code must be provided";
 
-    private AddressEntity addressEntity = newInstance(AddressEntity.class);
+    private AddressEntity addressEntity = newInstanceOf(AddressEntity.class);
 
     public AddressDomainBuilder withCityAs(String city) {
         addressEntity.setCity(city);

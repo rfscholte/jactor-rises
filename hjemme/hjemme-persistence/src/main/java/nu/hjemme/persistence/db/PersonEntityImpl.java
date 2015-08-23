@@ -4,26 +4,19 @@ import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Person;
 import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.PersonEntity;
-import nu.hjemme.persistence.base.PersistentEntity;
-import nu.hjemme.persistence.meta.PersistentMetadata;
+import nu.hjemme.persistence.base.PersistentEntityImpl;
 import nu.hjemme.persistence.meta.PersonMetadata;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import static java.util.Objects.hash;
 
 //@Table(name = "T_PERSON")
-public class PersonEntityImpl extends PersistentEntity<Long> implements PersonEntity {
-
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) @SuppressWarnings("unused") // used by persistence engine
-    private Long id;
+public class PersonEntityImpl extends PersistentEntityImpl implements PersonEntity {
 
     @Column(name = PersonMetadata.FIRST_NAME) private Name firstName;
     @Column(name = PersonMetadata.LAST_NAME) private Name lastName;
@@ -82,9 +75,5 @@ public class PersonEntityImpl extends PersistentEntity<Long> implements PersonEn
 
     @Override public void setAddress(AddressEntity address) {
         this.address = address;
-    }
-
-    @Override public Long getId() {
-        return id;
     }
 }

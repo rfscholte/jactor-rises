@@ -59,7 +59,7 @@ public class UserDomainDaoTest {
     }
 
     @Test public void willReturnDomainWhenEntityIsFound() {
-        when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(PersistentData.getInstance().provideEntityFor(UserEntity.class));
+        when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(PersistentData.getInstance().provideInstanceFor(UserEntity.class));
         userDomainDaoToTest.findUsing(new UserName("someone"));
         verify(userDaoMock, times(1)).findUsing(new UserName("someone"));
     }

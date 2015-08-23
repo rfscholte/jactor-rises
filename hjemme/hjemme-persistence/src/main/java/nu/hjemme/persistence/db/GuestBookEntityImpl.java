@@ -4,26 +4,19 @@ import nu.hjemme.client.domain.GuestBook;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.GuestBookEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.base.PersistentEntity;
+import nu.hjemme.persistence.base.PersistentEntityImpl;
 import nu.hjemme.persistence.meta.GuestBookMetadata;
-import nu.hjemme.persistence.meta.PersistentMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class GuestBookEntityImpl extends PersistentEntity<Long> implements GuestBookEntity {
-
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) @SuppressWarnings("unused") // used by persistence engine
-    private Long id;
+public class GuestBookEntityImpl extends PersistentEntityImpl implements GuestBookEntity {
 
     @Column(name = GuestBookMetadata.TITLE) private String title;
     @OneToMany(mappedBy = GuestBookMetadata.USER) private UserEntity user;
@@ -76,9 +69,5 @@ public class GuestBookEntityImpl extends PersistentEntity<Long> implements Guest
 
     @Override public void setUser(UserEntity user) {
         this.user = user;
-    }
-
-    @Override public Long getId() {
-        return id;
     }
 }

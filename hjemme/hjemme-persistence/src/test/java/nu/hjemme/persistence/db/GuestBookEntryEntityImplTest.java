@@ -1,13 +1,13 @@
 package nu.hjemme.persistence.db;
 
-import nu.hjemme.persistence.db.GuestBookEntityImpl;
-import nu.hjemme.persistence.db.GuestBookEntryEntityImpl;
+import nu.hjemme.client.datatype.Name;
+import nu.hjemme.persistence.PersistentEntry;
+import nu.hjemme.persistence.PersonEntity;
 import nu.hjemme.persistence.time.NowAsPureDate;
-import org.junit.After;
+import nu.hjemme.persistence.time.NowAsPureDateRule;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-
-import java.time.LocalDateTime;
 
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
@@ -15,60 +15,69 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-/** @author Tor Egil Jacobsen */
 public class GuestBookEntryEntityImplTest {
 
-    @Before
-    public void mockNow() {
+    @Rule public NowAsPureDateRule nowAsPureDateRule = NowAsPureDateRule.init();
+
+    @Before public void mockNow() {
         new NowAsPureDate();
     }
 
-    @Test
-    public void willHaveCorrectImplementedHashCode() {
+    @Test public void willHaveCorrectImplementedHashCode() {
+        PersistentEntry persistentEntry = new PersistentEntryEmbeddable();
+        persistentEntry.setEntry("some entry");
+        persistentEntry.setCreator(aCreatorNamed("some creator"));
+
+        PersistentEntry otherPersistentEntry = new PersistentEntryEmbeddable();
+        otherPersistentEntry.setEntry("some other entry");
+        otherPersistentEntry.setCreator(aCreatorNamed("some other creator"));
+
         GuestBookEntryEntityImpl base = new GuestBookEntryEntityImpl();
-        base.setEntry("some entry");
-        base.setCreatorName("some creator");
-        base.setGuestBookEntity(new GuestBookEntityImpl());
+        base.setPersistentEntry(persistentEntry);
+        base.setGuestBook(new GuestBookEntityImpl());
 
         GuestBookEntryEntityImpl equal = new GuestBookEntryEntityImpl(base);
 
         GuestBookEntryEntityImpl notEqual = new GuestBookEntryEntityImpl();
-        notEqual.setEntry("some other entry");
-        notEqual.setCreatorName("some other creator");
-        notEqual.setGuestBookEntity(new GuestBookEntityImpl());
+        notEqual.setPersistentEntry(otherPersistentEntry);
+        notEqual.setGuestBook(new GuestBookEntityImpl());
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
-    @Test
-    public void willHaveCorrectImplementedEquals() {
+
+    @Test public void willHaveCorrectImplementedEquals() {
+        PersistentEntry persistentEntry = new PersistentEntryEmbeddable();
+        persistentEntry.setEntry("some entry");
+        persistentEntry.setCreator(aCreatorNamed("some creator"));
+
+        PersistentEntry otherPersistentEntry = new PersistentEntryEmbeddable();
+        otherPersistentEntry.setEntry("some other entry");
+        otherPersistentEntry.setCreator(aCreatorNamed("some other creator"));
+
         GuestBookEntryEntityImpl base = new GuestBookEntryEntityImpl();
-        base.setEntry("some entry");
-        base.setCreatorName("some creator");
-        base.setGuestBookEntity(new GuestBookEntityImpl());
+        base.setPersistentEntry(persistentEntry);
+        base.setGuestBook(new GuestBookEntityImpl());
 
         GuestBookEntryEntityImpl equal = new GuestBookEntryEntityImpl(base);
 
         GuestBookEntryEntityImpl notEqual = new GuestBookEntryEntityImpl();
-        notEqual.setEntry("some other entry");
-        notEqual.setCreatorName("some other creator");
-        notEqual.setGuestBookEntity(new GuestBookEntityImpl());
+        notEqual.setPersistentEntry(otherPersistentEntry);
+        notEqual.setGuestBook(new GuestBookEntityImpl());
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
-    @Test
-    public void skalHaTidspunktForOpprettelseSattVedBrukAvNoArgsConstructor() {
-        GuestBookEntryEntityImpl guestBookEntryEntity = new GuestBookEntryEntityImpl();
+    static PersonEntity aCreatorNamed(String creator) {
+        PersonEntityImpl personEntity = new PersonEntityImpl();
+        personEntity.setFirstName(new Name(creator));
 
-        assertThat("Creation time", guestBookEntryEntity.getCreationTime(), is(equalTo(
-                LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0)
-        )));
-
+        return personEntity;
     }
 
-    @After
-    public void removeNowAsPureDate() {
-        NowAsPureDate.removeNowAsPureDate();
+    @Test public void skalHaTidspunktForOpprettelseSattVedBrukAvNoArgsConstructor() {
+        GuestBookEntryEntityImpl guestBookEntryEntity = new GuestBookEntryEntityImpl();
+
+        assertThat("Creation time", guestBookEntryEntity.getEntry().getCreationTime(), is(equalTo(NowAsPureDate.asDateTime())));
     }
 }

@@ -1,7 +1,10 @@
 package nu.hjemme.business.domain;
 
+import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Persistent;
 import org.apache.commons.lang.Validate;
+
+import java.time.LocalDateTime;
 
 public abstract class PersistentDomain<Entity extends Persistent<Id>, Id> implements Persistent<Id> {
     static final String THE_ENTITY_ON_THE_DOMAIN_CANNOT_BE_NULL = "The Entity on the domain cannot be null!";
@@ -19,5 +22,13 @@ public abstract class PersistentDomain<Entity extends Persistent<Id>, Id> implem
 
     @Override public Id getId() {
         return entity.getId();
+    }
+
+    @Override public Name getCreatedBy() {
+        return entity.getCreatedBy();
+    }
+
+    @Override public LocalDateTime getCreationTime() {
+        return entity.getCreationTime();
     }
 }

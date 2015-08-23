@@ -3,25 +3,18 @@ package nu.hjemme.persistence.db;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
 import nu.hjemme.persistence.AddressEntity;
-import nu.hjemme.persistence.base.PersistentEntity;
+import nu.hjemme.persistence.base.PersistentEntityImpl;
 import nu.hjemme.persistence.meta.AddressMetadata;
-import nu.hjemme.persistence.meta.PersistentMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class AddressEntityImpl extends PersistentEntity<Long> implements AddressEntity {
-
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) @SuppressWarnings("unused") // used by persistence engine
-    private Long id;
+public class AddressEntityImpl extends PersistentEntityImpl implements AddressEntity {
 
     @Column(name = AddressMetadata.COUNTRY) private Country country;
     @Column(name = AddressMetadata.ZIP_CODE) private Integer zipCode;
@@ -114,9 +107,5 @@ public class AddressEntityImpl extends PersistentEntity<Long> implements Address
 
     @Override public void setCity(String city) {
         this.city = city;
-    }
-
-    @Override public Long getId() {
-        return id;
     }
 }

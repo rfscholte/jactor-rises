@@ -5,8 +5,7 @@ import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.ProfileEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.base.PersistentEntity;
-import nu.hjemme.persistence.meta.PersistentMetadata;
+import nu.hjemme.persistence.base.PersistentEntityImpl;
 import nu.hjemme.persistence.meta.UserMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -15,9 +14,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -27,16 +23,13 @@ import static java.util.Objects.hash;
 
 @Entity
 @Table(name = UserMetadata.USER_TABLE)
-public class UserEntityImpl extends PersistentEntity<Long> implements UserEntity {
+public class UserEntityImpl extends PersistentEntityImpl implements UserEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) @SuppressWarnings("unused") // used by persistence engine
-    private Long id;
-
-    @Column(name = UserMetadata.PASSWORD) private String password; // the user password
-    @Column(name = UserMetadata.USER_NAME) private String userName; // the user name
+    @Column(name = UserMetadata.PASSWORD, nullable = false) private String password; // the user password
+    @Column(name = UserMetadata.USER_NAME, nullable = false) private String userName; // the user name
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) @JoinColumn(name = UserMetadata.PROFILE_ID) private ProfileEntityImpl profileEntity; // the profile to the user
     @Column(name = UserMetadata.EMAIL) private String emailAddress; // the email address to the user
-    @Column(name = UserMetadata.EMAIL_AS_NAME) private boolean userNameIsEmailAddress; // if the user uses the email address as the user name
+    @Column(name = UserMetadata.EMAIL_AS_NAME, nullable = false) private boolean userNameIsEmailAddress; // if the user uses the email address as the user name
 
     public UserEntityImpl() { }
 
@@ -112,9 +105,5 @@ public class UserEntityImpl extends PersistentEntity<Long> implements UserEntity
 
     @Override public void setProfileEntity(ProfileEntity profileEntity) {
         this.profileEntity = cast(profileEntity);
-    }
-
-    @Override public Long getId() {
-        return id;
     }
 }

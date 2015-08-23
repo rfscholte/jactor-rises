@@ -21,8 +21,16 @@ public abstract class DomainBuilder<Domain> {
         return initDomain();
     }
 
-    protected <T> T newInstance(Class<T> persistentClass) {
-        return PersistentData.getInstance().provideEntityFor(persistentClass);
+    protected <T> T newInstanceOf(Class<T> persistentClass) {
+        return PersistentData.getInstance().provideInstanceFor(persistentClass);
+    }
+
+    public static GuestBookEntryDomainBuilder aGuestBookEntry() {
+        return new GuestBookEntryDomainBuilder();
+    }
+
+    public static GuestBookDomainBuilder aGuestBook() {
+        return new GuestBookDomainBuilder();
     }
 
     public static UserDomainBuilder aUser() {
@@ -35,6 +43,18 @@ public abstract class DomainBuilder<Domain> {
 
     public static AddressDomainBuilder anAddress() {
         return new AddressDomainBuilder();
+    }
+
+    public static BlogDomainBuilder aBlog() {
+        return new BlogDomainBuilder();
+    }
+
+    public static BlogEntryDomainBuilder aBlogEntry() {
+        return new BlogEntryDomainBuilder();
+    }
+
+    public static PersonDomainBuilder aPerson() {
+        return new PersonDomainBuilder();
     }
 
     @SuppressWarnings("unchecked") static void addSkippedValidationOn(Build... builds) {
@@ -51,9 +71,9 @@ public abstract class DomainBuilder<Domain> {
 
     public enum Build {
         ADDRESS(AddressDomainBuilder.class),
+        PERSON(PersonDomainBuilder.class),
         PROFILE(ProfileDomainBuilder.class),
         USER(UserDomainBuilder.class);
-
 
         final Class builderClass;
 

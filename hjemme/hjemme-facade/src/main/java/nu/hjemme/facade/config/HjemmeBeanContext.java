@@ -33,7 +33,7 @@ public class HjemmeBeanContext {
 
     @Bean(name = "hjemme.userFacade") @SuppressWarnings("unused")  // initialized by spring
     public UserFacade userFacade(SessionFactory sessionFactory) {
-        return new UserFacadeImpl(PersistentData.getInstance().provideDaoFor(UserDao.class, sessionFactory));
+        return new UserFacadeImpl(PersistentData.getInstance().provideInstanceFor(UserDao.class, sessionFactory));
     }
 
     @Bean(name = "hjemme.aop.chosenMenuItems") @SuppressWarnings("unused") // initialized by spring

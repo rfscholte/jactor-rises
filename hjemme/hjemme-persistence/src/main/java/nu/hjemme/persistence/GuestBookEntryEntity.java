@@ -1,17 +1,14 @@
 package nu.hjemme.persistence;
 
-import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBookEntry;
 
 /**
  * @author Tor Egil Jacobsen
  */
 public interface GuestBookEntryEntity extends GuestBookEntry {
-    void setCreatorName(Name name);
+    @Override GuestBookEntity getGuestBook();
 
-    void setEntry(String entry);
+    void setGuestBook(GuestBookEntity guestBook);
 
-    void setGuestBookEntity(GuestBookEntity guestBookEntity);
-
-    void setCreator(PersonEntity creator);
+    void setPersistentEntry(PersistentEntry persistentEntry);
 }

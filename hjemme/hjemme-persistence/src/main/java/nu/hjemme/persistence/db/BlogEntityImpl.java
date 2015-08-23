@@ -2,17 +2,13 @@ package nu.hjemme.persistence.db;
 
 import nu.hjemme.persistence.BlogEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.base.PersistentEntity;
+import nu.hjemme.persistence.base.PersistentEntityImpl;
 import nu.hjemme.persistence.meta.BlogMetadata;
-import nu.hjemme.persistence.meta.PersistentMetadata;
 import nu.hjemme.persistence.time.Now;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -20,10 +16,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 /** @author Tor Egil Jacobsen */
-public class BlogEntityImpl extends PersistentEntity<Long> implements BlogEntity {
-
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) @SuppressWarnings("unused") // used by persistence engine
-    private Long id;
+public class BlogEntityImpl extends PersistentEntityImpl implements BlogEntity {
 
     @Column(name = BlogMetadata.CREATED) private LocalDateTime created;
     @Column(name = BlogMetadata.TITLE) private String title;
@@ -76,9 +69,5 @@ public class BlogEntityImpl extends PersistentEntity<Long> implements BlogEntity
 
     @Override public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
-    }
-
-    @Override public Long getId() {
-        return id;
     }
 }

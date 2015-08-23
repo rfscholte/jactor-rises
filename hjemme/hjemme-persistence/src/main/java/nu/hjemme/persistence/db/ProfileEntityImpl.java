@@ -6,7 +6,7 @@ import nu.hjemme.client.domain.Profile;
 import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.ProfileEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.base.PersistentEntity;
+import nu.hjemme.persistence.base.PersistentEntityImpl;
 import nu.hjemme.persistence.meta.PersistentMetadata;
 import nu.hjemme.persistence.meta.ProfileMetadata;
 
@@ -26,7 +26,7 @@ import static java.util.Objects.hash;
 
 @Entity
 @Table(name = ProfileMetadata.PROFILE_TABLE)
-public class ProfileEntityImpl extends PersistentEntity<Long> implements ProfileEntity {
+public class ProfileEntityImpl extends PersistentEntityImpl implements ProfileEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) @SuppressWarnings("unused") // used by persistence engine
     private Long id;

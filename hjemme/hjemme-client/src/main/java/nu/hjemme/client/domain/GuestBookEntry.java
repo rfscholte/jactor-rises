@@ -1,8 +1,9 @@
 package nu.hjemme.client.domain;
 
-/** @author Tor Egil Jacobsen */
-public interface GuestBookEntry extends Entry {
+public interface GuestBookEntry extends Persistent<Long> {
 
     GuestBook getGuestBook();
+
+    Entry getEntry();
 }
 

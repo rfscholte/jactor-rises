@@ -9,7 +9,7 @@ public class BlogDomainBuilder extends DomainBuilder<BlogDomain> {
     static final String THE_BLOG_MUST_BELONG_TO_A_USER = "The blog must belong to a user";
     static final String THE_BLOG_MUST_HAVE_A_TITLE = "The blog must have a title";
 
-    private BlogEntity blogEntity = newInstance(BlogEntity.class);
+    private BlogEntity blogEntity = newInstanceOf(BlogEntity.class);
 
     public BlogDomainBuilder withTitleAs(String title) {
         blogEntity.setTitle(title);
@@ -28,9 +28,5 @@ public class BlogDomainBuilder extends DomainBuilder<BlogDomain> {
     @Override protected void validate() {
         Validate.notEmpty(blogEntity.getTitle(), THE_BLOG_MUST_HAVE_A_TITLE);
         Validate.notNull(blogEntity.getUser(), THE_BLOG_MUST_BELONG_TO_A_USER);
-    }
-
-    static BlogDomainBuilder init() {
-        return new BlogDomainBuilder();
     }
 }

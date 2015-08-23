@@ -1,6 +1,6 @@
 package nu.hjemme.business.domain;
 
-import nu.hjemme.persistence.base.PersistentEntity;
+import nu.hjemme.persistence.base.PersistentEntityImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,15 +16,9 @@ public class PersistentDomainTest {
         new TestPersistentDomain();
     }
 
-    private class TestPersistentDomain extends PersistentDomain<TestPersistentEntity, Long> {
+    private class TestPersistentDomain extends PersistentDomain<PersistentEntityImpl, Long> {
         private TestPersistentDomain() {
             super(null);
-        }
-    }
-
-    private class TestPersistentEntity extends PersistentEntity<Long> {
-        @Override public Long getId() {
-            throw new UnsupportedOperationException("bean is only for testing");
         }
     }
 }

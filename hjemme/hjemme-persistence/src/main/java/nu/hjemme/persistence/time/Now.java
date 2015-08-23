@@ -1,6 +1,7 @@
 package nu.hjemme.persistence.time;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /** @author Tor Egil Jacobsen */
 public class Now {
@@ -12,12 +13,20 @@ public class Now {
         instance = new Now();
     }
 
+    protected LocalDateTime nowAsDateTime() {
+        return LocalDateTime.now();
+    }
+
+    protected Date nowAsJavaUtilDate() {
+        return new Date();
+    }
+
     public static LocalDateTime asDateTime() {
         return instance.nowAsDateTime();
     }
 
-    protected LocalDateTime nowAsDateTime() {
-        return LocalDateTime.now();
+    public static Date asJavaUtilDate() {
+        return instance.nowAsJavaUtilDate();
     }
 
     protected static void setInstance(Now instance) {

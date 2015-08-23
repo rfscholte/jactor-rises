@@ -10,7 +10,7 @@ public final class BlogEntryMetadata {
     /** The creation time of an entry */
     public static final String CREATION_TIME = "CREATION_TIME";
     /** The name to the creator of this entry */
-    public static final String CREATED_BY = "CREATED_BY";
+    public static final String CREATOR_NAME = "CREATOR_NAME";
     /** The creator of this entry */
     public static final String CREATOR = "CREATOR";
     /** The entry */

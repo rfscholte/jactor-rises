@@ -11,13 +11,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.time.LocalDate;
+
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
 
-public class PersistentEntityTest {
+public class PersistentEntityImplTest {
     private TestPersistentEntity testPersistentEntity;
 
     @Rule public ExpectedException expectedException = ExpectedException.none();
@@ -45,9 +47,9 @@ public class PersistentEntityTest {
 
     @Test public void willThrowIllegalArgumentExceptionWhenDataTypeIsUnknown() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(PersistentEntity.class.toString());
+        expectedException.expectMessage(PersistentEntityImpl.class.toString());
 
-        testPersistentEntity.convert(new TestPersistentEntity(), PersistentEntity.class);
+        testPersistentEntity.convert(new TestPersistentEntity(), PersistentEntityImpl.class);
     }
 
     @Test public void willConvertName() {
@@ -66,8 +68,19 @@ public class PersistentEntityTest {
         assertThat(testPersistentEntity.convert("description", Description.class), is(equalTo(new Description("description")), "String->Description"));
     }
 
-    private class TestPersistentEntity extends PersistentEntity<Long> {
+    @Test public void willUpdateEntityWithCreatedByAndCreationTime() {
+        testPersistentEntity.createInstanceWith("jactor");
 
+         assertThat(testPersistentEntity, new TypeSafeBuildMatcher<TestPersistentEntity>("create persistent instance") {
+            @Override public MatchBuilder matches(TestPersistentEntity typeToTest, MatchBuilder matchBuilder) {
+                return matchBuilder
+                        .matches(typeToTest.getCreatedBy(), is(equalTo(new Name("jactor")), "created by"))
+                        .matches(typeToTest.getCreationTime().toLocalDate(), is(equalTo(LocalDate.now()), "creation time"));
+            }
+        });
+    }
+
+    private class TestPersistentEntity extends PersistentEntityImpl {
         private Long id;
 
         @Override public Long getId() {

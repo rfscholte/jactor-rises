@@ -11,5 +11,4 @@ public interface PersonEntity extends Person {
     void setLastName(Name lastName);
 
     void setAddress(AddressEntity address);
-
 }
