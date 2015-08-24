@@ -38,24 +38,29 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
         password = user.getPassword();
         userName = user.getUserName() != null ? user.getUserName().getName() : null;
         profileEntity = user.getProfile() != null ? new DefaultProfileEntity(user.getProfile()) : null;
+        emailAddress = convertFrom(user.getEmailAddress(), EmailAddress.class);
+        userNameIsEmailAddress = user.isUserNameEmailAddress();
     }
 
     @Override public boolean equals(Object o) {
         return o == this || o != null && getClass() == o.getClass() &&
-                Objects.equals(getPassword(), ((UserEntity) o).getPassword()) &&
-                Objects.equals(getProfile(), ((UserEntity) o).getProfile()) &&
-                Objects.equals(getUserName(), ((UserEntity) o).getUserName());
+                Objects.equals(userName, ((DefaultUserEntity) o).userName) &&
+                Objects.equals(profileEntity, ((DefaultUserEntity) o).profileEntity) &&
+                Objects.equals(emailAddress, ((DefaultUserEntity) o).emailAddress) &&
+                Objects.equals(userNameIsEmailAddress, ((DefaultUserEntity) o).userNameIsEmailAddress);
+
     }
 
     @Override public int hashCode() {
-        return hash(password, null /*profileEntity*/, userName);
+        return hash(userName, profileEntity, emailAddress, userNameIsEmailAddress);
     }
 
     @Override public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .appendSuper(super.toString())
-                .append(getUserName())
-                .append(getProfile())
+                .append(userName)
+                .append(profileEntity)
+                .append(emailAddress)
+                .append(userNameIsEmailAddress)
                 .toString();
     }
 

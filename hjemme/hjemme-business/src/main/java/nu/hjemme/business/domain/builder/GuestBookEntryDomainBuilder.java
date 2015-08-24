@@ -4,7 +4,6 @@ import nu.hjemme.business.domain.GuestBookEntryDomain;
 import nu.hjemme.persistence.GuestBookEntity;
 import nu.hjemme.persistence.GuestBookEntryEntity;
 import nu.hjemme.persistence.PersistentEntry;
-import nu.hjemme.persistence.PersonEntity;
 import org.apache.commons.lang.Validate;
 
 public class GuestBookEntryDomainBuilder extends DomainBuilder<GuestBookEntryDomain> {
@@ -25,7 +24,7 @@ public class GuestBookEntryDomainBuilder extends DomainBuilder<GuestBookEntryDom
         return this;
     }
 
-    public GuestBookEntryDomainBuilder with(PersonEntity creator) {
+    public GuestBookEntryDomainBuilder withCreatorNamed(String creator) {
         persistentEntry.setCreator(creator);
         return this;
     }

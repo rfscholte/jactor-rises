@@ -1,8 +1,6 @@
 package nu.hjemme.persistence.db;
 
-import nu.hjemme.client.datatype.Name;
 import nu.hjemme.persistence.PersistentEntry;
-import nu.hjemme.persistence.PersonEntity;
 import nu.hjemme.persistence.time.NowAsPureDate;
 import nu.hjemme.persistence.time.NowAsPureDateRule;
 import org.junit.Before;
@@ -26,11 +24,11 @@ public class DefaultGuestBookEntryEntityTest {
     @Test public void willHaveCorrectImplementedHashCode() {
         PersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator(aCreatorNamed("some creator"));
+        persistentEntry.setCreator("some creator");
 
         PersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
         otherPersistentEntry.setEntry("some other entry");
-        otherPersistentEntry.setCreator(aCreatorNamed("some other creator"));
+        otherPersistentEntry.setCreator("some other creator");
 
         DefaultGuestBookEntryEntity base = new DefaultGuestBookEntryEntity();
         base.setPersistentEntry(persistentEntry);
@@ -42,10 +40,6 @@ public class DefaultGuestBookEntryEntityTest {
         notEqual.setPersistentEntry(otherPersistentEntry);
         notEqual.setGuestBook(new DefaultGuestBookEntity());
 
-        System.out.println("base    " + base);
-        System.out.println("equal   " + equal);
-        System.out.println("unequal " + notEqual);
-
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
@@ -53,11 +47,11 @@ public class DefaultGuestBookEntryEntityTest {
     @Test public void willHaveCorrectImplementedEquals() {
         PersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator(aCreatorNamed("some creator"));
+        persistentEntry.setCreator("some creator");
 
         PersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
         otherPersistentEntry.setEntry("some other entry");
-        otherPersistentEntry.setCreator(aCreatorNamed("some other creator"));
+        otherPersistentEntry.setCreator("some other creator");
 
         DefaultGuestBookEntryEntity base = new DefaultGuestBookEntryEntity();
         base.setPersistentEntry(persistentEntry);
@@ -70,13 +64,6 @@ public class DefaultGuestBookEntryEntityTest {
         notEqual.setGuestBook(new DefaultGuestBookEntity());
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
-    }
-
-    static PersonEntity aCreatorNamed(String creator) {
-        DefaultPersonEntity personEntity = new DefaultPersonEntity();
-        personEntity.setFirstName(new Name(creator));
-
-        return personEntity;
     }
 
     @Test public void skalHaTidspunktForOpprettelseSattVedBrukAvNoArgsConstructor() {

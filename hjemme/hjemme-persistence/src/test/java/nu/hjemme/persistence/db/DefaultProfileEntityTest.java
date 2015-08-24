@@ -1,5 +1,6 @@
 package nu.hjemme.persistence.db;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
@@ -9,37 +10,39 @@ import static org.junit.Assert.assertThat;
 /** @author Tor Egil Jacobsen */
 public class DefaultProfileEntityTest {
 
+    private DefaultProfileEntity defaultProfileEntityToTest;
+
+    @Before public void initDefaultProfileEntity() {
+        defaultProfileEntityToTest = new DefaultProfileEntity();
+    }
+
     @Test
     public void willHaveCorrectImplementedHashCode() {
-        DefaultProfileEntity base = new DefaultProfileEntity();
-        base.addFirstName("some first name");
-        base.addLastName("some last name");
-        base.setAddressEntity(new DefaultAddressEntity());
+        defaultProfileEntityToTest = new DefaultProfileEntity();
+        defaultProfileEntityToTest.setDescription("some description");
+        defaultProfileEntityToTest.setAddressEntity(new DefaultAddressEntity());
 
-        DefaultProfileEntity equal = new DefaultProfileEntity(base);
+        DefaultProfileEntity equal = new DefaultProfileEntity(defaultProfileEntityToTest);
 
         DefaultProfileEntity notEqual = new DefaultProfileEntity();
-        notEqual.addFirstName("some other first name");
-        notEqual.addLastName("some other last name");
+        notEqual.setDescription("some other description");
         notEqual.setAddressEntity(new DefaultAddressEntity());
 
-        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(defaultProfileEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
     public void willHaveCorrectImplementedEquals() {
-        DefaultProfileEntity base = new DefaultProfileEntity();
-        base.addFirstName("some first name");
-        base.addLastName("some last name");
-        base.setAddressEntity(new DefaultAddressEntity());
+        defaultProfileEntityToTest.setAddressEntity(new DefaultAddressEntity());
+        defaultProfileEntityToTest.setDescription("some description");
+        defaultProfileEntityToTest.setAddressEntity(new DefaultAddressEntity());
 
-        DefaultProfileEntity equal = new DefaultProfileEntity(base);
+        DefaultProfileEntity equal = new DefaultProfileEntity(defaultProfileEntityToTest);
 
         DefaultProfileEntity notEqual = new DefaultProfileEntity();
-        notEqual.addFirstName("some other first name");
-        notEqual.addLastName("some other last name");
+        notEqual.setDescription("some other description");
         notEqual.setAddressEntity(new DefaultAddressEntity());
 
-        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(defaultProfileEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 }

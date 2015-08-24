@@ -8,7 +8,6 @@ import nu.hjemme.persistence.db.DefaultBlogEntryEntity;
 import nu.hjemme.persistence.db.DefaultGuestBookEntity;
 import nu.hjemme.persistence.db.DefaultGuestBookEntryEntity;
 import nu.hjemme.persistence.db.DefaultPersistentEntry;
-import nu.hjemme.persistence.db.DefaultPersonEntity;
 import nu.hjemme.persistence.db.DefaultUserEntity;
 
 import java.lang.reflect.Constructor;
@@ -99,7 +98,6 @@ public class PersistentData {
         put(GuestBookEntity.class, DefaultGuestBookEntity.class);
         put(GuestBookEntryEntity.class, DefaultGuestBookEntryEntity.class);
         put(PersistentEntry.class, DefaultPersistentEntry.class);
-        put(PersonEntity.class, DefaultPersonEntity.class);
         put(UserEntity.class, DefaultUserEntity.class);
         put(UserDao.class, UserDaoDb.class);
     }

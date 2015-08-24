@@ -27,51 +27,44 @@ import static java.util.Objects.hash;
 public class DefaultProfileEntity extends DefaultPersistentEntity implements ProfileEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = ProfileMetadata.ADDRESS_ID) private DefaultAddressEntity addressEntity;
-    @Transient private DefaultPersonEntity personEntity;
     @Column(name = ProfileMetadata.DESCRIPTION) private String description;
     @OneToOne(mappedBy = "profileEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL) private DefaultUserEntity userEntity;
+    @Transient private Name firstName;
+    @Transient private Name lastName;
 
     public DefaultProfileEntity() {
-        personEntity = new DefaultPersonEntity();
     }
 
     public DefaultProfileEntity(Profile profile) {
         this();
         description = convertFrom(profile.getDescription(), Description.class);
         addressEntity = new DefaultAddressEntity(profile.getAddress());
-        initPersonEntity();
-        personEntity.setFirstName(profile.getFirstName());
-        personEntity.setLastName(profile.getLastName());
         userEntity = profile.getUser() != null ? new DefaultUserEntity(profile.getUser()) : null;
-    }
-
-    public void addLastName(String lastName) {
-        personEntity.setLastName(new Name(lastName));
-    }
-
-    public void addFirstName(String firstName) {
-        personEntity.setFirstName(new Name(firstName));
-    }
-
-    private void initPersonEntity() {
-        if (personEntity == null) {
-            personEntity = new DefaultPersonEntity();
-        }
+        firstName = profile.getFirstName();
+        lastName = profile.getLastName();
     }
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
-                Objects.equals(getAddress(), ((DefaultProfileEntity) o).getAddress()) &&
+                Objects.equals(addressEntity, ((DefaultProfileEntity) o).addressEntity) &&
                 Objects.equals(description, ((DefaultProfileEntity) o).description) &&
-                Objects.equals(getUser(), ((DefaultProfileEntity) o).getUser());
+                Objects.equals(userEntity, ((DefaultProfileEntity) o).userEntity);
     }
 
     @Override public int hashCode() {
-        return hash(getDescription(), getAddress(), getFirstName(), getLastName(), getUser());
+        return hash(description, addressEntity, userEntity);
     }
 
     @Override public AddressEntity getAddress() {
         return addressEntity;
+    }
+
+    @Override public Name getFirstName() {
+        return firstName;
+    }
+
+    @Override public Name getLastName() {
+        return lastName;
     }
 
     @Override public Description getDescription() {
@@ -80,14 +73,6 @@ public class DefaultProfileEntity extends DefaultPersistentEntity implements Pro
 
     @Override public UserEntity getUser() {
         return userEntity;
-    }
-
-    @Override public Name getFirstName() {
-        return personEntity != null ? personEntity.getFirstName() : null;
-    }
-
-    @Override public Name getLastName() {
-        return personEntity != null ? personEntity.getLastName() : null;
     }
 
     @Override public void setAddressEntity(AddressEntity addressEntity) {

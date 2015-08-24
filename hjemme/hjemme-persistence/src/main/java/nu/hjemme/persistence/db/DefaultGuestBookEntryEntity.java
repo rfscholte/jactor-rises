@@ -38,7 +38,7 @@ public class DefaultGuestBookEntryEntity extends DefaultPersistentEntity impleme
 
     public DefaultGuestBookEntryEntity(GuestBookEntry guestBookEntry) {
         guestBookEntity = guestBookEntry.getGuestBook() != null ? new DefaultGuestBookEntity(guestBookEntry.getGuestBook()) : null;
-        persistentEntry = new DefaultPersistentEntry(guestBookEntry.getEntry());
+        persistentEntry = guestBookEntry.getEntry() != null ? new DefaultPersistentEntry(guestBookEntry.getEntry()) : null;
     }
 
     @Override public void setPersistentEntry(PersistentEntry persistentEntry) {
@@ -52,7 +52,7 @@ public class DefaultGuestBookEntryEntity extends DefaultPersistentEntity impleme
     }
 
     @Override public int hashCode() {
-        return hash(super.hashCode(), getGuestBook());
+        return hash(guestBookEntity, persistentEntry);
     }
 
     @Override public String toString() {

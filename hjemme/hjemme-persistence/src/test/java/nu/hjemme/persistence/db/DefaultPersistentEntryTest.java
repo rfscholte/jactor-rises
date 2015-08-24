@@ -15,27 +15,27 @@ public class DefaultPersistentEntryTest {
     }
 
     @Test public void willHaveCorrectlyImplementedEquals() {
-        defaultPersistentEntryToTest.setCreator(new DefaultPersonEntity());
+        defaultPersistentEntryToTest.setCreator("a creator");
         defaultPersistentEntryToTest.setEntry("some entry");
 
         DefaultPersistentEntry equal = new DefaultPersistentEntry(defaultPersistentEntryToTest);
 
         DefaultPersistentEntry notEqual = new DefaultPersistentEntry();
-        notEqual.setCreator(new DefaultPersonEntity());
-        notEqual.setEntry("some other entry");
+        notEqual.setCreator("another creator");
+        notEqual.setEntry("another entry");
 
         assertThat(defaultPersistentEntryToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
     @Test public void willHaveCorrectlyImplementedHashCode() {
-        defaultPersistentEntryToTest.setCreator(new DefaultPersonEntity());
+        defaultPersistentEntryToTest.setCreator("a creator");
         defaultPersistentEntryToTest.setEntry("some entry");
 
         DefaultPersistentEntry equal = new DefaultPersistentEntry(defaultPersistentEntryToTest);
 
         DefaultPersistentEntry notEqual = new DefaultPersistentEntry();
-        notEqual.setCreator(new DefaultPersonEntity());
-        notEqual.setEntry("some other entry");
+        notEqual.setCreator("another creator");
+        notEqual.setEntry("another entry");
 
         assertThat(defaultPersistentEntryToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }

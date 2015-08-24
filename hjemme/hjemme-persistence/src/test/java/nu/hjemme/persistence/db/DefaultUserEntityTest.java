@@ -1,5 +1,6 @@
 package nu.hjemme.persistence.db;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
@@ -8,38 +9,43 @@ import static org.junit.Assert.assertThat;
 
 /** @author Tor Egil Jacobsen */
 public class DefaultUserEntityTest {
+    private DefaultUserEntity defaultUserEntityToTest;
+
+    @Before public void initClassToTest() {
+        defaultUserEntityToTest = new DefaultUserEntity();
+    }
 
     @Test
     public void willHaveCorrectImplementedHashCode() {
-        DefaultUserEntity base = new DefaultUserEntity();
-        base.setUserName("some user");
-        base.setProfileEntity(new DefaultProfileEntity());
-        base.setPassword("some password");
+        defaultUserEntityToTest.setUserName("some user");
+        defaultUserEntityToTest.setProfileEntity(new DefaultProfileEntity());
+        defaultUserEntityToTest.setEmailAddress("some@where");
+        defaultUserEntityToTest.setUserNameAsEmailAddress();
 
-        DefaultUserEntity equal = new DefaultUserEntity(base);
+        DefaultUserEntity equal = new DefaultUserEntity(defaultUserEntityToTest);
 
         DefaultUserEntity notEqual = new DefaultUserEntity();
-        notEqual.setUserName("some other user");
+        notEqual.setEmailAddress("any@where");
         notEqual.setProfileEntity(new DefaultProfileEntity());
-        notEqual.setPassword("some other password");
+        notEqual.setUserName("some other user");
 
-        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(defaultUserEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
     public void willHaveCorrectImplementedEquals() {
-        DefaultUserEntity base = new DefaultUserEntity();
-        base.setUserName("some user");
-        base.setProfileEntity(new DefaultProfileEntity());
-        base.setPassword("some password");
+        defaultUserEntityToTest.setUserName("some user");
+        defaultUserEntityToTest.setProfileEntity(new DefaultProfileEntity());
+        defaultUserEntityToTest.setEmailAddress("some@where");
+        defaultUserEntityToTest.setUserNameAsEmailAddress();
 
-        DefaultUserEntity equal = new DefaultUserEntity(base);
+        DefaultUserEntity equal = new DefaultUserEntity(defaultUserEntityToTest);
 
         DefaultUserEntity notEqual = new DefaultUserEntity();
-        notEqual.setUserName("some other user");
+        notEqual.setEmailAddress("any@where");
         notEqual.setProfileEntity(new DefaultProfileEntity());
-        notEqual.setPassword("some other password");
+        notEqual.setUserName("some other user");
 
-        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(defaultUserEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 }

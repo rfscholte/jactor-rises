@@ -53,10 +53,6 @@ public abstract class DomainBuilder<Domain> {
         return new BlogEntryDomainBuilder();
     }
 
-    public static PersonDomainBuilder aPerson() {
-        return new PersonDomainBuilder();
-    }
-
     @SuppressWarnings("unchecked") static void addSkippedValidationOn(Build... builds) {
         if (builds != null) {
             for (Build build : builds) {
@@ -71,7 +67,6 @@ public abstract class DomainBuilder<Domain> {
 
     public enum Build {
         ADDRESS(AddressDomainBuilder.class),
-        PERSON(PersonDomainBuilder.class),
         PROFILE(ProfileDomainBuilder.class),
         USER(UserDomainBuilder.class);
 

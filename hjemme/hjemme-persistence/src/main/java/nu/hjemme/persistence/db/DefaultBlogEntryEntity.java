@@ -40,13 +40,13 @@ public class DefaultBlogEntryEntity extends DefaultPersistentEntity implements B
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
-                Objects.equals(persistentEntry, ((BlogEntryEntity) o).getEntry()) &&
-                Objects.equals(blogEntity, ((BlogEntryEntity) o).getBlog());
+                Objects.equals(persistentEntry, ((DefaultBlogEntryEntity) o).persistentEntry) &&
+                Objects.equals(blogEntity, ((DefaultBlogEntryEntity) o).blogEntity);
     }
 
     /** {@inheritDoc} */
     @Override public int hashCode() {
-        return hash(super.hashCode(), getBlog());
+        return hash(blogEntity, persistentEntry);
     }
 
     /** {@inheritDoc} */

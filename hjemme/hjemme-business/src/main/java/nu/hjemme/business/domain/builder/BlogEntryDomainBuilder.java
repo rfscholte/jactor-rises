@@ -3,7 +3,6 @@ package nu.hjemme.business.domain.builder;
 import nu.hjemme.business.domain.BlogEntryDomain;
 import nu.hjemme.persistence.BlogEntity;
 import nu.hjemme.persistence.BlogEntryEntity;
-import nu.hjemme.persistence.PersonEntity;
 import org.apache.commons.lang.Validate;
 
 public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
@@ -13,14 +12,9 @@ public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
 
     private BlogEntryEntity blogEntryEntity = newInstanceOf(BlogEntryEntity.class);
 
-    public BlogEntryDomainBuilder with(PersonEntity creator) {
+    public BlogEntryDomainBuilder withCreatorNamed(String creator) {
         blogEntryEntity.getEntry().setCreator(creator);
 
-        return this;
-    }
-
-    public BlogEntryDomainBuilder with(PersonDomainBuilder personDomainBuilder) {
-        with(personDomainBuilder.get().getEntity());
         return this;
     }
 

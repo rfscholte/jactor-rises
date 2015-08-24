@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static nu.hjemme.persistence.db.DefaultGuestBookEntryEntityTest.aCreatorNamed;
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.junit.Assert.assertThat;
@@ -25,40 +24,39 @@ public class DefaultBlogEntryEntityTest {
     @Test public void willHaveCorrectImplementedHashCode() {
         PersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator(aCreatorNamed("some creator"));
+        persistentEntry.setCreator("some creator");
 
         PersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
         otherPersistentEntry.setEntry("some other entry");
-        otherPersistentEntry.setCreator(aCreatorNamed("some other creator"));
+        otherPersistentEntry.setCreator("some other creator");
 
-        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
         blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
+        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
 
         BlogEntryEntity equal = new DefaultBlogEntryEntity(blogEntryEntityToTest);
 
         BlogEntryEntity notEqual = new DefaultBlogEntryEntity();
-        blogEntryEntityToTest.setPersistentEntry(otherPersistentEntry);
+        notEqual.setPersistentEntry(otherPersistentEntry);
         notEqual.setBlog(new DefaultBlogEntity());
-
         assertThat(blogEntryEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
         PersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator(aCreatorNamed("some creator"));
+        persistentEntry.setCreator("some creator");
 
         PersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
         otherPersistentEntry.setEntry("some other entry");
-        otherPersistentEntry.setCreator(aCreatorNamed("some other creator"));
+        otherPersistentEntry.setCreator("some other creator");
 
-        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
         blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
+        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
 
         BlogEntryEntity equal = new DefaultBlogEntryEntity(blogEntryEntityToTest);
 
         BlogEntryEntity notEqual = new DefaultBlogEntryEntity();
-        blogEntryEntityToTest.setPersistentEntry(otherPersistentEntry);
+        notEqual.setPersistentEntry(otherPersistentEntry);
         notEqual.setBlog(new DefaultBlogEntity());
 
         assertThat(blogEntryEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
