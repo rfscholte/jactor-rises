@@ -8,6 +8,7 @@ import nu.hjemme.persistence.db.DefaultBlogEntryEntity;
 import nu.hjemme.persistence.db.DefaultGuestBookEntity;
 import nu.hjemme.persistence.db.DefaultGuestBookEntryEntity;
 import nu.hjemme.persistence.db.DefaultPersistentEntry;
+import nu.hjemme.persistence.db.DefaultPersonEntity;
 import nu.hjemme.persistence.db.DefaultUserEntity;
 
 import java.lang.reflect.Constructor;
@@ -32,7 +33,7 @@ public class PersistentData {
     @SuppressWarnings("unchecked") public <T> T provideInstanceFor(Class<T> interfaceToInitiate, Object... arguments) {
         if (SUPPORTED_CLASSES.containsKey(interfaceToInitiate)) {
             if (arguments == null || arguments.length == 0) {
-                return (T) initializeWithNoArgumentsUsing(interfaceToInitiate);
+                return (T) initializeWithoutArgumentsUsing(interfaceToInitiate);
             }
 
             return (T) initializeWithConstructorUsing(SUPPORTED_CLASSES.get(interfaceToInitiate), arguments);
@@ -41,7 +42,7 @@ public class PersistentData {
         throw newIllegalArgumentException(interfaceToInitiate, arguments);
     }
 
-    private Object initializeWithNoArgumentsUsing(Class<?> interfaceToInitiate) {
+    private Object initializeWithoutArgumentsUsing(Class<?> interfaceToInitiate) {
         try {
             return SUPPORTED_CLASSES.get(interfaceToInitiate).newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
@@ -98,6 +99,7 @@ public class PersistentData {
         put(GuestBookEntity.class, DefaultGuestBookEntity.class);
         put(GuestBookEntryEntity.class, DefaultGuestBookEntryEntity.class);
         put(PersistentEntry.class, DefaultPersistentEntry.class);
+        put(PersonEntity.class, DefaultPersonEntity.class);
         put(UserEntity.class, DefaultUserEntity.class);
         put(UserDao.class, UserDaoDb.class);
     }

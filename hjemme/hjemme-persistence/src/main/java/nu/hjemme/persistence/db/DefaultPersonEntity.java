@@ -30,7 +30,7 @@ public class DefaultPersonEntity extends DefaultPersistentEntity implements Pers
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = PersonMetadata.ADDRESS_ID) private DefaultAddressEntity addressEntity;
     @Column(name = PersonMetadata.DESCRIPTION) private String description;
-    @OneToOne(mappedBy = "userEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL) private DefaultUserEntity userEntity;
+    @OneToOne(mappedBy = "personEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL) private DefaultUserEntity userEntity;
     @Transient private String firstName;
     @Transient private String lastName;
 
