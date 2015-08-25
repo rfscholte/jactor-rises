@@ -1,36 +1,38 @@
 package nu.hjemme.persistence.db;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import static nu.hjemme.persistence.converter.CountryConverter.SPLITTER;
+import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-/** @author Tor Egil Jacobsen */
 public class DefaultAddressEntityTest {
 
-    @Test
-    public void willHaveCorrectImplementedHashCode() {
+    private DefaultAddressEntity defaultAddressEntityToTest;
+
+    @Before public void initDefaultAddressEntity() {
+        defaultAddressEntityToTest = new DefaultAddressEntity();
+    }
+
+    @Test public void willHaveCorrectImplementedHashCode() {
         DefaultAddressEntity base = new DefaultAddressEntity();
         base.setAddressLine1("somewhere");
         base.setZipCode(1234);
-        base.setCountry("NO$no");
+        base.setCountry("NO" + SPLITTER + "no");
         base.setCity("some city");
         base.setAddressLine2("somewhere else");
         base.setAddressLine3("way out there");
 
         DefaultAddressEntity equal = new DefaultAddressEntity(base);
-        equal.setAddressLine1("somewhere");
-        equal.setZipCode(1234);
-        equal.setCountry("NO$no");
-        equal.setCity("some city");
-        equal.setAddressLine2("somewhere else");
-        equal.setAddressLine3("way out there");
 
         DefaultAddressEntity notEqual = new DefaultAddressEntity();
         notEqual.setAddressLine1("somewhere else");
         notEqual.setZipCode(5678);
-        notEqual.setCountry("SE$se");
+        notEqual.setCountry("SE" + SPLITTER + "se");
         notEqual.setCity("some other city");
         notEqual.setAddressLine2("some place");
         notEqual.setAddressLine3("in the distance");
@@ -38,32 +40,57 @@ public class DefaultAddressEntityTest {
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
-    @Test
-    public void willHaveCorrectImplementedEquals() {
-        DefaultAddressEntity base = new DefaultAddressEntity();
-        base.setAddressLine1("somewhere");
-        base.setZipCode(1234);
-        base.setCountry("NO$no");
-        base.setCity("some city");
-        base.setAddressLine2("somewhere else");
-        base.setAddressLine3("way out there");
+    @Test public void willHaveCorrectImplementedEquals() {
+        defaultAddressEntityToTest = new DefaultAddressEntity();
+        defaultAddressEntityToTest.setAddressLine1("somewhere");
+        defaultAddressEntityToTest.setZipCode(1234);
+        defaultAddressEntityToTest.setCountry("NO" + SPLITTER + "no");
+        defaultAddressEntityToTest.setCity("some city");
+        defaultAddressEntityToTest.setAddressLine2("somewhere else");
+        defaultAddressEntityToTest.setAddressLine3("way out there");
 
-        DefaultAddressEntity equal = new DefaultAddressEntity(base);
-        equal.setAddressLine1("somewhere");
-        equal.setZipCode(1234);
-        equal.setCountry("NO$no");
-        equal.setCity("some city");
-        equal.setAddressLine2("somewhere else");
-        equal.setAddressLine3("way out there");
+        DefaultAddressEntity equal = new DefaultAddressEntity(defaultAddressEntityToTest);
 
         DefaultAddressEntity notEqual = new DefaultAddressEntity();
         notEqual.setAddressLine1("somewhere else");
         notEqual.setZipCode(5678);
-        notEqual.setCountry("SE$se");
+        notEqual.setCountry("SE" + SPLITTER + "se");
         notEqual.setCity("some other city");
         notEqual.setAddressLine2("some place");
         notEqual.setAddressLine3("in the distance");
 
-        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(defaultAddressEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
+    }
+
+    @Test public void willBeEqualAnIdenticalEntity() {
+        defaultAddressEntityToTest.setAddressLine1("somewhere");
+        defaultAddressEntityToTest.setZipCode(1234);
+        defaultAddressEntityToTest.setCountry("NO" + SPLITTER + "no");
+        defaultAddressEntityToTest.setCity("some city");
+        defaultAddressEntityToTest.setAddressLine2("somewhere else");
+        defaultAddressEntityToTest.setAddressLine3("way out there");
+
+        DefaultAddressEntity equal = new DefaultAddressEntity();
+        equal.setAddressLine1("somewhere");
+        equal.setZipCode(1234);
+        equal.setCountry("NO" + SPLITTER + "no");
+        equal.setCity("some city");
+        equal.setAddressLine2("somewhere else");
+        equal.setAddressLine3("way out there");
+
+        assertThat(defaultAddressEntityToTest, is(equalTo(equal), "Equal Entity"));
+    }
+
+    @Test public void willBeEqualAnIdenticalntityUsingConstructor() {
+        defaultAddressEntityToTest.setAddressLine1("somewhere");
+        defaultAddressEntityToTest.setZipCode(1234);
+        defaultAddressEntityToTest.setCountry("NO" + SPLITTER + "no");
+        defaultAddressEntityToTest.setCity("some city");
+        defaultAddressEntityToTest.setAddressLine2("somewhere else");
+        defaultAddressEntityToTest.setAddressLine3("way out there");
+
+        DefaultAddressEntity equal = new DefaultAddressEntity(defaultAddressEntityToTest);
+
+        assertThat(defaultAddressEntityToTest, is(equalTo(equal), "Equal Entity"));
     }
 }

@@ -4,6 +4,9 @@ import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.datatype.UserName;
+import nu.hjemme.persistence.AddressEntity;
+import nu.hjemme.persistence.UserEntity;
+import nu.hjemme.persistence.db.DefaultUserEntity;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Before;
@@ -15,9 +18,13 @@ import java.time.LocalDate;
 
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class DefaultPersistentEntityTest {
     private TestPersistentEntity testPersistentEntity;
@@ -60,13 +67,33 @@ public class DefaultPersistentEntityTest {
     @Test public void willUpdateEntityWithCreatedByAndCreationTime() {
         testPersistentEntity.createInstanceWith("jactor");
 
-         assertThat(testPersistentEntity, new TypeSafeBuildMatcher<TestPersistentEntity>("create persistent instance") {
+        assertThat(testPersistentEntity, new TypeSafeBuildMatcher<TestPersistentEntity>("create persistent instance") {
             @Override public MatchBuilder matches(TestPersistentEntity typeToTest, MatchBuilder matchBuilder) {
                 return matchBuilder
                         .matches(typeToTest.getCreatedBy(), is(equalTo(new Name("jactor")), "created by"))
                         .matches(typeToTest.getCreationTime().toLocalDate(), is(equalTo(LocalDate.now()), "creation time"));
             }
         });
+    }
+
+    @Test public void willNotCastOrInitializeKnownImplementation() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("Unable to cast or initialize");
+
+        testPersistentEntity.castOrInitialize(new DefaultUserEntity(), AddressEntity.class);
+    }
+
+    @Test public void willCastKnownImplementation() {
+        DefaultUserEntity defaultUserEntity = new DefaultUserEntity();
+
+        assertThat(defaultUserEntity, is(sameInstance(testPersistentEntity.castOrInitialize(defaultUserEntity, DefaultUserEntity.class)), "casting"));
+    }
+
+    @Test public void willInitializeKnownImplementation() {
+        assertThat(
+                new DefaultUserEntity(),
+                is(allOf(notNullValue(), not(sameInstance(testPersistentEntity.castOrInitialize(mock(UserEntity.class), DefaultUserEntity.class)))), "initialized")
+        );
     }
 
     private class TestPersistentEntity extends DefaultPersistentEntity {

@@ -8,11 +8,10 @@ import java.util.Locale;
 import java.util.Objects;
 
 import static java.util.Arrays.asList;
+import static java.util.Objects.hash;
 
 /**
- * Representing a country according to the ISO 3166 standard. In addition to the country, you must add a specific {@link
- * Locale} representing the language of the country.
- * @author Tor Egil Jacobsen
+ * Representing a country according to the ISO 3166 standard. In addition to the country, you must add a specific {@link Locale} representing the language of the country.
  */
 public class Country {
     private static final String VALID_COUNTRY_CODES = ", valid codes: ";
@@ -41,35 +40,19 @@ public class Country {
             }
         }
 
-        String errorMessage = countryCode +
-                NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166 +
-                VALID_COUNTRY_CODES + asList(isoCountries);
-
-        throw new IllegalArgumentException(errorMessage);
+        throw new IllegalArgumentException(countryCode + NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166 + VALID_COUNTRY_CODES + asList(isoCountries));
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-
-        Country country = (Country) obj;
-
-        return Objects.equals(getCountryCode(), country.getCountryCode()) && Objects.equals(getLocale(), country.getLocale());
+    @Override public boolean equals(Object obj) {
+        return this == obj || obj != null && getClass() == obj.getClass() &&
+                Objects.equals(getCountryCode(), ((Country) obj).getCountryCode()) && Objects.equals(getLocale(), ((Country) obj).getLocale());
     }
 
-    @Override
-    public int hashCode() {
-        return getCountryCode().hashCode() + getLocale().hashCode();
+    @Override public int hashCode() {
+        return hash(countryCode, locale);
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append(countryCode)
                 .append(locale)

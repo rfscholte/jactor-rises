@@ -7,11 +7,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-/** @author Tor Egil Jacobsen */
 public class DefaultBlogEntryEntityTest {
     private DefaultBlogEntryEntity blogEntryEntityToTest;
 
@@ -60,5 +61,33 @@ public class DefaultBlogEntryEntityTest {
         notEqual.setBlog(new DefaultBlogEntity());
 
         assertThat(blogEntryEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
+    }
+
+    @Test public void willBeEqualAnIdenticalEntity() {
+        PersistentEntry persistentEntry = new DefaultPersistentEntry();
+        persistentEntry.setEntry("some entry");
+        persistentEntry.setCreator("some creator");
+
+        blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
+        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
+
+        BlogEntryEntity equal = new DefaultBlogEntryEntity();
+        equal.setBlog(new DefaultBlogEntity());
+        equal.setPersistentEntry(persistentEntry);
+
+        assertThat(blogEntryEntityToTest, is(equalTo(equal), "Equal Entity"));
+    }
+
+    @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
+        PersistentEntry persistentEntry = new DefaultPersistentEntry();
+        persistentEntry.setEntry("some entry");
+        persistentEntry.setCreator("some creator");
+
+        blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
+        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
+
+        BlogEntryEntity equal = new DefaultBlogEntryEntity(blogEntryEntityToTest);
+
+        assertThat(blogEntryEntityToTest, is(equalTo(equal), "Equal Entity"));
     }
 }

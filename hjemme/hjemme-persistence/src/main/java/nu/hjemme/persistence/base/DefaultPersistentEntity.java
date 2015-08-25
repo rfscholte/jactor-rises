@@ -23,6 +23,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
@@ -63,6 +65,28 @@ public abstract class DefaultPersistentEntity implements Persistent<Long>, Persi
 
     private <DataType> boolean isValidValue(Class<DataType> classType) {
         return !(classType != null && !dataTypeConverters.containsKey(classType));
+    }
+
+    @SuppressWarnings("unchecked") protected <T> T castOrInitialize(Object object, Class<T> implementation) {
+        if (implementation.isAssignableFrom(object.getClass())) {
+            return (T) object;
+        }
+
+        for (Constructor<?> constructor : implementation.getConstructors()) {
+            if (constructor.getParameterCount() == 1) {
+                try {
+                    return (T) constructor.newInstance(object);
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                    throw new IllegalArgumentException(createErrorMessageUsing(object, implementation), e);
+                }
+            }
+        }
+
+        throw new IllegalArgumentException(createErrorMessageUsing(object, implementation));
+    }
+
+    private String createErrorMessageUsing(Object object, Class<?> implementation) {
+        return "Unable to cast or initialize " + object.getClass() + " to " + implementation;
     }
 
     @Override public String toString() {

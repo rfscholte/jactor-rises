@@ -4,6 +4,8 @@ import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.persistence.AddressEntity;
 import org.apache.commons.lang.Validate;
 
+import static nu.hjemme.persistence.converter.CountryConverter.SPLITTER;
+
 public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
     static final String ADDRESS_LINE_1_CANNOT_BE_EMPTY = "Address line 1 cannot be empty";
     static final String COUNTRY_CANNOT_BE_NULL = "A country must be provided";
@@ -17,7 +19,7 @@ public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
     }
 
     public AddressDomainBuilder withCountryAs(String code, String locale) {
-        addressEntity.setCountry(code + "$" + locale);
+        addressEntity.setCountry(code + SPLITTER + locale);
         return this;
     }
 

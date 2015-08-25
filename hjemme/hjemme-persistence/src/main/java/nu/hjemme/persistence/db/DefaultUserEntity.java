@@ -27,7 +27,7 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
 
     @Column(name = UserMetadata.PASSWORD, nullable = false) private String password; // the user password
     @Column(name = UserMetadata.USER_NAME, nullable = false) private String userName; // the user name
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) @JoinColumn(name = UserMetadata.PROFILE_ID) private DefaultProfileEntity profileEntity; // the profile to the user
+    @JoinColumn(name = UserMetadata.PROFILE_ID) @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) private DefaultProfileEntity profileEntity; // the profile to the user
     @Column(name = UserMetadata.EMAIL) private String emailAddress; // the email address to the user
     @Column(name = UserMetadata.EMAIL_AS_NAME, nullable = false) private boolean userNameIsEmailAddress; // if the user uses the email address as the user name
 
@@ -36,7 +36,7 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
     /** @param user is used to create an entity */
     public DefaultUserEntity(User user) {
         password = user.getPassword();
-        userName = user.getUserName() != null ? user.getUserName().getName() : null;
+        userName = convertFrom(user.getUserName(), UserName.class);
         profileEntity = user.getProfile() != null ? new DefaultProfileEntity(user.getProfile()) : null;
         emailAddress = convertFrom(user.getEmailAddress(), EmailAddress.class);
         userNameIsEmailAddress = user.isUserNameEmailAddress();
@@ -48,7 +48,6 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
                 Objects.equals(profileEntity, ((DefaultUserEntity) o).profileEntity) &&
                 Objects.equals(emailAddress, ((DefaultUserEntity) o).emailAddress) &&
                 Objects.equals(userNameIsEmailAddress, ((DefaultUserEntity) o).userNameIsEmailAddress);
-
     }
 
     @Override public int hashCode() {
@@ -57,19 +56,12 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
 
     @Override public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .appendSuper(super.toString())
                 .append(userName)
                 .append(profileEntity)
                 .append(emailAddress)
                 .append(userNameIsEmailAddress)
                 .toString();
-    }
-
-    private DefaultProfileEntity cast(ProfileEntity profileEntity) {
-        if (profileEntity instanceof DefaultProfileEntity) {
-            return (DefaultProfileEntity) profileEntity;
-        }
-
-        throw new IllegalArgumentException("unknown entity: " + profileEntity.getClass());
     }
 
     @Override public String getPassword() {
@@ -109,6 +101,6 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
     }
 
     @Override public void setProfileEntity(ProfileEntity profileEntity) {
-        this.profileEntity = cast(profileEntity);
+        this.profileEntity = castOrInitialize(profileEntity, DefaultProfileEntity.class);
     }
 }

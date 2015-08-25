@@ -41,14 +41,10 @@ public class DefaultGuestBookEntryEntity extends DefaultPersistentEntity impleme
         persistentEntry = guestBookEntry.getEntry() != null ? new DefaultPersistentEntry(guestBookEntry.getEntry()) : null;
     }
 
-    @Override public void setPersistentEntry(PersistentEntry persistentEntry) {
-        this.persistentEntry = persistentEntry;
-    }
-
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
-                Objects.equals(persistentEntry, ((GuestBookEntryEntity) o).getEntry()) &&
-                Objects.equals(guestBookEntity, ((GuestBookEntryEntity) o).getGuestBook());
+                Objects.equals(persistentEntry, ((DefaultGuestBookEntryEntity) o).persistentEntry) &&
+                Objects.equals(guestBookEntity, ((DefaultGuestBookEntryEntity) o).guestBookEntity);
     }
 
     @Override public int hashCode() {
@@ -72,5 +68,9 @@ public class DefaultGuestBookEntryEntity extends DefaultPersistentEntity impleme
 
     @Override public void setGuestBook(GuestBookEntity guestBookEntity) {
         this.guestBookEntity = guestBookEntity;
+    }
+
+    @Override public void setPersistentEntry(PersistentEntry persistentEntry) {
+        this.persistentEntry = persistentEntry;
     }
 }

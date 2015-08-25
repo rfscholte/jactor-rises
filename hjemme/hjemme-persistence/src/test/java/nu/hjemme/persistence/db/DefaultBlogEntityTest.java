@@ -1,33 +1,34 @@
 package nu.hjemme.persistence.db;
 
 import nu.hjemme.persistence.time.NowAsPureDate;
-import org.junit.After;
+import nu.hjemme.persistence.time.NowAsPureDateRule;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
-
+import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-/** @author Tor Egil Jacobsen */
 public class DefaultBlogEntityTest {
 
-    @Before public void mockNow() {
-        new NowAsPureDate();
+    private DefaultBlogEntity defaultBlogEntityToTest;
+
+    @Rule public NowAsPureDateRule nowAsPureDateRule = NowAsPureDateRule.init();
+
+    @Before public void initDefaulBlogEntityToTest() {
+        defaultBlogEntityToTest = new DefaultBlogEntity();
     }
 
     @Test public void willHaveCorrectImplementedHashCode() {
         DefaultUserEntity userEntity = new DefaultUserEntity();
 
-        DefaultBlogEntity base = new DefaultBlogEntity();
-        base.setTitle("title");
-        base.setUserEntity(userEntity);
+        defaultBlogEntityToTest.setTitle("title");
+        defaultBlogEntityToTest.setUserEntity(userEntity);
 
-        DefaultBlogEntity equal = new DefaultBlogEntity(base);
+        DefaultBlogEntity equal = new DefaultBlogEntity(defaultBlogEntityToTest);
         equal.setTitle("title");
         equal.setUserEntity(userEntity);
 
@@ -35,31 +36,45 @@ public class DefaultBlogEntityTest {
         notEqual.setTitle("another title");
         notEqual.setUserEntity(new DefaultUserEntity());
 
-        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(defaultBlogEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
-        DefaultBlogEntity base = new DefaultBlogEntity();
-        base.setTitle("title");
-        base.setUserEntity(new DefaultUserEntity());
+        defaultBlogEntityToTest.setTitle("title");
+        defaultBlogEntityToTest.setUserEntity(new DefaultUserEntity());
 
-        DefaultBlogEntity equal = new DefaultBlogEntity(base);
+        DefaultBlogEntity equal = new DefaultBlogEntity(defaultBlogEntityToTest);
 
         DefaultBlogEntity notEqual = new DefaultBlogEntity();
         notEqual.setTitle("another title");
         notEqual.setUserEntity(new DefaultUserEntity());
 
-        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(defaultBlogEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
-    @Test public void skalHaTidspunktForOpprettelseSattVedBrukAvNoArgsConstructor() {
-        DefaultBlogEntity testBlogEntity = new DefaultBlogEntity();
-        assertThat("Opprettet tidspunkt: ", testBlogEntity.getCreated(), is(equalTo(
-                LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0)
-        )));
+    @Test public void willHaveCreationTimeWhenInitialized() {
+        assertThat(defaultBlogEntityToTest.getCreated(), is(equalTo(NowAsPureDate.asDateTime()), "created time"));
     }
 
-    @After public void removeNowAsPureDate() {
-        NowAsPureDate.removeNowAsPureDate();
+    @Test public void willBeEqualAnIdenticalEntity() {
+        DefaultUserEntity userEntity = new DefaultUserEntity();
+
+        defaultBlogEntityToTest.setTitle("title");
+        defaultBlogEntityToTest.setUserEntity(userEntity);
+
+        DefaultBlogEntity equal = new DefaultBlogEntity();
+        equal.setTitle("title");
+        equal.setUserEntity(userEntity);
+
+        assertThat(defaultBlogEntityToTest, is(equalTo(equal), "Equal Entity"));
+    }
+
+    @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
+        defaultBlogEntityToTest.setTitle("title");
+        defaultBlogEntityToTest.setUserEntity(new DefaultUserEntity());
+
+        DefaultBlogEntity equal = new DefaultBlogEntity(defaultBlogEntityToTest);
+
+        assertThat(defaultBlogEntityToTest, is(equalTo(equal), "Equal Entity"));
     }
 }
