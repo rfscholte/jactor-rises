@@ -37,8 +37,8 @@ public abstract class DomainBuilder<Domain> {
         return new UserDomainBuilder();
     }
 
-    public static ProfileDomainBuilder aProfile() {
-        return new ProfileDomainBuilder();
+    public static PersonDomainBuilder aPerson() {
+        return new PersonDomainBuilder();
     }
 
     public static AddressDomainBuilder anAddress() {
@@ -67,7 +67,7 @@ public abstract class DomainBuilder<Domain> {
 
     public enum Build {
         ADDRESS(AddressDomainBuilder.class),
-        PROFILE(ProfileDomainBuilder.class),
+        PERSON(PersonDomainBuilder.class),
         USER(UserDomainBuilder.class);
 
         final Class builderClass;

@@ -1,7 +1,5 @@
 package nu.hjemme.persistence;
 
-import nu.hjemme.client.datatype.EmailAddress;
-import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
 
 /**
@@ -10,7 +8,7 @@ import nu.hjemme.client.domain.User;
 public interface UserEntity extends User {
     void setUserName(String userName);
 
-    void setProfileEntity(ProfileEntity profile);
+    void setPersonEntity(PersonEntity personEntity);
 
     void setPassword(String password);
 

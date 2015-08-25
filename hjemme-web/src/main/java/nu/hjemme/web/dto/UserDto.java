@@ -14,27 +14,27 @@ public class UserDto {
     }
 
     public String getAddressLine1() {
-        return user.getProfile().getAddress().getAddressLine1();
+        return user.getPerson().getAddress().getAddressLine1();
     }
 
     public String getAddressLine2() {
-        return user.getProfile().getAddress().getAddressLine2();
+        return user.getPerson().getAddress().getAddressLine2();
     }
 
     public String getCity() {
-        return user.getProfile().getAddress().getCity();
+        return user.getPerson().getAddress().getCity();
     }
 
     public Integer getZipCode() {
-        return user.getProfile().getAddress().getZipCode();
+        return user.getPerson().getAddress().getZipCode();
     }
 
     public String getFirstName() {
-        return user.getProfile().getFirstName().getName();
+        return user.getPerson().getFirstName().getName();
     }
 
     public String getLastName() {
-        return user.getProfile().getLastName().getName();
+        return user.getPerson().getLastName().getName();
     }
 
     public String getUserName() {
@@ -42,6 +42,6 @@ public class UserDto {
     }
 
     public String getDescription() {
-        return user.getProfile().getDescription().toString();
+        return user.getPerson().getDescription().toString();
     }
 }

@@ -1,6 +1,5 @@
 package nu.hjemme.persistence.meta;
 
-/** @author Tor Egil Jacobsen */
 public final class AddressMetadata {
     private AddressMetadata() {}
 

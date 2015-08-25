@@ -10,7 +10,7 @@ public interface User extends Persistent<Long> {
 
     UserName getUserName();
 
-    Profile getProfile();
+    Person getPerson();
 
     EmailAddress getEmailAddress();
 

@@ -3,7 +3,7 @@ package nu.hjemme.business.domain;
 import nu.hjemme.business.domain.dao.UserDomainDao;
 import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.client.domain.Profile;
+import nu.hjemme.client.domain.Person;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.UserEntity;
 
@@ -23,8 +23,8 @@ public class UserDomain extends PersistentDomain<UserEntity, Long> implements Us
         return getEntity().getUserName();
     }
 
-    @Override public Profile getProfile() {
-        return getEntity().getProfile();
+    @Override public Person getPerson() {
+        return getEntity().getPerson();
     }
 
     @Override public EmailAddress getEmailAddress() {

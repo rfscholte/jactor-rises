@@ -3,13 +3,13 @@ package nu.hjemme.business.domain;
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Address;
-import nu.hjemme.client.domain.Profile;
-import nu.hjemme.persistence.db.DefaultProfileEntity;
+import nu.hjemme.client.domain.Person;
+import nu.hjemme.persistence.PersonEntity;
 
-public class ProfileDomain extends PersistentDomain<DefaultProfileEntity, Long> implements Profile {
+public class PersonDomain extends PersistentDomain<PersonEntity, Long> implements Person {
 
-    public ProfileDomain(DefaultProfileEntity profileEntity) {
-        super(profileEntity);
+    public PersonDomain(PersonEntity personEntity) {
+        super(personEntity);
     }
 
     @Override public Description getDescription() {

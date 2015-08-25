@@ -18,9 +18,9 @@ public class HjemmeWebContext {
                 .leggTil(createTipItem());
     }
 
-    @Bean(name = "hjemme.profileMenu")
+    @Bean(name = "hjemme.personMenu")
     public MenuDto createProfilMenu() {
-        return new MenuDto("profile")
+        return new MenuDto("person")
                 .leggTil(createAboutItem());
     }
 
@@ -44,7 +44,7 @@ public class HjemmeWebContext {
 
     @Bean(name = "hjemme.aboutItem")
     public MenuItemDto createAboutItem() {
-        return new MenuItemDto("menu.profile.about", "about.do")
-                .medBeskrivelseSom("menu.profile.about.desc");
+        return new MenuItemDto("menu.person.about", "about.do")
+                .medBeskrivelseSom("menu.person.about.desc");
     }
 }

@@ -11,10 +11,10 @@ final class InterceptorValues {
     }
 
     static final Name MAIN_MENU = new Name("main");
-    static final Name PROFILE_MENU = new Name("profile");
+    static final Name PERSON_MENU = new Name("person");
 
     static final String ATTRIBUTE_ACTION = "action";
     static final String ATTRIBUTE_MAIN_ITEMS = "mainItems";
     static final String ATTRIBUTE_PARAMETERS = "parameters";
-    static final String ATTRIBUTE_PROFILE_ITEMS = "profileItems";
+    static final String ATTRIBUTE_PERSON_ITEMS = "personItems";
 }

@@ -18,7 +18,7 @@ public class DefaultUserEntityTest {
 
     @Test public void willHaveCorrectImplementedHashCode() {
         defaultUserEntityToTest.setUserName("some user");
-        defaultUserEntityToTest.setProfileEntity(new DefaultProfileEntity());
+        defaultUserEntityToTest.setPersonEntity(new DefaultPersonEntity());
         defaultUserEntityToTest.setEmailAddress("some@where");
         defaultUserEntityToTest.setUserNameAsEmailAddress();
 
@@ -26,14 +26,14 @@ public class DefaultUserEntityTest {
 
         DefaultUserEntity notEqual = new DefaultUserEntity();
         notEqual.setEmailAddress("any@where");
-        notEqual.setProfileEntity(new DefaultProfileEntity());
+        notEqual.setPersonEntity(new DefaultPersonEntity());
         notEqual.setUserName("some other user");
 
         assertThat(defaultUserEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
-        defaultUserEntityToTest.setProfileEntity(new DefaultProfileEntity());
+        defaultUserEntityToTest.setPersonEntity(new DefaultPersonEntity());
         defaultUserEntityToTest.setUserName("some user");
         defaultUserEntityToTest.setEmailAddress("some@where");
         defaultUserEntityToTest.setUserNameAsEmailAddress();
@@ -41,7 +41,7 @@ public class DefaultUserEntityTest {
         DefaultUserEntity equal = new DefaultUserEntity(defaultUserEntityToTest);
 
         DefaultUserEntity notEqual = new DefaultUserEntity();
-        notEqual.setProfileEntity(new DefaultProfileEntity());
+        notEqual.setPersonEntity(new DefaultPersonEntity());
         notEqual.setEmailAddress("any@where");
         notEqual.setUserName("some other user");
 
@@ -49,13 +49,13 @@ public class DefaultUserEntityTest {
     }
 
     @Test public void willBeEqualToAnIdenticalDefaultUserEntity() {
-        defaultUserEntityToTest.setProfileEntity(new DefaultProfileEntity());
+        defaultUserEntityToTest.setPersonEntity(new DefaultPersonEntity());
         defaultUserEntityToTest.setUserName("aUser");
         defaultUserEntityToTest.setEmailAddress("far@away.com");
         defaultUserEntityToTest.setUserNameAsEmailAddress();
 
         DefaultUserEntity defaultUserEntity = new DefaultUserEntity();
-        defaultUserEntity.setProfileEntity(new DefaultProfileEntity());
+        defaultUserEntity.setPersonEntity(new DefaultPersonEntity());
         defaultUserEntity.setUserName("aUser");
         defaultUserEntity.setEmailAddress("far@away.com");
         defaultUserEntity.setUserNameAsEmailAddress();
@@ -64,15 +64,15 @@ public class DefaultUserEntityTest {
     }
 
     @Test public void willBeEqualAnIdenticalEntity() {
-        DefaultProfileEntity profileEntity = new DefaultProfileEntity();
+        DefaultPersonEntity defaultPersonEntity = new DefaultPersonEntity();
 
-        defaultUserEntityToTest.setProfileEntity(profileEntity);
+        defaultUserEntityToTest.setPersonEntity(defaultPersonEntity);
         defaultUserEntityToTest.setUserName("aUser");
         defaultUserEntityToTest.setEmailAddress("far@away.com");
         defaultUserEntityToTest.setUserNameAsEmailAddress();
 
         DefaultUserEntity equal = new DefaultUserEntity();
-        equal.setProfileEntity(profileEntity);
+        equal.setPersonEntity(defaultPersonEntity);
         equal.setUserName("aUser");
         equal.setEmailAddress("far@away.com");
         equal.setUserNameAsEmailAddress();
@@ -81,7 +81,7 @@ public class DefaultUserEntityTest {
     }
 
     @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
-        defaultUserEntityToTest.setProfileEntity(new DefaultProfileEntity());
+        defaultUserEntityToTest.setPersonEntity(new DefaultPersonEntity());
         defaultUserEntityToTest.setUserName("aUser");
         defaultUserEntityToTest.setEmailAddress("far@away.com");
         defaultUserEntityToTest.setUserNameAsEmailAddress();

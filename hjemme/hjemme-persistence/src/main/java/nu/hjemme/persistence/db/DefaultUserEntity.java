@@ -3,7 +3,7 @@ package nu.hjemme.persistence.db;
 import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
-import nu.hjemme.persistence.ProfileEntity;
+import nu.hjemme.persistence.PersonEntity;
 import nu.hjemme.persistence.UserEntity;
 import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.UserMetadata;
@@ -27,7 +27,7 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
 
     @Column(name = UserMetadata.PASSWORD, nullable = false) private String password; // the user password
     @Column(name = UserMetadata.USER_NAME, nullable = false) private String userName; // the user name
-    @JoinColumn(name = UserMetadata.PROFILE_ID) @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) private DefaultProfileEntity profileEntity; // the profile to the user
+    @JoinColumn(name = UserMetadata.PERSON_ID) @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) private DefaultPersonEntity personEntity; // the user as a person
     @Column(name = UserMetadata.EMAIL) private String emailAddress; // the email address to the user
     @Column(name = UserMetadata.EMAIL_AS_NAME, nullable = false) private boolean userNameIsEmailAddress; // if the user uses the email address as the user name
 
@@ -37,7 +37,7 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
     public DefaultUserEntity(User user) {
         password = user.getPassword();
         userName = convertFrom(user.getUserName(), UserName.class);
-        profileEntity = user.getProfile() != null ? new DefaultProfileEntity(user.getProfile()) : null;
+        personEntity = user.getPerson() != null ? new DefaultPersonEntity(user.getPerson()) : null;
         emailAddress = convertFrom(user.getEmailAddress(), EmailAddress.class);
         userNameIsEmailAddress = user.isUserNameEmailAddress();
     }
@@ -45,20 +45,20 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
     @Override public boolean equals(Object o) {
         return o == this || o != null && getClass() == o.getClass() &&
                 Objects.equals(userName, ((DefaultUserEntity) o).userName) &&
-                Objects.equals(profileEntity, ((DefaultUserEntity) o).profileEntity) &&
+                Objects.equals(personEntity, ((DefaultUserEntity) o).personEntity) &&
                 Objects.equals(emailAddress, ((DefaultUserEntity) o).emailAddress) &&
                 Objects.equals(userNameIsEmailAddress, ((DefaultUserEntity) o).userNameIsEmailAddress);
     }
 
     @Override public int hashCode() {
-        return hash(userName, profileEntity, emailAddress, userNameIsEmailAddress);
+        return hash(userName, personEntity, emailAddress, userNameIsEmailAddress);
     }
 
     @Override public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
                 .appendSuper(super.toString())
                 .append(userName)
-                .append(profileEntity)
+                .append(personEntity)
                 .append(emailAddress)
                 .append(userNameIsEmailAddress)
                 .toString();
@@ -72,8 +72,8 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
         return convertTo(userName, UserName.class);
     }
 
-    @Override public ProfileEntity getProfile() {
-        return profileEntity;
+    @Override public PersonEntity getPerson() {
+        return personEntity;
     }
 
     @Override public EmailAddress getEmailAddress() {
@@ -100,7 +100,7 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
         this.userName = userName;
     }
 
-    @Override public void setProfileEntity(ProfileEntity profileEntity) {
-        this.profileEntity = castOrInitialize(profileEntity, DefaultProfileEntity.class);
+    @Override public void setPersonEntity(PersonEntity personEntity) {
+        this.personEntity = castOrInitialize(personEntity, DefaultPersonEntity.class);
     }
 }

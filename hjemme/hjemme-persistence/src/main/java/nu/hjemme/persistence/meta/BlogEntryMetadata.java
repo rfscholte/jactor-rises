@@ -2,7 +2,6 @@ package nu.hjemme.persistence.meta;
 
 /**
  * The meta data of a blog entry.
- * @author Tor Egil Jacobsen
  */
 public final class BlogEntryMetadata {
     private BlogEntryMetadata() {}

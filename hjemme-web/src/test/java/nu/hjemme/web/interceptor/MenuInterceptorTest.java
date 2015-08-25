@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_MAIN_ITEMS;
-import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_PROFILE_ITEMS;
+import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_PERSON_ITEMS;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -50,6 +50,6 @@ public class MenuInterceptorTest {
         verify(mockedMenuFacade, times(2)).retrieveChosenMenuItemBy(any(MenuTarget.class));
 
         assertThat("The aware main items should be present", modelAndView.getModel().get(ATTRIBUTE_MAIN_ITEMS), is(notNullValue()));
-        assertThat("The aware profile items should be present", modelAndView.getModel().get(ATTRIBUTE_PROFILE_ITEMS), is(notNullValue()));
+        assertThat("The aware persons items should be present", modelAndView.getModel().get(ATTRIBUTE_PERSON_ITEMS), is(notNullValue()));
     }
 }

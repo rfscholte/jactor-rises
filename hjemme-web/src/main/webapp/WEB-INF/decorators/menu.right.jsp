@@ -14,7 +14,7 @@
 </table>
 
 <table>
-<c:forEach var="item" items="${profileItems}">
+<c:forEach var="item" items="${personItems}">
   <tr>
     <td>
      <div id='menu.item'>

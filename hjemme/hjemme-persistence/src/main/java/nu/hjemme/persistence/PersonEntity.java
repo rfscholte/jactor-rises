@@ -1,8 +1,10 @@
 package nu.hjemme.persistence;
 
-import nu.hjemme.client.domain.Profile;
+import nu.hjemme.client.domain.Person;
 
-public interface ProfileEntity extends Profile {
+public interface PersonEntity extends Person {
+    @Override UserEntity getUser();
+
     void setAddressEntity(AddressEntity addressEntity);
 
     void setDescription(String description);
