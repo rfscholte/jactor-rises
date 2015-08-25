@@ -7,7 +7,6 @@ import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.PersonEntity;
 import nu.hjemme.persistence.UserEntity;
 import nu.hjemme.persistence.base.DefaultPersistentEntity;
-import nu.hjemme.persistence.meta.PersonMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -23,13 +22,16 @@ import javax.persistence.Transient;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
+import static nu.hjemme.persistence.meta.PersonMetadata.ADDRESS_ID;
+import static nu.hjemme.persistence.meta.PersonMetadata.DESCRIPTION;
+import static nu.hjemme.persistence.meta.PersonMetadata.PERSON_TABLE;
 
 @Entity
-@Table(name = PersonMetadata.PERSON_TABLE)
+@Table(name = PERSON_TABLE)
 public class DefaultPersonEntity extends DefaultPersistentEntity implements PersonEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = PersonMetadata.ADDRESS_ID) private DefaultAddressEntity addressEntity;
-    @Column(name = PersonMetadata.DESCRIPTION) private String description;
+    @JoinColumn(name = ADDRESS_ID) @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) private DefaultAddressEntity addressEntity;
+    @Column(name = DESCRIPTION) private String description;
     @OneToOne(mappedBy = "personEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL) private DefaultUserEntity userEntity;
     @Transient private String firstName;
     @Transient private String lastName;
@@ -83,7 +85,7 @@ public class DefaultPersonEntity extends DefaultPersistentEntity implements Pers
     }
 
     @Override public void setAddressEntity(AddressEntity addressEntity) {
-        this.addressEntity = castOrInitialize(addressEntity, DefaultAddressEntity.class);
+        this.addressEntity = castOrInitializeCopyWith(addressEntity, DefaultAddressEntity.class);
     }
 
     @Override public void setDescription(String description) {
@@ -99,6 +101,6 @@ public class DefaultPersonEntity extends DefaultPersistentEntity implements Pers
     }
 
     @Override public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = castOrInitialize(userEntity, DefaultUserEntity.class);
+        this.userEntity = castOrInitializeCopyWith(userEntity, DefaultUserEntity.class);
     }
 }

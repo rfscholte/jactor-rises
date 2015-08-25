@@ -1,10 +1,11 @@
 package nu.hjemme.persistence.db;
 
-import nu.hjemme.persistence.time.NowAsPureDate;
 import nu.hjemme.persistence.time.NowAsPureDateRule;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
+import java.time.LocalDate;
 
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
@@ -52,8 +53,8 @@ public class DefaultBlogEntityTest {
         assertThat(defaultBlogEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
-    @Test public void willHaveCreationTimeWhenInitialized() {
-        assertThat(defaultBlogEntityToTest.getCreated(), is(equalTo(NowAsPureDate.asDateTime()), "created time"));
+    @Test public void willSetCreatedWhenInitialized() {
+        assertThat(defaultBlogEntityToTest.getCreated(), is(equalTo(LocalDate.now()), "created"));
     }
 
     @Test public void willBeEqualAnIdenticalEntity() {

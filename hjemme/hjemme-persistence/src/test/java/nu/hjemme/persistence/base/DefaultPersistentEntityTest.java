@@ -80,19 +80,19 @@ public class DefaultPersistentEntityTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("Unable to cast or initialize");
 
-        testPersistentEntity.castOrInitialize(new DefaultUserEntity(), AddressEntity.class);
+        testPersistentEntity.castOrInitializeCopyWith(new DefaultUserEntity(), AddressEntity.class);
     }
 
     @Test public void willCastKnownImplementation() {
         DefaultUserEntity defaultUserEntity = new DefaultUserEntity();
 
-        assertThat(defaultUserEntity, is(sameInstance(testPersistentEntity.castOrInitialize(defaultUserEntity, DefaultUserEntity.class)), "casting"));
+        assertThat(defaultUserEntity, is(sameInstance(testPersistentEntity.castOrInitializeCopyWith(defaultUserEntity, DefaultUserEntity.class)), "casting"));
     }
 
     @Test public void willInitializeKnownImplementation() {
         assertThat(
                 new DefaultUserEntity(),
-                is(allOf(notNullValue(), not(sameInstance(testPersistentEntity.castOrInitialize(mock(UserEntity.class), DefaultUserEntity.class)))), "initialized")
+                is(allOf(notNullValue(), not(sameInstance(testPersistentEntity.castOrInitializeCopyWith(mock(UserEntity.class), DefaultUserEntity.class)))), "initialized")
         );
     }
 

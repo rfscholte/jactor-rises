@@ -22,6 +22,7 @@ public class HjemmeDbContext {
                 .setType(EmbeddedDatabaseType.HSQL)
                 .setName("hjemme-db" + System.currentTimeMillis())
                 .addScript("classpath:create.db.sql")
+                .addScript("classpath:create.constraints.sql")
                 .addScript("classpath:create.default.users.sql")
                 .build();
     }

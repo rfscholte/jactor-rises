@@ -6,11 +6,12 @@ package nu.hjemme.persistence.meta;
 public final class BlogMetadata {
     private BlogMetadata() {}
 
-    /** The creation time of the blog */
-    public static final String CREATED = "CREATION_TIME";
+    public static final String BLOG_TABLE = "T_BLOG";
+
     /** The title of the blog */
     public static final String TITLE = "TITLE";
     /** The user who is the creator of the blog */
     public static final String USER = "USER_ID";
-
+    /** The time the blog was crated */
+    public static final String CREATED = "CREATED";
 }

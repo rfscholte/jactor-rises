@@ -10,6 +10,7 @@ import nu.hjemme.persistence.PersistentEntitiy;
 import nu.hjemme.persistence.converter.CountryConverter;
 import nu.hjemme.persistence.converter.DescriptionConverter;
 import nu.hjemme.persistence.converter.EmailAddressConverter;
+import nu.hjemme.persistence.converter.LocalDateConverter;
 import nu.hjemme.persistence.converter.LocalDateTimeConverter;
 import nu.hjemme.persistence.converter.NameConverter;
 import nu.hjemme.persistence.converter.TypeConverter;
@@ -25,10 +26,14 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import static nu.hjemme.persistence.meta.PersistentMetadata.CREATED_BY;
+import static nu.hjemme.persistence.meta.PersistentMetadata.CREATION_TIME;
 
 @MappedSuperclass
 public abstract class DefaultPersistentEntity implements Persistent<Long>, PersistentEntitiy {
@@ -38,8 +43,8 @@ public abstract class DefaultPersistentEntity implements Persistent<Long>, Persi
     @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) @SuppressWarnings("unused") // used by persistence engine
     protected Long id;
 
-    @Column(name = PersistentMetadata.CREATION_TIME) @Type(type = "timestamp") protected Date creationTime;
-    @Column(name = PersistentMetadata.CREATED_BY) protected String createdBy;
+    @Column(name = CREATION_TIME) @Type(type = "timestamp") protected Date creationTime;
+    @Column(name = CREATED_BY) protected String createdBy;
 
     @Override
     public void createInstanceWith(String createdBy) {
@@ -67,22 +72,36 @@ public abstract class DefaultPersistentEntity implements Persistent<Long>, Persi
         return !(classType != null && !dataTypeConverters.containsKey(classType));
     }
 
-    @SuppressWarnings("unchecked") protected <T> T castOrInitialize(Object object, Class<T> implementation) {
-        if (implementation.isAssignableFrom(object.getClass())) {
+    @SuppressWarnings("unchecked") protected <T> T castOrInitializeCopyWith(Object object, Class<T> implementation) {
+        if (object == null) {
+            return null;
+        }
+
+        if (object.getClass().getName().contains("EnhancerByMockito") || implementation.isAssignableFrom(object.getClass())) {
             return (T) object;
         }
 
-        for (Constructor<?> constructor : implementation.getConstructors()) {
-            if (constructor.getParameterCount() == 1) {
-                try {
-                    return (T) constructor.newInstance(object);
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                    throw new IllegalArgumentException(createErrorMessageUsing(object, implementation), e);
+        if (!implementation.isAssignableFrom(object.getClass())) {
+            throw new IllegalArgumentException(createErrorMessageUsing(object, implementation));
+        }
+
+        return initializeCopyWith(object, implementation);
+    }
+
+    @SuppressWarnings("unchecked") protected <T> T initializeCopyWith(Object object, Class<T> implementation) {
+        if (object != null) {
+            for (Constructor<?> constructor : implementation.getConstructors()) {
+                if (constructor.getParameterCount() == 1) {
+                    try {
+                        return (T) constructor.newInstance(object);
+                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                        throw new IllegalArgumentException(createErrorMessageUsing(object, implementation), e);
+                    }
                 }
             }
         }
 
-        throw new IllegalArgumentException(createErrorMessageUsing(object, implementation));
+        return null;
     }
 
     private String createErrorMessageUsing(Object object, Class<?> implementation) {
@@ -90,7 +109,7 @@ public abstract class DefaultPersistentEntity implements Persistent<Long>, Persi
     }
 
     @Override public String toString() {
-        return getClass().getSimpleName() + (id != null ?  "#" + id : "");
+        return getClass().getSimpleName() + (id != null ? "#" + id : "");
     }
 
     @Override public Name getCreatedBy() {
@@ -113,6 +132,7 @@ public abstract class DefaultPersistentEntity implements Persistent<Long>, Persi
         knownConverters.put(Description.class, new DescriptionConverter());
         knownConverters.put(LocalDateTime.class, new LocalDateTimeConverter());
         knownConverters.put(Country.class, new CountryConverter());
+        knownConverters.put(LocalDate.class, new LocalDateConverter());
 
         return knownConverters;
     }

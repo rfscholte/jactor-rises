@@ -6,7 +6,6 @@ import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.PersonEntity;
 import nu.hjemme.persistence.UserEntity;
 import nu.hjemme.persistence.base.DefaultPersistentEntity;
-import nu.hjemme.persistence.meta.UserMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -20,16 +19,22 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
+import static nu.hjemme.persistence.meta.UserMetadata.EMAIL;
+import static nu.hjemme.persistence.meta.UserMetadata.EMAIL_AS_NAME;
+import static nu.hjemme.persistence.meta.UserMetadata.PASSWORD;
+import static nu.hjemme.persistence.meta.UserMetadata.PERSON_ID;
+import static nu.hjemme.persistence.meta.UserMetadata.USER_NAME;
+import static nu.hjemme.persistence.meta.UserMetadata.USER_TABLE;
 
 @Entity
-@Table(name = UserMetadata.USER_TABLE)
+@Table(name = USER_TABLE)
 public class DefaultUserEntity extends DefaultPersistentEntity implements UserEntity {
 
-    @Column(name = UserMetadata.PASSWORD, nullable = false) private String password; // the user password
-    @Column(name = UserMetadata.USER_NAME, nullable = false) private String userName; // the user name
-    @JoinColumn(name = UserMetadata.PERSON_ID) @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) private DefaultPersonEntity personEntity; // the user as a person
-    @Column(name = UserMetadata.EMAIL) private String emailAddress; // the email address to the user
-    @Column(name = UserMetadata.EMAIL_AS_NAME, nullable = false) private boolean userNameIsEmailAddress; // if the user uses the email address as the user name
+    @Column(name = PASSWORD, nullable = false) private String password; // the user password
+    @Column(name = USER_NAME, nullable = false) private String userName; // the user name
+    @JoinColumn(name = PERSON_ID) @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) private DefaultPersonEntity personEntity; // the user as a person
+    @Column(name = EMAIL) private String emailAddress; // the email address to the user
+    @Column(name = EMAIL_AS_NAME, nullable = false) private boolean userNameIsEmailAddress; // if the user uses the email address as the user name
 
     public DefaultUserEntity() { }
 
@@ -37,7 +42,7 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
     public DefaultUserEntity(User user) {
         password = user.getPassword();
         userName = convertFrom(user.getUserName(), UserName.class);
-        personEntity = user.getPerson() != null ? new DefaultPersonEntity(user.getPerson()) : null;
+        personEntity = initializeCopyWith(user.getPerson(), DefaultPersonEntity.class);
         emailAddress = convertFrom(user.getEmailAddress(), EmailAddress.class);
         userNameIsEmailAddress = user.isUserNameEmailAddress();
     }
@@ -101,6 +106,6 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
     }
 
     @Override public void setPersonEntity(PersonEntity personEntity) {
-        this.personEntity = castOrInitialize(personEntity, DefaultPersonEntity.class);
+        this.personEntity = castOrInitializeCopyWith(personEntity, DefaultPersonEntity.class);
     }
 }

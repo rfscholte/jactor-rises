@@ -1,13 +1,11 @@
 package nu.hjemme.client.domain;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-/** @author Tor Egil Jacobsen */
 public interface Blog extends Persistent<Long> {
     String getTitle();
 
     User getUser();
 
-    LocalDateTime getCreated();
-
+    LocalDate getCreated();
 }
