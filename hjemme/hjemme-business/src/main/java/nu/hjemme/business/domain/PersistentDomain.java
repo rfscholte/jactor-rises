@@ -31,4 +31,12 @@ public abstract class PersistentDomain<Entity extends Persistent<Id>, Id> implem
     @Override public LocalDateTime getCreationTime() {
         return entity.getCreationTime();
     }
+
+    @Override public Name getUpdatedBy() {
+        return entity.getUpdatedBy();
+    }
+
+    @Override public LocalDateTime getUpdatedTime() {
+        return entity.getUpdatedTime();
+    }
 }

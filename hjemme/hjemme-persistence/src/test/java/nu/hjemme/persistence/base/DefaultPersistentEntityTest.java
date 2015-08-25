@@ -7,14 +7,10 @@ import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.UserEntity;
 import nu.hjemme.persistence.db.DefaultUserEntity;
-import nu.hjemme.test.matcher.MatchBuilder;
-import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.time.LocalDate;
 
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -62,18 +58,6 @@ public class DefaultPersistentEntityTest {
 
     @Test public void willConvertDescription() {
         assertThat(testPersistentEntity.convertTo("description", Description.class), is(equalTo(new Description("description")), "String->Description"));
-    }
-
-    @Test public void willUpdateEntityWithCreatedByAndCreationTime() {
-        testPersistentEntity.createInstanceWith("jactor");
-
-        assertThat(testPersistentEntity, new TypeSafeBuildMatcher<TestPersistentEntity>("create persistent instance") {
-            @Override public MatchBuilder matches(TestPersistentEntity typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(typeToTest.getCreatedBy(), is(equalTo(new Name("jactor")), "created by"))
-                        .matches(typeToTest.getCreationTime().toLocalDate(), is(equalTo(LocalDate.now()), "creation time"));
-            }
-        });
     }
 
     @Test public void willNotCastOrInitializeKnownImplementation() {

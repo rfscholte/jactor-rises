@@ -13,4 +13,8 @@ public interface Persistent<Id> {
     Name getCreatedBy();
 
     LocalDateTime getCreationTime();
+
+    Name getUpdatedBy();
+
+    LocalDateTime getUpdatedTime();
 }

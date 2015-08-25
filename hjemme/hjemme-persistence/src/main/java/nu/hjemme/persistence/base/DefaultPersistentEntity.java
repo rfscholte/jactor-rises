@@ -6,7 +6,6 @@ import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.Persistent;
-import nu.hjemme.persistence.PersistentEntitiy;
 import nu.hjemme.persistence.converter.CountryConverter;
 import nu.hjemme.persistence.converter.DescriptionConverter;
 import nu.hjemme.persistence.converter.EmailAddressConverter;
@@ -16,7 +15,6 @@ import nu.hjemme.persistence.converter.NameConverter;
 import nu.hjemme.persistence.converter.TypeConverter;
 import nu.hjemme.persistence.converter.UserNameConverter;
 import nu.hjemme.persistence.meta.PersistentMetadata;
-import nu.hjemme.persistence.time.Now;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
@@ -34,9 +32,11 @@ import java.util.Map;
 
 import static nu.hjemme.persistence.meta.PersistentMetadata.CREATED_BY;
 import static nu.hjemme.persistence.meta.PersistentMetadata.CREATION_TIME;
+import static nu.hjemme.persistence.meta.PersistentMetadata.UPDATED_BY;
+import static nu.hjemme.persistence.meta.PersistentMetadata.UPDATED_TIME;
 
 @MappedSuperclass
-public abstract class DefaultPersistentEntity implements Persistent<Long>, PersistentEntitiy {
+public abstract class DefaultPersistentEntity implements Persistent<Long> {
 
     private static Map<Class<?>, TypeConverter> dataTypeConverters = initKnownConverters();
 
@@ -45,12 +45,8 @@ public abstract class DefaultPersistentEntity implements Persistent<Long>, Persi
 
     @Column(name = CREATION_TIME) @Type(type = "timestamp") protected Date creationTime;
     @Column(name = CREATED_BY) protected String createdBy;
-
-    @Override
-    public void createInstanceWith(String createdBy) {
-        this.createdBy = createdBy;
-        creationTime = Now.asJavaUtilDate();
-    }
+    @Column(name = UPDATED_TIME) @Type(type = "timestamp") protected Date updatedTime;
+    @Column(name = UPDATED_BY) protected String updatedBy;
 
     @SuppressWarnings("unchecked") protected <To, From> To convertTo(From from, Class<To> classType) {
         if (isValidValue(classType)) {
@@ -122,6 +118,14 @@ public abstract class DefaultPersistentEntity implements Persistent<Long>, Persi
 
     @Override public Long getId() {
         return id;
+    }
+
+    @Override public Name getUpdatedBy() {
+        return convertTo(updatedBy, Name.class);
+    }
+
+    @Override public LocalDateTime getUpdatedTime() {
+        return convertTo(updatedTime, LocalDateTime.class);
     }
 
     private static Map<Class<?>, TypeConverter> initKnownConverters() {
