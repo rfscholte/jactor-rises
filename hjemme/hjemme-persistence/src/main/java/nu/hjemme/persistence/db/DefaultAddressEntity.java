@@ -3,7 +3,6 @@ package nu.hjemme.persistence.db;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
 import nu.hjemme.persistence.AddressEntity;
-import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.AddressMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

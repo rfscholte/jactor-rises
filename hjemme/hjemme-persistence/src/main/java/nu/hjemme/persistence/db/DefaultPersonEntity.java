@@ -6,7 +6,6 @@ import nu.hjemme.client.domain.Person;
 import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.PersonEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 

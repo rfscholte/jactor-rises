@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.base;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.datatype.Description;

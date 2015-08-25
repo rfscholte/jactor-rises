@@ -3,7 +3,6 @@ package nu.hjemme.persistence.db;
 import nu.hjemme.persistence.BlogEntity;
 import nu.hjemme.persistence.BlogEntryEntity;
 import nu.hjemme.persistence.PersistentEntry;
-import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.BlogEntryMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

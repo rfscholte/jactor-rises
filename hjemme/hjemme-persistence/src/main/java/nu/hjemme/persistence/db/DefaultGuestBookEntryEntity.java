@@ -5,7 +5,6 @@ import nu.hjemme.client.domain.GuestBookEntry;
 import nu.hjemme.persistence.GuestBookEntity;
 import nu.hjemme.persistence.GuestBookEntryEntity;
 import nu.hjemme.persistence.PersistentEntry;
-import nu.hjemme.persistence.base.DefaultPersistentEntity;
 import nu.hjemme.persistence.meta.GuestBookEntryMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

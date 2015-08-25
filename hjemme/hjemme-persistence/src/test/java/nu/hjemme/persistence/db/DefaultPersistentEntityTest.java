@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.base;
+package nu.hjemme.persistence.db;
 
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.EmailAddress;
@@ -6,7 +6,6 @@ import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.AddressEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.db.DefaultUserEntity;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

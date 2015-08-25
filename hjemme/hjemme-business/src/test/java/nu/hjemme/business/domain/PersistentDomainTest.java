@@ -1,6 +1,6 @@
 package nu.hjemme.business.domain;
 
-import nu.hjemme.persistence.base.DefaultPersistentEntity;
+import nu.hjemme.persistence.db.DefaultPersistentEntity;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
