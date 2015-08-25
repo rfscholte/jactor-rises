@@ -1,4 +1,4 @@
-package nu.hjemme.facade.config;
+package nu.hjemme.facade.db;
 
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.datatype.Description;
