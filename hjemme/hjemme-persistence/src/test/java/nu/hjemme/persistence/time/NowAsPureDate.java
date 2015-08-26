@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-/** @author Tor Egil Jacobsen */
 public class NowAsPureDate extends Now {
 
     public NowAsPureDate() {

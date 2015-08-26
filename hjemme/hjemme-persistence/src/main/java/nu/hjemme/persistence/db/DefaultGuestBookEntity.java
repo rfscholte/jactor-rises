@@ -4,27 +4,36 @@ import nu.hjemme.client.domain.GuestBook;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.GuestBookEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.meta.GuestBookMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.OneToMany;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
+import static nu.hjemme.persistence.meta.GuestBookMetadata.GUEST_BOOK_TABLE;
+import static nu.hjemme.persistence.meta.GuestBookMetadata.TITLE;
+import static nu.hjemme.persistence.meta.GuestBookMetadata.USER;
 
+@Entity
+@Table(name = GUEST_BOOK_TABLE)
 public class DefaultGuestBookEntity extends DefaultPersistentEntity implements GuestBookEntity {
 
-    @Column(name = GuestBookMetadata.TITLE) private String title;
-    @OneToMany(mappedBy = GuestBookMetadata.USER) private UserEntity user;
+    @Column(name = TITLE) private String title;
+    @JoinColumn(name = USER) @OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY) private DefaultUserEntity user;
 
     public DefaultGuestBookEntity() { }
 
-    /** @param guestbook will be used to create the instance... */
-    public DefaultGuestBookEntity(GuestBook guestbook) {
-        title = guestbook.getTitle();
-        user = guestbook.getUser() != null ? new DefaultUserEntity(guestbook.getUser()) : null;
+    /** @param guestBook will be used to copy an instance... */
+    public DefaultGuestBookEntity(GuestBook guestBook) {
+        title = guestBook.getTitle();
+        user = castOrInitializeCopyWith(guestBook.getUser(), DefaultUserEntity.class);
     }
 
     @Override public boolean equals(Object o) {
@@ -33,14 +42,14 @@ public class DefaultGuestBookEntity extends DefaultPersistentEntity implements G
     }
 
     @Override public int hashCode() {
-        return hash(getTitle(), getUser());
+        return hash(title, user);
     }
 
     @Override public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
                 .appendSuper(super.toString())
-                .append(getTitle())
-                .append(getUser())
+                .append(title)
+                .append(user)
                 .toString();
     }
 
@@ -57,6 +66,6 @@ public class DefaultGuestBookEntity extends DefaultPersistentEntity implements G
     }
 
     @Override public void setUser(UserEntity user) {
-        this.user = user;
+        this.user = castOrInitializeCopyWith(user, DefaultUserEntity.class);
     }
 }
