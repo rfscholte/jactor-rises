@@ -29,7 +29,7 @@ public class DefaultPersistentEntry implements PersistentEntry {
         createdTime = Now.asJavaUtilDate();
     }
 
-    /** @param entry will be used to create the instance... */
+    /** @param entry will be used to copy an instance... */
     public DefaultPersistentEntry(Entry entry) {
         createdTime = TIME_CONVERTER.convertFrom(entry.getCreatedTime());
         this.entry = entry.getEntry();
@@ -45,11 +45,7 @@ public class DefaultPersistentEntry implements PersistentEntry {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(getCreatedTime())
-                .append(creatorName)
-                .append(getEntry())
-                .toString();
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append(getCreatedTime()).append(creatorName).append(entry).toString();
     }
 
     @Override public int hashCode() {

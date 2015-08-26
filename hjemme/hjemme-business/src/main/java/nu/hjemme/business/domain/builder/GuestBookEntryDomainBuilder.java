@@ -14,18 +14,14 @@ public class GuestBookEntryDomainBuilder extends DomainBuilder<GuestBookEntryDom
     private GuestBookEntryEntity guestBookEntryEntity = newInstanceOf(GuestBookEntryEntity.class);
     private PersistentEntry persistentEntry = newInstanceOf(PersistentEntry.class);
 
-    public GuestBookEntryDomainBuilder withEntryAs(String entry) {
+    public GuestBookEntryDomainBuilder withEntryAs(String entry, String guestName) {
         persistentEntry.setEntry(entry);
+        persistentEntry.setCreatorName(guestName);
         return this;
     }
 
     public GuestBookEntryDomainBuilder with(GuestBookEntity guestBookEntity) {
         guestBookEntryEntity.setGuestBook(guestBookEntity);
-        return this;
-    }
-
-    public GuestBookEntryDomainBuilder withCreatorNamed(String creator) {
-        persistentEntry.setCreatorName(creator);
         return this;
     }
 

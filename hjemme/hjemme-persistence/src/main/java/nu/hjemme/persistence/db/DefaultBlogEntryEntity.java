@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
+import static nu.hjemme.persistence.meta.BlogEntryMetadata.BLOG;
 import static nu.hjemme.persistence.meta.BlogEntryMetadata.CREATED_TIME;
 import static nu.hjemme.persistence.meta.BlogEntryMetadata.CREATOR_NAME;
 import static nu.hjemme.persistence.meta.BlogEntryMetadata.ENTRY;
@@ -26,7 +27,7 @@ import static nu.hjemme.persistence.meta.BlogEntryMetadata.ENTRY;
 @Table(name = BlogEntryMetadata.BLOG_ENTRY_TABLE)
 public class DefaultBlogEntryEntity extends DefaultPersistentEntity implements BlogEntryEntity {
 
-    @ManyToOne() @JoinColumn(name = BlogEntryMetadata.BLOG) private DefaultBlogEntity blogEntity;
+    @ManyToOne() @JoinColumn(name = BLOG) private DefaultBlogEntity blogEntity;
 
     @Embedded @AttributeOverrides({
             @AttributeOverride(name = "createdTime", column = @Column(name = CREATED_TIME)),
@@ -55,7 +56,7 @@ public class DefaultBlogEntryEntity extends DefaultPersistentEntity implements B
     }
 
     @Override public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append(getBlog()).append(getEntry()).toString();
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append(blogEntity).append(persistentEntry).toString();
     }
 
     @Override public BlogEntity getBlog() {

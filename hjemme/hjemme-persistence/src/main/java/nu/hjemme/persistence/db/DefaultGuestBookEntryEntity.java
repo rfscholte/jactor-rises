@@ -13,32 +13,36 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.OneToMany;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
-import static nu.hjemme.persistence.meta.GuestBookEntryMetadata.CREATION_TIME;
-import static nu.hjemme.persistence.meta.GuestBookEntryMetadata.CREATOR_NAME;
+import static nu.hjemme.persistence.meta.GuestBookEntryMetadata.CREATED_TIME;
 import static nu.hjemme.persistence.meta.GuestBookEntryMetadata.ENTRY;
+import static nu.hjemme.persistence.meta.GuestBookEntryMetadata.GUEST_BOOK_ID;
+import static nu.hjemme.persistence.meta.GuestBookEntryMetadata.GUEST_NAME;
 
+@Entity
+@Table(name = GuestBookEntryMetadata.GUEST_BOOK_ENTRY_TABLE)
 public class DefaultGuestBookEntryEntity extends DefaultPersistentEntity implements GuestBookEntryEntity {
-    @OneToMany(mappedBy = GuestBookEntryMetadata.GUEST_BOOK) private GuestBookEntity guestBookEntity;
+    @ManyToOne() @JoinColumn(name = GUEST_BOOK_ID) private DefaultGuestBookEntity guestBookEntity;
 
     @Embedded @AttributeOverrides({
-            @AttributeOverride(name = "createdTime", column = @Column(name = CREATION_TIME)),
-            @AttributeOverride(name = "creatorName", column = @Column(name = CREATOR_NAME)),
+            @AttributeOverride(name = "createdTime", column = @Column(name = CREATED_TIME)),
+            @AttributeOverride(name = "creatorName", column = @Column(name = GUEST_NAME)),
             @AttributeOverride(name = "entry", column = @Column(name = ENTRY))
-
-    })
-    private PersistentEntry persistentEntry;
+    }) private DefaultPersistentEntry persistentEntry;
 
     public DefaultGuestBookEntryEntity() {
         persistentEntry = new DefaultPersistentEntry();
     }
 
     public DefaultGuestBookEntryEntity(GuestBookEntry guestBookEntry) {
-        guestBookEntity = guestBookEntry.getGuestBook() != null ? new DefaultGuestBookEntity(guestBookEntry.getGuestBook()) : null;
-        persistentEntry = guestBookEntry.getEntry() != null ? new DefaultPersistentEntry(guestBookEntry.getEntry()) : null;
+        guestBookEntity = castOrInitializeCopyWith(guestBookEntry.getGuestBook(), DefaultGuestBookEntity.class);
+        persistentEntry = castOrInitializeCopyWith(guestBookEntry.getEntry(), DefaultPersistentEntry.class);
     }
 
     @Override public boolean equals(Object o) {
@@ -52,10 +56,7 @@ public class DefaultGuestBookEntryEntity extends DefaultPersistentEntity impleme
     }
 
     @Override public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(getGuestBook())
-                .append(getEntry())
-                .toString();
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append(guestBookEntity).append(persistentEntry).toString();
     }
 
     @Override public GuestBookEntity getGuestBook() {
@@ -67,10 +68,10 @@ public class DefaultGuestBookEntryEntity extends DefaultPersistentEntity impleme
     }
 
     @Override public void setGuestBook(GuestBookEntity guestBookEntity) {
-        this.guestBookEntity = guestBookEntity;
+        this.guestBookEntity = castOrInitializeCopyWith(guestBookEntity, DefaultGuestBookEntity.class);
     }
 
     @Override public void setPersistentEntry(PersistentEntry persistentEntry) {
-        this.persistentEntry = persistentEntry;
+        this.persistentEntry = castOrInitializeCopyWith(persistentEntry, DefaultPersistentEntry.class);
     }
 }
