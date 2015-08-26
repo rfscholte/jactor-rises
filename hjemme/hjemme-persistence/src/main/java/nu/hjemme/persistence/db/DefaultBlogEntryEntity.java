@@ -11,30 +11,37 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
+import static nu.hjemme.persistence.meta.BlogEntryMetadata.CREATED_TIME;
+import static nu.hjemme.persistence.meta.BlogEntryMetadata.CREATOR_NAME;
+import static nu.hjemme.persistence.meta.BlogEntryMetadata.ENTRY;
 
+@Entity
+@Table(name = BlogEntryMetadata.BLOG_ENTRY_TABLE)
 public class DefaultBlogEntryEntity extends DefaultPersistentEntity implements BlogEntryEntity {
 
-    @ManyToOne() @Column(name = BlogEntryMetadata.BLOG) private BlogEntity blogEntity;
+    @ManyToOne() @JoinColumn(name = BlogEntryMetadata.BLOG) private DefaultBlogEntity blogEntity;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "creationTime", column = @Column(name = BlogEntryMetadata.CREATION_TIME)),
-            @AttributeOverride(name = "creator", column = @Column(name = BlogEntryMetadata.CREATOR)),
-            @AttributeOverride(name = "creatorName", column = @Column(name = BlogEntryMetadata.CREATOR_NAME)),
-            @AttributeOverride(name = "entry", column = @Column(name = BlogEntryMetadata.ENTRY))
-    }) private PersistentEntry persistentEntry;
+    @Embedded @AttributeOverrides({
+            @AttributeOverride(name = "createdTime", column = @Column(name = CREATED_TIME)),
+            @AttributeOverride(name = "creatorName", column = @Column(name = CREATOR_NAME)),
+            @AttributeOverride(name = "entry", column = @Column(name = ENTRY))
+    }) private DefaultPersistentEntry persistentEntry;
 
     public DefaultBlogEntryEntity() {
         persistentEntry = new DefaultPersistentEntry();
     }
 
     public DefaultBlogEntryEntity(BlogEntryEntity blogEntryEntity) {
-        blogEntity = blogEntryEntity.getBlog();
-        persistentEntry = blogEntryEntity.getEntry();
+        blogEntity = castOrInitializeCopyWith(blogEntryEntity.getBlog(), DefaultBlogEntity.class);
+        blogEntity = castOrInitializeCopyWith(blogEntryEntity.getBlog(), DefaultBlogEntity.class);
+        persistentEntry = castOrInitializeCopyWith(blogEntryEntity.getEntry(), DefaultPersistentEntry.class);
     }
 
     @Override public boolean equals(Object o) {
@@ -43,12 +50,10 @@ public class DefaultBlogEntryEntity extends DefaultPersistentEntity implements B
                 Objects.equals(blogEntity, ((DefaultBlogEntryEntity) o).blogEntity);
     }
 
-    /** {@inheritDoc} */
     @Override public int hashCode() {
         return hash(blogEntity, persistentEntry);
     }
 
-    /** {@inheritDoc} */
     @Override public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append(getBlog()).append(getEntry()).toString();
     }
@@ -58,14 +63,14 @@ public class DefaultBlogEntryEntity extends DefaultPersistentEntity implements B
     }
 
     @Override public void setBlog(BlogEntity blog) {
-        this.blogEntity = blog;
+        this.blogEntity = castOrInitializeCopyWith(blog, DefaultBlogEntity.class);
     }
 
     @Override public PersistentEntry getEntry() {
         return persistentEntry;
     }
 
-    @Override public void setPersistentEntry(PersistentEntry persistentEntry) {
+    @Override public void setPersistentEntry(DefaultPersistentEntry persistentEntry) {
         this.persistentEntry = persistentEntry;
     }
 }

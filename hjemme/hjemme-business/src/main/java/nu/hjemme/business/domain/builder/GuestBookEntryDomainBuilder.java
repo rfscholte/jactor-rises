@@ -25,7 +25,7 @@ public class GuestBookEntryDomainBuilder extends DomainBuilder<GuestBookEntryDom
     }
 
     public GuestBookEntryDomainBuilder withCreatorNamed(String creator) {
-        persistentEntry.setCreator(creator);
+        persistentEntry.setCreatorName(creator);
         return this;
     }
 
@@ -37,6 +37,6 @@ public class GuestBookEntryDomainBuilder extends DomainBuilder<GuestBookEntryDom
     @Override protected void validate() {
         Validate.notEmpty(persistentEntry.getEntry(), THE_ENTRY_CANNOT_BE_EMPTY);
         Validate.notNull(guestBookEntryEntity.getGuestBook(), THE_ENTRY_MUST_BELONG_TO_A_GUEST_BOOK);
-        Validate.notNull(persistentEntry.getCreator(), THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
+        Validate.notNull(persistentEntry.getCreatorName(), THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
     }
 }

@@ -1,7 +1,6 @@
 package nu.hjemme.persistence.db;
 
 import nu.hjemme.persistence.BlogEntryEntity;
-import nu.hjemme.persistence.PersistentEntry;
 import nu.hjemme.persistence.time.NowAsPureDateRule;
 import org.junit.Before;
 import org.junit.Rule;
@@ -23,13 +22,13 @@ public class DefaultBlogEntryEntityTest {
     @Rule public NowAsPureDateRule nowAsPureDateRule = NowAsPureDateRule.init();
 
     @Test public void willHaveCorrectImplementedHashCode() {
-        PersistentEntry persistentEntry = new DefaultPersistentEntry();
+        DefaultPersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator("some creator");
+        persistentEntry.setCreatorName("some creator");
 
-        PersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
+        DefaultPersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
         otherPersistentEntry.setEntry("some other entry");
-        otherPersistentEntry.setCreator("some other creator");
+        otherPersistentEntry.setCreatorName("some other creator");
 
         blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
         blogEntryEntityToTest.setPersistentEntry(persistentEntry);
@@ -43,13 +42,13 @@ public class DefaultBlogEntryEntityTest {
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
-        PersistentEntry persistentEntry = new DefaultPersistentEntry();
+        DefaultPersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator("some creator");
+        persistentEntry.setCreatorName("some creator");
 
-        PersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
+        DefaultPersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
         otherPersistentEntry.setEntry("some other entry");
-        otherPersistentEntry.setCreator("some other creator");
+        otherPersistentEntry.setCreatorName("some other creator");
 
         blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
         blogEntryEntityToTest.setPersistentEntry(persistentEntry);
@@ -64,9 +63,9 @@ public class DefaultBlogEntryEntityTest {
     }
 
     @Test public void willBeEqualAnIdenticalEntity() {
-        PersistentEntry persistentEntry = new DefaultPersistentEntry();
+        DefaultPersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator("some creator");
+        persistentEntry.setCreatorName("some creator");
 
         blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
         blogEntryEntityToTest.setPersistentEntry(persistentEntry);
@@ -79,9 +78,9 @@ public class DefaultBlogEntryEntityTest {
     }
 
     @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
-        PersistentEntry persistentEntry = new DefaultPersistentEntry();
+        DefaultPersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator("some creator");
+        persistentEntry.setCreatorName("some creator");
 
         blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
         blogEntryEntityToTest.setPersistentEntry(persistentEntry);

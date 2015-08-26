@@ -68,13 +68,13 @@ public abstract class DefaultPersistentEntity implements Persistent<Long> {
         return !(classType != null && !dataTypeConverters.containsKey(classType));
     }
 
-    @SuppressWarnings("unchecked") protected <T> T castOrInitializeCopyWith(Object object, Class<T> implementation) {
+    @SuppressWarnings("unchecked") protected <Implementation extends Obj, Obj> Implementation castOrInitializeCopyWith(Obj object, Class<Implementation> implementation) {
         if (object == null) {
             return null;
         }
 
-        if (object.getClass().getName().contains("EnhancerByMockito") || implementation.isAssignableFrom(object.getClass())) {
-            return (T) object;
+        if (implementation.isAssignableFrom(object.getClass())) {
+            return (Implementation) object;
         }
 
         if (!implementation.isAssignableFrom(object.getClass())) {
@@ -84,12 +84,12 @@ public abstract class DefaultPersistentEntity implements Persistent<Long> {
         return initializeCopyWith(object, implementation);
     }
 
-    @SuppressWarnings("unchecked") protected <T> T initializeCopyWith(Object object, Class<T> implementation) {
+    @SuppressWarnings("unchecked") protected <Implementation extends Obj, Obj> Implementation initializeCopyWith(Obj object, Class<Implementation> implementation) {
         if (object != null) {
             for (Constructor<?> constructor : implementation.getConstructors()) {
                 if (constructor.getParameterCount() == 1) {
                     try {
-                        return (T) constructor.newInstance(object);
+                        return (Implementation) constructor.newInstance(object);
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                         throw new IllegalArgumentException(createErrorMessageUsing(object, implementation), e);
                     }

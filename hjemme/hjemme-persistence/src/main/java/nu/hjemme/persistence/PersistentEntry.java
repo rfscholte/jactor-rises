@@ -6,5 +6,5 @@ public interface PersistentEntry extends Entry {
 
     void setEntry(String entry);
 
-    void setCreator(String creator);
+    void setCreatorName(String creator);
 }

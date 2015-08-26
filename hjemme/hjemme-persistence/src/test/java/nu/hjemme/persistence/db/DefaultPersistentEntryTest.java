@@ -21,44 +21,44 @@ public class DefaultPersistentEntryTest {
     }
 
     @Test public void willHaveCorrectlyImplementedEquals() {
-        defaultPersistentEntryToTest.setCreator("a creator");
+        defaultPersistentEntryToTest.setCreatorName("a creator");
         defaultPersistentEntryToTest.setEntry("some entry");
 
         DefaultPersistentEntry equal = new DefaultPersistentEntry(defaultPersistentEntryToTest);
 
         DefaultPersistentEntry notEqual = new DefaultPersistentEntry();
-        notEqual.setCreator("another creator");
+        notEqual.setCreatorName("another creator");
         notEqual.setEntry("another entry");
 
         assertThat(defaultPersistentEntryToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
     @Test public void willHaveCorrectlyImplementedHashCode() {
-        defaultPersistentEntryToTest.setCreator("a creator");
+        defaultPersistentEntryToTest.setCreatorName("a creator");
         defaultPersistentEntryToTest.setEntry("some entry");
 
         DefaultPersistentEntry equal = new DefaultPersistentEntry(defaultPersistentEntryToTest);
 
         DefaultPersistentEntry notEqual = new DefaultPersistentEntry();
-        notEqual.setCreator("another creator");
+        notEqual.setCreatorName("another creator");
         notEqual.setEntry("another entry");
 
         assertThat(defaultPersistentEntryToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test public void willBeEqualAnIdenticalEntry() {
-        defaultPersistentEntryToTest.setCreator("a creator");
+        defaultPersistentEntryToTest.setCreatorName("a creator");
         defaultPersistentEntryToTest.setEntry("some entry");
 
         DefaultPersistentEntry equal = new DefaultPersistentEntry();
-        equal.setCreator("a creator");
+        equal.setCreatorName("a creator");
         equal.setEntry("some entry");
 
         assertThat(defaultPersistentEntryToTest, is(equalTo(equal), "Equal Entry"));
     }
 
     @Test public void willBeEqualAnIdenticalEntryUsingConstructor() {
-        defaultPersistentEntryToTest.setCreator("a creator");
+        defaultPersistentEntryToTest.setCreatorName("a creator");
         defaultPersistentEntryToTest.setEntry("some entry");
 
         DefaultPersistentEntry equal = new DefaultPersistentEntry(defaultPersistentEntryToTest);

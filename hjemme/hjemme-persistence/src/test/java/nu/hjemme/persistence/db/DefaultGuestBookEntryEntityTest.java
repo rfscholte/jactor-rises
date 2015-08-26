@@ -30,11 +30,11 @@ public class DefaultGuestBookEntryEntityTest {
     @Test public void willHaveCorrectImplementedHashCode() {
         PersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator("some creator");
+        persistentEntry.setCreatorName("some creator");
 
         PersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
         otherPersistentEntry.setEntry("some other entry");
-        otherPersistentEntry.setCreator("some other creator");
+        otherPersistentEntry.setCreatorName("some other creator");
 
         defaultGuestBookEntryEntityToTest = new DefaultGuestBookEntryEntity();
         defaultGuestBookEntryEntityToTest.setPersistentEntry(persistentEntry);
@@ -52,11 +52,11 @@ public class DefaultGuestBookEntryEntityTest {
     @Test public void willHaveCorrectImplementedEquals() {
         PersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator("some creator");
+        persistentEntry.setCreatorName("some creator");
 
         PersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
         otherPersistentEntry.setEntry("some other entry");
-        otherPersistentEntry.setCreator("some other creator");
+        otherPersistentEntry.setCreatorName("some other creator");
 
         defaultGuestBookEntryEntityToTest.setPersistentEntry(persistentEntry);
         defaultGuestBookEntryEntityToTest.setGuestBook(new DefaultGuestBookEntity());
@@ -73,13 +73,13 @@ public class DefaultGuestBookEntryEntityTest {
     @Test public void willHaveCreationTimeOnEntryWhenCreated() {
         DefaultGuestBookEntryEntity guestBookEntryEntity = new DefaultGuestBookEntryEntity();
 
-        assertThat(guestBookEntryEntity.getEntry().getCreationTime(), is(equalTo(NowAsPureDate.asDateTime()), "creation time"));
+        assertThat(guestBookEntryEntity.getEntry().getCreatedTime(), is(equalTo(NowAsPureDate.asDateTime()), "creation time"));
     }
 
     @Test public void willBeEqualAnIdenticalEntity() {
         PersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator("some creator");
+        persistentEntry.setCreatorName("some creator");
 
         defaultGuestBookEntryEntityToTest.setPersistentEntry(persistentEntry);
         defaultGuestBookEntryEntityToTest.setGuestBook(new DefaultGuestBookEntity());
@@ -94,7 +94,7 @@ public class DefaultGuestBookEntryEntityTest {
     @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
         PersistentEntry persistentEntry = new DefaultPersistentEntry();
         persistentEntry.setEntry("some entry");
-        persistentEntry.setCreator("some creator");
+        persistentEntry.setCreatorName("some creator");
 
         defaultGuestBookEntryEntityToTest.setPersistentEntry(persistentEntry);
         defaultGuestBookEntryEntityToTest.setGuestBook(new DefaultGuestBookEntity());

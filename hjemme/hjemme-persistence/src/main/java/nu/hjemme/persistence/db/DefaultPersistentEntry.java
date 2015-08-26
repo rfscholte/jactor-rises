@@ -21,58 +21,58 @@ public class DefaultPersistentEntry implements PersistentEntry {
     private static final LocalDateTimeConverter TIME_CONVERTER = new LocalDateTimeConverter();
     private static final NameConverter NAME_CONVERTER = new NameConverter();
 
-    private Date creationTime;
-    private String creator;
+    private Date createdTime;
+    private String creatorName;
     private String entry;
 
     public DefaultPersistentEntry() {
-        creationTime = Now.asJavaUtilDate();
+        createdTime = Now.asJavaUtilDate();
     }
 
     /** @param entry will be used to create the instance... */
     public DefaultPersistentEntry(Entry entry) {
-        creationTime = TIME_CONVERTER.convertFrom(entry.getCreationTime());
+        createdTime = TIME_CONVERTER.convertFrom(entry.getCreatedTime());
         this.entry = entry.getEntry();
-        creator = NAME_CONVERTER.convertFrom(entry.getCreator());
+        creatorName = NAME_CONVERTER.convertFrom(entry.getCreatorName());
     }
 
     @Override public boolean equals(Object obj) {
         return this == obj || obj != null && getClass() == obj.getClass() &&
-                Objects.equals(creationTime, ((DefaultPersistentEntry) obj).creationTime) &&
+                Objects.equals(createdTime, ((DefaultPersistentEntry) obj).createdTime) &&
                 Objects.equals(entry, ((DefaultPersistentEntry) obj).entry) &&
-                Objects.equals(creator, ((DefaultPersistentEntry) obj).creator);
+                Objects.equals(creatorName, ((DefaultPersistentEntry) obj).creatorName);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(getCreationTime())
-                .append(creator)
+                .append(getCreatedTime())
+                .append(creatorName)
                 .append(getEntry())
                 .toString();
     }
 
     @Override public int hashCode() {
-        return hash(creationTime, creator, entry);
+        return hash(createdTime, creatorName, entry);
     }
 
     @Override public String getEntry() {
         return entry;
     }
 
-    @Override public Name getCreator() {
-        return NAME_CONVERTER.convertTo(creator);
+    @Override public Name getCreatorName() {
+        return NAME_CONVERTER.convertTo(creatorName);
     }
 
     @Override public void setEntry(String entry) {
         this.entry = entry;
     }
 
-    @Override public void setCreator(String creator) {
-        this.creator = creator;
+    @Override public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
     }
 
-    @Override public LocalDateTime getCreationTime() {
-        return TIME_CONVERTER.convertTo(creationTime);
+    @Override public LocalDateTime getCreatedTime() {
+        return TIME_CONVERTER.convertTo(createdTime);
     }
 }

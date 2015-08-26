@@ -17,16 +17,17 @@ import javax.persistence.OneToMany;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
+import static nu.hjemme.persistence.meta.GuestBookEntryMetadata.CREATION_TIME;
+import static nu.hjemme.persistence.meta.GuestBookEntryMetadata.CREATOR_NAME;
+import static nu.hjemme.persistence.meta.GuestBookEntryMetadata.ENTRY;
 
 public class DefaultGuestBookEntryEntity extends DefaultPersistentEntity implements GuestBookEntryEntity {
     @OneToMany(mappedBy = GuestBookEntryMetadata.GUEST_BOOK) private GuestBookEntity guestBookEntity;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "creationTime", column = @Column(name = GuestBookEntryMetadata.CREATION_TIME)),
-            @AttributeOverride(name = "creator", column = @Column(name = GuestBookEntryMetadata.CREATOR)),
-            @AttributeOverride(name = "creatorName", column = @Column(name = GuestBookEntryMetadata.CREATOR_NAME)),
-            @AttributeOverride(name = "entry", column = @Column(name = GuestBookEntryMetadata.ENTRY))
+    @Embedded @AttributeOverrides({
+            @AttributeOverride(name = "createdTime", column = @Column(name = CREATION_TIME)),
+            @AttributeOverride(name = "creatorName", column = @Column(name = CREATOR_NAME)),
+            @AttributeOverride(name = "entry", column = @Column(name = ENTRY))
 
     })
     private PersistentEntry persistentEntry;

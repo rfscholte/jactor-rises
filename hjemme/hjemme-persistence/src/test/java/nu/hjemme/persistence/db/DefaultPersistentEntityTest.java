@@ -5,14 +5,15 @@ import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.AddressEntity;
-import nu.hjemme.persistence.UserEntity;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.sameInstance;
@@ -74,8 +75,8 @@ public class DefaultPersistentEntityTest {
 
     @Test public void willInitializeKnownImplementation() {
         assertThat(
-                new DefaultUserEntity(),
-                is(allOf(notNullValue(), not(sameInstance(testPersistentEntity.castOrInitializeCopyWith(mock(UserEntity.class), DefaultUserEntity.class)))), "initialized")
+                testPersistentEntity.castOrInitializeCopyWith(mock(DefaultUserEntity.class), DefaultUserEntity.class),
+                is(allOf(notNullValue(), not(instanceOf(Mockito.class))), "initialized with mock")
         );
     }
 

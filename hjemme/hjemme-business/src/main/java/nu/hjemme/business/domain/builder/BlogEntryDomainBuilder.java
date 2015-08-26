@@ -12,14 +12,9 @@ public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
 
     private BlogEntryEntity blogEntryEntity = newInstanceOf(BlogEntryEntity.class);
 
-    public BlogEntryDomainBuilder withCreatorNamed(String creator) {
-        blogEntryEntity.getEntry().setCreator(creator);
-
-        return this;
-    }
-
-    public BlogEntryDomainBuilder withEntryAs(String entry) {
+    public BlogEntryDomainBuilder withEntryAs(String entry, String creator) {
         blogEntryEntity.getEntry().setEntry(entry);
+        blogEntryEntity.getEntry().setCreatorName(creator);
         return this;
     }
 
@@ -39,7 +34,7 @@ public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
 
     @Override protected void validate() {
         Validate.notEmpty(blogEntryEntity.getEntry().getEntry(), THE_ENTRY_CANNOT_BE_EMPTY);
-        Validate.notNull(blogEntryEntity.getEntry().getCreator(), THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
+        Validate.notNull(blogEntryEntity.getEntry().getCreatorName(), THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
         Validate.notNull(blogEntryEntity.getBlog(), THE_ENTRY_MUST_BELONG_TO_A_BLOG);
     }
 }

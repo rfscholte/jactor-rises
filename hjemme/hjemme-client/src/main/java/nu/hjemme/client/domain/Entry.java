@@ -7,11 +7,11 @@ import java.time.LocalDateTime;
 public interface Entry {
 
     /** @return creation time of an entry */
-    LocalDateTime getCreationTime();
+    LocalDateTime getCreatedTime();
 
     /** @return the actual entry */
     String getEntry();
 
     /** @return the creator which is the originator of the entry */
-    Name getCreator();
+    Name getCreatorName();
 }
