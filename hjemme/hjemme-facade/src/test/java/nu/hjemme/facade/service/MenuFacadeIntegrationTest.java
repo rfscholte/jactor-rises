@@ -8,7 +8,7 @@ import nu.hjemme.client.domain.menu.dto.MenuDto;
 import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
-import nu.hjemme.persistence.config.HjemmeDbContext;
+import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Rule;

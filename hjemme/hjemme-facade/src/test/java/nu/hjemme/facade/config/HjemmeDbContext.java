@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.config;
+package nu.hjemme.facade.config;
 
 import nu.hjemme.persistence.dao.UserDao;
 import nu.hjemme.persistence.dao.UserDaoDb;
