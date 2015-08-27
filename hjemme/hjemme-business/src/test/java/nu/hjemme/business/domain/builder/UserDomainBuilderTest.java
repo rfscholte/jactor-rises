@@ -1,12 +1,13 @@
 package nu.hjemme.business.domain.builder;
 
+import nu.hjemme.business.rules.BuildValidations;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static nu.hjemme.business.domain.builder.DomainBuilder.Build.PERSON;
 import static nu.hjemme.business.domain.builder.DomainBuilder.aPerson;
 import static nu.hjemme.business.domain.builder.DomainBuilder.aUser;
+import static nu.hjemme.business.rules.BuildValidations.Build.PERSON;
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -15,7 +16,7 @@ public class UserDomainBuilderTest {
 
     @Rule public ExpectedException expectedException = ExpectedException.none();
 
-    @Rule public DomainBuilderValidations domainBuilderValidations = DomainBuilderValidations.init().skipValidationOn(PERSON);
+    @Rule public BuildValidations buildValidations = BuildValidations.skipValidationOn(PERSON);
 
     @Test public void willNotBuildUserDomainWithoutUserName() {
         expectedException.expect(IllegalArgumentException.class);

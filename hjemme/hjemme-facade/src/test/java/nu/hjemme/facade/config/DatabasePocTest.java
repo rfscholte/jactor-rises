@@ -45,15 +45,10 @@ public class DatabasePocTest {
 
     @Test public void willFindUsersInTheDatabase() {
         int noOfRows = jdbcTemplate.queryForObject("select count(1) from t_user", Integer.class);
-        printDefaultUsers();
         createUserInTheDatabaseWith(new UserName("svada"));
         createUserInTheDatabaseWith(new UserName("lada"));
 
         assertThat((List<?>) session().createCriteria(UserEntity.class).list(), is(hasSize(noOfRows + 2), "no. of users"));
-    }
-
-    private void printDefaultUsers() {
-        System.out.println(jdbcTemplate.queryForList("select * from t_user"));
     }
 
     @Test public void willReadDatabaseValues() {

@@ -1,6 +1,6 @@
 package nu.hjemme.business.service;
 
-import nu.hjemme.business.domain.builder.DomainBuilderValidations;
+import nu.hjemme.business.rules.BuildValidations;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.dao.UserDao;
@@ -12,8 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static nu.hjemme.business.domain.builder.DomainBuilder.Build.USER;
 import static nu.hjemme.business.domain.builder.DomainBuilder.aUser;
+import static nu.hjemme.business.rules.BuildValidations.Build.USER;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserFacadeTest {
-    @Rule public DomainBuilderValidations domainBuilderValidations = DomainBuilderValidations.init().skipValidationOn(USER);
+    @Rule public BuildValidations buildValidations = BuildValidations.skipValidationOn().skipValidationOn(USER);
 
     @InjectMocks
     private UserFacadeImpl testUserFacadeImpl;
