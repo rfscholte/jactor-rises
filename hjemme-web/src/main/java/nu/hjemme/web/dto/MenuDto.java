@@ -5,17 +5,16 @@ import nu.hjemme.client.domain.menu.ChosenMenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-/** @author Tor Egil Jacobsen */
 public class MenuDto {
-    private List<ChosenMenuItemDto> chosenMenuItemDtos = new ArrayList<ChosenMenuItemDto>();
+    private List<ChosenMenuItemDto> chosenMenuItems = new ArrayList<>();
 
     public MenuDto(List<ChosenMenuItem> chosenMenuItems) {
         for (ChosenMenuItem chosenMenuItem : chosenMenuItems) {
-            chosenMenuItemDtos.add(new ChosenMenuItemDto(chosenMenuItem));
+            this.chosenMenuItems.add(new ChosenMenuItemDto(chosenMenuItem));
         }
     }
 
     public List<ChosenMenuItemDto> getChosenMenuItems() {
-        return chosenMenuItemDtos;
+        return chosenMenuItems;
     }
 }

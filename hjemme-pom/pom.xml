@@ -19,29 +19,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.sun.faces</groupId>
-                <artifactId>jsf-api</artifactId>
-                <version>${sun.faces-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sun.faces</groupId>
-                <artifactId>jsf-impl</artifactId>
-                <version>${sun.faces-version}</version>
-            </dependency>
-            <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>${commons.lang-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.persistence</groupId>
-                <artifactId>persistence-api</artifactId>
-                <version>${javax.persistence-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>${javax.servlet.api-version}</version>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -52,11 +32,6 @@
                 <groupId>javax.servlet.jsp</groupId>
                 <artifactId>jsp-api</artifactId>
                 <version>${javax.servlet.jsp.api-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>javax.servlet.jsp-api</artifactId>
-                <version>${javax.servlet.jsp.api-version</version>
             </dependency>
             <dependency>
                 <groupId>log4j</groupId>
@@ -110,7 +85,7 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-beans</artifactId>
+                <artifactId>spring-webmvc</artifactId>
                 <version>${org.springframework-version}</version>
             </dependency>
             <dependency>

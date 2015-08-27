@@ -5,9 +5,7 @@ import nu.hjemme.client.datatype.MenuItemTarget;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * A menu item target for an web application which will remove the context root of the web application from the requested
- * target.
- * @author Tor Egil Jacobsen
+ * A menu item target for an web application which will remove the context root of the web application from the requested target.
  */
 public class MenuItemTargetDto extends MenuItemTarget {
 

@@ -4,9 +4,6 @@ import nu.hjemme.client.domain.menu.dto.MenuDto;
 import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import org.springframework.context.annotation.Bean;
 
-/**
- * @author Tor Egil Jacobsen
- */
 @SuppressWarnings("unused") // brukes av spring
 public class HjemmeWebContext {
 

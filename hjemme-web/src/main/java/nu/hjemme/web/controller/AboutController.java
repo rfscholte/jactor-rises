@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import static nu.hjemme.web.controller.ControllerValues.VIEW_ABOUT;
 
 @Controller
-/** @author Tor Egil Jacobsen */
 public class AboutController {
 
-    @RequestMapping(value = VIEW_ABOUT, method = {RequestMethod.GET, RequestMethod.POST})
-    public void doAbout() {
-    }
+    @RequestMapping(value = VIEW_ABOUT, method = {RequestMethod.GET, RequestMethod.POST}) @SuppressWarnings("unused") // used by spring mvn
+    public void doAbout() { }
 }

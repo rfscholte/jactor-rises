@@ -9,7 +9,6 @@ import static nu.hjemme.web.controller.ControllerValues.VIEW_HOME;
 @Controller
 public class HomeController {
 
-    @RequestMapping(value = VIEW_HOME, method = {RequestMethod.GET, RequestMethod.POST})
-    public void doHome() {
-    }
+    @RequestMapping(value = VIEW_HOME, method = {RequestMethod.GET, RequestMethod.POST}) @SuppressWarnings("unused") // used by spring mvn
+    public void doHome() { }
 }

@@ -1,40 +1,43 @@
 package nu.hjemme.web.dto;
 
+import nu.hjemme.client.domain.Address;
+import nu.hjemme.client.domain.Person;
 import nu.hjemme.client.domain.User;
 
-/**
- * A class for displaying a user on this web application
- * @author Tor Egil Jacobsen
- */
+/** A class for displaying a user on this web application */
 public class UserDto {
-    private User user;
+    private final Address address;
+    private final Person person;
+    private final User user;
 
     public UserDto(User user) {
         this.user = user;
+        person = user.getPerson();
+        address = person != null ? person.getAddress() : null;
     }
 
     public String getAddressLine1() {
-        return user.getPerson().getAddress().getAddressLine1();
+        return address != null ? address.getAddressLine1() : null;
     }
 
     public String getAddressLine2() {
-        return user.getPerson().getAddress().getAddressLine2();
+        return address != null ? address.getAddressLine2() : null;
     }
 
     public String getCity() {
-        return user.getPerson().getAddress().getCity();
+        return address != null ? address.getCity() : null;
     }
 
     public Integer getZipCode() {
-        return user.getPerson().getAddress().getZipCode();
+        return address != null ? address.getZipCode() : null;
     }
 
     public String getFirstName() {
-        return user.getPerson().getFirstName().getName();
+        return person != null && person.getFirstName() != null ? person.getFirstName().getName() : null;
     }
 
     public String getLastName() {
-        return user.getPerson().getLastName().getName();
+        return person != null && person.getLastName() != null ? person.getLastName().getName() : null;
     }
 
     public String getUserName() {
@@ -42,6 +45,6 @@ public class UserDto {
     }
 
     public String getDescription() {
-        return user.getPerson().getDescription().toString();
+        return person != null ? person.getDescription().toString() : null;
     }
 }
