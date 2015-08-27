@@ -48,6 +48,7 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
 
     @Override public boolean equals(Object o) {
         return o == this || o != null && getClass() == o.getClass() &&
+                Objects.equals(getId(), ((DefaultUserEntity) o).getId()) &&
                 Objects.equals(userName, ((DefaultUserEntity) o).userName) &&
                 Objects.equals(personEntity, ((DefaultUserEntity) o).personEntity) &&
                 Objects.equals(emailAddress, ((DefaultUserEntity) o).emailAddress) &&

@@ -47,6 +47,7 @@ public class DefaultPersonEntity extends DefaultPersistentEntity implements Pers
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
+                Objects.equals(getId(), ((DefaultPersonEntity) o).getId()) &&
                 Objects.equals(addressEntity, ((DefaultPersonEntity) o).addressEntity) &&
                 Objects.equals(description, ((DefaultPersonEntity) o).description) &&
                 Objects.equals(firstName, ((DefaultPersonEntity) o).firstName) &&

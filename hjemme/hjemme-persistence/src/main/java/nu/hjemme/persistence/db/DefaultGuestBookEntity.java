@@ -38,7 +38,9 @@ public class DefaultGuestBookEntity extends DefaultPersistentEntity implements G
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
-                Objects.equals(title, ((DefaultGuestBookEntity) o).title) && Objects.equals(user, ((DefaultGuestBookEntity) o).user);
+                Objects.equals(getId(), ((DefaultGuestBookEntity) o).getId()) &&
+                Objects.equals(title, ((DefaultGuestBookEntity) o).title) &&
+                Objects.equals(user, ((DefaultGuestBookEntity) o).user);
     }
 
     @Override public int hashCode() {

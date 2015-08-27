@@ -43,6 +43,7 @@ public class DefaultBlogEntity extends DefaultPersistentEntity implements BlogEn
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
+                Objects.equals(getId(), ((DefaultBlogEntity) o).getId()) &&
                 Objects.equals(title, ((DefaultBlogEntity) o).title) &&
                 Objects.equals(userEntity, ((DefaultBlogEntity) o).userEntity);
     }

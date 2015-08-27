@@ -47,6 +47,7 @@ public class DefaultGuestBookEntryEntity extends DefaultPersistentEntity impleme
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
+                Objects.equals(getId(), ((DefaultGuestBookEntryEntity) o).getId()) &&
                 Objects.equals(persistentEntry, ((DefaultGuestBookEntryEntity) o).persistentEntry) &&
                 Objects.equals(guestBookEntity, ((DefaultGuestBookEntryEntity) o).guestBookEntity);
     }

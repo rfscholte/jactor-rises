@@ -41,6 +41,7 @@ public class DefaultAddressEntity extends DefaultPersistentEntity implements Add
 
     @Override public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() &&
+                Objects.equals(getId(), ((DefaultAddressEntity) o).getId()) &&
                 Objects.equals(addressLine1, ((DefaultAddressEntity) o).addressLine1) &&
                 Objects.equals(addressLine2, ((DefaultAddressEntity) o).addressLine2) &&
                 Objects.equals(addressLine3, ((DefaultAddressEntity) o).addressLine3) &&
