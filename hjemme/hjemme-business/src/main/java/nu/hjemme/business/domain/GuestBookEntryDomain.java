@@ -1,10 +1,12 @@
 package nu.hjemme.business.domain;
 
 import nu.hjemme.business.domain.builder.GuestBookEntryDomainBuilder;
-import nu.hjemme.client.domain.Entry;
+import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.GuestBook;
 import nu.hjemme.client.domain.GuestBookEntry;
 import nu.hjemme.persistence.GuestBookEntryEntity;
+
+import java.time.LocalDateTime;
 
 public class GuestBookEntryDomain extends PersistentDomain<GuestBookEntryEntity, Long> implements GuestBookEntry {
 
@@ -17,9 +19,17 @@ public class GuestBookEntryDomain extends PersistentDomain<GuestBookEntryEntity,
         return getEntity().getGuestBook();
     }
 
+    @Override public LocalDateTime getCreatedTime() {
+        return getEntity().getCreatedTime();
+    }
+
     @Override
-    public Entry getEntry() {
+    public String getEntry() {
         return getEntity().getEntry();
+    }
+
+    @Override public Name getCreatorName() {
+        return getEntity().getCreatorName();
     }
 
     public static GuestBookEntryDomainBuilder aGuestBookEntry() {

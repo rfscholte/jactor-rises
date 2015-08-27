@@ -22,68 +22,51 @@ public class DefaultBlogEntryEntityTest {
     @Rule public NowAsPureDateRule nowAsPureDateRule = NowAsPureDateRule.init();
 
     @Test public void willHaveCorrectImplementedHashCode() {
-        DefaultPersistentEntry persistentEntry = new DefaultPersistentEntry();
-        persistentEntry.setEntry("some entry");
-        persistentEntry.setCreatorName("some creator");
-
-        DefaultPersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
-        otherPersistentEntry.setEntry("some other entry");
-        otherPersistentEntry.setCreatorName("some other creator");
-
         blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
-        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
+        blogEntryEntityToTest.setEntry("some entry");
+        blogEntryEntityToTest.setCreatorName("some creator");
 
         BlogEntryEntity equal = new DefaultBlogEntryEntity(blogEntryEntityToTest);
 
         BlogEntryEntity notEqual = new DefaultBlogEntryEntity();
-        notEqual.setPersistentEntry(otherPersistentEntry);
+        notEqual.setEntry("some other entry");
+        notEqual.setCreatorName("some other creator");
         notEqual.setBlog(new DefaultBlogEntity());
         assertThat(blogEntryEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
-        DefaultPersistentEntry persistentEntry = new DefaultPersistentEntry();
-        persistentEntry.setEntry("some entry");
-        persistentEntry.setCreatorName("some creator");
-
-        DefaultPersistentEntry otherPersistentEntry = new DefaultPersistentEntry();
-        otherPersistentEntry.setEntry("some other entry");
-        otherPersistentEntry.setCreatorName("some other creator");
-
         blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
-        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
+        blogEntryEntityToTest.setEntry("some entry");
+        blogEntryEntityToTest.setCreatorName("some creator");
 
         BlogEntryEntity equal = new DefaultBlogEntryEntity(blogEntryEntityToTest);
 
         BlogEntryEntity notEqual = new DefaultBlogEntryEntity();
-        notEqual.setPersistentEntry(otherPersistentEntry);
+        notEqual.setEntry("some other entry");
+        notEqual.setCreatorName("some other creator");
         notEqual.setBlog(new DefaultBlogEntity());
 
         assertThat(blogEntryEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
     @Test public void willBeEqualAnIdenticalEntity() {
-        DefaultPersistentEntry persistentEntry = new DefaultPersistentEntry();
-        persistentEntry.setEntry("some entry");
-        persistentEntry.setCreatorName("some creator");
-
         blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
-        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
+        blogEntryEntityToTest.setEntry("some entry");
+        blogEntryEntityToTest.setCreatorName("some creator");
 
         BlogEntryEntity equal = new DefaultBlogEntryEntity();
         equal.setBlog(new DefaultBlogEntity());
-        equal.setPersistentEntry(persistentEntry);
+        equal.setEntry("some entry");
+        equal.setCreatorName("some creator");
 
         assertThat(blogEntryEntityToTest, is(equalTo(equal), "Equal Entity"));
     }
 
     @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
-        DefaultPersistentEntry persistentEntry = new DefaultPersistentEntry();
-        persistentEntry.setEntry("some entry");
-        persistentEntry.setCreatorName("some creator");
-
         blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
-        blogEntryEntityToTest.setPersistentEntry(persistentEntry);
+        blogEntryEntityToTest.setEntry("some entry");
+        blogEntryEntityToTest.setCreatorName("some creator");
 
         BlogEntryEntity equal = new DefaultBlogEntryEntity(blogEntryEntityToTest);
 

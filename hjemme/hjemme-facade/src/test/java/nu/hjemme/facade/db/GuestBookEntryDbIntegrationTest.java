@@ -48,9 +48,9 @@ public class GuestBookEntryDbIntegrationTest {
             @Override public MatchBuilder matches(DefaultGuestBookEntryEntity typeToTest, MatchBuilder matchBuilder) {
                 return matchBuilder
                         .matches(typeToTest.getGuestBook().getTitle(), is(equalTo("my guest book"), "guest book.title"))
-                        .matches(typeToTest.getEntry().getCreatedTime(), is(notNullValue(), "entry.createdTime"))
-                        .matches(typeToTest.getEntry().getCreatorName(), is(equalTo(new Name("lada")), "entry.creatorName"))
-                        .matches(typeToTest.getEntry().getEntry(), is(equalTo("svada"), "entry.entry"));
+                        .matches(typeToTest.getCreatedTime(), is(notNullValue(), "entry.createdTime"))
+                        .matches(typeToTest.getCreatorName(), is(equalTo(new Name("lada")), "entry.creatorName"))
+                        .matches(typeToTest.getEntry(), is(equalTo("svada"), "entry.entry"));
             }
         });
     }

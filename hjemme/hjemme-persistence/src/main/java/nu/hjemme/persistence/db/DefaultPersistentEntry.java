@@ -29,6 +29,10 @@ public class DefaultPersistentEntry implements PersistentEntry {
         createdTime = Now.asJavaUtilDate();
     }
 
+    public DefaultPersistentEntry(Date createdTime) {
+        this.createdTime = createdTime;
+    }
+
     /** @param entry will be used to copy an instance... */
     public DefaultPersistentEntry(Entry entry) {
         createdTime = TIME_CONVERTER.convertFrom(entry.getCreatedTime());

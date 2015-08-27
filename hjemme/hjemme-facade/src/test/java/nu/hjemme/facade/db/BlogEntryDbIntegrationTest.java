@@ -49,9 +49,9 @@ public class BlogEntryDbIntegrationTest {
             @Override public MatchBuilder matches(BlogEntryEntity typeToTest, MatchBuilder matchBuilder) {
                 return matchBuilder
                         .matches(typeToTest.getBlog().getTitle(), is(equalTo("my blog"), "blog.title"))
-                        .matches(typeToTest.getEntry().getCreatedTime(), is(notNullValue(), "entry.createdTime"))
-                        .matches(typeToTest.getEntry().getCreatorName(), is(equalTo(new Name("lada")), "entry.creator"))
-                        .matches(typeToTest.getEntry().getEntry(), is(equalTo("svada"), "entry.entry"));
+                        .matches(typeToTest.getCreatedTime(), is(notNullValue(), "entry.createdTime"))
+                        .matches(typeToTest.getCreatorName(), is(equalTo(new Name("lada")), "entry.creator"))
+                        .matches(typeToTest.getEntry(), is(equalTo("svada"), "entry.entry"));
             }
         });
     }

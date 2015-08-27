@@ -1,8 +1,8 @@
 package nu.hjemme.persistence.db;
 
+import nu.hjemme.client.datatype.Name;
 import nu.hjemme.persistence.BlogEntity;
 import nu.hjemme.persistence.BlogEntryEntity;
-import nu.hjemme.persistence.PersistentEntry;
 import nu.hjemme.persistence.meta.BlogEntryMetadata;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
@@ -42,7 +44,9 @@ public class DefaultBlogEntryEntity extends DefaultPersistentEntity implements B
     public DefaultBlogEntryEntity(BlogEntryEntity blogEntryEntity) {
         blogEntity = castOrInitializeCopyWith(blogEntryEntity.getBlog(), DefaultBlogEntity.class);
         blogEntity = castOrInitializeCopyWith(blogEntryEntity.getBlog(), DefaultBlogEntity.class);
-        persistentEntry = castOrInitializeCopyWith(blogEntryEntity.getEntry(), DefaultPersistentEntry.class);
+        persistentEntry = new DefaultPersistentEntry((Date) convertFrom(blogEntryEntity.getCreatedTime(), LocalDateTime.class));
+        persistentEntry.setCreatorName(convertFrom(blogEntryEntity.getCreatorName(), Name.class));
+        persistentEntry.setEntry(blogEntryEntity.getEntry());
     }
 
     @Override public boolean equals(Object o) {
@@ -68,11 +72,23 @@ public class DefaultBlogEntryEntity extends DefaultPersistentEntity implements B
         this.blogEntity = castOrInitializeCopyWith(blog, DefaultBlogEntity.class);
     }
 
-    @Override public PersistentEntry getEntry() {
-        return persistentEntry;
+    @Override public LocalDateTime getCreatedTime() {
+        return persistentEntry.getCreatedTime();
     }
 
-    @Override public void setPersistentEntry(DefaultPersistentEntry persistentEntry) {
-        this.persistentEntry = persistentEntry;
+    @Override public Name getCreatorName() {
+        return persistentEntry.getCreatorName();
+    }
+
+    @Override public void setCreatorName(String creator) {
+        persistentEntry.setCreatorName(creator);
+    }
+
+    @Override public String getEntry() {
+        return persistentEntry.getEntry();
+    }
+
+    @Override public void setEntry(String entry) {
+        persistentEntry.setEntry(entry);
     }
 }
