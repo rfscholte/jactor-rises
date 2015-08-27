@@ -20,36 +20,8 @@ public abstract class DomainBuilder<Domain> {
         return PersistentData.getInstance().provideInstanceFor(persistentClass);
     }
 
-    public static GuestBookEntryDomainBuilder aGuestBookEntry() {
-        return new GuestBookEntryDomainBuilder();
-    }
-
-    public static GuestBookDomainBuilder aGuestBook() {
-        return new GuestBookDomainBuilder();
-    }
-
-    public static UserDomainBuilder aUser() {
-        return new UserDomainBuilder();
-    }
-
-    public static PersonDomainBuilder aPerson() {
-        return new PersonDomainBuilder();
-    }
-
-    public static AddressDomainBuilder anAddress() {
-        return new AddressDomainBuilder();
-    }
-
-    public static BlogDomainBuilder aBlog() {
-        return new BlogDomainBuilder();
-    }
-
-    public static BlogEntryDomainBuilder aBlogEntry() {
-        return new BlogEntryDomainBuilder();
-    }
-
     static {
-        new BuildValidator();
+        new BuildValidator(); // constructor will set the instance on the static BuildValidator field in the domain builder
     }
 
     public static class BuildValidator {

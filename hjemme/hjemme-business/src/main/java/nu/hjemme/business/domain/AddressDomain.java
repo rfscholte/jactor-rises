@@ -1,10 +1,10 @@
 package nu.hjemme.business.domain;
 
-import nu.hjemme.persistence.AddressEntity;
+import nu.hjemme.business.domain.builder.AddressDomainBuilder;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
+import nu.hjemme.persistence.AddressEntity;
 
-/** @author Tor Egil Jacobsen */
 public class AddressDomain extends PersistentDomain<AddressEntity, Long> implements Address {
 
     public AddressDomain(AddressEntity addressEntity) {
@@ -39,5 +39,9 @@ public class AddressDomain extends PersistentDomain<AddressEntity, Long> impleme
     @Override
     public Integer getZipCode() {
         return getEntity().getZipCode();
+    }
+
+    public static AddressDomainBuilder anAddress() {
+        return new AddressDomainBuilder();
     }
 }

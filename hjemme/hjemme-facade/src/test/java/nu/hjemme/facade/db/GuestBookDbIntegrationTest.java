@@ -19,10 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.io.Serializable;
 
-import static nu.hjemme.business.domain.builder.DomainBuilder.aGuestBook;
-import static nu.hjemme.business.domain.builder.DomainBuilder.aPerson;
-import static nu.hjemme.business.domain.builder.DomainBuilder.aUser;
-import static nu.hjemme.business.domain.builder.DomainBuilder.anAddress;
+import static nu.hjemme.business.domain.AddressDomain.anAddress;
+import static nu.hjemme.business.domain.GuestBookDomain.aGuestBook;
+import static nu.hjemme.business.domain.PersonDomain.aPerson;
+import static nu.hjemme.business.domain.UserDomain.aUser;
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

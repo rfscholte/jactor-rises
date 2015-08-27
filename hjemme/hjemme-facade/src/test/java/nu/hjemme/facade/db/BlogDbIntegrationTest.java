@@ -20,10 +20,10 @@ import javax.annotation.Resource;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import static nu.hjemme.business.domain.builder.DomainBuilder.aBlog;
-import static nu.hjemme.business.domain.builder.DomainBuilder.aPerson;
-import static nu.hjemme.business.domain.builder.DomainBuilder.aUser;
-import static nu.hjemme.business.domain.builder.DomainBuilder.anAddress;
+import static nu.hjemme.business.domain.AddressDomain.anAddress;
+import static nu.hjemme.business.domain.BlogDomain.aBlog;
+import static nu.hjemme.business.domain.PersonDomain.aPerson;
+import static nu.hjemme.business.domain.UserDomain.aUser;
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

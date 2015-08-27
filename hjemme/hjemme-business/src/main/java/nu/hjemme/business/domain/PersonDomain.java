@@ -1,5 +1,6 @@
 package nu.hjemme.business.domain;
 
+import nu.hjemme.business.domain.builder.PersonDomainBuilder;
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Address;
@@ -30,5 +31,9 @@ public class PersonDomain extends PersistentDomain<PersonEntity, Long> implement
 
     @Override public Address getAddress() {
         return getEntity().getAddress();
+    }
+
+    public static PersonDomainBuilder aPerson() {
+        return new PersonDomainBuilder();
     }
 }

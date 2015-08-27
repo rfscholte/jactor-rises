@@ -7,7 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static nu.hjemme.business.domain.builder.DomainBuilder.aGuestBookEntry;
+import static nu.hjemme.business.domain.GuestBookEntryDomain.aGuestBookEntry;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;

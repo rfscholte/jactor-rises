@@ -1,12 +1,12 @@
 package nu.hjemme.business.domain;
 
+import nu.hjemme.business.domain.builder.BlogDomainBuilder;
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.BlogEntity;
 
 import java.time.LocalDate;
 
-/** @author Tor Egil Jacobsen */
 public class BlogDomain extends PersistentDomain<BlogEntity, Long> implements Blog {
 
     private User user;
@@ -29,5 +29,9 @@ public class BlogDomain extends PersistentDomain<BlogEntity, Long> implements Bl
     @Override
     public LocalDate getCreated() {
         return getEntity().getCreated();
+    }
+
+    public static BlogDomainBuilder aBlog() {
+        return new BlogDomainBuilder();
     }
 }

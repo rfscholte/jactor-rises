@@ -12,7 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static nu.hjemme.business.domain.builder.DomainBuilder.aUser;
+import static nu.hjemme.business.domain.UserDomain.aUser;
 import static nu.hjemme.business.rules.BuildValidations.Build.USER;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserFacadeTest {
-    @Rule public BuildValidations buildValidations = BuildValidations.skipValidationOn().skipValidationOn(USER);
+    @Rule public BuildValidations buildValidations = BuildValidations.skipValidationOn(USER);
 
     @InjectMocks
     private UserFacadeImpl testUserFacadeImpl;

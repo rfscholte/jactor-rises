@@ -1,5 +1,6 @@
 package nu.hjemme.business.domain;
 
+import nu.hjemme.business.domain.builder.UserDomainBuilder;
 import nu.hjemme.business.domain.dao.UserDomainDao;
 import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.UserName;
@@ -37,5 +38,9 @@ public class UserDomain extends PersistentDomain<UserEntity, Long> implements Us
 
     public static void setUserDomainDao(UserDomainDao userDomainDao) {
         UserDomain.userDomainDao = userDomainDao;
+    }
+
+    public static UserDomainBuilder aUser() {
+        return new UserDomainBuilder();
     }
 }
