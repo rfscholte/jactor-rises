@@ -6,7 +6,6 @@ import nu.hjemme.persistence.PersistentData;
 import nu.hjemme.persistence.PersonEntity;
 import org.apache.commons.lang.Validate;
 
-/** @author Tor Egil Jacobsen */
 public class PersonDomainBuilder extends DomainBuilder<PersonDomain> {
     static final String AN_ADDRESS_MUST_BE_PRESENT = "An address must be present";
 

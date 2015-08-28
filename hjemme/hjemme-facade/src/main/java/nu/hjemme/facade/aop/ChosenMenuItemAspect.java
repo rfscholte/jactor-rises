@@ -7,10 +7,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
-/**
- * The aspect of caching chosen menu items
- * @author Tor Egil Jacobsen
- */
+/** The aspect of caching chosen menu items */
 @Aspect
 public class ChosenMenuItemAspect {
     private static ChosenMenuItemCache chosenMenuItemCache;
@@ -19,13 +16,11 @@ public class ChosenMenuItemAspect {
         chosenMenuItemCache = new ChosenMenuItemCache();
     }
 
-    @Pointcut("execution(* nu.hjemme.client.service.MenuFacade.retrieveChosenMenuItemBy(..))")
-    @SuppressWarnings("unused") // Brukes av spring og aspect j
+    @Pointcut("execution(* nu.hjemme.client.service.MenuFacade.retrieveChosenMenuItemBy(..))") @SuppressWarnings("unused") // Brukes av spring og aspect j
     public void menuCaching() {
     }
 
-    @Around("menuCaching()")
-    @SuppressWarnings("unchecked")
+    @Around("menuCaching()") @SuppressWarnings("unchecked")
     public Object cacheChosenMenuItemsByTarget(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         MenuTarget menuTarget = (MenuTarget) proceedingJoinPoint.getArgs()[0];
         Object listeMedChosenMenuItems;

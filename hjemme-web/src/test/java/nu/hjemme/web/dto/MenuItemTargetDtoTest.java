@@ -11,11 +11,9 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-/** @author Tor Egil Jacobsen */
 public class MenuItemTargetDtoTest {
 
-    @Test
-    public void willRemoveContextRootFromRequestedUri() {
+    @Test public void willRemoveContextRootFromRequestedUri() {
         HttpServletRequest mockedHttpServletRequest = mock(HttpServletRequest.class);
         when(mockedHttpServletRequest.getRequestURI()).thenReturn("/hjemme/action");
 

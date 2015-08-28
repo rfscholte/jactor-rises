@@ -14,9 +14,6 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 
-/**
- * @author Tor Egil Jacobsen
- */
 public class PersistentDataTest {
 
     @Rule public ExpectedException expectedException = ExpectedException.none();

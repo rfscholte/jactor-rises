@@ -11,7 +11,6 @@ import org.mockito.stubbing.Answer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -21,14 +20,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-/** @author Tor Egil Jacobsen */
 public class MenuItemImplTest {
 
-    @Mock
-    private MenuItem mockedMenuItem;
+    @Mock private MenuItem mockedMenuItem;
 
-    @Test
-    public void willHaveCorrectImplementedHashCode() {
+    @Test public void willHaveCorrectImplementedHashCode() {
         MenuItem mockedChild = mock(MenuItem.class);
         MenuItem mockedUnequal = mock(MenuItem.class);
 
@@ -46,11 +42,14 @@ public class MenuItemImplTest {
     }
 
     private Answer<List<? extends MenuItem>> somListe(MenuItem mockedEqualChild) {
-        return invocation -> asList(mockedEqualChild);
+        return invocation -> new ArrayList<MenuItem>() {
+            {
+                add(mockedEqualChild);
+            }
+        };
     }
 
-    @Test
-    public void willHaveCorrectImplementedEquals() {
+    @Test public void willHaveCorrectImplementedEquals() {
         MenuItem mockedChild = mock(MenuItem.class);
         MenuItem mockedUnequal = mock(MenuItem.class);
 
@@ -67,8 +66,7 @@ public class MenuItemImplTest {
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, unequal));
     }
 
-    @Test
-    public void skalIkkeVareValgtNarMaletErUkjent() {
+    @Test public void skalIkkeVareValgtNarMaletErUkjent() {
         when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("hit?dead=center"));
 
         MenuItemImpl testMenuItem = new MenuItemImpl(mockedMenuItem);
@@ -78,8 +76,7 @@ public class MenuItemImplTest {
 
     }
 
-    @Test
-    public void skalVareValgtNarMaletErKjent() {
+    @Test public void skalVareValgtNarMaletErKjent() {
         when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("hit?dead=center"));
 
         MenuItemImpl testMenuItem = new MenuItemImpl(mockedMenuItem);
@@ -88,8 +85,7 @@ public class MenuItemImplTest {
                 is(equalTo(true)));
     }
 
-    @Test
-    public void skalIkkeHaEtValgtMenyvalgNarsMaletTilBarnetErUkjent() {
+    @Test public void skalIkkeHaEtValgtMenyvalgNarsMaletTilBarnetErUkjent() {
         MenuItem mockedChild = mock(MenuItem.class);
 
         when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("target?some=parameter"));
@@ -104,8 +100,7 @@ public class MenuItemImplTest {
         );
     }
 
-    @Test
-    public void skalHaEtValgtMenyvalgNarsMaletTilBarnetErKjent() {
+    @Test public void skalHaEtValgtMenyvalgNarsMaletTilBarnetErKjent() {
         MenuItem mockedChild = mock(MenuItem.class);
 
         when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("target?some=parameter"));

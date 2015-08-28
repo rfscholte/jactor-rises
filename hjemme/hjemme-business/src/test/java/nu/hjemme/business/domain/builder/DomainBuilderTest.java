@@ -10,22 +10,18 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-/** @author Tor Egil Jacobsen */
 public class DomainBuilderTest {
     private TestDomainBuilder testDomainBuilder;
 
-    @Before
-    public void initForTesting() {
+    @Before public void initForTesting() {
         testDomainBuilder = new TestDomainBuilder();
     }
 
-    @Test
-    public void skalByggeEtDomeneNarBuildMetodeKalles() {
+    @Test public void skalByggeEtDomeneNarBuildMetodeKalles() {
         assertThat("skal bygge domene", testDomainBuilder.get(), is(notNullValue()));
     }
 
-    @Test
-    public void skalValidereDomeneVedByging() {
+    @Test public void skalValidereDomeneVedByging() {
         assertThat(testDomainBuilder, new TypeSafeBuildMatcher<TestDomainBuilder>("Validate domain when building it") {
             @Override
             public MatchBuilder matches(TestDomainBuilder typeToTest, MatchBuilder matchBuilder) {
@@ -41,13 +37,11 @@ public class DomainBuilderTest {
     private class TestDomainBuilder extends DomainBuilder<DomainBuilderTest> {
         boolean validated;
 
-        @Override
-        protected DomainBuilderTest initDomain() {
+        @Override protected DomainBuilderTest initDomain() {
             return new DomainBuilderTest();
         }
 
-        @Override
-        protected void validate() {
+        @Override protected void validate() {
             validated = true;
         }
     }

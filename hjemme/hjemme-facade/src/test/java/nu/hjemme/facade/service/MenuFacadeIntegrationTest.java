@@ -47,8 +47,7 @@ public class MenuFacadeIntegrationTest {
         List<ChosenMenuItem> chosenMenuItems = testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
 
         assertThat(chosenMenuItems, new TypeSafeBuildMatcher<List<ChosenMenuItem>>("En liste med test menyvalg fra test context") {
-            @Override
-            public MatchBuilder matches(List<ChosenMenuItem> chosenMenuItems, MatchBuilder matchBuilder) {
+            @Override public MatchBuilder matches(List<ChosenMenuItem> chosenMenuItems, MatchBuilder matchBuilder) {
                 matchBuilder.matches(chosenMenuItems.isEmpty(), is(equalTo(false), "lista kan ikke være tom"));
 
                 for (ChosenMenuItem chosenMenuItem : chosenMenuItems) {
@@ -64,9 +63,6 @@ public class MenuFacadeIntegrationTest {
         });
     }
 
-    /**
-     * @author Tor Egil Jacobsen
-     */
     @Configuration
     public static class HjemmeTestMenus {
         @Bean @SuppressWarnings("unused") // brukes av spring

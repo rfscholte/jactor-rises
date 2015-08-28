@@ -2,13 +2,9 @@ package nu.hjemme.web.interceptor;
 
 import nu.hjemme.client.datatype.Name;
 
-/**
- * The values used by the interceptors on this web application
- * @author Tor Egil Jacobsen
- */
+/** The values used by the interceptors on this web application */
 final class InterceptorValues {
-    private InterceptorValues() {
-    }
+    private InterceptorValues() { }
 
     static final Name MAIN_MENU = new Name("main");
     static final Name PERSON_MENU = new Name("person");

@@ -3,7 +3,6 @@ package nu.hjemme.persistence.time;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-/** @author Tor Egil Jacobsen */
 public class Now {
     private static final Object SYNC = new Object();
 

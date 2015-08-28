@@ -20,17 +20,13 @@ import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_PERSON_ITEMS
 import static nu.hjemme.web.interceptor.InterceptorValues.MAIN_MENU;
 import static nu.hjemme.web.interceptor.InterceptorValues.PERSON_MENU;
 
-/**
- * The {@link MenuInterceptor} is a {@link HandlerInterceptorAdapter}  which put the menus on the model.
- * @author Tor Egil Jacobsen
- */
+/** The {@link MenuInterceptor} is a {@link HandlerInterceptorAdapter}  which put the menus on the model. */
 @Component
 public class MenuInterceptor extends HandlerInterceptorAdapter {
 
     private MenuFacade menuFacade;
 
-    @Override
-    public void postHandle(
+    @Override public void postHandle(
             HttpServletRequest request,
             HttpServletResponse response,
             Object handler,
@@ -59,8 +55,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         modelMap.put(ATTRIBUTE_PERSON_ITEMS, chosenMenuItemsFromPersonMenu);
     }
 
-    @Autowired
-    public void setMenuFacade(MenuFacade menuFacade) {
+    @Autowired public void setMenuFacade(MenuFacade menuFacade) {
         this.menuFacade = menuFacade;
     }
 }

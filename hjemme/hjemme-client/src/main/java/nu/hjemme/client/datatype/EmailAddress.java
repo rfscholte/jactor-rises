@@ -5,9 +5,6 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import static java.util.Objects.hash;
 import static java.util.Objects.requireNonNull;
 
-/**
- * @author Tor Egil Jacobsen
- */
 public class EmailAddress {
     private static final String AT = "@";
 
@@ -33,13 +30,11 @@ public class EmailAddress {
         this.suffix = requireNonNull(suffix, "suffix cannot be null");
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return hash(prefix, suffix);
     }
 
-    @Override
-    public boolean equals(Object obj) {
+    @Override public boolean equals(Object obj) {
         return obj == this || obj instanceof EmailAddress && new EqualsBuilder()
                 .append(prefix, ((EmailAddress) obj).prefix)
                 .append(suffix, ((EmailAddress) obj).suffix)
@@ -51,8 +46,7 @@ public class EmailAddress {
         return prefix + AT + suffix;
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return EmailAddress.class.getSimpleName() + "[" + asString() + "]";
     }
 }

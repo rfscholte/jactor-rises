@@ -13,10 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * A {@link MenuImpl} that contains a collection of {@link MenuItemImpl}s.
- * @author Tor Egil Jacobsen
- */
+/** A {@link MenuImpl} that contains a collection of {@link MenuItemImpl}s. */
 public class MenuImpl implements Menu {
     private static MenuImpl newInstanceCreator = new MenuImpl();
 

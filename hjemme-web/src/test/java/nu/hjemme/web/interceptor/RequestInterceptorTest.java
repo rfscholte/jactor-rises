@@ -20,15 +20,12 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-/** @author Tor Egil Jacobsen */
 public class RequestInterceptorTest {
     private RequestInterceptor testRequestInterceptor = new RequestInterceptor();
 
-    @Mock
-    private HttpServletRequest mockedRequest;
+    @Mock private HttpServletRequest mockedRequest;
 
-    @Test
-    public void willSetTheActionAttributeOnTheModel() throws Exception {
+    @Test public void willSetTheActionAttributeOnTheModel() throws Exception {
         when(mockedRequest.getRequestURI()).thenReturn("home.do");
 
         ModelAndView modelAndView = new ModelAndView();
@@ -37,10 +34,8 @@ public class RequestInterceptorTest {
         assertThat("Action", modelAndView.getModel().get(ATTRIBUTE_ACTION), is(equalTo((Object) "home.do")));
     }
 
-    @Test
-    @SuppressWarnings(value = "unchecked")
-    public void willSetTheParametersAttributeOnTheModel() throws Exception {
-        Map<Object, Object> parameterMap = new HashMap<Object, Object>();
+    @Test @SuppressWarnings(value = "unchecked") public void willSetTheParametersAttributeOnTheModel() throws Exception {
+        Map<Object, Object> parameterMap = new HashMap<>();
         parameterMap.put("some", new String[]{"parameter"});
 
         when(mockedRequest.getParameterMap()).thenReturn(parameterMap);

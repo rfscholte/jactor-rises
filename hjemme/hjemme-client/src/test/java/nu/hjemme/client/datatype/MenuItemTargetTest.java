@@ -15,14 +15,11 @@ import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-/** @author Tor Egil Jacobsen */
 public class MenuItemTargetTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+    @Rule public ExpectedException expectedException = ExpectedException.none();
 
-    @Test
-    public void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
+    @Test public void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
         MenuItemTarget base = new MenuItemTarget("target");
         MenuItemTarget equal = new MenuItemTarget("target");
         MenuItemTarget notEqual = new MenuItemTarget("another target");
@@ -30,8 +27,7 @@ public class MenuItemTargetTest {
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
-    @Test
-    public void whenChecksForEqualityIsDoneTheValuesOfThePropertiesMustBeCorrect() {
+    @Test public void whenChecksForEqualityIsDoneTheValuesOfThePropertiesMustBeCorrect() {
         MenuItemTarget base = new MenuItemTarget("target");
         MenuItemTarget equal = new MenuItemTarget("target");
         MenuItemTarget notEqual = new MenuItemTarget("another target");
@@ -39,32 +35,27 @@ public class MenuItemTargetTest {
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
-    @Test
-    public void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
+    @Test public void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
         assertThat(new MenuItemTarget("hit?with=parameter").toString(), is(equalTo("hit?with=parameter"), "toString"));
     }
 
-    @Test
-    public void whenInitializingTheTargetCannotBeNull() {
+    @Test public void whenInitializingTheTargetCannotBeNull() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY);
 
         new MenuItemTarget(null);
     }
 
-    @Test
-    public void whenInitializingTheTargetCannotBeEmpty() {
+    @Test public void whenInitializingTheTargetCannotBeEmpty() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY);
 
         new MenuItemTarget("");
     }
 
-    @Test
-    public void willNotContainParametersWhenTheTargetDoesNotContainQuestionMark() {
+    @Test public void willNotContainParametersWhenTheTargetDoesNotContainQuestionMark() {
         assertThat(new MenuItemTarget("targetparam=value"), new TypeSafeBuildMatcher<MenuItemTarget>("Leste parametre fra MenuItemTarget") {
-            @Override
-            public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
+            @Override public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
                 return matchBuilder
                         .matches(menuItemTarget.getTarget(), is(equalTo("targetparam=value"), "target uten ? skal tolkes som et rent mål"))
                         .matches(menuItemTarget.getParameters().isEmpty(), is(equalTo(true), "ingen parametre"));
@@ -72,8 +63,7 @@ public class MenuItemTargetTest {
         });
     }
 
-    @Test
-    public void willContainOneParameterWhenTheTargetContainsQuestionMarkNameEqualValue() {
+    @Test public void willContainOneParameterWhenTheTargetContainsQuestionMarkNameEqualValue() {
         assertThat(new MenuItemTarget("target?param=value"), new TypeSafeBuildMatcher<MenuItemTarget>("Lest parameter fra MenuItemTarget") {
             @Override
             public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
@@ -88,11 +78,9 @@ public class MenuItemTargetTest {
         });
     }
 
-    @Test
-    public void willContainTwoParametersWhenTheTargetContainsTwoQuestionMarksWithNameEqualValueSeperatedByComma() {
+    @Test public void willContainTwoParametersWhenTheTargetContainsTwoQuestionMarksWithNameEqualValueSeperatedByComma() {
         assertThat(new MenuItemTarget("target?param=value,another=parameter"), new TypeSafeBuildMatcher<MenuItemTarget>("Leste parametre fra MenuItemTarget") {
-            @Override
-            public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
+            @Override public MatchBuilder matches(MenuItemTarget menuItemTarget, MatchBuilder matchBuilder) {
                 Set<Parameter> parameters = menuItemTarget.getParameters();
                 Parameter parameter = parameters.iterator().next();
                 Parameter annetParameter = parameters.iterator().next();

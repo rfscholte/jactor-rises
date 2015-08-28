@@ -5,7 +5,6 @@ import nu.hjemme.business.domain.UserDomain;
 import nu.hjemme.persistence.UserEntity;
 import org.apache.commons.lang.Validate;
 
-/** @author Tor Egil Jacobsen */
 public class UserDomainBuilder extends DomainBuilder<UserDomain> {
     static final String THE_PASSWORD_FIELD_CANNOT_BE_EMPTY = "The password cannot be empty";
     static final String THE_USER_MUST_BE_A_PERSON = "The user must be a person";

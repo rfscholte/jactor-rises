@@ -2,9 +2,6 @@ package nu.hjemme.persistence;
 
 import nu.hjemme.client.domain.Address;
 
-/**
- * @author Tor Egil Jacobsen
- */
 public interface AddressEntity extends Address {
     void setCity(String city);
 

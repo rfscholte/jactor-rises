@@ -22,23 +22,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/** @author Tor Egil Jacobsen */
 @RunWith(MockitoJUnitRunner.class)
 public class MenuInterceptorTest {
 
-    @Mock
-    MenuFacade mockedMenuFacade;
+    @Mock private MenuFacade mockedMenuFacade;
 
     private MenuInterceptor testMenuInterceptor;
 
-    @Before
-    public void setUpTests() {
+    @Before public void setUpTests() {
         testMenuInterceptor = new MenuInterceptor();
         testMenuInterceptor.setMenuFacade(mockedMenuFacade);
     }
 
-    @Test
-    public void whenHandlingHttpRequestTheAwareMenuItemsAreGathered() throws Exception {
+    @Test public void whenHandlingHttpRequestTheAwareMenuItemsAreGathered() throws Exception {
         HttpServletRequest mockedHttpServletRequest = mock(HttpServletRequest.class);
 
         when(mockedHttpServletRequest.getRequestURI()).thenReturn("uri");

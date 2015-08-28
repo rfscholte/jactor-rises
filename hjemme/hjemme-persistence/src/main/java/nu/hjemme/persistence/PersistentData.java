@@ -18,9 +18,6 @@ import java.util.Map;
 
 import static java.util.Arrays.asList;
 
-/**
- * @author Tor Egil Jacobsen
- */
 public class PersistentData {
     private static final Map<Class, Class> SUPPORTED_CLASSES = new HashMap<>();
 

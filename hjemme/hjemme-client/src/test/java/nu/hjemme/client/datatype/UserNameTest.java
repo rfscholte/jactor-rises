@@ -9,11 +9,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
-/** @author Tor Egil Jacobsen */
 public class UserNameTest {
 
-    @Test
-    public void willBeEqualIfOnlyDifferenceIsTheCharacterCase() {
+    @Test public void willBeEqualIfOnlyDifferenceIsTheCharacterCase() {
         UserName jactorLowerCase = new UserName("jactor");
         UserName jactorUpperCase = new UserName("JACTOR");
 
@@ -24,8 +22,7 @@ public class UserNameTest {
         assertThat("UserName", jactorLowerCase, is(not(equalTo(tip))));
     }
 
-    @Test
-    public void willProduceEqualHashCodeIfOnlyDifferenceIsTheCharacterCase() {
+    @Test public void willProduceEqualHashCodeIfOnlyDifferenceIsTheCharacterCase() {
         UserName jactorLowerCase = new UserName("jactor");
         UserName jactorUpperCase = new UserName("JACTOR");
         UserName tip = new UserName("tip");
@@ -34,8 +31,7 @@ public class UserNameTest {
         assertThat("UserName", jactorLowerCase.hashCode(), is(not(equalTo(tip.hashCode()))));
     }
 
-    @Test
-    public void willImplementHashCodeAccordingToTheJavaSpecifications() {
+    @Test public void willImplementHashCodeAccordingToTheJavaSpecifications() {
         UserName base = new UserName("someone");
         UserName equal = new UserName("SOMEONE");
         UserName notEqual = new UserName("SOMEONE else");
@@ -43,8 +39,7 @@ public class UserNameTest {
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
-    @Test
-    public void willImplementEqualsAccordingToTheJavaSpecifications() {
+    @Test public void willImplementEqualsAccordingToTheJavaSpecifications() {
         UserName base = new UserName("someone");
         UserName equal = new UserName("SOMEONE");
         UserName notEqual = new UserName("SOMEONE else");

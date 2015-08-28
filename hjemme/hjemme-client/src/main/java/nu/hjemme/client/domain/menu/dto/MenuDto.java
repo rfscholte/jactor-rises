@@ -9,7 +9,6 @@ import nu.hjemme.client.domain.menu.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-/** @author Tor Egil Jacobsen */
 public class MenuDto implements Menu {
     private final String name;
     private final List<MenuItemDto> menuItems = new ArrayList<>();

@@ -24,24 +24,24 @@ public class HjemmeWebContext {
     @Bean(name = "hjemme.homeItem")
     public MenuItemDto createHomeItem() {
         return new MenuItemDto("menu.main.home", "home.do")
-                .medBeskrivelseSom("menu.main.home.desc");
+                .withDescriptionAs("menu.main.home.desc");
     }
 
     @Bean(name = "hjemme.jactorItem")
     public MenuItemDto createJactorItem() {
         return new MenuItemDto("menu.main.jactor", "user.do?choose=jactor")
-                .medBeskrivelseSom("menu.main.jactor.desc");
+                .withDescriptionAs("menu.main.jactor.desc");
     }
 
     @Bean(name = "hjemme.tipItem")
     public MenuItemDto createTipItem() {
         return new MenuItemDto("menu.main.tip", "user.do?choose=tip")
-                .medBeskrivelseSom("menu.main.tip.desc");
+                .withDescriptionAs("menu.main.tip.desc");
     }
 
     @Bean(name = "hjemme.aboutItem")
     public MenuItemDto createAboutItem() {
         return new MenuItemDto("menu.person.about", "about.do")
-                .medBeskrivelseSom("menu.person.about.desc");
+                .withDescriptionAs("menu.person.about.desc");
     }
 }
