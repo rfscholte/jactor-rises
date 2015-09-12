@@ -9,22 +9,22 @@ import org.junit.rules.ExternalResource;
 import java.util.HashSet;
 import java.util.Set;
 
-import static java.util.Arrays.asList;
-
 /** A {@link org.junit.rules.MethodRule} which will ensure that all skipped validations are cleared after each test */
 public final class BuildValidations extends ExternalResource {
-    private final Set<Build> skipValidations = new HashSet<>();
+    private final Set<Class> skipValidations = new HashSet<>();
 
     private BuildValidations(Build[] builds) {
         super();
 
         if (builds != null) {
-            skipValidations.addAll(asList(builds));
+            for (Build build : builds) {
+                skipValidations.add(build.builderClass);
+            }
         }
     }
 
     @Override protected void before() throws Throwable {
-        new TestBuildValidator(this);
+        new TestBuildValidator();
     }
 
     @Override protected void after() {
@@ -45,34 +45,18 @@ public final class BuildValidations extends ExternalResource {
         Build(Class builderClass) {
             this.builderClass = builderClass;
         }
-
-        public boolean shouldSkipBuildOn(Class<?> builderClass) {
-            return this.builderClass == builderClass;
-        }
     }
 
     private class TestBuildValidator extends DomainBuilder.BuildValidator {
 
-        private BuildValidations buildValidations;
-
-        private TestBuildValidator(BuildValidations buildValidations) {
-            this.buildValidations = buildValidations;
-        }
-
         @Override protected void validate(DomainBuilder<?> domainBuilder) {
-            if (shouldNotSkipValidationOn(domainBuilder.getClass())) {
+            if (shouldValidate(domainBuilder.getClass())) {
                 super.validate(domainBuilder);
             }
         }
 
-        private boolean shouldNotSkipValidationOn(Class<? extends DomainBuilder> domainBuilderClass) {
-            for (Build build : buildValidations.skipValidations) {
-                if (!build.shouldSkipBuildOn(domainBuilderClass)) {
-                    return true;
-                }
-            }
-
-            return false;
+        private boolean shouldValidate(Class<? extends DomainBuilder> domainBuilderClass) {
+            return !skipValidations.contains(domainBuilderClass);
         }
     }
 }
