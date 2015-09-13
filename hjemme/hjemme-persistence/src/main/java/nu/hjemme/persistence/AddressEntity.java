@@ -1,15 +1,11 @@
 package nu.hjemme.persistence;
 
-import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
 
-/**
- * @author Tor Egil Jacobsen
- */
 public interface AddressEntity extends Address {
     void setCity(String city);
 
-    void setCountry(Country country);
+    void setCountry(String country);
 
     void setAddressLine1(String addressLine1);
 

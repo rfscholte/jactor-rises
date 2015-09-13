@@ -7,10 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Simple caching mechanism for a list of {@link ChosenMenuItemImpl} by {@link nu.hjemme.client.datatype.MenuTarget}
- * @author Tor Egil Jacobsen
- */
+/** Simple caching mechanism for a list of {@link ChosenMenuItemImpl} by {@link nu.hjemme.client.datatype.MenuTarget} */
 public class ChosenMenuItemCache {
 
     private final Map<MenuTarget, List<ChosenMenuItem>> chosenMenuItemCache;

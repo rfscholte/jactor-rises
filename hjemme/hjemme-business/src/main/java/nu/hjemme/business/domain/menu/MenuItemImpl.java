@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 import static java.util.Objects.hash;
 
-/** @author Tor Egil Jacobsen */
 public class MenuItemImpl implements MenuItem {
     private static MenuItemImpl newInstanceCreator = new MenuItemImpl();
 

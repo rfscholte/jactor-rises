@@ -1,14 +1,13 @@
 package nu.hjemme.persistence.dao;
 
 import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.persistence.db.UserEntityImpl;
+import nu.hjemme.persistence.db.DefaultUserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
@@ -26,7 +25,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = UserDaoDbIntegrationTest.DbConfig.class)
+@ContextConfiguration(classes = UserDaoDbIntegrationTest.HjemmeDbContext.class)
 @Transactional
 public class UserDaoDbIntegrationTest {
 
@@ -40,8 +39,9 @@ public class UserDaoDbIntegrationTest {
     }
 
     @Test public void willPersistAndFindUserWithDao() {
-        UserEntityImpl userEntity = new UserEntityImpl();
+        DefaultUserEntity userEntity = new DefaultUserEntity();
         userEntity.setUserName("me");
+        userEntity.setPassword("demo");
         session().save(userEntity);
 
         session().flush();
@@ -54,14 +54,17 @@ public class UserDaoDbIntegrationTest {
         return sessionFactory.getCurrentSession();
     }
 
-    @Configuration
-    public static class DbConfig {
+    @ContextConfiguration
+    public static class HjemmeDbContext {
+
         @Bean(name = "dataSource") @SuppressWarnings("unused") // used by spring
         public DataSource dataSourceFromHsqldb() {
             return new EmbeddedDatabaseBuilder()
                     .setType(EmbeddedDatabaseType.HSQL)
-                    .setName("hjemme-db:" + System.currentTimeMillis())
+                    .setName("hjemme-db" + System.currentTimeMillis())
                     .addScript("classpath:create.db.sql")
+                    .addScript("classpath:create.constraints.sql")
+                    .addScript("classpath:create.default.users.sql")
                     .build();
         }
 
@@ -81,7 +84,7 @@ public class UserDaoDbIntegrationTest {
             return sessionFactory;
         }
 
-        @Bean @SuppressWarnings("unused") // used by spring
+        @Bean(name = "txManager") @SuppressWarnings("unused") // used by spring
         public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
             HibernateTransactionManager txManager = new HibernateTransactionManager();
             txManager.setSessionFactory(sessionFactory);

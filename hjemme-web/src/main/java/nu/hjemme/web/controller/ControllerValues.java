@@ -1,14 +1,10 @@
 package nu.hjemme.web.controller;
 
-/**
- * The values used by controllers on this web application
- * @author Tor Egil Jacobsen
- */
+/** The values used by controllers on this web application */
 final class ControllerValues {
     private static final String USER = "user";
 
-    private ControllerValues() {
-    }
+    private ControllerValues() { }
 
     static final String ATTRIBUTE_USER = USER;
 

@@ -8,7 +8,7 @@ import nu.hjemme.client.domain.menu.dto.MenuDto;
 import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
-import nu.hjemme.persistence.config.HjemmeDbContext;
+import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Rule;
@@ -47,8 +47,7 @@ public class MenuFacadeIntegrationTest {
         List<ChosenMenuItem> chosenMenuItems = testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
 
         assertThat(chosenMenuItems, new TypeSafeBuildMatcher<List<ChosenMenuItem>>("En liste med test menyvalg fra test context") {
-            @Override
-            public MatchBuilder matches(List<ChosenMenuItem> chosenMenuItems, MatchBuilder matchBuilder) {
+            @Override public MatchBuilder matches(List<ChosenMenuItem> chosenMenuItems, MatchBuilder matchBuilder) {
                 matchBuilder.matches(chosenMenuItems.isEmpty(), is(equalTo(false), "lista kan ikke være tom"));
 
                 for (ChosenMenuItem chosenMenuItem : chosenMenuItems) {
@@ -64,15 +63,12 @@ public class MenuFacadeIntegrationTest {
         });
     }
 
-    /**
-     * @author Tor Egil Jacobsen
-     */
     @Configuration
     public static class HjemmeTestMenus {
         @Bean @SuppressWarnings("unused") // brukes av spring
         public MenuDto createTestMenu() {
             return new MenuDto("testMenu")
-                    .leggTil(new MenuItemDto("testParent", "bullseye")
+                    .add(new MenuItemDto("testParent", "bullseye")
                                     .leggTilBarn(new MenuItemDto("testChild", "bullseye?some=where"))
                     );
 

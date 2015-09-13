@@ -1,8 +1,9 @@
 package nu.hjemme.persistence.time;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
-/** @author Tor Egil Jacobsen */
 public class NowAsPureDate extends Now {
 
     public NowAsPureDate() {
@@ -13,6 +14,10 @@ public class NowAsPureDate extends Now {
     protected LocalDateTime nowAsDateTime() {
         return LocalDateTime.now()
                 .withHour(0).withMinute(0).withSecond(0).withNano(0);
+    }
+
+    @Override protected Date nowAsJavaUtilDate() {
+        return Date.from(nowAsDateTime().atZone(ZoneId.systemDefault()).toInstant());
     }
 
     public static void removeNowAsPureDate() {

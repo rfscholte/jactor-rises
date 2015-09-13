@@ -4,47 +4,43 @@ import nu.hjemme.client.domain.menu.dto.MenuDto;
 import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import org.springframework.context.annotation.Bean;
 
-/**
- * @author Tor Egil Jacobsen
- */
-@SuppressWarnings("unused") // brukes av spring
 public class HjemmeWebContext {
 
-    @Bean(name = "hjemme.mainMenu")
+    @Bean(name = "hjemme.mainMenu") @SuppressWarnings("unused") // used by spring
     public MenuDto createMainMenu() {
         return new MenuDto("main")
-                .leggTil(createHomeItem())
-                .leggTil(createJactorItem())
-                .leggTil(createTipItem());
+                .add(homeItem())
+                .add(jactorItem())
+                .add(tipItem());
     }
 
-    @Bean(name = "hjemme.profileMenu")
+    @Bean(name = "hjemme.personMenu") @SuppressWarnings("unused") // used by spring
     public MenuDto createProfilMenu() {
-        return new MenuDto("profile")
-                .leggTil(createAboutItem());
+        return new MenuDto("person")
+                .add(aboutItem());
     }
 
     @Bean(name = "hjemme.homeItem")
-    public MenuItemDto createHomeItem() {
+    public MenuItemDto homeItem() {
         return new MenuItemDto("menu.main.home", "home.do")
-                .medBeskrivelseSom("menu.main.home.desc");
+                .withDescriptionAs("menu.main.home.desc");
     }
 
     @Bean(name = "hjemme.jactorItem")
-    public MenuItemDto createJactorItem() {
+    public MenuItemDto jactorItem() {
         return new MenuItemDto("menu.main.jactor", "user.do?choose=jactor")
-                .medBeskrivelseSom("menu.main.jactor.desc");
+                .withDescriptionAs("menu.main.jactor.desc");
     }
 
     @Bean(name = "hjemme.tipItem")
-    public MenuItemDto createTipItem() {
+    public MenuItemDto tipItem() {
         return new MenuItemDto("menu.main.tip", "user.do?choose=tip")
-                .medBeskrivelseSom("menu.main.tip.desc");
+                .withDescriptionAs("menu.main.tip.desc");
     }
 
     @Bean(name = "hjemme.aboutItem")
-    public MenuItemDto createAboutItem() {
-        return new MenuItemDto("menu.profile.about", "about.do")
-                .medBeskrivelseSom("menu.profile.about.desc");
+    public MenuItemDto aboutItem() {
+        return new MenuItemDto("menu.person.about", "about.do")
+                .withDescriptionAs("menu.person.about.desc");
     }
 }

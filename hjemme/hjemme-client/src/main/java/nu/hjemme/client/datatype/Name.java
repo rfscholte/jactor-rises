@@ -4,10 +4,7 @@ import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-/**
- * A bean representing a name
- * @author Tor Egil Jacobsen
- */
+/** A bean representing a name */
 public class Name implements Comparable<Name> {
     static final String A_NAME_MUST_BE_GIVEN = "A name must be given";
 

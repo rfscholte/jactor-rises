@@ -1,15 +1,17 @@
 package nu.hjemme.persistence;
 
-import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Person;
 
 public interface PersonEntity extends Person {
-    @Override AddressEntity getAddress();
+    @Override UserEntity getUser();
 
-    void setFirstName(Name firstName);
+    void setAddressEntity(AddressEntity addressEntity);
 
-    void setLastName(Name lastName);
+    void setDescription(String description);
 
-    void setAddress(AddressEntity address);
+    void setFirstName(String firstName);
 
+    void setLastName(String lastName);
+
+    void setUserEntity(UserEntity userEntity);
 }

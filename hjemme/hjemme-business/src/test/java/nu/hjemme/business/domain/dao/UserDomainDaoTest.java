@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.dao;
 
 import nu.hjemme.business.domain.UserDomain;
-import nu.hjemme.business.domain.builder.DomainBuilderValidations;
+import nu.hjemme.business.rules.BuildValidations;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.PersistentData;
 import nu.hjemme.persistence.UserEntity;
@@ -13,8 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static nu.hjemme.business.domain.builder.DomainBuilder.Build.USER;
-import static nu.hjemme.business.domain.builder.DomainBuilder.aUser;
+import static nu.hjemme.business.domain.UserDomain.aUser;
+import static nu.hjemme.business.rules.BuildValidations.Build.USER;
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class UserDomainDaoTest {
     @InjectMocks private UserDomainDao userDomainDaoToTest;
-    @Rule public DomainBuilderValidations domainBuilderValidations = DomainBuilderValidations.init().skipValidationOn(USER);
+    @Rule public BuildValidations buildValidations = BuildValidations.skipValidationOn(USER);
     @Mock private UserDao userDaoMock;
 
     @Test public void willNotSaveNull() {
@@ -59,7 +59,7 @@ public class UserDomainDaoTest {
     }
 
     @Test public void willReturnDomainWhenEntityIsFound() {
-        when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(PersistentData.getInstance().provideEntityFor(UserEntity.class));
+        when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(PersistentData.getInstance().provideInstanceFor(UserEntity.class));
         userDomainDaoToTest.findUsing(new UserName("someone"));
         verify(userDaoMock, times(1)).findUsing(new UserName("someone"));
     }

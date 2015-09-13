@@ -16,21 +16,17 @@ import java.util.List;
 import java.util.Map;
 
 import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_MAIN_ITEMS;
-import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_PROFILE_ITEMS;
+import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_PERSON_ITEMS;
 import static nu.hjemme.web.interceptor.InterceptorValues.MAIN_MENU;
-import static nu.hjemme.web.interceptor.InterceptorValues.PROFILE_MENU;
+import static nu.hjemme.web.interceptor.InterceptorValues.PERSON_MENU;
 
-/**
- * The {@link MenuInterceptor} is a {@link HandlerInterceptorAdapter}  which put the menus on the model.
- * @author Tor Egil Jacobsen
- */
+/** The {@link MenuInterceptor} is a {@link HandlerInterceptorAdapter}  which put the menus on the model. */
 @Component
 public class MenuInterceptor extends HandlerInterceptorAdapter {
 
     private MenuFacade menuFacade;
 
-    @Override
-    public void postHandle(
+    @Override public void postHandle(
             HttpServletRequest request,
             HttpServletResponse response,
             Object handler,
@@ -38,29 +34,28 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
     ) {
         MenuItemTargetDto menuItemTargetDto = new MenuItemTargetDto(request);
         MenuTarget mainMenuTarget = new MenuTarget(menuItemTargetDto, MAIN_MENU);
-        MenuTarget profileMenuTarget = new MenuTarget(menuItemTargetDto, PROFILE_MENU);
+        MenuTarget personMenuTarget = new MenuTarget(menuItemTargetDto, PERSON_MENU);
 
         MenuDto mainMenuDto = new MenuDto(menuFacade.retrieveChosenMenuItemBy(mainMenuTarget));
-        MenuDto profileMenuDto = new MenuDto(menuFacade.retrieveChosenMenuItemBy(profileMenuTarget));
+        MenuDto personMenuDto = new MenuDto(menuFacade.retrieveChosenMenuItemBy(personMenuTarget));
 
         List<ChosenMenuItemDto> chosenMenuItemsFromMainMenu = mainMenuDto.getChosenMenuItems();
-        List<ChosenMenuItemDto> chosenMenuItemsFromProfileMenu = profileMenuDto.getChosenMenuItems();
+        List<ChosenMenuItemDto> chosenMenuItemsFromPersonMenu = personMenuDto.getChosenMenuItems();
 
-        addMenuItemsToModelAndView(modelAndView, chosenMenuItemsFromMainMenu, chosenMenuItemsFromProfileMenu);
+        addMenuItemsToModelAndView(modelAndView, chosenMenuItemsFromMainMenu, chosenMenuItemsFromPersonMenu);
     }
 
     private void addMenuItemsToModelAndView(
             ModelAndView modelAndView,
             List<ChosenMenuItemDto> chosenMenuItemsFromMainMenu,
-            List<ChosenMenuItemDto> chosenMenuItemsFromProfileMenu
+            List<ChosenMenuItemDto> chosenMenuItemsFromPersonMenu
     ) {
         Map<String, Object> modelMap = modelAndView.getModel();
         modelMap.put(ATTRIBUTE_MAIN_ITEMS, chosenMenuItemsFromMainMenu);
-        modelMap.put(ATTRIBUTE_PROFILE_ITEMS, chosenMenuItemsFromProfileMenu);
+        modelMap.put(ATTRIBUTE_PERSON_ITEMS, chosenMenuItemsFromPersonMenu);
     }
 
-    @Autowired
-    public void setMenuFacade(MenuFacade menuFacade) {
+    @Autowired public void setMenuFacade(MenuFacade menuFacade) {
         this.menuFacade = menuFacade;
     }
 }

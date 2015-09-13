@@ -7,7 +7,6 @@ import nu.hjemme.client.domain.menu.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-/** @author Tor Egil Jacobsen */
 public class MenuItemDto implements MenuItem {
     private final List<MenuItemDto> children = new ArrayList<>();
     private final String menuItemTarget;
@@ -24,7 +23,7 @@ public class MenuItemDto implements MenuItem {
         return this;
     }
 
-    public MenuItemDto medBeskrivelseSom(String beskrivelse) {
+    public MenuItemDto withDescriptionAs(String beskrivelse) {
         this.beskrivelse = beskrivelse;
         return this;
     }
@@ -33,18 +32,15 @@ public class MenuItemDto implements MenuItem {
         return name;
     }
 
-    @Override
-    public Description getDescription() {
+    @Override public Description getDescription() {
         return new Description(name, beskrivelse);
     }
 
-    @Override
-    public MenuItemTarget getMenuItemTarget() {
+    @Override public MenuItemTarget getMenuItemTarget() {
         return new MenuItemTarget(menuItemTarget);
     }
 
-    @Override
-    public List<? extends MenuItem> getChildren() {
+    @Override public List<? extends MenuItem> getChildren() {
         return children;
     }
 }

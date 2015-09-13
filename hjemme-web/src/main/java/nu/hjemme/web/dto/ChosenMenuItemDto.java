@@ -5,10 +5,9 @@ import nu.hjemme.client.domain.menu.ChosenMenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-/** @author Tor Egil Jacobsen */
 public class ChosenMenuItemDto {
     private final ChosenMenuItem chosenMenuItem;
-    private final List<ChosenMenuItemDto> chosenChildren = new ArrayList<ChosenMenuItemDto>();
+    private final List<ChosenMenuItemDto> chosenChildren = new ArrayList<>();
 
     public ChosenMenuItemDto(ChosenMenuItem chosenMenuItem) {
         this.chosenMenuItem = chosenMenuItem;

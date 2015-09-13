@@ -1,16 +1,17 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.AddressDomain;
-import nu.hjemme.client.datatype.Country;
 import nu.hjemme.persistence.AddressEntity;
 import org.apache.commons.lang.Validate;
+
+import static nu.hjemme.persistence.converter.CountryConverter.SPLITTER;
 
 public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
     static final String ADDRESS_LINE_1_CANNOT_BE_EMPTY = "Address line 1 cannot be empty";
     static final String COUNTRY_CANNOT_BE_NULL = "A country must be provided";
     static final String ZIP_CODE_CANNOT_BE_NULL = "A Zip code must be provided";
 
-    private AddressEntity addressEntity = newInstance(AddressEntity.class);
+    private AddressEntity addressEntity = newInstanceOf(AddressEntity.class);
 
     public AddressDomainBuilder withCityAs(String city) {
         addressEntity.setCity(city);
@@ -18,7 +19,7 @@ public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
     }
 
     public AddressDomainBuilder withCountryAs(String code, String locale) {
-        addressEntity.setCountry(new Country(code, locale));
+        addressEntity.setCountry(code + SPLITTER + locale);
         return this;
     }
 

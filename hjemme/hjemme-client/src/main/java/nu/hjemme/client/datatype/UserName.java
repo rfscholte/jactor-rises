@@ -4,14 +4,12 @@ import java.util.Objects;
 
 import static java.util.Objects.hash;
 
-/** @author Tor Egil Jacobsen */
 public class UserName extends Name {
     public UserName(String name) {
         super(name);
     }
 
-    @Override
-    public boolean equals(Object obj) {
+    @Override public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -26,8 +24,7 @@ public class UserName extends Name {
         return Objects.equals(thisName, thatName);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return hash(getName() != null ? getName().toUpperCase() : null);
     }
 }

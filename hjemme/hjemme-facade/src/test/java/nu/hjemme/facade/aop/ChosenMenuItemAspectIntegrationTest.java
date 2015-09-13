@@ -10,7 +10,7 @@ import nu.hjemme.client.domain.menu.dto.MenuDto;
 import nu.hjemme.client.domain.menu.dto.MenuItemDto;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
-import nu.hjemme.persistence.config.HjemmeDbContext;
+import nu.hjemme.facade.config.HjemmeDbContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,7 +60,7 @@ public class ChosenMenuItemAspectIntegrationTest {
         @Bean
         @SuppressWarnings("unused") // brukes av spring
         public Menu createMockedMenu() {
-            return new MenuDto("my.menu").leggTil(new MenuItemDto("menuvalg", "somewhere"));
+            return new MenuDto("my.menu").add(new MenuItemDto("menuvalg", "somewhere"));
         }
     }
 }

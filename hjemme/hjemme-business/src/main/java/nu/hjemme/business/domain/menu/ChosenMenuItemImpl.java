@@ -6,7 +6,6 @@ import nu.hjemme.client.datatype.MenuItemTarget;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/** @author Tor Egil Jacobsen */
 public class ChosenMenuItemImpl implements nu.hjemme.client.domain.menu.ChosenMenuItem {
     private final List<nu.hjemme.client.domain.menu.ChosenMenuItem> chosenChildren;
     private final MenuItemImpl menuItem;

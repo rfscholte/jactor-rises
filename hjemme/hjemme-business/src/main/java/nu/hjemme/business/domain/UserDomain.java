@@ -1,13 +1,13 @@
 package nu.hjemme.business.domain;
 
+import nu.hjemme.business.domain.builder.UserDomainBuilder;
 import nu.hjemme.business.domain.dao.UserDomainDao;
 import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.client.domain.Profile;
+import nu.hjemme.client.domain.Person;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.UserEntity;
 
-/** @author Tor Egil Jacobsen */
 public class UserDomain extends PersistentDomain<UserEntity, Long> implements User {
 
     private static UserDomainDao userDomainDao;
@@ -16,23 +16,19 @@ public class UserDomain extends PersistentDomain<UserEntity, Long> implements Us
         super(userEntity);
     }
 
-    @Override
-    public String getPassword() {
+    @Override public String getPassword() {
         return getEntity().getPassword();
     }
 
-    @Override
-    public UserName getUserName() {
+    @Override public UserName getUserName() {
         return getEntity().getUserName();
     }
 
-    @Override
-    public Profile getProfile() {
-        return getEntity().getProfile();
+    @Override public Person getPerson() {
+        return getEntity().getPerson();
     }
 
-    @Override
-    public EmailAddress getEmailAddress() {
+    @Override public EmailAddress getEmailAddress() {
         return getEntity().getEmailAddress();
     }
 
@@ -44,7 +40,7 @@ public class UserDomain extends PersistentDomain<UserEntity, Long> implements Us
         UserDomain.userDomainDao = userDomainDao;
     }
 
-    public static UserDomainDao getUserDomainDao() {
-        return UserDomain.userDomainDao;
+    public static UserDomainBuilder aUser() {
+        return new UserDomainBuilder();
     }
 }

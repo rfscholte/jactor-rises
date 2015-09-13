@@ -4,18 +4,14 @@ import nu.hjemme.client.datatype.Name;
 
 import java.time.LocalDateTime;
 
-/** @author Tor Egil Jacobsen */
-public interface Entry extends Persistent<Long> {
+public interface Entry {
 
     /** @return creation time of an entry */
-    LocalDateTime getCreationTime();
+    LocalDateTime getCreatedTime();
 
     /** @return the actual entry */
     String getEntry();
 
-    /** @return who/what created the entry */
+    /** @return the creator which is the originator of the entry */
     Name getCreatorName();
-
-    /** @return the {@link Person} which is the originator of the entry (if provided) */
-    Person getCreator();
 }

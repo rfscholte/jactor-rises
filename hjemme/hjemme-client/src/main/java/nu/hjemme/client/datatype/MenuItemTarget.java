@@ -9,13 +9,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import static java.util.Arrays.asList;
 import static java.util.Objects.hash;
 
-/**
- * A bean representing the target of a menu item
- * @author Tor Egil Jacobsen
- */
+/** A bean representing the target of a menu item */
 public class MenuItemTarget {
 
     private static final String COMMA = ",";
@@ -53,16 +49,6 @@ public class MenuItemTarget {
     }
 
     private List<Parameter> findParametersFromString(String parametersAsString) {
-        int indexComma = parametersAsString.indexOf(',');
-
-        if (indexComma == -1) {
-            return asList(new Parameter(parametersAsString));
-        }
-
-        return findSeveralParametersFrom(parametersAsString);
-    }
-
-    private List<Parameter> findSeveralParametersFrom(String parametersAsString) {
         String[] severalParameters = parametersAsString.split(COMMA);
         List<Parameter> parameterList = new ArrayList<>(severalParameters.length);
 
@@ -73,8 +59,7 @@ public class MenuItemTarget {
         return parameterList;
     }
 
-    @Override
-    public boolean equals(Object obj) {
+    @Override public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -88,13 +73,11 @@ public class MenuItemTarget {
         return Objects.equals(target, menuItemTarget.target) && Objects.equals(parameters, menuItemTarget.parameters);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return hash(target, parameters);
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return target + parametersAsString();
     }
 

@@ -6,7 +6,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import static nu.hjemme.web.html.ParameterConstants.CHOOSE_USER;
 
-/** @author Tor Egil Jacobsen */
 public class UserNameDto {
     private UserName userName;
 

@@ -4,7 +4,7 @@ import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.Address;
-import nu.hjemme.client.domain.Profile;
+import nu.hjemme.client.domain.Person;
 import nu.hjemme.client.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class UserDtoTest {
     @Mock private Address mockedAddress;
     @Mock private User mockedUser;
-    @Mock private Profile mockedProfile;
+    @Mock private Person mockedPerson;
 
     @Test public void willGetTheAddress() {
         mockUserInstance();
@@ -39,7 +39,7 @@ public class UserDtoTest {
         assertThat("User name", testUserDto.getUserName(), is(equalTo("user")));
     }
 
-    @Test public void willGetTheProfile() {
+    @Test public void willGetThePersonForTheUser() {
         mockUserInstance();
         UserDto testUserDto = new UserDto(mockedUser);
 
@@ -50,11 +50,11 @@ public class UserDtoTest {
 
     private void mockUserInstance() {
         when(mockedUser.getUserName()).thenReturn(new UserName("user"));
-        when(mockedUser.getProfile()).thenReturn(mockedProfile);
-        when(mockedProfile.getAddress()).thenReturn(mockedAddress);
-        when(mockedProfile.getDescription()).thenReturn(new Description("description"));
-        when(mockedProfile.getFirstName()).thenReturn(new Name("John"));
-        when(mockedProfile.getLastName()).thenReturn(new Name("Smith"));
+        when(mockedUser.getPerson()).thenReturn(mockedPerson);
+        when(mockedPerson.getAddress()).thenReturn(mockedAddress);
+        when(mockedPerson.getDescription()).thenReturn(new Description("description"));
+        when(mockedPerson.getFirstName()).thenReturn(new Name("John"));
+        when(mockedPerson.getLastName()).thenReturn(new Name("Smith"));
         when(mockedAddress.getAddressLine1()).thenReturn("address line 1");
         when(mockedAddress.getAddressLine2()).thenReturn("address line 2");
         when(mockedAddress.getCity()).thenReturn("somewhere");

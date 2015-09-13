@@ -9,4 +9,5 @@
 
     <bean id = "hjemme.appContext" class = "nu.hjemme.facade.config.HjemmeBeanContext" />
     <bean id = "hjemme.webContext" class = "nu.hjemme.web.config.HjemmeWebContext" />
+    <bean id = "hjemme.webDbContext" class = "nu.hjemme.web.config.HjemmeWebDbContext" />
 </beans>

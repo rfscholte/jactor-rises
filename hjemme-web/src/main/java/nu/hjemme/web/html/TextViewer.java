@@ -1,11 +1,9 @@
 package nu.hjemme.web.html;
 
-/** @author Tor Egil Jacobsen */
 public class TextViewer {
     private static TextViewer instance;
 
-    protected TextViewer() {
-    }
+    protected TextViewer() { }
 
     static {
         instance = new TextViewer();

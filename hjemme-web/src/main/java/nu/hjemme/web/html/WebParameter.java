@@ -1,6 +1,5 @@
 package nu.hjemme.web.html;
 
-/** @author Tor Egil Jacobsen */
 public class WebParameter {
 
     private String name;

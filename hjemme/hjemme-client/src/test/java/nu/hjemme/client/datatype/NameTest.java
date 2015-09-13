@@ -10,14 +10,11 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-/** @author Tor Egil Jacobsen */
 public class NameTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+    @Rule public ExpectedException expectedException = ExpectedException.none();
 
-    @Test
-    public void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
+    @Test public void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
         Name base = new Name("name");
         Name equal = new Name("name");
         Name notEqual = new Name("another name");
@@ -25,8 +22,7 @@ public class NameTest {
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
-    @Test
-    public void whenChecksForEqualityIsDoneTheValuesOfThePropertiesMustBeCorrect() {
+    @Test public void whenChecksForEqualityIsDoneTheValuesOfThePropertiesMustBeCorrect() {
         Name base = new Name("name");
         Name equal = new Name("name");
         Name notEqual = new Name("another name");
@@ -34,29 +30,25 @@ public class NameTest {
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }
 
-    @Test
-    public void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
+    @Test public void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
         assertThat("Name", new Name("another name").toString(), is(equalTo("Name[another name]")));
     }
 
-    @Test
-    public void whenInitializingTheMenuNameCannotBeNull() {
+    @Test public void whenInitializingTheMenuNameCannotBeNull() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(Name.A_NAME_MUST_BE_GIVEN);
 
         new Name(null);
     }
 
-    @Test
-    public void whenInitializingTheMenuNameCannotBeEmpty() {
+    @Test public void whenInitializingTheMenuNameCannotBeEmpty() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(Name.A_NAME_MUST_BE_GIVEN);
 
         new Name("");
     }
 
-    @Test
-    public void willBeComparableAccordingToTheStringValue() {
+    @Test public void willBeComparableAccordingToTheStringValue() {
         assertThat("Comparable", new Name("a name").compareTo(new Name("different name")),
                 is(equalTo("a name".compareTo("different name")))
         );

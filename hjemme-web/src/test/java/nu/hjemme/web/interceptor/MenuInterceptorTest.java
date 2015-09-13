@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_MAIN_ITEMS;
-import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_PROFILE_ITEMS;
+import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_PERSON_ITEMS;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -22,23 +22,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/** @author Tor Egil Jacobsen */
 @RunWith(MockitoJUnitRunner.class)
 public class MenuInterceptorTest {
 
-    @Mock
-    MenuFacade mockedMenuFacade;
+    @Mock private MenuFacade mockedMenuFacade;
 
     private MenuInterceptor testMenuInterceptor;
 
-    @Before
-    public void setUpTests() {
+    @Before public void setUpTests() {
         testMenuInterceptor = new MenuInterceptor();
         testMenuInterceptor.setMenuFacade(mockedMenuFacade);
     }
 
-    @Test
-    public void whenHandlingHttpRequestTheAwareMenuItemsAreGathered() throws Exception {
+    @Test public void whenHandlingHttpRequestTheAwareMenuItemsAreGathered() throws Exception {
         HttpServletRequest mockedHttpServletRequest = mock(HttpServletRequest.class);
 
         when(mockedHttpServletRequest.getRequestURI()).thenReturn("uri");
@@ -50,6 +46,6 @@ public class MenuInterceptorTest {
         verify(mockedMenuFacade, times(2)).retrieveChosenMenuItemBy(any(MenuTarget.class));
 
         assertThat("The aware main items should be present", modelAndView.getModel().get(ATTRIBUTE_MAIN_ITEMS), is(notNullValue()));
-        assertThat("The aware profile items should be present", modelAndView.getModel().get(ATTRIBUTE_PROFILE_ITEMS), is(notNullValue()));
+        assertThat("The aware persons items should be present", modelAndView.getModel().get(ATTRIBUTE_PERSON_ITEMS), is(notNullValue()));
     }
 }

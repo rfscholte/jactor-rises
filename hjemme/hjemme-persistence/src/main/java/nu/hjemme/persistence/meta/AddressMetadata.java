@@ -1,8 +1,9 @@
 package nu.hjemme.persistence.meta;
 
-/** @author Tor Egil Jacobsen */
 public final class AddressMetadata {
     private AddressMetadata() {}
+
+    public static final String TABLE = "T_ADDRESS";
 
     /** The country where the address is located */
     public static final String COUNTRY = "COUNTRY";

@@ -1,17 +1,16 @@
 package nu.hjemme.business.domain;
 
+import nu.hjemme.business.domain.builder.BlogEntryDomainBuilder;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.client.domain.BlogEntry;
-import nu.hjemme.client.domain.Person;
-import nu.hjemme.persistence.db.BlogEntryEntityImpl;
+import nu.hjemme.persistence.BlogEntryEntity;
 
 import java.time.LocalDateTime;
 
-/** @author Tor Egil Jacobsen */
-public class BlogEntryDomain extends PersistentDomain<BlogEntryEntityImpl, Long> implements BlogEntry {
+public class BlogEntryDomain extends PersistentDomain<BlogEntryEntity, Long> implements BlogEntry {
 
-    public BlogEntryDomain(BlogEntryEntityImpl blogEntryEntity) {
+    public BlogEntryDomain(BlogEntryEntity blogEntryEntity) {
         super(blogEntryEntity);
     }
 
@@ -20,9 +19,8 @@ public class BlogEntryDomain extends PersistentDomain<BlogEntryEntityImpl, Long>
         return new BlogDomain(getEntity().getBlog());
     }
 
-    @Override
-    public LocalDateTime getCreationTime() {
-        return getEntity().getCreationTime();
+    @Override public LocalDateTime getCreatedTime() {
+        return getEntity().getCreatedTime();
     }
 
     @Override
@@ -30,13 +28,11 @@ public class BlogEntryDomain extends PersistentDomain<BlogEntryEntityImpl, Long>
         return getEntity().getEntry();
     }
 
-    @Override
-    public Name getCreatorName() {
+    @Override public Name getCreatorName() {
         return getEntity().getCreatorName();
     }
 
-    @Override
-    public Person getCreator() {
-        return new PersonDomain(getEntity().getCreator());
+    public static BlogEntryDomainBuilder aBlogEntry() {
+        return new BlogEntryDomainBuilder();
     }
 }

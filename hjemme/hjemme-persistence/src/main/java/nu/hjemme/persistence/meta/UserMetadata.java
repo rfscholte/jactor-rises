@@ -1,6 +1,5 @@
 package nu.hjemme.persistence.meta;
 
-/** @author Tor Egil Jacobsen */
 public final class UserMetadata {
 
     private UserMetadata() {}
@@ -16,6 +15,6 @@ public final class UserMetadata {
     public static final String EMAIL = "EMAIL";
     /** If the user uses the email address as an user name */
     public static final String EMAIL_AS_NAME = "EMAIL_AS_NAME";
-    /** Foreign key to the profile */
-    public static final String PROFILE_ID = "PROFILE_ID";
+    /** Foreign key to the person */
+    public static final String PERSON_ID = "PERSON_ID";
 }

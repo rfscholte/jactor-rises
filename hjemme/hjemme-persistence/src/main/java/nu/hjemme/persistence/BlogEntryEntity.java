@@ -2,13 +2,9 @@ package nu.hjemme.persistence;
 
 import nu.hjemme.client.domain.BlogEntry;
 
-/**
- * @author Tor Egil Jacobsen
- */
-public interface BlogEntryEntity extends BlogEntry {
+public interface BlogEntryEntity extends BlogEntry, PersistentEntry {
 
-    @Override
-    BlogEntity getBlog();
+    @Override BlogEntity getBlog();
 
     void setBlog(BlogEntity blog);
 }

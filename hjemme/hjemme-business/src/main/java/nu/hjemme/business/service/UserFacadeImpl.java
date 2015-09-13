@@ -5,9 +5,6 @@ import nu.hjemme.client.domain.User;
 import nu.hjemme.client.service.UserFacade;
 import nu.hjemme.persistence.dao.UserDao;
 
-import java.util.Map;
-
-/** @author Tor Egil Jacobsen */
 public class UserFacadeImpl implements UserFacade {
 
     private final UserDao userDao;
@@ -16,8 +13,7 @@ public class UserFacadeImpl implements UserFacade {
         this.userDao = userDao;
     }
 
-    @Override
-    public User findUsing(UserName userName) {
+    @Override public User findUsing(UserName userName) {
         return userDao.findUsing(userName);
     }
 }
