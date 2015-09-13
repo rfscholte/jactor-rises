@@ -10,6 +10,7 @@ import nu.hjemme.client.service.UserFacade;
 import nu.hjemme.facade.aop.ChosenMenuItemAspect;
 import nu.hjemme.persistence.PersistentData;
 import nu.hjemme.persistence.dao.UserDao;
+import nu.hjemme.persistence.dao.UserDaoDb;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +35,11 @@ public class HjemmeBeanContext {
     @Bean(name = "hjemme.userFacade") @SuppressWarnings("unused")  // initialized by spring
     public UserFacade userFacade(SessionFactory sessionFactory) {
         return new UserFacadeImpl(PersistentData.getInstance().provideInstanceFor(UserDao.class, sessionFactory));
+    }
+
+    @Bean(name = "hjemme.userDao") @SuppressWarnings("unused")  // initialized by spring
+    public UserDao userDao(SessionFactory sessionFactory) {
+        return new UserDaoDb(sessionFactory);
     }
 
     @Bean(name = "hjemme.aop.chosenMenuItems") @SuppressWarnings("unused") // initialized by spring

@@ -1,7 +1,5 @@
 package nu.hjemme.facade.config;
 
-import nu.hjemme.persistence.dao.UserDao;
-import nu.hjemme.persistence.dao.UserDaoDb;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,10 +47,5 @@ public class HjemmeDbContext {
         txManager.setSessionFactory(sessionFactory);
 
         return txManager;
-    }
-
-    @Bean(name = "hjemme.persistence.userDao") @SuppressWarnings("unused") // used by spring
-    public UserDao userDao(SessionFactory sessionFactory) {
-        return new UserDaoDb(sessionFactory);
     }
 }
