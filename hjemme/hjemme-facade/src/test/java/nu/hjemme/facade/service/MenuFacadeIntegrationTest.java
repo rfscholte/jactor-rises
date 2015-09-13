@@ -68,7 +68,7 @@ public class MenuFacadeIntegrationTest {
         @Bean @SuppressWarnings("unused") // brukes av spring
         public MenuDto createTestMenu() {
             return new MenuDto("testMenu")
-                    .leggTil(new MenuItemDto("testParent", "bullseye")
+                    .add(new MenuItemDto("testParent", "bullseye")
                                     .leggTilBarn(new MenuItemDto("testChild", "bullseye?some=where"))
                     );
 

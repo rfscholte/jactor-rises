@@ -60,7 +60,7 @@ public class ChosenMenuItemAspectIntegrationTest {
         @Bean
         @SuppressWarnings("unused") // brukes av spring
         public Menu createMockedMenu() {
-            return new MenuDto("my.menu").leggTil(new MenuItemDto("menuvalg", "somewhere"));
+            return new MenuDto("my.menu").add(new MenuItemDto("menuvalg", "somewhere"));
         }
     }
 }

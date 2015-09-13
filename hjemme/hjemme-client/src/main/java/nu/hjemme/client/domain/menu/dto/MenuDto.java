@@ -17,7 +17,7 @@ public class MenuDto implements Menu {
         this.name = name;
     }
 
-    public MenuDto leggTil(MenuItemDto menuItemDto) {
+    public MenuDto add(MenuItemDto menuItemDto) {
         menuItems.add(menuItemDto);
         return this;
     }
