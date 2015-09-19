@@ -1,6 +1,6 @@
 # funksjoner
 function wcgrep {													# fun: wcgrep
-    grep -R $1 * | grep -v target | grep -v \.git | grep -v "~" | grep -v ".pyc" | grep -v Binary | grep --color -n $1	# fun: wcgrep
+    grep -R $1 * | grep -v target | grep -v .git | grep -v "~" | grep -v ".pyc" | grep -v Binary | grep --color -n $1	# fun: wcgrep
 }															# fun: wcgrep
 															# fun:
 function grath {													# fun: grath
@@ -10,9 +10,9 @@ function grath {													# fun: grath
 function filelog() {													# fun: (git) lister ut commits fra tidspunkt som ikke inkluderer testfiler
         if [ $# -eq 0 ]													# fun: (git)
                 then													# fun: (git)
-                git log --name-only --oneline | grep -v -i Test								# fun: (git)
+                git log --name-only --oneline | grep src/main | grep -v src/test					# fun: (git)
         else														# fun: (git)
-                git log --name-only --oneline --since=$1 | grep -v -i Test						# fun: (git)
+                git log --name-only --oneline --since=$1 | grep src/main | grep -v src/test				# fun: (git)
         fi														# fun: (git)
 }															# fun: (git)
 															# fun:
@@ -21,10 +21,13 @@ precmd () {														# fun: genererer tittel pa konsollvindu (kjores for hve
 }															# fun:
 															# fun:
 # System variables
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home						# var: hjemmekatalogen til gjeldende jdk
+export CATALINA_HOME=/Library/Catalina											# var: hjemmekatalogen til apache tomcat installasjon
+export DEPLOY_LINK=http://localhost:8080/manager/text/deploy								# var: url til deploy
+export JAVA_HOME=$(/usr/libexec/java_home)										# var: hjemmekatalogen til gjeldende jdk
 export M2_HOME=/usr/lib/apache-maven-3.2.1										# var: hjemmeomrade til maven
 export PATH=$PATH:$M2_HOME/bin												# var: bin mappa til maven er en del av PATH
 export WS=$HOME/ws													# var: miljøvariabel for filsti til workspace
+export WAR_FILE=$WS/hjemme/hjemme-web/target/hjemme.war									# var: filsti til hjemme.war
 setopt correctall													# opt: zsh-option som foreslar rettelser av kommandoer som har skriveleif
 setopt allexport													# opt: zsh option for a legge til historikk for kommandoer
 HISTFILE=~/.histfile													# opt: historikkfil i zsh
@@ -95,7 +98,13 @@ alias mhe='mvn help:effective-pom'											# cmd: print ut reell pom (maven)
 alias mvd='mvn versions:display-property-updates' 									# cmd: skriv ut versjoner som kan oppdateres i pom.xml (maven)
 alias mvupa='mvn versions:update-parent'										# cmd: oppdater pom.xml forelder (maven)
 alias mvupr='mvn versions:update-properties'										# cmd: oppdater versjoner til avhengigheter i pom.xml (maven)
- 
+
+# Tomcat
+alias tom.bin='la $CATALINA_HOME/bin/'											# cmd: lister innhold i Tomcat/bin
+alias tom.cp='cp $WAR_FILE $CATALINA_HOME/webapps && echo copying $WAR_FILE to $CATALINA_HOME/webapps'			# cmd: kopier war til CATALINA_HOME/webapps
+alias tom.start='$CATALINA_HOME/bin/startup.sh'										# cmd: start up apache tomcat
+alias tom.stop='$CATALINA_HOME/bin/shutdown.sh'										# cmd: shut down apache tomcat
+
 # Alias, diverse:
 alias ..='cd .. && la'													# navigasjon: en mappe ned og list dens innhold
 alias clear='echo "====================== C L E A R E D ======================" && clear'				# cmd: setter en melding for at skjermen er rensket for tekst og rensker skjermen for tekst
@@ -103,7 +112,6 @@ alias cmd='more $HOME/.zshrc | grep "# cmd:"'										# cmd: list alle alias fo
 alias cmd.git='fun | grep "# fun: (git)" && cmd | grep git'								# cmd: lister alle funksjoner/kommandoer som har noe med git
 alias cmd.grep='cmd | grep '												# cmd: grepper alle kommandoer i zshrc
 alias con='more $HOME/.zshrc | grep -e "# var:" -e "# opt:"'								# cmd: list all configurasjon i .zshrc
-alias con.grep='con | grep -i'												# cmd: grepper alle konfigureringer i zshrc
 alias env.grep='env | grep -i'												# cmd: case insensitive grepping av miljovariabler
 alias files.hide='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'				# cmd: skjul "hidden files" fra Finder (Mac Os X)
 alias files.show='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'				# cmd: vis "hidden files" fra Finder (Mac Os X)
