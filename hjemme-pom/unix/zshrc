@@ -102,6 +102,7 @@ alias mvupr='mvn versions:update-properties'										# cmd: oppdater versjoner 
 # Tomcat
 alias tom.bin='la $CATALINA_HOME/bin/'											# cmd: lister innhold i Tomcat/bin
 alias tom.cp='cp $WAR_FILE $CATALINA_HOME/webapps && echo copying $WAR_FILE to $CATALINA_HOME/webapps'			# cmd: kopier war til CATALINA_HOME/webapps
+alias tom.restart='tom.stop && tom.start'										# cmd: stops a running apache tomcat and starts it agian
 alias tom.start='$CATALINA_HOME/bin/startup.sh'										# cmd: start up apache tomcat
 alias tom.stop='$CATALINA_HOME/bin/shutdown.sh'										# cmd: shut down apache tomcat
 
