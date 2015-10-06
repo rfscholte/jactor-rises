@@ -22,9 +22,8 @@ precmd () {														# fun: genererer tittel pa konsollvindu (kjores for hve
 															# fun:
 # System variables
 export CATALINA_HOME=/Library/Catalina											# var: hjemmekatalogen til apache tomcat installasjon
-export DEPLOY_LINK=http://localhost:8080/manager/text/deploy								# var: url til deploy
 export JAVA_HOME=$(/usr/libexec/java_home)										# var: hjemmekatalogen til gjeldende jdk
-export M2_HOME=/usr/lib/apache-maven-3.2.1										# var: hjemmeomrade til maven
+export M2_HOME=/Library/maven												# var: hjemmeomrade til maven
 export PATH=$PATH:$M2_HOME/bin												# var: bin mappa til maven er en del av PATH
 export WS=$HOME/ws													# var: miljøvariabel for filsti til workspace
 export WAR_FILE=$WS/hjemme/hjemme-web/target/hjemme.war									# var: filsti til hjemme.war
