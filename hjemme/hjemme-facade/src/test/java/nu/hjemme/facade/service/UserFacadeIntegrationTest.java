@@ -25,7 +25,7 @@ public class UserFacadeIntegrationTest {
     @Resource @SuppressWarnings("unused") // initialized by spring
     private UserFacade testUserFacade;
 
-    @Test public void willRetrieveStandardUser() {
+    @Test public void willfetchStandardUser() {
         assertThat(testUserFacade.findUsing(new UserName("tip")), is(notNullValue(), "User by UserName"));
     }
 }

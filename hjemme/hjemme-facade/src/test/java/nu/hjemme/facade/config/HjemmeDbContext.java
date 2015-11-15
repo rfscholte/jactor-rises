@@ -14,8 +14,7 @@ import java.util.Properties;
 @Configuration
 public class HjemmeDbContext {
 
-    @Bean(name = "dataSource") @SuppressWarnings("unused") // used by spring
-    public DataSource dataSourceFromHsqldb() {
+    @Bean(name = "dataSource") public DataSource dataSourceFromHsqldb() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
                 .setName("hjemme-db" + System.currentTimeMillis())
@@ -25,11 +24,10 @@ public class HjemmeDbContext {
                 .build();
     }
 
-    @Bean(name = "sessionFactory") @SuppressWarnings("unused") // used by spring
-    public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
+    @Bean(name = "sessionFactory") public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource);
         sessionFactory.setPackagesToScan("nu.hjemme.persistence.db");
+        sessionFactory.setDataSource(dataSource);
         sessionFactory.setHibernateProperties(new Properties() {
             {
                 setProperty("hibernate.hbm2ddl.auto", "validate");
@@ -41,8 +39,7 @@ public class HjemmeDbContext {
         return sessionFactory;
     }
 
-    @Bean(name = "txManager") @SuppressWarnings("unused") // used by spring
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+    @Bean(name = "txManager") public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(sessionFactory);
 

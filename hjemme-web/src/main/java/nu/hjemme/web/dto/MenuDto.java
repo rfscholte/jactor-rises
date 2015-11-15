@@ -1,20 +1,20 @@
 package nu.hjemme.web.dto;
 
-import nu.hjemme.client.domain.menu.ChosenMenuItem;
+import nu.hjemme.client.domain.menu.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MenuDto {
-    private List<ChosenMenuItemDto> chosenMenuItems = new ArrayList<>();
+    private List<MenuItemDto> menuItems = new ArrayList<>();
 
-    public MenuDto(List<ChosenMenuItem> chosenMenuItems) {
-        for (ChosenMenuItem chosenMenuItem : chosenMenuItems) {
-            this.chosenMenuItems.add(new ChosenMenuItemDto(chosenMenuItem));
+    public MenuDto(List<MenuItem> menuItems) {
+        for (MenuItem menuItem : menuItems) {
+            this.menuItems.add(new MenuItemDto(menuItem));
         }
     }
 
-    public List<ChosenMenuItemDto> getChosenMenuItems() {
-        return chosenMenuItems;
+    public List<MenuItemDto> getMenuItems() {
+        return menuItems;
     }
 }

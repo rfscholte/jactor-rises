@@ -63,7 +63,7 @@ alias fet='git fetch -p'												# cmd: fetch med prune fra git server
 alias pull='git pull --rebase -p'											# cmd: pull med rebase og prune fra git repo
 alias push='git push'													# cmd: push committer til git server
 alias stat='git status'													# cmd: sjekk status til lokalt git repo
-	
+
 # Alias, navigering
 alias apps='cd /Applications'												# navigasjon: /Applications
 alias ..='cd .. && la'													# navigasjon: navigering ned ei mappe og list ut innholdet av denne mappa
@@ -80,7 +80,7 @@ alias hwj='cd $WS/hjemme/hjemme-web-jsf/'										# navigasjon: hjemme-web-jsf
 alias repo='cd $HOME/.m2/repository/nu/hjemme/'										# navigasjon: maven repo for hjemme
 alias wiki='cd $WS/wiki/'												# navigasjon: wiki sider
 alias ws='cd $WS/'													# navigasjon: workspace mappa
-  
+
 # Alias, maven
 alias mc='mvn clean'													# cmd: mvn clean
 alias mcc='mvn clean compile'												# cmd: mvn clean compile (maven)
@@ -119,6 +119,7 @@ alias find.txt='find . -name "*.txt" | xargs grep --color'								# cmd: soker e
 alias find.java='find . -name "*.java" | xargs grep --color'								# cmd: soker etter tekststreng i java filer
 alias fun='more $HOME/.zshrc | grep -v fun= | grep "# fun:"'								# cmd: list alle funksjonser (de som har kommentarene 'fun:') i .zshrc
 alias grep='grep --color'												# cmd: filtrer ord (og farglegg treff)
+alias grep.around='grep -A 3 -B 3'											# cmd: skriver ut 3 linjer før og 3 linjer etter et treff med grep
 alias grep.no.down='grep -v -i \"Download'										# cmd: grep alt utenom "Downloading" og "downloaded"
 alias grep.no.succ='grep -v "SUCCESS"'											# cmd: grep alt utenom "SUCCESS"
 alias grep.tree='grep -e "SNAPSHOT" -e "+" -e "|" -e "-" -e "nu.hjemme"'						# cmd: strenger som har interessant verdi ifm mvn dependency:tree

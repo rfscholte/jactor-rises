@@ -43,7 +43,7 @@ public class MenuInterceptorTest {
 
         testMenuInterceptor.postHandle(mockedHttpServletRequest, null, null, modelAndView);
 
-        verify(mockedMenuFacade, times(2)).retrieveChosenMenuItemBy(any(MenuTarget.class));
+        verify(mockedMenuFacade, times(2)).fetchMenuItemBy(any(MenuTarget.class));
 
         assertThat("The aware main items should be present", modelAndView.getModel().get(ATTRIBUTE_MAIN_ITEMS), is(notNullValue()));
         assertThat("The aware persons items should be present", modelAndView.getModel().get(ATTRIBUTE_PERSON_ITEMS), is(notNullValue()));

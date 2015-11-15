@@ -24,7 +24,7 @@ public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
     }
 
     public BlogEntryDomainBuilder with(BlogDomainBuilder blog) {
-        with(blog.get().getEntity());
+        with(blog.build().getEntity());
         return this;
     }
 

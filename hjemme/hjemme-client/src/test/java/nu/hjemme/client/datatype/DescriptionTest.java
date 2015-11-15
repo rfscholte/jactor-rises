@@ -19,18 +19,18 @@ public class DescriptionTest {
 
     @Test
     public void whenInvokingHashCodeTheImplementationShouldBeCorrect() {
-        Description base = new Description("some item", "some description");
-        Description equal = new Description("some item", "some description");
-        Description notEqual = new Description("some other item", "some other description");
+        Description base = new Description(new Name("some item"), "some description");
+        Description equal = new Description(new Name("some item"), "some description");
+        Description notEqual = new Description(new Name("some other item"), "some other description");
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
     }
 
     @Test
     public void whenChecksForEqualityTheImplementationShouldBeCorrect() {
-        Description base = new Description("some item", "some description");
-        Description equal = new Description("some item", "some description");
-        Description notEqual = new Description("some other item", "some other description");
+        Description base = new Description(new Name("some item"), "some description");
+        Description equal = new Description(new Name("some item"), "some description");
+        Description notEqual = new Description(new Name("some other item"), "some other description");
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
     }

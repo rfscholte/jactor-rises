@@ -20,32 +20,32 @@ public class BlogEntryDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
 
-        aBlogEntry().withEntryAs(null, "aCreator").with(aBlog()).get();
+        aBlogEntry().withEntryAs(null, "aCreator").with(aBlog()).build();
     }
 
     @Test public void willNotBuildBlogEntryWithAnEmptyEntry() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
 
-        aBlogEntry().withEntryAs("", "aCreatorName").with(aBlog()).get();
+        aBlogEntry().withEntryAs("", "aCreatorName").with(aBlog()).build();
     }
 
     @Test public void willNotBuildBlogEntryWithoutTheBlog() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogEntryDomainBuilder.THE_ENTRY_MUST_BELONG_TO_A_BLOG);
 
-        aBlogEntry().withEntryAs("some entry", "aCreatorName").get();
+        aBlogEntry().withEntryAs("some entry", "aCreatorName").build();
     }
 
     @Test public void willNotBuildBlogEntryWithoutTheCreator() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogEntryDomainBuilder.THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
 
-        aBlogEntry().withEntryAs("some entry", null).with(aBlog()).get();
+        aBlogEntry().withEntryAs("some entry", null).with(aBlog()).build();
     }
 
     @Test public void willBuildBlogEntryWhenAllRequiredFieldsAreSet() {
-        BlogEntryDomain blogEntry = aBlogEntry().with(aBlog()).withEntryAs("some entry", "aCreator").get();
+        BlogEntryDomain blogEntry = aBlogEntry().with(aBlog()).withEntryAs("some entry", "aCreator").build();
 
         assertThat("BlogEntry", blogEntry, is(notNullValue()));
     }

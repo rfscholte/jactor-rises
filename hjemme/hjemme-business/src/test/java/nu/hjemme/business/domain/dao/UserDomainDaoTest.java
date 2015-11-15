@@ -37,7 +37,7 @@ public class UserDomainDaoTest {
     }
 
     @Test public void willSaveNotNull() {
-        userDomainDaoToTest.save(aUser().get());
+        userDomainDaoToTest.save(aUser().build());
         verify(userDaoMock, times(1)).save(notNull(UserEntity.class));
     }
 

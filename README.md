@@ -24,4 +24,4 @@ git origin for hjemme (including hjemme-web and hjemme-pom)
 * hamcrest 1.3
 * mockito 1.10
 * aspect j 1.8
-* opensymphony sitemesh 2.4
+* sitemesh 3

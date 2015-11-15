@@ -15,8 +15,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ChosenMenuItemAspectTest {
-    private ChosenMenuItemAspect testChosenMenuItemAspect;
+public class MenuItemAspectTest {
+    private MenuItemAspect testMenuItemAspect;
     private MenuTarget etStedPaHovedmenyen;
     private MenuTarget etAnnetStedPaHovedmenyen;
 
@@ -25,7 +25,7 @@ public class ChosenMenuItemAspectTest {
 
     @Before
     public void initForTesting() {
-        testChosenMenuItemAspect = new ChosenMenuItemAspect();
+        testMenuItemAspect = new MenuItemAspect();
     }
 
     @Before
@@ -44,8 +44,8 @@ public class ChosenMenuItemAspectTest {
                 .thenReturn(somObjectArray(etStedPaHovedmenyen))
                 .thenReturn(somObjectArray(etAnnetStedPaHovedmenyen));
 
-        testChosenMenuItemAspect.cacheChosenMenuItemsByTarget(mockedProceedingJoinPoint);
-        testChosenMenuItemAspect.cacheChosenMenuItemsByTarget(mockedProceedingJoinPoint);
+        testMenuItemAspect.cacheMenuItemsByTarget(mockedProceedingJoinPoint);
+        testMenuItemAspect.cacheMenuItemsByTarget(mockedProceedingJoinPoint);
 
         verify(mockedProceedingJoinPoint, times(2)).proceed();
     }
@@ -59,9 +59,9 @@ public class ChosenMenuItemAspectTest {
         when(mockedProceedingJoinPoint.getArgs())
                 .thenReturn(somObjectArray(etStedPaHovedmenyen));
 
-        testChosenMenuItemAspect.cacheChosenMenuItemsByTarget(mockedProceedingJoinPoint);
-        testChosenMenuItemAspect.cacheChosenMenuItemsByTarget(mockedProceedingJoinPoint);
-        testChosenMenuItemAspect.cacheChosenMenuItemsByTarget(mockedProceedingJoinPoint);
+        testMenuItemAspect.cacheMenuItemsByTarget(mockedProceedingJoinPoint);
+        testMenuItemAspect.cacheMenuItemsByTarget(mockedProceedingJoinPoint);
+        testMenuItemAspect.cacheMenuItemsByTarget(mockedProceedingJoinPoint);
 
         verify(mockedProceedingJoinPoint, times(1)).proceed();
     }

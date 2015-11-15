@@ -23,7 +23,7 @@ public class UserDomainBuilder extends DomainBuilder<UserDomain> {
     }
 
     public UserDomainBuilder with(PersonDomainBuilder personDomainBuilder) {
-        return with(personDomainBuilder.get());
+        return with(personDomainBuilder.build());
     }
 
     public UserDomainBuilder withPasswordAs(String password) {

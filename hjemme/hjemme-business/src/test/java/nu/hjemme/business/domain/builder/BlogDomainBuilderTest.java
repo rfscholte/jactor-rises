@@ -20,25 +20,25 @@ public class BlogDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogDomainBuilder.THE_BLOG_MUST_HAVE_A_TITLE);
 
-        aBlog().with(aUser()).get();
+        aBlog().with(aUser()).build();
     }
 
     @Test public void skalIkkeByggeMedTomTittel() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogDomainBuilder.THE_BLOG_MUST_HAVE_A_TITLE);
 
-        aBlog().withTitleAs("").with(aUser()).get();
+        aBlog().withTitleAs("").with(aUser()).build();
     }
 
     @Test public void skalIkkeByggeUtenBruker() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BlogDomainBuilder.THE_BLOG_MUST_BELONG_TO_A_USER);
 
-        aBlog().withTitleAs("title").get();
+        aBlog().withTitleAs("title").build();
     }
 
     @Test public void skalByggeMedTittelOgBruker() {
-        BlogDomain guestBookEntryEntity = aBlog().withTitleAs("title").with(aUser()).get();
+        BlogDomain guestBookEntryEntity = aBlog().withTitleAs("title").with(aUser()).build();
 
         assertThat("BlogEntity", guestBookEntryEntity, is(notNullValue()));
     }
