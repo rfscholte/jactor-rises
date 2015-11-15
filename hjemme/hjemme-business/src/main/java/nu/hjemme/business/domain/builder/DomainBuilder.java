@@ -2,7 +2,7 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.persistence.PersistentData;
 
-/** The base builder from which to get valid domains. */
+/** The base builder from which to build valid domains. */
 public abstract class DomainBuilder<Domain> {
     static BuildValidator buildValidator;
 
@@ -10,7 +10,7 @@ public abstract class DomainBuilder<Domain> {
 
     abstract protected void validate();
 
-    public Domain get() {
+    public Domain build() {
         buildValidator.validate(this);
 
         return initDomain();

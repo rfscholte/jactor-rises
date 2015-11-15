@@ -23,11 +23,11 @@ public class PersonDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(PersonDomainBuilder.AN_ADDRESS_MUST_BE_PRESENT);
 
-        aPerson().withDescriptionAs("description field will not be validated").get();
+        aPerson().withDescriptionAs("description field will not be validated").build();
     }
 
     @Test public void willBuildPersonDomainWhenAllRequiredFieldsAreSet() throws Exception {
-        PersonDomain personDomain = aPerson().with(anAddress()).withDescriptionAs("description field will not be validated").get();
+        PersonDomain personDomain = aPerson().with(anAddress()).withDescriptionAs("description field will not be validated").build();
 
         assertThat(personDomain, is(notNullValue(), "PersonDomain"));
     }

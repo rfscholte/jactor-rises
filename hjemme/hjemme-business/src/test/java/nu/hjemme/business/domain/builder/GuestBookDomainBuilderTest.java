@@ -20,25 +20,25 @@ public class GuestBookDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_EMPTY);
 
-        aGuestBook().with(PersistentData.getInstance().provideInstanceFor(UserEntity.class)).get();
+        aGuestBook().with(PersistentData.getInstance().provideInstanceFor(UserEntity.class)).build();
     }
 
     @Test public void willNotBuildGuestBookWithAnEmptyTitleOfTheGuestBook() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_EMPTY);
 
-        aGuestBook().withTitleAs("").with(PersistentData.getInstance().provideInstanceFor(UserEntity.class)).get();
+        aGuestBook().withTitleAs("").with(PersistentData.getInstance().provideInstanceFor(UserEntity.class)).build();
     }
 
     @Test public void willNotBuildGuestBookWithoutTheUserWhoIsTheOwnerOfTheGuestBook() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookDomainBuilder.THE_GUEST_BOOK_MUST_BELONG_TO_A_USER);
 
-        aGuestBook().withTitleAs("some title").get();
+        aGuestBook().withTitleAs("some title").build();
     }
 
     @Test public void willBuildGuestBookWhenAllRequiredFieldsAreSet() throws Exception {
-        GuestBookDomain guestBookDomain = aGuestBook().withTitleAs("some title").with(PersistentData.getInstance().provideInstanceFor(UserEntity.class)).get();
+        GuestBookDomain guestBookDomain = aGuestBook().withTitleAs("some title").with(PersistentData.getInstance().provideInstanceFor(UserEntity.class)).build();
 
         assertThat("GuestBook", guestBookDomain, is(notNullValue()));
     }
