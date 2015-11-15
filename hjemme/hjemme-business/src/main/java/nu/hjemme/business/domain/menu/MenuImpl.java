@@ -47,7 +47,7 @@ public class MenuImpl implements Menu {
     }
 
     @Override
-    public List<MenuItem> retrieveChosenMenuItemsBy(MenuItemTarget menuItemTarget) {
+    public List<MenuItem> fetchMenuItemsBy(MenuItemTarget menuItemTarget) {
         List<MenuItem> menuItems = new ArrayList<>(this.menuItems.size());
 
         menuItems.addAll(this.menuItems.stream().map(menuItem -> new MenuItemImpl(menuItem, menuItemTarget)).collect(Collectors.toList()));

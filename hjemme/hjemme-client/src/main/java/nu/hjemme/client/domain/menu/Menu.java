@@ -17,5 +17,5 @@ public interface Menu {
      * @param menuItemTarget som er ønskelig
      * @return en liste av {@link nu.hjemme.client.domain.menu.MenuItem}s basert på ønsket {@link nu.hjemme.client.datatype.MenuItemTarget}
      */
-    List<MenuItem> retrieveChosenMenuItemsBy(MenuItemTarget menuItemTarget);
+    List<MenuItem> fetchMenuItemsBy(MenuItemTarget menuItemTarget);
 }

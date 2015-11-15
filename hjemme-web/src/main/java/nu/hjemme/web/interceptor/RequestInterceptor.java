@@ -23,6 +23,6 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
             ModelAndView modelAndView
     ) {
         modelAndView.addObject(ATTRIBUTE_ACTION, request.getRequestURI());
-        modelAndView.addObject(ATTRIBUTE_PARAMETERS, new WebParameters(request).retrieveWebParameters());
+        modelAndView.addObject(ATTRIBUTE_PARAMETERS, new WebParameters(request).fetchWebParameters());
     }
 }

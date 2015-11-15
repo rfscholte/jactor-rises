@@ -12,5 +12,5 @@ public interface MenuFacade {
      * @param menuTarget determine the menu where the menu item target belongs.
      * @return a list of {@link nu.hjemme.client.domain.menu.MenuItem} according to the request.
      */
-    List<MenuItem> retrieveChosenMenuItemBy(MenuTarget menuTarget);
+    List<MenuItem> fetchMenuItemBy(MenuTarget menuTarget);
 }

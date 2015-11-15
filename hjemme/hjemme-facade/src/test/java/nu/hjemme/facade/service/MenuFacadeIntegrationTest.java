@@ -35,13 +35,13 @@ public class MenuFacadeIntegrationTest {
     @Test public void whenFindingMenuItemsAndTheNameIsUnknownTheMethodWillFail() {
         expectedException.expect(IllegalArgumentException.class);
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("some target"), new Name("unknown"));
-        testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
+        testMenuFacade.fetchMenuItemBy(menuTarget);
     }
 
     @Test public void whenFindingMenuItemsAndTheNameIsKnownTheListOfMenuItemsWillBeReturned() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("bullseye?some=where"), new Name("testMenu"));
 
-        List<MenuItem> menuItems = testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
+        List<MenuItem> menuItems = testMenuFacade.fetchMenuItemBy(menuTarget);
 
         assertThat(menuItems, new TypeSafeBuildMatcher<List<MenuItem>>("En liste med test menyvalg fra test context") {
             @Override public MatchBuilder matches(List<MenuItem> menuItems, MatchBuilder matchBuilder) {

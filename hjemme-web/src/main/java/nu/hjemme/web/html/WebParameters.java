@@ -35,7 +35,7 @@ public class WebParameters {
         return LOCALE.equals(parameterName);
     }
 
-    public List<WebParameter> retrieveWebParameters() {
+    public List<WebParameter> fetchWebParameters() {
         List<WebParameter> webParameters = new ArrayList<>(parameterMap.size());
 
         for (String parameterName : parameterMap.keySet()) {

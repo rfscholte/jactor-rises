@@ -66,8 +66,8 @@ public class MenuItemCacheTest {
                 testMenuItemCache.cache(etAnnetStedPaHovedmenyen, eiAnnenListeAvMenuItems);
 
                 return matchBuilder
-                        .matches(menuItemCache.retrieveBy(etStedPaHovedmenyen), is(equalTo(eiListeAvMenuItems), "cache av " + etStedPaHovedmenyen))
-                        .matches(menuItemCache.retrieveBy(etAnnetStedPaHovedmenyen), is(equalTo(eiAnnenListeAvMenuItems), "cache av " + etAnnetStedPaHovedmenyen));
+                        .matches(menuItemCache.fetchBy(etStedPaHovedmenyen), is(equalTo(eiListeAvMenuItems), "cache av " + etStedPaHovedmenyen))
+                        .matches(menuItemCache.fetchBy(etAnnetStedPaHovedmenyen), is(equalTo(eiAnnenListeAvMenuItems), "cache av " + etAnnetStedPaHovedmenyen));
 
             }
         });

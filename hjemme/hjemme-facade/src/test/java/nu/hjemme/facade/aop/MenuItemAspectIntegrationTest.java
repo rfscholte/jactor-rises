@@ -36,7 +36,7 @@ public class MenuItemAspectIntegrationTest {
     @Resource @SuppressWarnings("unused") // initialized by spring
     private MenuFacade menuFacade;
 
-    @Before public void byttUtChosenMenuItemCachePaAspect() {
+    @Before public void byttUtMenuItemCachePaAspect() {
         menuItemCacheMock = mock(MenuItemCache.class);
         MenuItemAspect.cacheMed(menuItemCacheMock);
     }
@@ -45,12 +45,12 @@ public class MenuItemAspectIntegrationTest {
         when(menuItemCacheMock.isCached(any(MenuTarget.class))).thenReturn(false).thenReturn(true);
         MenuTarget somewhereOnMyMenu = new MenuTarget(new MenuItemTarget("somewhere"), new Name("my.menu"));
 
-        menuFacade.retrieveChosenMenuItemBy(somewhereOnMyMenu);
-        menuFacade.retrieveChosenMenuItemBy(somewhereOnMyMenu);
-        menuFacade.retrieveChosenMenuItemBy(somewhereOnMyMenu);
+        menuFacade.fetchMenuItemBy(somewhereOnMyMenu);
+        menuFacade.fetchMenuItemBy(somewhereOnMyMenu);
+        menuFacade.fetchMenuItemBy(somewhereOnMyMenu);
 
         verify(menuItemCacheMock).cache(eq(somewhereOnMyMenu), anyListOf(MenuItem.class));
-        verify(menuItemCacheMock, times(2)).retrieveBy(somewhereOnMyMenu);
+        verify(menuItemCacheMock, times(2)).fetchBy(somewhereOnMyMenu);
     }
 
     @Configuration

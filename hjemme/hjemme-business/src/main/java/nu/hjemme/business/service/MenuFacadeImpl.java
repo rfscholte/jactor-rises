@@ -27,10 +27,10 @@ public class MenuFacadeImpl implements MenuFacade {
 
     /** {@inheritDoc} */
     @Override
-    public List<MenuItem> retrieveChosenMenuItemBy(MenuTarget menuTarget) {
+    public List<MenuItem> fetchMenuItemBy(MenuTarget menuTarget) {
         Name name = throwIllegalArgumentExceptionIfUnknown(menuTarget.getMenuName());
 
-        return menusByName.get(name).retrieveChosenMenuItemsBy(menuTarget.getMenuItemTarget());
+        return menusByName.get(name).fetchMenuItemsBy(menuTarget.getMenuItemTarget());
     }
 
     private Name throwIllegalArgumentExceptionIfUnknown(Name name) {

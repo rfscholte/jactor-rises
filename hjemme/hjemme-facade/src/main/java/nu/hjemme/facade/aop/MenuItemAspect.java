@@ -16,7 +16,7 @@ public class MenuItemAspect {
         menuItemCache = new MenuItemCache();
     }
 
-    @Pointcut("execution(* nu.hjemme.client.service.MenuFacade.retrieveChosenMenuItemBy(..))") @SuppressWarnings("unused") // Brukes av spring og aspectj
+    @Pointcut("execution(* nu.hjemme.client.service.MenuFacade.fetchMenuItemBy(..))") @SuppressWarnings("unused") // Brukes av spring og aspectj
     public void menuCaching() {
     }
 
@@ -26,7 +26,7 @@ public class MenuItemAspect {
         Object listWithMenuItems;
 
         if (menuItemCache.isCached(menuTarget)) {
-            listWithMenuItems = menuItemCache.retrieveBy(menuTarget);
+            listWithMenuItems = menuItemCache.fetchBy(menuTarget);
         } else {
             listWithMenuItems = proceedingJoinPoint.proceed();
             menuItemCache.cache(menuTarget, (java.util.List<nu.hjemme.client.domain.menu.MenuItem>) listWithMenuItems);

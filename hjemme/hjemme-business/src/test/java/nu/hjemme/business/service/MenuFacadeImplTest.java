@@ -54,7 +54,7 @@ public class MenuFacadeImplTest {
         when(mockedMenuImpl.getName()).thenReturn(knownMenu);
 
         MenuFacadeImpl testMenuFacadeImpl = new MenuFacadeImpl(asList(mockedMenuImpl));
-        testMenuFacadeImpl.retrieveChosenMenuItemBy(
+        testMenuFacadeImpl.fetchMenuItemBy(
                 new MenuTarget(somewhere, new Name("unknown.menu"))
         );
     }
@@ -67,8 +67,8 @@ public class MenuFacadeImplTest {
         when(mockedMenuImpl.getName()).thenReturn(knownMenu);
 
         MenuFacadeImpl testMenuFacadeImpl = new MenuFacadeImpl(asList(mockedMenuImpl));
-        testMenuFacadeImpl.retrieveChosenMenuItemBy(new MenuTarget(somewhere, knownMenu));
+        testMenuFacadeImpl.fetchMenuItemBy(new MenuTarget(somewhere, knownMenu));
 
-        verify(mockedMenuImpl).retrieveChosenMenuItemsBy(somewhere);
+        verify(mockedMenuImpl).fetchMenuItemsBy(somewhere);
     }
 }

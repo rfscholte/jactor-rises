@@ -26,7 +26,7 @@ public class MenuItemCache {
         menuItemCache.put(menuItemTarget, listeOfMenuItems);
     }
 
-    public List<MenuItem> retrieveBy(MenuTarget menuItemTarget) {
+    public List<MenuItem> fetchBy(MenuTarget menuItemTarget) {
         return menuItemCache.get(menuItemTarget);
     }
 }

@@ -36,8 +36,8 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         MenuTarget mainMenuTarget = new MenuTarget(menuItemTargetDto, MAIN_MENU);
         MenuTarget personMenuTarget = new MenuTarget(menuItemTargetDto, PERSON_MENU);
 
-        MenuDto mainMenuDto = new MenuDto(menuFacade.retrieveChosenMenuItemBy(mainMenuTarget));
-        MenuDto personMenuDto = new MenuDto(menuFacade.retrieveChosenMenuItemBy(personMenuTarget));
+        MenuDto mainMenuDto = new MenuDto(menuFacade.fetchMenuItemBy(mainMenuTarget));
+        MenuDto personMenuDto = new MenuDto(menuFacade.fetchMenuItemBy(personMenuTarget));
 
         List<MenuItemDto> menuItemsFromMainMenu = mainMenuDto.getMenuItems();
         List<MenuItemDto> menuItemsFromPersonMenu = personMenuDto.getMenuItems();
