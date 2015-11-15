@@ -1,70 +1,63 @@
 package nu.hjemme.business.service;
 
 import nu.hjemme.business.domain.menu.MenuDomain;
+import nu.hjemme.business.domain.menu.MenuItemDomain;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.Menu;
-import org.junit.Before;
+import nu.hjemme.client.domain.menu.MenuItem;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Collections;
+import java.util.List;
 
-import static java.util.Collections.singletonList;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static nu.hjemme.business.domain.menu.MenuItemDomain.aMenuItemDomain;
+import static nu.hjemme.test.matcher.DescriptionMatcher.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
-@RunWith(MockitoJUnitRunner.class)
 public class DefaultMenuFacadeTest {
 
     @Rule public ExpectedException expectedException = ExpectedException.none();
-    @Mock static private MenuDomain menuDomainMock;
-
-    private DefaultMenuFacade testDefaultMenuFacade;
-
-    @Before public void initMenuFacadeToTest() {
-        testDefaultMenuFacade = new DefaultMenuFacade(singletonList(menuDomainMock));
-    }
 
     @Test public void willThrowExceptionIfProvidedMenusAreNull() {
         expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("Menus must be provided");
         new DefaultMenuFacade(null);
     }
 
     @Test public void willThrowExceptionIfProvidedMenusAreEmpty() {
         expectedException.expect(IllegalArgumentException.class);
-        new DefaultMenuFacade(Collections.<Menu>emptyList());
+        expectedException.expectMessage("Menus must be provided");
+        Menu[] menus = new Menu[]{};
+
+        new DefaultMenuFacade(menus);
     }
 
     @Test public void willFailWhenMenuIsUnknown() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("unknown configuration");
+        expectedException.expectMessage("unknown menu");
         expectedException.expectMessage("known.menu");
         expectedException.expectMessage("unknown.menu");
 
         MenuItemTarget somewhere = new MenuItemTarget("somewhere");
         Name knownMenu = new Name("known.menu");
 
-        when(menuDomainMock.getName()).thenReturn(knownMenu);
-
-        testDefaultMenuFacade.fetchMenuItemBy(
-                new MenuTarget(somewhere, new Name("unknown.menu"))
-        );
+        DefaultMenuFacade defaultMenuFacadeToTest = new DefaultMenuFacade(MenuDomain.aMenuDomain().with(knownMenu).add(aMenuItemDomain()).build());
+        defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTarget(somewhere, new Name("unknown.menu")));
     }
 
     @Test public void willFindKnownMenuItems() {
         MenuItemTarget somewhere = new MenuItemTarget("somewhere");
         Name knownMenu = new Name("known.menu");
 
-        when(menuDomainMock.getName()).thenReturn(knownMenu);
+        MenuItemDomain menuItemDomain = aMenuItemDomain().build();
+        DefaultMenuFacade defaultMenuFacadeToTest = new DefaultMenuFacade(MenuDomain.aMenuDomain().with(knownMenu).add(menuItemDomain).build());
 
-        testDefaultMenuFacade.fetchMenuItemBy(new MenuTarget(somewhere, knownMenu));
+        List<MenuItem> menuItems = defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTarget(somewhere, knownMenu));
 
-        verify(menuDomainMock).fetchMenuItemsBy(somewhere);
+        assertThat(menuItems, is(hasItem(menuItemDomain), "menuItems"));
     }
 }

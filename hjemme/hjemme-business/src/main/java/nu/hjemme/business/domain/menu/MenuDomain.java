@@ -1,40 +1,27 @@
 package nu.hjemme.business.domain.menu;
 
-import nu.hjemme.client.datatype.MenuItemTarget;
+import nu.hjemme.business.domain.builder.menu.MenuDomainBuilder;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.Menu;
 import nu.hjemme.client.domain.menu.MenuItem;
-import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.apache.commons.lang.Validate.notEmpty;
+
 /** A {@link MenuDomain} that contains a collection of {@link MenuItemDomain}s. */
 public class MenuDomain implements Menu {
-    private static MenuDomain newInstanceCreator = new MenuDomain();
 
     private final Name menuName;
     private final List<MenuItem> menuItems = new ArrayList<>();
 
-    private MenuDomain() {
-        this(new Name("new instance creator"));
-    }
-
-    private MenuDomain(Name menuName) {
+    public MenuDomain(Name menuName, List<MenuItem> menuItems) {
+        notEmpty(menuItems, "There must be provided at least one menu item");
         this.menuName = menuName;
-    }
-
-    public MenuDomain(Menu menu) {
-        Validate.notEmpty(menu.getMenuItems(), "There must be provided at least one menu item");
-        this.menuName = menu.getName();
-
-//        menuItems.addAll(menu.getMenuItems().stream().map(MenuItemDomain::newInstance).collect(Collectors.toList()));
-    }
-
-    protected MenuDomain createInstance(Menu menu) {
-        return new MenuDomain(menu);
+        this.menuItems.addAll(menuItems);
     }
 
     @Override
@@ -43,15 +30,6 @@ public class MenuDomain implements Menu {
                 .append(menuName)
                 .append(menuItems)
                 .toString();
-    }
-
-    @Override
-    public List<MenuItem> fetchMenuItemsBy(MenuItemTarget menuItemTarget) {
-        List<MenuItem> menuItems = new ArrayList<>(this.menuItems.size());
-
-//        menuItems.addAll(this.menuItems.stream().map(menuItem -> new MenuItemDomain(menuItem, menuItemTarget)).collect(Collectors.toList()));
-
-        return menuItems;
     }
 
     @Override
@@ -64,11 +42,7 @@ public class MenuDomain implements Menu {
         return menuItems;
     }
 
-    public static MenuDomain newInstance(Menu menu) {
-        return newInstanceCreator.createInstance(menu);
-    }
-
-    public static void resetNewInstanceCreator() {
-        newInstanceCreator = new MenuDomain();
+    public static MenuDomainBuilder aMenuDomain() {
+        return new MenuDomainBuilder();
     }
 }

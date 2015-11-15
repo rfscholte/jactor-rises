@@ -4,7 +4,6 @@ import nu.hjemme.business.domain.builder.DomainBuilder;
 import nu.hjemme.business.domain.menu.MenuItemDomain;
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.MenuItemTarget;
-import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.MenuItem;
 
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ public class MenuItemDomainBuilder extends DomainBuilder<MenuItemDomain> {
 
     private Description description;
     private MenuItemTarget menuItemTarget;
-    private Name nameOfItem;
 
     @Override protected MenuItemDomain initDomain() {
         return new MenuItemDomain(description, menuItemTarget).appendChildren(children);
@@ -30,7 +28,20 @@ public class MenuItemDomainBuilder extends DomainBuilder<MenuItemDomain> {
     }
 
     public MenuItemDomainBuilder add(MenuItemDomainBuilder childBuilder) {
-        children.add(childBuilder.build());
+        return add(childBuilder.build());
+    }
+
+    public MenuItemDomainBuilder add(MenuItemDomain child) {
+        children.add(child);
+        return this;
+    }
+
+    public MenuItemDomainBuilder withTarget(String menuItemTarget) {
+        return with(new MenuItemTarget(menuItemTarget));
+    }
+
+    public MenuItemDomainBuilder with(Description description) {
+        this.description = description;
         return this;
     }
 }

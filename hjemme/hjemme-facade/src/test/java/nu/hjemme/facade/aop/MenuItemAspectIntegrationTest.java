@@ -19,6 +19,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
+import static nu.hjemme.business.domain.menu.MenuDomain.aMenuDomain;
+import static nu.hjemme.business.domain.menu.MenuItemDomain.aMenuItemDomain;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.eq;
@@ -28,7 +30,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HjemmeBeanContext.class, MenuItemAspectIntegrationTest.MockedMenuConfiguration.class, HjemmeDbContext.class})
+@ContextConfiguration(classes = {HjemmeBeanContext.class, MenuItemAspectIntegrationTest.MenuConfiguration.class, HjemmeDbContext.class})
 public class MenuItemAspectIntegrationTest {
 
     private MenuItemCache menuItemCacheMock;
@@ -54,12 +56,9 @@ public class MenuItemAspectIntegrationTest {
     }
 
     @Configuration
-    public static class MockedMenuConfiguration {
-        @Bean
-        @SuppressWarnings("unused") // brukes av spring
-        public Menu createMockedMenu() {
-//            return new MenuDto("my.menu").add(new MenuItemDto(new Name("item"), new MenuItemTarget("somewhere")));
-            return null;
+    public static class MenuConfiguration {
+        @Bean public Menu createMenu() {
+            return aMenuDomain().withName("my.menu").add(aMenuItemDomain().with(new MenuItemTarget("somewhere"))).build();
         }
     }
 }

@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-import java.util.List;
 import java.util.Locale;
 
 @Configuration
@@ -27,28 +26,23 @@ public class HjemmeBeanContext {
         Locale.setDefault(Locale.ENGLISH);
     }
 
-    @Bean(name = "hjemme.menuFacade") // initialized by spring
-    public MenuFacade menuFacade(List<Menu> menus) {
+    @Bean(name = "hjemme.menuFacade") public MenuFacade menuFacade(Menu... menus) {
         return new DefaultMenuFacade(menus);
     }
 
-    @Bean(name = "hjemme.userFacade")  // initialized by spring
-    public UserFacade userFacade(SessionFactory sessionFactory) {
+    @Bean(name = "hjemme.userFacade") public UserFacade userFacade(SessionFactory sessionFactory) {
         return new UserFacadeImpl(PersistentData.getInstance().provideInstanceFor(UserDao.class, sessionFactory));
     }
 
-    @Bean(name = "hjemme.userDao")  // initialized by spring
-    public UserDao userDao(SessionFactory sessionFactory) {
+    @Bean(name = "hjemme.userDao") public UserDao userDao(SessionFactory sessionFactory) {
         return new UserDaoDb(sessionFactory);
     }
 
-    @Bean(name = "hjemme.aop.menuItems") // initialized by spring
-    public MenuItemAspect menuItemAspect() {
+    @Bean(name = "hjemme.aop.menuItems") public MenuItemAspect menuItemAspect() {
         return new MenuItemAspect();
     }
 
-    @Bean(name = "hjemme.domains.aware.db") // initialized by spring
-    public UserDomainDao domainConfig(UserDao userDao) {
+    @Bean(name = "hjemme.domains.aware.db") public UserDomainDao domainConfig(UserDao userDao) {
         UserDomainDao userDomainDao = new UserDomainDao(userDao);
         UserDomain.setUserDomainDao(userDomainDao);
 

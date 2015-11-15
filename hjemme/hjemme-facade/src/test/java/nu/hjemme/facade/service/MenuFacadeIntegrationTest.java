@@ -1,8 +1,11 @@
 package nu.hjemme.facade.service;
 
+import nu.hjemme.business.domain.menu.MenuItemRequest;
+import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
+import nu.hjemme.client.domain.menu.Menu;
 import nu.hjemme.client.domain.menu.MenuItem;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
@@ -13,6 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -20,6 +24,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static nu.hjemme.business.domain.menu.MenuDomain.aMenuDomain;
+import static nu.hjemme.business.domain.menu.MenuItemDomain.aMenuItemDomain;
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -40,6 +46,7 @@ public class MenuFacadeIntegrationTest {
 
     @Test public void whenFindingMenuItemsAndTheNameIsKnownTheListOfMenuItemsWillBeReturned() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("bullseye?some=where"), new Name("testMenu"));
+        new MenuItemRequest(new MenuItemTarget("bullseye?some=where"));
 
         List<MenuItem> menuItems = testMenuFacade.fetchMenuItemBy(menuTarget);
 
@@ -62,13 +69,12 @@ public class MenuFacadeIntegrationTest {
 
     @Configuration
     public static class HjemmeTestMenus {
-//        @Bean @SuppressWarnings("unused") // brukes av spring
-//        public MenuDto createTestMenu() {
-//            return new MenuDto("testMenu")
-//                    .add(new MenuItemDto("testParent", "bullseye")
-//                            .add(new MenuItemDto("testChild", "bullseye?some=where"))
-//                    );
-//
-//        }
+        @Bean public Menu createTestMenu() {
+            return aMenuDomain().withName("testMenu")
+                    .add(aMenuItemDomain().with(new Description(new Name("testParent"), "na")).withTarget("testParent?hit=bullseye")
+                            .add(aMenuItemDomain().withTarget("bullseye?some=where")))
+                    .build();
+
+        }
     }
 }
