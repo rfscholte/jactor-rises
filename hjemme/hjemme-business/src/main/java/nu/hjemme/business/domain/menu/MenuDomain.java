@@ -12,30 +12,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/** A {@link MenuImpl} that contains a collection of {@link MenuItemImpl}s. */
-public class MenuImpl implements Menu {
-    private static MenuImpl newInstanceCreator = new MenuImpl();
+/** A {@link MenuDomain} that contains a collection of {@link MenuItemDomain}s. */
+public class MenuDomain implements Menu {
+    private static MenuDomain newInstanceCreator = new MenuDomain();
 
     private final Name menuName;
     private final List<MenuItem> menuItems = new ArrayList<>();
 
-    private MenuImpl() {
+    private MenuDomain() {
         this(new Name("new instance creator"));
     }
 
-    private MenuImpl(Name menuName) {
+    private MenuDomain(Name menuName) {
         this.menuName = menuName;
     }
 
-    public MenuImpl(Menu menu) {
+    public MenuDomain(Menu menu) {
         Validate.notEmpty(menu.getMenuItems(), "There must be provided at least one menu item");
         this.menuName = menu.getName();
 
-//        menuItems.addAll(menu.getMenuItems().stream().map(MenuItemImpl::newInstance).collect(Collectors.toList()));
+//        menuItems.addAll(menu.getMenuItems().stream().map(MenuItemDomain::newInstance).collect(Collectors.toList()));
     }
 
-    protected MenuImpl createInstance(Menu menu) {
-        return new MenuImpl(menu);
+    protected MenuDomain createInstance(Menu menu) {
+        return new MenuDomain(menu);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class MenuImpl implements Menu {
     public List<MenuItem> fetchMenuItemsBy(MenuItemTarget menuItemTarget) {
         List<MenuItem> menuItems = new ArrayList<>(this.menuItems.size());
 
-        menuItems.addAll(this.menuItems.stream().map(menuItem -> new MenuItemImpl(menuItem, menuItemTarget)).collect(Collectors.toList()));
+        menuItems.addAll(this.menuItems.stream().map(menuItem -> new MenuItemDomain(menuItem, menuItemTarget)).collect(Collectors.toList()));
 
         return menuItems;
     }
@@ -65,11 +65,11 @@ public class MenuImpl implements Menu {
         return menuItems;
     }
 
-    public static MenuImpl newInstance(Menu menu) {
+    public static MenuDomain newInstance(Menu menu) {
         return newInstanceCreator.createInstance(menu);
     }
 
     public static void resetNewInstanceCreator() {
-        newInstanceCreator = new MenuImpl();
+        newInstanceCreator = new MenuDomain();
     }
 }

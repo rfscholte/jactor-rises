@@ -3,32 +3,30 @@ package nu.hjemme.business.domain.menu;
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.domain.menu.MenuItem;
-import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static java.util.Objects.hash;
 import static org.apache.commons.lang.Validate.notNull;
 
-public class MenuItemImpl implements MenuItem {
+public class MenuItemDomain implements MenuItem {
 
     private final Description description;
     private final List<MenuItem> children = new ArrayList<>();
     private final MenuItemTarget menuItemTarget;
 
-    public MenuItemImpl(MenuItem menuItem) {
+    public MenuItemDomain(MenuItem menuItem) {
         notNull(menuItem, "A MenuItem must be provided");
         description = menuItem.getDescription();
         menuItemTarget = menuItem.getMenuItemTarget();
         addChildren(menuItem.getChildren());
     }
 
-    public MenuItemImpl(MenuItem menuItem, MenuItemTarget menuItemTarget) {
+    public MenuItemDomain(MenuItem menuItem, MenuItemTarget menuItemTarget) {
         notNull(menuItem, "A MenuItem must be provided");
         description = menuItem.getDescription();
         this.menuItemTarget = menuItemTarget;
@@ -67,7 +65,7 @@ public class MenuItemImpl implements MenuItem {
             return false;
         }
 
-        MenuItemImpl other = (MenuItemImpl) o;
+        MenuItemDomain other = (MenuItemDomain) o;
 
         return Objects.equals(getChildren(), other.getChildren()) &&
                 Objects.equals(getDescription(), other.getDescription()) &&

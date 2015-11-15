@@ -1,6 +1,6 @@
 package nu.hjemme.business.service;
 
-import nu.hjemme.business.domain.menu.MenuImpl;
+import nu.hjemme.business.domain.menu.MenuDomain;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.Menu;
@@ -21,7 +21,7 @@ public class MenuFacadeImpl implements MenuFacade {
 
         for (Menu menu : menus) {
             Name menuName = menu.getName();
-            menusByName.put(menuName, MenuImpl.newInstance(menu));
+            menusByName.put(menuName, MenuDomain.newInstance(menu));
         }
     }
 

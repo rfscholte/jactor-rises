@@ -1,12 +1,10 @@
 package nu.hjemme.business.service;
 
-import nu.hjemme.business.domain.menu.MenuImpl;
+import nu.hjemme.business.domain.menu.MenuDomain;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.Menu;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,7 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Collections;
 
-import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,7 +25,7 @@ public class MenuFacadeImplTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @Mock
-    static private MenuImpl mockedMenuImpl;
+    static private MenuDomain menuDomainMock;
 
     @Test
     public void willThrowExceptionIfProvidedMenusAreNull() {
@@ -51,9 +49,9 @@ public class MenuFacadeImplTest {
         MenuItemTarget somewhere = new MenuItemTarget("somewhere");
         Name knownMenu = new Name("known.menu");
 
-        when(mockedMenuImpl.getName()).thenReturn(knownMenu);
+        when(menuDomainMock.getName()).thenReturn(knownMenu);
 
-        MenuFacadeImpl testMenuFacadeImpl = new MenuFacadeImpl(asList(mockedMenuImpl));
+        MenuFacadeImpl testMenuFacadeImpl = new MenuFacadeImpl(singletonList(menuDomainMock));
         testMenuFacadeImpl.fetchMenuItemBy(
                 new MenuTarget(somewhere, new Name("unknown.menu"))
         );
@@ -64,11 +62,11 @@ public class MenuFacadeImplTest {
         MenuItemTarget somewhere = new MenuItemTarget("somewhere");
         Name knownMenu = new Name("known.menu");
 
-        when(mockedMenuImpl.getName()).thenReturn(knownMenu);
+        when(menuDomainMock.getName()).thenReturn(knownMenu);
 
-        MenuFacadeImpl testMenuFacadeImpl = new MenuFacadeImpl(asList(mockedMenuImpl));
+        MenuFacadeImpl testMenuFacadeImpl = new MenuFacadeImpl(singletonList(menuDomainMock));
         testMenuFacadeImpl.fetchMenuItemBy(new MenuTarget(somewhere, knownMenu));
 
-        verify(mockedMenuImpl).fetchMenuItemsBy(somewhere);
+        verify(menuDomainMock).fetchMenuItemsBy(somewhere);
     }
 }
