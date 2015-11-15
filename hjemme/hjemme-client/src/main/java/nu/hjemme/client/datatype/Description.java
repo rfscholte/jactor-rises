@@ -15,8 +15,8 @@ public class Description {
         this(null, description);
     }
 
-    public Description(String itemName, String description) {
-        this.itemName = itemName != null ? new Name(itemName) : null;
+    public Description(Name itemName, String description) {
+        this.itemName = itemName;
         this.description = description;
     }
 

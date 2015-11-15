@@ -20,25 +20,25 @@ public class GuestBookDomainEntryBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
 
-        aGuestBookEntry().with(aGuestBook()).withEntryAs(null, "aCreator").get();
+        aGuestBookEntry().with(aGuestBook()).withEntryAs(null, "aCreator").build();
     }
 
     @Test public void willNotBuildGuestBookEntryWithAnEmptyEntry() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
 
-        aGuestBookEntry().withEntryAs("", "guestName").with(aGuestBook()).get();
+        aGuestBookEntry().withEntryAs("", "guestName").with(aGuestBook()).build();
     }
 
     @Test public void willNotBuildGuestBookEntryWithoutTheGuestBook() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(GuestBookEntryDomainBuilder.THE_ENTRY_MUST_BELONG_TO_A_GUEST_BOOK);
 
-        aGuestBookEntry().withEntryAs("some entry", "guestName").get();
+        aGuestBookEntry().withEntryAs("some entry", "guestName").build();
     }
 
     @Test public void willBuildGuestBookEntryWhenAllRequiredFieldsAreSet() {
-        GuestBookEntryDomain guestBookEntryDomain = aGuestBookEntry().withEntryAs("some entry", "guestName").with(aGuestBook()).get();
+        GuestBookEntryDomain guestBookEntryDomain = aGuestBookEntry().withEntryAs("some entry", "guestName").with(aGuestBook()).build();
 
         assertThat("GuestBookEntryEntity", guestBookEntryDomain, is(notNullValue()));
     }

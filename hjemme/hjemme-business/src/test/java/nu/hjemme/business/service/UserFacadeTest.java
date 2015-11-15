@@ -32,7 +32,7 @@ public class UserFacadeTest {
 
     @Before
     public void mockDefaultUser() {
-        when(userDaoMock.findUsing(new UserName("jactor"))).thenReturn(aUser().get().getEntity());
+        when(userDaoMock.findUsing(new UserName("jactor"))).thenReturn(aUser().build().getEntity());
     }
 
     @Test

@@ -40,7 +40,7 @@ public class BlogEntryDbIntegrationTest {
     private SessionFactory sessionFactory;
 
     @Test public void willSaveBlogEntryEntityToThePersistentLayer() {
-        Serializable id = session().save(aBlogEntry().with(aPersistedBlogTitled("my blog")).withEntryAs("svada", "lada").get().getEntity());
+        Serializable id = session().save(aBlogEntry().with(aPersistedBlogTitled("my blog")).withEntryAs("svada", "lada").build().getEntity());
 
         session().flush();
         session().clear();
@@ -57,7 +57,7 @@ public class BlogEntryDbIntegrationTest {
     }
 
     private BlogEntity aPersistedBlogTitled(String blogTitled) {
-        BlogEntity blogEntity = aBlog().with(aPersistedUser()).withTitleAs(blogTitled).get().getEntity();
+        BlogEntity blogEntity = aBlog().with(aPersistedUser()).withTitleAs(blogTitled).build().getEntity();
         session().save(blogEntity);
         return blogEntity;
     }
@@ -73,7 +73,7 @@ public class BlogEntryDbIntegrationTest {
                                                 .withZipCodeAs(1234)
                                 )
                 )
-                .get().getEntity();
+                .build().getEntity();
 
         session().save(userEntity);
 

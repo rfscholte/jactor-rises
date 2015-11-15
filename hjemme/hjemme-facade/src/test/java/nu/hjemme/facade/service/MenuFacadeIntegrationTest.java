@@ -1,11 +1,12 @@
 package nu.hjemme.facade.service;
 
+import nu.hjemme.business.domain.menu.MenuItemRequest;
+import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.ChosenMenuItem;
-import nu.hjemme.client.domain.menu.dto.MenuDto;
-import nu.hjemme.client.domain.menu.dto.MenuItemDto;
+import nu.hjemme.client.domain.menu.Menu;
+import nu.hjemme.client.domain.menu.MenuItem;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
@@ -23,6 +24,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static nu.hjemme.business.domain.menu.MenuDomain.aMenuDomain;
+import static nu.hjemme.business.domain.menu.MenuItemDomain.aMenuItemDomain;
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -38,23 +41,24 @@ public class MenuFacadeIntegrationTest {
     @Test public void whenFindingMenuItemsAndTheNameIsUnknownTheMethodWillFail() {
         expectedException.expect(IllegalArgumentException.class);
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("some target"), new Name("unknown"));
-        testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
+        testMenuFacade.fetchMenuItemBy(menuTarget);
     }
 
     @Test public void whenFindingMenuItemsAndTheNameIsKnownTheListOfMenuItemsWillBeReturned() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("bullseye?some=where"), new Name("testMenu"));
+        new MenuItemRequest(new MenuItemTarget("bullseye?some=where"));
 
-        List<ChosenMenuItem> chosenMenuItems = testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
+        List<MenuItem> menuItems = testMenuFacade.fetchMenuItemBy(menuTarget);
 
-        assertThat(chosenMenuItems, new TypeSafeBuildMatcher<List<ChosenMenuItem>>("En liste med test menyvalg fra test context") {
-            @Override public MatchBuilder matches(List<ChosenMenuItem> chosenMenuItems, MatchBuilder matchBuilder) {
-                matchBuilder.matches(chosenMenuItems.isEmpty(), is(equalTo(false), "lista kan ikke være tom"));
+        assertThat(menuItems, new TypeSafeBuildMatcher<List<MenuItem>>("En liste med test menyvalg fra test context") {
+            @Override public MatchBuilder matches(List<MenuItem> menuItems, MatchBuilder matchBuilder) {
+                matchBuilder.matches(menuItems.isEmpty(), is(equalTo(false), "lista kan ikke være tom"));
 
-                for (ChosenMenuItem chosenMenuItem : chosenMenuItems) {
-                    if (new Name("testParent").equals(chosenMenuItem.getDescription().getItemName())) {
-                        matchBuilder.matches(chosenMenuItem.isChildChosen(), is(equalTo(true), "testParent sitt barn skal vaere valgt"));
+                for (MenuItem menuItem : menuItems) {
+                    if (new Name("testParent").equals(menuItem.getDescription().getItemName())) {
+                        matchBuilder.matches(menuItem.isChildChosen(), is(equalTo(true), "testParent sitt barn skal vaere valgt"));
                     } else {
-                        matchBuilder.matches(chosenMenuItem.isChosen(), is(equalTo(true), "menyvalget skal være valgt"));
+                        matchBuilder.matches(menuItem.isChosen(), is(equalTo(true), "menyvalgget skal være valgt"));
                     }
                 }
 
@@ -65,12 +69,11 @@ public class MenuFacadeIntegrationTest {
 
     @Configuration
     public static class HjemmeTestMenus {
-        @Bean @SuppressWarnings("unused") // brukes av spring
-        public MenuDto createTestMenu() {
-            return new MenuDto("testMenu")
-                    .add(new MenuItemDto("testParent", "bullseye")
-                                    .leggTilBarn(new MenuItemDto("testChild", "bullseye?some=where"))
-                    );
+        @Bean public Menu createTestMenu() {
+            return aMenuDomain().withName("testMenu")
+                    .add(aMenuItemDomain().with(new Description(new Name("testParent"), "na")).withTarget("testParent?hit=bullseye")
+                            .add(aMenuItemDomain().withTarget("bullseye?some=where")))
+                    .build();
 
         }
     }

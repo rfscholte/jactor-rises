@@ -22,7 +22,7 @@ public class UserDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(UserDomainBuilder.THE_USER_NAME_CANNOT_BE_NULL);
 
-        aUser().with(aPerson()).withPasswordAs("password").get();
+        aUser().with(aPerson()).withPasswordAs("password").build();
 
     }
 
@@ -30,24 +30,24 @@ public class UserDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(UserDomainBuilder.THE_USER_MUST_BE_A_PERSON);
 
-        aUser().withUserNameAs("some user").withPasswordAs("password").get();
+        aUser().withUserNameAs("some user").withPasswordAs("password").build();
     }
 
     @Test public void willNotBuildUserDomainWithoutPassword() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(UserDomainBuilder.THE_PASSWORD_FIELD_CANNOT_BE_EMPTY);
 
-        aUser().withUserNameAs("some user").with(aPerson()).get();
+        aUser().withUserNameAs("some user").with(aPerson()).build();
     }
 
     @Test public void willNotBuildUserDomainWithAnEmptyPassword() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(UserDomainBuilder.THE_PASSWORD_FIELD_CANNOT_BE_EMPTY);
 
-        aUser().withUserNameAs("some user").with(aPerson()).withPasswordAs("").get();
+        aUser().withUserNameAs("some user").with(aPerson()).withPasswordAs("").build();
     }
 
     @Test public void willBuildUserDomainWithAllRequiredProperties() {
-        assertThat(aUser().withUserNameAs("some user").with(aPerson()).withPasswordAs("password").get(), is(notNullValue(), "build of a user domain"));
+        assertThat(aUser().withUserNameAs("some user").with(aPerson()).withPasswordAs("password").build(), is(notNullValue(), "build of a user domain"));
     }
 }

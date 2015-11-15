@@ -46,7 +46,7 @@ public class UserDbIntegrationTest {
                                                         .withCountryAs("NO", "no")
                                                         .withZipCodeAs(1234)
                                         )
-                        ).get().getEntity()
+                        ).build().getEntity()
         );
 
         session().flush();
@@ -74,7 +74,7 @@ public class UserDbIntegrationTest {
                                                         .withCountryAs("NO", "no")
                                                         .withZipCodeAs(1234)
                                         )
-                        ).get().getEntity()
+                        ).build().getEntity()
         );
 
         session().flush();

@@ -2,15 +2,16 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.persistence.PersistentData;
 
-/** The base builder from which to get valid domains. */
+/** The base builder from which to build valid domains. */
 public abstract class DomainBuilder<Domain> {
     static BuildValidator buildValidator;
 
     abstract protected Domain initDomain();
 
-    abstract protected void validate();
+    /** a validation of the domain must be overridden if the domain needs particular validation to be a valid instance... */
+    protected void validate() { }
 
-    public Domain get() {
+    public Domain build() {
         buildValidator.validate(this);
 
         return initDomain();

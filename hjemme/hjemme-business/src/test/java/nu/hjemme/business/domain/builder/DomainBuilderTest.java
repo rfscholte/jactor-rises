@@ -18,18 +18,18 @@ public class DomainBuilderTest {
     }
 
     @Test public void skalByggeEtDomeneNarBuildMetodeKalles() {
-        assertThat("skal bygge domene", testDomainBuilder.get(), is(notNullValue()));
+        assertThat("skal bygge domene", testDomainBuilder.build(), is(notNullValue()));
     }
 
     @Test public void skalValidereDomeneVedByging() {
         assertThat(testDomainBuilder, new TypeSafeBuildMatcher<TestDomainBuilder>("Validate domain when building it") {
             @Override
             public MatchBuilder matches(TestDomainBuilder typeToTest, MatchBuilder matchBuilder) {
-                matchBuilder.matches(typeToTest.validated, is(equalTo(false), "before get"));
+                matchBuilder.matches(typeToTest.validated, is(equalTo(false), "before build"));
 
-                typeToTest.get();
+                typeToTest.build();
 
-                return matchBuilder.matches(typeToTest.validated, is(equalTo(true), "after get"));
+                return matchBuilder.matches(typeToTest.validated, is(equalTo(true), "after build"));
             }
         });
     }

@@ -37,7 +37,7 @@ public class GuestBookDbIntegrationTest {
 
     @Test public void willSaveGuestBookEntityToThePersistentLayer() {
         final UserEntity aPersistedUser = aPersistedUser();
-        Serializable id = session().save(aGuestBook().withTitleAs("my guest book").with(aPersistedUser).get().getEntity());
+        Serializable id = session().save(aGuestBook().withTitleAs("my guest book").with(aPersistedUser).build().getEntity());
 
         session().flush();
         session().clear();
@@ -62,7 +62,7 @@ public class GuestBookDbIntegrationTest {
                                                 .withZipCodeAs(1234)
                                 )
                 )
-                .get().getEntity();
+                .build().getEntity();
 
         session().save(userEntity);
 

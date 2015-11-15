@@ -24,7 +24,7 @@ precmd () {														# fun: genererer tittel pa konsollvindu (kjores for hve
 export CATALINA_HOME=/Library/Catalina											# var: hjemmekatalogen til apache tomcat installasjon
 export DEPLOY_LINK=http://localhost:8080/manager/text/deploy								# var: url til deploy
 export JAVA_HOME=$(/usr/libexec/java_home)										# var: hjemmekatalogen til gjeldende jdk
-export M2_HOME=/usr/lib/apache-maven-3.2.1										# var: hjemmeomrade til maven
+export M2_HOME=/Library/maven												# var: hjemmeomrade til maven
 export PATH=$PATH:$M2_HOME/bin												# var: bin mappa til maven er en del av PATH
 export WS=$HOME/ws													# var: miljøvariabel for filsti til workspace
 export WAR_FILE=$WS/hjemme/hjemme-web/target/hjemme.war									# var: filsti til hjemme.war
@@ -64,7 +64,7 @@ alias fet='git fetch -p'												# cmd: fetch med prune fra git server
 alias pull='git pull --rebase -p'											# cmd: pull med rebase og prune fra git repo
 alias push='git push'													# cmd: push committer til git server
 alias stat='git status'													# cmd: sjekk status til lokalt git repo
-	
+
 # Alias, navigering
 alias apps='cd /Applications'												# navigasjon: /Applications
 alias ..='cd .. && la'													# navigasjon: navigering ned ei mappe og list ut innholdet av denne mappa
@@ -81,7 +81,7 @@ alias hwj='cd $WS/hjemme/hjemme-web-jsf/'										# navigasjon: hjemme-web-jsf
 alias repo='cd $HOME/.m2/repository/nu/hjemme/'										# navigasjon: maven repo for hjemme
 alias wiki='cd $WS/wiki/'												# navigasjon: wiki sider
 alias ws='cd $WS/'													# navigasjon: workspace mappa
-  
+
 # Alias, maven
 alias mc='mvn clean'													# cmd: mvn clean
 alias mcc='mvn clean compile'												# cmd: mvn clean compile (maven)
@@ -102,6 +102,7 @@ alias mvupr='mvn versions:update-properties'										# cmd: oppdater versjoner 
 # Tomcat
 alias tom.bin='la $CATALINA_HOME/bin/'											# cmd: lister innhold i Tomcat/bin
 alias tom.cp='cp $WAR_FILE $CATALINA_HOME/webapps && echo copying $WAR_FILE to $CATALINA_HOME/webapps'			# cmd: kopier war til CATALINA_HOME/webapps
+alias tom.restart='tom.stop && tom.start'										# cmd: stops a running apache tomcat and starts it agian
 alias tom.start='$CATALINA_HOME/bin/startup.sh'										# cmd: start up apache tomcat
 alias tom.stop='$CATALINA_HOME/bin/shutdown.sh'										# cmd: shut down apache tomcat
 
@@ -119,6 +120,7 @@ alias find.txt='find . -name "*.txt" | xargs grep --color'								# cmd: soker e
 alias find.java='find . -name "*.java" | xargs grep --color'								# cmd: soker etter tekststreng i java filer
 alias fun='more $HOME/.zshrc | grep -v fun= | grep "# fun:"'								# cmd: list alle funksjonser (de som har kommentarene 'fun:') i .zshrc
 alias grep='grep --color'												# cmd: filtrer ord (og farglegg treff)
+alias grep.around='grep -A 3 -B 3'											# cmd: skriver ut 3 linjer før og 3 linjer etter et treff med grep
 alias grep.no.down='grep -v -i \"Download'										# cmd: grep alt utenom "Downloading" og "downloaded"
 alias grep.no.succ='grep -v "SUCCESS"'											# cmd: grep alt utenom "SUCCESS"
 alias grep.tree='grep -e "SNAPSHOT" -e "+" -e "|" -e "-" -e "nu.hjemme"'						# cmd: strenger som har interessant verdi ifm mvn dependency:tree

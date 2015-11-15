@@ -25,7 +25,7 @@ public class PersonDomainBuilder extends DomainBuilder<PersonDomain> {
     }
 
     public PersonDomainBuilder with(AddressDomainBuilder address) {
-        return with(address.get());
+        return with(address.build());
     }
 
     public PersonDomainBuilder withDescriptionAs(String description) {

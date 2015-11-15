@@ -36,7 +36,7 @@ public class UserControllerTest {
         testUserController.setUserFacade(mockedUserFacade);
     }
 
-    @Test public void willNotRetrieveUserByUserNameIfTheUserNameInTheWebRequestIsNullOrAnEmptyString() {
+    @Test public void willNotfetchUserByUserNameIfTheUserNameInTheWebRequestIsNullOrAnEmptyString() {
         Map<String, String[]> params = new HashMap<String, String[]>();
 
         WebRequest mockedWebRequest = mock(WebRequest.class);
@@ -54,7 +54,7 @@ public class UserControllerTest {
         verify(mockedUserFacade, atMost(0)).findUsing(any(UserName.class));
     }
 
-    @Test public void willRetrieveTheUserIfChooseParameterExist() {
+    @Test public void willfetchTheUserIfChooseParameterExist() {
         WebRequest mockedWebRequest = mock(WebRequest.class);
         ModelMap mockedModelMap = mock(ModelMap.class);
         User mockedUser = mock(User.class);

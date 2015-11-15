@@ -22,28 +22,28 @@ public class AddressDomainBuilderTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY);
 
-        anAddress().withZipCodeAs(1234).withCountryAs("NO", "no").get();
+        anAddress().withZipCodeAs(1234).withCountryAs("NO", "no").build();
     }
 
     @Test public void willNotBuildDomainWithAnEmptyAddressLine1() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY);
 
-        anAddress().withAddressLine1As("").withZipCodeAs(1234).withCountryAs("NO", "no").get();
+        anAddress().withAddressLine1As("").withZipCodeAs(1234).withCountryAs("NO", "no").build();
     }
 
     @Test public void willNotBuildDomainWithoutZipCode() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.ZIP_CODE_CANNOT_BE_NULL);
 
-        anAddress().withAddressLine1As("somewhere").withCountryAs("NO", "no").get();
+        anAddress().withAddressLine1As("somewhere").withCountryAs("NO", "no").build();
     }
 
     @Test public void willNotBuildDomainWithoutCountry() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(AddressDomainBuilder.COUNTRY_CANNOT_BE_NULL);
 
-        anAddress().withAddressLine1As("somewhere").withZipCodeAs(1234).get();
+        anAddress().withAddressLine1As("somewhere").withZipCodeAs(1234).build();
     }
 
     @Test public void willBuildValidatedDomain() {
@@ -51,7 +51,7 @@ public class AddressDomainBuilderTest {
                 .withAddressLine1As("somewhere")
                 .withZipCodeAs(1234)
                 .withCountryAs("NO", "no")
-                .get();
+                .build();
 
         assertThat("Address", addressDomain, is(notNullValue()));
     }
@@ -64,7 +64,7 @@ public class AddressDomainBuilderTest {
                 .withCityAs("some city")
                 .withCountryAs("NO", "no")
                 .withZipCodeAs(1234)
-                .get();
+                .build();
 
         assertThat(addressDomain, new TypeSafeBuildMatcher<AddressDomain>("A domain with all properties set") {
             @Override
