@@ -114,4 +114,36 @@ public class MenuItemImplTest {
                 is(equalTo(true))
         );
     }
-}
+
+
+    @Test
+    public void skalIkkeVareValgtNarImplementasjonAvMenyvalgSierDetMotsatte() {
+        when(mockedMenuItem.isChosenBy(new MenuItemTarget("hit?something=hard"))).thenReturn(false);
+        MenuItemImpl testMenuItem = new MenuItemImpl(mockedMenuItem, new MenuItemTarget("hit?something=hard"));
+
+        assertThat("Is chosen", testMenuItem.isChosen(), is(equalTo(false)));
+    }
+
+    @Test
+    public void skalVareValgtNarImplementasjonAvMenyvalgSierDetErValgt() {
+        when(mockedMenuItem.isChosenBy(new MenuItemTarget("hit?something=hard"))).thenReturn(true);
+        MenuItemImpl testMenuItem = new MenuItemImpl(mockedMenuItem, new MenuItemTarget("hit?something=hard"));
+
+        assertThat("Er valgt?", testMenuItem.isChosen(), is(equalTo(true)));
+    }
+
+    @Test
+    public void skalIkkeHaValgtBarnNarImplementasjonAvMenyvalgetSierDetMotsatte() {
+        when(mockedMenuItem.isChildChosenBy(new MenuItemTarget("hit?something=hard"))).thenReturn(false);
+        MenuItemImpl testMenuItem = new MenuItemImpl(mockedMenuItem, new MenuItemTarget("hit?something=hard"));
+
+        assertThat("Har valgte barn?", testMenuItem.isChildChosen(), is(equalTo(false)));
+    }
+
+    @Test
+    public void skalHaValgtBarnNarImplementasjonAvMenyvalgetSierAtDetHarValgtBarn() {
+        when(mockedMenuItem.isChildChosenBy(new MenuItemTarget("hit?something=hard"))).thenReturn(true);
+        MenuItemImpl testMenuItem = new MenuItemImpl(mockedMenuItem, new MenuItemTarget("hit?something=hard"));
+
+        assertThat("Har valgte barn?", testMenuItem.isChildChosen(), is(equalTo(true)));
+    }}

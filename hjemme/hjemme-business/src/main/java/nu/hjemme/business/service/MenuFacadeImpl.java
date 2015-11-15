@@ -3,8 +3,8 @@ package nu.hjemme.business.service;
 import nu.hjemme.business.domain.menu.MenuImpl;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.ChosenMenuItem;
 import nu.hjemme.client.domain.menu.Menu;
+import nu.hjemme.client.domain.menu.MenuItem;
 import nu.hjemme.client.service.MenuFacade;
 import org.apache.commons.lang.Validate;
 
@@ -27,7 +27,7 @@ public class MenuFacadeImpl implements MenuFacade {
 
     /** {@inheritDoc} */
     @Override
-    public List<ChosenMenuItem> retrieveChosenMenuItemBy(MenuTarget menuTarget) {
+    public List<MenuItem> retrieveChosenMenuItemBy(MenuTarget menuTarget) {
         Name name = throwIllegalArgumentExceptionIfUnknown(menuTarget.getMenuName());
 
         return menusByName.get(name).retrieveChosenMenuItemsBy(menuTarget.getMenuItemTarget());

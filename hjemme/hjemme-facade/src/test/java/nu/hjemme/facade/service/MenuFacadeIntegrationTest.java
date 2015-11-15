@@ -3,9 +3,7 @@ package nu.hjemme.facade.service;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.ChosenMenuItem;
-import nu.hjemme.client.domain.menu.dto.MenuDto;
-import nu.hjemme.client.domain.menu.dto.MenuItemDto;
+import nu.hjemme.client.domain.menu.MenuItem;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
@@ -15,7 +13,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -44,17 +41,17 @@ public class MenuFacadeIntegrationTest {
     @Test public void whenFindingMenuItemsAndTheNameIsKnownTheListOfMenuItemsWillBeReturned() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("bullseye?some=where"), new Name("testMenu"));
 
-        List<ChosenMenuItem> chosenMenuItems = testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
+        List<MenuItem> menuItems = testMenuFacade.retrieveChosenMenuItemBy(menuTarget);
 
-        assertThat(chosenMenuItems, new TypeSafeBuildMatcher<List<ChosenMenuItem>>("En liste med test menyvalg fra test context") {
-            @Override public MatchBuilder matches(List<ChosenMenuItem> chosenMenuItems, MatchBuilder matchBuilder) {
-                matchBuilder.matches(chosenMenuItems.isEmpty(), is(equalTo(false), "lista kan ikke være tom"));
+        assertThat(menuItems, new TypeSafeBuildMatcher<List<MenuItem>>("En liste med test menyvalg fra test context") {
+            @Override public MatchBuilder matches(List<MenuItem> menuItems, MatchBuilder matchBuilder) {
+                matchBuilder.matches(menuItems.isEmpty(), is(equalTo(false), "lista kan ikke være tom"));
 
-                for (ChosenMenuItem chosenMenuItem : chosenMenuItems) {
-                    if (new Name("testParent").equals(chosenMenuItem.getDescription().getItemName())) {
-                        matchBuilder.matches(chosenMenuItem.isChildChosen(), is(equalTo(true), "testParent sitt barn skal vaere valgt"));
+                for (MenuItem menuItem : menuItems) {
+                    if (new Name("testParent").equals(menuItem.getDescription().getItemName())) {
+                        matchBuilder.matches(menuItem.isChildChosen(), is(equalTo(true), "testParent sitt barn skal vaere valgt"));
                     } else {
-                        matchBuilder.matches(chosenMenuItem.isChosen(), is(equalTo(true), "menyvalget skal være valgt"));
+                        matchBuilder.matches(menuItem.isChosen(), is(equalTo(true), "menyvalgget skal være valgt"));
                     }
                 }
 
@@ -65,13 +62,13 @@ public class MenuFacadeIntegrationTest {
 
     @Configuration
     public static class HjemmeTestMenus {
-        @Bean @SuppressWarnings("unused") // brukes av spring
-        public MenuDto createTestMenu() {
-            return new MenuDto("testMenu")
-                    .add(new MenuItemDto("testParent", "bullseye")
-                                    .leggTilBarn(new MenuItemDto("testChild", "bullseye?some=where"))
-                    );
-
-        }
+//        @Bean @SuppressWarnings("unused") // brukes av spring
+//        public MenuDto createTestMenu() {
+//            return new MenuDto("testMenu")
+//                    .add(new MenuItemDto("testParent", "bullseye")
+//                            .add(new MenuItemDto("testChild", "bullseye?some=where"))
+//                    );
+//
+//        }
     }
 }

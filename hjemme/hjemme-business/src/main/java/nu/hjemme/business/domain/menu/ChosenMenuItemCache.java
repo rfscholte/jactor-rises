@@ -1,16 +1,18 @@
 package nu.hjemme.business.domain.menu;
 
 import nu.hjemme.client.datatype.MenuTarget;
-import nu.hjemme.client.domain.menu.ChosenMenuItem;
+import nu.hjemme.client.domain.menu.MenuItem;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Simple caching mechanism for a list of {@link ChosenMenuItemImpl} by {@link nu.hjemme.client.datatype.MenuTarget} */
+/**
+ * Simple caching mechanism for a list of {@link MenuItem} by {@link nu.hjemme.client.datatype.MenuTarget}
+ */
 public class ChosenMenuItemCache {
 
-    private final Map<MenuTarget, List<ChosenMenuItem>> chosenMenuItemCache;
+    private final Map<MenuTarget, List<MenuItem>> chosenMenuItemCache;
 
     public ChosenMenuItemCache() {
         chosenMenuItemCache = new HashMap<>();
@@ -20,11 +22,11 @@ public class ChosenMenuItemCache {
         return chosenMenuItemCache.containsKey(menuTarget);
     }
 
-    public void cache(MenuTarget menuItemTarget, List<ChosenMenuItem> listeAvChosenMenuItem) {
-        chosenMenuItemCache.put(menuItemTarget, listeAvChosenMenuItem);
+    public void cache(MenuTarget menuItemTarget, List<MenuItem> listeOfMenuItems) {
+        chosenMenuItemCache.put(menuItemTarget, listeOfMenuItems);
     }
 
-    public List<ChosenMenuItem> retrieveBy(MenuTarget menuItemTarget) {
+    public List<MenuItem> retrieveBy(MenuTarget menuItemTarget) {
         return chosenMenuItemCache.get(menuItemTarget);
     }
 }

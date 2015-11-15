@@ -29,11 +29,6 @@ public class MenuFacadeImplTest {
     @Mock
     static private MenuImpl mockedMenuImpl;
 
-    @Before
-    public void replaceMenuImplCreator() {
-        new MenuImplCreation();
-    }
-
     @Test
     public void willThrowExceptionIfProvidedMenusAreNull() {
         expectedException.expect(IllegalArgumentException.class);
@@ -75,26 +70,5 @@ public class MenuFacadeImplTest {
         testMenuFacadeImpl.retrieveChosenMenuItemBy(new MenuTarget(somewhere, knownMenu));
 
         verify(mockedMenuImpl).retrieveChosenMenuItemsBy(somewhere);
-    }
-
-    @After
-    public void replaceMenuItemImplCreatorWithOriginalCreator() {
-        MenuImplCreation.returnOriginalCreator();
-    }
-
-    static class MenuImplCreation extends MenuImpl {
-
-        MenuImplCreation() {
-            MenuImpl.setNewInstanceCreator(this);
-        }
-
-        @Override
-        protected MenuImpl createInstance(Menu menu) {
-            return mockedMenuImpl;
-        }
-
-        static void returnOriginalCreator() {
-            MenuImpl.setNewInstanceCreator(new MenuImpl());
-        }
     }
 }

@@ -23,16 +23,16 @@ public class ChosenMenuItemAspect {
     @Around("menuCaching()") @SuppressWarnings("unchecked")
     public Object cacheChosenMenuItemsByTarget(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         MenuTarget menuTarget = (MenuTarget) proceedingJoinPoint.getArgs()[0];
-        Object listeMedChosenMenuItems;
+        Object listWithChosenMenuItem;
 
         if (chosenMenuItemCache.isCached(menuTarget)) {
-            listeMedChosenMenuItems = chosenMenuItemCache.retrieveBy(menuTarget);
+            listWithChosenMenuItem = chosenMenuItemCache.retrieveBy(menuTarget);
         } else {
-            listeMedChosenMenuItems = proceedingJoinPoint.proceed();
-            chosenMenuItemCache.cache(menuTarget, (java.util.List<nu.hjemme.client.domain.menu.ChosenMenuItem>) listeMedChosenMenuItems);
+            listWithChosenMenuItem = proceedingJoinPoint.proceed();
+            chosenMenuItemCache.cache(menuTarget, (java.util.List<nu.hjemme.client.domain.menu.MenuItem>) listWithChosenMenuItem);
         }
 
-        return listeMedChosenMenuItems;
+        return listWithChosenMenuItem;
     }
 
     static void cacheMed(ChosenMenuItemCache mockedChosenMenuItemCache) {

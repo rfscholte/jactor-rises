@@ -13,28 +13,29 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.hash;
+import static org.apache.commons.lang.Validate.notNull;
 
 public class MenuItemImpl implements MenuItem {
-    private static MenuItemImpl newInstanceCreator = new MenuItemImpl();
 
     private final Description description;
-    private final List<MenuItemImpl> children = new ArrayList<>();
+    private final List<MenuItem> children = new ArrayList<>();
     private final MenuItemTarget menuItemTarget;
 
-    public MenuItemImpl() {
-        description = new Description("na", "new instance creator");
-        menuItemTarget = null;
-    }
-
     public MenuItemImpl(MenuItem menuItem) {
-        Validate.notNull(menuItem, "A MenuItem must be provided");
+        notNull(menuItem, "A MenuItem must be provided");
         description = menuItem.getDescription();
         menuItemTarget = menuItem.getMenuItemTarget();
         addChildren(menuItem.getChildren());
     }
 
-    private void addChildren(List<? extends MenuItem> children) {
-        this.children.addAll(children.stream().map(MenuItemImpl::newInstance).collect(Collectors.toList()));
+    public MenuItemImpl(MenuItem menuItem, MenuItemTarget menuItemTarget) {
+        notNull(menuItem, "A MenuItem must be provided");
+        description = menuItem.getDescription();
+        this.menuItemTarget = menuItemTarget;
+    }
+
+    private void addChildren(List<MenuItem> children) {
+        this.children.addAll(children);
     }
 
     public boolean isChosenBy(MenuItemTarget menuItemTarget) {
@@ -42,17 +43,13 @@ public class MenuItemImpl implements MenuItem {
     }
 
     public boolean isChildChosenBy(MenuItemTarget menuItemTarget) {
-        for (MenuItemImpl menuItem : children) {
+        for (MenuItem menuItem : children) {
             if (menuItem.isChosenBy(menuItemTarget)) {
                 return true;
             }
         }
 
         return false;
-    }
-
-    protected MenuItemImpl createInstance(MenuItem menuItem) {
-        return new MenuItemImpl(menuItem);
     }
 
     @Override
@@ -86,29 +83,23 @@ public class MenuItemImpl implements MenuItem {
                 .toString();
     }
 
-    /** {@inheritDoc */
-    @Override
-    public List<? extends MenuItem> getChildren() {
+    @Override public List<MenuItem> getChildren() {
         return children;
     }
 
-    List<MenuItemImpl> getChildrenImpls() {
-        return children;
-    }
-
-    /** {@inheritDoc */
-    @Override
-    public Description getDescription() {
+    @Override public Description getDescription() {
         return description;
     }
 
-    /** {@inheritDoc */
-    @Override
-    public MenuItemTarget getMenuItemTarget() {
+    @Override public MenuItemTarget getMenuItemTarget() {
         return menuItemTarget;
     }
 
-    static MenuItemImpl newInstance(MenuItem menuItem) {
-        return newInstanceCreator.createInstance(menuItem);
+    @Override public boolean isChosen() {
+        return menuItemTarget != null && isChildChosenBy(menuItemTarget);
+    }
+
+    @Override public boolean isChildChosen() {
+        return menuItemTarget != null && isChildChosenBy(menuItemTarget);
     }
 }

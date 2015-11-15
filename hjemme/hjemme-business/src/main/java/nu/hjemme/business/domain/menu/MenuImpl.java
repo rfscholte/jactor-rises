@@ -2,7 +2,6 @@ package nu.hjemme.business.domain.menu;
 
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.ChosenMenuItem;
 import nu.hjemme.client.domain.menu.Menu;
 import nu.hjemme.client.domain.menu.MenuItem;
 import org.apache.commons.lang.Validate;
@@ -18,17 +17,21 @@ public class MenuImpl implements Menu {
     private static MenuImpl newInstanceCreator = new MenuImpl();
 
     private final Name menuName;
-    private final List<MenuItemImpl> menuItems = new ArrayList<>();
+    private final List<MenuItem> menuItems = new ArrayList<>();
 
-    public MenuImpl() {
-        this.menuName = new Name("new instance creator");
+    private MenuImpl() {
+        this(new Name("new instance creator"));
+    }
+
+    private MenuImpl(Name menuName) {
+        this.menuName = menuName;
     }
 
     public MenuImpl(Menu menu) {
         Validate.notEmpty(menu.getMenuItems(), "There must be provided at least one menu item");
         this.menuName = menu.getName();
 
-        menuItems.addAll(menu.getMenuItems().stream().map(MenuItemImpl::newInstance).collect(Collectors.toList()));
+//        menuItems.addAll(menu.getMenuItems().stream().map(MenuItemImpl::newInstance).collect(Collectors.toList()));
     }
 
     protected MenuImpl createInstance(Menu menu) {
@@ -44,12 +47,12 @@ public class MenuImpl implements Menu {
     }
 
     @Override
-    public List<ChosenMenuItem> retrieveChosenMenuItemsBy(MenuItemTarget menuItemTarget) {
-        List<ChosenMenuItem> chosenMenuItems = new ArrayList<>(menuItems.size());
+    public List<MenuItem> retrieveChosenMenuItemsBy(MenuItemTarget menuItemTarget) {
+        List<MenuItem> menuItems = new ArrayList<>(this.menuItems.size());
 
-        chosenMenuItems.addAll(menuItems.stream().map(menuItem -> new ChosenMenuItemImpl(menuItem, menuItemTarget)).collect(Collectors.toList()));
+        menuItems.addAll(this.menuItems.stream().map(menuItem -> new MenuItemImpl(menuItem, menuItemTarget)).collect(Collectors.toList()));
 
-        return chosenMenuItems;
+        return menuItems;
     }
 
     @Override
@@ -58,7 +61,7 @@ public class MenuImpl implements Menu {
     }
 
     @Override
-    public List<? extends MenuItem> getMenuItems() {
+    public List<MenuItem> getMenuItems() {
         return menuItems;
     }
 
@@ -66,7 +69,7 @@ public class MenuImpl implements Menu {
         return newInstanceCreator.createInstance(menu);
     }
 
-    public static void setNewInstanceCreator(MenuImpl newInstanceCreator) {
-        MenuImpl.newInstanceCreator = newInstanceCreator;
+    public static void resetNewInstanceCreator() {
+        newInstanceCreator = new MenuImpl();
     }
 }

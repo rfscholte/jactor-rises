@@ -11,11 +11,11 @@ public interface Menu {
     Name getName();
 
     /** @return the menu items of this menu */
-    List<? extends MenuItem> getMenuItems();
+    List<MenuItem> getMenuItems();
 
     /**
      * @param menuItemTarget som er ønskelig
-     * @return en liste av {@link nu.hjemme.client.domain.menu.ChosenMenuItem}s basert på ønsket {@link nu.hjemme.client.datatype.MenuItemTarget}
+     * @return en liste av {@link nu.hjemme.client.domain.menu.MenuItem}s basert på ønsket {@link nu.hjemme.client.datatype.MenuItemTarget}
      */
-    List<ChosenMenuItem> retrieveChosenMenuItemsBy(MenuItemTarget menuItemTarget);
+    List<MenuItem> retrieveChosenMenuItemsBy(MenuItemTarget menuItemTarget);
 }

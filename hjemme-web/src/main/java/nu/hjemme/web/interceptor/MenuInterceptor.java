@@ -2,7 +2,7 @@ package nu.hjemme.web.interceptor;
 
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.service.MenuFacade;
-import nu.hjemme.web.dto.ChosenMenuItemDto;
+import nu.hjemme.web.dto.MenuItemDto;
 import nu.hjemme.web.dto.MenuDto;
 import nu.hjemme.web.dto.MenuItemTargetDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +39,16 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         MenuDto mainMenuDto = new MenuDto(menuFacade.retrieveChosenMenuItemBy(mainMenuTarget));
         MenuDto personMenuDto = new MenuDto(menuFacade.retrieveChosenMenuItemBy(personMenuTarget));
 
-        List<ChosenMenuItemDto> chosenMenuItemsFromMainMenu = mainMenuDto.getChosenMenuItems();
-        List<ChosenMenuItemDto> chosenMenuItemsFromPersonMenu = personMenuDto.getChosenMenuItems();
+        List<MenuItemDto> chosenMenuItemsFromMainMenu = mainMenuDto.getMenuItems();
+        List<MenuItemDto> chosenMenuItemsFromPersonMenu = personMenuDto.getMenuItems();
 
         addMenuItemsToModelAndView(modelAndView, chosenMenuItemsFromMainMenu, chosenMenuItemsFromPersonMenu);
     }
 
     private void addMenuItemsToModelAndView(
             ModelAndView modelAndView,
-            List<ChosenMenuItemDto> chosenMenuItemsFromMainMenu,
-            List<ChosenMenuItemDto> chosenMenuItemsFromPersonMenu
+            List<MenuItemDto> chosenMenuItemsFromMainMenu,
+            List<MenuItemDto> chosenMenuItemsFromPersonMenu
     ) {
         Map<String, Object> modelMap = modelAndView.getModel();
         modelMap.put(ATTRIBUTE_MAIN_ITEMS, chosenMenuItemsFromMainMenu);

@@ -4,10 +4,8 @@ import nu.hjemme.business.domain.menu.ChosenMenuItemCache;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.ChosenMenuItem;
 import nu.hjemme.client.domain.menu.Menu;
-import nu.hjemme.client.domain.menu.dto.MenuDto;
-import nu.hjemme.client.domain.menu.dto.MenuItemDto;
+import nu.hjemme.client.domain.menu.MenuItem;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
@@ -51,7 +49,7 @@ public class ChosenMenuItemAspectIntegrationTest {
         menuFacade.retrieveChosenMenuItemBy(somewhereOnMyMenu);
         menuFacade.retrieveChosenMenuItemBy(somewhereOnMyMenu);
 
-        verify(mockedChosenMenuItemCache).cache(eq(somewhereOnMyMenu), anyListOf(ChosenMenuItem.class));
+        verify(mockedChosenMenuItemCache).cache(eq(somewhereOnMyMenu), anyListOf(MenuItem.class));
         verify(mockedChosenMenuItemCache, times(2)).retrieveBy(somewhereOnMyMenu);
     }
 
@@ -60,7 +58,8 @@ public class ChosenMenuItemAspectIntegrationTest {
         @Bean
         @SuppressWarnings("unused") // brukes av spring
         public Menu createMockedMenu() {
-            return new MenuDto("my.menu").add(new MenuItemDto("menuvalg", "somewhere"));
+//            return new MenuDto("my.menu").add(new MenuItemDto(new Name("item"), new MenuItemTarget("somewhere")));
+            return null;
         }
     }
 }

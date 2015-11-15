@@ -3,7 +3,7 @@ package nu.hjemme.business.domain.menu;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.ChosenMenuItem;
+import nu.hjemme.client.domain.menu.MenuItem;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Before;
@@ -49,7 +49,7 @@ public class ChosenMenuItemCacheTest {
     }
 
     @Test
-    public void skalHaMenuTargetCachetNarNarMenuTargetSomBesOmErLiktCache() {
+    public void skalHaMenuTargetCachetNarNarMenuTargetSomBesOmErCachet() {
         testChosenMenuItemCache.cache(etStedPaHovedmenyen, new ArrayList<>());
         assertThat(testChosenMenuItemCache.isCached(etStedPaHovedmenyen), is(equalTo(true), "chosen from menu"));
     }
@@ -59,14 +59,14 @@ public class ChosenMenuItemCacheTest {
         assertThat(testChosenMenuItemCache, new TypeSafeBuildMatcher<ChosenMenuItemCache>("Caching basert pa menu item target") {
             @Override
             public MatchBuilder matches(ChosenMenuItemCache chosenMenuItemCache, MatchBuilder matchBuilder) {
-                @SuppressWarnings("unchecked") List<ChosenMenuItem> eiListeAvChosenMenuItems = mock(List.class);
-                @SuppressWarnings("unchecked") List<ChosenMenuItem> eiAnnenListeAvChosenMenuItems = mock(List.class);
+                @SuppressWarnings("unchecked") List<MenuItem> eiListeAvMenuItems = mock(List.class);
+                @SuppressWarnings("unchecked") List<MenuItem> eiAnnenListeAvChosenMenuItems = mock(List.class);
 
-                testChosenMenuItemCache.cache(etStedPaHovedmenyen, eiListeAvChosenMenuItems);
+                testChosenMenuItemCache.cache(etStedPaHovedmenyen, eiListeAvMenuItems);
                 testChosenMenuItemCache.cache(etAnnetStedPaHovedmenyen, eiAnnenListeAvChosenMenuItems);
 
                 return matchBuilder
-                        .matches(chosenMenuItemCache.retrieveBy(etStedPaHovedmenyen), is(equalTo(eiListeAvChosenMenuItems), "cache av " + etStedPaHovedmenyen))
+                        .matches(chosenMenuItemCache.retrieveBy(etStedPaHovedmenyen), is(equalTo(eiListeAvMenuItems), "cache av " + etStedPaHovedmenyen))
                         .matches(chosenMenuItemCache.retrieveBy(etAnnetStedPaHovedmenyen), is(equalTo(eiAnnenListeAvChosenMenuItems), "cache av " + etAnnetStedPaHovedmenyen));
 
             }
