@@ -14,17 +14,12 @@ public interface MenuItem {
     MenuItemTarget getMenuItemTarget();
 
     /**
-     * @return {@code true} when menu item is aware of the requested {@link MenuItemTarget} and it is the same as its items target
+     * @return {@code true} when requested {@link MenuItemTarget} is the same as its items target
      */
     boolean isChosen();
 
     /**
-     * @return {@code true} when the children is aware of the requested {@link MenuItemTarget} and it is the same as its childs target
+     * @return {@code true} when requested {@link MenuItemTarget} is the same as its childs target
      */
     boolean isChildChosen();
-
-    boolean isChosenBy(MenuItemTarget menuItemTarget);
-
-    boolean isChildChosenBy(MenuItemTarget menuItemTarget);
-
 }

@@ -1,149 +1,67 @@
 package nu.hjemme.business.domain.menu;
 
 import nu.hjemme.client.datatype.MenuItemTarget;
-import nu.hjemme.client.domain.menu.MenuItem;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import static nu.hjemme.business.domain.menu.MenuItemDomain.aMenuItemDomain;
+import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
 public class MenuItemDomainTest {
 
-    @Mock private MenuItem mockedMenuItem;
+    @Before public void requestMenuItemTargetDeadCenter() {
+        new MenuItemRequest(new MenuItemTarget("hit?dead=center"));
+    }
 
     @Test public void willHaveCorrectImplementedHashCode() {
-        MenuItem mockedChild = mock(MenuItem.class);
-        MenuItem mockedUnequal = mock(MenuItem.class);
-
-        when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("target?some=parameter"));
-        when(mockedMenuItem.getChildren()).thenAnswer(somListe(mockedChild));
-        when(mockedChild.getMenuItemTarget()).thenReturn(new MenuItemTarget("childTarget?child=parameter"));
-        when(mockedUnequal.getMenuItemTarget()).thenReturn(new MenuItemTarget("target?another=parameter"));
-        when(mockedUnequal.getChildren()).thenReturn(new ArrayList<>());
-
-        MenuItemDomain base = new MenuItemDomain(mockedMenuItem);
-        MenuItemDomain equal = new MenuItemDomain(mockedMenuItem);
-        MenuItemDomain unequal = new MenuItemDomain(mockedUnequal);
+        MenuItemDomain base = aMenuItemDomain().with(new MenuItemTarget("target?some=parameter"))
+                .add(aMenuItemDomain().with(new MenuItemTarget("childTarget?child=parameter"))).build();
+        MenuItemDomain equal = aMenuItemDomain().with(new MenuItemTarget("target?some=parameter"))
+                .add(aMenuItemDomain().with(new MenuItemTarget("childTarget?child=parameter"))).build();
+        MenuItemDomain unequal = aMenuItemDomain().with(new MenuItemTarget("target?another=parameter")).build();
 
         assertThat(base, hasImplementedHashCodeAccordingTo(equal, unequal));
     }
 
-    private Answer<List<? extends MenuItem>> somListe(MenuItem mockedEqualChild) {
-        return invocation -> new ArrayList<MenuItem>() {
-            {
-                add(mockedEqualChild);
-            }
-        };
-    }
-
     @Test public void willHaveCorrectImplementedEquals() {
-        MenuItem mockedChild = mock(MenuItem.class);
-        MenuItem mockedUnequal = mock(MenuItem.class);
-
-        when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("target?some=parameter"));
-        when(mockedMenuItem.getChildren()).thenAnswer(somListe(mockedChild));
-        when(mockedChild.getMenuItemTarget()).thenReturn(new MenuItemTarget("childTarget?child=parameter"));
-        when(mockedUnequal.getMenuItemTarget()).thenReturn(new MenuItemTarget("target?another=parameter"));
-        when(mockedUnequal.getChildren()).thenReturn(new ArrayList<>());
-
-        MenuItemDomain base = new MenuItemDomain(mockedMenuItem);
-        MenuItemDomain equal = new MenuItemDomain(mockedMenuItem);
-        MenuItemDomain unequal = new MenuItemDomain(mockedUnequal);
+        MenuItemDomain base = aMenuItemDomain().with(new MenuItemTarget("target?some=parameter"))
+                .add(aMenuItemDomain().with(new MenuItemTarget("childTarget?child=parameter"))).build();
+        MenuItemDomain equal = aMenuItemDomain().with(new MenuItemTarget("target?some=parameter"))
+                .add(aMenuItemDomain().with(new MenuItemTarget("childTarget?child=parameter"))).build();
+        MenuItemDomain unequal = aMenuItemDomain().with(new MenuItemTarget("target?another=parameter")).build();
 
         assertThat(base, hasImplenetedEqualsMethodUsing(equal, unequal));
     }
 
-    @Test public void skalIkkeVareValgtNarMaletErUkjent() {
-        when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("hit?dead=center"));
+    @Test public void shouldNotBeChosenWhenTheTargetIsUnknown() {
+        MenuItemDomain testMenuItem = aMenuItemDomain().with(new MenuItemTarget("miss")).build();
 
-        MenuItemDomain testMenuItem = new MenuItemDomain(mockedMenuItem);
-
-        assertThat("Should not be chosen", testMenuItem.isChosenBy(new MenuItemTarget("miss?some=where")),
-                is(equalTo(false)));
-
+        assertThat(testMenuItem.isChosen(), is(equalTo(false), "menuItem.chosen"));
     }
 
-    @Test public void skalVareValgtNarMaletErKjent() {
-        when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("hit?dead=center"));
+    @Test public void shouldBeChosenWhenTheTargetIsKnown() {
+        MenuItemDomain testMenuItem = aMenuItemDomain().with(new MenuItemTarget("hit?dead=center")).build();
 
-        MenuItemDomain testMenuItem = new MenuItemDomain(mockedMenuItem);
-
-        assertThat("Should be chosen", testMenuItem.isChosenBy(new MenuItemTarget("hit?dead=center")),
-                is(equalTo(true)));
+        assertThat(testMenuItem.isChosen(), is(equalTo(true), "menuItem.chosen"));
     }
 
-    @Test public void skalIkkeHaEtValgtMenyvalgNarsMaletTilBarnetErUkjent() {
-        MenuItem mockedChild = mock(MenuItem.class);
+    @Test public void shouldNotBeChosenChildWhenMenuTargetOnChildIsUnknown() {
+        MenuItemDomain testMenuItem = aMenuItemDomain().with(new MenuItemTarget("hit?dead=center"))
+                .add(aMenuItemDomain().with(new MenuItemTarget("miss")))
+                .build();
 
-        when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("target?some=parameter"));
-        when(mockedMenuItem.getChildren()).thenAnswer(somListe(mockedChild));
-        when(mockedChild.getMenuItemTarget()).thenReturn(new MenuItemTarget("hit?dead=center"));
-
-        MenuItemDomain testMenuItem = new MenuItemDomain(mockedMenuItem);
-
-        assertThat("Menyvalget har ikke valgt barn når barnets mal er ukjent",
-                testMenuItem.isChildChosenBy(new MenuItemTarget("miss?some=where")),
-                is(equalTo(false))
-        );
+        assertThat(testMenuItem.isChildChosen(), is(equalTo(false), "menuItem.isChildChosen"));
     }
 
-    @Test public void skalHaEtValgtMenyvalgNarsMaletTilBarnetErKjent() {
-        MenuItem mockedChild = mock(MenuItem.class);
+    @Test public void shouldBeChosenChildWhenMenuTargetOnChildIsKnown() {
+        MenuItemDomain testMenuItem = aMenuItemDomain().with(new MenuItemTarget("miss"))
+                .add(aMenuItemDomain().with(new MenuItemTarget("hit?dead=center")))
+                .build();
 
-        when(mockedMenuItem.getMenuItemTarget()).thenReturn(new MenuItemTarget("target?some=parameter"));
-        when(mockedMenuItem.getChildren()).thenAnswer(somListe(mockedChild));
-        when(mockedChild.getMenuItemTarget()).thenReturn(new MenuItemTarget("hit?dead=center"));
-
-        MenuItemDomain testMenuItem = new MenuItemDomain(mockedMenuItem);
-
-        assertThat("Menyvalget har valgt barn når barnets mal er kjent",
-                testMenuItem.isChildChosenBy(new MenuItemTarget("hit?dead=center")),
-                is(equalTo(true))
-        );
+        assertThat(testMenuItem.isChildChosen(), is(equalTo(true), "menuItem.isChildChosen"));
     }
-
-
-    @Test
-    public void skalIkkeVareValgtNarImplementasjonAvMenyvalgSierDetMotsatte() {
-        when(mockedMenuItem.isChosenBy(new MenuItemTarget("hit?something=hard"))).thenReturn(false);
-        MenuItemDomain testMenuItem = new MenuItemDomain(mockedMenuItem, new MenuItemTarget("hit?something=hard"));
-
-        assertThat("Is chosen", testMenuItem.isChosen(), is(equalTo(false)));
-    }
-
-    @Test
-    public void skalVareValgtNarImplementasjonAvMenyvalgSierDetErValgt() {
-        when(mockedMenuItem.isChosenBy(new MenuItemTarget("hit?something=hard"))).thenReturn(true);
-        MenuItemDomain testMenuItem = new MenuItemDomain(mockedMenuItem, new MenuItemTarget("hit?something=hard"));
-
-        assertThat("Er valgt?", testMenuItem.isChosen(), is(equalTo(true)));
-    }
-
-    @Test
-    public void skalIkkeHaValgtBarnNarImplementasjonAvMenyvalgetSierDetMotsatte() {
-        when(mockedMenuItem.isChildChosenBy(new MenuItemTarget("hit?something=hard"))).thenReturn(false);
-        MenuItemDomain testMenuItem = new MenuItemDomain(mockedMenuItem, new MenuItemTarget("hit?something=hard"));
-
-        assertThat("Har valgte barn?", testMenuItem.isChildChosen(), is(equalTo(false)));
-    }
-
-    @Test
-    public void skalHaValgtBarnNarImplementasjonAvMenyvalgetSierAtDetHarValgtBarn() {
-        when(mockedMenuItem.isChildChosenBy(new MenuItemTarget("hit?something=hard"))).thenReturn(true);
-        MenuItemDomain testMenuItem = new MenuItemDomain(mockedMenuItem, new MenuItemTarget("hit?something=hard"));
-
-        assertThat("Har valgte barn?", testMenuItem.isChildChosen(), is(equalTo(true)));
-    }}
+}

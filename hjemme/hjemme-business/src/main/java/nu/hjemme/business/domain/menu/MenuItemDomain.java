@@ -1,5 +1,6 @@
 package nu.hjemme.business.domain.menu;
 
+import nu.hjemme.business.domain.builder.menu.MenuItemDomainBuilder;
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.domain.menu.MenuItem;
@@ -11,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
-import static org.apache.commons.lang.Validate.notNull;
 
 public class MenuItemDomain implements MenuItem {
 
@@ -19,30 +19,23 @@ public class MenuItemDomain implements MenuItem {
     private final List<MenuItem> children = new ArrayList<>();
     private final MenuItemTarget menuItemTarget;
 
-    public MenuItemDomain(MenuItem menuItem) {
-        notNull(menuItem, "A MenuItem must be provided");
-        description = menuItem.getDescription();
-        menuItemTarget = menuItem.getMenuItemTarget();
-        addChildren(menuItem.getChildren());
-    }
-
-    public MenuItemDomain(MenuItem menuItem, MenuItemTarget menuItemTarget) {
-        notNull(menuItem, "A MenuItem must be provided");
-        description = menuItem.getDescription();
+    public MenuItemDomain(Description description, MenuItemTarget menuItemTarget) {
+        this.description = description;
         this.menuItemTarget = menuItemTarget;
     }
 
-    private void addChildren(List<MenuItem> children) {
+    public MenuItemDomain appendChildren(List<MenuItem> children) {
         this.children.addAll(children);
+        return this;
     }
 
-    public boolean isChosenBy(MenuItemTarget menuItemTarget) {
-        return this.menuItemTarget.equals(menuItemTarget);
+    @Override public boolean isChosen() {
+        return MenuItemRequest.isRequestFor(menuItemTarget);
     }
 
-    public boolean isChildChosenBy(MenuItemTarget menuItemTarget) {
+    @Override public boolean isChildChosen() {
         for (MenuItem menuItem : children) {
-            if (menuItem.isChosenBy(menuItemTarget)) {
+            if (menuItem.isChosen()) {
                 return true;
             }
         }
@@ -93,11 +86,7 @@ public class MenuItemDomain implements MenuItem {
         return menuItemTarget;
     }
 
-    @Override public boolean isChosen() {
-        return menuItemTarget != null && isChildChosenBy(menuItemTarget);
-    }
-
-    @Override public boolean isChildChosen() {
-        return menuItemTarget != null && isChildChosenBy(menuItemTarget);
+    public static MenuItemDomainBuilder aMenuItemDomain() {
+        return new MenuItemDomainBuilder();
     }
 }

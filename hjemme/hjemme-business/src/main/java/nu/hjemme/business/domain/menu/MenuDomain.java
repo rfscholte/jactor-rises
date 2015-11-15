@@ -10,7 +10,6 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /** A {@link MenuDomain} that contains a collection of {@link MenuItemDomain}s. */
 public class MenuDomain implements Menu {
@@ -50,7 +49,7 @@ public class MenuDomain implements Menu {
     public List<MenuItem> fetchMenuItemsBy(MenuItemTarget menuItemTarget) {
         List<MenuItem> menuItems = new ArrayList<>(this.menuItems.size());
 
-        menuItems.addAll(this.menuItems.stream().map(menuItem -> new MenuItemDomain(menuItem, menuItemTarget)).collect(Collectors.toList()));
+//        menuItems.addAll(this.menuItems.stream().map(menuItem -> new MenuItemDomain(menuItem, menuItemTarget)).collect(Collectors.toList()));
 
         return menuItems;
     }

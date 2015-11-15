@@ -8,7 +8,8 @@ public abstract class DomainBuilder<Domain> {
 
     abstract protected Domain initDomain();
 
-    abstract protected void validate();
+    /** a validation of the domain must be overridden if the domain needs particular validation to be a valid instance... */
+    protected void validate() { }
 
     public Domain build() {
         buildValidator.validate(this);
