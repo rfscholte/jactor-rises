@@ -1,6 +1,6 @@
 package nu.hjemme.facade.aop;
 
-import nu.hjemme.business.domain.menu.ChosenMenuItemCache;
+import nu.hjemme.business.domain.menu.MenuItemCache;
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
@@ -28,29 +28,29 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HjemmeBeanContext.class, ChosenMenuItemAspectIntegrationTest.MockedMenuConfiguration.class, HjemmeDbContext.class})
-public class ChosenMenuItemAspectIntegrationTest {
+@ContextConfiguration(classes = {HjemmeBeanContext.class, MenuItemAspectIntegrationTest.MockedMenuConfiguration.class, HjemmeDbContext.class})
+public class MenuItemAspectIntegrationTest {
 
-    private ChosenMenuItemCache mockedChosenMenuItemCache;
+    private MenuItemCache menuItemCacheMock;
 
     @Resource @SuppressWarnings("unused") // initialized by spring
     private MenuFacade menuFacade;
 
     @Before public void byttUtChosenMenuItemCachePaAspect() {
-        mockedChosenMenuItemCache = mock(ChosenMenuItemCache.class);
-        ChosenMenuItemAspect.cacheMed(mockedChosenMenuItemCache);
+        menuItemCacheMock = mock(MenuItemCache.class);
+        MenuItemAspect.cacheMed(menuItemCacheMock);
     }
 
     @Test public void skalSjekkeAtMenyBlirCachet() {
-        when(mockedChosenMenuItemCache.isCached(any(MenuTarget.class))).thenReturn(false).thenReturn(true);
+        when(menuItemCacheMock.isCached(any(MenuTarget.class))).thenReturn(false).thenReturn(true);
         MenuTarget somewhereOnMyMenu = new MenuTarget(new MenuItemTarget("somewhere"), new Name("my.menu"));
 
         menuFacade.retrieveChosenMenuItemBy(somewhereOnMyMenu);
         menuFacade.retrieveChosenMenuItemBy(somewhereOnMyMenu);
         menuFacade.retrieveChosenMenuItemBy(somewhereOnMyMenu);
 
-        verify(mockedChosenMenuItemCache).cache(eq(somewhereOnMyMenu), anyListOf(MenuItem.class));
-        verify(mockedChosenMenuItemCache, times(2)).retrieveBy(somewhereOnMyMenu);
+        verify(menuItemCacheMock).cache(eq(somewhereOnMyMenu), anyListOf(MenuItem.class));
+        verify(menuItemCacheMock, times(2)).retrieveBy(somewhereOnMyMenu);
     }
 
     @Configuration

@@ -39,20 +39,20 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         MenuDto mainMenuDto = new MenuDto(menuFacade.retrieveChosenMenuItemBy(mainMenuTarget));
         MenuDto personMenuDto = new MenuDto(menuFacade.retrieveChosenMenuItemBy(personMenuTarget));
 
-        List<MenuItemDto> chosenMenuItemsFromMainMenu = mainMenuDto.getMenuItems();
-        List<MenuItemDto> chosenMenuItemsFromPersonMenu = personMenuDto.getMenuItems();
+        List<MenuItemDto> menuItemsFromMainMenu = mainMenuDto.getMenuItems();
+        List<MenuItemDto> menuItemsFromPersonMenu = personMenuDto.getMenuItems();
 
-        addMenuItemsToModelAndView(modelAndView, chosenMenuItemsFromMainMenu, chosenMenuItemsFromPersonMenu);
+        addMenuItemsToModelAndView(modelAndView, menuItemsFromMainMenu, menuItemsFromPersonMenu);
     }
 
     private void addMenuItemsToModelAndView(
             ModelAndView modelAndView,
-            List<MenuItemDto> chosenMenuItemsFromMainMenu,
-            List<MenuItemDto> chosenMenuItemsFromPersonMenu
+            List<MenuItemDto> menuItemsFromMainMenu,
+            List<MenuItemDto> menuItemsFromPersonMenu
     ) {
         Map<String, Object> modelMap = modelAndView.getModel();
-        modelMap.put(ATTRIBUTE_MAIN_ITEMS, chosenMenuItemsFromMainMenu);
-        modelMap.put(ATTRIBUTE_PERSON_ITEMS, chosenMenuItemsFromPersonMenu);
+        modelMap.put(ATTRIBUTE_MAIN_ITEMS, menuItemsFromMainMenu);
+        modelMap.put(ATTRIBUTE_PERSON_ITEMS, menuItemsFromPersonMenu);
     }
 
     @Autowired public void setMenuFacade(MenuFacade menuFacade) {

@@ -9,8 +9,8 @@ public class MenuDto {
     private List<MenuItemDto> menuItems = new ArrayList<>();
 
     public MenuDto(List<MenuItem> menuItems) {
-        for (MenuItem chosenMenuItem : menuItems) {
-            this.menuItems.add(new MenuItemDto(chosenMenuItem));
+        for (MenuItem menuItem : menuItems) {
+            this.menuItems.add(new MenuItemDto(menuItem));
         }
     }
 

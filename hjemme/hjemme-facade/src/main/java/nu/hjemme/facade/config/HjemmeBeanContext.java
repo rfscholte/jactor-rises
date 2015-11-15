@@ -7,7 +7,7 @@ import nu.hjemme.business.service.UserFacadeImpl;
 import nu.hjemme.client.domain.menu.Menu;
 import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.client.service.UserFacade;
-import nu.hjemme.facade.aop.ChosenMenuItemAspect;
+import nu.hjemme.facade.aop.MenuItemAspect;
 import nu.hjemme.persistence.PersistentData;
 import nu.hjemme.persistence.dao.UserDao;
 import nu.hjemme.persistence.dao.UserDaoDb;
@@ -27,27 +27,27 @@ public class HjemmeBeanContext {
         Locale.setDefault(Locale.ENGLISH);
     }
 
-    @Bean(name = "hjemme.menuFacade") @SuppressWarnings("unused") // initialized by spring
+    @Bean(name = "hjemme.menuFacade") // initialized by spring
     public MenuFacade menuFacade(List<Menu> menus) {
         return new MenuFacadeImpl(menus);
     }
 
-    @Bean(name = "hjemme.userFacade") @SuppressWarnings("unused")  // initialized by spring
+    @Bean(name = "hjemme.userFacade")  // initialized by spring
     public UserFacade userFacade(SessionFactory sessionFactory) {
         return new UserFacadeImpl(PersistentData.getInstance().provideInstanceFor(UserDao.class, sessionFactory));
     }
 
-    @Bean(name = "hjemme.userDao") @SuppressWarnings("unused")  // initialized by spring
+    @Bean(name = "hjemme.userDao")  // initialized by spring
     public UserDao userDao(SessionFactory sessionFactory) {
         return new UserDaoDb(sessionFactory);
     }
 
-    @Bean(name = "hjemme.aop.chosenMenuItems") @SuppressWarnings("unused") // initialized by spring
-    public ChosenMenuItemAspect chosenMenuItemAspect() {
-        return new ChosenMenuItemAspect();
+    @Bean(name = "hjemme.aop.menuItems") // initialized by spring
+    public MenuItemAspect menuItemAspect() {
+        return new MenuItemAspect();
     }
 
-    @Bean(name = "hjemme.domains.aware.db") @SuppressWarnings("unused") // initialized by spring
+    @Bean(name = "hjemme.domains.aware.db") // initialized by spring
     public UserDomainDao domainConfig(UserDao userDao) {
         UserDomainDao userDomainDao = new UserDomainDao(userDao);
         UserDomain.setUserDomainDao(userDomainDao);
