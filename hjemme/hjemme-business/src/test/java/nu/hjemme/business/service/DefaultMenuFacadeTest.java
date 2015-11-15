@@ -20,25 +20,25 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MenuFacadeImplTest {
+public class DefaultMenuFacadeTest {
 
     @Rule public ExpectedException expectedException = ExpectedException.none();
     @Mock static private MenuDomain menuDomainMock;
 
-    private MenuFacadeImpl testMenuFacadeImpl;
+    private DefaultMenuFacade testDefaultMenuFacade;
 
     @Before public void initMenuFacadeToTest() {
-        testMenuFacadeImpl = new MenuFacadeImpl(singletonList(menuDomainMock));
+        testDefaultMenuFacade = new DefaultMenuFacade(singletonList(menuDomainMock));
     }
 
     @Test public void willThrowExceptionIfProvidedMenusAreNull() {
         expectedException.expect(IllegalArgumentException.class);
-        new MenuFacadeImpl(null);
+        new DefaultMenuFacade(null);
     }
 
     @Test public void willThrowExceptionIfProvidedMenusAreEmpty() {
         expectedException.expect(IllegalArgumentException.class);
-        new MenuFacadeImpl(Collections.<Menu>emptyList());
+        new DefaultMenuFacade(Collections.<Menu>emptyList());
     }
 
     @Test public void willFailWhenMenuIsUnknown() {
@@ -52,7 +52,7 @@ public class MenuFacadeImplTest {
 
         when(menuDomainMock.getName()).thenReturn(knownMenu);
 
-        testMenuFacadeImpl.fetchMenuItemBy(
+        testDefaultMenuFacade.fetchMenuItemBy(
                 new MenuTarget(somewhere, new Name("unknown.menu"))
         );
     }
@@ -63,7 +63,7 @@ public class MenuFacadeImplTest {
 
         when(menuDomainMock.getName()).thenReturn(knownMenu);
 
-        testMenuFacadeImpl.fetchMenuItemBy(new MenuTarget(somewhere, knownMenu));
+        testDefaultMenuFacade.fetchMenuItemBy(new MenuTarget(somewhere, knownMenu));
 
         verify(menuDomainMock).fetchMenuItemsBy(somewhere);
     }

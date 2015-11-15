@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 /** The implementation of {@link MenuFacade} */
-public class MenuFacadeImpl implements MenuFacade {
+public class DefaultMenuFacade implements MenuFacade {
     private Map<Name, Menu> menusByName = new HashMap<>();
 
-    public MenuFacadeImpl(List<Menu> menus) {
+    public DefaultMenuFacade(List<Menu> menus) {
         Validate.notEmpty(menus, "Menus must be provided");
 
         for (Menu menu : menus) {

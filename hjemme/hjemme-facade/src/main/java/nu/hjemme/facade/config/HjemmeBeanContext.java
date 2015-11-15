@@ -2,7 +2,7 @@ package nu.hjemme.facade.config;
 
 import nu.hjemme.business.domain.UserDomain;
 import nu.hjemme.business.domain.dao.UserDomainDao;
-import nu.hjemme.business.service.MenuFacadeImpl;
+import nu.hjemme.business.service.DefaultMenuFacade;
 import nu.hjemme.business.service.UserFacadeImpl;
 import nu.hjemme.client.domain.menu.Menu;
 import nu.hjemme.client.service.MenuFacade;
@@ -29,7 +29,7 @@ public class HjemmeBeanContext {
 
     @Bean(name = "hjemme.menuFacade") // initialized by spring
     public MenuFacade menuFacade(List<Menu> menus) {
-        return new MenuFacadeImpl(menus);
+        return new DefaultMenuFacade(menus);
     }
 
     @Bean(name = "hjemme.userFacade")  // initialized by spring
