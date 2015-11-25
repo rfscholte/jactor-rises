@@ -25,17 +25,17 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = UserDaoDbIntegrationTest.HjemmeDbContext.class)
+@ContextConfiguration(classes = DefaultUserDaoIntegrationTest.HjemmeDbContext.class)
 @Transactional
-public class UserDaoDbIntegrationTest {
+public class DefaultUserDaoIntegrationTest {
 
-    private UserDaoDb userDaoToTest;
+    private DefaultUserDao userDaoToTest;
 
     @Resource(name = "sessionFactory") @SuppressWarnings("unused") // initialized by spring
     private SessionFactory sessionFactory;
 
     @Before public void initDao() {
-        userDaoToTest = new UserDaoDb(sessionFactory);
+        userDaoToTest = new DefaultUserDao(sessionFactory);
     }
 
     @Test public void willPersistAndFindUserWithDao() {

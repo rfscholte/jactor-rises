@@ -9,8 +9,8 @@ import nu.hjemme.client.service.MenuFacade;
 import nu.hjemme.client.service.UserFacade;
 import nu.hjemme.facade.aop.MenuItemAspect;
 import nu.hjemme.persistence.PersistentData;
+import nu.hjemme.persistence.dao.DefaultUserDao;
 import nu.hjemme.persistence.dao.UserDao;
-import nu.hjemme.persistence.dao.UserDaoDb;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +35,7 @@ public class HjemmeBeanContext {
     }
 
     @Bean(name = "hjemme.userDao") public UserDao userDao(SessionFactory sessionFactory) {
-        return new UserDaoDb(sessionFactory);
+        return new DefaultUserDao(sessionFactory);
     }
 
     @Bean(name = "hjemme.aop.menuItems") public MenuItemAspect menuItemAspect() {

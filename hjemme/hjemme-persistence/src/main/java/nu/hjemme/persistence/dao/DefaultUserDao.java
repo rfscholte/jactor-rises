@@ -8,11 +8,11 @@ import org.hibernate.SessionFactory;
 
 import static org.hibernate.criterion.Restrictions.eq;
 
-public class UserDaoDb implements UserDao {
+public class DefaultUserDao implements UserDao {
 
     private final SessionFactory sessionFactory;
 
-    public UserDaoDb(SessionFactory sessionFactory) {
+    public DefaultUserDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

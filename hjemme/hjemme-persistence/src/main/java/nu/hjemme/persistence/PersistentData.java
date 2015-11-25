@@ -1,7 +1,7 @@
 package nu.hjemme.persistence;
 
+import nu.hjemme.persistence.dao.DefaultUserDao;
 import nu.hjemme.persistence.dao.UserDao;
-import nu.hjemme.persistence.dao.UserDaoDb;
 import nu.hjemme.persistence.db.DefaultAddressEntity;
 import nu.hjemme.persistence.db.DefaultBlogEntity;
 import nu.hjemme.persistence.db.DefaultBlogEntryEntity;
@@ -98,6 +98,6 @@ public class PersistentData {
         put(PersistentEntry.class, DefaultPersistentEntry.class);
         put(PersonEntity.class, DefaultPersonEntity.class);
         put(UserEntity.class, DefaultUserEntity.class);
-        put(UserDao.class, UserDaoDb.class);
+        put(UserDao.class, DefaultUserDao.class);
     }
 }
