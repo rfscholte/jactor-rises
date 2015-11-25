@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.db;
+package nu.hjemme.persistence.domain;
 
 import nu.hjemme.persistence.time.NowAsPureDate;
 import nu.hjemme.persistence.time.NowAsPureDateRule;

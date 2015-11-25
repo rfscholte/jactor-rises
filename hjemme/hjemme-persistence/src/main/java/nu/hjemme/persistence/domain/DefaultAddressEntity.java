@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.db;
+package nu.hjemme.persistence.domain;
 
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;

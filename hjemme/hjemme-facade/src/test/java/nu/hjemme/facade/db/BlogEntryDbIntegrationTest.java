@@ -1,13 +1,13 @@
 package nu.hjemme.facade.db;
 
 import nu.hjemme.client.datatype.Name;
+import nu.hjemme.facade.MenuFacadeIntegrationTest;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
-import nu.hjemme.facade.service.MenuFacadeIntegrationTest;
 import nu.hjemme.persistence.BlogEntity;
 import nu.hjemme.persistence.BlogEntryEntity;
 import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.db.DefaultBlogEntryEntity;
+import nu.hjemme.persistence.domain.DefaultBlogEntryEntity;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.hibernate.Session;

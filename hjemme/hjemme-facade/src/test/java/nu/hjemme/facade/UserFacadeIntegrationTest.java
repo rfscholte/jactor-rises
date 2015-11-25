@@ -1,7 +1,7 @@
-package nu.hjemme.facade.service;
+package nu.hjemme.facade;
 
 import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.client.service.UserFacade;
+import nu.hjemme.client.facade.UserFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
 import org.junit.Test;

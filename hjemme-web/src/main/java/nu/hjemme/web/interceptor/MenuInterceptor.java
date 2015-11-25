@@ -1,9 +1,9 @@
 package nu.hjemme.web.interceptor;
 
 import nu.hjemme.client.datatype.MenuTarget;
-import nu.hjemme.client.service.MenuFacade;
-import nu.hjemme.web.dto.MenuItemDto;
+import nu.hjemme.client.facade.MenuFacade;
 import nu.hjemme.web.dto.MenuDto;
+import nu.hjemme.web.dto.MenuItemDto;
 import nu.hjemme.web.dto.MenuItemTargetDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

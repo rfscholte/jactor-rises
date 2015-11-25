@@ -2,14 +2,14 @@ package nu.hjemme.persistence;
 
 import nu.hjemme.persistence.dao.DefaultUserDao;
 import nu.hjemme.persistence.dao.UserDao;
-import nu.hjemme.persistence.db.DefaultAddressEntity;
-import nu.hjemme.persistence.db.DefaultBlogEntity;
-import nu.hjemme.persistence.db.DefaultBlogEntryEntity;
-import nu.hjemme.persistence.db.DefaultGuestBookEntity;
-import nu.hjemme.persistence.db.DefaultGuestBookEntryEntity;
-import nu.hjemme.persistence.db.DefaultPersistentEntry;
-import nu.hjemme.persistence.db.DefaultPersonEntity;
-import nu.hjemme.persistence.db.DefaultUserEntity;
+import nu.hjemme.persistence.domain.DefaultAddressEntity;
+import nu.hjemme.persistence.domain.DefaultBlogEntity;
+import nu.hjemme.persistence.domain.DefaultBlogEntryEntity;
+import nu.hjemme.persistence.domain.DefaultGuestBookEntity;
+import nu.hjemme.persistence.domain.DefaultGuestBookEntryEntity;
+import nu.hjemme.persistence.domain.DefaultPersistentEntry;
+import nu.hjemme.persistence.domain.DefaultPersonEntity;
+import nu.hjemme.persistence.domain.DefaultUserEntity;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

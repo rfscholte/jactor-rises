@@ -1,7 +1,7 @@
 package nu.hjemme.persistence.dao;
 
 import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.persistence.db.DefaultUserEntity;
+import nu.hjemme.persistence.domain.DefaultUserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
@@ -72,7 +72,7 @@ public class DefaultUserDaoIntegrationTest {
         public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
             LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
             sessionFactory.setDataSource(dataSource);
-            sessionFactory.setPackagesToScan("nu.hjemme.persistence.db");
+            sessionFactory.setPackagesToScan("nu.hjemme.persistence.domain");
             sessionFactory.setHibernateProperties(new Properties() {
                 {
                     setProperty("hibernate.hbm2ddl.auto", "validate");

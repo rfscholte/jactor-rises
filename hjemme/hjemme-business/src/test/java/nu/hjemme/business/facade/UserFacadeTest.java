@@ -1,4 +1,4 @@
-package nu.hjemme.business.service;
+package nu.hjemme.business.facade;
 
 import nu.hjemme.business.rules.BuildValidations;
 import nu.hjemme.client.datatype.UserName;

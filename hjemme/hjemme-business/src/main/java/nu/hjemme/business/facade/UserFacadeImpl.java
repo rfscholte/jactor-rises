@@ -1,8 +1,8 @@
-package nu.hjemme.business.service;
+package nu.hjemme.business.facade;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
-import nu.hjemme.client.service.UserFacade;
+import nu.hjemme.client.facade.UserFacade;
 import nu.hjemme.persistence.dao.UserDao;
 
 public class UserFacadeImpl implements UserFacade {

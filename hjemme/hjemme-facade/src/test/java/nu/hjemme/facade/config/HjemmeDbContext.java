@@ -26,7 +26,7 @@ public class HjemmeDbContext {
 
     @Bean(name = "sessionFactory") public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setPackagesToScan("nu.hjemme.persistence.db");
+        sessionFactory.setPackagesToScan("nu.hjemme.persistence.domain");
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setHibernateProperties(new Properties() {
             {
