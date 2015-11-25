@@ -16,7 +16,7 @@ public class MenuItemAspect {
         menuItemCache = new MenuItemCache();
     }
 
-    @Pointcut("execution(* nu.hjemme.client.service.MenuFacade.fetchMenuItemBy(..))") @SuppressWarnings("unused") // Brukes av spring og aspectj
+    @Pointcut("execution(* nu.hjemme.client.facade.MenuFacade.fetchMenuItemBy(..))") @SuppressWarnings("unused") // Brukes av spring og aspectj
     public void menuCaching() {
     }
 
