@@ -29,7 +29,7 @@ public class HjemmeWebDbContext {
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        sessionFactory.setPackagesToScan("nu.hjemme.persistence.db");
+        sessionFactory.setPackagesToScan("nu.hjemme.persistence.domain");
         sessionFactory.setHibernateProperties(new Properties() {
             {
                 setProperty("hibernate.hbm2ddl.auto", "validate");

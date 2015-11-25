@@ -6,7 +6,7 @@ import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.menu.Menu;
 import nu.hjemme.client.domain.menu.MenuItem;
-import nu.hjemme.client.service.MenuFacade;
+import nu.hjemme.client.facade.MenuFacade;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
 import org.junit.Before;
