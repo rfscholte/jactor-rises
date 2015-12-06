@@ -1,4 +1,4 @@
-package nu.hjemme.facade.aop;
+package nu.hjemme.web.aop;
 
 import nu.hjemme.business.domain.menu.MenuItemCache;
 import nu.hjemme.client.datatype.MenuItemTarget;

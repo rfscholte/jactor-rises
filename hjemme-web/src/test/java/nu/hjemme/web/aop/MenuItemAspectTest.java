@@ -1,4 +1,4 @@
-package nu.hjemme.facade.aop;
+package nu.hjemme.web.aop;
 
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
