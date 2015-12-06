@@ -1,9 +1,8 @@
-package nu.hjemme.business.domain.menu;
+package nu.hjemme.web.menu;
 
 import nu.hjemme.client.datatype.MenuItemTarget;
 import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.MenuItem;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Before;

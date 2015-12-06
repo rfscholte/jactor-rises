@@ -18,7 +18,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeDbContext.class, MenuFacadeIntegrationTest.HjemmeTestMenus.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeDbContext.class}, loader = AnnotationConfigContextLoader.class)
 @Transactional
 public class UserFacadeIntegrationTest {
 

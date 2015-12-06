@@ -1,7 +1,6 @@
 package nu.hjemme.web.menu;
 
 import nu.hjemme.client.datatype.MenuTarget;
-import nu.hjemme.client.domain.menu.MenuItem;
 
 import java.util.HashMap;
 import java.util.List;
