@@ -1,4 +1,4 @@
-package nu.hjemme.facade;
+package nu.hjemme.web.menu;
 
 import nu.hjemme.business.domain.menu.MenuItemRequest;
 import nu.hjemme.client.datatype.Description;
