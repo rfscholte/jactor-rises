@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * a builder of menu items
  */
-public class MenuItemDomainBuilder extends DomainBuilder<MenuItemDomain> {
+public class MenuItemBuilder extends DomainBuilder<MenuItemDomain> {
     private final List<MenuItem> children = new ArrayList<>();
 
     private Description description;
@@ -22,25 +22,25 @@ public class MenuItemDomainBuilder extends DomainBuilder<MenuItemDomain> {
         return new MenuItemDomain(description, menuItemTarget).appendChildren(children);
     }
 
-    public MenuItemDomainBuilder with(MenuItemTarget menuItemTarget) {
+    public MenuItemBuilder with(MenuItemTarget menuItemTarget) {
         this.menuItemTarget = menuItemTarget;
         return this;
     }
 
-    public MenuItemDomainBuilder add(MenuItemDomainBuilder childBuilder) {
+    public MenuItemBuilder add(MenuItemBuilder childBuilder) {
         return add(childBuilder.build());
     }
 
-    public MenuItemDomainBuilder add(MenuItemDomain child) {
+    public MenuItemBuilder add(MenuItemDomain child) {
         children.add(child);
         return this;
     }
 
-    public MenuItemDomainBuilder withTarget(String menuItemTarget) {
+    public MenuItemBuilder withTarget(String menuItemTarget) {
         return with(new MenuItemTarget(menuItemTarget));
     }
 
-    public MenuItemDomainBuilder with(Description description) {
+    public MenuItemBuilder with(Description description) {
         this.description = description;
         return this;
     }

@@ -1,7 +1,7 @@
 package nu.hjemme.web.menu;
 
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.web.menu.builder.MenuDomainBuilder;
+import nu.hjemme.web.menu.builder.MenuBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -38,7 +38,7 @@ public class Menu {
         return menuItems;
     }
 
-    public static MenuDomainBuilder aMenu() {
-        return new MenuDomainBuilder();
+    public static MenuBuilder aMenu() {
+        return new MenuBuilder();
     }
 }
