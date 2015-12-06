@@ -12,10 +12,6 @@ public class MenuBuilder {
     private Name nameOfMenu;
     private final List<MenuItem> menuItems = new ArrayList<>();
 
-    protected Menu initDomain() {
-        return new Menu(nameOfMenu, menuItems);
-    }
-
     public MenuBuilder with(Name nameOfMenu) {
         this.nameOfMenu = nameOfMenu;
         return this;
@@ -32,5 +28,9 @@ public class MenuBuilder {
 
     public MenuBuilder withName(String name) {
         return with(new Name(name));
+    }
+
+    public Menu build() {
+        return new Menu(nameOfMenu, menuItems);
     }
 }

@@ -1,10 +1,8 @@
 package nu.hjemme.web.interceptor;
 
 import nu.hjemme.client.datatype.MenuTarget;
-import nu.hjemme.client.facade.MenuFacade;
-import nu.hjemme.web.dto.MenuDto;
-import nu.hjemme.web.dto.MenuItemDto;
-import nu.hjemme.web.dto.MenuItemTargetDto;
+import nu.hjemme.web.menu.Menu;
+import nu.hjemme.web.menu.MenuFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,8 +34,8 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         MenuTarget mainMenuTarget = new MenuTarget(menuItemTargetDto, MAIN_MENU);
         MenuTarget personMenuTarget = new MenuTarget(menuItemTargetDto, PERSON_MENU);
 
-        MenuDto mainMenuDto = new MenuDto(menuFacade.fetchMenuItemBy(mainMenuTarget));
-        MenuDto personMenuDto = new MenuDto(menuFacade.fetchMenuItemBy(personMenuTarget));
+        Menu mainMenuDto = new Menu(MAIN_MENU, menuFacade.fetchMenuItemBy(mainMenuTarget));
+        Menu personMenuDto = new Menu(PERSON_MENU, menuFacade.fetchMenuItemBy(personMenuTarget));
 
         List<MenuItemDto> menuItemsFromMainMenu = mainMenuDto.getMenuItems();
         List<MenuItemDto> menuItemsFromPersonMenu = personMenuDto.getMenuItems();
