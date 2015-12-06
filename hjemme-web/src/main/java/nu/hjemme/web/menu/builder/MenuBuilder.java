@@ -1,21 +1,19 @@
 package nu.hjemme.web.menu.builder;
 
-import nu.hjemme.business.domain.builder.DomainBuilder;
-import nu.hjemme.business.domain.menu.MenuDomain;
-import nu.hjemme.business.domain.menu.MenuItemDomain;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.MenuItem;
+import nu.hjemme.web.menu.Menu;
+import nu.hjemme.web.menu.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuBuilder extends DomainBuilder<MenuDomain> {
+public class MenuBuilder {
 
     private Name nameOfMenu;
     private final List<MenuItem> menuItems = new ArrayList<>();
 
-    @Override protected MenuDomain initDomain() {
-        return new MenuDomain(nameOfMenu, menuItems);
+    protected Menu initDomain() {
+        return new Menu(nameOfMenu, menuItems);
     }
 
     public MenuBuilder with(Name nameOfMenu) {
@@ -27,7 +25,7 @@ public class MenuBuilder extends DomainBuilder<MenuDomain> {
         return add(menuItemBuilder.build());
     }
 
-    public MenuBuilder add(MenuItemDomain menuItemDomain) {
+    public MenuBuilder add(MenuItem menuItemDomain) {
         menuItems.add(menuItemDomain);
         return this;
     }
