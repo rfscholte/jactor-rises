@@ -58,9 +58,9 @@ PROMPT=$'%B%* %w%b %{\e[32m%}%n@%m (#%h): %{\e[33m%}%3c%{\e[32m%}>%{\e[33m%}%{\e
 
 # Alias, git
 alias log="git log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(magenta bold)%d%Creset %s %Cgreen(%cr) %C(blue bold)<%an>%Creset' --abbrev-commit"			# cmd: logger commits i git med hash og farger ++
-alias bra='git branch'													# cmd: vis lokale feature brancher til git repo
+alias branch='git branch'												# cmd: vis lokale feature brancher til git repo
 alias co='git checkout'													# cmd: chekcout featurebranch (fra git server hvis --track origin -b er med, eller switch til lokal branch)
-alias fet='git fetch -p'												# cmd: fetch med prune fra git server
+alias fetch='git fetch -p'												# cmd: fetch med prune fra git server
 alias pull='git pull --rebase -p'											# cmd: pull med rebase og prune fra git repo
 alias push='git push'													# cmd: push committer til git server
 alias stat='git status'													# cmd: sjekk status til lokalt git repo
