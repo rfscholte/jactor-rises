@@ -12,10 +12,10 @@ import java.util.Objects;
 
 import static java.util.Objects.hash;
 
-public class MenuItem implements nu.hjemme.client.domain.menu.MenuItem {
+public class MenuItem {
 
     private final Description description;
-    private final List<nu.hjemme.client.domain.menu.MenuItem> children = new ArrayList<>();
+    private final List<MenuItem> children = new ArrayList<>();
     private final MenuItemTarget menuItemTarget;
 
     public MenuItem(Description description, MenuItemTarget menuItemTarget) {
@@ -23,17 +23,17 @@ public class MenuItem implements nu.hjemme.client.domain.menu.MenuItem {
         this.menuItemTarget = menuItemTarget;
     }
 
-    public MenuItem appendChildren(List<nu.hjemme.client.domain.menu.MenuItem> children) {
+    public MenuItem appendChildren(List<MenuItem> children) {
         this.children.addAll(children);
         return this;
     }
 
-    @Override public boolean isChosen() {
+    public boolean isChosen() {
         return MenuItemRequest.isRequestFor(menuItemTarget);
     }
 
-    @Override public boolean isChildChosen() {
-        for (nu.hjemme.client.domain.menu.MenuItem menuItem : children) {
+    public boolean isChildChosen() {
+        for (MenuItem menuItem : children) {
             if (menuItem.isChosen()) {
                 return true;
             }
@@ -73,19 +73,19 @@ public class MenuItem implements nu.hjemme.client.domain.menu.MenuItem {
                 .toString();
     }
 
-    @Override public List<nu.hjemme.client.domain.menu.MenuItem> getChildren() {
+    public List<MenuItem> getChildren() {
         return children;
     }
 
-    @Override public Description getDescription() {
+    public Description getDescription() {
         return description;
     }
 
-    @Override public MenuItemTarget getMenuItemTarget() {
+    public MenuItemTarget getMenuItemTarget() {
         return menuItemTarget;
     }
 
-    public static MenuItemDomainBuilder aMenuItemDomain() {
+    public static MenuItemDomainBuilder aMenuItem() {
         return new MenuItemDomainBuilder();
     }
 }

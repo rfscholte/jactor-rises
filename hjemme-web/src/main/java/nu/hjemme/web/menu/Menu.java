@@ -11,12 +11,12 @@ import java.util.List;
 import static org.apache.commons.lang.Validate.notEmpty;
 
 /** A {@link Menu} that contains a collection of {@link MenuItem}s. */
-public class Menu implements nu.hjemme.client.domain.menu.Menu {
+public class Menu {
 
     private final Name menuName;
-    private final List<nu.hjemme.client.domain.menu.MenuItem> menuItems = new ArrayList<>();
+    private final List<MenuItem> menuItems = new ArrayList<>();
 
-    public Menu(Name menuName, List<nu.hjemme.client.domain.menu.MenuItem> menuItems) {
+    public Menu(Name menuName, List<MenuItem> menuItems) {
         notEmpty(menuItems, "There must be provided at least one menu item");
         this.menuName = menuName;
         this.menuItems.addAll(menuItems);
@@ -30,17 +30,15 @@ public class Menu implements nu.hjemme.client.domain.menu.Menu {
                 .toString();
     }
 
-    @Override
     public Name getName() {
         return menuName;
     }
 
-    @Override
-    public List<nu.hjemme.client.domain.menu.MenuItem> getMenuItems() {
+    public List<MenuItem> getMenuItems() {
         return menuItems;
     }
 
-    public static MenuDomainBuilder aMenuDomain() {
+    public static MenuDomainBuilder aMenu() {
         return new MenuDomainBuilder();
     }
 }
