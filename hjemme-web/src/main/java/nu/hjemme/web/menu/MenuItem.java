@@ -1,8 +1,8 @@
 package nu.hjemme.web.menu;
 
-import nu.hjemme.business.domain.builder.menu.MenuItemDomainBuilder;
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.MenuItemTarget;
+import nu.hjemme.web.menu.builder.MenuItemDomainBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 

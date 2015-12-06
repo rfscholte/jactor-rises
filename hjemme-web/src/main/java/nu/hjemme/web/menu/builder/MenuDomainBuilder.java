@@ -1,4 +1,4 @@
-package nu.hjemme.business.domain.builder.menu;
+package nu.hjemme.web.menu.builder;
 
 import nu.hjemme.business.domain.builder.DomainBuilder;
 import nu.hjemme.business.domain.menu.MenuDomain;
