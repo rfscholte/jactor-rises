@@ -2,8 +2,6 @@ package nu.hjemme.web.menu;
 
 import nu.hjemme.business.domain.builder.menu.MenuDomainBuilder;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.Menu;
-import nu.hjemme.client.domain.menu.MenuItem;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -12,13 +10,13 @@ import java.util.List;
 
 import static org.apache.commons.lang.Validate.notEmpty;
 
-/** A {@link MenuDomain} that contains a collection of {@link MenuItemDomain}s. */
-public class MenuDomain implements Menu {
+/** A {@link Menu} that contains a collection of {@link MenuItem}s. */
+public class Menu implements nu.hjemme.client.domain.menu.Menu {
 
     private final Name menuName;
-    private final List<MenuItem> menuItems = new ArrayList<>();
+    private final List<nu.hjemme.client.domain.menu.MenuItem> menuItems = new ArrayList<>();
 
-    public MenuDomain(Name menuName, List<MenuItem> menuItems) {
+    public Menu(Name menuName, List<nu.hjemme.client.domain.menu.MenuItem> menuItems) {
         notEmpty(menuItems, "There must be provided at least one menu item");
         this.menuName = menuName;
         this.menuItems.addAll(menuItems);
@@ -38,7 +36,7 @@ public class MenuDomain implements Menu {
     }
 
     @Override
-    public List<MenuItem> getMenuItems() {
+    public List<nu.hjemme.client.domain.menu.MenuItem> getMenuItems() {
         return menuItems;
     }
 
