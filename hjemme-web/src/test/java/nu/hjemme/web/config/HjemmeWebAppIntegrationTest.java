@@ -22,14 +22,11 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(classes = HjemmeWebApp.class)
 public class HjemmeWebAppIntegrationTest {
 
-    @Resource @SuppressWarnings("unused") // assigned by spring
-    private HomeController homeController;
+    @Resource private HomeController homeController;
 
-    @Resource @SuppressWarnings("unused") // assigned by spring
-    private AboutController aboutController;
+    @Resource private AboutController aboutController;
 
-    @Resource @SuppressWarnings("unused") // assigned by spring
-    private UserController userController;
+    @Resource private UserController userController;
 
     @Test
     public void willGetControllers() {

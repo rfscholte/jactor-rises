@@ -21,8 +21,7 @@ import org.springframework.web.servlet.view.JstlView;
 @PropertySource("classpath:environment.properties")
 @ComponentScan(basePackages = {"nu.hjemme.web.controller", "nu.hjemme.web.config", "nu.hjemme.facade.config"})
 public class HjemmeWebApp extends WebMvcConfigurerAdapter {
-    @Bean @SuppressWarnings("unused") // used by spring
-    public ViewResolver internalViewResolver() {
+    @Bean public ViewResolver internalViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/");
@@ -31,7 +30,6 @@ public class HjemmeWebApp extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
-    @SuppressWarnings("unused") // used by spring
     @Bean public LocaleResolver localeResolver() {
         CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
         cookieLocaleResolver.setDefaultLocale(StringUtils.parseLocaleString("en"));
