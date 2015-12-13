@@ -1,5 +1,6 @@
-package nu.hjemme.client.datatype;
+package nu.hjemme.web.menu;
 
+import nu.hjemme.client.datatype.Parameter;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Rule;

@@ -1,5 +1,6 @@
-package nu.hjemme.client.datatype;
+package nu.hjemme.web.menu;
 
+import nu.hjemme.client.datatype.Parameter;
 import org.apache.commons.lang.Validate;
 
 import java.util.ArrayList;
