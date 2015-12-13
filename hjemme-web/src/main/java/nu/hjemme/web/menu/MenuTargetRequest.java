@@ -1,11 +1,11 @@
 package nu.hjemme.web.menu;
 
-public final class MenuItemRequest {
-    private MenuItemRequest() { }
+public final class MenuTargetRequest {
+    private MenuTargetRequest() { }
 
     private static ThreadLocal<MenuItemTarget> requestedByThread = new ThreadLocal<>();
 
-    public MenuItemRequest(MenuItemTarget requestedTarget) {
+    public MenuTargetRequest(MenuItemTarget requestedTarget) {
         requestedByThread.set(requestedTarget);
     }
 
