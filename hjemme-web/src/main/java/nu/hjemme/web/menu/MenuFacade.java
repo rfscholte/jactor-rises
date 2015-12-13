@@ -1,7 +1,5 @@
 package nu.hjemme.web.menu;
 
-import nu.hjemme.client.datatype.MenuTarget;
-
 import java.util.List;
 
 /** Finds {@link MenuItem}s by {@link MenuTarget} */

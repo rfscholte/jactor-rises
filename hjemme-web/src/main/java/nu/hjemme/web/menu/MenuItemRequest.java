@@ -1,7 +1,5 @@
 package nu.hjemme.web.menu;
 
-import nu.hjemme.client.datatype.MenuItemTarget;
-
 public final class MenuItemRequest {
     private MenuItemRequest() { }
 

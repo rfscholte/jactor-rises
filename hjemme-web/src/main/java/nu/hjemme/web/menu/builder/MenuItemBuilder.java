@@ -1,8 +1,9 @@
 package nu.hjemme.web.menu.builder;
 
 import nu.hjemme.client.datatype.Description;
-import nu.hjemme.client.datatype.MenuItemTarget;
+import nu.hjemme.client.datatype.Name;
 import nu.hjemme.web.menu.MenuItem;
+import nu.hjemme.web.menu.MenuItemTarget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +14,16 @@ import java.util.List;
 public class MenuItemBuilder {
     private final List<MenuItem> children = new ArrayList<>();
 
-    private Description description;
+    private Name itemName;
+    private String description;
     private MenuItemTarget menuItemTarget;
-
-    public MenuItemBuilder with(MenuItemTarget menuItemTarget) {
-        this.menuItemTarget = menuItemTarget;
-        return this;
-    }
 
     public MenuItemBuilder add(MenuItemBuilder childBuilder) {
         return add(childBuilder.build());
     }
 
     public MenuItem build() {
+        Description description = new Description(itemName, this.description);
         return new MenuItem(description, menuItemTarget).appendChildren(children);
     }
 
@@ -35,11 +33,17 @@ public class MenuItemBuilder {
     }
 
     public MenuItemBuilder withTarget(String menuItemTarget) {
-        return with(new MenuItemTarget(menuItemTarget));
+        this.menuItemTarget = new MenuItemTarget(menuItemTarget);
+        return this;
     }
 
-    public MenuItemBuilder with(Description description) {
+    public MenuItemBuilder withDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public MenuItemBuilder withName(String name) {
+        itemName = new Name(name);
         return this;
     }
 }

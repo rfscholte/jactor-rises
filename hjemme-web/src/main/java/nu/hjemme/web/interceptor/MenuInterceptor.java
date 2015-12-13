@@ -1,8 +1,10 @@
 package nu.hjemme.web.interceptor;
 
-import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.web.menu.Menu;
 import nu.hjemme.web.menu.MenuFacade;
+import nu.hjemme.web.menu.MenuItem;
+import nu.hjemme.web.menu.MenuItemTarget;
+import nu.hjemme.web.menu.MenuTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +24,7 @@ import static nu.hjemme.web.interceptor.InterceptorValues.PERSON_MENU;
 @Component
 public class MenuInterceptor extends HandlerInterceptorAdapter {
 
-    private MenuFacade menuFacade;
+    @Autowired private MenuFacade menuFacade;
 
     @Override public void postHandle(
             HttpServletRequest request,
@@ -30,30 +32,30 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
             Object handler,
             ModelAndView modelAndView
     ) {
-        MenuItemTargetDto menuItemTargetDto = new MenuItemTargetDto(request);
-        MenuTarget mainMenuTarget = new MenuTarget(menuItemTargetDto, MAIN_MENU);
-        MenuTarget personMenuTarget = new MenuTarget(menuItemTargetDto, PERSON_MENU);
+        MenuItemTarget menuItemTarget = new MenuItemTarget(request);
+        MenuTarget mainMenuTarget = new MenuTarget(menuItemTarget, MAIN_MENU);
+        MenuTarget personMenuTarget = new MenuTarget(menuItemTarget, PERSON_MENU);
 
-        Menu mainMenuDto = new Menu(MAIN_MENU, menuFacade.fetchMenuItemBy(mainMenuTarget));
-        Menu personMenuDto = new Menu(PERSON_MENU, menuFacade.fetchMenuItemBy(personMenuTarget));
+        Menu mainMenu = new Menu(MAIN_MENU, menuFacade.fetchMenuItemBy(mainMenuTarget));
+        Menu personMenu = new Menu(PERSON_MENU, menuFacade.fetchMenuItemBy(personMenuTarget));
 
-        List<MenuItemDto> menuItemsFromMainMenu = mainMenuDto.getMenuItems();
-        List<MenuItemDto> menuItemsFromPersonMenu = personMenuDto.getMenuItems();
+        List<MenuItem> menuItemsFromMainMenu = mainMenu.getMenuItems();
+        List<MenuItem> menuItemsFromPersonMenu = personMenu.getMenuItems();
 
         addMenuItemsToModelAndView(modelAndView, menuItemsFromMainMenu, menuItemsFromPersonMenu);
     }
 
     private void addMenuItemsToModelAndView(
             ModelAndView modelAndView,
-            List<MenuItemDto> menuItemsFromMainMenu,
-            List<MenuItemDto> menuItemsFromPersonMenu
+            List<MenuItem> menuItemsFromMainMenu,
+            List<MenuItem> menuItemsFromPersonMenu
     ) {
         Map<String, Object> modelMap = modelAndView.getModel();
         modelMap.put(ATTRIBUTE_MAIN_ITEMS, menuItemsFromMainMenu);
         modelMap.put(ATTRIBUTE_PERSON_ITEMS, menuItemsFromPersonMenu);
     }
 
-    @Autowired public void setMenuFacade(MenuFacade menuFacade) {
+    public void setMenuFacade(MenuFacade menuFacade) {
         this.menuFacade = menuFacade;
     }
 }

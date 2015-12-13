@@ -1,7 +1,7 @@
 package nu.hjemme.web.interceptor;
 
-import nu.hjemme.client.datatype.MenuTarget;
-import nu.hjemme.client.facade.MenuFacade;
+import nu.hjemme.web.menu.MenuFacade;
+import nu.hjemme.web.menu.MenuTarget;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,13 +25,13 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class MenuInterceptorTest {
 
-    @Mock private MenuFacade mockedMenuFacade;
+    @Mock private MenuFacade menuFacadeMock;
 
-    private MenuInterceptor testMenuInterceptor;
+    private MenuInterceptor menuInterceptorToTest;
 
-    @Before public void setUpTests() {
-        testMenuInterceptor = new MenuInterceptor();
-        testMenuInterceptor.setMenuFacade(mockedMenuFacade);
+    @Before public void initMenuInterceptorForTesting() {
+        menuInterceptorToTest = new MenuInterceptor();
+        menuInterceptorToTest.setMenuFacade(menuFacadeMock);
     }
 
     @Test public void whenHandlingHttpRequestTheAwareMenuItemsAreGathered() throws Exception {
@@ -41,9 +41,9 @@ public class MenuInterceptorTest {
 
         ModelAndView modelAndView = new ModelAndView();
 
-        testMenuInterceptor.postHandle(mockedHttpServletRequest, null, null, modelAndView);
+        menuInterceptorToTest.postHandle(mockedHttpServletRequest, null, null, modelAndView);
 
-        verify(mockedMenuFacade, times(2)).fetchMenuItemBy(any(MenuTarget.class));
+        verify(menuFacadeMock, times(2)).fetchMenuItemBy(any(MenuTarget.class));
 
         assertThat("The aware main items should be present", modelAndView.getModel().get(ATTRIBUTE_MAIN_ITEMS), is(notNullValue()));
         assertThat("The aware persons items should be present", modelAndView.getModel().get(ATTRIBUTE_PERSON_ITEMS), is(notNullValue()));

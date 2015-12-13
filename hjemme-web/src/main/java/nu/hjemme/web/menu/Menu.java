@@ -8,8 +8,6 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.apache.commons.lang.Validate.notEmpty;
-
 /** A {@link Menu} that contains a collection of {@link MenuItem}s. */
 public class Menu {
 
@@ -17,7 +15,6 @@ public class Menu {
     private final List<MenuItem> menuItems = new ArrayList<>();
 
     public Menu(Name menuName, List<MenuItem> menuItems) {
-        notEmpty(menuItems, "There must be provided at least one menu item");
         this.menuName = menuName;
         this.menuItems.addAll(menuItems);
     }

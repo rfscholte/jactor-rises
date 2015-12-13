@@ -3,6 +3,7 @@ package nu.hjemme.web.menu;
 import nu.hjemme.client.datatype.Parameter;
 import org.apache.commons.lang.Validate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,6 +28,10 @@ public class MenuItemTarget {
         Validate.notEmpty(target, THE_TARGET_CANNOT_BE_EMPTY);
         this.target = removeParametersFrom(target);
         parameters.addAll(findParametersWithValuesFrom(target));
+    }
+
+    public MenuItemTarget(HttpServletRequest httpServletRequest) {
+        this(httpServletRequest != null ? httpServletRequest.getRequestURI() : null);
     }
 
     private String removeParametersFrom(String target) {

@@ -44,7 +44,7 @@ public class MenuItemTargetTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY);
 
-        new MenuItemTarget(null);
+        new MenuItemTarget((String) null);
     }
 
     @Test public void whenInitializingTheTargetCannotBeEmpty() {

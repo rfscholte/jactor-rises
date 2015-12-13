@@ -12,11 +12,6 @@ public class MenuBuilder {
     private Name nameOfMenu;
     private final List<MenuItem> menuItems = new ArrayList<>();
 
-    public MenuBuilder with(Name nameOfMenu) {
-        this.nameOfMenu = nameOfMenu;
-        return this;
-    }
-
     public MenuBuilder add(MenuItemBuilder menuItemBuilder) {
         return add(menuItemBuilder.build());
     }
@@ -27,7 +22,8 @@ public class MenuBuilder {
     }
 
     public MenuBuilder withName(String name) {
-        return with(new Name(name));
+        nameOfMenu = new Name(name);
+        return this;
     }
 
     public Menu build() {
