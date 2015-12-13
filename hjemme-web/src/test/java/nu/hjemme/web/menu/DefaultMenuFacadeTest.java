@@ -40,16 +40,15 @@ public class DefaultMenuFacadeTest {
         MenuItemTarget somewhere = new MenuItemTarget("somewhere");
 
         DefaultMenuFacade defaultMenuFacadeToTest = new DefaultMenuFacade(aMenu().withName("known.menu").add(aMenuItem()).build());
-        defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTarget(somewhere, new Name("unknown.menu")));
+        defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTargetRequest(new MenuTarget(somewhere, new Name("unknown.menu"))));
     }
 
     @Test public void willFindKnownMenuItems() {
         MenuItemTarget somewhere = new MenuItemTarget("somewhere");
-
         MenuItem menuItem = aMenuItem().build();
         DefaultMenuFacade defaultMenuFacadeToTest = new DefaultMenuFacade(aMenu().withName("known.menu").add(menuItem).build());
 
-        List<MenuItem> menuItems = defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTarget(somewhere, new Name("known.menu")));
+        List<MenuItem> menuItems = defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTargetRequest(new MenuTarget(somewhere, new Name("known.menu"))));
 
         assertThat(menuItems, is(hasItem(menuItem), "menuItems"));
     }

@@ -5,6 +5,7 @@ import nu.hjemme.web.menu.MenuFacade;
 import nu.hjemme.web.menu.MenuItem;
 import nu.hjemme.web.menu.MenuItemTarget;
 import nu.hjemme.web.menu.MenuTarget;
+import nu.hjemme.web.menu.MenuTargetRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +25,7 @@ import static nu.hjemme.web.interceptor.InterceptorValues.PERSON_MENU;
 @Component
 public class MenuInterceptor extends HandlerInterceptorAdapter {
 
-    @Autowired private MenuFacade menuFacade;
+    private MenuFacade menuFacade;
 
     @Override public void postHandle(
             HttpServletRequest request,
@@ -33,11 +34,11 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
             ModelAndView modelAndView
     ) {
         MenuItemTarget menuItemTarget = new MenuItemTarget(request);
-        MenuTarget mainMenuTarget = new MenuTarget(menuItemTarget, MAIN_MENU);
-        MenuTarget personMenuTarget = new MenuTarget(menuItemTarget, PERSON_MENU);
+        MenuTargetRequest mainMenuTargetRequest = new MenuTargetRequest(new MenuTarget(menuItemTarget, MAIN_MENU));
+        MenuTargetRequest personMenuTargetRequest = new MenuTargetRequest(new MenuTarget(menuItemTarget, PERSON_MENU));
 
-        Menu mainMenu = new Menu(MAIN_MENU, menuFacade.fetchMenuItemBy(mainMenuTarget));
-        Menu personMenu = new Menu(PERSON_MENU, menuFacade.fetchMenuItemBy(personMenuTarget));
+        Menu mainMenu = new Menu(MAIN_MENU, menuFacade.fetchMenuItemBy(mainMenuTargetRequest));
+        Menu personMenu = new Menu(PERSON_MENU, menuFacade.fetchMenuItemBy(personMenuTargetRequest));
 
         List<MenuItem> menuItemsFromMainMenu = mainMenu.getMenuItems();
         List<MenuItem> menuItemsFromPersonMenu = personMenu.getMenuItems();
@@ -55,7 +56,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         modelMap.put(ATTRIBUTE_PERSON_ITEMS, menuItemsFromPersonMenu);
     }
 
-    public void setMenuFacade(MenuFacade menuFacade) {
+    @Autowired public void setMenuFacade(MenuFacade menuFacade) {
         this.menuFacade = menuFacade;
     }
 }

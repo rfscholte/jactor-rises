@@ -9,12 +9,15 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 public class MenuTarget {
+    private static ThreadLocal<MenuItemTarget> requestedByThread = new ThreadLocal<>();
+
     private final MenuItemTarget menuItemTarget;
     private final Name menuName;
 
     public MenuTarget(MenuItemTarget menuItemTarget, Name menuName) {
         this.menuItemTarget = menuItemTarget;
         this.menuName = menuName;
+        requestedByThread.set(menuItemTarget);
     }
 
     @Override public boolean equals(Object o) {

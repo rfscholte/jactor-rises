@@ -1,5 +1,6 @@
 package nu.hjemme.web.menu;
 
+import nu.hjemme.client.datatype.Name;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertThat;
 public class MenuItemTest {
 
     @Before public void requestMenuItemTargetDeadCenter() {
-        new MenuItemRequest(new MenuItemTarget("hit?dead=center"));
+        new MenuTargetRequest(new MenuTarget(new MenuItemTarget("hit?dead=center"), new Name("some.menu")));
     }
 
     @Test public void willHaveCorrectImplementedHashCode() {

@@ -22,8 +22,8 @@ public class DefaultMenuFacade implements MenuFacade {
         }
     }
 
-    @Override public List<MenuItem> fetchMenuItemBy(MenuTarget menuTarget) {
-        Name name = menuTarget.getMenuName();
+    @Override public List<MenuItem> fetchMenuItemBy(MenuTargetRequest menuTargetRequest) {
+        Name name = menuTargetRequest.getMenuName();
         isTrue(menusByName.containsKey(name), name + " is an unknown menu. Known menus: " + menusByName.keySet());
 
         return menusByName.get(name).getMenuItems();
