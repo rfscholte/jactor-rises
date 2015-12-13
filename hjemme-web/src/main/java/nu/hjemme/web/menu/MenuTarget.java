@@ -1,5 +1,6 @@
-package nu.hjemme.client.datatype;
+package nu.hjemme.web.menu;
 
+import nu.hjemme.client.datatype.Name;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 

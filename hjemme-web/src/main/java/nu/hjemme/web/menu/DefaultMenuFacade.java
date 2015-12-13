@@ -1,11 +1,6 @@
-package nu.hjemme.business.facade;
+package nu.hjemme.web.menu;
 
-import nu.hjemme.business.domain.menu.MenuDomain;
-import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.Menu;
-import nu.hjemme.client.domain.menu.MenuItem;
-import nu.hjemme.client.facade.MenuFacade;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +18,7 @@ public class DefaultMenuFacade implements MenuFacade {
 
         for (Menu menu : menus) {
             Name menuName = menu.getName();
-            menusByName.put(menuName, new MenuDomain(menu.getName(), menu.getMenuItems()));
+            menusByName.put(menuName, new Menu(menu.getName(), menu.getMenuItems()));
         }
     }
 
