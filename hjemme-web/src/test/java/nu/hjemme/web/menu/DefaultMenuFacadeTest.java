@@ -1,20 +1,15 @@
-package nu.hjemme.business.facade;
+package nu.hjemme.web.menu;
 
-import nu.hjemme.business.domain.menu.MenuDomain;
-import nu.hjemme.business.domain.menu.MenuItemDomain;
-import nu.hjemme.client.datatype.MenuItemTarget;
-import nu.hjemme.client.datatype.MenuTarget;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.Menu;
-import nu.hjemme.client.domain.menu.MenuItem;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.List;
 
-import static nu.hjemme.business.domain.menu.MenuItemDomain.aMenuItemDomain;
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
+import static nu.hjemme.web.menu.Menu.aMenu;
+import static nu.hjemme.web.menu.MenuItem.aMenuItem;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
@@ -43,21 +38,19 @@ public class DefaultMenuFacadeTest {
         expectedException.expectMessage("unknown.menu");
 
         MenuItemTarget somewhere = new MenuItemTarget("somewhere");
-        Name knownMenu = new Name("known.menu");
 
-        DefaultMenuFacade defaultMenuFacadeToTest = new DefaultMenuFacade(MenuDomain.aMenuDomain().with(knownMenu).add(aMenuItemDomain()).build());
+        DefaultMenuFacade defaultMenuFacadeToTest = new DefaultMenuFacade(aMenu().withName("known.menu").add(aMenuItem()).build());
         defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTarget(somewhere, new Name("unknown.menu")));
     }
 
     @Test public void willFindKnownMenuItems() {
         MenuItemTarget somewhere = new MenuItemTarget("somewhere");
-        Name knownMenu = new Name("known.menu");
 
-        MenuItemDomain menuItemDomain = aMenuItemDomain().build();
-        DefaultMenuFacade defaultMenuFacadeToTest = new DefaultMenuFacade(MenuDomain.aMenuDomain().with(knownMenu).add(menuItemDomain).build());
+        MenuItem menuItem = aMenuItem().build();
+        DefaultMenuFacade defaultMenuFacadeToTest = new DefaultMenuFacade(aMenu().withName("known.menu").add(menuItem).build());
 
-        List<MenuItem> menuItems = defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTarget(somewhere, knownMenu));
+        List<MenuItem> menuItems = defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTarget(somewhere, new Name("known.menu")));
 
-        assertThat(menuItems, is(hasItem(menuItemDomain), "menuItems"));
+        assertThat(menuItems, is(hasItem(menuItem), "menuItems"));
     }
 }

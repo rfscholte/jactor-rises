@@ -26,6 +26,12 @@
             <artifactId>hjemme-facade</artifactId>
             <version>${hjemme.version}</version>
         </dependency>
+        <dependency>
+            <groupId>nu.hjemme</groupId>
+            <artifactId>hjemme-test</artifactId>
+            <version>${hjemme.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Spring -->
         <dependency>

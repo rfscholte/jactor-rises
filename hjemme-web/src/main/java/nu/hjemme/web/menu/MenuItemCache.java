@@ -1,14 +1,11 @@
-package nu.hjemme.business.domain.menu;
-
-import nu.hjemme.client.datatype.MenuTarget;
-import nu.hjemme.client.domain.menu.MenuItem;
+package nu.hjemme.web.menu;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Simple caching mechanism for a list of {@link MenuItem} by {@link nu.hjemme.client.datatype.MenuTarget}
+ * Simple caching mechanism for a list of {@link MenuItem} by {@link MenuTarget}
  */
 public class MenuItemCache {
 

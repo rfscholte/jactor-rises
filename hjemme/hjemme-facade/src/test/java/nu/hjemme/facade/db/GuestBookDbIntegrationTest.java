@@ -1,6 +1,5 @@
 package nu.hjemme.facade.db;
 
-import nu.hjemme.facade.MenuFacadeIntegrationTest;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.persistence.GuestBookEntity;
@@ -28,7 +27,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HjemmeBeanContext.class, MenuFacadeIntegrationTest.HjemmeTestMenus.class, HjemmeDbContext.class})
+@ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeDbContext.class})
 @Transactional
 public class GuestBookDbIntegrationTest {
 

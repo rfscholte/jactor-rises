@@ -1,9 +1,7 @@
-package nu.hjemme.business.domain.menu;
+package nu.hjemme.web.menu;
 
-import nu.hjemme.business.domain.builder.menu.MenuItemDomainBuilder;
 import nu.hjemme.client.datatype.Description;
-import nu.hjemme.client.datatype.MenuItemTarget;
-import nu.hjemme.client.domain.menu.MenuItem;
+import nu.hjemme.web.menu.builder.MenuItemBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -13,27 +11,27 @@ import java.util.Objects;
 
 import static java.util.Objects.hash;
 
-public class MenuItemDomain implements MenuItem {
+public class MenuItem {
 
     private final Description description;
     private final List<MenuItem> children = new ArrayList<>();
     private final MenuItemTarget menuItemTarget;
 
-    public MenuItemDomain(Description description, MenuItemTarget menuItemTarget) {
+    public MenuItem(Description description, MenuItemTarget menuItemTarget) {
         this.description = description;
         this.menuItemTarget = menuItemTarget;
     }
 
-    public MenuItemDomain appendChildren(List<MenuItem> children) {
+    public MenuItem appendChildren(List<MenuItem> children) {
         this.children.addAll(children);
         return this;
     }
 
-    @Override public boolean isChosen() {
+    public boolean isChosen() {
         return MenuItemRequest.isRequestFor(menuItemTarget);
     }
 
-    @Override public boolean isChildChosen() {
+    public boolean isChildChosen() {
         for (MenuItem menuItem : children) {
             if (menuItem.isChosen()) {
                 return true;
@@ -58,7 +56,7 @@ public class MenuItemDomain implements MenuItem {
             return false;
         }
 
-        MenuItemDomain other = (MenuItemDomain) o;
+        MenuItem other = (MenuItem) o;
 
         return Objects.equals(getChildren(), other.getChildren()) &&
                 Objects.equals(getDescription(), other.getDescription()) &&
@@ -74,19 +72,19 @@ public class MenuItemDomain implements MenuItem {
                 .toString();
     }
 
-    @Override public List<MenuItem> getChildren() {
+    public List<MenuItem> getChildren() {
         return children;
     }
 
-    @Override public Description getDescription() {
+    public Description getDescription() {
         return description;
     }
 
-    @Override public MenuItemTarget getMenuItemTarget() {
+    public MenuItemTarget getMenuItemTarget() {
         return menuItemTarget;
     }
 
-    public static MenuItemDomainBuilder aMenuItemDomain() {
-        return new MenuItemDomainBuilder();
+    public static MenuItemBuilder aMenuItem() {
+        return new MenuItemBuilder();
     }
 }

@@ -1,6 +1,4 @@
-package nu.hjemme.business.domain.menu;
-
-import nu.hjemme.client.datatype.MenuItemTarget;
+package nu.hjemme.web.menu;
 
 public final class MenuItemRequest {
     private MenuItemRequest() { }

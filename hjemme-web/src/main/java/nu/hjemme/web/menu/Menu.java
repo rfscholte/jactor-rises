@@ -1,25 +1,20 @@
-package nu.hjemme.business.domain.menu;
+package nu.hjemme.web.menu;
 
-import nu.hjemme.business.domain.builder.menu.MenuDomainBuilder;
 import nu.hjemme.client.datatype.Name;
-import nu.hjemme.client.domain.menu.Menu;
-import nu.hjemme.client.domain.menu.MenuItem;
+import nu.hjemme.web.menu.builder.MenuBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.apache.commons.lang.Validate.notEmpty;
-
-/** A {@link MenuDomain} that contains a collection of {@link MenuItemDomain}s. */
-public class MenuDomain implements Menu {
+/** A {@link Menu} that contains a collection of {@link MenuItem}s. */
+public class Menu {
 
     private final Name menuName;
     private final List<MenuItem> menuItems = new ArrayList<>();
 
-    public MenuDomain(Name menuName, List<MenuItem> menuItems) {
-        notEmpty(menuItems, "There must be provided at least one menu item");
+    public Menu(Name menuName, List<MenuItem> menuItems) {
         this.menuName = menuName;
         this.menuItems.addAll(menuItems);
     }
@@ -32,17 +27,15 @@ public class MenuDomain implements Menu {
                 .toString();
     }
 
-    @Override
     public Name getName() {
         return menuName;
     }
 
-    @Override
     public List<MenuItem> getMenuItems() {
         return menuItems;
     }
 
-    public static MenuDomainBuilder aMenuDomain() {
-        return new MenuDomainBuilder();
+    public static MenuBuilder aMenu() {
+        return new MenuBuilder();
     }
 }
