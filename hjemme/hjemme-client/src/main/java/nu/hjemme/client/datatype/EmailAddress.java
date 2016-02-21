@@ -1,6 +1,6 @@
 package nu.hjemme.client.datatype;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
+import java.util.Objects;
 
 import static java.util.Objects.hash;
 import static java.util.Objects.requireNonNull;
@@ -35,10 +35,9 @@ public class EmailAddress {
     }
 
     @Override public boolean equals(Object obj) {
-        return obj == this || obj instanceof EmailAddress && new EqualsBuilder()
-                .append(prefix, ((EmailAddress) obj).prefix)
-                .append(suffix, ((EmailAddress) obj).suffix)
-                .isEquals();
+        return obj == this || obj instanceof EmailAddress &&
+                Objects.equals(prefix, ((EmailAddress) obj).prefix) &&
+                Objects.equals(suffix, ((EmailAddress) obj).suffix);
     }
 
 

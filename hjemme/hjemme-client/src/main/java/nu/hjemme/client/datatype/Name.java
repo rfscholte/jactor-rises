@@ -1,8 +1,9 @@
 package nu.hjemme.client.datatype;
 
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import static org.apache.commons.lang.Validate.notEmpty;
 
 /** A bean representing a name */
 public class Name implements Comparable<Name> {
@@ -11,7 +12,7 @@ public class Name implements Comparable<Name> {
     private String name;
 
     public Name(String name) {
-        Validate.notEmpty(name, A_NAME_MUST_BE_GIVEN);
+        notEmpty(name, A_NAME_MUST_BE_GIVEN);
         this.name = name;
     }
 
