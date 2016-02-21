@@ -6,7 +6,7 @@
     <parent>
         <artifactId>hjemme-pom</artifactId>
         <groupId>nu.hjemme</groupId>
-        <version>1.0.28</version>
+        <version>1.0.29</version>
     </parent>
 
     <artifactId>hjemme</artifactId>

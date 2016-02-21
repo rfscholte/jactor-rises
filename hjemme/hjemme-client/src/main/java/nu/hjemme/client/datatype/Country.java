@@ -1,14 +1,15 @@
 package nu.hjemme.client.datatype;
 
 import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.Locale;
 import java.util.Objects;
 
 import static java.util.Arrays.asList;
 import static java.util.Objects.hash;
+import static org.apache.commons.lang.Validate.notEmpty;
 
 /**
  * Representing a country according to the ISO 3166 standard. In addition to the country, you must add a specific {@link Locale} representing the language of the country.
@@ -29,8 +30,8 @@ public class Country {
     }
 
     private void validate(String countryCode, String localeCode) {
-        Validate.notEmpty(countryCode, THE_COUNTRY_CODE_CANNOT_BE_EMPTY);
-        Validate.notEmpty(localeCode, CODE_FOR_JAVA_UTIL_LOCALE_MUST_BE_PROVIDED);
+        notEmpty(countryCode, THE_COUNTRY_CODE_CANNOT_BE_EMPTY);
+        notEmpty(localeCode, CODE_FOR_JAVA_UTIL_LOCALE_MUST_BE_PROVIDED);
 
         String[] isoCountries = Locale.getISOCountries();
 
