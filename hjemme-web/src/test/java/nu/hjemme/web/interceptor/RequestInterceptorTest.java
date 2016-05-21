@@ -35,7 +35,7 @@ public class RequestInterceptorTest {
     }
 
     @Test @SuppressWarnings(value = "unchecked") public void willSetTheParametersAttributeOnTheModel() throws Exception {
-        Map<Object, Object> parameterMap = new HashMap<>();
+        Map<String, String[]> parameterMap = new HashMap<>();
         parameterMap.put("some", new String[]{"parameter"});
 
         when(mockedRequest.getParameterMap()).thenReturn(parameterMap);
