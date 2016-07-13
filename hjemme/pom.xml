@@ -6,7 +6,7 @@
     <parent>
         <artifactId>hjemme-pom</artifactId>
         <groupId>nu.hjemme</groupId>
-        <version>1.0.29</version>
+        <version>1.0.30</version>
     </parent>
 
     <artifactId>hjemme</artifactId>
@@ -49,37 +49,33 @@
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-business</artifactId>
-                <version>${hjemme-version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-client</artifactId>
-                <version>${hjemme-version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-config</artifactId>
-                <version>${hjemme-version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-facade</artifactId>
-                <version>${hjemme-version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-persistence</artifactId>
-                <version>${hjemme-version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-test</artifactId>
-                <version>${hjemme-version}</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <properties>
-        <hjemme-version>1.0-SNAPSHOT</hjemme-version>
-    </properties>
 </project>
