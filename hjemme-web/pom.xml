@@ -14,22 +14,34 @@
     <version>1.0-SNAPSHOT</version>
     <description>The hjemme-web module uses hjemme.facade to bring hjemme-business to life on the web.</description>
 
+    <properties>
+        <javax.servlet.version>1.2</javax.servlet.version>
+        <log4j.version>1.2.17</log4j.version>
+        <org.tuckey.version>3.1.0</org.tuckey.version>
+        <sitemesh.version>2.4.2</sitemesh.version>
+
+        <maven-war-plugin.version>2.6</maven-war-plugin.version>
+        <maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
+
+        <build-helper-maven-plugin>1.11</build-helper-maven-plugin>
+    </properties>
+
     <dependencies>
         <!-- hjemme.nu -->
         <dependency>
             <groupId>nu.hjemme</groupId>
             <artifactId>hjemme-client</artifactId>
-            <version>${hjemme.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>nu.hjemme</groupId>
             <artifactId>hjemme-facade</artifactId>
-            <version>${hjemme.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>nu.hjemme</groupId>
             <artifactId>hjemme-test</artifactId>
-            <version>${hjemme.version}</version>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -126,9 +138,25 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven-war-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven-dependency-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build-helper-maven-plugin}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.8</source>
@@ -137,14 +165,12 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <warName>hjemme</warName>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
@@ -176,12 +202,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <properties>
-        <hjemme.version>1.0-SNAPSHOT</hjemme.version>
-        <javax.servlet.version>1.2</javax.servlet.version>
-        <log4j.version>1.2.17</log4j.version>
-        <org.tuckey.version>3.1.0</org.tuckey.version>
-        <sitemesh.version>2.4.2</sitemesh.version>
-    </properties>
 </project>
