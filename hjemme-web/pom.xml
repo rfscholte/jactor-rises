@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns = "http://maven.apache.org/POM/4.0.0" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>hjemme-pom</artifactId>
         <groupId>nu.hjemme</groupId>
-        <version>1.0.27</version>
+        <artifactId>hjemme-web-build</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>hjemme-web</artifactId>
@@ -14,34 +15,19 @@
     <version>1.0-SNAPSHOT</version>
     <description>The hjemme-web module uses hjemme.facade to bring hjemme-business to life on the web.</description>
 
-    <properties>
-        <javax.servlet.version>1.2</javax.servlet.version>
-        <log4j.version>1.2.17</log4j.version>
-        <org.tuckey.version>3.1.0</org.tuckey.version>
-        <sitemesh.version>2.4.2</sitemesh.version>
-
-        <maven-war-plugin.version>2.6</maven-war-plugin.version>
-        <maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
-
-        <build-helper-maven-plugin>1.11</build-helper-maven-plugin>
-    </properties>
-
     <dependencies>
         <!-- hjemme.nu -->
         <dependency>
             <groupId>nu.hjemme</groupId>
             <artifactId>hjemme-client</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>nu.hjemme</groupId>
             <artifactId>hjemme-facade</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>nu.hjemme</groupId>
             <artifactId>hjemme-test</artifactId>
-            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -49,24 +35,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <exclusions>
-                <!-- Exclude Commons Logging in favor of SLF4j -->
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <!-- Exclude Commons Logging in favor of SLF4j -->
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- Logging -->
@@ -87,31 +59,26 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
         </dependency>
 
         <!-- Other third part libraries -->
         <dependency>
             <groupId>opensymphony</groupId>
             <artifactId>sitemesh</artifactId>
-            <version>${sitemesh.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
-            <version>2.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>${javax.servlet.version}</version>
         </dependency>
 
         <!-- test -->
@@ -158,47 +125,16 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <showWarnings>true</showWarnings>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <warName>hjemme</warName>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>install</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>sources</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src/main/webapp</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

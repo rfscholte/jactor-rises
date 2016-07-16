@@ -4,16 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>hjemme-pom</artifactId>
         <groupId>nu.hjemme</groupId>
-        <version>1.0.30</version>
+        <artifactId>hjemme-build</artifactId>
+        <version>1.0</version>
     </parent>
 
     <artifactId>hjemme</artifactId>
     <name>hjemme</name>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <description>The main pom for hjemme.nu</description>
+    <description>The pom for multibuild of hjemme.nu</description>
 
     <url>http://www.hjemme.nu</url>
 
