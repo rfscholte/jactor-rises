@@ -9,11 +9,11 @@
     </prerequisites>
 
     <groupId>nu.hjemme</groupId>
-    <artifactId>hjemme-build</artifactId>
-    <name>hjemme-build</name>
+    <artifactId>hjemme-persistence-build</artifactId>
+    <name>hjemme-persistence-build</name>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <description>The build pom of hjemme is my playground where I cultivate being a nerd!!!!</description>
+    <description>The build pom of hjemme-persistence</description>
 
     <url>http://www.hjemme.nu</url>
 
@@ -40,6 +40,18 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- third party -->
             <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
@@ -131,7 +143,13 @@
                 <version>${org.springframework.version}</version>
             </dependency>
 
-            <!-- testing -->
+            <!-- Test scope -->
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-test</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
