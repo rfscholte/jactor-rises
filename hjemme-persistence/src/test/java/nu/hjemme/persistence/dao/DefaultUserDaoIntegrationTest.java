@@ -31,7 +31,7 @@ public class DefaultUserDaoIntegrationTest {
 
     private DefaultUserDao userDaoToTest;
 
-    @Resource(name = "sessionFactory") @SuppressWarnings("unused") // initialized by spring
+    @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
 
     @Before public void initDao() {
@@ -57,7 +57,7 @@ public class DefaultUserDaoIntegrationTest {
     @ContextConfiguration
     public static class HjemmeDbContext {
 
-        @Bean(name = "dataSource") @SuppressWarnings("unused") // used by spring
+        @Bean(name = "dataSource")
         public DataSource dataSourceFromHsqldb() {
             return new EmbeddedDatabaseBuilder()
                     .setType(EmbeddedDatabaseType.HSQL)
@@ -68,7 +68,7 @@ public class DefaultUserDaoIntegrationTest {
                     .build();
         }
 
-        @Bean(name = "sessionFactory") @SuppressWarnings("unused") // used by spring
+        @Bean(name = "sessionFactory")
         public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
             LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
             sessionFactory.setDataSource(dataSource);
