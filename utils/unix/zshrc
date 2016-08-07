@@ -1,132 +1,132 @@
-# funksjoner
-function wcgrep {													# fun: wcgrep
-	grep -R $1 * | grep -v target | grep -v .git | grep -v "~" | grep -v ".pyc" | grep -v Binary | grep --color -n $1	# fun: wcgrep
-}															# fun: wcgrep
-															# fun:
-function grath {													# fun: grath
-	find . | grep $1 | grep /\.git -v | grep /target -v | grep --color $1						# fun: grath
-}															# fun: grath
-															# fun:
-function filelog() {													# fun: (git) lister ut commits fra tidspunkt som ikke inkluderer testfiler
+# funksjoner for å lette bruk av
+function filelog() {														# fun: (git) lister ut commits fra tidspunkt som ikke inkluderer testfiler
 		if [ $# -eq 0 ]													# fun: (git)
-				then													# fun: (git)
-				git log --name-only --oneline | grep src/main | grep -v src/test					# fun: (git)
+				then												# fun: (git)
+				git log --name-only --oneline | grep src/main | grep -v src/test				# fun: (git)
 		else														# fun: (git)
-				git log --name-only --oneline --since=$1 | grep src/main | grep -v src/test				# fun: (git)
+				git log --name-only --oneline --since=$1 | grep src/main | grep -v src/test			# fun: (git)
 		fi														# fun: (git)
-}															# fun: (git)
-															# fun:
-precmd () {														# fun: genererer tittel pa konsollvindu (kjores for hver kommando)
-		print -Pn "\033]0;$(git rev-parse --abbrev-ref HEAD 2> /dev/null)\007"						# fun:
-}															# fun:
-															# fun:
+}																# fun: (git)
+																# fun:
+function grath {														# fun: grath
+	find . | grep $1 | grep /\.git -v | grep /target -v | grep --color $1							# fun: grath
+}																# fun: grath
+																# fun:
+precmd () {															# fun: genererer tittel pa konsollvindu (kjores for hver kommando)
+		print -Pn "\033]0;$(git rev-parse --abbrev-ref HEAD 2> /dev/null)\007"						# fun: precmd
+}																# fun: precmd
+																# fun:
+function wcgrep {														# fun: wcgrep
+	grep -R $1 * | grep -v target | grep -v .git | grep -v "~" | grep -v ".pyc" | grep -v Binary | grep --color -n $1	# fun: wcgrep
+}																# fun: wcgrep
+																# fun:
 # System variables
-export CATALINA_HOME=/Library/Catalina											# var: hjemmekatalogen til apache tomcat installasjon
-export DEPLOY_LINK=http://localhost:8080/manager/text/deploy								# var: url til deploy
-export JAVA_HOME=$(/usr/libexec/java_home)										# var: hjemmekatalogen til gjeldende jdk
-export M2_HOME=/Library/maven												# var: hjemmeomrade til maven
-export PATH=$PATH:$M2_HOME/bin												# var: bin mappa til maven er en del av PATH
-export WS=$HOME/ws													# var: miljøvariabel for filsti til workspace
-export WAR_FILE=$WS/hjemme/hjemme-web/target/hjemme.war									# var: filsti til hjemme.war
-setopt correctall													# opt: zsh-option som foreslar rettelser av kommandoer som har skriveleif
-setopt allexport													# opt: zsh option for a legge til historikk for kommandoer
-HISTFILE=~/.histfile													# opt: historikkfil i zsh
-HISTSIZE=1000														# opt: storrelse på historikkfil i zsh
-SAVEHIST=1000														# opt: antall kommandoer i historikkfil i zsh
-setopt appendhistory extendedglob allexport automenu promptsubst histsavenodups						# opt: zsh-options...
+export CATALINA_HOME=/Library/Catalina												# var: hjemmekatalogen til apache tomcat installasjon
+export DEPLOY_LINK=http://localhost:8080/manager/text/deploy									# var: url til deploy
+export JAVA_HOME=$(/usr/libexec/java_home)											# var: hjemmekatalogen til gjeldende jdk
+export M2_HOME=/Library/maven													# var: hjemmeomrade til maven
+export PATH=$PATH:$M2_HOME/bin													# var: bin mappa til maven er en del av PATH
+export WS=$HOME/ws														# var: miljøvariabel for filsti til workspace
+export WAR_FILE=$WS/hjemme/hjemme-web/target/hjemme.war										# var: filsti til hjemme.war
+setopt correctall														# opt: zsh-option som foreslar rettelser av kommandoer som har skriveleif
+setopt allexport														# opt: zsh option for a legge til historikk for kommandoer
+HISTFILE=~/.histfile														# opt: historikkfil i zsh
+HISTSIZE=1000															# opt: storrelse på historikkfil i zsh
+SAVEHIST=1000															# opt: antall kommandoer i historikkfil i zsh
+setopt appendhistory extendedglob allexport automenu promptsubst histsavenodups							# opt: zsh-options...
 
 # key bindings
-bindkey "\e[1~" beginning-of-line											# opt: key-binding for zsh
-bindkey "\e[4~" end-of-line												# opt: key-binding for zsh
-bindkey "\e[5~" beginning-of-history											# opt: key-binding for zsh
-bindkey "\e[6~" end-of-history												# opt: key-binding for zsh
-bindkey "\e[3~" delete-char												# opt: key-binding for zsh
-bindkey "\e[2~" quoted-insert												# opt: key-binding for zsh
-bindkey "\e[5C" forward-word												# opt: key-binding for zsh
-bindkey "\eOc" emacs-forward-word											# opt: key-binding for zsh
-bindkey "\e[5D" backward-word												# opt: key-binding for zsh
-bindkey "\eOd" emacs-backward-word											# opt: key-binding for zsh
-bindkey "\ee[C" forward-word												# opt: key-binding for zsh
-bindkey "\ee[D" backward-word												# opt: key-binding for zsh
-bindkey "^H" backward-delete-word											# opt: key-binding for zsh
+bindkey "\e[1~" beginning-of-line												# opt: key-binding for zsh
+bindkey "\e[4~" end-of-line													# opt: key-binding for zsh
+bindkey "\e[5~" beginning-of-history												# opt: key-binding for zsh
+bindkey "\e[6~" end-of-history													# opt: key-binding for zsh
+bindkey "\e[3~" delete-char													# opt: key-binding for zsh
+bindkey "\e[2~" quoted-insert													# opt: key-binding for zsh
+bindkey "\e[5C" forward-word													# opt: key-binding for zsh
+bindkey "\eOc" emacs-forward-word												# opt: key-binding for zsh
+bindkey "\e[5D" backward-word													# opt: key-binding for zsh
+bindkey "\eOd" emacs-backward-word												# opt: key-binding for zsh
+bindkey "\ee[C" forward-word													# opt: key-binding for zsh
+bindkey "\ee[D" backward-word													# opt: key-binding for zsh
+bindkey "^H" backward-delete-word												# opt: key-binding for zsh
 
 # completion in the middle of a line
-bindkey '^i' expand-or-complete-prefix											# opt: key-binding for zsh
+bindkey '^i' expand-or-complete-prefix												# opt: key-binding for zsh
 
 # PROMT text i konsollvindu
-PROMPT=$'%B%* %w%b %{\e[32m%}%n@%m (#%h): %{\e[33m%}%3c%{\e[32m%}>%{\e[33m%}%{\e[0m%} '					# opt: promt text i konsollvindu
+PROMPT=$'%B%* %w%b %{\e[32m%}%n@%m (#%h): %{\e[33m%}%3c%{\e[32m%}>%{\e[33m%}%{\e[0m%} '						# opt: promt text i konsollvindu
 
 # Alias, git
 alias log="git log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(magenta bold)%d%Creset %s %Cgreen(%cr) %C(blue bold)<%an>%Creset' --abbrev-commit"			# cmd: logger commits i git med hash og farger ++
-alias branch='git branch'												# cmd: vis lokale feature brancher til git repo
-alias co='git checkout'													# cmd: chekcout featurebranch (fra git server hvis --track origin -b er med, eller switch til lokal branch)
-alias fetch='git fetch -p'												# cmd: fetch med prune fra git server
-alias pull='git pull --rebase -p'											# cmd: pull med rebase og prune fra git repo
-alias push='git push'													# cmd: push committer til git server
-alias stat='git status'													# cmd: sjekk status til lokalt git repo
+alias branch='git branch'													# cmd: vis lokale feature brancher til git repo
+alias co='git checkout'														# cmd: chekcout featurebranch (fra git server hvis --track origin -b er med, eller switch til lokal branch)
+alias fetch='git fetch -p'													# cmd: fetch med prune fra git server
+alias pull='git pull --rebase -p'												# cmd: pull med rebase og prune fra git repo
+alias push='git push'														# cmd: push committer til git server
+alias stat='git status'														# cmd: sjekk status til lokalt git repo
 
-# Alias, navigeringmo
-alias apps='cd /Applications'												# navigasjon: /Applications
-alias ..='cd .. && la'													# navigasjon: navigering ned ei mappe og list ut innholdet av denne mappa
-alias hbu='cd $WS/hjemme/hjemme/hjemme-business'									# navigasjon: hjemme-business
-alias hcl='cd $WS/hjemme/hjemme/hjemme-client'										# navigasjon: hjemme-client
-alias hfa='cd $WS/hjemme/hjemme/hjemme-facade'										# navigasjon: hjemme-facade
-alias hje='cd $WS/hjemme/hjemme'											# navigasjon: hjemme
-alias hpe='cd $WS/hjemme/hjemme/hjemme-persistence'									# navigasjon: hjemme-persistence (provider)
-alias hpt='cd $WS/hjemme/hjemme-persistence-tech'									# navigasjon: hjemme-persistence (different db tech.)
-alias hte='cd $WS/hjemme/hjemme/hjemme-test'										# navigasjon: hjemme-test
-alias hwe='cd $WS/hjemme/hjemme-web/'											# navigasjon: hjemme-web
-alias hwj='cd $WS/hjemme/hjemme-web-jsf/'										# navigasjon: hjemme-web-jsf
-alias repo='cd $HOME/.m2/repository/nu/hjemme/'										# navigasjon: maven repo for hjemme
-alias hut='cd $WS/hjemme/utils'			 									# navigasjon: utils
-alias wiki='cd $WS/wiki/'												# navigasjon: wiki sider
-alias ws='cd $WS/'													# navigasjon: workspace mappa
+# Alias, navigering
+alias ..='cd .. && la'														# navigasjon: navigering ned ei mappe og list ut innholdet av denne mappa
+alias apps='cd /Applications'													# navigasjon: /Applications
+alias hbu='cd $WS/hjemme/hjemme/hjemme-business'										# navigasjon: hjemme-business
+alias hbui='cd $WS/hjemme/hjemme/hjemme-build'											# navigasjon: hjemme-build
+alias hcl='cd $WS/hjemme/hjemme/hjemme-client'											# navigasjon: hjemme-client
+alias hfa='cd $WS/hjemme/hjemme/hjemme-facade'											# navigasjon: hjemme-facade
+alias hje='cd $WS/hjemme/hjemme'												# navigasjon: hjemme
+alias hpe='cd $WS/hjemme/hjemme-persistence'											# navigasjon: hjemme-persistence
+alias hte='cd $WS/hjemme/hjemme/hjemme-test'											# navigasjon: hjemme-test
+alias hwe='cd $WS/hjemme/hjemme-web/'												# navigasjon: hjemme-web
+alias hwj='cd $WS/hjemme/hjemme-web-jsf/'											# navigasjon: hjemme-web-jsf
+alias repo='cd $HOME/.m2/repository/nu/hjemme/'											# navigasjon: maven repo for hjemme
+alias hut='cd $WS/hjemme/utils'													# navigasjon: utils
+alias wiki='cd $WS/wiki/'													# navigasjon: wiki sider
+alias ws='cd $WS/'														# navigasjon: workspace mappa
 
 # Alias, maven
-alias mc='mvn clean'													# cmd: mvn clean
-alias mcc='mvn clean compile'												# cmd: mvn clean compile (maven)
-alias mci='mvn clean install'												# cmd: mvn clean install (maven)
-alias mcp='mvn clean package'												# cmd: mvn clean package (maven)
-alias mcis='mvn clean install -DskipTests'										# cmd: mvn clean install uten enhetstesting (maven)
-alias mcs='mvn clean site'												# cmd: mvn clean site (maven)
-alias mct='mvn clean test'												# cmd: mvn clean test (maven)
-alias mda='mvn dependency:analyze'											# cmd: analyser avhengigheter i pom.xml (maven)
-alias mda.det='mda | grep -i -e warning -e error'									# cmd: analyser avhengigheter i pom.xml (maven) og filtrerer bare advarsler og feil
-alias mdt='mvn dependency:tree'												# cmd: mvn dependency:tree (maven)
-alias mdt.det='mdt | grep.no.down | grep.no.succ | grep.tree'								# cmd: mvn dependency:tree detaljert (detaljert utskrift) (maven)
-alias mi='mvn install'													# cmd: mvn install (uten clean) (maven)
-alias mhe='mvn help:effective-pom'											# cmd: print ut reell pom (maven)
-alias mvd='mvn versions:display-property-updates' 									# cmd: skriv ut versjoner som kan oppdateres i pom.xml (maven)
-alias mvupa='mvn versions:update-parent'										# cmd: oppdater pom.xml forelder (maven)
-alias mvupr='mvn versions:update-properties'										# cmd: oppdater versjoner til avhengigheter i pom.xml (maven)
+alias mc='mvn clean'														# cmd: mvn clean
+alias mcc='mvn clean compile'													# cmd: mvn clean compile (maven)
+alias mci='mvn clean install'													# cmd: mvn clean install (maven)
+alias mcp='mvn clean package'													# cmd: mvn clean package (maven)
+alias mcis='mvn clean install -DskipTests'											# cmd: mvn clean install uten enhetstesting (maven)
+alias mcs='mvn clean site'													# cmd: mvn clean site (maven)
+alias mct='mvn clean test'													# cmd: mvn clean test (maven)
+alias mda='mvn dependency:analyze'												# cmd: analyser avhengigheter i pom.xml (maven)
+alias mda.det='mda | grep -i -e warning -e error'										# cmd: analyser avhengigheter i pom.xml (maven) og filtrerer bare advarsler og feil
+alias mdt='mvn dependency:tree'													# cmd: mvn dependency:tree (maven)
+alias mdt.det='mdt | grep.no.down | grep.no.succ | grep.tree'									# cmd: mvn dependency:tree detaljert (detaljert utskrift) (maven)
+alias mi='mvn install'														# cmd: mvn install (uten clean) (maven)
+alias mhe='mvn help:effective-pom'												# cmd: print ut reell pom (maven)
+alias mvd='mvn versions:display-property-updates'										# cmd: skriv ut versjoner som kan oppdateres i pom.xml (maven)
+alias mvupa='mvn versions:update-parent'											# cmd: oppdater pom.xml forelder (maven)
+alias mvupr='mvn versions:update-properties'											# cmd: oppdater versjoner til avhengigheter i pom.xml (maven)
 
 # Tomcat
-alias tom.bin='la $CATALINA_HOME/bin/'											# cmd: lister innhold i Tomcat/bin
-alias tom.cp='cp $WAR_FILE $CATALINA_HOME/webapps && echo copying $WAR_FILE to $CATALINA_HOME/webapps'			# cmd: kopier war til CATALINA_HOME/webapps
-alias tom.restart='tom.stop && tom.start'										# cmd: stops a running apache tomcat and starts it agian
-alias tom.start='$CATALINA_HOME/bin/startup.sh'										# cmd: start up apache tomcat
-alias tom.stop='$CATALINA_HOME/bin/shutdown.sh'										# cmd: shut down apache tomcat
+alias tom.bin='la $CATALINA_HOME/bin/'												# cmd: lister innhold i Tomcat/bin
+alias tom.cp='cp $WAR_FILE $CATALINA_HOME/webapps && echo copying $WAR_FILE to $CATALINA_HOME/webapps'				# cmd: kopier war til CATALINA_HOME/webapps
+alias tom.restart='tom.stop && tom.start'											# cmd: stops a running apache tomcat and starts it agian
+alias tom.start='$CATALINA_HOME/bin/startup.sh'											# cmd: start up apache tomcat
+alias tom.stop='$CATALINA_HOME/bin/shutdown.sh'											# cmd: shut down apache tomcat
 
 # Alias, diverse:
-alias ..='cd .. && la'													# navigasjon: en mappe ned og list dens innhold
-alias clear='echo "====================== C L E A R E D ======================" && clear'				# cmd: setter en melding for at skjermen er rensket for tekst og rensker skjermen for tekst
-alias cmd='less $HOME/.zshrc | grep "# cmd:"'										# cmd: list alle alias for kommandoer i .zshrc
-alias cmd.git='fun | grep "# fun: (git)" && cmd | grep git'								# cmd: lister alle funksjoner/kommandoer som har noe med git
-alias cmd.grep='cmd | grep '												# cmd: grepper alle kommandoer i zshrc
-alias con='less $HOME/.zshrc | grep -e "# var:" -e "# opt:"'								# cmd: list all configurasjon i .zshrc
-alias env.grep='env | grep -i'												# cmd: case insensitive grepping av miljovariabler
-alias files.hide='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'				# cmd: skjul "hidden files" fra Finder (Mac Os X)
-alias files.show='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'				# cmd: vis "hidden files" fra Finder (Mac Os X)
-alias find.txt='find . -name "*.txt" | xargs grep --color'								# cmd: soker etter tekststreng i txt filer
-alias find.java='find . -name "*.java" | xargs grep --color'								# cmd: soker etter tekststreng i java filer
-alias fun='less $HOME/.zshrc | grep -v fun= | grep "# fun:"'								# cmd: list alle funksjonser (de som har kommentarene 'fun:') i .zshrc
-alias grep='grep --color'												# cmd: filtrer ord (og farglegg treff)
-alias grep.around='grep -A 3 -B 3'											# cmd: skriver ut 3 linjer før og 3 linjer etter et treff med grep
-alias grep.no.down='grep -v -i \"Download'										# cmd: grep alt utenom "Downloading" og "downloaded"
-alias grep.no.succ='grep -v "SUCCESS"'											# cmd: grep alt utenom "SUCCESS"
-alias grep.tree='grep -e "SNAPSHOT" -e "+" -e "|" -e "-" -e "nu.hjemme"'						# cmd: strenger som har interessant verdi ifm mvn dependency:tree
-alias la='ls -all -G'													# cmd: list alt innhold i mapper med farger.
-alias nav='less $HOME/.zshrc | grep "# navigasjon:"'									# cmd: vis navigasjoner i .zshrc
-alias nav.til='nav | grep'												# cmd: oppgi tekststreng for a se om mulig navigasjon er lagt inn
-alias rm.dir='rm -r -f'													# cmd: rekursiv fjerning av mapper med innhold
-alias zsh='source ~/.zshrc && echo "> .zshrc reloaded"'									# cmd: leser inn .zshrc pa nytt
+alias ..='cd .. && la'														# navigasjon: en mappe ned og list dens innhold
+alias clear='echo "====================== C L E A R E D ======================" && clear'					# cmd: setter en melding for at skjermen er rensket for tekst og rensker skjermen for tekst
+alias cmd='less $HOME/.zshrc | grep "# cmd:"'											# cmd: list alle alias for kommandoer i .zshrc
+alias cmd.git='fun | grep "# fun: (git)" && cmd | grep git'									# cmd: lister alle funksjoner/kommandoer som har noe med git
+alias cmd.grep='cmd | grep '													# cmd: grepper alle kommandoer i zshrc
+alias con='less $HOME/.zshrc | grep -e "# var:" -e "# opt:"'									# cmd: list all configurasjon i .zshrc
+alias env.grep='env | grep -i'													# cmd: case insensitive grepping av miljovariabler
+alias files.hide='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'					# cmd: skjul "hidden files" fra Finder (Mac Os X)
+alias files.show='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'					# cmd: vis "hidden files" fra Finder (Mac Os X)
+alias find.txt='find . -name "*.txt" | xargs grep --color'									# cmd: soker etter tekststreng i txt filer
+alias find.java='find . -name "*.java" | xargs grep --color'									# cmd: soker etter tekststreng i java filer
+alias fun='less $HOME/.zshrc | grep -v fun= | grep "# fun:"'									# cmd: list alle funksjonser (de som har kommentarene 'fun:') i .zshrc
+alias grep='grep --color'													# cmd: filtrer ord (og farglegg treff)
+alias grep.around='grep -A 3 -B 3'												# cmd: skriver ut 3 linjer før og 3 linjer etter et treff med grep
+alias grep.no.down='grep -v -i \"Download'											# cmd: grep alt utenom "Downloading" og "downloaded"
+alias grep.no.succ='grep -v "SUCCESS"'												# cmd: grep alt utenom "SUCCESS"
+alias grep.tree='grep -e "SNAPSHOT" -e "+" -e "|" -e "-" -e "nu.hjemme"'							# cmd: strenger som har interessant verdi ifm mvn dependency:tree
+alias la='ls -all -G'														# cmd: list alt innhold i mapper med farger.
+alias nav='less $HOME/.zshrc | grep "# navigasjon:"'										# cmd: vis navigasjoner i .zshrc
+alias nav.til='nav | grep'													# cmd: oppgi tekststreng for a se om mulig navigasjon er lagt inn
+alias rm.dir='rm -r -f'														# cmd: rekursiv fjerning av mapper med innhold
+alias zsh='source ~/.zshrc && echo "> .zshrc reloaded"'										# cmd: leser inn .zshrc pa nytt
