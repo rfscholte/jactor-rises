@@ -6,13 +6,12 @@
     <parent>
         <groupId>nu.hjemme</groupId>
         <artifactId>hjemme-build</artifactId>
-        <version>1.0</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>hjemme</artifactId>
     <name>hjemme</name>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
     <description>The pom for multibuild of hjemme.nu</description>
 
     <url>http://www.hjemme.nu</url>
@@ -20,9 +19,7 @@
     <modules>
         <module>hjemme-business</module>
         <module>hjemme-client</module>
-        <module>hjemme-config</module>
         <module>hjemme-facade</module>
-        <module>hjemme-persistence</module>
         <module>hjemme-test</module>
     </modules>
 

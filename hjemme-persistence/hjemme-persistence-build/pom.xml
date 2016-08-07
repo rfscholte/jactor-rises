@@ -9,11 +9,11 @@
     </prerequisites>
 
     <groupId>nu.hjemme</groupId>
-    <artifactId>hjemme-build</artifactId>
-    <name>hjemme-build</name>
+    <artifactId>hjemme-persistence-build</artifactId>
+    <name>hjemme-persistence-build</name>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <description>The build pom of hjemme is my playground where I cultivate being a nerd!!!!</description>
+    <description>The build pom of hjemme-persistence</description>
 
     <url>http://www.hjemme.nu</url>
 
@@ -41,38 +41,20 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- third party -->
+            <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>${commons-lang.version}</version>
             </dependency>
             <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${org.apache.commons-lang3.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-dbcp2</artifactId>
-                <version>${commons-dbcp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>${org.aspectj.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
             <dependency>
@@ -81,43 +63,8 @@
                 <version>${org.hsqldb.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>jcl-over-slf4j</artifactId>
-                <version>${org.slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${org.slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>${org.slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-aop</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context-support</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
             <dependency>
@@ -130,18 +77,24 @@
                 <artifactId>spring-orm</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
 
-            <!-- testing -->
+            <!-- Test scope -->
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-test</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-all</artifactId>
-                <version>${org.hamcrest.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
