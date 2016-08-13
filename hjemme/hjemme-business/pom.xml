@@ -21,8 +21,9 @@
             <artifactId>hjemme-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>nu.hjemme</groupId>
-            <artifactId>hjemme-persistence</artifactId>
+            <groupId>nu.hjemme-persistence</groupId>
+            <artifactId>hjemme-persistence-orm</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <!-- Third party -->

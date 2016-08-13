@@ -8,7 +8,7 @@
         <maven>3.3.3</maven>
     </prerequisites>
 
-    <groupId>nu.hjemme</groupId>
+    <groupId>nu.hjemme-persistence</groupId>
     <artifactId>hjemme-persistence-build</artifactId>
     <name>hjemme-persistence-build</name>
     <packaging>pom</packaging>

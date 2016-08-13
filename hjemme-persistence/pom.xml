@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>nu.hjemme-persistence</groupId>
+        <artifactId>hjemme-persistence-build</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>hjemme-persistence</artifactId>
+    <packaging>pom</packaging>
+    <url>http://www.hjemme.nu</url>
+
+    <modules>
+        <!-- <module>hjemme-persistence-client</module> -->
+        <module>hjemme-persistence-orm</module>
+        <!-- <module>hjemme-persistence-facade</module> -->
+    </modules>
+
+    <name>hjemme-persistence</name>
+    <description>The build of the persistence layer in hjemme.</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>nu.hjemme</groupId>
+            <artifactId>hjemme-client</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!--
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>nu.hjemme-persistence</groupId>
+                <artifactId>hjemme-persistence-client</artifactId>
+                <version>$[project.version]</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    -->
+</project>
