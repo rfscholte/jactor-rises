@@ -8,7 +8,7 @@ import org.apache.commons.lang.Validate;
 public class GuestBookEntryDomainBuilder extends DomainBuilder<GuestBookEntryDomain> {
     static final String THE_ENTRY_MUST_BELONG_TO_A_GUEST_BOOK = "The entry must belong to a guest book";
     static final String THE_ENTRY_CANNOT_BE_EMPTY = "The entry cannot be empty";
-    static final String THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE = "The entry must be created by someone";
+    private static final String THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE = "The entry must be created by someone";
 
     private GuestBookEntryEntity guestBookEntryEntity = newInstanceOf(GuestBookEntryEntity.class);
 

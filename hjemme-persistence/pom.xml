@@ -13,7 +13,7 @@
     <url>http://www.hjemme.nu</url>
 
     <modules>
-        <!-- <module>hjemme-persistence-client</module> -->
+        <module>hjemme-persistence-client</module>
         <module>hjemme-persistence-orm</module>
         <!-- <module>hjemme-persistence-facade</module> -->
     </modules>
@@ -28,15 +28,13 @@
         </dependency>
     </dependencies>
 
-    <!--
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>nu.hjemme-persistence</groupId>
                 <artifactId>hjemme-persistence-client</artifactId>
-                <version>$[project.version]</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
-    -->
 </project>
