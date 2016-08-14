@@ -15,11 +15,11 @@
     <modules>
         <module>hjemme-persistence-client</module>
         <module>hjemme-persistence-orm</module>
-        <!-- <module>hjemme-persistence-facade</module> -->
+        <module>hjemme-persistence-facade</module>
     </modules>
 
     <name>hjemme-persistence</name>
-    <description>The build of the persistence layer in hjemme.</description>
+    <description>The build for the persistence layer in hjemme.nu</description>
 
     <dependencies>
         <dependency>
@@ -33,6 +33,16 @@
             <dependency>
                 <groupId>nu.hjemme-persistence</groupId>
                 <artifactId>hjemme-persistence-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nu.hjemme-persistence</groupId>
+                <artifactId>hjemme-persistence-facade</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nu.hjemme-persistence</groupId>
+                <artifactId>hjemme-persistence-orm</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

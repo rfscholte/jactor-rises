@@ -1,8 +1,8 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.GuestBookEntryDomain;
-import nu.hjemme.persistence.GuestBookEntity;
-import nu.hjemme.persistence.GuestBookEntryEntity;
+import nu.hjemme.persistence.client.GuestBookEntity;
+import nu.hjemme.persistence.client.GuestBookEntryEntity;
 import org.apache.commons.lang.Validate;
 
 public class GuestBookEntryDomainBuilder extends DomainBuilder<GuestBookEntryDomain> {
