@@ -1,6 +1,7 @@
 package nu.hjemme.persistence.client.domain;
 
-import nu.hjemme.persistence.client.converter.CountryConverter;
+import nu.hjemme.persistence.converter.CountryConverter;
+import nu.hjemme.persistence.domain.DefaultAddressEntity;
 import org.junit.Before;
 import org.junit.Test;
 

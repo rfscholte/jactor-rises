@@ -3,7 +3,7 @@ package nu.hjemme.business.facade;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.client.facade.UserFacade;
-import nu.hjemme.persistence.client.dao.UserDao;
+import nu.hjemme.persistence.dao.UserDao;
 
 public class UserFacadeImpl implements UserFacade {
 

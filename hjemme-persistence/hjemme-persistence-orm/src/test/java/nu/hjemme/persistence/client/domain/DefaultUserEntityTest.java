@@ -1,5 +1,7 @@
 package nu.hjemme.persistence.client.domain;
 
+import nu.hjemme.persistence.domain.DefaultPersonEntity;
+import nu.hjemme.persistence.domain.DefaultUserEntity;
 import org.junit.Before;
 import org.junit.Test;
 

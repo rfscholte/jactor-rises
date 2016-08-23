@@ -3,7 +3,7 @@ package nu.hjemme.business.domain.dao;
 import nu.hjemme.business.domain.UserDomain;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.client.UserEntity;
-import nu.hjemme.persistence.client.dao.UserDao;
+import nu.hjemme.persistence.dao.UserDao;
 
 public class UserDomainDao {
     private final UserDao userDao;

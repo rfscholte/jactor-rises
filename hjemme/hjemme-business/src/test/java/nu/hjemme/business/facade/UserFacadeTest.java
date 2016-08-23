@@ -3,7 +3,7 @@ package nu.hjemme.business.facade;
 import nu.hjemme.business.rules.BuildValidations;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
-import nu.hjemme.persistence.client.dao.UserDao;
+import nu.hjemme.persistence.dao.UserDao;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.GuestBookDomain;
-import nu.hjemme.persistence.client.PersistentData;
+import nu.hjemme.persistence.PersistentData;
 import nu.hjemme.persistence.client.UserEntity;
 import org.junit.Rule;
 import org.junit.Test;

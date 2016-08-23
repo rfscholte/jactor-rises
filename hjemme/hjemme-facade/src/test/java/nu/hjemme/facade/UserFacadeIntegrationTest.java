@@ -22,10 +22,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @Transactional
 public class UserFacadeIntegrationTest {
 
-    @Resource @SuppressWarnings("unused") // initialized by spring
+    @Resource(name = "hjemme.userFacade")
     private UserFacade testUserFacade;
 
-    @Test public void willfetchStandardUser() {
+    @Test public void willFetchStandardUser() {
         assertThat(testUserFacade.findUsing(new UserName("tip")), is(notNullValue(), "User by UserName"));
     }
 }

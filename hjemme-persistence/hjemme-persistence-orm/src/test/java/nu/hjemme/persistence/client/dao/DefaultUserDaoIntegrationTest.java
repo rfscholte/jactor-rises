@@ -1,11 +1,11 @@
 package nu.hjemme.persistence.client.dao;
 
 import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.persistence.client.domain.DefaultUserEntity;
+import nu.hjemme.persistence.dao.DefaultUserDao;
+import nu.hjemme.persistence.domain.DefaultUserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +25,6 @@ import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = DefaultUserDaoIntegrationTest.HjemmeDbContext.class)
 @Transactional
@@ -33,8 +32,7 @@ public class DefaultUserDaoIntegrationTest {
 
     private DefaultUserDao userDaoToTest;
 
-    @Resource(mappedName = "sessionFactory")
-    private SessionFactory sessionFactory;
+    @Resource(mappedName = "sessionFactory") private SessionFactory sessionFactory;
 
     @Before public void initDao() {
         userDaoToTest = new DefaultUserDao(sessionFactory);
@@ -59,8 +57,7 @@ public class DefaultUserDaoIntegrationTest {
     @ContextConfiguration
     public static class HjemmeDbContext {
 
-        @Bean(name = "dataSource")
-        public DataSource dataSource() {
+        @Bean(name = "dataSource") public DataSource dataSource() {
             return new EmbeddedDatabaseBuilder()
                     .setType(EmbeddedDatabaseType.HSQL)
                     .setName("hjemme-persistence-" + System.currentTimeMillis())
@@ -70,9 +67,10 @@ public class DefaultUserDaoIntegrationTest {
                     .build();
         }
 
-        @Bean(name = "sessionFactory")
-        public LocalSessionFactoryBean sessionFactory() {
+        @Bean(name = "sessionFactory") public LocalSessionFactoryBean sessionFactory() {
             LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+            sessionFactory.setDataSource(dataSource());
+            sessionFactory.setPackagesToScan("nu.hjemme.persistence.domain");
             sessionFactory.setHibernateProperties(new Properties() {
                 {
                     setProperty("hibernate.hbm2ddl.auto", "validate");
@@ -81,16 +79,12 @@ public class DefaultUserDaoIntegrationTest {
                 }
             });
 
-            sessionFactory.setDataSource(dataSource());
-            sessionFactory.setPackagesToScan("nu.hjemme.persistence.domain");
-
             return sessionFactory;
         }
 
-        @Bean(name = "txManager")
-        public HibernateTransactionManager txManager(SessionFactory ssessionFactory) {
+        @Bean(name = "txManager") public HibernateTransactionManager txManager() {
             HibernateTransactionManager txManager = new HibernateTransactionManager();
-            txManager.setSessionFactory(ssessionFactory);
+            txManager.setSessionFactory(sessionFactory().getObject());
 
             return txManager;
         }

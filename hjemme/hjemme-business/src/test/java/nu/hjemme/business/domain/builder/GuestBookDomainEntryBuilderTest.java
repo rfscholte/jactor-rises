@@ -1,8 +1,8 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.GuestBookEntryDomain;
+import nu.hjemme.persistence.PersistentData;
 import nu.hjemme.persistence.client.GuestBookEntity;
-import nu.hjemme.persistence.client.PersistentData;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

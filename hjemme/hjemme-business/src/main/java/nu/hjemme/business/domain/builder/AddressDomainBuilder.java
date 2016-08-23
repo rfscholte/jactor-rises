@@ -4,7 +4,7 @@ import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.persistence.client.AddressEntity;
 import org.apache.commons.lang.Validate;
 
-import static nu.hjemme.persistence.client.converter.CountryConverter.SPLITTER;
+import static nu.hjemme.persistence.converter.CountryConverter.SPLITTER;
 
 public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
     static final String ADDRESS_LINE_1_CANNOT_BE_EMPTY = "Address line 1 cannot be empty";

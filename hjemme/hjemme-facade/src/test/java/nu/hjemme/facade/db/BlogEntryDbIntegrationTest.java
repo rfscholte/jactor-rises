@@ -6,7 +6,7 @@ import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.persistence.client.BlogEntity;
 import nu.hjemme.persistence.client.BlogEntryEntity;
 import nu.hjemme.persistence.client.UserEntity;
-import nu.hjemme.persistence.client.domain.DefaultBlogEntryEntity;
+import nu.hjemme.persistence.domain.DefaultBlogEntryEntity;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.hibernate.Session;

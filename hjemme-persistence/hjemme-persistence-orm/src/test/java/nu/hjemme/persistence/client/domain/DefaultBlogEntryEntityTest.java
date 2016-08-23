@@ -2,6 +2,8 @@ package nu.hjemme.persistence.client.domain;
 
 import nu.hjemme.persistence.client.BlogEntryEntity;
 import nu.hjemme.persistence.client.time.NowAsPureDateRule;
+import nu.hjemme.persistence.domain.DefaultBlogEntity;
+import nu.hjemme.persistence.domain.DefaultBlogEntryEntity;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

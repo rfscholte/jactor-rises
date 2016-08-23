@@ -2,7 +2,8 @@ package nu.hjemme.persistence.client;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.User;
-import nu.hjemme.persistence.client.domain.DefaultUserEntity;
+import nu.hjemme.persistence.PersistentData;
+import nu.hjemme.persistence.domain.DefaultUserEntity;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;

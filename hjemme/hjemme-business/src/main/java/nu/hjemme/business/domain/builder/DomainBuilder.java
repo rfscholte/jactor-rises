@@ -1,6 +1,6 @@
 package nu.hjemme.business.domain.builder;
 
-import nu.hjemme.persistence.client.PersistentData;
+import nu.hjemme.persistence.PersistentData;
 
 /** The base builder from which to build valid domains. */
 public abstract class DomainBuilder<Domain> {

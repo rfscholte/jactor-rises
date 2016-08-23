@@ -20,7 +20,7 @@ public class DefaultMenuFacadeTest {
     @Test public void willThrowExceptionIfProvidedMenusAreNull() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("Menus must be provided");
-        new DefaultMenuFacade(null);
+        new DefaultMenuFacade((Menu[]) null);
     }
 
     @Test public void willThrowExceptionIfProvidedMenusAreEmpty() {
