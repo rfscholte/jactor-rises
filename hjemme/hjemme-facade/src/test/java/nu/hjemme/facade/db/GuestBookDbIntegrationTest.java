@@ -4,7 +4,7 @@ import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.persistence.client.GuestBookEntity;
 import nu.hjemme.persistence.client.UserEntity;
-import nu.hjemme.persistence.domain.DefaultGuestBookEntity;
+import nu.hjemme.persistence.orm.domain.DefaultGuestBookEntity;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.hibernate.Session;
