@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.dao;
+package nu.hjemme.persistence.client.dao;
 
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.client.UserEntity;

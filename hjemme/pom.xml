@@ -65,7 +65,12 @@
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
-                <artifactId>hjemme-persistence-orm</artifactId>
+                <artifactId>hjemme-persistence-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nu.hjemme</groupId>
+                <artifactId>hjemme-persistence-facade</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

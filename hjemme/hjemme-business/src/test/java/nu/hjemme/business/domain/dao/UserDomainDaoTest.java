@@ -5,7 +5,7 @@ import nu.hjemme.business.rules.BuildValidations;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.PersistentData;
 import nu.hjemme.persistence.client.UserEntity;
-import nu.hjemme.persistence.dao.UserDao;
+import nu.hjemme.persistence.client.dao.UserDao;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
