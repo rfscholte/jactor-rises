@@ -1,7 +1,5 @@
-package nu.hjemme.persistence.client.domain;
+package nu.hjemme.persistence.domain;
 
-import nu.hjemme.persistence.domain.DefaultGuestBookEntity;
-import nu.hjemme.persistence.domain.DefaultUserEntity;
 import org.junit.Before;
 import org.junit.Test;
 

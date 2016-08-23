@@ -1,6 +1,4 @@
-package nu.hjemme.persistence.client.time;
-
-import nu.hjemme.persistence.time.Now;
+package nu.hjemme.persistence.time;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

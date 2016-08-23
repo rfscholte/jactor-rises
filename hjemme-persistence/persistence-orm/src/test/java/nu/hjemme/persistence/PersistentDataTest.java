@@ -1,9 +1,10 @@
-package nu.hjemme.persistence.client;
+package nu.hjemme.persistence;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.User;
-import nu.hjemme.persistence.PersistentData;
+import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.domain.DefaultUserEntity;
+import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class PersistentDataTest {
     }
 
     @Test public void willFindImplementationOfInterface() {
-        assertThat(PersistentData.getInstance().provideInstanceFor(UserEntity.class), is(instanceOf(DefaultUserEntity.class), "defaultUserEntity"));
+        MatcherAssert.assertThat(PersistentData.getInstance().provideInstanceFor(UserEntity.class), is(instanceOf(DefaultUserEntity.class), "defaultUserEntity"));
     }
 
     @Test public void willFindImplementationOfInterfaceUsingConstructorArguments() {

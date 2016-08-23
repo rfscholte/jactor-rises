@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.client.time;
+package nu.hjemme.persistence.time;
 
 import org.junit.rules.ExternalResource;
 

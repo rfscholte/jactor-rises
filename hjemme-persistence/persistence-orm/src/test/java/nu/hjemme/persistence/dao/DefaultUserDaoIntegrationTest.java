@@ -1,7 +1,6 @@
-package nu.hjemme.persistence.client.dao;
+package nu.hjemme.persistence.dao;
 
 import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.persistence.dao.DefaultUserDao;
 import nu.hjemme.persistence.domain.DefaultUserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
