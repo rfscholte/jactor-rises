@@ -21,12 +21,12 @@
             <artifactId>hjemme-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>nu.hjemme-persistence</groupId>
-            <artifactId>hjemme-persistence-client</artifactId>
+            <groupId>nu.hjemme.persistence</groupId>
+            <artifactId>persistence-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>nu.hjemme-persistence</groupId>
-            <artifactId>hjemme-persistence-facade</artifactId>
+            <groupId>nu.hjemme.persistence</groupId>
+            <artifactId>persistence-facade</artifactId>
         </dependency>
 
         <!-- Third party -->

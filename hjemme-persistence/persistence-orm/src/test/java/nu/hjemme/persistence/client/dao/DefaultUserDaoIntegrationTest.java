@@ -26,7 +26,7 @@ import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@Ignore("fix after finished making hjemme-persistence an extra")
+@Ignore("fix after finished making hjemme-persistence an external component of hjemme.nu")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = DefaultUserDaoIntegrationTest.HjemmeDbContext.class)
 @Transactional

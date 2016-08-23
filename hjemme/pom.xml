@@ -64,13 +64,13 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>nu.hjemme</groupId>
-                <artifactId>hjemme-persistence-client</artifactId>
+                <groupId>nu.hjemme.persistence</groupId>
+                <artifactId>persistence-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>nu.hjemme</groupId>
-                <artifactId>hjemme-persistence-facade</artifactId>
+                <groupId>nu.hjemme.persistence</groupId>
+                <artifactId>persistence-facade</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
