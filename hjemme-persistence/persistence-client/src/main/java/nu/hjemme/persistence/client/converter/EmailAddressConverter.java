@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.converter;
+package nu.hjemme.persistence.client.converter;
 
 import nu.hjemme.client.datatype.EmailAddress;
 

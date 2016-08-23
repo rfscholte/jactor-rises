@@ -15,8 +15,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>nu.hjemme-persistence</groupId>
-            <artifactId>hjemme-persistence-orm</artifactId>
+            <groupId>nu.hjemme.persistence</groupId>
+            <artifactId>persistence-orm</artifactId>
         </dependency>
     </dependencies>
 </project>

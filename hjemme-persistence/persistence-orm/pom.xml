@@ -16,8 +16,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>nu.hjemme-persistence</groupId>
-            <artifactId>hjemme-persistence-client</artifactId>
+            <groupId>nu.hjemme.persistence</groupId>
+            <artifactId>persistence-client</artifactId>
         </dependency>
 
         <!-- Third party -->

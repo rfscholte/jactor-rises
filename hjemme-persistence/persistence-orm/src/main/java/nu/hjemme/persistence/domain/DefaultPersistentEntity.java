@@ -6,14 +6,14 @@ import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.Persistent;
-import nu.hjemme.persistence.converter.CountryConverter;
-import nu.hjemme.persistence.converter.DescriptionConverter;
-import nu.hjemme.persistence.converter.EmailAddressConverter;
-import nu.hjemme.persistence.converter.LocalDateConverter;
-import nu.hjemme.persistence.converter.LocalDateTimeConverter;
-import nu.hjemme.persistence.converter.NameConverter;
-import nu.hjemme.persistence.converter.TypeConverter;
-import nu.hjemme.persistence.converter.UserNameConverter;
+import nu.hjemme.persistence.client.converter.CountryConverter;
+import nu.hjemme.persistence.client.converter.DescriptionConverter;
+import nu.hjemme.persistence.client.converter.EmailAddressConverter;
+import nu.hjemme.persistence.client.converter.LocalDateConverter;
+import nu.hjemme.persistence.client.converter.LocalDateTimeConverter;
+import nu.hjemme.persistence.client.converter.NameConverter;
+import nu.hjemme.persistence.client.converter.TypeConverter;
+import nu.hjemme.persistence.client.converter.UserNameConverter;
 import nu.hjemme.persistence.meta.PersistentMetadata;
 import org.hibernate.annotations.Type;
 
@@ -40,13 +40,19 @@ public abstract class DefaultPersistentEntity implements Persistent<Long> {
 
     private static Map<Class<?>, TypeConverter> dataTypeConverters = initKnownConverters();
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) @SuppressWarnings("unused") // used by persistence engine
-    protected Long id;
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) Long id;
 
-    @Column(name = CREATION_TIME) @Type(type = "timestamp") protected Date creationTime;
-    @Column(name = CREATED_BY) protected String createdBy;
-    @Column(name = UPDATED_TIME) @Type(type = "timestamp") protected Date updatedTime;
-    @Column(name = UPDATED_BY) protected String updatedBy;
+    @Column(name = CREATION_TIME) @Type(type = "timestamp") private Date creationTime;
+    @Column(name = CREATED_BY) private String createdBy;
+    @Column(name = UPDATED_TIME) @Type(type = "timestamp") private Date updatedTime;
+    @Column(name = UPDATED_BY) private String updatedBy;
+
+    public DefaultPersistentEntity() {
+        createdBy = "todo";
+        creationTime = new Date();
+        updatedBy = "todo";
+        updatedTime = new Date();
+    }
 
     @SuppressWarnings("unchecked") public <To, From> To convertTo(From from, Class<To> classType) {
         if (isValidValue(classType)) {
