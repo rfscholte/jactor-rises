@@ -5,7 +5,7 @@ import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Address;
 import nu.hjemme.client.domain.Person;
-import nu.hjemme.persistence.PersonEntity;
+import nu.hjemme.persistence.client.PersonEntity;
 
 public class PersonDomain extends PersistentDomain<PersonEntity, Long> implements Person {
 

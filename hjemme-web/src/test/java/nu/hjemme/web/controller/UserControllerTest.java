@@ -37,7 +37,7 @@ public class UserControllerTest {
     }
 
     @Test public void willNotfetchUserByUserNameIfTheUserNameInTheWebRequestIsNullOrAnEmptyString() {
-        Map<String, String[]> params = new HashMap<String, String[]>();
+        Map<String, String[]> params = new HashMap<>();
 
         WebRequest mockedWebRequest = mock(WebRequest.class);
         when(mockedWebRequest.getParameterMap()).thenReturn(params);
@@ -72,7 +72,7 @@ public class UserControllerTest {
         ModelMap mockedModelMap = mock(ModelMap.class);
 
         String[] value = {"user"};
-        Map<String, String[]> params = new HashMap<String, String[]>();
+        Map<String, String[]> params = new HashMap<>();
         params.put("choose", value);
 
         when(mockedWebRequest.getParameterMap()).thenReturn(params);

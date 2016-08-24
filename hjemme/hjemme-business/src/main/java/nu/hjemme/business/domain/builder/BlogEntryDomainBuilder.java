@@ -1,8 +1,8 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.BlogEntryDomain;
-import nu.hjemme.persistence.BlogEntity;
-import nu.hjemme.persistence.BlogEntryEntity;
+import nu.hjemme.persistence.client.BlogEntity;
+import nu.hjemme.persistence.client.BlogEntryEntity;
 import org.apache.commons.lang.Validate;
 
 public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {

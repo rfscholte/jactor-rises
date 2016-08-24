@@ -5,7 +5,7 @@ import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.domain.Address;
 import nu.hjemme.facade.config.HjemmeDbContext;
-import nu.hjemme.persistence.UserEntity;
+import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.hibernate.Session;

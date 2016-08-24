@@ -1,18 +1,13 @@
 package nu.hjemme.client.datatype;
 
-import nu.hjemme.test.matcher.DescriptionMatcher;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
-import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 public class DescriptionTest {

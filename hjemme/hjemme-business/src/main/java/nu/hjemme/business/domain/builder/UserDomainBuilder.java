@@ -2,7 +2,7 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.PersonDomain;
 import nu.hjemme.business.domain.UserDomain;
-import nu.hjemme.persistence.UserEntity;
+import nu.hjemme.persistence.client.UserEntity;
 import org.apache.commons.lang.Validate;
 
 public class UserDomainBuilder extends DomainBuilder<UserDomain> {
