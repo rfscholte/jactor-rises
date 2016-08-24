@@ -4,25 +4,22 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>hjemme-pom</artifactId>
         <groupId>nu.hjemme</groupId>
-        <version>1.0.27</version>
+        <artifactId>hjemme-build</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>hjemme</artifactId>
     <name>hjemme</name>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <description>The main pom for hjemme.nu</description>
+    <description>The pom for multibuild of hjemme.nu</description>
 
     <url>http://www.hjemme.nu</url>
 
     <modules>
         <module>hjemme-business</module>
         <module>hjemme-client</module>
-        <module>hjemme-config</module>
         <module>hjemme-facade</module>
-        <module>hjemme-persistence</module>
         <module>hjemme-test</module>
     </modules>
 
@@ -49,37 +46,38 @@
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-business</artifactId>
-                <version>${hjemme-version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-client</artifactId>
-                <version>${hjemme-version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-config</artifactId>
-                <version>${hjemme-version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-facade</artifactId>
-                <version>${hjemme-version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>nu.hjemme</groupId>
-                <artifactId>hjemme-persistence</artifactId>
-                <version>${hjemme-version}</version>
+                <groupId>nu.hjemme.persistence</groupId>
+                <artifactId>persistence-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nu.hjemme.persistence</groupId>
+                <artifactId>persistence-facade</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>nu.hjemme</groupId>
                 <artifactId>hjemme-test</artifactId>
-                <version>${hjemme-version}</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <properties>
-        <hjemme-version>1.0-SNAPSHOT</hjemme-version>
-    </properties>
 </project>

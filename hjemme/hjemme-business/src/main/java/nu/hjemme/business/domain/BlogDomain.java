@@ -3,7 +3,7 @@ package nu.hjemme.business.domain;
 import nu.hjemme.business.domain.builder.BlogDomainBuilder;
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.client.domain.User;
-import nu.hjemme.persistence.BlogEntity;
+import nu.hjemme.persistence.client.BlogEntity;
 
 import java.time.LocalDate;
 

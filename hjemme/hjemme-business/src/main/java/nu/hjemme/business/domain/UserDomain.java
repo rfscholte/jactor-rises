@@ -6,7 +6,7 @@ import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.Person;
 import nu.hjemme.client.domain.User;
-import nu.hjemme.persistence.UserEntity;
+import nu.hjemme.persistence.client.UserEntity;
 
 public class UserDomain extends PersistentDomain<UserEntity, Long> implements User {
 

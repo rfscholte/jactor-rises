@@ -1,8 +1,8 @@
 package nu.hjemme.facade.config;
 
 import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.domain.DefaultUserEntity;
+import nu.hjemme.persistence.client.UserEntity;
+import nu.hjemme.persistence.orm.domain.DefaultUserEntity;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.hibernate.Session;

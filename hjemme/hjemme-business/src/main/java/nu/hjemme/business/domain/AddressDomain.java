@@ -3,7 +3,7 @@ package nu.hjemme.business.domain;
 import nu.hjemme.business.domain.builder.AddressDomainBuilder;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
-import nu.hjemme.persistence.AddressEntity;
+import nu.hjemme.persistence.client.AddressEntity;
 
 public class AddressDomain extends PersistentDomain<AddressEntity, Long> implements Address {
 

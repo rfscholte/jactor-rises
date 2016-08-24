@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class WebParameters {
     private static final String LOCALE = "locale";
@@ -15,16 +16,14 @@ public class WebParameters {
 
     private Map<String, String> parameterMap = new HashMap<>();
 
-    public WebParameters(HttpServletRequest request) {
+    @SuppressWarnings("unchecked") public WebParameters(HttpServletRequest request) {
         Validate.notNull(request, "The request cannot be null!");
 
         Map parameters = request.getParameterMap();
 
-        for (Object parameterName : request.getParameterMap().keySet()) {
-            if (!isLanguageParameter(parameterName) && !isFormSubmit(parameterName)) {
-                parameterMap.put(parameterName.toString(), ((String[]) parameters.get(parameterName))[0]);
-            }
-        }
+        request.getParameterMap().keySet().stream().filter(parameterName -> !isLanguageParameter(parameterName) && !isFormSubmit(parameterName)).forEach(parameterName -> {
+            parameterMap.put(parameterName.toString(), ((String[]) parameters.get(parameterName))[0]);
+        });
     }
 
     private boolean isFormSubmit(Object parameterName) {
@@ -38,9 +37,7 @@ public class WebParameters {
     public List<WebParameter> fetchWebParameters() {
         List<WebParameter> webParameters = new ArrayList<>(parameterMap.size());
 
-        for (String parameterName : parameterMap.keySet()) {
-            webParameters.add(new WebParameter(parameterName, parameterMap.get(parameterName)));
-        }
+        webParameters.addAll(parameterMap.keySet().stream().map(parameterName -> new WebParameter(parameterName, parameterMap.get(parameterName))).collect(Collectors.toList()));
 
         return webParameters;
     }

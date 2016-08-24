@@ -31,7 +31,7 @@ public class RequestInterceptorTest {
         ModelAndView modelAndView = new ModelAndView();
         testRequestInterceptor.postHandle(mockedRequest, null, null, modelAndView);
 
-        assertThat("Action", modelAndView.getModel().get(ATTRIBUTE_ACTION), is(equalTo((Object) "home.do")));
+        assertThat("Action", modelAndView.getModel().get(ATTRIBUTE_ACTION), is(equalTo("home.do")));
     }
 
     @Test @SuppressWarnings(value = "unchecked") public void willSetTheParametersAttributeOnTheModel() throws Exception {

@@ -2,9 +2,9 @@ package nu.hjemme.facade.db;
 
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
-import nu.hjemme.persistence.BlogEntity;
-import nu.hjemme.persistence.UserEntity;
-import nu.hjemme.persistence.domain.DefaultBlogEntity;
+import nu.hjemme.persistence.client.BlogEntity;
+import nu.hjemme.persistence.client.UserEntity;
+import nu.hjemme.persistence.orm.domain.DefaultBlogEntity;
 import nu.hjemme.test.matcher.MatchBuilder;
 import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.hibernate.Session;

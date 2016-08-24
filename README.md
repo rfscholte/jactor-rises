@@ -1,10 +1,10 @@
 # README #
 
-git origin for hjemme (including hjemme-web and hjemme-pom)
+git origin for hjemme (including hjemme-web and hjemme-persistence)
 
 ### What is this repository for? ###
 
-* Src kode and issues regarding hjemme
+* Src code and issues regarding hjemme
 * hjemme has none releases yet as this is used mostly for my own development
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 

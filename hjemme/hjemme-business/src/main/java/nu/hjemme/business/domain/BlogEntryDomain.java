@@ -4,7 +4,7 @@ import nu.hjemme.business.domain.builder.BlogEntryDomainBuilder;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Blog;
 import nu.hjemme.client.domain.BlogEntry;
-import nu.hjemme.persistence.BlogEntryEntity;
+import nu.hjemme.persistence.client.BlogEntryEntity;
 
 import java.time.LocalDateTime;
 
