@@ -15,8 +15,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>nu.hjemme</groupId>
-            <artifactId>hjemme-test</artifactId>
+            <groupId>com.github.jactor-rises</groupId>
+            <artifactId>build-matcher</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

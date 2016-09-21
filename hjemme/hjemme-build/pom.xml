@@ -18,6 +18,7 @@
     <url>http://www.hjemme.nu</url>
 
     <properties>
+        <build-matcher.version>1.0</build-matcher.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-dbcp.version>2.1.1</commons-dbcp.version>
         <hibernate.version>4.2.0.Final</hibernate.version>
@@ -40,6 +41,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.github.jactor-rises</groupId>
+                <artifactId>build-matcher</artifactId>
+                <version>${build-matcher.version}</version>
+            </dependency>
             <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>

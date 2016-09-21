@@ -1,13 +1,13 @@
 package nu.hjemme.facade.db;
 
+import com.github.jactorrises.matcher.MatchBuilder;
+import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.persistence.client.GuestBookEntity;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.orm.domain.DefaultGuestBookEntryEntity;
-import nu.hjemme.test.matcher.MatchBuilder;
-import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
@@ -19,12 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.io.Serializable;
 
+import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.GuestBookDomain.aGuestBook;
 import static nu.hjemme.business.domain.GuestBookEntryDomain.aGuestBookEntry;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
-import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -65,11 +65,11 @@ public class GuestBookEntryDbIntegrationTest {
                 .withPasswordAs("demo")
                 .withEmailAddressAs("helt@hjemme")
                 .with(aPerson().withDescriptionAs("description")
-                                .with(anAddress().withAddressLine1As("Hjemme")
-                                                .withCityAs("Dirdal")
-                                                .withCountryAs("NO", "no")
-                                                .withZipCodeAs(1234)
-                                )
+                        .with(anAddress().withAddressLine1As("Hjemme")
+                                .withCityAs("Dirdal")
+                                .withCountryAs("NO", "no")
+                                .withZipCodeAs(1234)
+                        )
                 )
                 .build().getEntity();
 

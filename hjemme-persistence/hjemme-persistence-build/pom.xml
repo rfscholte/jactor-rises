@@ -18,6 +18,7 @@
     <url>http://www.hjemme.nu</url>
 
     <properties>
+        <build-matcher.version>1.0</build-matcher.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-dbcp.version>2.1.1</commons-dbcp.version>
         <hibernate.version>4.2.0.Final</hibernate.version>
@@ -102,9 +103,9 @@
 
             <!-- Test scope -->
             <dependency>
-                <groupId>nu.hjemme</groupId>
-                <artifactId>hjemme-test</artifactId>
-                <version>${project.version}</version>
+                <groupId>com.github.jactor-rises</groupId>
+                <artifactId>build-matcher</artifactId>
+                <version>${build-matcher.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

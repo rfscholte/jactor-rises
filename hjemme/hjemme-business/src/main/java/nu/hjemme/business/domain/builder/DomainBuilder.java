@@ -4,7 +4,7 @@ import nu.hjemme.persistence.orm.PersistentData;
 
 /** The base builder from which to build valid domains. */
 public abstract class DomainBuilder<Domain> {
-    static BuildValidator buildValidator;
+    private static BuildValidator buildValidator;
 
     abstract protected Domain initDomain();
 
@@ -17,7 +17,7 @@ public abstract class DomainBuilder<Domain> {
         return initDomain();
     }
 
-    protected <T> T newInstanceOf(Class<T> persistentClass) {
+    <T> T newInstanceOf(Class<T> persistentClass) {
         return PersistentData.getInstance().provideInstanceFor(persistentClass);
     }
 

@@ -20,7 +20,6 @@
         <module>hjemme-business</module>
         <module>hjemme-client</module>
         <module>hjemme-facade</module>
-        <module>hjemme-test</module>
     </modules>
 
     <dependencies>
@@ -71,11 +70,6 @@
             <dependency>
                 <groupId>nu.hjemme.persistence</groupId>
                 <artifactId>persistence-facade</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>nu.hjemme</groupId>
-                <artifactId>hjemme-test</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
