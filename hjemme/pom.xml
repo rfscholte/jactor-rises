@@ -18,7 +18,6 @@
 
     <modules>
         <module>hjemme-business</module>
-        <module>hjemme-client</module>
         <module>hjemme-facade</module>
     </modules>
 

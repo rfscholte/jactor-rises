@@ -1,11 +1,11 @@
 # README #
 
-git origin for hjemme (including hjemme-web and hjemme-persistence)
+Src code for hjemme-application (client, module, persistence, and front end)
 
 ### What is this repository for? ###
 
 * Src code and issues regarding hjemme
-* hjemme has none releases yet as this is used mostly for my own development
+* hjemme has none releases yet as this is used mostly for my own learning
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### How do I get set up? ###
@@ -16,12 +16,12 @@ git origin for hjemme (including hjemme-web and hjemme-persistence)
 * after deployment, the application is visible on localhost:8080/hjemme/home.do
 * to deploy on tomcat, copy the buildt hjemme.war to CATALINE_(HOME/BASE)/webapps
 
-### Some versions used in hjemme ###
+### Some artifacts used in hjemme ###
 
-* spring framwork 4.2
-* hibernate 4.2
-* hsqldb 2.3
-* hamcrest 1.3
-* mockito 1.10
-* aspect j 1.8
-* sitemesh 3
+* spring framwork
+* hibernate
+* hsqldb
+* hamcrest
+* mockito
+* aspect j
+* sitemesh
