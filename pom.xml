@@ -9,6 +9,10 @@
     <packaging>pom</packaging>
     <url>http://www.hjemme.nu</url>
 
+    <prerequisites>
+        <maven>3.3.3</maven>
+    </prerequisites>
+
     <modules>
         <module>hjemme</module>
         <module>hjemme-client</module>
