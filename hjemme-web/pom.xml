@@ -30,12 +30,6 @@
         <org.tuckey.version>3.1.0</org.tuckey.version>
         <sitemesh.version>2.4.2</sitemesh.version>
         <sun.faces-version>2.2.12</sun.faces-version>
-
-        <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
-        <maven-war-plugin.version>2.6</maven-war-plugin.version>
-        <maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
-
-        <build-helper-maven-plugin>1.11</build-helper-maven-plugin>
     </properties>
 
     <dependencyManagement>
@@ -248,62 +242,7 @@
     </dependencies>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-compiler-plugin.version}</version>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                        <showWarnings>true</showWarnings>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>${maven-war-plugin.version}</version>
-                    <configuration>
-                        <warName>hjemme</warName>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <version>${maven-dependency-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>install</id>
-                            <phase>install</phase>
-                            <goals>
-                                <goal>sources</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>${build-helper-maven-plugin}</version>
-                    <executions>
-                        <execution>
-                            <id>add-source</id>
-                            <phase>generate-sources</phase>
-                            <goals>
-                                <goal>add-source</goal>
-                            </goals>
-                            <configuration>
-                                <sources>
-                                    <source>src/main/webapp</source>
-                                </sources>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
             </plugin>
