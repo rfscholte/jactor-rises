@@ -1,17 +1,17 @@
 package nu.hjemme.web.menu;
 
+import com.github.jactorrises.matcher.MatchBuilder;
+import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.client.datatype.Parameter;
-import nu.hjemme.test.matcher.MatchBuilder;
-import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Set;
 
-import static nu.hjemme.test.matcher.DescriptionMatcher.is;
-import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;

@@ -1,10 +1,10 @@
 package nu.hjemme.facade.config;
 
+import com.github.jactorrises.matcher.MatchBuilder;
+import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.orm.domain.DefaultUserEntity;
-import nu.hjemme.test.matcher.MatchBuilder;
-import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.List;
 
-import static nu.hjemme.test.matcher.DescriptionMatcher.is;
+import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -30,10 +30,10 @@ import static org.hibernate.criterion.Restrictions.eq;
 @Transactional
 public class DatabasePocTest {
 
-    @Resource(name = "sessionFactory") @SuppressWarnings("unused") // initialized by spring
+    @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
 
-    @Resource(name = "dataSource") @SuppressWarnings("unused") // initialized by spring
+    @Resource(name = "dataSource")
     private DataSource dataSource;
 
     private JdbcTemplate jdbcTemplate;
