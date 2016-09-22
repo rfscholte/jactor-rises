@@ -11,7 +11,7 @@
     <description>The public classes for www.hjemme.nu</description>
 
     <properties>
-        <build-matcher.version>1.0</build-matcher.version>
+        <build-matcher.version>1.1</build-matcher.version>
         <commons-lang.version>2.5</commons-lang.version>
         <commons-lang3.version>3.4</commons-lang3.version>
 
