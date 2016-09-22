@@ -1,34 +1,44 @@
 package nu.hjemme.client.datatype;
 
+import com.github.jactorrises.matcher.MatchBuilder;
+import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import org.junit.Test;
 
 import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 public class UserNameTest {
 
     @Test public void willBeEqualIfOnlyDifferenceIsTheCharacterCase() {
-        UserName jactorLowerCase = new UserName("jactor");
-        UserName jactorUpperCase = new UserName("JACTOR");
+        assertThat(new UserName("jactor"), new TypeSafeBuildMatcher<UserName>("case difference will not cause unequal user names") {
+            @Override
+            public MatchBuilder matches(UserName jactor, MatchBuilder matchBuilder) {
+                UserName jactorUpperCase = new UserName("JACTOR");
+                UserName tip = new UserName("tip");
 
-        assertThat("UserName", jactorLowerCase, is(equalTo(jactorUpperCase)));
-
-        UserName tip = new UserName("tip");
-
-        assertThat("UserName", jactorLowerCase, is(not(equalTo(tip))));
+                return matchBuilder
+                        .matches(jactor, is(equalTo(jactorUpperCase), "jactor vs. JACTOR"))
+                        .matches(jactor, is(not(equalTo(tip)), "jactor vs. tip"));
+            }
+        });
     }
 
     @Test public void willProduceEqualHashCodeIfOnlyDifferenceIsTheCharacterCase() {
-        UserName jactorLowerCase = new UserName("jactor");
-        UserName jactorUpperCase = new UserName("JACTOR");
-        UserName tip = new UserName("tip");
+        assertThat(new UserName("jactor"), new TypeSafeBuildMatcher<UserName>("case difference will not cause unequal hash codes") {
+            @Override
+            public MatchBuilder matches(UserName jactor, MatchBuilder matchBuilder) {
+                UserName jactorUpperCase = new UserName("JACTOR");
+                UserName tip = new UserName("tip");
 
-        assertThat("UserName", jactorLowerCase.hashCode(), is(equalTo(jactorUpperCase.hashCode())));
-        assertThat("UserName", jactorLowerCase.hashCode(), is(not(equalTo(tip.hashCode()))));
+                return matchBuilder
+                        .matches(jactor.hashCode(), is(equalTo(jactorUpperCase.hashCode()), "hash code jactor vs. JACTOR"))
+                        .matches(jactor.hashCode(), is(not(equalTo(tip.hashCode())), "hash code jactor vs. tip"));
+            }
+        });
     }
 
     @Test public void willImplementHashCodeAccordingToTheJavaSpecifications() {
