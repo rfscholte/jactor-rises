@@ -1,7 +1,7 @@
 package nu.hjemme.web.config;
 
-import nu.hjemme.test.matcher.MatchBuilder;
-import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
+import com.github.jactorrises.matcher.MatchBuilder;
+import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.web.controller.AboutController;
 import nu.hjemme.web.controller.HomeController;
 import nu.hjemme.web.controller.UserController;
@@ -13,7 +13,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
 
-import static nu.hjemme.test.matcher.DescriptionMatcher.is;
+import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 
