@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.AnnotationConfigWebContextLoader;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = HjemmeWebApp.class)
+@ContextConfiguration(loader = AnnotationConfigWebContextLoader.class, classes = HjemmeWebApp.class)
 public class HjemmeWebAppIntegrationTest {
 
     @Resource private HomeController homeController;
@@ -28,8 +29,7 @@ public class HjemmeWebAppIntegrationTest {
 
     @Resource private UserController userController;
 
-    @Test
-    public void willGetControllers() {
+    @Test public void shouldGetControllers() {
         assertThat(this, new TypeSafeBuildMatcher<HjemmeWebAppIntegrationTest>("Controllers for hjemme-web") {
             @Override public MatchBuilder matches(HjemmeWebAppIntegrationTest typeToTest, MatchBuilder matchBuilder) {
                 return matchBuilder
