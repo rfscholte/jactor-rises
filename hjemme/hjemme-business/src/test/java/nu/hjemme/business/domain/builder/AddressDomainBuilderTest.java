@@ -1,15 +1,15 @@
 package nu.hjemme.business.domain.builder;
 
+import com.github.jactorrises.matcher.MatchBuilder;
+import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.client.datatype.Country;
-import nu.hjemme.test.matcher.MatchBuilder;
-import nu.hjemme.test.matcher.TypeSafeBuildMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
-import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;

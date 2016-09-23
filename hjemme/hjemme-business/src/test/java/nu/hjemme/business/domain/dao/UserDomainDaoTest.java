@@ -13,9 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static nu.hjemme.business.domain.UserDomain.aUser;
 import static nu.hjemme.business.rules.BuildValidations.Build.USER;
-import static nu.hjemme.test.matcher.DescriptionMatcher.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.any;

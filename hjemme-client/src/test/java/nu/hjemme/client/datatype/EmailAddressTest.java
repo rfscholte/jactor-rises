@@ -4,9 +4,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static nu.hjemme.test.matcher.DescriptionMatcher.is;
-import static nu.hjemme.test.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static nu.hjemme.test.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
+import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
+import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
