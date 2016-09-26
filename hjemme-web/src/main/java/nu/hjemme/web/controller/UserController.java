@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.Optional;
+
 import static nu.hjemme.web.controller.ControllerValues.ATTRIBUTE_USER;
 import static nu.hjemme.web.controller.ControllerValues.VIEW_USER;
 
@@ -33,13 +35,13 @@ public class UserController {
         }
 
         UserName userName = userNameDto.getUserName();
-        User user = userFacade.findUsing(userName);
+        Optional<User> user = userFacade.findUsing(userName);
 
-        if (user == null) {
+        if (!user.isPresent()) {
             return;
         }
 
-        modelMap.put(ATTRIBUTE_USER, new UserDto(user));
+        modelMap.put(ATTRIBUTE_USER, new UserDto(user.get()));
     }
 
     @Autowired

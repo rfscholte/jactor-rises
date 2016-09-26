@@ -5,6 +5,8 @@ import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.client.dao.UserDao;
 
+import java.util.Optional;
+
 public class UserDomainDao {
     private final UserDao userDao;
 
@@ -12,21 +14,21 @@ public class UserDomainDao {
         this.userDao = userDao;
     }
 
-    public UserDomain findUsing(UserName userName) {
+    Optional<UserDomain> findUsing(UserName userName) {
         if (userName == null) {
-            return null;
+            return Optional.empty();
         }
 
-        UserEntity entity = userDao.findUsing(userName);
+        Optional<UserEntity> entity = userDao.findUsing(userName);
 
-        if (entity == null) {
-            return null;
+        if (!entity.isPresent()) {
+            return Optional.empty();
         }
 
-        return new UserDomain(entity);
+        return Optional.of(new UserDomain(entity.get()));
     }
 
-    public void save(UserDomain userDomain) {
+    void save(UserDomain userDomain) {
         if (userDomain != null) {
             userDao.save(userDomain.getEntity());
         }
