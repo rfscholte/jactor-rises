@@ -15,6 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -36,7 +37,7 @@ public class UserControllerTest {
         testUserController.setUserFacade(mockedUserFacade);
     }
 
-    @Test public void willNotfetchUserByUserNameIfTheUserNameInTheWebRequestIsNullOrAnEmptyString() {
+    @Test public void shouldNotFetchUserByUserNameIfTheUserNameInTheWebRequestIsNullOrAnEmptyString() {
         Map<String, String[]> params = new HashMap<>();
 
         WebRequest mockedWebRequest = mock(WebRequest.class);
@@ -54,20 +55,20 @@ public class UserControllerTest {
         verify(mockedUserFacade, atMost(0)).findUsing(any(UserName.class));
     }
 
-    @Test public void willfetchTheUserIfChooseParameterExist() {
+    @Test public void shouldFetchTheUserIfChooseParameterExist() {
         WebRequest mockedWebRequest = mock(WebRequest.class);
         ModelMap mockedModelMap = mock(ModelMap.class);
         User mockedUser = mock(User.class);
 
         when(mockedWebRequest.getParameter(ParameterConstants.CHOOSE_USER)).thenReturn("user");
-        when(mockedUserFacade.findUsing(new UserName("user"))).thenReturn(mockedUser);
+        when(mockedUserFacade.findUsing(new UserName("user"))).thenReturn(Optional.of(mockedUser));
 
         testUserController.doUser(mockedModelMap, mockedWebRequest);
 
         verify(mockedModelMap, atLeastOnce()).put(eq(ControllerValues.ATTRIBUTE_USER), any(UserDto.class));
     }
 
-    @Test public void willNotPutTheUserOnTheModelIfNotFound() {
+    @Test public void shouldNotPutTheUserOnTheModelIfNotFound() {
         WebRequest mockedWebRequest = mock(WebRequest.class);
         ModelMap mockedModelMap = mock(ModelMap.class);
 
