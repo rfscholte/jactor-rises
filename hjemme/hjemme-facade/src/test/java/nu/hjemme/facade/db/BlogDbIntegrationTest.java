@@ -5,8 +5,6 @@ import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.persistence.client.BlogEntity;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.orm.domain.DefaultBlogEntity;
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
@@ -19,11 +17,12 @@ import javax.annotation.Resource;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.BlogDomain.aBlog;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
-import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -32,7 +31,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @Transactional
 public class BlogDbIntegrationTest {
 
-    @Resource(name = "sessionFactory") @SuppressWarnings("unused") // initialized by spring
+    @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
 
     @Test public void willSaveBlogEntityToThePersistentLayer() {
@@ -42,14 +41,13 @@ public class BlogDbIntegrationTest {
         session().flush();
         session().clear();
 
-        assertThat((BlogEntity) session().get(DefaultBlogEntity.class, id), new TypeSafeBuildMatcher<BlogEntity>("blog persisted") {
-            @Override public MatchBuilder matches(BlogEntity typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(typeToTest.getCreated(), is(equalTo(LocalDate.now()), "created"))
-                        .matches(typeToTest.getTitle(), is(equalTo("some blog"), "title"))
-                        .matches(typeToTest.getUser().getId(), is(equalTo(persistedUser.getId()), "user entity id"));
-            }
-        });
+        BlogEntity blog = (BlogEntity) session().get(DefaultBlogEntity.class, id);
+
+        assertThat(blog, build("blog persisted", (blogEntity, matchBuilder) -> matchBuilder
+                .matches(blogEntity.getCreated(), is(equalTo(LocalDate.now()), "created"))
+                .matches(blogEntity.getTitle(), is(equalTo("some blog"), "title"))
+                .matches(blogEntity.getUser().getId(), is(equalTo(persistedUser.getId()), "user entity id"))
+        ));
     }
 
     private UserEntity persistUser() {

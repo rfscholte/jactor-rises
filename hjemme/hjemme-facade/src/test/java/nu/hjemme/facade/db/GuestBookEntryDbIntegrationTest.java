@@ -1,7 +1,5 @@
 package nu.hjemme.facade.db;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
@@ -20,6 +18,7 @@ import javax.annotation.Resource;
 import java.io.Serializable;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.GuestBookDomain.aGuestBook;
 import static nu.hjemme.business.domain.GuestBookEntryDomain.aGuestBookEntry;
@@ -43,15 +42,13 @@ public class GuestBookEntryDbIntegrationTest {
         session().flush();
         session().clear();
 
-        assertThat((DefaultGuestBookEntryEntity) session().get(DefaultGuestBookEntryEntity.class, id), new TypeSafeBuildMatcher<DefaultGuestBookEntryEntity>("blog entry persisted") {
-            @Override public MatchBuilder matches(DefaultGuestBookEntryEntity typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(typeToTest.getGuestBook().getTitle(), is(equalTo("my guest book"), "guest book.title"))
-                        .matches(typeToTest.getCreatedTime(), is(notNullValue(), "entry.createdTime"))
-                        .matches(typeToTest.getCreatorName(), is(equalTo(new Name("lada")), "entry.creatorName"))
-                        .matches(typeToTest.getEntry(), is(equalTo("svada"), "entry.entry"));
-            }
-        });
+        DefaultGuestBookEntryEntity guestBookEntry = (DefaultGuestBookEntryEntity) session().get(DefaultGuestBookEntryEntity.class, id);
+        assertThat(guestBookEntry, build("blog entry persisted", (guestBookEntryEntity, matchBuilder) -> matchBuilder
+                .matches(guestBookEntryEntity.getGuestBook().getTitle(), is(equalTo("my guest book"), "guest book.title"))
+                .matches(guestBookEntryEntity.getCreatedTime(), is(notNullValue(), "entry.createdTime"))
+                .matches(guestBookEntryEntity.getCreatorName(), is(equalTo(new Name("lada")), "entry.creatorName"))
+                .matches(guestBookEntryEntity.getEntry(), is(equalTo("svada"), "entry.entry"))
+        ));
     }
 
     private GuestBookEntity aPersistedGuestBookTitled(String blogTitled) {

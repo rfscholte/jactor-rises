@@ -1,7 +1,5 @@
 package nu.hjemme.facade.db;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.datatype.Description;
 import nu.hjemme.client.datatype.EmailAddress;
@@ -19,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
@@ -54,14 +53,11 @@ public class UserDbIntegrationTest {
 
         UserEntity userFromDb = (UserEntity) session().createCriteria(UserEntity.class).add(eq("userName", "titten")).uniqueResult();
 
-        assertThat(userFromDb, new TypeSafeBuildMatcher<UserEntity>("user is a person") {
-            @Override public MatchBuilder matches(UserEntity typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(typeToTest.getEmailAddress(), is(equalTo(new EmailAddress("helt", "hjemme")), "user.emailAddress"))
-                        .matches(typeToTest.getPassword(), is(equalTo("demo"), "user.password"))
-                        .matches(typeToTest.getPerson().getDescription(), is(equalTo(new Description("description")), "user.description"));
-            }
-        });
+        assertThat(userFromDb, build("user is a person", (user, matchBuilder) -> matchBuilder
+                .matches(user.getEmailAddress(), is(equalTo(new EmailAddress("helt", "hjemme")), "user.emailAddress"))
+                .matches(user.getPassword(), is(equalTo("demo"), "user.password"))
+                .matches(user.getPerson().getDescription(), is(equalTo(new Description("description")), "user.description"))
+        ));
     }
 
     @Test public void willSaveUserWithAddressTheDatabase() {
@@ -82,19 +78,18 @@ public class UserDbIntegrationTest {
 
         UserEntity userFromDb = (UserEntity) session().createCriteria(UserEntity.class).add(eq("userName", "titten")).uniqueResult();
 
-        assertThat(userFromDb, new TypeSafeBuildMatcher<UserEntity>("user an address") {
-            @Override public MatchBuilder matches(UserEntity typeToTest, MatchBuilder matchBuilder) {
-                Address address = typeToTest.getPerson().getAddress();
+        assertThat(userFromDb, build("user an address", (user, matchBuilder) -> {
+                    Address address = user.getPerson().getAddress();
 
-                return matchBuilder
-                        .matches(address.getAddressLine1(), is(equalTo("Hjemme"), "address line 1"))
-                        .matches(address.getAddressLine2(), is(nullValue(), "address line 2"))
-                        .matches(address.getAddressLine3(), is(nullValue(), "address line 3"))
-                        .matches(address.getCity(), is(equalTo("Dirdal"), "city"))
-                        .matches(address.getCountry(), is(equalTo(new Country("NO", "no")), "country"))
-                        .matches(address.getZipCode(), is(equalTo(1234), "zip code"));
-            }
-        });
+                    return matchBuilder
+                            .matches(address.getAddressLine1(), is(equalTo("Hjemme"), "address line 1"))
+                            .matches(address.getAddressLine2(), is(nullValue(), "address line 2"))
+                            .matches(address.getAddressLine3(), is(nullValue(), "address line 3"))
+                            .matches(address.getCity(), is(equalTo("Dirdal"), "city"))
+                            .matches(address.getCountry(), is(equalTo(new Country("NO", "no")), "country"))
+                            .matches(address.getZipCode(), is(equalTo(1234), "zip code"));
+                }
+        ));
     }
 
     private Session session() {

@@ -1,12 +1,11 @@
 package nu.hjemme.client.datatype;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import org.junit.Test;
 
 import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -32,11 +31,8 @@ public class DescriptionTest {
 
     @Test
     public void willInitWithoutName() {
-        assertThat(new Description("some description"), new TypeSafeBuildMatcher<Description>("will initialize without name") {
-
-            @Override public MatchBuilder matches(Description typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder.matches(typeToTest.toString(), is(equalTo("some description"), "toString"));
-            }
-        });
+        assertThat(new Description("some description"), build("will initialize description without name", (description, matchBuilder) -> matchBuilder
+                .matches(description.toString(), is(equalTo("some description"), "toString"))
+        ));
     }
 }

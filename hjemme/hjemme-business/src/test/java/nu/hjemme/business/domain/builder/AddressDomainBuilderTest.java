@@ -1,7 +1,5 @@
 package nu.hjemme.business.domain.builder;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.client.datatype.Country;
 import org.junit.Rule;
@@ -9,6 +7,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -66,17 +65,13 @@ public class AddressDomainBuilderTest {
                 .withZipCodeAs(1234)
                 .build();
 
-        assertThat(addressDomain, new TypeSafeBuildMatcher<AddressDomain>("A domain with all properties set") {
-            @Override
-            public MatchBuilder matches(AddressDomain addressDomain, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(addressDomain.getAddressLine1(), is(equalTo("somewhere"), "Address line 1"))
-                        .matches(addressDomain.getAddressLine2(), is(equalTo("somewhere else"), "Address line 2"))
-                        .matches(addressDomain.getAddressLine3(), is(equalTo("way out there"), "Address line 3"))
-                        .matches(addressDomain.getCity(), is(equalTo("some city"), "city"))
-                        .matches(addressDomain.getCountry(), is(equalTo(new Country("NO", "no")), "Country"))
-                        .matches(addressDomain.getZipCode(), is(equalTo(1234), "Zip code"));
-            }
-        });
+        assertThat(addressDomain, build("A domain with all properties set", (adressDomain, matchBuilder) -> matchBuilder
+                .matches(addressDomain.getAddressLine1(), is(equalTo("somewhere"), "Address line 1"))
+                .matches(addressDomain.getAddressLine2(), is(equalTo("somewhere else"), "Address line 2"))
+                .matches(addressDomain.getAddressLine3(), is(equalTo("way out there"), "Address line 3"))
+                .matches(addressDomain.getCity(), is(equalTo("some city"), "city"))
+                .matches(addressDomain.getCountry(), is(equalTo(new Country("NO", "no")), "Country"))
+                .matches(addressDomain.getZipCode(), is(equalTo(1234), "Zip code"))
+        ));
     }
 }

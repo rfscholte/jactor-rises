@@ -1,12 +1,11 @@
 package nu.hjemme.client.datatype;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import org.junit.Test;
 
 import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -35,12 +34,9 @@ public class ParameterTest {
     @Test public void whenCreatedWithStringTheParameterShouldBeSplitByAnEqualSign() {
         Parameter parameter = new Parameter("some=where");
 
-        assertThat(parameter, new TypeSafeBuildMatcher<Parameter>("har splittet opp parameter i 'key/value'") {
-            @Override public MatchBuilder matches(Parameter parameter, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(parameter.getKey(), is(equalTo("some"), "key"))
-                        .matches(parameter.getValue(), is(equalTo("where"), "value"));
-            }
-        });
+        assertThat(parameter, build("har splittet opp parameter i 'key/value'", (parameterToMatch, matchBuilder) -> matchBuilder
+                .matches(parameterToMatch.getKey(), is(equalTo("some"), "key"))
+                .matches(parameterToMatch.getValue(), is(equalTo("where"), "value"))
+        ));
     }
 }

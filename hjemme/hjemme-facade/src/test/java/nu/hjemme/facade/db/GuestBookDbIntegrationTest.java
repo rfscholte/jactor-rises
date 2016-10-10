@@ -1,7 +1,5 @@
 package nu.hjemme.facade.db;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.persistence.client.GuestBookEntity;
@@ -19,6 +17,7 @@ import javax.annotation.Resource;
 import java.io.Serializable;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.GuestBookDomain.aGuestBook;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
@@ -41,13 +40,11 @@ public class GuestBookDbIntegrationTest {
         session().flush();
         session().clear();
 
-        assertThat((GuestBookEntity) session().get(DefaultGuestBookEntity.class, id), new TypeSafeBuildMatcher<GuestBookEntity>("guest book persisted") {
-            @Override public MatchBuilder matches(GuestBookEntity typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(typeToTest.getTitle(), is(equalTo("my guest book"), "title"))
-                        .matches(typeToTest.getUser().getId(), is(equalTo(aPersistedUser.getId()), "user entity id"));
-            }
-        });
+        GuestBookEntity guestBook = (GuestBookEntity) session().get(DefaultGuestBookEntity.class, id);
+        assertThat(guestBook, build("guest book persisted", (guestBookEntity, matchBuilder) -> matchBuilder
+                        .matches(guestBookEntity.getTitle(), is(equalTo("my guest book"), "title"))
+                        .matches(guestBookEntity.getUser().getId(), is(equalTo(aPersistedUser.getId()), "user entity id"))
+        ));
     }
 
     private UserEntity aPersistedUser() {

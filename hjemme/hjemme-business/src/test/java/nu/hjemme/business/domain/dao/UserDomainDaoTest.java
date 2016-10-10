@@ -1,7 +1,5 @@
 package nu.hjemme.business.domain.dao;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.business.domain.UserDomain;
 import nu.hjemme.business.rules.BuildValidations;
 import nu.hjemme.client.datatype.UserName;
@@ -18,6 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Optional;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
 import static nu.hjemme.business.domain.UserDomain.aUser;
 import static nu.hjemme.business.rules.BuildValidations.Build.USER;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -63,20 +62,14 @@ public class UserDomainDaoTest {
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.empty());
         Optional<UserDomain> userDomain = userDomainDaoToTest.findUsing(new UserName("someone"));
 
-        assertThat(userDomain, new TypeSafeBuildMatcher<Optional<UserDomain>>("userDomain") {
-            @SuppressWarnings("OptionalUsedAsFieldOrParameterType") @Override
-            public MatchBuilder matches(Optional<UserDomain> typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder.matches(typeToTest.isPresent(), is(equalTo(false), "isPresent"));
-            }
-        });
+        assertThat(userDomain, build("userDomain", (userDomainOptional, matchBuilder) -> matchBuilder.matches(userDomainOptional.isPresent(), is(equalTo(false), "isPresent"))));
     }
 
     @Test public void willReturnDomainWhenEntityIsFound() {
-        when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(
-                Optional.of(PersistentData.getInstance().provideInstanceFor(UserEntity.class))
-        );
+        UserEntity userEntity = PersistentData.getInstance().provideInstanceFor(UserEntity.class);
+        when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.of(userEntity));
 
-        userDomainDaoToTest.findUsing(new UserName("someone"));
-        verify(userDaoMock, times(1)).findUsing(new UserName("someone"));
+        Optional<UserDomain> userDomain = userDomainDaoToTest.findUsing(new UserName("someone"));
+        assertThat(userDomain, build("userDomain", (userDomainOptional, matchBuilder) -> matchBuilder.matches(userDomainOptional.isPresent(), is(equalTo(true), "isPresent"))));
     }
 }

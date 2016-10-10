@@ -1,7 +1,5 @@
 package nu.hjemme.facade.config;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.orm.domain.DefaultUserEntity;
@@ -20,6 +18,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -55,12 +54,9 @@ public class DatabasePocTest {
         session().flush();
         UserEntity user = (UserEntity) session().createCriteria(DefaultUserEntity.class).add(eq("emailAddress", "testing@svada.lada")).uniqueResult();
 
-        assertThat(user, new TypeSafeBuildMatcher<UserEntity>("entity read from databaser") {
-            @Override public MatchBuilder matches(UserEntity typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(typeToTest.getPassword(), is(equalTo("testing"), "password"));
-            }
-        });
+        assertThat(user, build("entity read from databaser", (userEntity, matchBuilder) -> matchBuilder
+                .matches(userEntity.getPassword(), is(equalTo("testing"), "password"))
+        ));
     }
 
     private void createUserInTheDatabaseWith(UserName userName) {

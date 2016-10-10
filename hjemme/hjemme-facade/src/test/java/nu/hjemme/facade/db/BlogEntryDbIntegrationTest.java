@@ -1,7 +1,6 @@
 package nu.hjemme.facade.db;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
+import com.github.jactorrises.matcher.LambdaBuildMatcher;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
@@ -44,15 +43,13 @@ public class BlogEntryDbIntegrationTest {
         session().flush();
         session().clear();
 
-        assertThat((BlogEntryEntity) session().get(DefaultBlogEntryEntity.class, id), new TypeSafeBuildMatcher<BlogEntryEntity>("blog entry persisted") {
-            @Override public MatchBuilder matches(BlogEntryEntity typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(typeToTest.getBlog().getTitle(), is(equalTo("my blog"), "blog.title"))
-                        .matches(typeToTest.getCreatedTime(), is(notNullValue(), "entry.createdTime"))
-                        .matches(typeToTest.getCreatorName(), is(equalTo(new Name("lada")), "entry.creator"))
-                        .matches(typeToTest.getEntry(), is(equalTo("svada"), "entry.entry"));
-            }
-        });
+        BlogEntryEntity blogEntry = (BlogEntryEntity) session().get(DefaultBlogEntryEntity.class, id);
+        assertThat(blogEntry, LambdaBuildMatcher.build("blog entry persisted", (blogEntryEntity, matchBuilder) -> matchBuilder
+                        .matches(blogEntryEntity.getBlog().getTitle(), is(equalTo("my blog"), "blog.title"))
+                        .matches(blogEntryEntity.getCreatedTime(), is(notNullValue(), "entry.createdTime"))
+                        .matches(blogEntryEntity.getCreatorName(), is(equalTo(new Name("lada")), "entry.creator"))
+                        .matches(blogEntryEntity.getEntry(), is(equalTo("svada"), "entry.entry"))
+        ));
     }
 
     private BlogEntity aPersistedBlogTitled(String blogTitled) {
