@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -54,7 +54,7 @@ public class DatabasePocTest {
         session().flush();
         UserEntity user = (UserEntity) session().createCriteria(DefaultUserEntity.class).add(eq("emailAddress", "testing@svada.lada")).uniqueResult();
 
-        assertThat(user, build("entity read from databaser", (userEntity, matchBuilder) -> matchBuilder
+        assertThat(user, verify("entity read from databaser", (userEntity, matchBuilder) -> matchBuilder
                 .matches(userEntity.getPassword(), is(equalTo("testing"), "password"))
         ));
     }

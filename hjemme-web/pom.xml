@@ -15,7 +15,7 @@
     <description>The hjemme-web module uses hjemme.facade to bring hjemme-business to life on the web.</description>
 
     <properties>
-        <build-matcher.version>1.2.2</build-matcher.version>
+        <build-matcher.version>2.2</build-matcher.version>
         <log4j.version>1.2.17</log4j.version>
         <javax.servlet.version>1.2</javax.servlet.version>
         <javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>

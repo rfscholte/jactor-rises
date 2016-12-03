@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -21,11 +21,12 @@ public class DomainBuilderTest {
     }
 
     @Test public void shouldValidateDomainWhenBuildMethodIsInvokedg() {
-        assertThat(testDomainBuilder, build("Validate domain when building", (domainBuilder, matchBuilder) -> {
-            matchBuilder.matches(domainBuilder.validated, is(equalTo(false), "before build"));
-            domainBuilder.build();
-            return matchBuilder.matches(domainBuilder.validated, is(equalTo(true), "after build"));
-        }));
+        assertThat(testDomainBuilder, verify("validate domain when building it", (builder, buildMatcher) -> {
+                    buildMatcher.matches(builder.validated, is(equalTo(false)), "before build");
+                    builder.build();
+                    return buildMatcher.matches(builder.validated, is(equalTo(true), "after build"));
+                }
+        ));
     }
 
     private class TestDomainBuilder extends DomainBuilder<DomainBuilderTest> {

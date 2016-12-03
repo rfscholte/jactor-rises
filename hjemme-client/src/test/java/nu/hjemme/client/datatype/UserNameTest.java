@@ -5,7 +5,7 @@ import org.junit.Test;
 import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 public class UserNameTest {
 
     @Test public void willBeEqualIfOnlyDifferenceIsTheCharacterCase() {
-        assertThat(new UserName("jactor"), build("case difference will not cause unequal user names", (jactor, matchBuilder) -> {
+        assertThat(new UserName("jactor"), verify("case difference will not cause unequal user names", (jactor, matchBuilder) -> {
             UserName jactorUpperCase = new UserName("JACTOR");
             UserName tip = new UserName("tip");
 
@@ -24,7 +24,7 @@ public class UserNameTest {
     }
 
     @Test public void willProduceEqualHashCodeIfOnlyDifferenceIsTheCharacterCase() {
-        assertThat(new UserName("jactor"), build("case difference will not cause unequal hash codes", (jactor, matchBuilder) -> {
+        assertThat(new UserName("jactor"), verify("case difference will not cause unequal hash codes", (jactor, matchBuilder) -> {
             UserName jactorUpperCase = new UserName("JACTOR");
             UserName tip = new UserName("tip");
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -51,10 +51,9 @@ public class MenuItemCacheTest {
         testMenuItemCache.cache(somewhereOnTheMenu, eiListeAvMenuItems);
         testMenuItemCache.cache(somewhereElseOnTheMenu, eiAnnenListeAvMenuItems);
 
-        assertThat(testMenuItemCache, build("MenuItems", (menuItemCache, matchBuilder) -> matchBuilder
+        assertThat(testMenuItemCache, verify("MenuItems", (menuItemCache, matchBuilder) -> matchBuilder
                 .matches(menuItemCache.fetchBy(somewhereOnTheMenu), is(equalTo(eiListeAvMenuItems), "Cache provided by " + somewhereOnTheMenu))
                 .matches(menuItemCache.fetchBy(somewhereElseOnTheMenu), is(equalTo(eiAnnenListeAvMenuItems), "Cache provided by " + somewhereElseOnTheMenu))
-
         ));
     }
 }

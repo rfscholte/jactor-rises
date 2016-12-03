@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 import java.io.Serializable;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.GuestBookDomain.aGuestBook;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
@@ -41,7 +41,7 @@ public class GuestBookDbIntegrationTest {
         session().clear();
 
         GuestBookEntity guestBook = (GuestBookEntity) session().get(DefaultGuestBookEntity.class, id);
-        assertThat(guestBook, build("guest book persisted", (guestBookEntity, matchBuilder) -> matchBuilder
+        assertThat(guestBook, verify("guest book persisted", (guestBookEntity, matchBuilder) -> matchBuilder
                         .matches(guestBookEntity.getTitle(), is(equalTo("my guest book"), "title"))
                         .matches(guestBookEntity.getUser().getId(), is(equalTo(aPersistedUser.getId()), "user entity id"))
         ));

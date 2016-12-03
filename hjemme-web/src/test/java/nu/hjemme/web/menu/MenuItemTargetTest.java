@@ -10,7 +10,7 @@ import java.util.Set;
 import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
 import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
 import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -54,14 +54,14 @@ public class MenuItemTargetTest {
     }
 
     @Test public void willNotContainParametersWhenTheTargetDoesNotContainQuestionMark() {
-        assertThat(new MenuItemTarget("targetparam=value"), build("Leste parametre fra MenuItemTarget", (menuItemTarget, matchBuilder) -> matchBuilder
+        assertThat(new MenuItemTarget("targetparam=value"), verify("Leste parametre fra MenuItemTarget", (menuItemTarget, matchBuilder) -> matchBuilder
                 .matches(menuItemTarget.getTarget(), is(equalTo("targetparam=value"), "target uten ? skal tolkes som et rent mål"))
                 .matches(menuItemTarget.getParameters().isEmpty(), is(equalTo(true), "ingen parametre"))
         ));
     }
 
     @Test public void willContainOneParameterWhenTheTargetContainsQuestionMarkNameEqualValue() {
-        assertThat(new MenuItemTarget("target?param=value"), build("Lest parameter fra MenuItemTarget", (menuItemTarget, matchBuilder) -> {
+        assertThat(new MenuItemTarget("target?param=value"), verify("Lest parameter fra MenuItemTarget", (menuItemTarget, matchBuilder) -> {
                     Set<Parameter> parameters = menuItemTarget.getParameters();
                     Parameter parameter = parameters.iterator().next();
 
@@ -74,7 +74,7 @@ public class MenuItemTargetTest {
     }
 
     @Test public void willContainTwoParametersWhenTheTargetContainsTwoQuestionMarksWithNameEqualValueSeperatedByComma() {
-        assertThat(new MenuItemTarget("target?param=value,another=parameter"), build("Leste parametre fra MenuItemTarget", (menuItemTarget, matchBuilder) -> {
+        assertThat(new MenuItemTarget("target?param=value,another=parameter"), verify("Leste parametre fra MenuItemTarget", (menuItemTarget, matchBuilder) -> {
                     Set<Parameter> parameters = menuItemTarget.getParameters();
                     Parameter parameter = parameters.iterator().next();
                     Parameter annetParameter = parameters.iterator().next();

@@ -36,7 +36,7 @@ public class MenuTargetTest {
     @Test public void willEncapsulateTheNameOfTheMenuAndTheTargetOnTheMenu() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("a target"), new Name("a menu"));
 
-        assertThat(menuTarget, LambdaBuildMatcher.build("Et 'target' som inneholder navnet til menyen", (target, matchBuilder) -> matchBuilder
+        assertThat(menuTarget, LambdaBuildMatcher.verify("Et 'target' som inneholder navnet til menyen", (target, matchBuilder) -> matchBuilder
                 .matches(target.getMenuName().getName(), is(equalTo("a menu"), "menuName"))
                 .matches(target.getMenuItemTarget().getTarget(), is(equalTo("a target"), "menuItemTarget"))
         ));

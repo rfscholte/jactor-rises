@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
@@ -53,7 +53,7 @@ public class UserDbIntegrationTest {
 
         UserEntity userFromDb = (UserEntity) session().createCriteria(UserEntity.class).add(eq("userName", "titten")).uniqueResult();
 
-        assertThat(userFromDb, build("user is a person", (user, matchBuilder) -> matchBuilder
+        assertThat(userFromDb, verify("user is a person", (user, matchBuilder) -> matchBuilder
                 .matches(user.getEmailAddress(), is(equalTo(new EmailAddress("helt", "hjemme")), "user.emailAddress"))
                 .matches(user.getPassword(), is(equalTo("demo"), "user.password"))
                 .matches(user.getPerson().getDescription(), is(equalTo(new Description("description")), "user.description"))
@@ -78,7 +78,7 @@ public class UserDbIntegrationTest {
 
         UserEntity userFromDb = (UserEntity) session().createCriteria(UserEntity.class).add(eq("userName", "titten")).uniqueResult();
 
-        assertThat(userFromDb, build("user an address", (user, matchBuilder) -> {
+        assertThat(userFromDb, verify("user an address", (user, matchBuilder) -> {
                     Address address = user.getPerson().getAddress();
 
                     return matchBuilder

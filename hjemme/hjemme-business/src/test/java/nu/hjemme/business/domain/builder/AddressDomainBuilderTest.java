@@ -6,11 +6,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 public class AddressDomainBuilderTest {
@@ -65,13 +63,13 @@ public class AddressDomainBuilderTest {
                 .withZipCodeAs(1234)
                 .build();
 
-        assertThat(addressDomain, build("A domain with all properties set", (adressDomain, matchBuilder) -> matchBuilder
-                .matches(addressDomain.getAddressLine1(), is(equalTo("somewhere"), "Address line 1"))
-                .matches(addressDomain.getAddressLine2(), is(equalTo("somewhere else"), "Address line 2"))
-                .matches(addressDomain.getAddressLine3(), is(equalTo("way out there"), "Address line 3"))
-                .matches(addressDomain.getCity(), is(equalTo("some city"), "city"))
-                .matches(addressDomain.getCountry(), is(equalTo(new Country("NO", "no")), "Country"))
-                .matches(addressDomain.getZipCode(), is(equalTo(1234), "Zip code"))
+        assertThat(addressDomain, verify("A domain with all properties set", (address, buildMatcher) -> buildMatcher
+                .matches(address.getAddressLine1(), equalTo("somewhere"), "Address line 1")
+                .matches(address.getAddressLine2(), equalTo("somewhere else"), "Address line 2")
+                .matches(address.getAddressLine3(), equalTo("way out there"), "Address line 3")
+                .matches(address.getCity(), equalTo("some city"), "city")
+                .matches(address.getCountry(), equalTo(new Country("NO", "no")), "Country")
+                .matches(address.getZipCode(), equalTo(1234), "Zip code")
         ));
     }
 }

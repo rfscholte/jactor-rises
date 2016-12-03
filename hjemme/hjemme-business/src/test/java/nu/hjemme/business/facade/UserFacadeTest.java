@@ -14,7 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Optional;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static nu.hjemme.business.domain.UserDomain.aUser;
 import static nu.hjemme.business.rules.BuildValidations.Build.USER;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -35,13 +35,13 @@ public class UserFacadeTest {
     public void willFindDefauldUser() {
         when(userDaoMock.findUsing(new UserName("jactor"))).thenReturn(Optional.of(aUser().build().getEntity()));
         Optional<User> user = testUserFacadeImpl.findUsing(new UserName("jactor"));
-        assertThat(user, build("jactor", (jactor, matchBuilder) -> matchBuilder.matches(jactor.isPresent(), is(equalTo(true), "isPresent"))));
+        assertThat(user, verify("jactor", (jactor, matchBuilder) -> matchBuilder.matches(jactor.isPresent(), is(equalTo(true), "isPresent"))));
     }
 
     @Test
     public void willNotFindUnknownUser() {
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.empty());
         Optional<User> user = testUserFacadeImpl.findUsing(new UserName("someone"));
-        assertThat(user, build("someone", (someone, matchBuilder) -> matchBuilder.matches(someone.isPresent(), is(equalTo(false), "isPresent"))));
+        assertThat(user, verify("someone", (someone, matchBuilder) -> matchBuilder.matches(someone.isPresent(), is(equalTo(false), "isPresent"))));
     }
 }

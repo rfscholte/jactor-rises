@@ -18,7 +18,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.build;
+import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.BlogDomain.aBlog;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
@@ -43,7 +43,7 @@ public class BlogDbIntegrationTest {
 
         BlogEntity blog = (BlogEntity) session().get(DefaultBlogEntity.class, id);
 
-        assertThat(blog, build("blog persisted", (blogEntity, matchBuilder) -> matchBuilder
+        assertThat(blog, verify("blog persisted", (blogEntity, matchBuilder) -> matchBuilder
                 .matches(blogEntity.getCreated(), is(equalTo(LocalDate.now()), "created"))
                 .matches(blogEntity.getTitle(), is(equalTo("some blog"), "title"))
                 .matches(blogEntity.getUser().getId(), is(equalTo(persistedUser.getId()), "user entity id"))

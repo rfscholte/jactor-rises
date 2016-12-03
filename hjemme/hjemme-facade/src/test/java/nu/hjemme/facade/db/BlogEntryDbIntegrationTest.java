@@ -44,7 +44,7 @@ public class BlogEntryDbIntegrationTest {
         session().clear();
 
         BlogEntryEntity blogEntry = (BlogEntryEntity) session().get(DefaultBlogEntryEntity.class, id);
-        assertThat(blogEntry, LambdaBuildMatcher.build("blog entry persisted", (blogEntryEntity, matchBuilder) -> matchBuilder
+        assertThat(blogEntry, LambdaBuildMatcher.verify("blog entry persisted", (blogEntryEntity, matchBuilder) -> matchBuilder
                         .matches(blogEntryEntity.getBlog().getTitle(), is(equalTo("my blog"), "blog.title"))
                         .matches(blogEntryEntity.getCreatedTime(), is(notNullValue(), "entry.createdTime"))
                         .matches(blogEntryEntity.getCreatorName(), is(equalTo(new Name("lada")), "entry.creator"))
