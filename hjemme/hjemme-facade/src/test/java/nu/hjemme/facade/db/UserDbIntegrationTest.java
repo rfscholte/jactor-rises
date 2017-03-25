@@ -31,7 +31,7 @@ import static org.hibernate.criterion.Restrictions.eq;
 @Transactional
 public class UserDbIntegrationTest {
 
-    @Resource(name = "sessionFactory") @SuppressWarnings("unused") // initialized by spring
+    @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
 
     @Test public void willSaveUserAndPersonToTheDatabase() {
