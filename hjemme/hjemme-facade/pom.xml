@@ -62,11 +62,6 @@
 
         <!-- Test scope -->
         <dependency>
-            <groupId>com.github.jactor-rises</groupId>
-            <artifactId>build-matcher</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
