@@ -14,7 +14,6 @@
     </prerequisites>
 
     <properties>
-        <build-matcher.version>2.2</build-matcher.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-lang3.version>3.4</commons-lang3.version>
         <junit.version>4.12</junit.version>
@@ -55,11 +54,6 @@
 
         <!-- testing -->
         <dependency>
-            <groupId>com.github.jactor-rises</groupId>
-            <artifactId>build-matcher</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
             <scope>test</scope>
@@ -90,12 +84,6 @@
             </dependency>
 
             <!-- testing -->
-            <dependency>
-                <groupId>com.github.jactor-rises</groupId>
-                <artifactId>build-matcher</artifactId>
-                <version>${build-matcher.version}</version>
-                <scope>test</scope>
-            </dependency>
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-all</artifactId>

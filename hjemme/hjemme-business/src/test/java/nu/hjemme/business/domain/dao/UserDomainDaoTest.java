@@ -11,15 +11,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static nu.hjemme.business.domain.UserDomain.aUser;
 import static nu.hjemme.business.rules.BuildValidations.Build.USER;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.notNull;
@@ -36,17 +35,17 @@ public class UserDomainDaoTest {
 
     @Test public void willNotSaveNull() {
         userDomainDaoToTest.save(null);
-        verify(userDaoMock, never()).save(any(UserEntity.class));
+        verify(userDaoMock, never()).save(any());
     }
 
     @Test public void willSaveNotNull() {
         userDomainDaoToTest.save(aUser().build());
-        verify(userDaoMock, times(1)).save(notNull(UserEntity.class));
+        verify(userDaoMock, times(1)).save(notNull());
     }
 
     @Test public void willNotFindUserNameWhichIsNull() {
-        assertThat(userDomainDaoToTest.findUsing(null), is(equalTo(Optional.empty()), "userDomainDao.findUsing(UserName)"));
-        verify(userDaoMock, never()).findUsing(any(UserName.class));
+        assertThat(userDomainDaoToTest.findUsing(null), is(equalTo(Optional.empty())));
+        verify(userDaoMock, never()).findUsing(any());
     }
 
     @Test public void willFindUserDomainBasedOnUserName() {
@@ -62,7 +61,7 @@ public class UserDomainDaoTest {
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.empty());
         Optional<UserDomain> userDomain = userDomainDaoToTest.findUsing(new UserName("someone"));
 
-        assertThat(userDomain, verify("userDomain", (userDomainOptional, matchBuilder) -> matchBuilder.matches(userDomainOptional.isPresent(), is(equalTo(false), "isPresent"))));
+        assertThat("isPresent", userDomain.isPresent(), is(equalTo(false)));
     }
 
     @Test public void willReturnDomainWhenEntityIsFound() {
@@ -70,6 +69,6 @@ public class UserDomainDaoTest {
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.of(userEntity));
 
         Optional<UserDomain> userDomain = userDomainDaoToTest.findUsing(new UserName("someone"));
-        assertThat(userDomain, verify("userDomain", (userDomainOptional, matchBuilder) -> matchBuilder.matches(userDomainOptional.isPresent(), is(equalTo(true), "isPresent"))));
+        assertThat("isPresent", userDomain.isPresent(), is(equalTo(true)));
     }
 }

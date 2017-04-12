@@ -17,14 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.io.Serializable;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.GuestBookDomain.aGuestBook;
 import static nu.hjemme.business.domain.GuestBookEntryDomain.aGuestBookEntry;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -43,15 +42,14 @@ public class GuestBookEntryDbIntegrationTest {
         session().clear();
 
         DefaultGuestBookEntryEntity guestBookEntry = (DefaultGuestBookEntryEntity) session().get(DefaultGuestBookEntryEntity.class, id);
-        assertThat(guestBookEntry, verify("blog entry persisted", (guestBookEntryEntity, matchBuilder) -> matchBuilder
-                .matches(guestBookEntryEntity.getGuestBook().getTitle(), is(equalTo("my guest book"), "guest book.title"))
-                .matches(guestBookEntryEntity.getCreatedTime(), is(notNullValue(), "entry.createdTime"))
-                .matches(guestBookEntryEntity.getCreatorName(), is(equalTo(new Name("lada")), "entry.creatorName"))
-                .matches(guestBookEntryEntity.getEntry(), is(equalTo("svada"), "entry.entry"))
-        ));
+
+        assertThat("guest book.title", guestBookEntry.getGuestBook().getTitle(), is(equalTo("my guest book")));
+        assertThat("entry.createdTime", guestBookEntry.getCreatedTime(), is(notNullValue()));
+        assertThat("entry.creatorName", guestBookEntry.getCreatorName(), is(equalTo(new Name("lada"))));
+        assertThat("entry.entry", guestBookEntry.getEntry(), is(equalTo("svada")));
     }
 
-    private GuestBookEntity aPersistedGuestBookTitled(String blogTitled) {
+    private GuestBookEntity aPersistedGuestBookTitled(@SuppressWarnings("SameParameterValue") String blogTitled) {
         GuestBookEntity guestBookEntry = aGuestBook().with(aPersistedUser()).withTitleAs(blogTitled).build().getEntity();
         session().save(guestBookEntry);
         return guestBookEntry;

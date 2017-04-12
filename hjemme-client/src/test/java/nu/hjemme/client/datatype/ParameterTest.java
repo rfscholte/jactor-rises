@@ -1,42 +1,42 @@
 package nu.hjemme.client.datatype;
 
-import org.junit.Test;
 
-import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
-import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
+import org.junit.jupiter.api.Test;
+
+import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-public class ParameterTest {
+class ParameterTest {
 
-    @Test public void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
+    @Test void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
         Parameter base = new Parameter("param", "value");
         Parameter equal = new Parameter("param", "value");
         Parameter notEqual = new Parameter("another param", "value");
 
-        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(base.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
     }
 
-    @Test public void whenChecksForEqualityIsDoneTheValuesOfThePropertiesMustBeCorrect() {
+    @Test void whenChecksForEqualityIsDoneTheValuesOfThePropertiesMustBeCorrect() {
         Parameter base = new Parameter("param", "value");
         Parameter equal = new Parameter("param", "value");
         Parameter notEqual = new Parameter("another param", "value");
 
-        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(base, implementsWith(equal, notEqual));
     }
 
-    @Test public void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
-        assertThat("toString", new Name("another name").toString(), is(equalTo("Name[another name]")));
+    @Test void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
+        assertThat("toString", new Name("another name").toString(), equalTo("Name[another name]"));
     }
 
-    @Test public void whenCreatedWithStringTheParameterShouldBeSplitByAnEqualSign() {
+    @Test void whenCreatedWithStringTheParameterShouldSplitKeyValueByAnEqualSign() {
         Parameter parameter = new Parameter("some=where");
 
-        assertThat(parameter, verify("har splittet opp parameter i 'key/value'", (parameterToMatch, matchBuilder) -> matchBuilder
-                .matches(parameterToMatch.getKey(), is(equalTo("some"), "key"))
-                .matches(parameterToMatch.getValue(), is(equalTo("where"), "value"))
-        ));
+        assertAll(
+                () -> assertThat(parameter.getKey(), is(equalTo("some"))),
+                () -> assertThat(parameter.getValue(), is(equalTo("where")))
+        );
     }
 }

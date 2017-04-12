@@ -3,11 +3,9 @@ package nu.hjemme.persistence.orm.domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
-import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class DefaultGuestBookEntityTest {
 
@@ -27,7 +25,7 @@ public class DefaultGuestBookEntityTest {
         notEqual.setTitle("another title");
         notEqual.setUser(new DefaultUserEntity());
 
-        assertThat(defaultGuestBookEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(defaultGuestBookEntityToTest.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
@@ -40,7 +38,7 @@ public class DefaultGuestBookEntityTest {
         notEqual.setTitle("another title");
         notEqual.setUser(new DefaultUserEntity());
 
-        assertThat(defaultGuestBookEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(defaultGuestBookEntityToTest, implementsWith(equal, notEqual));
     }
 
     @Test public void willBeEqualAnIdenticalEntity() {
@@ -53,7 +51,7 @@ public class DefaultGuestBookEntityTest {
         equal.setTitle("title");
         equal.setUser(userEntity);
 
-        assertThat(defaultGuestBookEntityToTest, is(equalTo(equal), "Equal Entity"));
+        assertThat(defaultGuestBookEntityToTest, equalTo(equal));
     }
 
     @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
@@ -62,6 +60,6 @@ public class DefaultGuestBookEntityTest {
 
         DefaultGuestBookEntity equal = new DefaultGuestBookEntity(defaultGuestBookEntityToTest);
 
-        assertThat(defaultGuestBookEntityToTest, is(equalTo(equal), "Equal Entity"));
+        assertThat(defaultGuestBookEntityToTest, equalTo(equal));
     }
 }                             
