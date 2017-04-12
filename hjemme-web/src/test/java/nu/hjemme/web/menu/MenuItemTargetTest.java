@@ -1,91 +1,83 @@
 package nu.hjemme.web.menu;
 
 import nu.hjemme.client.datatype.Parameter;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
-import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
+import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MenuItemTargetTest {
+class MenuItemTargetTest {
 
-    @Rule public ExpectedException expectedException = ExpectedException.none();
-
-    @Test public void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
+    @Test void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
         MenuItemTarget base = new MenuItemTarget("target");
         MenuItemTarget equal = new MenuItemTarget("target");
         MenuItemTarget notEqual = new MenuItemTarget("another target");
 
-        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(base.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
     }
 
-    @Test public void whenChecksForEqualityIsDoneTheValuesOfThePropertiesMustBeCorrect() {
+    @Test void whenChecksForEqualityIsDoneTheValuesOfThePropertiesMustBeCorrect() {
         MenuItemTarget base = new MenuItemTarget("target");
         MenuItemTarget equal = new MenuItemTarget("target");
         MenuItemTarget notEqual = new MenuItemTarget("another target");
 
-        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(base, implementsWith(equal, notEqual));
     }
 
-    @Test public void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
-        assertThat(new MenuItemTarget("hit?with=parameter").toString(), is(equalTo("hit?with=parameter"), "toString"));
+    @Test void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
+        assertThat(new MenuItemTarget("hit?with=parameter").toString(), is(equalTo("hit?with=parameter")));
     }
 
-    @Test public void whenInitializingTheTargetCannotBeNull() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY);
-
-        new MenuItemTarget((String) null);
+    @Test void whenInitializingTheTargetCannotBeNull() {
+        assertThat(assertThrows(
+                IllegalArgumentException.class, () -> new MenuItemTarget((String) null)
+        ).getMessage(), is(equalTo(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY)));
     }
 
-    @Test public void whenInitializingTheTargetCannotBeEmpty() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY);
-
-        new MenuItemTarget("");
+    @Test void whenInitializingTheTargetCannotBeEmpty() {
+        assertThat(assertThrows(
+                IllegalArgumentException.class, () -> new MenuItemTarget("")
+        ).getMessage(), is(equalTo(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY)));
     }
 
-    @Test public void willNotContainParametersWhenTheTargetDoesNotContainQuestionMark() {
-        assertThat(new MenuItemTarget("targetparam=value"), verify("Leste parametre fra MenuItemTarget", (menuItemTarget, matchBuilder) -> matchBuilder
-                .matches(menuItemTarget.getTarget(), is(equalTo("targetparam=value"), "target uten ? skal tolkes som et rent mål"))
-                .matches(menuItemTarget.getParameters().isEmpty(), is(equalTo(true), "ingen parametre"))
-        ));
+    @Test void willNotContainParametersWhenTheTargetDoesNotContainQuestionMark() {
+        assertAll(
+                () -> assertThat("target uten ? skal tolkes som et rent mål", new MenuItemTarget("targetparam=value").getTarget(), is(equalTo("targetparam=value"))),
+                () -> assertThat("ingen parametre", new MenuItemTarget("targetparam=value").getParameters().isEmpty(), is(equalTo(true)))
+        );
     }
 
-    @Test public void willContainOneParameterWhenTheTargetContainsQuestionMarkNameEqualValue() {
-        assertThat(new MenuItemTarget("target?param=value"), verify("Lest parameter fra MenuItemTarget", (menuItemTarget, matchBuilder) -> {
-                    Set<Parameter> parameters = menuItemTarget.getParameters();
-                    Parameter parameter = parameters.iterator().next();
+    @Test void willContainOneParameterWhenTheTargetContainsQuestionMarkNameEqualValue() {
+        MenuItemTarget menuItemTarget = new MenuItemTarget("target?param=value");
+        Set<Parameter> parameters = menuItemTarget.getParameters();
+        Parameter parameter = parameters.iterator().next();
 
-                    return matchBuilder
-                            .matches(menuItemTarget.getTarget(), is(equalTo("target"), "malnavn skal vere uten parameterstreng"))
-                            .matches(parameter.getKey(), is(equalTo("param"), "parameter"))
-                            .matches(parameter.getValue(), is(equalTo("value"), "parameterverdi"));
-                }
-        ));
+        assertAll("Lest parameter fra MenuItemTarget",
+                () -> assertThat("malnavn skal vere uten parameterstreng", menuItemTarget.getTarget(), is(equalTo("target"))),
+                () -> assertThat("parameter", parameter.getKey(), is(equalTo("param"))),
+                () -> assertThat("parameterverdi", parameter.getValue(), is(equalTo("value")))
+        );
     }
 
-    @Test public void willContainTwoParametersWhenTheTargetContainsTwoQuestionMarksWithNameEqualValueSeperatedByComma() {
-        assertThat(new MenuItemTarget("target?param=value,another=parameter"), verify("Leste parametre fra MenuItemTarget", (menuItemTarget, matchBuilder) -> {
-                    Set<Parameter> parameters = menuItemTarget.getParameters();
-                    Parameter parameter = parameters.iterator().next();
-                    Parameter annetParameter = parameters.iterator().next();
+    @Test void willContainTwoParametersWhenTheTargetContainsTwoQuestionMarksWithNameEqualValueSeperatedByComma() {
+        MenuItemTarget menuItemTarget = new MenuItemTarget("target?param=value,another=parameter");
+        Set<Parameter> parameters = menuItemTarget.getParameters();
+        Parameter parameter = parameters.iterator().next();
+        Parameter annetParameter = parameters.iterator().next();
 
-                    return matchBuilder
-                            .matches(menuItemTarget.getTarget(), is(equalTo("target"), "malnavn skal vere uten parameterstreng"))
-                            .matches(parameter.getKey(), is(anyOf(equalTo("param"), equalTo("another")), "parameternavn"))
-                            .matches(parameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter")), "parameterverdier"))
-                            .matches(annetParameter.getKey(), is(anyOf(equalTo("param"), equalTo("another")), "parameternavn"))
-                            .matches(annetParameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter")), "parameterverdier"));
-                }
-        ));
+        assertAll("Leste parametre fra MenuItemTarget",
+                () -> assertThat("malnavn skal være uten parameterstreng", menuItemTarget.getTarget(), is(equalTo("target"))),
+                () -> assertThat("parameternavn", parameter.getKey(), is(anyOf(equalTo("param"), equalTo("another")))),
+                () -> assertThat("parameternavn", parameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter")))),
+                () -> assertThat("parameternavn", annetParameter.getKey(), is(anyOf(equalTo("param"), equalTo("another")))),
+                () -> assertThat("parameternavn", annetParameter.getValue(), is(anyOf(equalTo("value"), equalTo("parameter"))))
+        );
     }
 }

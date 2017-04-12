@@ -1,59 +1,59 @@
 package nu.hjemme.web.menu;
 
 import nu.hjemme.client.datatype.Name;
-import org.junit.Before;
-import org.junit.Test;
+import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
-import static com.github.jactorrises.matcher.LambdaBuildMatcher.verify;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.mock;
 
-public class MenuItemCacheTest {
+class MenuItemCacheTest {
     private MenuItemCache testMenuItemCache;
     private MenuTarget somewhereOnTheMenu;
     private MenuTarget somewhereElseOnTheMenu;
 
-    @Before public void initForTest() {
+    @BeforeEach void initForTest() {
         testMenuItemCache = new MenuItemCache();
     }
 
-    @Before public void initSomewhereOnTheMenu() {
+    @BeforeEach void initSomewhereOnTheMenu() {
         somewhereOnTheMenu = new MenuTarget(new MenuItemTarget("somewhere"), new Name("main.menu"));
     }
 
-    @Before public void initSomewhereElseOnTheMenu() {
+    @BeforeEach void initSomewhereElseOnTheMenu() {
         somewhereElseOnTheMenu = new MenuTarget(new MenuItemTarget("somewhere else"), new Name("main.menu"));
     }
 
-    @Test public void sholdTellIfChosenItemIsCached() {
-        assertThat(testMenuItemCache.isCached(somewhereOnTheMenu), is(equalTo(false), "chosen item cached"));
+    @Test void sholdTellIfChosenItemIsCached() {
+        assertThat(testMenuItemCache.isCached(somewhereOnTheMenu), equalTo(false));
     }
 
-    @Test public void sholdTellIfNotChosenItemIsCached() {
+    @Test void sholdTellIfNotChosenItemIsCached() {
         testMenuItemCache.cache(somewhereOnTheMenu, new ArrayList<>());
-        assertThat(testMenuItemCache.isCached(somewhereElseOnTheMenu), is(equalTo(false), "not chosen menu cached"));
+        assertThat(testMenuItemCache.isCached(somewhereElseOnTheMenu), equalTo(false));
     }
 
-    @Test public void shouldCacheChosenMenuItem() {
+    @Test void shouldCacheChosenMenuItem() {
         testMenuItemCache.cache(somewhereOnTheMenu, new ArrayList<>());
-        assertThat(testMenuItemCache.isCached(somewhereOnTheMenu), is(equalTo(true), "chosen from menu"));
+        assertThat(testMenuItemCache.isCached(somewhereOnTheMenu), equalTo(true));
     }
 
-    @Test public void shouldCacheMenuItemsBasedOnMenuTarget() {
+    @Test void shouldCacheMenuItemsBasedOnMenuTarget() {
         @SuppressWarnings("unchecked") final List<MenuItem> eiListeAvMenuItems = mock(List.class);
         @SuppressWarnings("unchecked") final List<MenuItem> eiAnnenListeAvMenuItems = mock(List.class);
 
         testMenuItemCache.cache(somewhereOnTheMenu, eiListeAvMenuItems);
         testMenuItemCache.cache(somewhereElseOnTheMenu, eiAnnenListeAvMenuItems);
 
-        assertThat(testMenuItemCache, verify("MenuItems", (menuItemCache, matchBuilder) -> matchBuilder
-                .matches(menuItemCache.fetchBy(somewhereOnTheMenu), is(equalTo(eiListeAvMenuItems), "Cache provided by " + somewhereOnTheMenu))
-                .matches(menuItemCache.fetchBy(somewhereElseOnTheMenu), is(equalTo(eiAnnenListeAvMenuItems), "Cache provided by " + somewhereElseOnTheMenu))
-        ));
+        assertAll("MenuItems",
+                () -> MatcherAssert.assertThat("Cache provided by " + somewhereOnTheMenu, testMenuItemCache.fetchBy(somewhereOnTheMenu), equalTo(eiListeAvMenuItems)),
+                () -> MatcherAssert.assertThat("Cache provided by " + somewhereElseOnTheMenu, testMenuItemCache.fetchBy(somewhereElseOnTheMenu), equalTo(eiAnnenListeAvMenuItems))
+        );
     }
 }

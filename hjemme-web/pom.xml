@@ -15,7 +15,6 @@
     <description>The hjemme-web module uses hjemme.facade to bring hjemme-business to life on the web.</description>
 
     <properties>
-        <build-matcher.version>2.2</build-matcher.version>
         <log4j.version>1.2.17</log4j.version>
         <javax.servlet.version>1.2</javax.servlet.version>
         <javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
@@ -122,11 +121,6 @@
 
             <!-- test -->
             <dependency>
-                <groupId>com.github.jactor-rises</groupId>
-                <artifactId>build-matcher</artifactId>
-                <version>${build-matcher.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-all</artifactId>
                 <version>${org.hamcrest.version}</version>
@@ -215,10 +209,6 @@
         </dependency>
 
         <!-- test -->
-        <dependency>
-            <groupId>com.github.jactor-rises</groupId>
-            <artifactId>build-matcher</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
