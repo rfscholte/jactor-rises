@@ -6,7 +6,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.rules.BuildValidations.Build.ADDRESS;
@@ -29,6 +28,6 @@ public class PersonDomainBuilderTest {
     @Test public void willBuildPersonDomainWhenAllRequiredFieldsAreSet() throws Exception {
         PersonDomain personDomain = aPerson().with(anAddress()).withDescriptionAs("description field will not be validated").build();
 
-        assertThat(personDomain, is(notNullValue(), "PersonDomain"));
+        assertThat(personDomain, notNullValue());
     }
 }

@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.not;
@@ -45,19 +44,19 @@ public class DefaultPersistentEntityTest {
     }
 
     @Test public void willConvertName() {
-        assertThat(testPersistentEntity.convertTo("jacobsen", Name.class), is(equalTo(new Name("jacobsen")), "String->Name"));
+        assertThat(testPersistentEntity.convertTo("jacobsen", Name.class), equalTo(new Name("jacobsen")));
     }
 
     @Test public void willConvertEmailAddress() {
-        assertThat(testPersistentEntity.convertTo("some@where.com", EmailAddress.class), is(equalTo(new EmailAddress("some", "where.com")), "String->EmailAddress"));
+        assertThat(testPersistentEntity.convertTo("some@where.com", EmailAddress.class), equalTo(new EmailAddress("some", "where.com")));
     }
 
     @Test public void willConvertUserName() {
-        assertThat(testPersistentEntity.convertTo("jactor", UserName.class), is(equalTo(new UserName("jactor")), "String->UserName"));
+        assertThat(testPersistentEntity.convertTo("jactor", UserName.class), equalTo(new UserName("jactor")));
     }
 
     @Test public void willConvertDescription() {
-        assertThat(testPersistentEntity.convertTo("description", Description.class), is(equalTo(new Description("description")), "String->Description"));
+        assertThat(testPersistentEntity.convertTo("description", Description.class), equalTo(new Description("description")));
     }
 
     @Test public void willNotCastOrInitializeKnownImplementation() {
@@ -70,19 +69,16 @@ public class DefaultPersistentEntityTest {
     @Test public void willCastKnownImplementation() {
         DefaultUserEntity defaultUserEntity = new DefaultUserEntity();
 
-        assertThat(defaultUserEntity, is(sameInstance(testPersistentEntity.castOrInitializeCopyWith(defaultUserEntity, DefaultUserEntity.class)), "casting"));
+        assertThat(defaultUserEntity, sameInstance(testPersistentEntity.castOrInitializeCopyWith(defaultUserEntity, DefaultUserEntity.class)));
     }
 
     @Test public void willInitializeKnownImplementation() {
-        assertThat(
-                testPersistentEntity.castOrInitializeCopyWith(mock(DefaultUserEntity.class), DefaultUserEntity.class),
-                is(allOf(notNullValue(), not(instanceOf(Mockito.class))), "initialized with mock")
-        );
+        assertThat(testPersistentEntity.castOrInitializeCopyWith(mock(DefaultUserEntity.class), DefaultUserEntity.class), allOf(notNullValue(), not(instanceOf(Mockito.class))));
     }
 
     private class TestPersistentEntity extends DefaultPersistentEntity {
 
-        TestPersistentEntity setId(Long id) {
+        TestPersistentEntity setId(@SuppressWarnings("SameParameterValue") Long id) {
             super.id = id;
             return this;
         }

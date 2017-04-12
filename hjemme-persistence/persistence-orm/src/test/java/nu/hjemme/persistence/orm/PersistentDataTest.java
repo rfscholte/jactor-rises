@@ -10,7 +10,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,7 +20,7 @@ public class PersistentDataTest {
     @Rule public ExpectedException expectedException = ExpectedException.none();
 
     @Test public void willProvideStaticInstance() {
-        assertThat(PersistentData.getInstance(), is(notNullValue(), "instance"));
+        assertThat(PersistentData.getInstance(), notNullValue());
     }
 
     @Test public void willThrowExceptionIfInterfaceIsNotConfiguredForNewInstances() {
@@ -31,11 +30,11 @@ public class PersistentDataTest {
     }
 
     @Test public void willFindImplementationOfInterface() {
-        MatcherAssert.assertThat(PersistentData.getInstance().provideInstanceFor(UserEntity.class), is(instanceOf(DefaultUserEntity.class), "defaultUserEntity"));
+        MatcherAssert.assertThat(PersistentData.getInstance().provideInstanceFor(UserEntity.class), instanceOf(DefaultUserEntity.class));
     }
 
     @Test public void willFindImplementationOfInterfaceUsingConstructorArguments() {
-        assertThat(PersistentData.getInstance().provideInstanceFor(UserEntity.class, mock(User.class)), is(instanceOf(DefaultUserEntity.class), "defaultUserEntity"));
+        assertThat(PersistentData.getInstance().provideInstanceFor(UserEntity.class, mock(User.class)), instanceOf(DefaultUserEntity.class));
     }
 
     @After public void resetInstance() {

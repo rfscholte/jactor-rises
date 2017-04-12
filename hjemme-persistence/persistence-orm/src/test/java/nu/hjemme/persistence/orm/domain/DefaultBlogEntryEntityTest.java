@@ -6,9 +6,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
-import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -32,7 +30,7 @@ public class DefaultBlogEntryEntityTest {
         notEqual.setEntry("some other entry");
         notEqual.setCreatorName("some other creator");
         notEqual.setBlog(new DefaultBlogEntity());
-        assertThat(blogEntryEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(blogEntryEntityToTest.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
@@ -47,7 +45,7 @@ public class DefaultBlogEntryEntityTest {
         notEqual.setCreatorName("some other creator");
         notEqual.setBlog(new DefaultBlogEntity());
 
-        assertThat(blogEntryEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(blogEntryEntityToTest, implementsWith(equal, notEqual));
     }
 
     @Test public void willBeEqualAnIdenticalEntity() {
@@ -60,7 +58,7 @@ public class DefaultBlogEntryEntityTest {
         equal.setEntry("some entry");
         equal.setCreatorName("some creator");
 
-        assertThat(blogEntryEntityToTest, is(equalTo(equal), "Equal Entity"));
+        assertThat(blogEntryEntityToTest, equalTo(equal));
     }
 
     @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
@@ -70,6 +68,6 @@ public class DefaultBlogEntryEntityTest {
 
         BlogEntryEntity equal = new DefaultBlogEntryEntity(blogEntryEntityToTest);
 
-        assertThat(blogEntryEntityToTest, is(equalTo(equal), "Equal Entity"));
+        assertThat(blogEntryEntityToTest, equalTo(equal));
     }
 }

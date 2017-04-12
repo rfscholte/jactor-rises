@@ -7,9 +7,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 
-import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
-import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -37,7 +35,7 @@ public class DefaultBlogEntityTest {
         notEqual.setTitle("another title");
         notEqual.setUserEntity(new DefaultUserEntity());
 
-        assertThat(defaultBlogEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(defaultBlogEntityToTest.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
@@ -50,11 +48,11 @@ public class DefaultBlogEntityTest {
         notEqual.setTitle("another title");
         notEqual.setUserEntity(new DefaultUserEntity());
 
-        assertThat(defaultBlogEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(defaultBlogEntityToTest, implementsWith(equal, notEqual));
     }
 
     @Test public void willSetCreatedWhenInitialized() {
-        assertThat(defaultBlogEntityToTest.getCreated(), is(equalTo(LocalDate.now()), "created"));
+        assertThat(defaultBlogEntityToTest.getCreated(), equalTo(LocalDate.now()));
     }
 
     @Test public void willBeEqualAnIdenticalEntity() {
@@ -67,7 +65,7 @@ public class DefaultBlogEntityTest {
         equal.setTitle("title");
         equal.setUserEntity(userEntity);
 
-        assertThat(defaultBlogEntityToTest, is(equalTo(equal), "Equal Entity"));
+        assertThat(defaultBlogEntityToTest, equalTo(equal));
     }
 
     @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
@@ -76,6 +74,6 @@ public class DefaultBlogEntityTest {
 
         DefaultBlogEntity equal = new DefaultBlogEntity(defaultBlogEntityToTest);
 
-        assertThat(defaultBlogEntityToTest, is(equalTo(equal), "Equal Entity"));
+        assertThat(defaultBlogEntityToTest, equalTo(equal));
     }
 }

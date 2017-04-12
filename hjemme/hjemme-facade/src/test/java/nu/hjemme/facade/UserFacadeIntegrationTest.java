@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -26,6 +26,6 @@ public class UserFacadeIntegrationTest {
     private UserFacade testUserFacade;
 
     @Test public void willFetchStandardUser() {
-        assertThat(testUserFacade.findUsing(new UserName("tip")), is(notNullValue(), "User by UserName"));
+        assertThat("User by UserName", testUserFacade.findUsing(new UserName("tip")), is(notNullValue()));
     }
 }

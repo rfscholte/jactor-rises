@@ -6,9 +6,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
-import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -39,7 +37,7 @@ public class DefaultGuestBookEntryEntityTest {
         notEqual.setEntry("some other entry");
         notEqual.setCreatorName("some other creator");
 
-        assertThat(defaultGuestBookEntryEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(defaultGuestBookEntryEntityToTest.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
@@ -54,13 +52,13 @@ public class DefaultGuestBookEntryEntityTest {
         notEqual.setEntry("some other entry");
         notEqual.setCreatorName("some other creator");
 
-        assertThat(defaultGuestBookEntryEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(defaultGuestBookEntryEntityToTest, implementsWith(equal, notEqual));
     }
 
     @Test public void willHaveCreationTimeOnEntryWhenCreated() {
         DefaultGuestBookEntryEntity guestBookEntryEntity = new DefaultGuestBookEntryEntity();
 
-        assertThat(guestBookEntryEntity.getCreatedTime(), is(equalTo(NowAsPureDate.asDateTime()), "creation time"));
+        assertThat(guestBookEntryEntity.getCreatedTime(), equalTo(NowAsPureDate.asDateTime()));
     }
 
     @Test public void willBeEqualAnIdenticalEntity() {
@@ -75,7 +73,7 @@ public class DefaultGuestBookEntryEntityTest {
         equal.setEntry("some entry");
         equal.setCreatorName("some creator");
 
-        assertThat(defaultGuestBookEntryEntityToTest, is(equalTo(equal), "Equal Entity"));
+        assertThat(defaultGuestBookEntryEntityToTest, equalTo(equal));
     }
 
     @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
@@ -85,6 +83,6 @@ public class DefaultGuestBookEntryEntityTest {
 
         DefaultGuestBookEntryEntity equal = new DefaultGuestBookEntryEntity(defaultGuestBookEntryEntityToTest);
 
-        assertThat(defaultGuestBookEntryEntityToTest, is(equalTo(equal), "Equal Entity"));
+        assertThat(defaultGuestBookEntryEntityToTest, equalTo(equal));
     }
 }

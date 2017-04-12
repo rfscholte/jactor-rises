@@ -3,9 +3,7 @@ package nu.hjemme.persistence.orm.domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
-import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -29,7 +27,7 @@ public class DefaultUserEntityTest {
         notEqual.setPersonEntity(new DefaultPersonEntity());
         notEqual.setUserName("some other user");
 
-        assertThat(defaultUserEntityToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(defaultUserEntityToTest.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
     }
 
     @Test public void willHaveCorrectImplementedEquals() {
@@ -45,7 +43,7 @@ public class DefaultUserEntityTest {
         notEqual.setEmailAddress("any@where");
         notEqual.setUserName("some other user");
 
-        assertThat(defaultUserEntityToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(defaultUserEntityToTest, implementsWith(equal, notEqual));
     }
 
     @Test public void willBeEqualToAnIdenticalDefaultUserEntity() {
@@ -60,7 +58,7 @@ public class DefaultUserEntityTest {
         defaultUserEntity.setEmailAddress("far@away.com");
         defaultUserEntity.setUserNameAsEmailAddress();
 
-        assertThat(defaultUserEntityToTest, is(equalTo(defaultUserEntity), "equal to"));
+        assertThat(defaultUserEntityToTest, equalTo(defaultUserEntity));
     }
 
     @Test public void willBeEqualAnIdenticalEntity() {
@@ -77,7 +75,7 @@ public class DefaultUserEntityTest {
         equal.setEmailAddress("far@away.com");
         equal.setUserNameAsEmailAddress();
 
-        assertThat(defaultUserEntityToTest, is(equalTo(equal), "Equal Entity"));
+        assertThat(defaultUserEntityToTest, equalTo(equal));
     }
 
     @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
@@ -88,6 +86,6 @@ public class DefaultUserEntityTest {
 
         DefaultUserEntity equal = new DefaultUserEntity(defaultUserEntityToTest);
 
-        assertThat(defaultUserEntityToTest, is(equalTo(equal), "Equal Entity"));
+        assertThat(defaultUserEntityToTest, equalTo(equal));
     }
 }
