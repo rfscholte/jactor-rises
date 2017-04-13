@@ -11,7 +11,7 @@ import static org.apache.commons.lang.Validate.notEmpty;
 
 /** The implementation of {@link MenuFacade} */
 public class DefaultMenuFacade implements MenuFacade {
-    private Map<Name, Menu> menusByName = new HashMap<>();
+    private final Map<Name, Menu> menusByName = new HashMap<>();
 
     public DefaultMenuFacade(Menu... menus) {
         notEmpty(menus, "Menus must be provided");

@@ -9,11 +9,11 @@ import static org.apache.commons.lang.Validate.notEmpty;
 public class Name implements Comparable<Name> {
     static final String A_NAME_MUST_BE_GIVEN = "A name must be given";
 
-    private String name;
+    private final String nameToWrap;
 
     public Name(String name) {
         notEmpty(name, A_NAME_MUST_BE_GIVEN);
-        this.name = name;
+        this.nameToWrap = name;
     }
 
     @Override public int compareTo(Name name) {
@@ -25,14 +25,14 @@ public class Name implements Comparable<Name> {
     }
 
     @Override public int hashCode() {
-        return name.hashCode();
+        return nameToWrap.hashCode();
     }
 
     @Override public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(name).toString();
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(nameToWrap).toString();
     }
 
     public String getName() {
-        return name;
+        return nameToWrap;
     }
 }

@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 
 public class BlogDomainBuilderTest {
 
-    @Rule public ExpectedException expectedException = ExpectedException.none();
+    @Rule public final ExpectedException expectedException = ExpectedException.none();
 
     @Test public void skalIkkeByggeUtenTittel() {
         expectedException.expect(IllegalArgumentException.class);

@@ -9,7 +9,7 @@ import java.util.Objects;
 import static java.util.Objects.hash;
 
 public class MenuTarget {
-    private static ThreadLocal<MenuItemTarget> requestedByThread = new ThreadLocal<>();
+    private static final ThreadLocal<MenuItemTarget> REQUESTED_BY_THREAD = new ThreadLocal<>();
 
     private final MenuItemTarget menuItemTarget;
     private final Name menuName;
@@ -17,7 +17,7 @@ public class MenuTarget {
     public MenuTarget(MenuItemTarget menuItemTarget, Name menuName) {
         this.menuItemTarget = menuItemTarget;
         this.menuName = menuName;
-        requestedByThread.set(menuItemTarget);
+        REQUESTED_BY_THREAD.set(menuItemTarget);
     }
 
     @Override public boolean equals(Object o) {

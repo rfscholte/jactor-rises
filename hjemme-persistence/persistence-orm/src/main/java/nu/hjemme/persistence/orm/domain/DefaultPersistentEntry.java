@@ -25,26 +25,31 @@ public class DefaultPersistentEntry implements PersistentEntry {
     private String creatorName;
     private String entry;
 
-    public DefaultPersistentEntry() {
+    DefaultPersistentEntry() {
         createdTime = Now.asJavaUtilDate();
     }
 
-    public DefaultPersistentEntry(Date createdTime) {
+    DefaultPersistentEntry(Date createdTime) {
         this.createdTime = createdTime;
     }
 
-    /** @param entry will be used to copy an instance... */
-    public DefaultPersistentEntry(Entry entry) {
+    /**
+     * @param entry will be used to copy an instance...
+     */
+    DefaultPersistentEntry(Entry entry) {
         createdTime = TIME_CONVERTER.convertFrom(entry.getCreatedTime());
         this.entry = entry.getEntry();
         creatorName = NAME_CONVERTER.convertFrom(entry.getCreatorName());
     }
 
     @Override public boolean equals(Object obj) {
-        return this == obj || obj != null && getClass() == obj.getClass() &&
-                Objects.equals(createdTime, ((DefaultPersistentEntry) obj).createdTime) &&
-                Objects.equals(entry, ((DefaultPersistentEntry) obj).entry) &&
-                Objects.equals(creatorName, ((DefaultPersistentEntry) obj).creatorName);
+        return this == obj || obj != null && getClass() == obj.getClass() && isEqualTo((DefaultPersistentEntry) obj);
+    }
+
+    private boolean isEqualTo(DefaultPersistentEntry obj) {
+        return Objects.equals(createdTime, obj.createdTime) &&
+                Objects.equals(entry, obj.entry) &&
+                Objects.equals(creatorName, obj.creatorName);
     }
 
     @Override

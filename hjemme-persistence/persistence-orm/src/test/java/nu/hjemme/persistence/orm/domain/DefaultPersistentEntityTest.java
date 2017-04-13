@@ -24,7 +24,7 @@ import static org.mockito.Mockito.mock;
 public class DefaultPersistentEntityTest {
     private TestPersistentEntity testPersistentEntity;
 
-    @Rule public ExpectedException expectedException = ExpectedException.none();
+    @Rule public final ExpectedException expectedException = ExpectedException.none();
 
     @Before public void initForTesting() {
         testPersistentEntity = new TestPersistentEntity();

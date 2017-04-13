@@ -7,23 +7,23 @@ import java.util.Map;
 /**
  * Simple caching mechanism for a list of {@link MenuItem} by {@link MenuTarget}
  */
-public class MenuItemCache {
+class MenuItemCache {
 
-    private final Map<MenuTarget, List<MenuItem>> menuItemCache;
+    private final Map<MenuTarget, List<MenuItem>> cachedMenuItems;
 
-    public MenuItemCache() {
-        menuItemCache = new HashMap<>();
+    MenuItemCache() {
+        cachedMenuItems = new HashMap<>();
     }
 
-    public boolean isCached(MenuTarget menuTarget) {
-        return menuItemCache.containsKey(menuTarget);
+    boolean isCached(MenuTarget menuTarget) {
+        return cachedMenuItems.containsKey(menuTarget);
     }
 
-    public void cache(MenuTarget menuItemTarget, List<MenuItem> listeOfMenuItems) {
-        menuItemCache.put(menuItemTarget, listeOfMenuItems);
+    void cache(MenuTarget menuItemTarget, List<MenuItem> listeOfMenuItems) {
+        cachedMenuItems.put(menuItemTarget, listeOfMenuItems);
     }
 
-    public List<MenuItem> fetchBy(MenuTarget menuItemTarget) {
-        return menuItemCache.get(menuItemTarget);
+    List<MenuItem> fetchBy(MenuTarget menuItemTarget) {
+        return cachedMenuItems.get(menuItemTarget);
     }
 }

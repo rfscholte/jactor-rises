@@ -32,7 +32,6 @@ public class PersistentData {
     private static PersistentData instance;
 
     protected PersistentData() {
-        instance = this;
     }
 
     @SuppressWarnings("unchecked") public <T> T provideInstanceFor(Class<T> interfaceToInitiate, Object... arguments) {
@@ -89,8 +88,8 @@ public class PersistentData {
         return instance;
     }
 
-    public static void reset() {
-        new PersistentData();
+    static void reset() {
+        instance = new PersistentData();
     }
 
     private static <F, I extends F> void put(Class<F> face, Class<I> impl) {
@@ -98,6 +97,7 @@ public class PersistentData {
     }
 
     static {
+        instance = new PersistentData();
         put(AddressEntity.class, DefaultAddressEntity.class);
         put(BlogEntity.class, DefaultBlogEntity.class);
         put(BlogEntryEntity.class, DefaultBlogEntryEntity.class);
