@@ -15,9 +15,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeWebContext.class, HjemmeWebContext.class, HjemmeWebDbContext.class})
@@ -38,26 +37,17 @@ public class MenuFacadeIntegrationTest {
 
         List<MenuItem> menuItems = testMenuFacade.fetchMenuItemBy(menuTargetRequest);
 
-        assertThat(menuItems, new TypeSafeBuildMatcher<List<MenuItem>>("En liste med menyvalg") {
-                    @Override public MatchBuilder matches(List<MenuItem> menuItems, MatchBuilder matchBuilder) {
-                        matchBuilder.matches(menuItems, is(not(empty()), "lista kan ikke være tom"));
+        for (MenuItem menuItem : menuItems) {
+            Name itemName = menuItem.getDescription().getItemName();
+            Name chosenName = new Name("menu.main.jactor");
 
-                        for (MenuItem menuItem : menuItems) {
-                            Name itemName = menuItem.getDescription().getItemName();
-                            Name chosenName = new Name("menu.main.jactor");
-
-                            if (new Name("menu.main.home").equals(itemName)) {
-                                matchBuilder.matches(menuItem.isChildChosen(), is(equalTo(true), "home.children"));
-                            } else if (chosenName.equals(itemName)) {
-                                matchBuilder.matches(menuItem.isChosen(), is(equalTo(true), "menu.main.jactor"));
-                            } else if (!chosenName.equals(itemName)) {
-                                matchBuilder.matches(menuItem.isChildChosen(), is(equalTo(false), "other item names"));
-                            }
-                        }
-
-                        return matchBuilder;
-                    }
-                }
-        );
+            if (new Name("menu.main.home").equals(itemName)) {
+                assertThat("home.children", menuItem.isChildChosen(), is(equalTo(true)));
+            } else if (chosenName.equals(itemName)) {
+                assertThat("menu.main.jactor", menuItem.isChosen(), is(equalTo(true)));
+            } else if (!chosenName.equals(itemName)) {
+                assertThat("other item names", menuItem.isChildChosen(), is(equalTo(false)));
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Locale;
 
 import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -16,10 +17,9 @@ class CountryTest {
     @Test void skalFeileNarInstansieringInneholderAndreLandkoderEnnFraISO3166() {
         assertThat(
                 assertThrows(IllegalArgumentException.class, () -> new Country("illegal", "gb")).getMessage(),
-                is(equalTo(Country.NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166))
+                containsString(Country.NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166)
         );
     }
-
 
     @Test void skalIkkeFeileNarInstansieringInneholderLandkoderEnnFraISO3166() {
         assertThat("Country initialized", new Country("NO", "no"), is(notNullValue()));
