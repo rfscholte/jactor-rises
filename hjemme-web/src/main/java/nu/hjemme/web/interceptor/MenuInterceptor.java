@@ -23,7 +23,7 @@ import static nu.hjemme.web.interceptor.InterceptorValues.PERSON_MENU;
 
 /** The {@link MenuInterceptor} is a {@link HandlerInterceptorAdapter}  which put the menus on the model. */
 @Component
-public class MenuInterceptor extends HandlerInterceptorAdapter {
+class MenuInterceptor extends HandlerInterceptorAdapter {
 
     private MenuFacade menuFacade;
 

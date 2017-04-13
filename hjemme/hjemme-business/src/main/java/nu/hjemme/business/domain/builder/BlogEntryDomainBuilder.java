@@ -10,7 +10,7 @@ public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
     static final String THE_ENTRY_CANNOT_BE_EMPTY = "The entry field cannot be empty";
     static final String THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE = "The entry must be created by someone";
 
-    private BlogEntryEntity blogEntryEntity = newInstanceOf(BlogEntryEntity.class);
+    private final BlogEntryEntity blogEntryEntity = newInstanceOf(BlogEntryEntity.class);
 
     public BlogEntryDomainBuilder withEntryAs(String entry, String creator) {
         blogEntryEntity.setEntry(entry);

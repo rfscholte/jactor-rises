@@ -2,10 +2,10 @@ package nu.hjemme.web.html;
 
 public class WebParameter {
 
-    private String name;
-    private String value;
+    private final String name;
+    private final String value;
 
-    public WebParameter(String key, String value) {
+    WebParameter(String key, String value) {
         this.name = key;
         this.value = value;
     }

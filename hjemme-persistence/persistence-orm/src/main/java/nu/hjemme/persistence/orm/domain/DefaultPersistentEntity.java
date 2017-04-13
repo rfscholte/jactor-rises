@@ -33,7 +33,7 @@ import java.util.Map;
 @MappedSuperclass
 public abstract class DefaultPersistentEntity implements Persistent<Long> {
 
-    private static Map<Class<?>, TypeConverter> dataTypeConverters = initKnownConverters();
+    private static final Map<Class<?>, TypeConverter> dataTypeConverters = initKnownConverters();
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = PersistentMetadata.ID) Long id;
 
@@ -49,7 +49,7 @@ public abstract class DefaultPersistentEntity implements Persistent<Long> {
         updatedTime = new Date();
     }
 
-    @SuppressWarnings("unchecked") public <To, From> To convertTo(From from, Class<To> classType) {
+    @SuppressWarnings("unchecked") <To, From> To convertTo(From from, Class<To> classType) {
         if (isValidValue(classType)) {
             return (To) dataTypeConverters.get(classType).convertTo(from);
         }
@@ -57,7 +57,7 @@ public abstract class DefaultPersistentEntity implements Persistent<Long> {
         throw new IllegalArgumentException(classType + " is not a type known for any converter!");
     }
 
-    @SuppressWarnings("unchecked") protected <To, From> From convertFrom(To to, Class<To> classType) {
+    @SuppressWarnings("unchecked") <To, From> From convertFrom(To to, Class<To> classType) {
         if (isValidValue(classType)) {
             return (From) dataTypeConverters.get(classType).convertFrom(to);
         }
@@ -69,7 +69,7 @@ public abstract class DefaultPersistentEntity implements Persistent<Long> {
         return !(classType != null && !dataTypeConverters.containsKey(classType));
     }
 
-    @SuppressWarnings("unchecked") public <Implementation extends Obj, Obj> Implementation castOrInitializeCopyWith(Obj object, Class<Implementation> implementation) {
+    @SuppressWarnings("unchecked") <Implementation extends Obj, Obj> Implementation castOrInitializeCopyWith(Obj object, Class<Implementation> implementation) {
         if (object == null) {
             return null;
         }
@@ -85,7 +85,7 @@ public abstract class DefaultPersistentEntity implements Persistent<Long> {
         return initializeCopyWith(object, implementation);
     }
 
-    @SuppressWarnings("unchecked") protected <Implementation extends Obj, Obj> Implementation initializeCopyWith(Obj object, Class<Implementation> implementation) {
+    @SuppressWarnings("unchecked") <Implementation extends Obj, Obj> Implementation initializeCopyWith(Obj object, Class<Implementation> implementation) {
         if (object != null) {
             for (Constructor<?> constructor : implementation.getConstructors()) {
                 if (constructor.getParameterCount() == 1) {

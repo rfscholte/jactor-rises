@@ -10,7 +10,7 @@ public class GuestBookEntryDomainBuilder extends DomainBuilder<GuestBookEntryDom
     static final String THE_ENTRY_CANNOT_BE_EMPTY = "The entry cannot be empty";
     private static final String THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE = "The entry must be created by someone";
 
-    private GuestBookEntryEntity guestBookEntryEntity = newInstanceOf(GuestBookEntryEntity.class);
+    private final GuestBookEntryEntity guestBookEntryEntity = newInstanceOf(GuestBookEntryEntity.class);
 
     public GuestBookEntryDomainBuilder withEntryAs(String entry, String guestName) {
         guestBookEntryEntity.setEntry(entry);

@@ -14,7 +14,7 @@ import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 public class DefaultMenuFacadeTest {
 
-    @Rule public ExpectedException expectedException = ExpectedException.none();
+    @Rule public final ExpectedException expectedException = ExpectedException.none();
 
     @Test public void willThrowExceptionIfProvidedMenusAreNull() {
         expectedException.expect(IllegalArgumentException.class);

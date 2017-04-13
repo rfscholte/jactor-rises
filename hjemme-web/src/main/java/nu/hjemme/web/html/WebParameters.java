@@ -14,16 +14,16 @@ public class WebParameters {
     private static final String SUBMIT_X = "x";
     private static final String SUBMIT_Y = "y";
 
-    private Map<String, String> parameterMap = new HashMap<>();
+    private final Map<String, String> parameterMap = new HashMap<>();
 
     @SuppressWarnings("unchecked") public WebParameters(HttpServletRequest request) {
         Validate.notNull(request, "The request cannot be null!");
 
         Map parameters = request.getParameterMap();
 
-        request.getParameterMap().keySet().stream().filter(parameterName -> !isLanguageParameter(parameterName) && !isFormSubmit(parameterName)).forEach(parameterName -> {
-            parameterMap.put(parameterName.toString(), ((String[]) parameters.get(parameterName))[0]);
-        });
+        request.getParameterMap().keySet().stream().filter(parameterName -> !isLanguageParameter(parameterName) && !isFormSubmit(parameterName)).forEach(
+                parameterName -> parameterMap.put(parameterName.toString(), ((String[]) parameters.get(parameterName))[0])
+        );
     }
 
     private boolean isFormSubmit(Object parameterName) {

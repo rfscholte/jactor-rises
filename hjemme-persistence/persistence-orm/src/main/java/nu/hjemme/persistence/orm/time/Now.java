@@ -12,11 +12,11 @@ public class Now {
         instance = new Now();
     }
 
-    protected LocalDateTime nowAsDateTime() {
+    LocalDateTime nowAsDateTime() {
         return LocalDateTime.now();
     }
 
-    protected Date nowAsJavaUtilDate() {
+    Date nowAsJavaUtilDate() {
         return new Date();
     }
 
@@ -28,7 +28,7 @@ public class Now {
         return instance.nowAsJavaUtilDate();
     }
 
-    protected static void setInstance(Now instance) {
+    static void setInstance(Now instance) {
         synchronized (SYNC) {
             Now.instance = instance;
         }
