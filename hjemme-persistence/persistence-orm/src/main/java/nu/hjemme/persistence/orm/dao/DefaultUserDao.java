@@ -7,6 +7,8 @@ import nu.hjemme.persistence.orm.domain.DefaultUserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.util.Optional;
+
 import static org.hibernate.criterion.Restrictions.eq;
 
 public class DefaultUserDao implements UserDao {
@@ -17,8 +19,8 @@ public class DefaultUserDao implements UserDao {
         this.sessionFactory = sessionFactory;
     }
 
-    @Override public UserEntity findUsing(UserName userName) {
-        return (UserEntity) session().createCriteria(DefaultUserEntity.class).add(eq("userName", userName.getName())).uniqueResult();
+    @Override public Optional<UserEntity> findUsing(UserName userName) {
+        return Optional.of((UserEntity) session().createCriteria(DefaultUserEntity.class).add(eq("userName", userName.getName())).uniqueResult());
     }
 
     @Override public void save(UserEntity userEntity) {

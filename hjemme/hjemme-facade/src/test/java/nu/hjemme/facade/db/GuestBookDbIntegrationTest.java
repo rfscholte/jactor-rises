@@ -1,7 +1,5 @@
 package nu.hjemme.facade.db;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.persistence.client.GuestBookEntity;
@@ -18,12 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.io.Serializable;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.GuestBookDomain.aGuestBook;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -41,13 +39,10 @@ public class GuestBookDbIntegrationTest {
         session().flush();
         session().clear();
 
-        assertThat((GuestBookEntity) session().get(DefaultGuestBookEntity.class, id), new TypeSafeBuildMatcher<GuestBookEntity>("guest book persisted") {
-            @Override public MatchBuilder matches(GuestBookEntity typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(typeToTest.getTitle(), is(equalTo("my guest book"), "title"))
-                        .matches(typeToTest.getUser().getId(), is(equalTo(aPersistedUser.getId()), "user entity id"));
-            }
-        });
+        GuestBookEntity guestBook = (GuestBookEntity) session().get(DefaultGuestBookEntity.class, id);
+
+        assertThat("title", guestBook.getTitle(), is(equalTo("my guest book")));
+        assertThat("user entity id", guestBook.getUser().getId(), is(equalTo(aPersistedUser.getId())));
     }
 
     private UserEntity aPersistedUser() {
@@ -55,11 +50,11 @@ public class GuestBookDbIntegrationTest {
                 .withPasswordAs("demo")
                 .withEmailAddressAs("helt@hjemme")
                 .with(aPerson().withDescriptionAs("description")
-                                .with(anAddress().withAddressLine1As("Hjemme")
-                                                .withCityAs("Dirdal")
-                                                .withCountryAs("NO", "no")
-                                                .withZipCodeAs(1234)
-                                )
+                        .with(anAddress().withAddressLine1As("Hjemme")
+                                .withCityAs("Dirdal")
+                                .withCountryAs("NO", "no")
+                                .withZipCodeAs(1234)
+                        )
                 )
                 .build().getEntity();
 

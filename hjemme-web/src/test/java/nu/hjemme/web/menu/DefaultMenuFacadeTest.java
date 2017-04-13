@@ -7,7 +7,6 @@ import org.junit.rules.ExpectedException;
 
 import java.util.List;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static nu.hjemme.web.menu.Menu.aMenu;
 import static nu.hjemme.web.menu.MenuItem.aMenuItem;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -50,6 +49,6 @@ public class DefaultMenuFacadeTest {
 
         List<MenuItem> menuItems = defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTargetRequest(new MenuTarget(somewhere, new Name("known.menu"))));
 
-        assertThat(menuItems, is(hasItem(menuItem), "menuItems"));
+        assertThat(menuItems, hasItem(menuItem));
     }
 }

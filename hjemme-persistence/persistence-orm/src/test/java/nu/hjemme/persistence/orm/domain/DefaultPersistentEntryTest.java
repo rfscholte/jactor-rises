@@ -5,9 +5,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
-import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -30,7 +28,7 @@ public class DefaultPersistentEntryTest {
         notEqual.setCreatorName("another creator");
         notEqual.setEntry("another entry");
 
-        assertThat(defaultPersistentEntryToTest, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(defaultPersistentEntryToTest.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
     }
 
     @Test public void willHaveCorrectlyImplementedHashCode() {
@@ -43,7 +41,7 @@ public class DefaultPersistentEntryTest {
         notEqual.setCreatorName("another creator");
         notEqual.setEntry("another entry");
 
-        assertThat(defaultPersistentEntryToTest, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(defaultPersistentEntryToTest, implementsWith(equal, notEqual));
     }
 
     @Test public void willBeEqualAnIdenticalEntry() {
@@ -54,7 +52,7 @@ public class DefaultPersistentEntryTest {
         equal.setCreatorName("a creator");
         equal.setEntry("some entry");
 
-        assertThat(defaultPersistentEntryToTest, is(equalTo(equal), "Equal Entry"));
+        assertThat(defaultPersistentEntryToTest, equalTo(equal));
     }
 
     @Test public void willBeEqualAnIdenticalEntryUsingConstructor() {
@@ -63,6 +61,6 @@ public class DefaultPersistentEntryTest {
 
         DefaultPersistentEntry equal = new DefaultPersistentEntry(defaultPersistentEntryToTest);
 
-        assertThat(defaultPersistentEntryToTest, is(equalTo(equal), "Equal Entry"));
+        assertThat(defaultPersistentEntryToTest, equalTo(equal));
     }
 }

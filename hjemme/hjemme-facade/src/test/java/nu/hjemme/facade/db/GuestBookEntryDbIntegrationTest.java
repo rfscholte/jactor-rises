@@ -1,7 +1,5 @@
 package nu.hjemme.facade.db;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
@@ -19,13 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.io.Serializable;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.GuestBookDomain.aGuestBook;
 import static nu.hjemme.business.domain.GuestBookEntryDomain.aGuestBookEntry;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -43,18 +41,15 @@ public class GuestBookEntryDbIntegrationTest {
         session().flush();
         session().clear();
 
-        assertThat((DefaultGuestBookEntryEntity) session().get(DefaultGuestBookEntryEntity.class, id), new TypeSafeBuildMatcher<DefaultGuestBookEntryEntity>("blog entry persisted") {
-            @Override public MatchBuilder matches(DefaultGuestBookEntryEntity typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(typeToTest.getGuestBook().getTitle(), is(equalTo("my guest book"), "guest book.title"))
-                        .matches(typeToTest.getCreatedTime(), is(notNullValue(), "entry.createdTime"))
-                        .matches(typeToTest.getCreatorName(), is(equalTo(new Name("lada")), "entry.creatorName"))
-                        .matches(typeToTest.getEntry(), is(equalTo("svada"), "entry.entry"));
-            }
-        });
+        DefaultGuestBookEntryEntity guestBookEntry = (DefaultGuestBookEntryEntity) session().get(DefaultGuestBookEntryEntity.class, id);
+
+        assertThat("guest book.title", guestBookEntry.getGuestBook().getTitle(), is(equalTo("my guest book")));
+        assertThat("entry.createdTime", guestBookEntry.getCreatedTime(), is(notNullValue()));
+        assertThat("entry.creatorName", guestBookEntry.getCreatorName(), is(equalTo(new Name("lada"))));
+        assertThat("entry.entry", guestBookEntry.getEntry(), is(equalTo("svada")));
     }
 
-    private GuestBookEntity aPersistedGuestBookTitled(String blogTitled) {
+    private GuestBookEntity aPersistedGuestBookTitled(@SuppressWarnings("SameParameterValue") String blogTitled) {
         GuestBookEntity guestBookEntry = aGuestBook().with(aPersistedUser()).withTitleAs(blogTitled).build().getEntity();
         session().save(guestBookEntry);
         return guestBookEntry;

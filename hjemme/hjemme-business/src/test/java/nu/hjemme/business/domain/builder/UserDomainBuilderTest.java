@@ -5,7 +5,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
 import static nu.hjemme.business.rules.BuildValidations.Build.PERSON;
@@ -48,6 +47,6 @@ public class UserDomainBuilderTest {
     }
 
     @Test public void willBuildUserDomainWithAllRequiredProperties() {
-        assertThat(aUser().withUserNameAs("some user").with(aPerson()).withPasswordAs("password").build(), is(notNullValue(), "build of a user domain"));
+        assertThat(aUser().withUserNameAs("some user").with(aPerson()).withPasswordAs("password").build(), notNullValue());
     }
 }

@@ -1,42 +1,32 @@
 package nu.hjemme.client.datatype;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
-import org.junit.Test;
 
-import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
-import static com.github.jactorrises.matcher.LabelMatcher.is;
+import org.junit.jupiter.api.Test;
+
+import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-public class DescriptionTest {
+class DescriptionTest {
 
-    @Test
-    public void whenInvokingHashCodeTheImplementationShouldBeCorrect() {
+    @Test void whenInvokingHashCodeTheImplementationShouldBeCorrect() {
         Description base = new Description(new Name("some item"), "some description");
         Description equal = new Description(new Name("some item"), "some description");
         Description notEqual = new Description(new Name("some other item"), "some other description");
 
-        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(base.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
     }
 
-    @Test
-    public void whenChecksForEqualityTheImplementationShouldBeCorrect() {
+    @Test void whenChecksForEqualityTheImplementationShouldBeCorrect() {
         Description base = new Description(new Name("some item"), "some description");
         Description equal = new Description(new Name("some item"), "some description");
         Description notEqual = new Description(new Name("some other item"), "some other description");
 
-        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(base, implementsWith(equal, notEqual));
     }
 
-    @Test
-    public void willInitWithoutName() {
-        assertThat(new Description("some description"), new TypeSafeBuildMatcher<Description>("will initialize without name") {
-
-            @Override public MatchBuilder matches(Description typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder.matches(typeToTest.toString(), is(equalTo("some description"), "toString"));
-            }
-        });
+    @Test void willSpellDescriptionInToString() {
+        assertThat(new Description("some description").toString(), is(equalTo("some description")));
     }
 }

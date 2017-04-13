@@ -4,19 +4,18 @@ import nu.hjemme.business.rules.BuildValidations;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.client.dao.UserDao;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Optional;
 
 import static nu.hjemme.business.domain.UserDomain.aUser;
 import static nu.hjemme.business.rules.BuildValidations.Build.USER;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.IsNull.notNullValue;
-import static org.hamcrest.core.IsNull.nullValue;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -30,20 +29,17 @@ public class UserFacadeTest {
     @Mock
     private UserDao userDaoMock;
 
-    @Before
-    public void mockDefaultUser() {
-        when(userDaoMock.findUsing(new UserName("jactor"))).thenReturn(aUser().build().getEntity());
-    }
-
     @Test
     public void willFindDefauldUser() {
-        User user = testUserFacadeImpl.findUsing(new UserName("jactor"));
-        assertThat("Standard user", user, is(notNullValue()));
+        when(userDaoMock.findUsing(new UserName("jactor"))).thenReturn(Optional.of(aUser().build().getEntity()));
+        Optional<User> user = testUserFacadeImpl.findUsing(new UserName("jactor"));
+        assertThat(user.isPresent(), (equalTo(true)));
     }
 
     @Test
     public void willNotFindUnknownUser() {
-        User user = testUserFacadeImpl.findUsing(new UserName("someone"));
-        assertThat("UserImpl", user, is(nullValue()));
+        when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.empty());
+        Optional<User> user = testUserFacadeImpl.findUsing(new UserName("someone"));
+        assertThat(user.isPresent(), equalTo(false));
     }
 }

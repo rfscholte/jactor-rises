@@ -4,9 +4,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.github.jactorrises.matcher.EqualsMatcher.hasImplenetedEqualsMethodUsing;
-import static com.github.jactorrises.matcher.HashCodeMatcher.hasImplementedHashCodeAccordingTo;
-import static com.github.jactorrises.matcher.LabelMatcher.is;
+import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
@@ -19,7 +18,7 @@ public class EmailAddressTest {
         EmailAddress equal = new EmailAddress("someone", "somewhere");
         EmailAddress notEqual = new EmailAddress("anyone", "anywhere");
 
-        assertThat(base, hasImplementedHashCodeAccordingTo(equal, notEqual));
+        assertThat(base.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
     }
 
     @Test public void whenChecksForEqualityTheImplementationShouldBeCorrect() {
@@ -27,7 +26,7 @@ public class EmailAddressTest {
         EmailAddress equal = new EmailAddress("someone", "somewhere");
         EmailAddress notEqual = new EmailAddress("anyone", "anywhere");
 
-        assertThat(base, hasImplenetedEqualsMethodUsing(equal, notEqual));
+        assertThat(base, implementsWith(equal, notEqual));
     }
 
     @Test public void willNotInitializeWhenPrefixIsNull() {
@@ -45,7 +44,7 @@ public class EmailAddressTest {
     }
 
     @Test public void willInitializeWithFullEmailAddress() {
-        assertThat(new EmailAddress("someone@somewhere"), is(notNullValue(), "full email address constructor"));
+        assertThat("full email address constructor", new EmailAddress("someone@somewhere"), is(notNullValue()));
     }
 
     @Test public void willNotInitializeWhenFullEmailAddressIsNull() {

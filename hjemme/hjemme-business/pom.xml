@@ -36,12 +36,5 @@
             <artifactId>commons-lang</artifactId>
             <scope>compile</scope>
         </dependency>
-
-        <!-- Test scope -->
-        <dependency>
-            <groupId>com.github.jactor-rises</groupId>
-            <artifactId>build-matcher</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 </project>

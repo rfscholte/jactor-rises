@@ -1,52 +1,44 @@
 package nu.hjemme.business.domain.builder;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.client.datatype.Country;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class AddressDomainBuilderTest {
+class AddressDomainBuilderTest {
 
-    @Rule public ExpectedException expectedException = ExpectedException.none();
-
-    @Test public void willNotBuildDomainWithoutAddressLine1() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY);
-
-        anAddress().withZipCodeAs(1234).withCountryAs("NO", "no").build();
+    @Test void willNotBuildDomainWithoutAddressLine1() {
+        assertThat(assertThrows(
+                IllegalArgumentException.class, () -> anAddress().withZipCodeAs(1234).withCountryAs("NO", "no").build()
+        ).getMessage(), is(equalTo(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY)));
     }
 
-    @Test public void willNotBuildDomainWithAnEmptyAddressLine1() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY);
-
-        anAddress().withAddressLine1As("").withZipCodeAs(1234).withCountryAs("NO", "no").build();
+    @Test void willNotBuildDomainWithAnEmptyAddressLine1() {
+        assertThat(assertThrows(
+                IllegalArgumentException.class, () -> anAddress().withAddressLine1As("").withZipCodeAs(1234).withCountryAs("NO", "no").build()
+        ).getMessage(), is(equalTo(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY)));
     }
 
-    @Test public void willNotBuildDomainWithoutZipCode() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(AddressDomainBuilder.ZIP_CODE_CANNOT_BE_NULL);
-
-        anAddress().withAddressLine1As("somewhere").withCountryAs("NO", "no").build();
+    @Test void willNotBuildDomainWithoutZipCode() {
+        assertThat(assertThrows(
+                IllegalArgumentException.class, () -> anAddress().withAddressLine1As("somewhere").withCountryAs("NO", "no").build()
+        ).getMessage(), is(equalTo(AddressDomainBuilder.ZIP_CODE_CANNOT_BE_NULL)));
     }
 
-    @Test public void willNotBuildDomainWithoutCountry() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(AddressDomainBuilder.COUNTRY_CANNOT_BE_NULL);
-
-        anAddress().withAddressLine1As("somewhere").withZipCodeAs(1234).build();
+    @Test void willNotBuildDomainWithoutCountry() {
+        assertThat(assertThrows(
+                IllegalArgumentException.class, () -> anAddress().withAddressLine1As("somewhere").withZipCodeAs(1234).build()
+        ).getMessage(), is(equalTo(AddressDomainBuilder.COUNTRY_CANNOT_BE_NULL)));
     }
 
-    @Test public void willBuildValidatedDomain() {
+    @Test void willBuildValidatedDomain() {
         AddressDomain addressDomain = anAddress()
                 .withAddressLine1As("somewhere")
                 .withZipCodeAs(1234)
@@ -56,7 +48,7 @@ public class AddressDomainBuilderTest {
         assertThat("Address", addressDomain, is(notNullValue()));
     }
 
-    @Test public void whenBuildingAnAddressAllAddressLinesAndItsCityCanAlsoBeAppended() {
+    @Test void whenBuildingAnAddressAllAddressLinesAndItsCityCanAlsoBeAppended() {
         AddressDomain addressDomain = anAddress()
                 .withAddressLine1As("somewhere")
                 .appendAddressLine2("somewhere else")
@@ -66,17 +58,13 @@ public class AddressDomainBuilderTest {
                 .withZipCodeAs(1234)
                 .build();
 
-        assertThat(addressDomain, new TypeSafeBuildMatcher<AddressDomain>("A domain with all properties set") {
-            @Override
-            public MatchBuilder matches(AddressDomain addressDomain, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(addressDomain.getAddressLine1(), is(equalTo("somewhere"), "Address line 1"))
-                        .matches(addressDomain.getAddressLine2(), is(equalTo("somewhere else"), "Address line 2"))
-                        .matches(addressDomain.getAddressLine3(), is(equalTo("way out there"), "Address line 3"))
-                        .matches(addressDomain.getCity(), is(equalTo("some city"), "city"))
-                        .matches(addressDomain.getCountry(), is(equalTo(new Country("NO", "no")), "Country"))
-                        .matches(addressDomain.getZipCode(), is(equalTo(1234), "Zip code"));
-            }
-        });
+        assertAll("A domain with all properties set",
+                () -> assertThat("Address line 1", addressDomain.getAddressLine1(), equalTo("somewhere")),
+                () -> assertThat("Address line 2", addressDomain.getAddressLine2(), equalTo("somewhere else")),
+                () -> assertThat("Address line 3", addressDomain.getAddressLine3(), equalTo("way out there")),
+                () -> assertThat("City", addressDomain.getCity(), equalTo("some city")),
+                () -> assertThat("Country", addressDomain.getCountry(), equalTo(new Country("NO", "no"))),
+                () -> assertThat("Zip Code", addressDomain.getZipCode(), equalTo(1234))
+        );
     }
 }

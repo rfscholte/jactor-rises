@@ -1,7 +1,5 @@
 package nu.hjemme.facade.db;
 
-import com.github.jactorrises.matcher.MatchBuilder;
-import com.github.jactorrises.matcher.TypeSafeBuildMatcher;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.facade.config.HjemmeDbContext;
@@ -20,13 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.io.Serializable;
 
-import static com.github.jactorrises.matcher.LabelMatcher.is;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.BlogDomain.aBlog;
 import static nu.hjemme.business.domain.BlogEntryDomain.aBlogEntry;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -44,15 +42,12 @@ public class BlogEntryDbIntegrationTest {
         session().flush();
         session().clear();
 
-        assertThat((BlogEntryEntity) session().get(DefaultBlogEntryEntity.class, id), new TypeSafeBuildMatcher<BlogEntryEntity>("blog entry persisted") {
-            @Override public MatchBuilder matches(BlogEntryEntity typeToTest, MatchBuilder matchBuilder) {
-                return matchBuilder
-                        .matches(typeToTest.getBlog().getTitle(), is(equalTo("my blog"), "blog.title"))
-                        .matches(typeToTest.getCreatedTime(), is(notNullValue(), "entry.createdTime"))
-                        .matches(typeToTest.getCreatorName(), is(equalTo(new Name("lada")), "entry.creator"))
-                        .matches(typeToTest.getEntry(), is(equalTo("svada"), "entry.entry"));
-            }
-        });
+        BlogEntryEntity blogEntry = (BlogEntryEntity) session().get(DefaultBlogEntryEntity.class, id);
+
+        assertThat("blog.title", blogEntry.getBlog().getTitle(), is(equalTo("my blog")));
+        assertThat("entry.createdTime", blogEntry.getCreatedTime(), is(notNullValue()));
+        assertThat("entry.creator", blogEntry.getCreatorName(), is(equalTo(new Name("lada"))));
+        assertThat("entry.entry", blogEntry.getEntry(), is(equalTo("svada")));
     }
 
     private BlogEntity aPersistedBlogTitled(String blogTitled) {

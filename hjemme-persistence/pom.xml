@@ -24,7 +24,6 @@
     <description>The build for the persistence layer in hjemme.nu</description>
 
     <properties>
-        <build-matcher.version>1.1</build-matcher.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-dbcp.version>2.1.1</commons-dbcp.version>
         <hibernate.version>4.2.0.Final</hibernate.version>
@@ -130,12 +129,6 @@
             </dependency>
 
             <!-- Test scope -->
-            <dependency>
-                <groupId>com.github.jactor-rises</groupId>
-                <artifactId>build-matcher</artifactId>
-                <version>${build-matcher.version}</version>
-                <scope>test</scope>
-            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
