@@ -6,8 +6,8 @@ import java.util.List;
 public interface MenuFacade {
 
     /**
-     * @param menuTarget determine the menu where the menu item target belongs.
+     * @param menuTargetRequest determine the menu where the menu item target belongs.
      * @return a list of {@link MenuItem} according to the request.
      */
-    List<MenuItem> fetchMenuItemBy(MenuTarget menuTarget);
+    List<MenuItem> fetchMenuItemBy(MenuTargetRequest menuTargetRequest);
 }

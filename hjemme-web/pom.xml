@@ -11,7 +11,7 @@
 
     <artifactId>hjemme-web</artifactId>
     <name>hjemme-web</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging> <!-- TODO #6: create a war and deploy on tomcat -->
     <description>The hjemme-web module uses hjemme.facade to bring hjemme-business to life on the web.</description>
 
     <properties>
@@ -21,7 +21,6 @@
         <javax.servlet.api.version>2.5</javax.servlet.api.version>
         <javax.servlet.jsp.version>2.1</javax.servlet.jsp.version>
         <junit.version>4.12</junit.version>
-        <log4j.version>1.2.17</log4j.version>
         <org.hamcrest.version>1.3</org.hamcrest.version>
         <org.mockito.version>1.10.8</org.mockito.version>
         <org.slf4j.version>1.7.12</org.slf4j.version>
@@ -215,19 +214,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>

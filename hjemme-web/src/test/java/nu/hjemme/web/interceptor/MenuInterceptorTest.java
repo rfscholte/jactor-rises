@@ -1,7 +1,7 @@
 package nu.hjemme.web.interceptor;
 
 import nu.hjemme.web.menu.MenuFacade;
-import nu.hjemme.web.menu.MenuTarget;
+import nu.hjemme.web.menu.MenuTargetRequest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,15 +35,13 @@ public class MenuInterceptorTest {
     }
 
     @Test public void whenHandlingHttpRequestTheAwareMenuItemsAreGathered() throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
         HttpServletRequest mockedHttpServletRequest = mock(HttpServletRequest.class);
 
         when(mockedHttpServletRequest.getRequestURI()).thenReturn("uri");
-
-        ModelAndView modelAndView = new ModelAndView();
-
         menuInterceptorToTest.postHandle(mockedHttpServletRequest, null, null, modelAndView);
 
-        verify(menuFacadeMock, times(2)).fetchMenuItemBy(any(MenuTarget.class));
+        verify(menuFacadeMock, times(2)).fetchMenuItemBy(any(MenuTargetRequest.class));
 
         assertThat("The aware main items should be present", modelAndView.getModel().get(ATTRIBUTE_MAIN_ITEMS), is(notNullValue()));
         assertThat("The aware persons items should be present", modelAndView.getModel().get(ATTRIBUTE_PERSON_ITEMS), is(notNullValue()));

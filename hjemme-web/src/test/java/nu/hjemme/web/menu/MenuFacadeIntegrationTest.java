@@ -4,7 +4,6 @@ import nu.hjemme.client.datatype.Name;
 import nu.hjemme.facade.config.HjemmeBeanContext;
 import nu.hjemme.web.config.HjemmeWebContext;
 import nu.hjemme.web.config.HjemmeWebDbContext;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,6 +13,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeWebContext.class, HjemmeWebContext.class, HjemmeWebDbContext.class})
@@ -25,33 +28,26 @@ public class MenuFacadeIntegrationTest {
     @Test public void whenFindingMenuItemsAndTheNameIsUnknownTheMethodWillFail() {
         expectedException.expect(IllegalArgumentException.class);
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("some target"), new Name("unknown"));
-        testMenuFacade.fetchMenuItemBy(menuTarget);
+        testMenuFacade.fetchMenuItemBy(new MenuTargetRequest(menuTarget));
     }
 
-    @Ignore @Test public void whenFindingMenuItemsAndTheNameIsKnownTheListOfMenuItemsWillBeReturned() {
+    @Test public void whenFindingMenuItemsAndTheNameIsKnownTheListOfMenuItemsWillBeReturned() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("home.do?choose=jactor"), new Name("main"));
-        new MenuItemRequest(new MenuItemTarget("home.do?choose=jactor"));
+        MenuTargetRequest menuTargetRequest = new MenuTargetRequest(menuTarget);
 
-        List<MenuItem> listOfMenuItems = testMenuFacade.fetchMenuItemBy(menuTarget);
+        List<MenuItem> menuItems = testMenuFacade.fetchMenuItemBy(menuTargetRequest);
 
-//        assertThat(listOfMenuItems, build("En liste med menyvalg", (menuItems, matchBuilder) -> {
-//                    matchBuilder.matches(menuItems, is(not(empty()), "lista kan ikke være tom"));
-//
-//                    for (MenuItem menuItem : menuItems) {
-//                        Name itemName = menuItem.getDescription().getItemName();
-//                        Name chosenName = new Name("menu.main.jactor");
-//
-//                        if (new Name("menu.main.home").equals(itemName)) {
-//                            matchBuilder.matches(menuItem.isChildChosen(), is(equalTo(true), "home.children"));
-//                        } else if (chosenName.equals(itemName)) {
-//                            matchBuilder.matches(menuItem.isChosen(), is(equalTo(true), "menu.main.jactor"));
-//                        } else if (!chosenName.equals(itemName)) {
-//                            matchBuilder.matches(menuItem.isChildChosen(), is(equalTo(false), "other item names"));
-//                        }
-//                    }
-//
-//                    return matchBuilder;
-//                }
-//        ));
+        for (MenuItem menuItem : menuItems) {
+            Name itemName = menuItem.getDescription().getItemName();
+            Name chosenName = new Name("menu.main.jactor");
+
+            if (new Name("menu.main.home").equals(itemName)) {
+                assertThat("home.children", menuItem.isChildChosen(), is(equalTo(true)));
+            } else if (chosenName.equals(itemName)) {
+                assertThat("menu.main.jactor", menuItem.isChosen(), is(equalTo(true)));
+            } else if (!chosenName.equals(itemName)) {
+                assertThat("other item names", menuItem.isChildChosen(), is(equalTo(false)));
+            }
+        }
     }
 }

@@ -28,7 +28,7 @@ public class MenuItem {
     }
 
     public boolean isChosen() {
-        return MenuItemRequest.isRequestFor(menuItemTarget);
+        return MenuTargetRequest.isRequestFor(menuItemTarget);
     }
 
     public boolean isChildChosen() {
