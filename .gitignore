@@ -1,5 +1,6 @@
 .idea/
 /**/target/
+.java-version
 *.iml
 /**/.DS_Store
 hjemme-web/.DS_Store
