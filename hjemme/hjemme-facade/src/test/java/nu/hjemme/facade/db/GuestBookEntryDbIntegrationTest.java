@@ -62,7 +62,7 @@ public class GuestBookEntryDbIntegrationTest {
                 .with(aPerson().withDescriptionAs("description")
                         .with(anAddress().withAddressLine1As("Hjemme")
                                 .withCityAs("Dirdal")
-                                .withCountryAs("NO", "no")
+                                .withCountryAs("no", "NO")
                                 .withZipCodeAs(1234)
                         )
                 )

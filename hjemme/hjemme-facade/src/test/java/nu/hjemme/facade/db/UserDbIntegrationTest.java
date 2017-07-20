@@ -41,7 +41,7 @@ public class UserDbIntegrationTest {
                         .with(aPerson().withDescriptionAs("description")
                                 .with(anAddress().withAddressLine1As("Hjemme")
                                         .withCityAs("Dirdal")
-                                        .withCountryAs("NO", "no")
+                                        .withCountryAs("no", "NO")
                                         .withZipCodeAs(1234)
                                 )
                         ).build().getEntity()
@@ -64,7 +64,7 @@ public class UserDbIntegrationTest {
                         .with(aPerson().withDescriptionAs("description")
                                 .with(anAddress().withAddressLine1As("Hjemme")
                                         .withCityAs("Dirdal")
-                                        .withCountryAs("NO", "no")
+                                        .withCountryAs("no", "NO")
                                         .withZipCodeAs(1234)
                                 )
                         ).build().getEntity()
@@ -80,7 +80,7 @@ public class UserDbIntegrationTest {
         assertThat("address line 2", address.getAddressLine2(), is(nullValue()));
         assertThat("address line 3", address.getAddressLine3(), is(nullValue()));
         assertThat("city", address.getCity(), is(equalTo("Dirdal")));
-        assertThat("country", address.getCountry(), is(equalTo(new Country("NO", "no"))));
+        assertThat("country", address.getCountry(), is(equalTo(new Country("no", "NO"))));
         assertThat("zip code", address.getZipCode(), is(equalTo(1234)));
     }
 

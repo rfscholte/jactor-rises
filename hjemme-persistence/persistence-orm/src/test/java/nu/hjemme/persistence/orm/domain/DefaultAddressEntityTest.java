@@ -21,7 +21,7 @@ public class DefaultAddressEntityTest {
         DefaultAddressEntity base = new DefaultAddressEntity();
         base.setAddressLine1("somewhere");
         base.setZipCode(1234);
-        base.setCountry("NO" + CountryConverter.SPLITTER + "no");
+        base.setCountry("no" + CountryConverter.SPLITTER + "NO");
         base.setCity("some city");
         base.setAddressLine2("somewhere else");
         base.setAddressLine3("way out there");
@@ -43,7 +43,7 @@ public class DefaultAddressEntityTest {
         defaultAddressEntityToTest = new DefaultAddressEntity();
         defaultAddressEntityToTest.setAddressLine1("somewhere");
         defaultAddressEntityToTest.setZipCode(1234);
-        defaultAddressEntityToTest.setCountry("NO" + CountryConverter.SPLITTER + "no");
+        defaultAddressEntityToTest.setCountry("no" + CountryConverter.SPLITTER + "NO");
         defaultAddressEntityToTest.setCity("some city");
         defaultAddressEntityToTest.setAddressLine2("somewhere else");
         defaultAddressEntityToTest.setAddressLine3("way out there");
@@ -64,7 +64,7 @@ public class DefaultAddressEntityTest {
     @Test public void willBeEqualAnIdenticalEntity() {
         defaultAddressEntityToTest.setAddressLine1("somewhere");
         defaultAddressEntityToTest.setZipCode(1234);
-        defaultAddressEntityToTest.setCountry("NO" + CountryConverter.SPLITTER + "no");
+        defaultAddressEntityToTest.setCountry("no" + CountryConverter.SPLITTER + "NO");
         defaultAddressEntityToTest.setCity("some city");
         defaultAddressEntityToTest.setAddressLine2("somewhere else");
         defaultAddressEntityToTest.setAddressLine3("way out there");
@@ -72,7 +72,7 @@ public class DefaultAddressEntityTest {
         DefaultAddressEntity equal = new DefaultAddressEntity();
         equal.setAddressLine1("somewhere");
         equal.setZipCode(1234);
-        equal.setCountry("NO" + CountryConverter.SPLITTER + "no");
+        equal.setCountry("no" + CountryConverter.SPLITTER + "NO");
         equal.setCity("some city");
         equal.setAddressLine2("somewhere else");
         equal.setAddressLine3("way out there");
@@ -83,7 +83,7 @@ public class DefaultAddressEntityTest {
     @Test public void willBeEqualAnIdenticalntityUsingConstructor() {
         defaultAddressEntityToTest.setAddressLine1("somewhere");
         defaultAddressEntityToTest.setZipCode(1234);
-        defaultAddressEntityToTest.setCountry("NO" + CountryConverter.SPLITTER + "no");
+        defaultAddressEntityToTest.setCountry("no" + CountryConverter.SPLITTER + "NO");
         defaultAddressEntityToTest.setCity("some city");
         defaultAddressEntityToTest.setAddressLine2("somewhere else");
         defaultAddressEntityToTest.setAddressLine3("way out there");

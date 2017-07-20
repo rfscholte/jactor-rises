@@ -16,19 +16,19 @@ class AddressDomainBuilderTest {
 
     @Test void willNotBuildDomainWithoutAddressLine1() {
         assertThat(assertThrows(
-                IllegalArgumentException.class, () -> anAddress().withZipCodeAs(1234).withCountryAs("NO", "no").build()
+                IllegalArgumentException.class, () -> anAddress().withZipCodeAs(1234).withCountryAs("no", "NO").build()
         ).getMessage(), is(equalTo(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY)));
     }
 
     @Test void willNotBuildDomainWithAnEmptyAddressLine1() {
         assertThat(assertThrows(
-                IllegalArgumentException.class, () -> anAddress().withAddressLine1As("").withZipCodeAs(1234).withCountryAs("NO", "no").build()
+                IllegalArgumentException.class, () -> anAddress().withAddressLine1As("").withZipCodeAs(1234).withCountryAs("no", "NO").build()
         ).getMessage(), is(equalTo(AddressDomainBuilder.ADDRESS_LINE_1_CANNOT_BE_EMPTY)));
     }
 
     @Test void willNotBuildDomainWithoutZipCode() {
         assertThat(assertThrows(
-                IllegalArgumentException.class, () -> anAddress().withAddressLine1As("somewhere").withCountryAs("NO", "no").build()
+                IllegalArgumentException.class, () -> anAddress().withAddressLine1As("somewhere").withCountryAs("no", "NO").build()
         ).getMessage(), is(equalTo(AddressDomainBuilder.ZIP_CODE_CANNOT_BE_NULL)));
     }
 
@@ -42,7 +42,7 @@ class AddressDomainBuilderTest {
         AddressDomain addressDomain = anAddress()
                 .withAddressLine1As("somewhere")
                 .withZipCodeAs(1234)
-                .withCountryAs("NO", "no")
+                .withCountryAs("no", "NO")
                 .build();
 
         assertThat("Address", addressDomain, is(notNullValue()));
@@ -54,7 +54,7 @@ class AddressDomainBuilderTest {
                 .appendAddressLine2("somewhere else")
                 .appendAddressLine3("way out there")
                 .withCityAs("some city")
-                .withCountryAs("NO", "no")
+                .withCountryAs("no", "NO")
                 .withZipCodeAs(1234)
                 .build();
 
@@ -63,7 +63,7 @@ class AddressDomainBuilderTest {
                 () -> assertThat("Address line 2", addressDomain.getAddressLine2(), equalTo("somewhere else")),
                 () -> assertThat("Address line 3", addressDomain.getAddressLine3(), equalTo("way out there")),
                 () -> assertThat("City", addressDomain.getCity(), equalTo("some city")),
-                () -> assertThat("Country", addressDomain.getCountry(), equalTo(new Country("NO", "no"))),
+                () -> assertThat("Country", addressDomain.getCountry(), equalTo(new Country("no", "NO"))),
                 () -> assertThat("Zip Code", addressDomain.getZipCode(), equalTo(1234))
         );
     }

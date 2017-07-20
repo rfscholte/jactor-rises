@@ -18,8 +18,8 @@ public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
         return this;
     }
 
-    public AddressDomainBuilder withCountryAs(String code, String locale) {
-        addressEntity.setCountry(code + SPLITTER + locale);
+    public AddressDomainBuilder withCountryAs(String language, String country) {
+        addressEntity.setCountry(language + SPLITTER + country);
         return this;
     }
 
