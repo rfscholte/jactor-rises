@@ -15,12 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hibernate.criterion.Restrictions.eq;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -45,7 +43,7 @@ public class DatabasePocTest {
         createUserInTheDatabaseWith(new UserName("svada"));
         createUserInTheDatabaseWith(new UserName("lada"));
 
-        assertThat("no. of users", (List<?>) session().createCriteria(UserEntity.class).list(), is(hasSize(noOfRows + 2)));
+        assertThat("no. of users", session().createCriteria(UserEntity.class).list().size(), is(equalTo(noOfRows + 2)));
     }
 
     @Test public void willReadDatabaseValues() {
@@ -63,6 +61,8 @@ public class DatabasePocTest {
         userEntity.setUserName(userName.getName());
 
         session().save(userEntity);
+        session().flush();
+        session().clear();
     }
 
     private Session session() {
