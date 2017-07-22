@@ -1,53 +1,44 @@
 package nu.hjemme.business.domain.builder;
 
-import nu.hjemme.business.domain.BlogEntryDomain;
 import nu.hjemme.persistence.client.BlogEntity;
 import nu.hjemme.persistence.orm.PersistentData;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static nu.hjemme.business.domain.BlogEntryDomain.aBlogEntry;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class BlogEntryDomainBuilderTest {
+@DisplayName("The Blog Entry Builder")
+class BlogEntryDomainBuilderTest {
 
-    @Rule public final ExpectedException expectedException = ExpectedException.none();
-
-    @Test public void willNotBuildBlogEntryWithoutTheEntry() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(BlogEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
-
-        aBlogEntry().withEntryAs(null, "aCreator").with(aBlog()).build();
+    @DisplayName("should not build a blog entry without the entry")
+    @Test void willNotBuildBlogEntryWithoutTheEntry() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aBlogEntry().withEntryAs(null, "aCreator").with(aBlog()).build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(BlogEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
     }
 
-    @Test public void willNotBuildBlogEntryWithAnEmptyEntry() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(BlogEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
-
-        aBlogEntry().withEntryAs("", "aCreatorName").with(aBlog()).build();
+    @DisplayName("should not build a blog entry with an empty entry")
+    @Test void willNotBuildBlogEntryWithAnEmptyEntry() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aBlogEntry().withEntryAs("", "aCreator").with(aBlog()).build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(BlogEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
     }
 
-    @Test public void willNotBuildBlogEntryWithoutTheBlog() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(BlogEntryDomainBuilder.THE_ENTRY_MUST_BELONG_TO_A_BLOG);
-
-        aBlogEntry().withEntryAs("some entry", "aCreatorName").build();
+    @DisplayName("should not build a blog entry with a blog")
+    @Test void willNotBuildBlogEntryWithoutTheBlog() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aBlogEntry().withEntryAs("some entry", "aCreatorName").build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(BlogEntryDomainBuilder.THE_ENTRY_MUST_BELONG_TO_A_BLOG);
     }
 
-    @Test public void willNotBuildBlogEntryWithoutTheCreator() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(BlogEntryDomainBuilder.THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
-
-        aBlogEntry().withEntryAs("some entry", null).with(aBlog()).build();
+    @DisplayName("should not build a blog entry with the creator")
+    @Test void willNotBuildBlogEntryWithoutTheCreator() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aBlogEntry().withEntryAs("some entry", null).with(aBlog()).build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(BlogEntryDomainBuilder.THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
     }
 
-    @Test public void willBuildBlogEntryWhenAllRequiredFieldsAreSet() {
-        BlogEntryDomain blogEntry = aBlogEntry().with(aBlog()).withEntryAs("some entry", "aCreator").build();
-
-        assertThat("BlogEntry", blogEntry, is(notNullValue()));
+    @DisplayName("should build a blog entry when all required fields are set")
+    @Test void willBuildBlogEntryWhenAllRequiredFieldsAreSet() {
+        assertThat(aBlogEntry().with(aBlog()).withEntryAs("some entry", "aCreator").build()).isNotNull();
     }
 
     private BlogEntity aBlog() {
