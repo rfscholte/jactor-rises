@@ -23,7 +23,7 @@ class CountryTest {
         assertThat(new Country("no", "NO")).isNotNull();
     }
 
-    @DisplayName("should implement hashcode correct")
+    @DisplayName("should have an implemention of the hashCode method")
     @Test void whenInvokingHashCodeItShouldBeImplementedCorrect() {
         Country base = new Country("no", "NO");
         Country equal = new Country("no", "NO");
@@ -31,11 +31,12 @@ class CountryTest {
 
         assertAll(
                 () -> assertThat(base.hashCode()).as("%s.hashCode() is equal to %s.hashCode()", base, equal).isEqualTo(equal.hashCode()),
-                () -> assertThat(base.hashCode()).as("%s.hashCode() is equal to %s.hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode())
+                () -> assertThat(base.hashCode()).as("%s.hashCode() is not equal to %s.hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
+                () -> assertThat(base.hashCode()).as("%s.hashCode() is a number with different value").isNotEqualTo(0)
         );
     }
 
-    @DisplayName("should implement equals correct")
+    @DisplayName("should have an implementation of the equals method")
     @Test void whenInvokingEqualsItShouldBeImplementedCorrect() {
         Country base = new Country("no", "NO");
         Country equal = new Country("no", "NO");
