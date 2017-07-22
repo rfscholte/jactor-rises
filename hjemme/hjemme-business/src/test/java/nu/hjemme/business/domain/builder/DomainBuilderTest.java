@@ -1,14 +1,13 @@
 package nu.hjemme.business.domain.builder;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+@DisplayName("A Domian builder")
 class DomainBuilderTest {
     private TestDomainBuilder testDomainBuilder;
 
@@ -16,16 +15,17 @@ class DomainBuilderTest {
         testDomainBuilder = new TestDomainBuilder();
     }
 
+    @DisplayName("should build a domain when the build method is invoked")
     @Test void shouldBuildDomainWhenBuildMethodIsInvoked() {
-        assertThat("Should build domain", testDomainBuilder.build(), is(notNullValue()));
+        assertThat(testDomainBuilder.build()).isNotNull();
     }
 
     @Test void shouldValidateDomainWhenBuildMethodIsInvokedg() {
         assertAll(
-                () -> assertThat(testDomainBuilder.validated, is(equalTo(false))),
+                () -> assertThat(testDomainBuilder.validated).isEqualTo(false),
                 () -> {
                     testDomainBuilder.build();
-                    assertThat(testDomainBuilder.validated, is(equalTo(true)));
+                    assertThat(testDomainBuilder.validated).isEqualTo(true);
                 }
         );
     }
