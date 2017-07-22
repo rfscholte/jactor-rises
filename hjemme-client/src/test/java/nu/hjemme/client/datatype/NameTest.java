@@ -36,7 +36,8 @@ class NameTest {
         assertAll(
                 () -> assertThat(base).as("%s is equal to %s", base, equal).isEqualTo(equal),
                 () -> assertThat(base).as("%s is not equal to %s", base, notEqual).isNotEqualTo(notEqual),
-                () -> assertThat(base).as("%s is not equal to %s").isNotEqualTo(null)
+                () -> assertThat(base).as("%s is not equal to %s").isNotEqualTo(null),
+                () -> assertThat(base).as("%s is equal to %s").isEqualTo(base)
         );
     }
 
@@ -55,7 +56,7 @@ class NameTest {
         assertThat(assertThrows(IllegalArgumentException.class, () -> new Name("")).getMessage()).isEqualTo(Name.A_NAME_MUST_BE_GIVEN);
     }
 
-    @DisplayName("should be sorted according to its comparable value")
+    @DisplayName("should be sorted according to its value")
     @Test void willBeComparableAccordingToTheStringValue() {
         List<Name> names = new ArrayList<>(asList(new Name("Donald"), new Name("Ashley"), new Name("Bill")));
         Collections.sort(names);
