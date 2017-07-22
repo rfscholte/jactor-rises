@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("A country")
+@DisplayName("A description")
 class DescriptionTest {
 
     @DisplayName("should have an implementation of the hashCode method")
