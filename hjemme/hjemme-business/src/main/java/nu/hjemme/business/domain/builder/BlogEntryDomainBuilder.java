@@ -23,11 +23,6 @@ public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
         return this;
     }
 
-    public BlogEntryDomainBuilder with(BlogDomainBuilder blog) {
-        with(blog.build().getEntity());
-        return this;
-    }
-
     @Override protected BlogEntryDomain initDomain() {
         return new BlogEntryDomain(blogEntryEntity);
     }
