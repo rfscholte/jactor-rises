@@ -1,50 +1,42 @@
 package nu.hjemme.business.domain.builder;
 
-import nu.hjemme.business.domain.BlogDomain;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.orm.PersistentData;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static nu.hjemme.business.domain.BlogDomain.aBlog;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class BlogDomainBuilderTest {
 
-    @Rule public final ExpectedException expectedException = ExpectedException.none();
+@DisplayName("The Blog Domain Builder")
+class BlogDomainBuilderTest {
 
-    @Test public void skalIkkeByggeUtenTittel() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(BlogDomainBuilder.THE_BLOG_MUST_HAVE_A_TITLE);
-
-        aBlog().with(aUser()).build();
+    @DisplayName("should not build a blog without a title")
+    @Test void skalIkkeByggeUtenTittel() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aBlog().with(aUser()).build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(BlogDomainBuilder.THE_BLOG_MUST_HAVE_A_TITLE);
     }
 
-    @Test public void skalIkkeByggeMedTomTittel() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(BlogDomainBuilder.THE_BLOG_MUST_HAVE_A_TITLE);
-
-        aBlog().withTitleAs("").with(aUser()).build();
+    @DisplayName("should not build a blog with an empty title")
+    @Test void skalIkkeByggeMedTomTittel() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aBlog().with(aUser()).withTitleAs("").build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(BlogDomainBuilder.THE_BLOG_MUST_HAVE_A_TITLE);
     }
 
-    @Test public void skalIkkeByggeUtenBruker() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(BlogDomainBuilder.THE_BLOG_MUST_BELONG_TO_A_USER);
-
-        aBlog().withTitleAs("title").build();
+    @DisplayName("should not build a blog without a user")
+    @Test void skalIkkeByggeUtenBruker() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aBlog().withTitleAs("the title").build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(BlogDomainBuilder.THE_BLOG_MUST_BELONG_TO_A_USER);
     }
 
-    @Test public void skalByggeMedTittelOgBruker() {
-        BlogDomain guestBookEntryEntity = aBlog().withTitleAs("title").with(aUser()).build();
-
-        assertThat("BlogEntity", guestBookEntryEntity, is(notNullValue()));
+    @DisplayName("should build a blog with a user and a title")
+    @Test void skalByggeMedTittelOgBruker() {
+        assertThat(aBlog().withTitleAs("title").with(aUser()).build()).isNotNull();
     }
 
     private UserEntity aUser() {
         return PersistentData.getInstance().provideInstanceFor(UserEntity.class);
     }
 }
-
