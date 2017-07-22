@@ -73,4 +73,11 @@ class EmailAddressTest {
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> new EmailAddress("someoneAreSomewhere"));
         assertThat(illegalArgumentException.getMessage()).isEqualTo("An email address requires an @-sign");
     }
+
+    @DisplayName("should implement toString")
+    @Test void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
+        assertThat(new EmailAddress("someone", "somewhere").toString())
+                .as("A toString should be implemented")
+                .isEqualTo("EmailAddress[someone@somewhere]");
+    }
 }
