@@ -1,19 +1,19 @@
 package nu.hjemme.business.domain;
 
 import nu.hjemme.persistence.orm.domain.DefaultPersistentEntity;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-public class PersistentDomainTest {
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-    @Rule public ExpectedException expectedException = ExpectedException.none();
+@DisplayName("A Persistent Domain")
+class PersistentDomainTest {
 
-    @Test public void skalFeileHvisEtDomeneInstansieresMedEntitetSomErNull() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(PersistentDomain.THE_ENTITY_ON_THE_DOMAIN_CANNOT_BE_NULL);
-
-        new TestPersistentDomain();
+    @DisplayName("Should not initialize with an entity beeing null")
+    @Test void skalFeileHvisEtDomeneInstansieresMedEntitetSomErNull() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, TestPersistentDomain::new);
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(PersistentDomain.THE_ENTITY_ON_THE_DOMAIN_CANNOT_BE_NULL);
     }
 
     private class TestPersistentDomain extends PersistentDomain<DefaultPersistentEntity, Long> {
