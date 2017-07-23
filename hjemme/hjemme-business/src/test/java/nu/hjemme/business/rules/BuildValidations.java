@@ -9,7 +9,10 @@ import org.junit.rules.ExternalResource;
 import java.util.HashSet;
 import java.util.Set;
 
-/** A {@link org.junit.rules.MethodRule} which will ensure that all skipped validations are cleared after each test */
+/**
+ * A {@link org.junit.rules.MethodRule} which will ensure that all skipped validations are cleared after each test
+ * TODO: #113, remove when builders are validation builder...
+ */
 public final class BuildValidations extends ExternalResource {
     private final Set<Class> skipValidations = new HashSet<>();
 
