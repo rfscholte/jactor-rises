@@ -15,8 +15,7 @@ import java.util.Optional;
 
 import static nu.hjemme.business.domain.UserDomain.aUser;
 import static nu.hjemme.business.rules.BuildValidations.Build.USER;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -33,13 +32,13 @@ public class UserFacadeTest {
     public void willFindDefauldUser() {
         when(userDaoMock.findUsing(new UserName("jactor"))).thenReturn(Optional.of(aUser().build().getEntity()));
         Optional<User> user = testUserFacadeImpl.findUsing(new UserName("jactor"));
-        assertThat(user.isPresent(), (equalTo(true)));
+        assertThat(user.isPresent()).isEqualTo(true);
     }
 
     @Test
     public void willNotFindUnknownUser() {
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.empty());
         Optional<User> user = testUserFacadeImpl.findUsing(new UserName("someone"));
-        assertThat(user.isPresent(), equalTo(false));
+        assertThat(user.isPresent()).isEqualTo(false);
     }
 }
