@@ -1,46 +1,39 @@
 package nu.hjemme.business.domain.builder;
 
-import nu.hjemme.business.domain.GuestBookEntryDomain;
 import nu.hjemme.persistence.client.GuestBookEntity;
 import nu.hjemme.persistence.orm.PersistentData;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static nu.hjemme.business.domain.GuestBookEntryDomain.aGuestBookEntry;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class GuestBookDomainEntryBuilderTest {
+@DisplayName("The Guest Book Entry Domain Builder")
+class GuestBookEntryDomainBuilderTest {
 
-    @Rule public ExpectedException expectedException = ExpectedException.none();
-
-    @Test public void willNotBuildGuestBookEntryWithoutAnEntry() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(GuestBookEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
-
-        aGuestBookEntry().with(aGuestBook()).withEntryAs(null, "aCreator").build();
+    @DisplayName("should not initialize a guest book entry without an entry")
+    @Test void willNotBuildGuestBookEntryWithoutAnEntry() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aGuestBookEntry().with(aGuestBook()).withEntryAs(null, "aCreator").build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(GuestBookEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
     }
 
-    @Test public void willNotBuildGuestBookEntryWithAnEmptyEntry() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(GuestBookEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
-
-        aGuestBookEntry().withEntryAs("", "guestName").with(aGuestBook()).build();
+    @DisplayName("should not initialize a guest book entry with an empty entry")
+    @Test void willNotBuildGuestBookEntryWithAnEmptyEntry() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aGuestBookEntry().withEntryAs("", "guestName").with(aGuestBook()).build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(GuestBookEntryDomainBuilder.THE_ENTRY_CANNOT_BE_EMPTY);
     }
 
-    @Test public void willNotBuildGuestBookEntryWithoutTheGuestBook() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(GuestBookEntryDomainBuilder.THE_ENTRY_MUST_BELONG_TO_A_GUEST_BOOK);
-
-        aGuestBookEntry().withEntryAs("some entry", "guestName").build();
+    @DisplayName("should not initialize a guest book entry without the guest book")
+    @Test void willNotBuildGuestBookEntryWithoutTheGuestBook() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aGuestBookEntry().withEntryAs("some entry", "guestName").build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(GuestBookEntryDomainBuilder.THE_ENTRY_MUST_BELONG_TO_A_GUEST_BOOK);
     }
 
-    @Test public void willBuildGuestBookEntryWhenAllRequiredFieldsAreSet() {
-        GuestBookEntryDomain guestBookEntryDomain = aGuestBookEntry().withEntryAs("some entry", "guestName").with(aGuestBook()).build();
-
-        assertThat("GuestBookEntryEntity", guestBookEntryDomain, is(notNullValue()));
+    @DisplayName("should not initialize a guest book entry when all requred fields are set")
+    @Test void willBuildGuestBookEntryWhenAllRequiredFieldsAreSet() {
+        assertThat(aGuestBookEntry().withEntryAs("some entry", "guestName").with(aGuestBook()).build())
+                .isNotNull();
     }
 
     private GuestBookEntity aGuestBook() {
