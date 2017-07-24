@@ -1,26 +1,30 @@
 package nu.hjemme.web.html;
 
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class TextViewerTest {
+@DisplayName("The Text Viewer")
+class TextViewerTest {
 
-    @Test public void willConvertLineBreaksIntoHtmlLineBreaks() {
+    @DisplayName("should create html line breaks")
+    @Test
+    void willConvertLineBreaksIntoHtmlLineBreaks() {
         String converted = TextViewer.convertTextToHtml("\n\nsome.text");
-        assertThat("Converted text", converted, is(equalTo("<br><br>some.text")));
+        assertThat(converted).isEqualTo("<br><br>some.text");
     }
 
-    @Test public void canBeOverridden() {
+    @DisplayName("should be overridden when watned to")
+    @Test
+    void canBeOverridden() {
         new TextViewer() {
             {
                 setInstance(this);
             }
 
-            @Override protected String convertLineBreaks(String textToConvert) {
+            @Override
+            protected String convertLineBreaks(String textToConvert) {
                 setInstance(new TextViewer());
                 return "is overridden";
             }
@@ -28,16 +32,20 @@ public class TextViewerTest {
 
         String overridden = TextViewer.convertTextToHtml(null);
 
-        assertThat("Overridden text", overridden, is(equalTo("is overridden")));
+        assertThat(overridden).isEqualTo("is overridden");
     }
 
-    @Test public void willConvertTabulatorsIntoThreeHtmlNoBreakSpaces() {
+    @DisplayName("should convert tabulators into three html no-break-spaces")
+    @Test
+    void willConvertTabulatorsIntoThreeHtmlNoBreakSpaces() {
         String converted = TextViewer.convertTextToHtml("\t\tsome.text");
-        assertThat("Converted text", converted, is(equalTo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;some.text")));
+        assertThat(converted).isEqualTo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;some.text");
     }
 
-    @Test public void willNotFailIfTheTextToViewIsNull() {
+    @DisplayName("should not fail when the text to convert is null")
+    @Test
+    void willNotFailIfTheTextToViewIsNull() {
         String converted = TextViewer.convertTextToHtml(null);
-        assertThat("Converted text", converted, is(nullValue()));
+        assertThat(converted).isNull();
     }
 }
