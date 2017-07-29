@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
+import nu.hjemme.business.domain.PersonDomain;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +20,15 @@ class PersonDomainBuilderTest {
     }
 
     @DisplayName("should build an instance when all requered fields are set")
-    @Disabled() // TODO: #113 fix when all builders are validation builders
     @Test void willBuildPersonDomainWhenAllRequiredFieldsAreSet() throws Exception {
-        assertThat(aPerson().with(anAddress()).withDescriptionAs("description field for coverage").build()).isNotNull();
+        PersonDomain person = aPerson()
+                .with(anAddress()
+                        .withAddressLine1As("somewhere")
+                        .withZipCodeAs(1234)
+                        .withCountryAs("no", "NO")
+                ).withDescriptionAs("description field only for coverage")
+                .build();
+
+        assertThat(person).isNotNull();
     }
 }

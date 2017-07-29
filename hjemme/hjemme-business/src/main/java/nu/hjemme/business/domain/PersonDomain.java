@@ -34,6 +34,6 @@ public class PersonDomain extends PersistentDomain<PersonEntity, Long> implement
     }
 
     public static PersonDomainBuilder aPerson() {
-        return new PersonDomainBuilder();
+        return PersonDomainBuilder.init();
     }
 }

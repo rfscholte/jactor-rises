@@ -1,44 +1,53 @@
 package nu.hjemme.business.domain.builder;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("A Domian builder")
 class DomainBuilderTest {
-    private TestDomainBuilder testDomainBuilder;
-
-    @BeforeEach void initForTesting() {
-        testDomainBuilder = new TestDomainBuilder();
-    }
 
     @DisplayName("should build a domain when the build method is invoked")
     @Test void shouldBuildDomainWhenBuildMethodIsInvoked() {
-        assertThat(testDomainBuilder.build()).isNotNull();
+        assertThat(new TestDomainBuilder(Collections.emptyList()).build()).isNotNull();
     }
 
+    @DisplayName("should throw exception when illegal build is done")
     @Test void shouldValidateDomainWhenBuildMethodIsInvokedg() {
-        assertAll(
-                () -> assertThat(testDomainBuilder.validated).isEqualTo(false),
-                () -> {
-                    testDomainBuilder.build();
-                    assertThat(testDomainBuilder.validated).isEqualTo(true);
-                }
+        IllegalArgumentException illegalArgumentException = assertThrows(
+                IllegalArgumentException.class, () -> new TestDomainBuilder(
+                        initAnListWith("example of invalid field")
+                ).build()
+        );
+
+        assertThat(illegalArgumentException.getMessage()).isEqualTo("example of invalid field");
+    }
+
+    @SuppressWarnings("unchecked") private List<FieldValidator.ValidateField<Bean>> initAnListWith(
+            @SuppressWarnings("SameParameterValue") String invalidMessage
+    ) {
+        return Collections.singletonList(
+                (domain) -> invalidMessage == null ? Optional.empty() : Optional.of(invalidMessage)
         );
     }
 
-    private class TestDomainBuilder extends DomainBuilder<DomainBuilderTest> {
-        boolean validated;
+    private class Bean {
+    }
 
-        @Override protected DomainBuilderTest initDomain() {
-            return new DomainBuilderTest();
+    private class TestDomainBuilder extends DomainBuilder<Bean> {
+
+        TestDomainBuilder(List<FieldValidator.ValidateField<Bean>> validFields) {
+            super(validFields);
         }
 
-        @Override protected void validate() {
-            validated = true;
+        @Override protected Bean initWithRequiredFields() {
+            return new Bean();
         }
     }
 }

@@ -16,7 +16,7 @@ public class BlogEntryDomain extends PersistentDomain<BlogEntryEntity, Long> imp
 
     @Override
     public Blog getBlog() {
-        return new BlogDomain(getEntity().getBlog());
+        return getEntity().getBlog();
     }
 
     @Override public LocalDateTime getCreatedTime() {
@@ -33,6 +33,6 @@ public class BlogEntryDomain extends PersistentDomain<BlogEntryEntity, Long> imp
     }
 
     public static BlogEntryDomainBuilder aBlogEntry() {
-        return new BlogEntryDomainBuilder();
+        return BlogEntryDomainBuilder.init();
     }
 }

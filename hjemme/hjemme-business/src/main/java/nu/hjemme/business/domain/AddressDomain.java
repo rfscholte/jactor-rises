@@ -42,6 +42,6 @@ public class AddressDomain extends PersistentDomain<AddressEntity, Long> impleme
     }
 
     public static AddressDomainBuilder anAddress() {
-        return new AddressDomainBuilder();
+        return AddressDomainBuilder.init();
     }
 }

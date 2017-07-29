@@ -1,54 +1,42 @@
 package nu.hjemme.business.domain.builder;
 
-import java.util.Optional;
+import nu.hjemme.business.domain.builder.FieldValidator.ValidateField;
+import nu.hjemme.persistence.orm.PersistentData;
+
+import java.util.List;
 
 /**
- * A builder which does not return a bean instance before all required fields are checked using the the {@link FunctionalInterface}
- * called {@link RequiredField}
+ * A builder which does not return a bean instance before all fields are validated using
+ * {@link ValidateField}
  *
- * @param <T> type of bean to build
- */public abstract class DomainBuilder<T> {
-    private static ValidateRequiredFields validateRequiredFields;
-    private final RequiredField[] requiredFields;
+ * @param <T> type of domain to build
+ */
+public abstract class DomainBuilder<T> {
+    private static FieldValidator fieldValidator;
+    private final List<ValidateField<T>> validateFields;
 
-    protected DomainBuilder(RequiredField ... requiredFields) {
-        this.requiredFields = requiredFields;
+    protected DomainBuilder(List<ValidateField<T>> validateFields) {
+        this.validateFields = validateFields;
     }
 
-    abstract T buildBean();
+    protected abstract T initWithRequiredFields();
 
     public T build() {
-        T bean = buildBean();
-        Optional<String> invalidMessage = validateRequiredFields.run(requiredFields, bean);
-
-        if (invalidMessage.isPresent()) {
-            throw new IllegalStateException(invalidMessage.get());
-        }
+        T bean = initWithRequiredFields();
+        fieldValidator.validate(bean, validateFields);
 
         return bean;
     }
 
-    static void validateRequiredFields(ValidateRequiredFields validateRequiredFields) {
-        DomainBuilder.validateRequiredFields = validateRequiredFields;
+    protected static void useFieldValidator(FieldValidator fieldValidator) {
+        DomainBuilder.fieldValidator = fieldValidator;
     }
 
-    public static class ValidateRequiredFields {
-        <B> Optional<String> run(RequiredField<B>[] requiredFields, B bean) {
-            if (requiredFields != null) {
-                for (RequiredField requiredField : requiredFields) {
-                    Optional<String> missingField = requiredField.fetchMissingFieldMessage(bean);
-
-                    if (missingField.isPresent()) {
-                        return missingField;
-                    }
-                }
-            }
-
-            return Optional.empty();
-        }
+    static <T> T newInstanceOf(Class<T> persistentClass) {
+        return PersistentData.getInstance().provideInstanceFor(persistentClass);
     }
 
     static {
-        validateRequiredFields(new ValidateRequiredFields());
+        useFieldValidator(new FieldValidator());
     }
 }
