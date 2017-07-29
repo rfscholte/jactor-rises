@@ -20,7 +20,7 @@ public class NowAsPureDate extends Now {
         return Date.from(nowAsDateTime().atZone(ZoneId.systemDefault()).toInstant());
     }
 
-    static void removeNowAsPureDate() {
+    public static void removeNowAsPureDate() {
         setInstance(new Now());
     }
 }
