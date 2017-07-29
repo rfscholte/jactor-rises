@@ -1,91 +1,70 @@
 package nu.hjemme.persistence.orm.domain;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-public class DefaultUserEntityTest {
+@DisplayName("A DefaulBlogtEntity")
+class DefaultUserEntityTest {
     private DefaultUserEntity defaultUserEntityToTest;
 
-    @Before public void initClassToTest() {
+    @BeforeEach void initClassToTest() {
         defaultUserEntityToTest = new DefaultUserEntity();
     }
 
-    @Test public void willHaveCorrectImplementedHashCode() {
-        defaultUserEntityToTest.setUserName("some user");
-        defaultUserEntityToTest.setPersonEntity(new DefaultPersonEntity());
-        defaultUserEntityToTest.setEmailAddress("some@where");
-        defaultUserEntityToTest.setUserNameAsEmailAddress();
-
-        DefaultUserEntity equal = new DefaultUserEntity(defaultUserEntityToTest);
-
-        DefaultUserEntity notEqual = new DefaultUserEntity();
-        notEqual.setEmailAddress("any@where");
-        notEqual.setPersonEntity(new DefaultPersonEntity());
-        notEqual.setUserName("some other user");
-
-        assertThat(defaultUserEntityToTest.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
-    }
-
-    @Test public void willHaveCorrectImplementedEquals() {
-        defaultUserEntityToTest.setPersonEntity(new DefaultPersonEntity());
-        defaultUserEntityToTest.setUserName("some user");
-        defaultUserEntityToTest.setEmailAddress("some@where");
-        defaultUserEntityToTest.setUserNameAsEmailAddress();
-
-        DefaultUserEntity equal = new DefaultUserEntity(defaultUserEntityToTest);
-
-        DefaultUserEntity notEqual = new DefaultUserEntity();
-        notEqual.setPersonEntity(new DefaultPersonEntity());
-        notEqual.setEmailAddress("any@where");
-        notEqual.setUserName("some other user");
-
-        assertThat(defaultUserEntityToTest, implementsWith(equal, notEqual));
-    }
-
-    @Test public void willBeEqualToAnIdenticalDefaultUserEntity() {
-        defaultUserEntityToTest.setPersonEntity(new DefaultPersonEntity());
-        defaultUserEntityToTest.setUserName("aUser");
-        defaultUserEntityToTest.setEmailAddress("far@away.com");
-        defaultUserEntityToTest.setUserNameAsEmailAddress();
-
-        DefaultUserEntity defaultUserEntity = new DefaultUserEntity();
-        defaultUserEntity.setPersonEntity(new DefaultPersonEntity());
-        defaultUserEntity.setUserName("aUser");
-        defaultUserEntity.setEmailAddress("far@away.com");
-        defaultUserEntity.setUserNameAsEmailAddress();
-
-        assertThat(defaultUserEntityToTest, equalTo(defaultUserEntity));
-    }
-
-    @Test public void willBeEqualAnIdenticalEntity() {
-        DefaultPersonEntity defaultPersonEntity = new DefaultPersonEntity();
-
-        defaultUserEntityToTest.setPersonEntity(defaultPersonEntity);
-        defaultUserEntityToTest.setUserName("aUser");
-        defaultUserEntityToTest.setEmailAddress("far@away.com");
-        defaultUserEntityToTest.setUserNameAsEmailAddress();
+    @DisplayName("should have an implementation of the hash code method")
+    @Test void willHaveCorrectImplementedHashCode() {
+        DefaultUserEntity base = defaultUserEntityToTest;
+        base.setUserName("some user");
+        base.setPersonEntity(new DefaultPersonEntity());
+        base.setEmailAddress("some@where");
+        base.setUserNameAsEmailAddress();
 
         DefaultUserEntity equal = new DefaultUserEntity();
-        equal.setPersonEntity(defaultPersonEntity);
-        equal.setUserName("aUser");
-        equal.setEmailAddress("far@away.com");
+        equal.setUserName("some user");
+        equal.setPersonEntity(new DefaultPersonEntity());
+        equal.setEmailAddress("some@where");
         equal.setUserNameAsEmailAddress();
 
-        assertThat(defaultUserEntityToTest, equalTo(equal));
+        DefaultUserEntity notEqual = new DefaultUserEntity();
+        notEqual.setEmailAddress("any@where");
+        notEqual.setPersonEntity(new DefaultPersonEntity());
+        notEqual.setUserName("some other user");
+
+        assertAll(
+                () -> Assertions.assertThat(base.hashCode()).as("(%s).hashCode() is equal to (%s).hashCode()", base, equal).isEqualTo(equal.hashCode()),
+                () -> Assertions.assertThat(base.hashCode()).as("(%s).hashCode() is not equal to (%s).hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
+                () -> Assertions.assertThat(base.hashCode()).as("(%s).hashCode() is a number with different value", base).isNotEqualTo(0)
+        );
     }
 
-    @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
-        defaultUserEntityToTest.setPersonEntity(new DefaultPersonEntity());
-        defaultUserEntityToTest.setUserName("aUser");
-        defaultUserEntityToTest.setEmailAddress("far@away.com");
-        defaultUserEntityToTest.setUserNameAsEmailAddress();
+    @DisplayName("should have an implementation of the equals method")
+    @Test void willHaveCorrectImplementedEquals() {
+        DefaultUserEntity base = defaultUserEntityToTest;
+        base.setPersonEntity(new DefaultPersonEntity());
+        base.setUserName("some user");
+        base.setEmailAddress("some@where");
+        base.setUserNameAsEmailAddress();
 
-        DefaultUserEntity equal = new DefaultUserEntity(defaultUserEntityToTest);
+        DefaultUserEntity equal = new DefaultUserEntity();
+        equal.setPersonEntity(new DefaultPersonEntity());
+        equal.setUserName("some user");
+        equal.setEmailAddress("some@where");
+        equal.setUserNameAsEmailAddress();
 
-        assertThat(defaultUserEntityToTest, equalTo(equal));
+        DefaultUserEntity notEqual = new DefaultUserEntity();
+        notEqual.setPersonEntity(new DefaultPersonEntity());
+        notEqual.setEmailAddress("any@where");
+        notEqual.setUserName("some other user");
+
+        assertAll(
+                () -> Assertions.assertThat(base).as("%s is equal to %s", base, equal).isEqualTo(equal),
+                () -> Assertions.assertThat(base).as("%s is not equal to %s", base, notEqual).isNotEqualTo(notEqual),
+                () -> Assertions.assertThat(base).as("%s is not equal to %s").isNotEqualTo(null),
+                () -> Assertions.assertThat(base).as("%s is equal to %s").isEqualTo(base)
+        );
     }
 }

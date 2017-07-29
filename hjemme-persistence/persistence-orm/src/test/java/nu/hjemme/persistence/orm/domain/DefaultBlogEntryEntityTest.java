@@ -1,9 +1,9 @@
 package nu.hjemme.persistence.orm.domain;
 
 import nu.hjemme.persistence.client.BlogEntryEntity;
-import nu.hjemme.persistence.orm.time.NowAsPureDateRule;
+import nu.hjemme.persistence.orm.time.NowAsPureDate;
+import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
 import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
@@ -14,10 +14,9 @@ public class DefaultBlogEntryEntityTest {
     private DefaultBlogEntryEntity blogEntryEntityToTest;
 
     @Before public void initBlogEntryEntity() {
+        NowAsPureDate.set();
         blogEntryEntityToTest = new DefaultBlogEntryEntity();
     }
-
-    @Rule public NowAsPureDateRule nowAsPureDateRule = NowAsPureDateRule.init();
 
     @Test public void willHaveCorrectImplementedHashCode() {
         blogEntryEntityToTest.setBlog(new DefaultBlogEntity());
@@ -69,5 +68,10 @@ public class DefaultBlogEntryEntityTest {
         BlogEntryEntity equal = new DefaultBlogEntryEntity(blogEntryEntityToTest);
 
         assertThat(blogEntryEntityToTest, equalTo(equal));
+    }
+
+    @After
+    public void removeNowAsPureDate() {
+        NowAsPureDate.remove();
     }
 }

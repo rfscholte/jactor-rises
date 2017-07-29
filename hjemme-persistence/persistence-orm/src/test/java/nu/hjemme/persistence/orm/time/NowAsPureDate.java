@@ -15,7 +15,7 @@ public final class NowAsPureDate extends Now {
                 .withHour(0).withMinute(0).withSecond(0).withNano(0);
     }
 
-    @Override protected Date nowAsJavaUtilDate() {
+    @Override protected Date nowAsDate() {
         return Date.from(nowAsDateTime().atZone(ZoneId.systemDefault()).toInstant());
     }
 

@@ -5,75 +5,87 @@ import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.client.AddressEntity;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import nu.hjemme.persistence.client.UserEntity;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.sameInstance;
-import static org.hamcrest.core.AllOf.allOf;
-import static org.hamcrest.core.StringContains.containsString;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
-public class DefaultPersistentEntityTest {
+@DisplayName("A DefaultPersistenEntity")
+class DefaultPersistentEntityTest {
     private TestPersistentEntity testPersistentEntity;
 
-    @Rule public final ExpectedException expectedException = ExpectedException.none();
-
-    @Before public void initForTesting() {
+    @BeforeEach void initForTesting() {
         testPersistentEntity = new TestPersistentEntity();
     }
 
-    @Test public void willHaveClassNameAndIdOnToStringMethod() {
+    @DisplayName("should have an implementation of the toString method")
+    @Test void willHaveClassNameAndIdOnToStringMethod() {
         String string = testPersistentEntity.setId(101L).toString();
 
-        assertThat(string, allOf(containsString("TestPersistentEntity"), containsString("101")));
+        assertThat(string).contains("TestPersistentEntity").contains("101");
     }
 
-    @Test public void willThrowIllegalArgumentExceptionWhenDataTypeIsUnknown() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(DefaultPersistentEntity.class.toString());
-
-        testPersistentEntity.convertTo(new TestPersistentEntity(), DefaultPersistentEntity.class);
+    @DisplayName("should fail to convert data when from a type which is unknown")
+    @Test void willThrowIllegalArgumentExceptionWhenDataTypeConvertingFromIsUnknown() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> testPersistentEntity.convertTo(new TestPersistentEntity(), DefaultPersistentEntity.class));
+        assertThat(illegalArgumentException.getMessage())
+                .contains(DefaultPersistentEntity.class.getSimpleName())
+                .contains("is not a type known for any converter");
     }
 
-    @Test public void willConvertName() {
-        assertThat(testPersistentEntity.convertTo("jacobsen", Name.class), equalTo(new Name("jacobsen")));
+    @DisplayName("should fail to convert data when from a type which is unknown")
+    @Test void willThrowIllegalArgumentExceptionWhenDataTypeIsUnknown() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> testPersistentEntity.convertFrom(new TestPersistentEntity(), DefaultPersistentEntity.class));
+        assertThat(illegalArgumentException.getMessage())
+                .contains(DefaultPersistentEntity.class.getSimpleName())
+                .contains("is not a type known for any converter");
     }
 
-    @Test public void willConvertEmailAddress() {
-        assertThat(testPersistentEntity.convertTo("some@where.com", EmailAddress.class), equalTo(new EmailAddress("some", "where.com")));
+    @DisplayName("should convert to a name")
+    @Test void willConvertFromName() {
+        assertThat(testPersistentEntity.convertTo("jacobsen", Name.class)).isEqualTo(new Name("jacobsen"));
     }
 
-    @Test public void willConvertUserName() {
-        assertThat(testPersistentEntity.convertTo("jactor", UserName.class), equalTo(new UserName("jactor")));
+    @DisplayName("should convert an email address")
+    @Test void willConvertEmailAddress() {
+        assertThat(testPersistentEntity.convertTo("some@where.com", EmailAddress.class)).isEqualTo(new EmailAddress("some", "where.com"));
     }
 
-    @Test public void willConvertDescription() {
-        assertThat(testPersistentEntity.convertTo("description", Description.class), equalTo(new Description("description")));
+    @DisplayName("should convert to a user name")
+    @Test void willConvertUserName() {
+        assertThat(testPersistentEntity.convertTo("jactor", UserName.class)).isEqualTo(new UserName("jactor"));
     }
 
-    @Test public void willNotCastOrInitializeKnownImplementation() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("Unable to cast or initialize");
-
-        testPersistentEntity.castOrInitializeCopyWith(new DefaultUserEntity(), AddressEntity.class);
+    @DisplayName("should convert a description")
+    @Test void willConvertDescription() {
+        assertThat(testPersistentEntity.convertTo("description", Description.class)).isEqualTo(new Description("description"));
     }
 
-    @Test public void willCastKnownImplementation() {
+    @DisplayName("should fail to cast when type is not suitable for the entity")
+    @Test void willNotCastOrInitializeKnownImplementation() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> testPersistentEntity.castOrInitializeCopyWith(new DefaultUserEntity(), AddressEntity.class));
+        assertThat(illegalArgumentException.getMessage())
+                .contains(DefaultUserEntity.class.getSimpleName())
+                .contains("Unable to cast or initialize");
+    }
+
+    @DisplayName("should cast when type is suitable for the entity")
+    @Test void willCastKnownImplementation() {
         DefaultUserEntity defaultUserEntity = new DefaultUserEntity();
-
-        assertThat(defaultUserEntity, sameInstance(testPersistentEntity.castOrInitializeCopyWith(defaultUserEntity, DefaultUserEntity.class)));
+        assertThat(defaultUserEntity).isSameAs(testPersistentEntity.castOrInitializeCopyWith(defaultUserEntity, DefaultUserEntity.class));
     }
 
-    @Test public void willInitializeKnownImplementation() {
-        assertThat(testPersistentEntity.castOrInitializeCopyWith(mock(DefaultUserEntity.class), DefaultUserEntity.class), allOf(notNullValue(), not(instanceOf(Mockito.class))));
+    @DisplayName("should initialize known implementation")
+    @Test void willInitializeKnownImplementation() {
+        assertThat(testPersistentEntity.castOrInitializeCopyWith(mock(DefaultUserEntity.class), DefaultUserEntity.class))
+                .isNotNull()
+                .isNotInstanceOf(Mockito.class)
+                .isInstanceOf(UserEntity.class);
     }
 
     private class TestPersistentEntity extends DefaultPersistentEntity {

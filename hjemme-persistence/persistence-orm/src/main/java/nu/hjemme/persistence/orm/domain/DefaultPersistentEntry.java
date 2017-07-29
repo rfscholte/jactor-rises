@@ -26,7 +26,7 @@ public class DefaultPersistentEntry implements PersistentEntry {
     private String entry;
 
     DefaultPersistentEntry() {
-        createdTime = Now.asJavaUtilDate();
+        createdTime = Now.asDate();
     }
 
     DefaultPersistentEntry(Date createdTime) {

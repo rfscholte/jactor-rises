@@ -8,15 +8,11 @@ public class Now {
 
     private static volatile Now instance;
 
-    static {
-        instance = new Now();
-    }
-
     LocalDateTime nowAsDateTime() {
         return LocalDateTime.now();
     }
 
-    Date nowAsJavaUtilDate() {
+    Date nowAsDate() {
         return new Date();
     }
 
@@ -24,13 +20,17 @@ public class Now {
         return instance.nowAsDateTime();
     }
 
-    public static Date asJavaUtilDate() {
-        return instance.nowAsJavaUtilDate();
+    public static Date asDate() {
+        return instance.nowAsDate();
     }
 
     static void setInstance(Now instance) {
         synchronized (SYNC) {
             Now.instance = instance;
         }
+    }
+
+    static {
+        setInstance(new Now());
     }
 }

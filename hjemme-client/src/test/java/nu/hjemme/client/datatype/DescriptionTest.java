@@ -16,9 +16,9 @@ class DescriptionTest {
         Description notEqual = new Description(new Name("some other item"), "some other description");
 
         assertAll(
-                () -> assertThat(base.hashCode()).as("%s.hashCode() is equal to %s.hashCode()", base, equal).isEqualTo(equal.hashCode()),
-                () -> assertThat(base.hashCode()).as("%s.hashCode() is not equal to %s.hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
-                () -> assertThat(base.hashCode()).as("%s.hashCode() is a number with different value", base).isNotEqualTo(0)
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is equal to (%s).hashCode()", base, equal).isEqualTo(equal.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is not equal to (%s).hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is a number with different value", base).isNotEqualTo(0)
         );
     }
 
