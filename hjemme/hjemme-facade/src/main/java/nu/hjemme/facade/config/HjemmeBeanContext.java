@@ -1,7 +1,5 @@
 package nu.hjemme.facade.config;
 
-import nu.hjemme.business.domain.UserDomain;
-import nu.hjemme.business.domain.dao.UserDomainDao;
 import nu.hjemme.business.facade.UserFacadeImpl;
 import nu.hjemme.client.facade.UserFacade;
 import nu.hjemme.persistence.client.dao.UserDao;
@@ -28,12 +26,5 @@ public class HjemmeBeanContext {
 
     @Bean(name = "hjemme.userDao") public UserDao userDao(SessionFactory sessionFactory) {
         return new DefaultUserDao(sessionFactory);
-    }
-
-    @Bean(name = "hjemme.domains.aware.db") public UserDomainDao domainConfig(UserDao userDao) {
-        UserDomainDao userDomainDao = new UserDomainDao(userDao);
-        UserDomain.setUserDomainDao(userDomainDao);
-
-        return userDomainDao;
     }
 }

@@ -15,13 +15,13 @@ class GuestBookDomainBuilderTest {
     @DisplayName("should not build an instance without the title of the guest book")
     @Test void willNotBuildGuestBookWithoutTheTitleOfTheGuestBook() {
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aGuestBook().with(aUser()).build());
-        assertThat(illegalArgumentException.getMessage()).isEqualTo(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_EMPTY);
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_BLANK);
     }
 
     @DisplayName("should not build an instance with an empty title for the guest book")
     @Test void willNotBuildGuestBookWithAnEmptyTitleOfTheGuestBook() {
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aGuestBook().withTitleAs("").with(aUser()).build());
-        assertThat(illegalArgumentException.getMessage()).isEqualTo(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_EMPTY);
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(GuestBookDomainBuilder.THE_TITLE_CANNOT_BE_BLANK);
     }
 
     @DisplayName("should not build an instance without an owner of the guest book")

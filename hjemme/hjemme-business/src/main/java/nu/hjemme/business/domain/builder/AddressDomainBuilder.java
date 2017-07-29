@@ -2,16 +2,27 @@ package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.persistence.client.AddressEntity;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.Optional;
+
+import static java.util.Arrays.asList;
 import static nu.hjemme.persistence.client.converter.CountryConverter.SPLITTER;
 
-public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
+public final class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
     static final String ADDRESS_LINE_1_CANNOT_BE_EMPTY = "Address line 1 cannot be empty";
     static final String COUNTRY_CANNOT_BE_NULL = "A country must be provided";
     static final String ZIP_CODE_CANNOT_BE_NULL = "A Zip code must be provided";
 
     private final AddressEntity addressEntity = newInstanceOf(AddressEntity.class);
+
+    private AddressDomainBuilder() {
+        super(asList(
+                domain -> StringUtils.isNotBlank(domain.getAddressLine1()) ? Optional.empty() : Optional.of(ADDRESS_LINE_1_CANNOT_BE_EMPTY),
+                domain -> domain.getZipCode() != null ? Optional.empty() : Optional.of(ZIP_CODE_CANNOT_BE_NULL),
+                domain -> domain.getCountry() != null ? Optional.empty() : Optional.of(COUNTRY_CANNOT_BE_NULL)
+        ));
+    }
 
     public AddressDomainBuilder withCityAs(String city) {
         addressEntity.setCity(city);
@@ -43,13 +54,11 @@ public class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
         return this;
     }
 
-    @Override protected AddressDomain initDomain() {
+    @Override protected AddressDomain initWithRequiredFields() {
         return new AddressDomain(addressEntity);
     }
 
-    @Override protected void validate() {
-        Validate.notEmpty(addressEntity.getAddressLine1(), ADDRESS_LINE_1_CANNOT_BE_EMPTY);
-        Validate.notNull(addressEntity.getZipCode(), ZIP_CODE_CANNOT_BE_NULL);
-        Validate.notNull(addressEntity.getCountry(), COUNTRY_CANNOT_BE_NULL);
+    public static AddressDomainBuilder init() {
+        return new AddressDomainBuilder();
     }
 }

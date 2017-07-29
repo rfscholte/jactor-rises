@@ -1,7 +1,6 @@
 package nu.hjemme.business.domain;
 
 import nu.hjemme.business.domain.builder.UserDomainBuilder;
-import nu.hjemme.business.domain.dao.UserDomainDao;
 import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.Person;
@@ -9,8 +8,6 @@ import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.client.UserEntity;
 
 public class UserDomain extends PersistentDomain<UserEntity, Long> implements User {
-
-    private static UserDomainDao userDomainDao;
 
     public UserDomain(UserEntity userEntity) {
         super(userEntity);
@@ -36,11 +33,7 @@ public class UserDomain extends PersistentDomain<UserEntity, Long> implements Us
         return getEntity().isUserNameEmailAddress();
     }
 
-    public static void setUserDomainDao(UserDomainDao userDomainDao) {
-        UserDomain.userDomainDao = userDomainDao;
-    }
-
     public static UserDomainBuilder aUser() {
-        return new UserDomainBuilder();
+        return UserDomainBuilder.init();
     }
 }
