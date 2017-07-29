@@ -4,10 +4,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class NowAsPureDate extends Now {
+public final class NowAsPureDate extends Now {
 
-    public NowAsPureDate() {
-        setInstance(this);
+    private NowAsPureDate() {
     }
 
     @Override
@@ -20,7 +19,11 @@ public class NowAsPureDate extends Now {
         return Date.from(nowAsDateTime().atZone(ZoneId.systemDefault()).toInstant());
     }
 
-    public static void removeNowAsPureDate() {
+    public static void set() {
+        setInstance(new NowAsPureDate());
+    }
+
+    public static void remove() {
         setInstance(new Now());
     }
 }

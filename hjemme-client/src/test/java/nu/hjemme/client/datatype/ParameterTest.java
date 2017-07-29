@@ -18,7 +18,7 @@ class ParameterTest {
         assertAll(
                 () -> assertThat(base.hashCode()).as("%s.hashCode() is equal to %s.hashCode()", base, equal).isEqualTo(equal.hashCode()),
                 () -> assertThat(base.hashCode()).as("%s.hashCode() is not equal to %s.hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
-                () -> assertThat(base.hashCode()).as("%s.hashCode() is a number with different value").isNotEqualTo(0)
+                () -> assertThat(base.hashCode()).as("%s.hashCode() is a number with different value", base).isNotEqualTo(0)
         );
     }
 

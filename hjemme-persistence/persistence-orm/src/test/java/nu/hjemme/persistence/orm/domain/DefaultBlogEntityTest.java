@@ -11,12 +11,12 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("A DefaultEntity")
+@DisplayName("A DefaulBlogtEntity")
 class DefaultBlogEntityTest {
     private DefaultBlogEntity defaultBlogEntityToTest;
 
     @BeforeEach void initDefaulBlogEntityToTestWithCreationTime() {
-        new NowAsPureDate();
+        NowAsPureDate.set();
         defaultBlogEntityToTest = new DefaultBlogEntity();
     }
 
@@ -38,7 +38,7 @@ class DefaultBlogEntityTest {
         assertAll(
                 () -> assertThat(base.hashCode()).as("%s.hashCode() is equal to %s.hashCode()", base, equal).isEqualTo(equal.hashCode()),
                 () -> assertThat(base.hashCode()).as("%s.hashCode() is not equal to %s.hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
-                () -> assertThat(base.hashCode()).as("%s.hashCode() is a number with different value").isNotEqualTo(0)
+                () -> assertThat(base.hashCode()).as("%s.hashCode() is a number with different value", base).isNotEqualTo(0)
         );
     }
 
@@ -79,6 +79,6 @@ class DefaultBlogEntityTest {
     }
 
     @AfterEach void removeNowAsPureDate() {
-        NowAsPureDate.removeNowAsPureDate();
+        NowAsPureDate.remove();
     }
 }

@@ -4,11 +4,11 @@ import org.junit.rules.ExternalResource;
 
 public class NowAsPureDateRule extends ExternalResource {
     @Override protected void before() {
-        new NowAsPureDate();
+        NowAsPureDate.set();
     }
 
     @Override protected void after() {
-        NowAsPureDate.removeNowAsPureDate();
+        NowAsPureDate.remove();
     }
 
     public static NowAsPureDateRule init() {
