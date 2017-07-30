@@ -14,9 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeDbContext.class}, loader = AnnotationConfigContextLoader.class)
@@ -28,6 +26,6 @@ public class UserFacadeIntegrationTest {
     private UserFacade testUserFacade;
 
     @Test public void willFetchStandardUser() {
-        assertThat("User by UserName", testUserFacade.findUsing(new UserName("tip")), is(notNullValue()));
+        assertThat(testUserFacade.findUsing(new UserName("tip"))).isNotNull();
     }
 }
