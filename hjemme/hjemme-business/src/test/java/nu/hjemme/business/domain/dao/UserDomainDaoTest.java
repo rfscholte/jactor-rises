@@ -5,7 +5,7 @@ import nu.hjemme.business.domain.builder.UserDomainBuilder;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.client.dao.UserDao;
-import nu.hjemme.persistence.orm.PersistentData;
+import nu.hjemme.persistence.orm.PersistentDataService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -69,7 +69,7 @@ class UserDomainDaoTest {
     @DisplayName("should try to find the user domain when user name is not null")
     @Test void willFindUserDomainBasedOnUserName() {
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(
-                Optional.of(PersistentData.getInstance().provideInstanceFor(UserEntity.class))
+                Optional.of(PersistentDataService.getInstance().provideInstanceFor(UserEntity.class))
         );
 
         userDomainDaoToTest.findUsing(new UserName("someone"));
@@ -86,7 +86,7 @@ class UserDomainDaoTest {
 
     @DisplayName("should return a user domain when an entity is found")
     @Test void willReturnDomainWhenEntityIsFound() {
-        UserEntity userEntity = PersistentData.getInstance().provideInstanceFor(UserEntity.class);
+        UserEntity userEntity = PersistentDataService.getInstance().provideInstanceFor(UserEntity.class);
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.of(userEntity));
 
         Optional<UserDomain> userDomain = userDomainDaoToTest.findUsing(new UserName("someone"));

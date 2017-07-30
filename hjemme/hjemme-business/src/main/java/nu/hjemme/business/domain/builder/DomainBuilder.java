@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.builder.FieldValidator.ValidateField;
-import nu.hjemme.persistence.orm.PersistentData;
+import nu.hjemme.persistence.orm.PersistentDataService;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public abstract class DomainBuilder<T> {
     }
 
     static <T> T newInstanceOf(Class<T> persistentClass) {
-        return PersistentData.getInstance().provideInstanceFor(persistentClass);
+        return PersistentDataService.getInstance().provideInstanceFor(persistentClass);
     }
 
     static {

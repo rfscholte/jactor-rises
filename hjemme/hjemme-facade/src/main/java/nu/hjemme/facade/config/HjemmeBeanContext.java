@@ -3,7 +3,7 @@ package nu.hjemme.facade.config;
 import nu.hjemme.business.facade.UserFacadeImpl;
 import nu.hjemme.client.facade.UserFacade;
 import nu.hjemme.persistence.client.dao.UserDao;
-import nu.hjemme.persistence.orm.PersistentData;
+import nu.hjemme.persistence.orm.PersistentDataService;
 import nu.hjemme.persistence.orm.dao.DefaultUserDao;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,7 @@ public class HjemmeBeanContext {
     }
 
     @Bean(name = "hjemme.userFacade") public UserFacade userFacade(SessionFactory sessionFactory) {
-        return new UserFacadeImpl(PersistentData.getInstance().provideInstanceFor(UserDao.class, sessionFactory));
+        return new UserFacadeImpl(PersistentDataService.getInstance().provideInstanceFor(UserDao.class, sessionFactory));
     }
 
     @Bean(name = "hjemme.userDao") public UserDao userDao(SessionFactory sessionFactory) {

@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.persistence.client.BlogEntity;
-import nu.hjemme.persistence.orm.PersistentData;
+import nu.hjemme.persistence.orm.PersistentDataService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +42,6 @@ class BlogEntryDomainBuilderTest {
     }
 
     private BlogEntity aBlog() {
-        return PersistentData.getInstance().provideInstanceFor(BlogEntity.class);
+        return PersistentDataService.getInstance().provideInstanceFor(BlogEntity.class);
     }
 }

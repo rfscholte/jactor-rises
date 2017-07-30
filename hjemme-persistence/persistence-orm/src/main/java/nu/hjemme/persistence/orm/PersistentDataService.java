@@ -26,12 +26,13 @@ import java.util.Map;
 
 import static java.util.Arrays.asList;
 
-public class PersistentData {
+public final class PersistentDataService {
     private static final Map<Class, Class> SUPPORTED_CLASSES = new HashMap<>();
 
-    private static PersistentData instance;
+    private static PersistentDataService instance;
 
-    protected PersistentData() {
+    private PersistentDataService() {
+        // final singleton
     }
 
     @SuppressWarnings("unchecked") public <T> T provideInstanceFor(Class<T> interfaceToInitiate, Object... arguments) {
@@ -81,15 +82,11 @@ public class PersistentData {
     }
 
     static {
-        new PersistentData();
+        new PersistentDataService();
     }
 
-    public static PersistentData getInstance() {
+    public static PersistentDataService getInstance() {
         return instance;
-    }
-
-    static void reset() {
-        instance = new PersistentData();
     }
 
     private static <F, I extends F> void put(Class<F> face, Class<I> impl) {
@@ -97,7 +94,7 @@ public class PersistentData {
     }
 
     static {
-        instance = new PersistentData();
+        instance = new PersistentDataService();
         put(AddressEntity.class, DefaultAddressEntity.class);
         put(BlogEntity.class, DefaultBlogEntity.class);
         put(BlogEntryEntity.class, DefaultBlogEntryEntity.class);

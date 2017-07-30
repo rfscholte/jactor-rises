@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.persistence.client.GuestBookEntity;
-import nu.hjemme.persistence.orm.PersistentData;
+import nu.hjemme.persistence.orm.PersistentDataService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +37,6 @@ class GuestBookEntryDomainBuilderTest {
     }
 
     private GuestBookEntity aGuestBook() {
-        return PersistentData.getInstance().provideInstanceFor(GuestBookEntity.class);
+        return PersistentDataService.getInstance().provideInstanceFor(GuestBookEntity.class);
     }
 }
