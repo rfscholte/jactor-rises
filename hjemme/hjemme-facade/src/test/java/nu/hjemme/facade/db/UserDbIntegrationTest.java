@@ -8,7 +8,6 @@ import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.persistence.client.UserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -29,7 +28,6 @@ import static org.hibernate.criterion.Restrictions.eq;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = HjemmeDbContext.class)
 @Transactional
-@Ignore("OutOfMemoryError ???")
 public class UserDbIntegrationTest {
 
     @Resource(name = "sessionFactory")

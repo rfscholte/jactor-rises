@@ -8,7 +8,6 @@ import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.orm.domain.DefaultGuestBookEntryEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -31,7 +30,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeDbContext.class})
 @Transactional
-@Ignore("OutOfMemoryError ???")
 public class GuestBookEntryDbIntegrationTest {
 
     @Resource(name = "sessionFactory") @SuppressWarnings("unused") // initialized by spring
