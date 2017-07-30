@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("An email adress")
+@DisplayName("An EmailAddress")
 class EmailAddressTest {
 
     @DisplayName("should have an implemention of the hashCode method")

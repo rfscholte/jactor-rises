@@ -10,7 +10,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("A Domian builder")
+@DisplayName("A DomianBuilder")
 class DomainBuilderTest {
 
     @DisplayName("should build a domain when the build method is invoked")

@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("The Adress Domain Builder")
+@DisplayName("An AdressDomainBuilder")
 class AddressDomainBuilderTest {
 
     @DisplayName("should not build an instance without an address line 1")

@@ -10,7 +10,7 @@ import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("The Person Domain Builder")
+@DisplayName("The PersonDomainBuilder")
 class PersonDomainBuilderTest {
 
     @DisplayName("should not build an instance without an address")

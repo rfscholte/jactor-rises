@@ -9,7 +9,7 @@ import static nu.hjemme.business.domain.UserDomain.aUser;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("A User Domain Builder")
+@DisplayName("A UserDomainBuilder")
 class UserDomainBuilderTest {
 
     @DisplayName("should not build an instance without a user name")

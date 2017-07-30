@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("A Persistent Domain")
+@DisplayName("A PersistentDomain")
 class PersistentDomainTest {
 
     @DisplayName("Should not initialize with an entity beeing null")

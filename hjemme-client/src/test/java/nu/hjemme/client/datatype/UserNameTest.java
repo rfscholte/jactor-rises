@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("A user name")
+@DisplayName("A UserName")
 class UserNameTest {
 
     @DisplayName("should be equal to another user name if the difference is only is case")

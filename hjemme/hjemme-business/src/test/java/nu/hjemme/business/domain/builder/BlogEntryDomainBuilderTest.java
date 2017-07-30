@@ -9,7 +9,7 @@ import static nu.hjemme.business.domain.BlogEntryDomain.aBlogEntry;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("The Blog Entry Builder")
+@DisplayName("A BlogEntryBuilder")
 class BlogEntryDomainBuilderTest {
 
     @DisplayName("should not build a blog entry without the entry")

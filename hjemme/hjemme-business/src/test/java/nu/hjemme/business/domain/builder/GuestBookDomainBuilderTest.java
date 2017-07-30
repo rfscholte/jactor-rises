@@ -9,7 +9,7 @@ import static nu.hjemme.business.domain.GuestBookDomain.aGuestBook;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("The Guest Book Domain Builder")
+@DisplayName("A GuestBookDomainBuilder")
 class GuestBookDomainBuilderTest {
 
     @DisplayName("should not build an instance without the title of the guest book")
