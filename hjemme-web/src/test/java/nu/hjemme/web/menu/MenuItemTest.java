@@ -1,66 +1,80 @@
 package nu.hjemme.web.menu;
 
 import nu.hjemme.client.datatype.Name;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
 import static nu.hjemme.web.menu.MenuItem.aMenuItem;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-public class MenuItemTest {
+@DisplayName("A MenuItem")
+class MenuItemTest {
 
-    @Before public void requestMenuItemTargetDeadCenter() {
+    @BeforeEach void requestMenuItemTargetDeadCenter() {
         new MenuTargetRequest(new MenuTarget(new MenuItemTarget("hit?dead=center"), new Name("some.menu")));
     }
 
-    @Test public void willHaveCorrectImplementedHashCode() {
+    @DisplayName("should have an implementation of the hash code method")
+    @Test void willHaveCorrectImplementedHashCode() {
         MenuItem base = aMenuItem().withTarget("target?some=parameter")
                 .add(aMenuItem().withTarget("childTarget?child=parameter")).build();
         MenuItem equal = aMenuItem().withTarget("target?some=parameter")
                 .add(aMenuItem().withTarget("childTarget?child=parameter")).build();
-        MenuItem unequal = aMenuItem().withTarget("target?another=parameter").build();
+        MenuItem notEqual = aMenuItem().withTarget("target?another=parameter").build();
 
-        assertThat(base.hashCode(), implementsWith(equal.hashCode(), unequal.hashCode()));
+        assertAll(
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is equal to (%s).hashCode()", base, equal).isEqualTo(equal.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is not equal to (%s).hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is a number with different value", base).isNotEqualTo(0)
+        );
     }
 
-    @Test public void willHaveCorrectImplementedEquals() {
+    @DisplayName("should have an implementation of the equals method")
+    @Test void willHaveCorrectImplementedEquals() {
         MenuItem base = aMenuItem().withTarget("target?some=parameter")
                 .add(aMenuItem().withTarget("childTarget?child=parameter")).build();
         MenuItem equal = aMenuItem().withTarget("target?some=parameter")
                 .add(aMenuItem().withTarget("childTarget?child=parameter")).build();
-        MenuItem unequal = aMenuItem().withTarget("target?another=parameter").build();
+        MenuItem notEqual = aMenuItem().withTarget("target?another=parameter").build();
 
-        assertThat(base, implementsWith(equal, unequal));
+        assertAll(
+                () -> assertThat(base).as("%s is equal to %s", base, equal).isEqualTo(equal),
+                () -> assertThat(base).as("%s is not equal to %s", base, notEqual).isNotEqualTo(notEqual),
+                () -> assertThat(base).as("%s is not equal to %s").isNotEqualTo(null),
+                () -> assertThat(base).as("%s is equal to %s").isEqualTo(base),
+                () -> assertThat(base).as("base is not same instance as equal").isNotSameAs(equal)
+        );
     }
 
-    @Test public void shouldNotBeChosenWhenTheTargetIsUnknown() {
+    @DisplayName("should not be chosen when the target is unknown")
+    @Test void shouldNotBeChosenWhenTheTargetIsUnknown() {
         MenuItem testMenuItem = aMenuItem().withTarget("miss").build();
-
-        assertThat("menuItem.chosen", testMenuItem.isChosen(), is(equalTo(false)));
+        assertThat(testMenuItem.isChosen()).isEqualTo(false);
     }
 
-    @Test public void shouldBeChosenWhenTheTargetIsKnown() {
+    @DisplayName("should be chosen when the target is known")
+    @Test void shouldBeChosenWhenTheTargetIsKnown() {
         MenuItem testMenuItem = aMenuItem().withTarget("hit?dead=center").build();
-
-        assertThat("menuItem.chosen", testMenuItem.isChosen(), is(equalTo(true)));
+        assertThat(testMenuItem.isChosen()).isEqualTo(true);
     }
 
-    @Test public void shouldNotBeChosenChildWhenMenuTargetOnChildIsUnknown() {
+    @DisplayName("should not have chosen child when the target is unknown")
+    @Test void shouldNotBeChosenChildWhenMenuTargetOnChildIsUnknown() {
         MenuItem testMenuItem = aMenuItem().withTarget("hit?dead=center")
                 .add(aMenuItem().withTarget("miss"))
                 .build();
 
-        assertThat("menuItem.isChildChosen", testMenuItem.isChildChosen(), is(equalTo(false)));
+        assertThat(testMenuItem.isChildChosen()).isEqualTo(false);
     }
 
-    @Test public void shouldBeChosenChildWhenMenuTargetOnChildIsKnown() {
+    @DisplayName("should have chosen child when the target is known")
+    @Test void shouldBeChosenChildWhenMenuTargetOnChildIsKnown() {
         MenuItem testMenuItem = aMenuItem().withTarget("miss")
                 .add(aMenuItem().withTarget("hit?dead=center"))
                 .build();
 
-        assertThat("menuItem.isChildChosen", testMenuItem.isChildChosen(), is(equalTo(true)));
+        assertThat(testMenuItem.isChildChosen()).isEqualTo(true);
     }
 }

@@ -1,43 +1,56 @@
 package nu.hjemme.web.menu;
 
 import nu.hjemme.client.datatype.Name;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+@DisplayName("A MenuTarget")
 class MenuTargetTest {
 
+    @DisplayName("should have an implementation of the hash code method")
     @Test void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
         MenuTarget base = new MenuTarget(new MenuItemTarget("a target"), new Name("a menu"));
         MenuTarget equal = new MenuTarget(new MenuItemTarget("a target"), new Name("a menu"));
         MenuTarget notEqual = new MenuTarget(new MenuItemTarget("on target"), new Name("a menu"));
 
-        assertThat(base.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
+        assertAll(
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is equal to (%s).hashCode()", base, equal).isEqualTo(equal.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is not equal to (%s).hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is a number with different value", base).isNotEqualTo(0)
+        );
     }
 
+    @DisplayName("should have an implementation of the equals method")
     @Test void whenChecksForEqualityIsDoneTheValuesOfThePropertiesMustBeCorrect() {
         MenuTarget base = new MenuTarget(new MenuItemTarget("a target"), new Name("a menu"));
         MenuTarget equal = new MenuTarget(new MenuItemTarget("a target"), new Name("a menu"));
         MenuTarget notEqual = new MenuTarget(new MenuItemTarget("on target"), new Name("a menu"));
 
-        assertThat(base, implementsWith(equal, notEqual));
+        assertAll(
+                () -> assertThat(base).as("%s is equal to %s", base, equal).isEqualTo(equal),
+                () -> assertThat(base).as("%s is not equal to %s", base, notEqual).isNotEqualTo(notEqual),
+                () -> assertThat(base).as("%s is not equal to %s").isNotEqualTo(null),
+                () -> assertThat(base).as("%s is equal to %s").isEqualTo(base),
+                () -> assertThat(base).as("base is not same instance as equal").isNotSameAs(equal)
+        );
     }
 
+    @DisplayName("should have an implementation of the toString method")
     @Test void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("a target"), new Name("a menu"));
-        assertThat("toString", menuTarget.toString(), is(equalTo("MenuTarget[Name[a menu],a target]")));
+        assertThat(menuTarget.toString()).isEqualTo("MenuTarget[Name[a menu],a target]");
     }
 
+    @DisplayName("should have the name of the menu and the menu item target of that menu")
     @Test void willEncapsulateTheNameOfTheMenuAndTheTargetOnTheMenu() {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("a target"), new Name("a menu"));
 
-        assertAll("Et 'target' som inneholder navnet til menyen",
-                () -> assertThat("menuName", menuTarget.getMenuName().getName(), is(equalTo("a menu"))),
-                () -> assertThat("menuItemTarget", menuTarget.getMenuItemTarget().getTarget(), is(equalTo("a target")))
+        assertAll(
+                () -> assertThat(menuTarget.getMenuName().getName()).as("menu name").isEqualTo("a menu"),
+                () -> assertThat(menuTarget.getMenuItemTarget().getTarget()).as("menu item target").isEqualTo("a target")
         );
     }
 }
