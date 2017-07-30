@@ -1,26 +1,30 @@
 package nu.hjemme.persistence.orm.domain;
 
-import org.junit.Before;
-import org.junit.Test;
 
-import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-public class DefaultPersonEntityTest {
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+
+@DisplayName("A DefaultPersontEntity")
+class DefaultPersonEntityTest {
 
     private DefaultPersonEntity defaultPersonEntityToTest;
 
-    @Before public void initDefaultPersonEntity() {
+    @BeforeEach void initDefaultPersonEntity() {
         defaultPersonEntityToTest = new DefaultPersonEntity();
     }
 
-    @Test public void willHaveCorrectImplementedHashCode() {
-        defaultPersonEntityToTest.setAddressEntity(new DefaultAddressEntity());
-        defaultPersonEntityToTest.setDescription("some description");
-        defaultPersonEntityToTest.setFirstName("ola");
-        defaultPersonEntityToTest.setLastName("norman");
-        defaultPersonEntityToTest.setUserEntity(new DefaultUserEntity());
+    @DisplayName("should have an implementation of the hash code method")
+    @Test void willHaveCorrectImplementedHashCode() {
+        DefaultPersonEntity base = defaultPersonEntityToTest;
+        base.setAddressEntity(new DefaultAddressEntity());
+        base.setDescription("some description");
+        base.setFirstName("ola");
+        base.setLastName("norman");
+        base.setUserEntity(new DefaultUserEntity());
 
         DefaultPersonEntity equal = new DefaultPersonEntity(defaultPersonEntityToTest);
 
@@ -30,15 +34,22 @@ public class DefaultPersonEntityTest {
         notEqual.setFirstName("kari");
         notEqual.setLastName("norman");
 
-        assertThat(defaultPersonEntityToTest.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
+
+        assertAll(
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is equal to (%s).hashCode()", base, equal).isEqualTo(equal.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is not equal to (%s).hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is a number with different value", base).isNotEqualTo(0)
+        );
     }
 
-    @Test public void willHaveCorrectImplementedEquals() {
-        defaultPersonEntityToTest.setAddressEntity(new DefaultAddressEntity());
-        defaultPersonEntityToTest.setDescription("some description");
-        defaultPersonEntityToTest.setFirstName("ola");
-        defaultPersonEntityToTest.setLastName("norman");
-        defaultPersonEntityToTest.setUserEntity(new DefaultUserEntity());
+    @DisplayName("should have an implementation of the equals method")
+    @Test void willHaveCorrectImplementedEquals() {
+        DefaultPersonEntity base = defaultPersonEntityToTest;
+        base.setAddressEntity(new DefaultAddressEntity());
+        base.setDescription("some description");
+        base.setFirstName("ola");
+        base.setLastName("norman");
+        base.setUserEntity(new DefaultUserEntity());
 
         DefaultPersonEntity equal = new DefaultPersonEntity(defaultPersonEntityToTest);
 
@@ -48,38 +59,12 @@ public class DefaultPersonEntityTest {
         notEqual.setFirstName("kari");
         notEqual.setLastName("norman");
 
-        assertThat(defaultPersonEntityToTest, implementsWith(equal, notEqual));
-    }
-
-    @Test public void willBeEqualAnIdenticalEntity() {
-        DefaultUserEntity userEntity = new DefaultUserEntity();
-        DefaultAddressEntity addressEntity = new DefaultAddressEntity();
-
-        defaultPersonEntityToTest.setAddressEntity(addressEntity);
-        defaultPersonEntityToTest.setDescription("some description");
-        defaultPersonEntityToTest.setFirstName("ola");
-        defaultPersonEntityToTest.setLastName("norman");
-        defaultPersonEntityToTest.setUserEntity(userEntity);
-
-        DefaultPersonEntity equal = new DefaultPersonEntity();
-        equal.setAddressEntity(addressEntity);
-        equal.setDescription("some description");
-        equal.setFirstName("ola");
-        equal.setLastName("norman");
-        equal.setUserEntity(userEntity);
-
-        assertThat(defaultPersonEntityToTest, equalTo(equal));
-    }
-
-    @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
-        defaultPersonEntityToTest.setAddressEntity(new DefaultAddressEntity());
-        defaultPersonEntityToTest.setDescription("some description");
-        defaultPersonEntityToTest.setFirstName("ola");
-        defaultPersonEntityToTest.setLastName("norman");
-        defaultPersonEntityToTest.setUserEntity(new DefaultUserEntity());
-
-        DefaultPersonEntity equal = new DefaultPersonEntity(defaultPersonEntityToTest);
-
-        assertThat(defaultPersonEntityToTest, equalTo(equal));
+        assertAll(
+                () -> assertThat(base).as("%s is equal to %s", base, equal).isEqualTo(equal),
+                () -> assertThat(base).as("%s is not equal to %s", base, notEqual).isNotEqualTo(notEqual),
+                () -> assertThat(base).as("%s is not equal to %s").isNotEqualTo(null),
+                () -> assertThat(base).as("%s is equal to %s").isEqualTo(base),
+                () -> assertThat(base).as("base is not same instance as equal").isNotSameAs(equal)
+        );
     }
 }

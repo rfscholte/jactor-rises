@@ -1,66 +1,64 @@
 package nu.hjemme.persistence.orm.domain;
 
-import nu.hjemme.persistence.orm.time.NowAsPureDateRule;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import nu.hjemme.persistence.orm.time.NowAsPureDate;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-public class DefaultPersistentEntryTest {
+@DisplayName("A DefaultPersistentEntry")
+class DefaultPersistentEntryTest {
     private DefaultPersistentEntry defaultPersistentEntryToTest;
 
-    @Rule public NowAsPureDateRule nowAsPureDateRule = NowAsPureDateRule.init();
-
-    @Before public void initClassToTest() {
+    @BeforeEach void initClassToTest() {
+        NowAsPureDate.set();
         defaultPersistentEntryToTest = new DefaultPersistentEntry();
     }
 
-    @Test public void willHaveCorrectlyImplementedEquals() {
-        defaultPersistentEntryToTest.setCreatorName("a creator");
-        defaultPersistentEntryToTest.setEntry("some entry");
+    @DisplayName("should have an implementation of the hash code method")
+    @Test void willHaveCorrectlyImplementedHashCode() {
+        DefaultPersistentEntry base = defaultPersistentEntryToTest;
+        base.setCreatorName("a creator");
+        base.setEntry("some entry");
 
-        DefaultPersistentEntry equal = new DefaultPersistentEntry(defaultPersistentEntryToTest);
-
-        DefaultPersistentEntry notEqual = new DefaultPersistentEntry();
-        notEqual.setCreatorName("another creator");
-        notEqual.setEntry("another entry");
-
-        assertThat(defaultPersistentEntryToTest.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
-    }
-
-    @Test public void willHaveCorrectlyImplementedHashCode() {
-        defaultPersistentEntryToTest.setCreatorName("a creator");
-        defaultPersistentEntryToTest.setEntry("some entry");
-
-        DefaultPersistentEntry equal = new DefaultPersistentEntry(defaultPersistentEntryToTest);
+        DefaultPersistentEntry equal = new DefaultPersistentEntry(base);
 
         DefaultPersistentEntry notEqual = new DefaultPersistentEntry();
         notEqual.setCreatorName("another creator");
         notEqual.setEntry("another entry");
 
-        assertThat(defaultPersistentEntryToTest, implementsWith(equal, notEqual));
+        assertAll(
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is equal to (%s).hashCode()", base, equal).isEqualTo(equal.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is not equal to (%s).hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is a number with different value", base).isNotEqualTo(0)
+        );
     }
 
-    @Test public void willBeEqualAnIdenticalEntry() {
-        defaultPersistentEntryToTest.setCreatorName("a creator");
-        defaultPersistentEntryToTest.setEntry("some entry");
+    @DisplayName("should have an implementation of the equals method")
+    @Test void willHaveCorrectlyImplementedEquals() {
+        DefaultPersistentEntry base = defaultPersistentEntryToTest;
+        base.setCreatorName("a creator");
+        base.setEntry("some entry");
 
-        DefaultPersistentEntry equal = new DefaultPersistentEntry();
-        equal.setCreatorName("a creator");
-        equal.setEntry("some entry");
+        DefaultPersistentEntry equal = new DefaultPersistentEntry(base);
 
-        assertThat(defaultPersistentEntryToTest, equalTo(equal));
+        DefaultPersistentEntry notEqual = new DefaultPersistentEntry();
+        notEqual.setCreatorName("another creator");
+        notEqual.setEntry("another entry");
+
+        assertAll(
+                () -> assertThat(base).as("%s is equal to %s", base, equal).isEqualTo(equal),
+                () -> assertThat(base).as("%s is not equal to %s", base, notEqual).isNotEqualTo(notEqual),
+                () -> assertThat(base).as("%s is not equal to %s").isNotEqualTo(null),
+                () -> assertThat(base).as("%s is equal to %s").isEqualTo(base),
+                () -> assertThat(base).as("base is not same instance as equal").isNotSameAs(equal)
+        );
     }
 
-    @Test public void willBeEqualAnIdenticalEntryUsingConstructor() {
-        defaultPersistentEntryToTest.setCreatorName("a creator");
-        defaultPersistentEntryToTest.setEntry("some entry");
-
-        DefaultPersistentEntry equal = new DefaultPersistentEntry(defaultPersistentEntryToTest);
-
-        assertThat(defaultPersistentEntryToTest, equalTo(equal));
+    @AfterEach void removeNowAsPureDate() {
+        NowAsPureDate.remove();
     }
 }
