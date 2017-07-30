@@ -34,10 +34,10 @@ public class DefaultPersonEntity extends DefaultPersistentEntity implements Pers
     @Transient private String firstName;
     @Transient private String lastName;
 
-    DefaultPersonEntity() {
+    public DefaultPersonEntity() {
     }
 
-    DefaultPersonEntity(Person person) {
+    public DefaultPersonEntity(Person person) {
         addressEntity = person.getAddress() != null ? new DefaultAddressEntity(person.getAddress()) : null;
         description = convertFrom(person.getDescription(), Description.class);
         firstName = convertFrom(person.getFirstName(), Name.class);

@@ -18,9 +18,7 @@ import java.util.Optional;
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.never;
@@ -64,7 +62,7 @@ class UserDomainDaoTest {
 
     @DisplayName("should not try to find the user domain when user name is null")
     @Test void willNotFindUserNameWhichIsNull() {
-        assertThat(userDomainDaoToTest.findUsing(null), is(equalTo(Optional.empty())));
+        assertThat(userDomainDaoToTest.findUsing(null)).isEqualTo(Optional.empty());
         verify(userDaoMock, never()).findUsing(any());
     }
 
@@ -83,7 +81,7 @@ class UserDomainDaoTest {
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.empty());
         Optional<UserDomain> userDomain = userDomainDaoToTest.findUsing(new UserName("someone"));
 
-        assertThat("isPresent", userDomain.isPresent(), is(equalTo(false)));
+        assertThat(userDomain.isPresent()).as("optional user domain").isEqualTo(false);
     }
 
     @DisplayName("should return a user domain when an entity is found")
@@ -92,6 +90,6 @@ class UserDomainDaoTest {
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.of(userEntity));
 
         Optional<UserDomain> userDomain = userDomainDaoToTest.findUsing(new UserName("someone"));
-        assertThat("isPresent", userDomain.isPresent(), is(equalTo(true)));
+        assertThat(userDomain.isPresent()).as("optional user domain").isEqualTo(true);
     }
 }
