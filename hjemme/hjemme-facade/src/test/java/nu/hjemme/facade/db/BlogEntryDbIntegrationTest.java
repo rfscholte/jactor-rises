@@ -23,10 +23,7 @@ import static nu.hjemme.business.domain.BlogDomain.aBlog;
 import static nu.hjemme.business.domain.BlogEntryDomain.aBlogEntry;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeDbContext.class})
@@ -44,10 +41,10 @@ public class BlogEntryDbIntegrationTest {
 
         BlogEntryEntity blogEntry = (BlogEntryEntity) session().get(DefaultBlogEntryEntity.class, id);
 
-        assertThat("blog.title", blogEntry.getBlog().getTitle(), is(equalTo("my blog")));
-        assertThat("entry.createdTime", blogEntry.getCreatedTime(), is(notNullValue()));
-        assertThat("entry.creator", blogEntry.getCreatorName(), is(equalTo(new Name("lada"))));
-        assertThat("entry.entry", blogEntry.getEntry(), is(equalTo("svada")));
+        assertThat(blogEntry.getBlog().getTitle()).as("blog.title").isEqualTo("my blog");
+        assertThat(blogEntry.getCreatedTime()).as("entry.createdTime").isNotNull();
+        assertThat(blogEntry.getCreatorName()).as("entry.creator").isEqualTo(new Name("lada"));
+        assertThat(blogEntry.getEntry()).as("entry.entry").isEqualTo("svada");
     }
 
     private BlogEntity aPersistedBlogTitled(@SuppressWarnings("SameParameterValue") String blogTitled) {
