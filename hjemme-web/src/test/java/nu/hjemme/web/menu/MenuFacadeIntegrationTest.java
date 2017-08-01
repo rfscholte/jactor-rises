@@ -14,9 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeWebContext.class, HjemmeWebContext.class, HjemmeWebDbContext.class})
@@ -42,11 +40,11 @@ public class MenuFacadeIntegrationTest {
             Name chosenName = new Name("menu.main.jactor");
 
             if (new Name("menu.main.home").equals(itemName)) {
-                assertThat("home.children", menuItem.isChildChosen(), is(equalTo(true)));
+                assertThat(menuItem.isChildChosen()).as("home.children").isEqualTo(true);
             } else if (chosenName.equals(itemName)) {
-                assertThat("menu.main.jactor", menuItem.isChosen(), is(equalTo(true)));
+                assertThat(menuItem.isChosen()).as("menu.main.jactor").isEqualTo(true);
             } else if (!chosenName.equals(itemName)) {
-                assertThat("other item names", menuItem.isChildChosen(), is(equalTo(false)));
+                assertThat(menuItem.isChildChosen()).as("other item names").isEqualTo(false);
             }
         }
     }
