@@ -22,10 +22,7 @@ import static nu.hjemme.business.domain.GuestBookDomain.aGuestBook;
 import static nu.hjemme.business.domain.GuestBookEntryDomain.aGuestBookEntry;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeDbContext.class})
@@ -43,10 +40,10 @@ public class GuestBookEntryDbIntegrationTest {
 
         DefaultGuestBookEntryEntity guestBookEntry = (DefaultGuestBookEntryEntity) session().get(DefaultGuestBookEntryEntity.class, id);
 
-        assertThat("guest book.title", guestBookEntry.getGuestBook().getTitle(), is(equalTo("my guest book")));
-        assertThat("entry.createdTime", guestBookEntry.getCreatedTime(), is(notNullValue()));
-        assertThat("entry.creatorName", guestBookEntry.getCreatorName(), is(equalTo(new Name("lada"))));
-        assertThat("entry.entry", guestBookEntry.getEntry(), is(equalTo("svada")));
+        assertThat(guestBookEntry.getGuestBook().getTitle()).as("guest book.title").isEqualTo("my guest book");
+        assertThat(guestBookEntry.getCreatedTime()).as("entry.createdTime").isNotNull();
+        assertThat(guestBookEntry.getCreatorName()).as("entry.creatorName").isEqualTo(new Name("lada"));
+        assertThat(guestBookEntry.getEntry()).as("entry.entry").isEqualTo("svada");
     }
 
     private GuestBookEntity aPersistedGuestBookTitled(@SuppressWarnings("SameParameterValue") String blogTitled) {
@@ -62,7 +59,7 @@ public class GuestBookEntryDbIntegrationTest {
                 .with(aPerson().withDescriptionAs("description")
                         .with(anAddress().withAddressLine1As("Hjemme")
                                 .withCityAs("Dirdal")
-                                .withCountryAs("NO", "no")
+                                .withCountryAs("no", "NO")
                                 .withZipCodeAs(1234)
                         )
                 )

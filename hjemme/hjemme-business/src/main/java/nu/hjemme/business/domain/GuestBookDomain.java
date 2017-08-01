@@ -22,6 +22,6 @@ public class GuestBookDomain extends PersistentDomain<GuestBookEntity, Long> imp
     }
 
     public static GuestBookDomainBuilder aGuestBook() {
-        return new GuestBookDomainBuilder();
+        return GuestBookDomainBuilder.init();
     }
 }

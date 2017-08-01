@@ -13,9 +13,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNull.notNullValue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -30,8 +28,8 @@ public class HjemmeWebAppIntegrationTest {
     @Resource private UserController userController;
 
     @Test public void shouldGetControllers() {
-        assertThat("HomeController", homeController, is(notNullValue()));
-        assertThat("AboutController", aboutController, is(notNullValue()));
-        assertThat("UserController", userController, is(notNullValue()));
+        assertThat(homeController).as("HomeController").isNotNull();
+        assertThat(aboutController).as("AboutController").isNotNull();
+        assertThat(userController).as("UserController").isNotNull();
     }
 }

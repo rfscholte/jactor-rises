@@ -3,7 +3,11 @@ package nu.hjemme.business.domain.builder;
 import nu.hjemme.business.domain.BlogEntryDomain;
 import nu.hjemme.persistence.client.BlogEntity;
 import nu.hjemme.persistence.client.BlogEntryEntity;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Optional;
+
+import static java.util.Arrays.asList;
 
 public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
     static final String THE_ENTRY_MUST_BELONG_TO_A_BLOG = "The blog entry must belong to a blog";
@@ -11,6 +15,14 @@ public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
     static final String THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE = "The entry must be created by someone";
 
     private final BlogEntryEntity blogEntryEntity = newInstanceOf(BlogEntryEntity.class);
+
+    private BlogEntryDomainBuilder() {
+        super(asList(
+                domain -> StringUtils.isNotBlank(domain.getEntry()) ? Optional.empty() : Optional.of(THE_ENTRY_CANNOT_BE_EMPTY),
+                domain -> domain.getCreatorName() != null ? Optional.empty() : Optional.of(THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE),
+                domain -> domain.getBlog() != null ? Optional.empty() : Optional.of(THE_ENTRY_MUST_BELONG_TO_A_BLOG)
+        ));
+    }
 
     public BlogEntryDomainBuilder withEntryAs(String entry, String creator) {
         blogEntryEntity.setEntry(entry);
@@ -23,18 +35,11 @@ public class BlogEntryDomainBuilder extends DomainBuilder<BlogEntryDomain> {
         return this;
     }
 
-    public BlogEntryDomainBuilder with(BlogDomainBuilder blog) {
-        with(blog.build().getEntity());
-        return this;
-    }
-
-    @Override protected BlogEntryDomain initDomain() {
+    @Override protected BlogEntryDomain initWithRequiredFields() {
         return new BlogEntryDomain(blogEntryEntity);
     }
 
-    @Override protected void validate() {
-        Validate.notEmpty(blogEntryEntity.getEntry(), THE_ENTRY_CANNOT_BE_EMPTY);
-        Validate.notNull(blogEntryEntity.getCreatorName(), THE_ENTRY_MUST_BE_CREATED_BY_SOMEONE);
-        Validate.notNull(blogEntryEntity.getBlog(), THE_ENTRY_MUST_BELONG_TO_A_BLOG);
+    public static BlogEntryDomainBuilder init() {
+        return new BlogEntryDomainBuilder();
     }
 }

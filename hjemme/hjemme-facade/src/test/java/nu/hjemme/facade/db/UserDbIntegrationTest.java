@@ -6,6 +6,10 @@ import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.domain.Address;
 import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.persistence.client.UserEntity;
+
+import javax.annotation.Resource;
+
+import org.assertj.core.api.SoftAssertions;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
@@ -14,15 +18,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hibernate.criterion.Restrictions.eq;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,7 +31,8 @@ public class UserDbIntegrationTest {
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
 
-    @Test public void willSaveUserAndPersonToTheDatabase() {
+    @Test
+    public void willSaveUserAndPersonToTheDatabase() {
         session().save(
                 aUser().withUserNameAs("titten")
                         .withPasswordAs("demo")
@@ -41,7 +40,7 @@ public class UserDbIntegrationTest {
                         .with(aPerson().withDescriptionAs("description")
                                 .with(anAddress().withAddressLine1As("Hjemme")
                                         .withCityAs("Dirdal")
-                                        .withCountryAs("NO", "no")
+                                        .withCountryAs("no", "NO")
                                         .withZipCodeAs(1234)
                                 )
                         ).build().getEntity()
@@ -52,19 +51,22 @@ public class UserDbIntegrationTest {
 
         UserEntity userFromDb = (UserEntity) session().createCriteria(UserEntity.class).add(eq("userName", "titten")).uniqueResult();
 
-        assertThat("user.emailAddress", userFromDb.getEmailAddress(), is(equalTo(new EmailAddress("helt", "hjemme"))));
-        assertThat("user.password", userFromDb.getPassword(), is(equalTo("demo")));
-        assertThat("user.description", userFromDb.getPerson().getDescription(), is(equalTo(new Description("description"))));
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(userFromDb.getEmailAddress()).as("user.emailAddress").isEqualTo(new EmailAddress("helt", "hjemme"));
+            softly.assertThat(userFromDb.getPassword()).as("user.password").isEqualTo("demo");
+            softly.assertThat(userFromDb.getPerson().getDescription()).as("user.description").isEqualTo(new Description("description"));
+        });
     }
 
-    @Test public void willSaveUserWithAddressTheDatabase() {
+    @Test
+    public void willSaveUserWithAddressTheDatabase() {
         session().save(
                 aUser().withUserNameAs("titten")
                         .withPasswordAs("demo")
                         .with(aPerson().withDescriptionAs("description")
                                 .with(anAddress().withAddressLine1As("Hjemme")
                                         .withCityAs("Dirdal")
-                                        .withCountryAs("NO", "no")
+                                        .withCountryAs("no", "NO")
                                         .withZipCodeAs(1234)
                                 )
                         ).build().getEntity()
@@ -76,12 +78,14 @@ public class UserDbIntegrationTest {
         UserEntity userFromDb = (UserEntity) session().createCriteria(UserEntity.class).add(eq("userName", "titten")).uniqueResult();
         Address address = userFromDb.getPerson().getAddress();
 
-        assertThat("address line 1", address.getAddressLine1(), is(equalTo("Hjemme")));
-        assertThat("address line 2", address.getAddressLine2(), is(nullValue()));
-        assertThat("address line 3", address.getAddressLine3(), is(nullValue()));
-        assertThat("city", address.getCity(), is(equalTo("Dirdal")));
-        assertThat("country", address.getCountry(), is(equalTo(new Country("NO", "no"))));
-        assertThat("zip code", address.getZipCode(), is(equalTo(1234)));
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(address.getAddressLine1()).as("address line 1").isEqualTo("Hjemme");
+            softly.assertThat(address.getAddressLine2()).as("address line 2").isNull();
+            softly.assertThat(address.getAddressLine3()).as("address line 3").isNull();
+            softly.assertThat(address.getCity()).as("city").isEqualTo("Dirdal");
+            softly.assertThat(address.getCountry()).as("country").isEqualTo(new Country("no", "NO"));
+            softly.assertThat(address.getZipCode()).as("zip code").isEqualTo(1234);
+        });
     }
 
     private Session session() {

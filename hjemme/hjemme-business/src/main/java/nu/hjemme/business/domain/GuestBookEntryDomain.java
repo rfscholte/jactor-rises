@@ -33,6 +33,6 @@ public class GuestBookEntryDomain extends PersistentDomain<GuestBookEntryEntity,
     }
 
     public static GuestBookEntryDomainBuilder aGuestBookEntry() {
-        return new GuestBookEntryDomainBuilder();
+        return GuestBookEntryDomainBuilder.init();
     }
 }

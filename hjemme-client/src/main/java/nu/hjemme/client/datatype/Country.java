@@ -4,33 +4,28 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.Locale;
-import java.util.Objects;
 
 import static java.util.Arrays.asList;
-import static java.util.Objects.hash;
 import static org.apache.commons.lang.Validate.notEmpty;
 
 /**
- * Representing a country according to the ISO 3166 standard. In addition to the country, you must add a specific {@link Locale} representing the language of the country.
+ * Representing a country according to the ISO 3166 standard. In addition, the country code will together with the language code represent specific {@link Locale}.
  */
-public class Country {
+public class Country extends Language {
     private static final String VALID_COUNTRY_CODES = ", valid codes: ";
-    static final String CODE_FOR_JAVA_UTIL_LOCALE_MUST_BE_PROVIDED = "The code for a java.util.Locale must be provided.";
     static final String NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166 = " is not a valid countryCode according to ISO 3166";
     static final String THE_COUNTRY_CODE_CANNOT_BE_EMPTY = "The country code cannot be empty";
 
-    private final String countryCode;
     private final Locale locale;
 
-    public Country(String countryCode, String localeCode) {
-        validate(countryCode, localeCode);
-        this.countryCode = countryCode.toUpperCase();
-        locale = new Locale(localeCode);
+    public Country(String languageCode, String countryCode) {
+        super(languageCode);
+        validate(countryCode);
+        locale = new Locale(languageCode, countryCode);
     }
 
-    private void validate(String countryCode, String localeCode) {
+    private void validate(String countryCode) {
         notEmpty(countryCode, THE_COUNTRY_CODE_CANNOT_BE_EMPTY);
-        notEmpty(localeCode, CODE_FOR_JAVA_UTIL_LOCALE_MUST_BE_PROVIDED);
 
         String[] isoCountries = Locale.getISOCountries();
 
@@ -44,25 +39,24 @@ public class Country {
     }
 
     @Override public boolean equals(Object obj) {
-        return this == obj || obj != null && getClass() == obj.getClass() &&
-                Objects.equals(getCountryCode(), ((Country) obj).getCountryCode()) && Objects.equals(getLocale(), ((Country) obj).getLocale());
+        return this == obj || obj != null && getClass() == obj.getClass() && ((Country) obj).getLocale().equals(locale);
     }
 
     @Override public int hashCode() {
-        return hash(countryCode, locale);
+        return locale.hashCode();
     }
 
     @Override public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append(countryCode)
-                .append(locale)
+                .append(locale.toString())
                 .toString();
     }
 
-    public String getCountryCode() {
-        return countryCode;
+    public String asString() {
+        return locale.toString();
     }
 
+    @Override
     public Locale getLocale() {
         return locale;
     }

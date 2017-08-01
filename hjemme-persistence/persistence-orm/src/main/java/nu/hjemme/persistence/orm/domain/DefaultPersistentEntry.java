@@ -26,7 +26,7 @@ public class DefaultPersistentEntry implements PersistentEntry {
     private String entry;
 
     DefaultPersistentEntry() {
-        createdTime = Now.asJavaUtilDate();
+        createdTime = Now.asDate();
     }
 
     DefaultPersistentEntry(Date createdTime) {
@@ -54,7 +54,15 @@ public class DefaultPersistentEntry implements PersistentEntry {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append(getCreatedTime()).append(creatorName).append(entry).toString();
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).append(getCreatedTime()).append(creatorName).append(entryAsString()).toString();
+    }
+
+    private String entryAsString() {
+        if (entry == null || entry.length() < 50) {
+            return entry;
+        }
+
+        return entry.substring(0, 47) + "...";
     }
 
     @Override public int hashCode() {

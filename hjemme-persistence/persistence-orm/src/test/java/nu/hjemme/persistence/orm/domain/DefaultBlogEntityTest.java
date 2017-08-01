@@ -1,79 +1,85 @@
 package nu.hjemme.persistence.orm.domain;
 
-import nu.hjemme.persistence.orm.time.NowAsPureDateRule;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import nu.hjemme.persistence.orm.time.NowAsPureDate;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-public class DefaultBlogEntityTest {
-
+@DisplayName("A DefaulBlogtEntity")
+class DefaultBlogEntityTest {
     private DefaultBlogEntity defaultBlogEntityToTest;
 
-    @Rule public NowAsPureDateRule nowAsPureDateRule = NowAsPureDateRule.init();
-
-    @Before public void initDefaulBlogEntityToTest() {
+    @BeforeEach void initDefaulBlogEntityToTestWithCreationTime() {
+        NowAsPureDate.set();
         defaultBlogEntityToTest = new DefaultBlogEntity();
     }
 
-    @Test public void willHaveCorrectImplementedHashCode() {
-        DefaultUserEntity userEntity = new DefaultUserEntity();
+    @DisplayName("should have an implementation of the hash code method")
+    @Test void willHaveCorrectImplementedHashCode() {
+        DefaultBlogEntity base = defaultBlogEntityToTest;
 
-        defaultBlogEntityToTest.setTitle("title");
-        defaultBlogEntityToTest.setUserEntity(userEntity);
+        base.setTitle("title");
+        base.setUserEntity(new DefaultUserEntity());
 
-        DefaultBlogEntity equal = new DefaultBlogEntity(defaultBlogEntityToTest);
+        DefaultBlogEntity equal = new DefaultBlogEntity(base);
         equal.setTitle("title");
-        equal.setUserEntity(userEntity);
+        equal.setUserEntity(new DefaultUserEntity());
 
         DefaultBlogEntity notEqual = new DefaultBlogEntity();
         notEqual.setTitle("another title");
         notEqual.setUserEntity(new DefaultUserEntity());
 
-        assertThat(defaultBlogEntityToTest.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
+        assertAll(
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is equal to (%s).hashCode()", base, equal).isEqualTo(equal.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is not equal to (%s).hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is a number with different value", base).isNotEqualTo(0)
+        );
     }
 
-    @Test public void willHaveCorrectImplementedEquals() {
-        defaultBlogEntityToTest.setTitle("title");
-        defaultBlogEntityToTest.setUserEntity(new DefaultUserEntity());
+    @DisplayName("should have an implementation of the equals method")
+    @Test void willHaveCorrectImplementedEquals() {
+        DefaultBlogEntity base = defaultBlogEntityToTest;
 
-        DefaultBlogEntity equal = new DefaultBlogEntity(defaultBlogEntityToTest);
+        base.setTitle("title");
+        base.setUserEntity(new DefaultUserEntity());
+
+        DefaultBlogEntity equal = new DefaultBlogEntity(base);
 
         DefaultBlogEntity notEqual = new DefaultBlogEntity();
         notEqual.setTitle("another title");
         notEqual.setUserEntity(new DefaultUserEntity());
 
-        assertThat(defaultBlogEntityToTest, implementsWith(equal, notEqual));
+        assertAll(
+                () -> assertThat(base).as("%s is equal to %s", base, equal).isEqualTo(equal),
+                () -> assertThat(base).as("%s is not equal to %s", base, notEqual).isNotEqualTo(notEqual),
+                () -> assertThat(base).as("%s is not equal to %s").isNotEqualTo(null),
+                () -> assertThat(base).as("%s is equal to %s").isEqualTo(base),
+                () -> assertThat(base).as("base is not same instance as equal").isNotSameAs(equal)
+        );
     }
 
-    @Test public void willSetCreatedWhenInitialized() {
-        assertThat(defaultBlogEntityToTest.getCreated(), equalTo(LocalDate.now()));
+    @DisplayName("should set created when initialized")
+    @Test void willSetCreatedWhenInitialized() {
+        assertThat(defaultBlogEntityToTest.getCreated()).isEqualTo(LocalDate.now());
     }
 
-    @Test public void willBeEqualAnIdenticalEntity() {
-        DefaultUserEntity userEntity = new DefaultUserEntity();
+    @DisplayName("should have an implementation of the toString method")
+    @Test void shouldHaveAnImplementationOfTheToStringMethod() {
+        defaultBlogEntityToTest.setTitle("my blog");
 
-        defaultBlogEntityToTest.setTitle("title");
-        defaultBlogEntityToTest.setUserEntity(userEntity);
-
-        DefaultBlogEntity equal = new DefaultBlogEntity();
-        equal.setTitle("title");
-        equal.setUserEntity(userEntity);
-
-        assertThat(defaultBlogEntityToTest, equalTo(equal));
+        assertThat(defaultBlogEntityToTest.toString())
+                .contains("DefaultBlogEntity")
+                .contains("my blog")
+                .contains(LocalDate.now().toString());
     }
 
-    @Test public void willBeEqualAnIdenticalEntityUsingConstructor() {
-        defaultBlogEntityToTest.setTitle("title");
-        defaultBlogEntityToTest.setUserEntity(new DefaultUserEntity());
-
-        DefaultBlogEntity equal = new DefaultBlogEntity(defaultBlogEntityToTest);
-
-        assertThat(defaultBlogEntityToTest, equalTo(equal));
+    @AfterEach void removeNowAsPureDate() {
+        NowAsPureDate.remove();
     }
 }

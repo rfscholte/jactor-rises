@@ -27,13 +27,15 @@ import static java.util.Objects.hash;
 @Table(name = PersonMetadata.PERSON_TABLE)
 public class DefaultPersonEntity extends DefaultPersistentEntity implements PersonEntity {
 
-    @JoinColumn(name = PersonMetadata.ADDRESS_ID) @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) private DefaultAddressEntity addressEntity;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = PersonMetadata.ADDRESS_ID) private DefaultAddressEntity addressEntity;
     @Column(name = PersonMetadata.DESCRIPTION) private String description;
     @OneToOne(mappedBy = "personEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL) private DefaultUserEntity userEntity;
     @Transient private String firstName;
     @Transient private String lastName;
 
-    public DefaultPersonEntity() { }
+    public DefaultPersonEntity() {
+    }
 
     public DefaultPersonEntity(Person person) {
         addressEntity = person.getAddress() != null ? new DefaultAddressEntity(person.getAddress()) : null;

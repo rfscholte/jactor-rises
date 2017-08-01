@@ -1,27 +1,26 @@
 package nu.hjemme.business.facade;
 
-import nu.hjemme.business.rules.BuildValidations;
+import nu.hjemme.business.domain.UserDomain;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.client.dao.UserDao;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
+import static nu.hjemme.business.domain.AddressDomain.anAddress;
+import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
-import static nu.hjemme.business.rules.BuildValidations.Build.USER;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class UserFacadeTest {
-    @Rule public BuildValidations buildValidations = BuildValidations.skipValidationOn(USER);
+@DisplayName("A UserFacade")
+class UserFacadeTest {
 
     @InjectMocks
     private UserFacadeImpl testUserFacadeImpl;
@@ -29,17 +28,37 @@ public class UserFacadeTest {
     @Mock
     private UserDao userDaoMock;
 
-    @Test
-    public void willFindDefauldUser() {
-        when(userDaoMock.findUsing(new UserName("jactor"))).thenReturn(Optional.of(aUser().build().getEntity()));
-        Optional<User> user = testUserFacadeImpl.findUsing(new UserName("jactor"));
-        assertThat(user.isPresent(), (equalTo(true)));
+    @BeforeEach
+    void initMocking() {
+        MockitoAnnotations.initMocks(this);
     }
 
-    @Test
-    public void willNotFindUnknownUser() {
+    @DisplayName("should find a user when the user name only differs in case")
+    @Test void willFindDefauldUser() {
+        UserDomain user = aValidUser();
+        when(userDaoMock.findUsing(new UserName("jactor"))).thenReturn(Optional.of(user.getEntity()));
+        Optional<User> optionalUser = testUserFacadeImpl.findUsing(new UserName("JACTOR"));
+
+        assertThat(optionalUser.isPresent()).isEqualTo(true);
+    }
+
+    private UserDomain aValidUser() {
+        return aUser()
+                .with(aPerson()
+                        .with(anAddress()
+                                .withAddressLine1As("on the road")
+                                .withZipCodeAs(69)
+                                .withCountryAs("nb", "NO")
+                        )
+                ).withUserNameAs("turbo")
+                .withPasswordAs("something")
+                .build();
+    }
+
+    @DisplayName("should not return a user when the UserDao returns an empty optional ")
+    @Test void willNotFindUnknownUser() {
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.empty());
         Optional<User> user = testUserFacadeImpl.findUsing(new UserName("someone"));
-        assertThat(user.isPresent(), equalTo(false));
+        assertThat(user.isPresent()).isEqualTo(false);
     }
 }

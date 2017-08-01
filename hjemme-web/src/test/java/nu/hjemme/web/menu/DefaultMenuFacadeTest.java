@@ -1,54 +1,53 @@
 package nu.hjemme.web.menu;
 
 import nu.hjemme.client.datatype.Name;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static nu.hjemme.web.menu.Menu.aMenu;
 import static nu.hjemme.web.menu.MenuItem.aMenuItem;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class DefaultMenuFacadeTest {
+@DisplayName("A DefaultMenuFacade")
+class DefaultMenuFacadeTest {
 
-    @Rule public final ExpectedException expectedException = ExpectedException.none();
-
-    @Test public void willThrowExceptionIfProvidedMenusAreNull() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("Menus must be provided");
-        new DefaultMenuFacade((Menu[]) null);
+    @DisplayName("should fail if the menus provided are null")
+    @Test void willThrowExceptionIfProvidedMenusAreNull() {
+        assertThatThrownBy(() -> new DefaultMenuFacade((Menu[]) null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Menus must be provided");
     }
 
-    @Test public void willThrowExceptionIfProvidedMenusAreEmpty() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("Menus must be provided");
+    @DisplayName("should fail if there are no provided menus")
+    @Test void willThrowExceptionIfProvidedMenusAreEmpty() {
         Menu[] menus = new Menu[]{};
-
-        new DefaultMenuFacade(menus);
+        assertThatThrownBy(() -> new DefaultMenuFacade(menus))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Menus must be provided");
     }
 
-    @Test public void willFailWhenMenuIsUnknown() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("unknown menu");
-        expectedException.expectMessage("known.menu");
-        expectedException.expectMessage("unknown.menu");
-
+    @DisplayName("should fail if the menu asked for is unknown")
+    @Test void willFailWhenMenuIsUnknown() {
         MenuItemTarget somewhere = new MenuItemTarget("somewhere");
-
         DefaultMenuFacade defaultMenuFacadeToTest = new DefaultMenuFacade(aMenu().withName("known.menu").add(aMenuItem()).build());
-        defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTargetRequest(new MenuTarget(somewhere, new Name("unknown.menu"))));
+
+        assertThatThrownBy(() -> defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTargetRequest(new MenuTarget(somewhere, new Name("unknown.menu")))))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("unknown menu")
+                .hasMessageContaining("known.menu");
     }
 
-    @Test public void willFindKnownMenuItems() {
+    @DisplayName("should find menu items for known MenuTarget")
+    @Test void willFindKnownMenuItems() {
         MenuItemTarget somewhere = new MenuItemTarget("somewhere");
         MenuItem menuItem = aMenuItem().build();
         DefaultMenuFacade defaultMenuFacadeToTest = new DefaultMenuFacade(aMenu().withName("known.menu").add(menuItem).build());
 
         List<MenuItem> menuItems = defaultMenuFacadeToTest.fetchMenuItemBy(new MenuTargetRequest(new MenuTarget(somewhere, new Name("known.menu"))));
 
-        assertThat(menuItems, hasItem(menuItem));
+        assertThat(menuItems).contains(menuItem);
     }
 }

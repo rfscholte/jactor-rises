@@ -11,8 +11,8 @@ public class Parameter {
     private final String value;
 
     public Parameter(String name, String value) {
-        Validate.notEmpty(name, "The parameter name cannot be empty");
-        Validate.notEmpty(value, "The parameter value cannot be empty");
+        Validate.notBlank(name, "The parameter name cannot be blank");
+        Validate.notBlank(value, "The parameter value cannot be blank");
 
         this.name = name;
         this.value = value;

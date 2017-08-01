@@ -20,9 +20,7 @@ import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.GuestBookDomain.aGuestBook;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeDbContext.class})
@@ -41,8 +39,8 @@ public class GuestBookDbIntegrationTest {
 
         GuestBookEntity guestBook = (GuestBookEntity) session().get(DefaultGuestBookEntity.class, id);
 
-        assertThat("title", guestBook.getTitle(), is(equalTo("my guest book")));
-        assertThat("user entity id", guestBook.getUser().getId(), is(equalTo(aPersistedUser.getId())));
+        assertThat(guestBook.getTitle()).isEqualTo("my guest book");
+        assertThat(guestBook.getUser().getId()).isEqualTo(aPersistedUser.getId());
     }
 
     private UserEntity aPersistedUser() {
@@ -52,7 +50,7 @@ public class GuestBookDbIntegrationTest {
                 .with(aPerson().withDescriptionAs("description")
                         .with(anAddress().withAddressLine1As("Hjemme")
                                 .withCityAs("Dirdal")
-                                .withCountryAs("NO", "no")
+                                .withCountryAs("no", "NO")
                                 .withZipCodeAs(1234)
                         )
                 )

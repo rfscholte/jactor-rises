@@ -1,52 +1,52 @@
 package nu.hjemme.business.domain.builder;
 
-import nu.hjemme.business.rules.BuildValidations;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
+import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
-import static nu.hjemme.business.rules.BuildValidations.Build.PERSON;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class UserDomainBuilderTest {
+@DisplayName("A UserDomainBuilder")
+class UserDomainBuilderTest {
 
-    @Rule public ExpectedException expectedException = ExpectedException.none();
-
-    @Rule public BuildValidations buildValidations = BuildValidations.skipValidationOn(PERSON);
-
-    @Test public void willNotBuildUserDomainWithoutUserName() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(UserDomainBuilder.THE_USER_NAME_CANNOT_BE_NULL);
-
-        aUser().with(aPerson()).withPasswordAs("password").build();
-
+    @DisplayName("should not build an instance without a user name")
+    @Test void willNotBuildUserDomainWithoutUserName() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aUser().with(aValidPerson()).withPasswordAs("password").build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(UserDomainBuilder.THE_USER_NAME_CANNOT_BE_NULL);
     }
 
-    @Test public void willNotBuildUserDomainWithoutPerson() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(UserDomainBuilder.THE_USER_MUST_BE_A_PERSON);
-
-        aUser().withUserNameAs("some user").withPasswordAs("password").build();
+    @DisplayName("should not build an instance without a person")
+    @Test void willNotBuildUserDomainWithoutPerson() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aUser().withUserNameAs("some user").withPasswordAs("password").build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(UserDomainBuilder.THE_USER_MUST_BE_A_PERSON);
     }
 
-    @Test public void willNotBuildUserDomainWithoutPassword() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(UserDomainBuilder.THE_PASSWORD_FIELD_CANNOT_BE_EMPTY);
-
-        aUser().withUserNameAs("some user").with(aPerson()).build();
+    @DisplayName("should not build an instance without a password")
+    @Test void willNotBuildUserDomainWithoutPassword() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aUser().withUserNameAs("some user").with(aValidPerson()).build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(UserDomainBuilder.THE_FIELD_CANNOT_BE_EMPTY);
     }
 
-    @Test public void willNotBuildUserDomainWithAnEmptyPassword() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(UserDomainBuilder.THE_PASSWORD_FIELD_CANNOT_BE_EMPTY);
-
-        aUser().withUserNameAs("some user").with(aPerson()).withPasswordAs("").build();
+    @DisplayName("should not build an instance with an empty password")
+    @Test void willNotBuildUserDomainWithAnEmptyPassword() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> aUser().withUserNameAs("some user").with(aValidPerson()).build());
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(UserDomainBuilder.THE_FIELD_CANNOT_BE_EMPTY);
     }
 
-    @Test public void willBuildUserDomainWithAllRequiredProperties() {
-        assertThat(aUser().withUserNameAs("some user").with(aPerson()).withPasswordAs("password").build(), notNullValue());
+    @DisplayName("should build an instance when all required fields are set")
+    @Test void willBuildUserDomainWithAllRequiredProperties() {
+        assertThat(aUser().withUserNameAs("some user").with(aValidPerson()).withPasswordAs("password").build()).isNotNull();
+    }
+
+    private PersonDomainBuilder aValidPerson() {
+        return aPerson()
+                .with(anAddress()
+                        .withAddressLine1As("out there")
+                        .withZipCodeAs(666)
+                        .withCountryAs("nb", "NO")
+                );
     }
 }

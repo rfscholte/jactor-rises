@@ -21,7 +21,7 @@ Src code for hjemme-application (client, module, persistence, and front end)
 * spring framwork
 * hibernate
 * hsqldb
-* hamcrest
+* assertj
 * mockito
 * aspect j
 * sitemesh

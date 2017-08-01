@@ -21,9 +21,7 @@ import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.BlogDomain.aBlog;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeDbContext.class})
@@ -42,9 +40,9 @@ public class BlogDbIntegrationTest {
 
         BlogEntity blog = (BlogEntity) session().get(DefaultBlogEntity.class, id);
 
-        assertThat(blog.getCreated(), is(equalTo(LocalDate.now())));
-        assertThat(blog.getTitle(), is(equalTo("some blog")));
-        assertThat(blog.getUser().getId(), is(equalTo(persistedUser.getId())));
+        assertThat(blog.getCreated()).isEqualTo(LocalDate.now());
+        assertThat(blog.getTitle()).isEqualTo("some blog");
+        assertThat(blog.getUser().getId()).isEqualTo(persistedUser.getId());
     }
 
     private UserEntity persistUser() {
@@ -54,7 +52,7 @@ public class BlogDbIntegrationTest {
                 .with(aPerson().withDescriptionAs("description")
                         .with(anAddress().withAddressLine1As("Hjemme")
                                 .withCityAs("Dirdal")
-                                .withCountryAs("NO", "no")
+                                .withCountryAs("no", "NO")
                                 .withZipCodeAs(1234)
                         )
                 )

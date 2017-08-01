@@ -10,10 +10,11 @@
     <url>http://www.hjemme.nu</url>
 
     <prerequisites>
-        <maven>3.3.9</maven>
+        <maven>3.5</maven>
     </prerequisites>
 
     <properties>
+        <assertj.version>3.8.0</assertj.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-lang3.version>3.6</commons-lang3.version>
         <junit.version>4.12</junit.version>
@@ -22,7 +23,6 @@
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
         <maven-war-plugin.version>2.6</maven-war-plugin.version>
-        <org.hamcrest.version>1.3</org.hamcrest.version>
         <org.junit.jupiter.version>5.0.0-M4</org.junit.jupiter.version>
         <org.junit.platform.verion>1.0.0-M4</org.junit.platform.verion>
         <org.junit.vintage.version>4.12.0-M4</org.junit.vintage.version>
@@ -54,9 +54,8 @@
 
         <!-- testing -->
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <scope>test</scope>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -73,26 +72,6 @@
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- TODO remove the junit.jupiter and junit.platform dependencies below when this version (or older) is bundleded with intellij -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.0.0-M4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <version>1.0.0-M4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
-            <version>1.0.0-M4</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -105,11 +84,6 @@
 
             <!-- testing -->
             <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-all</artifactId>
-                <version>${org.hamcrest.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
                 <version>${org.junit.jupiter.version}</version>
@@ -120,6 +94,11 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>

@@ -1,25 +1,24 @@
 package nu.hjemme.business.domain.dao;
 
 import nu.hjemme.business.domain.UserDomain;
-import nu.hjemme.business.rules.BuildValidations;
+import nu.hjemme.business.domain.builder.UserDomainBuilder;
 import nu.hjemme.client.datatype.UserName;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.client.dao.UserDao;
-import nu.hjemme.persistence.orm.PersistentData;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import nu.hjemme.persistence.orm.PersistentDataService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
+import static nu.hjemme.business.domain.AddressDomain.anAddress;
+import static nu.hjemme.business.domain.PersonDomain.aPerson;
 import static nu.hjemme.business.domain.UserDomain.aUser;
-import static nu.hjemme.business.rules.BuildValidations.Build.USER;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.never;
@@ -27,48 +26,70 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class UserDomainDaoTest {
+@DisplayName("a UserDomainDao")
+class UserDomainDaoTest {
     @InjectMocks private UserDomainDao userDomainDaoToTest;
-    @Rule public BuildValidations buildValidations = BuildValidations.skipValidationOn(USER);
     @Mock private UserDao userDaoMock;
 
-    @Test public void willNotSaveNull() {
+    @BeforeEach
+    void initMocking() {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @DisplayName("should not try to save a user domain being null")
+    @Test void willNotSaveNull() {
         userDomainDaoToTest.save(null);
         verify(userDaoMock, never()).save(any());
     }
 
-    @Test public void willSaveNotNull() {
-        userDomainDaoToTest.save(aUser().build());
+    @DisplayName("should try to save a user domain not being null")
+    @Test void willSaveNotNull() {
+        userDomainDaoToTest.save(aValidUser().build());
         verify(userDaoMock, times(1)).save(notNull());
     }
 
-    @Test public void willNotFindUserNameWhichIsNull() {
-        assertThat(userDomainDaoToTest.findUsing(null), is(equalTo(Optional.empty())));
+    private UserDomainBuilder aValidUser() {
+        return aUser()
+                .with(aPerson()
+                        .with(anAddress()
+                                .withAddressLine1As("on the road")
+                                .withZipCodeAs(69)
+                                .withCountryAs("nb", "NO")
+                        )
+                ).withUserNameAs("turbo")
+                .withPasswordAs("something");
+    }
+
+    @DisplayName("should not try to find the user domain when user name is null")
+    @Test void willNotFindUserNameWhichIsNull() {
+        assertThat(userDomainDaoToTest.findUsing(null)).isEqualTo(Optional.empty());
         verify(userDaoMock, never()).findUsing(any());
     }
 
-    @Test public void willFindUserDomainBasedOnUserName() {
+    @DisplayName("should try to find the user domain when user name is not null")
+    @Test void willFindUserDomainBasedOnUserName() {
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(
-                Optional.of(PersistentData.getInstance().provideInstanceFor(UserEntity.class))
+                Optional.of(PersistentDataService.getInstance().provideInstanceFor(UserEntity.class))
         );
 
         userDomainDaoToTest.findUsing(new UserName("someone"));
         verify(userDaoMock, times(1)).findUsing(new UserName("someone"));
     }
 
-    @Test public void willNotReturnDomainWhenEntityIsNotFound() {
+    @DisplayName("should not return a user domain if no entity is found")
+    @Test void willNotReturnDomainWhenEntityIsNotFound() {
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.empty());
         Optional<UserDomain> userDomain = userDomainDaoToTest.findUsing(new UserName("someone"));
 
-        assertThat("isPresent", userDomain.isPresent(), is(equalTo(false)));
+        assertThat(userDomain.isPresent()).as("optional user domain").isEqualTo(false);
     }
 
-    @Test public void willReturnDomainWhenEntityIsFound() {
-        UserEntity userEntity = PersistentData.getInstance().provideInstanceFor(UserEntity.class);
+    @DisplayName("should return a user domain when an entity is found")
+    @Test void willReturnDomainWhenEntityIsFound() {
+        UserEntity userEntity = PersistentDataService.getInstance().provideInstanceFor(UserEntity.class);
         when(userDaoMock.findUsing(new UserName("someone"))).thenReturn(Optional.of(userEntity));
 
         Optional<UserDomain> userDomain = userDomainDaoToTest.findUsing(new UserName("someone"));
-        assertThat("isPresent", userDomain.isPresent(), is(equalTo(true)));
+        assertThat(userDomain.isPresent()).as("optional user domain").isEqualTo(true);
     }
 }

@@ -9,11 +9,8 @@ import java.time.LocalDate;
 
 public class BlogDomain extends PersistentDomain<BlogEntity, Long> implements Blog {
 
-    private final User user;
-
     public BlogDomain(BlogEntity blogEntity) {
         super(blogEntity);
-        user = new UserDomain(blogEntity.getUser());
     }
 
     @Override
@@ -23,7 +20,7 @@ public class BlogDomain extends PersistentDomain<BlogEntity, Long> implements Bl
 
     @Override
     public User getUser() {
-        return user;
+        return getEntity().getUser();
     }
 
     @Override

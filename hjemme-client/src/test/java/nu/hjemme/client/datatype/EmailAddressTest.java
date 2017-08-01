@@ -1,63 +1,85 @@
 package nu.hjemme.client.datatype;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class EmailAddressTest {
+@DisplayName("An EmailAddress")
+class EmailAddressTest {
 
-    @Rule public ExpectedException expectedException = ExpectedException.none();
-
-    @Test public void whenInvokingHashCodeTheImplementationShouldBeCorrect() {
+    @DisplayName("should have an implemention of the hashCode method")
+    @Test void whenInvokingHashCodeTheImplementationShouldBeCorrect() {
         EmailAddress base = new EmailAddress("someone", "somewhere");
         EmailAddress equal = new EmailAddress("someone", "somewhere");
         EmailAddress notEqual = new EmailAddress("anyone", "anywhere");
 
-        assertThat(base.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
+        assertAll(
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is equal to (%s).hashCode()", base, equal).isEqualTo(equal.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is not equal to (%s).hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is a number with different value", base).isNotEqualTo(0)
+        );
     }
 
-    @Test public void whenChecksForEqualityTheImplementationShouldBeCorrect() {
+    @DisplayName("should have an implementation of the equals method")
+    @Test void whenChecksForEqualityTheImplementationShouldBeCorrect() {
         EmailAddress base = new EmailAddress("someone", "somewhere");
         EmailAddress equal = new EmailAddress("someone", "somewhere");
         EmailAddress notEqual = new EmailAddress("anyone", "anywhere");
 
-        assertThat(base, implementsWith(equal, notEqual));
+        assertAll(
+                () -> assertThat(base).as("%s is equal to %s", base, equal).isEqualTo(equal),
+                () -> assertThat(base).as("%s is not equal to %s", base, notEqual).isNotEqualTo(notEqual),
+                () -> assertThat(base).as("%s is not equal to %s").isNotEqualTo(null),
+                () -> assertThat(base).as("%s is equal to %s").isEqualTo(base),
+                () -> assertThat(base).as("base is not same instance as equal").isNotSameAs(equal)
+        );
     }
 
-    @Test public void willNotInitializeWhenPrefixIsNull() {
-        expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("prefix cannot be null");
+    @DisplayName("should not initialize without a prefix")
+    @Test void willNotInitializeWhenPrefixIsNull() {
+        NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> new EmailAddress(null, "somewhere"));
+        assertThat(nullPointerException.getMessage()).isEqualTo("prefix cannot be empty");
 
-        new EmailAddress(null, "somewhere");
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> new EmailAddress("", "somewhere"));
+        assertThat(illegalArgumentException.getMessage()).isEqualTo("prefix cannot be empty");
     }
 
-    @Test public void willNotInitializeWhenSuffixIsNull() {
-        expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("suffix cannot be null");
+    @DisplayName("should not initialize without a suffix")
+    @Test void willNotInitializeWhenSuffixIsNull() {
+        NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> new EmailAddress("someone", null));
+        assertThat(nullPointerException.getMessage()).isEqualTo("suffix cannot be empty");
 
-        new EmailAddress("someone", null);
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> new EmailAddress("someone", ""));
+        assertThat(illegalArgumentException.getMessage()).isEqualTo("suffix cannot be empty");
     }
 
-    @Test public void willInitializeWithFullEmailAddress() {
-        assertThat("full email address constructor", new EmailAddress("someone@somewhere"), is(notNullValue()));
+    @DisplayName("should be initialize with full email address")
+    @Test void willInitializeWithFullEmailAddress() {
+        assertThat(new EmailAddress("someone@somewhere")).isEqualTo(new EmailAddress("someone", "somewhere"));
     }
 
-    @Test public void willNotInitializeWhenFullEmailAddressIsNull() {
-        expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("full email address is required");
+    @DisplayName("should not be initialized when the full email address is null or empty")
+    @Test void willNotInitializeWhenFullEmailAddressIsNull() {
+        NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> new EmailAddress(null));
+        assertThat(nullPointerException.getMessage()).isEqualTo("full email address is required");
 
-        new EmailAddress(null);
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> new EmailAddress(""));
+        assertThat(illegalArgumentException.getMessage()).isEqualTo("full email address is required");
     }
 
-    @Test public void willNotInitializeWithoutAtSignInConstructor() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("An email address requires a @-sign");
+    @DisplayName("should not initialize with a full email address without an @-sign")
+    @Test void willNotInitializeWithoutAtSignInConstructor() {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> new EmailAddress("someoneAreSomewhere"));
+        assertThat(illegalArgumentException.getMessage()).isEqualTo("An email address requires an @-sign");
+    }
 
-        new EmailAddress("someoneAreSomewhere");
+    @DisplayName("should implement toString")
+    @Test void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
+        assertThat(new EmailAddress("someone", "somewhere").toString())
+                .as("A toString should be implemented")
+                .isEqualTo("EmailAddress[someone@somewhere]");
     }
 }

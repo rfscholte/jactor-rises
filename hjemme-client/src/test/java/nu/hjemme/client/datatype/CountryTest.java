@@ -1,86 +1,97 @@
 package nu.hjemme.client.datatype;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
 
-import static nu.hjemme.test.matcher.EqualMatcher.implementsWith;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@DisplayName("A Country")
 class CountryTest {
 
+    @DisplayName("should not initialize when country code is not configured as ISO 3166")
     @Test void skalFeileNarInstansieringInneholderAndreLandkoderEnnFraISO3166() {
-        assertThat(
-                assertThrows(IllegalArgumentException.class, () -> new Country("illegal", "gb")).getMessage(),
-                containsString(Country.NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166)
-        );
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> new Country("gb", "illegal"));
+        assertThat(illegalArgumentException.getMessage()).contains(Country.NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166);
     }
 
+    @DisplayName("should initialize when country code is configured as ISO 3166")
     @Test void skalIkkeFeileNarInstansieringInneholderLandkoderEnnFraISO3166() {
-        assertThat("Country initialized", new Country("NO", "no"), is(notNullValue()));
+        assertThat(new Country("no", "NO")).isNotNull();
     }
 
+    @DisplayName("should have an implemention of the hashCode method")
     @Test void whenInvokingHashCodeItShouldBeImplementedCorrect() {
-        Country base = new Country("NO", "no");
-        Country equal = new Country("NO", "no");
-        Country notEqual = new Country("SE", "se");
+        Country base = new Country("no", "NO");
+        Country equal = new Country("no", "NO");
+        Country notEqual = new Country("se", "SE");
 
-        assertThat(base.hashCode(), implementsWith(equal.hashCode(), notEqual.hashCode()));
+        assertAll(
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is equal to (%s).hashCode()", base, equal).isEqualTo(equal.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is not equal to (%s).hashCode()", base, notEqual).isNotEqualTo(notEqual.hashCode()),
+                () -> assertThat(base.hashCode()).as("(%s).hashCode() is a number with different value", base).isNotEqualTo(0)
+        );
     }
 
+    @DisplayName("should have an implementation of the equals method")
     @Test void whenInvokingEqualsItShouldBeImplementedCorrect() {
-        Country base = new Country("NO", "no");
-        Country equal = new Country("NO", "no");
-        Country notEqual = new Country("SE", "se");
+        Country base = new Country("no", "NO");
+        Country equal = new Country("no", "NO");
+        Country notEqual = new Country("se", "SE");
 
-        assertThat(base, implementsWith(equal, notEqual));
+        assertAll(
+                () -> assertThat(base).as("%s is equal to %s", base, equal).isEqualTo(equal),
+                () -> assertThat(base).as("%s is not equal to %s", base, notEqual).isNotEqualTo(notEqual),
+                () -> assertThat(base).as("%s is not equal to %s").isNotEqualTo(null),
+                () -> assertThat(base).as("%s is equal to %s").isEqualTo(base),
+                () -> assertThat(base).as("base is not same instance as equal").isNotSameAs(equal)
+        );
     }
 
+    @DisplayName("should implement toString")
     @Test void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
-        assertThat("ToString", new Country("NO", "no").toString(), is(equalTo("Country[NO,no]")));
+        assertThat(new Country("no", "NO").toString())
+                .as("A toString should be implemented")
+                .isEqualTo("Country[no_NO]");
     }
 
+    @DisplayName("should not initialize when country code is null")
     @Test void skalFeileNarCountryCodeErNull() {
-        assertThat(
-                assertThrows(IllegalArgumentException.class, () -> new Country(null, "NO")).getMessage(),
-                is(equalTo(Country.THE_COUNTRY_CODE_CANNOT_BE_EMPTY))
-        );
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> new Country("NO", null));
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(Country.THE_COUNTRY_CODE_CANNOT_BE_EMPTY);
     }
 
+    @DisplayName("should not initialize when couyntry code is empty")
     @Test void skalFeileNarCountryCodeErTom() {
-        assertThat(
-                assertThrows(IllegalArgumentException.class, () -> new Country("", "NO")).getMessage(),
-                is(equalTo(Country.THE_COUNTRY_CODE_CANNOT_BE_EMPTY))
-        );
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> new Country("NO", ""));
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(Country.THE_COUNTRY_CODE_CANNOT_BE_EMPTY);
     }
 
+    @DisplayName("should not initialize when there is no language code")
     @Test void skalFeileNarLocaleCodeErNull() {
-        assertThat(
-                assertThrows(IllegalArgumentException.class, () -> new Country("NO", null)).getMessage(),
-                is(equalTo(Country.CODE_FOR_JAVA_UTIL_LOCALE_MUST_BE_PROVIDED))
-        );
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> new Country(null, "NO"));
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(Country.THE_LANGUAGE_CODE_MUST_BE_PROVIDED);
     }
 
+    @DisplayName("thould not initialize when there is an empty language code")
     @Test void skalFeileNarLocaleCodeErTom() {
-        assertThat(
-                assertThrows(IllegalArgumentException.class, () -> new Country("NO", "")).getMessage(),
-                is(equalTo(Country.CODE_FOR_JAVA_UTIL_LOCALE_MUST_BE_PROVIDED))
-        );
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> new Country("", "NO"));
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(Country.THE_LANGUAGE_CODE_MUST_BE_PROVIDED);
     }
 
-    @Test void whenCreatingAnInstanceTheLocaleCodeWillBeConvertedToJavaUtilLocale() {
-        Country country = new Country("NO", "no");
+    @DisplayName("should convert the language and country code to a java.util.Locale")
+    @Test void whenCreatingAnInstanceWillConvertCountryAndLanguageCodeToJavaUtilLocale() {
+        Country country = new Country("no", "NO");
 
-        assertThat("Code", country.getCountryCode(), is(equalTo("NO")));
-        assertThat("Locale", country.getLocale(), is(equalTo(new Locale("no"))));
+        assertThat(country.getLocale()).isEqualTo(new Locale("no", "NO"));
     }
 
-    @Test void whenCallingToStringTheStringShouldBeExcepted() {
-        assertThat("Country.toString", new Country("NO", "no").toString(), is(equalTo("Country[NO,no]")));
+    @DisplayName("should be converted to a string")
+    @Test
+    void shouldConvertToString() {
+        assertThat(new Country("no", "NO").asString()).isEqualTo("no_NO");
     }
 }
