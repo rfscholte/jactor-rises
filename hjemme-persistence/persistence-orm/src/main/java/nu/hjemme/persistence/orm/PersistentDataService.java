@@ -28,26 +28,29 @@ import static java.util.Arrays.asList;
 
 public final class PersistentDataService {
     private static final Map<Class<?>, Class<?>> SUPPORTED_CLASSES = initMapOfSupportedClasses();
-
     private static final PersistentDataService INSTACHE = new PersistentDataService();
 
     private PersistentDataService() {
         // final singleton
     }
 
-    @SuppressWarnings("unchecked") public <T> T provideInstanceFor(Class<T> interfaceToInitiate, Object... arguments) {
+    public <T> T provideInstanceFor(Class<T> interfaceToInitiate, Object... arguments) {
         if (SUPPORTED_CLASSES.containsKey(interfaceToInitiate)) {
             if (arguments == null || arguments.length == 0) {
-                return (T) initWithDefaaultConstructor(interfaceToInitiate);
+                return cast(initWithNoArgumentConstructor(interfaceToInitiate));
             }
 
-            return (T) initWithArgumentConstructor(SUPPORTED_CLASSES.get(interfaceToInitiate), arguments);
+            return cast(initWithArgumentConstructor(SUPPORTED_CLASSES.get(interfaceToInitiate), arguments));
         }
 
         throw newIllegalArgumentException(interfaceToInitiate, arguments);
     }
 
-    private Object initWithDefaaultConstructor(Class<?> interfaceToInitiate) {
+    @SuppressWarnings("unchecked") private <T> T cast(Object object) {
+        return (T) object;
+    }
+
+    private Object initWithNoArgumentConstructor(Class<?> interfaceToInitiate) {
         try {
             @SuppressWarnings("unchecked") Constructor constructor = SUPPORTED_CLASSES.get(interfaceToInitiate).getConstructor();
             return constructor.newInstance();
