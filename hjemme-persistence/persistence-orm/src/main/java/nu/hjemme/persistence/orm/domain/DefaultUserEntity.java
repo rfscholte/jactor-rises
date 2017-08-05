@@ -36,7 +36,7 @@ public class DefaultUserEntity extends DefaultPersistentEntity implements UserEn
     public DefaultUserEntity(User user) {
         password = user.getPassword();
         userName = convertFrom(user.getUserName(), UserName.class);
-        personEntity = initializeCopyWith(user.getPerson(), DefaultPersonEntity.class);
+        personEntity = constructCopy(user.getPerson(), DefaultPersonEntity.class);
         emailAddress = convertFrom(user.getEmailAddress(), EmailAddress.class);
         userNameIsEmailAddress = user.isUserNameEmailAddress();
     }

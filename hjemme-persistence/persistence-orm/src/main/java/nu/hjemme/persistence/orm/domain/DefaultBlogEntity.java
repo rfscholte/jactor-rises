@@ -34,7 +34,7 @@ public class DefaultBlogEntity extends DefaultPersistentEntity implements BlogEn
         if (blogEntity != null) {
             created = convertFrom(blogEntity.getCreated(), LocalDate.class);
             title = blogEntity.getTitle();
-            userEntity = initializeCopyWith(blogEntity.getUser(), DefaultUserEntity.class);
+            userEntity = constructCopy(blogEntity.getUser(), DefaultUserEntity.class);
         }
     }
 
