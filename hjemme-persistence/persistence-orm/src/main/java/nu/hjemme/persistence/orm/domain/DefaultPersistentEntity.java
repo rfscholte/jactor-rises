@@ -49,56 +49,68 @@ public abstract class DefaultPersistentEntity implements Persistent<Long> {
         updatedTime = new Date();
     }
 
-    @SuppressWarnings("unchecked") <To, From> To convertTo(From from, Class<To> classType) {
-        if (isValidValue(classType)) {
-            return (To) dataTypeConverters.get(classType).convertTo(from);
+    @SuppressWarnings("unchecked") <T, F> T convertTo(F from, Class<T> classType) {
+        if (canConvert(classType)) {
+            return cast(dataTypeConverters.get(classType).convertTo(from));
         }
 
         throw new IllegalArgumentException(classType + " is not a type known for any converter!");
     }
 
-    @SuppressWarnings("unchecked") <To, From> From convertFrom(To to, Class<To> classType) {
-        if (isValidValue(classType)) {
-            return (From) dataTypeConverters.get(classType).convertFrom(to);
+    @SuppressWarnings("unchecked") <T, F> F convertFrom(T to, Class<T> classType) {
+        if (canConvert(classType)) {
+            return cast(dataTypeConverters.get(classType).convertFrom(to));
         }
 
         throw new IllegalArgumentException(classType + " is not a type known for any converter!");
     }
 
-    private <DataType> boolean isValidValue(Class<DataType> classType) {
+    private boolean canConvert(Class<?> classType) {
         return !(classType != null && !dataTypeConverters.containsKey(classType));
     }
 
-    @SuppressWarnings("unchecked") <Implementation extends Obj, Obj> Implementation castOrInitializeCopyWith(Obj object, Class<Implementation> implementation) {
-        if (object == null) {
+    <E extends I, I> E castOrInitializeCopyWith(I iFace, Class<E> entityClass) {
+        if (iFace == null) {
             return null;
         }
 
-        if (implementation.isAssignableFrom(object.getClass())) {
-            return (Implementation) object;
+        if (entityClass.isAssignableFrom(iFace.getClass())) {
+            return cast(iFace);
         }
 
-        if (!implementation.isAssignableFrom(object.getClass())) {
-            throw new IllegalArgumentException(createErrorMessageUsing(object, implementation));
+        if (!entityClass.isAssignableFrom(iFace.getClass())) {
+            throw new IllegalArgumentException(createErrorMessageUsing(iFace, entityClass));
         }
 
-        return initializeCopyWith(object, implementation);
+        return constructCopy(iFace, entityClass);
     }
 
-    @SuppressWarnings("unchecked") <Implementation extends Obj, Obj> Implementation initializeCopyWith(Obj object, Class<Implementation> implementation) {
-        if (object != null) {
-            for (Constructor<?> constructor : implementation.getConstructors()) {
-                if (constructor.getParameterCount() == 1) {
-                    try {
-                        return (Implementation) constructor.newInstance(object);
-                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                        throw new IllegalArgumentException(createErrorMessageUsing(object, implementation), e);
-                    }
+    <E extends I, I> E constructCopy(I iFace, Class<E> entityClass) {
+        if (iFace != null) {
+            for (Constructor<?> constructor : entityClass.getConstructors()) {
+                if (constructor.getParameterCount() == 1 && isCorrectParameterType(constructor.getParameterTypes()[0], entityClass)) {
+                    return constructCopy(iFace, entityClass, constructor);
                 }
             }
         }
 
         return null;
+    }
+
+    private boolean isCorrectParameterType(Class<?> aClass, Class<?> entityClass) {
+        return aClass.equals(entityClass);
+    }
+
+    private <E extends I, I> E constructCopy(I iFace, Class<E> implementation, Constructor<?> constructor) {
+        try {
+            return cast(constructor.newInstance(iFace));
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new IllegalArgumentException(createErrorMessageUsing(iFace, implementation), e);
+        }
+    }
+
+    @SuppressWarnings("unchecked") private <T> T cast(Object object) {
+        return (T) object;
     }
 
     private String createErrorMessageUsing(Object object, Class<?> implementation) {
