@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.mockito.Mockito.mock;
 
 @DisplayName("The PersistentDataService")
@@ -16,7 +16,8 @@ class PersistentDataServiceTest {
 
     @DisplayName("should fail when not configured for the requested class")
     @Test void willThrowExceptionIfInterfaceIsNotConfiguredForNewInstances() {
-        assertThrows(IllegalArgumentException.class, () -> PersistentDataService.getInstance().provideInstanceFor(Name.class));
+        assertThatIllegalArgumentException().isThrownBy(() -> PersistentDataService.getInstance().provideInstanceFor(Name.class))
+                .withMessageContaining("unable to create instance");
     }
 
     @DisplayName("should find an implementation of the class (interface)")
