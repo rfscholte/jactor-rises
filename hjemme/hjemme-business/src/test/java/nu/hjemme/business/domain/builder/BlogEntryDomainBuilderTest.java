@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.persistence.client.BlogEntity;
-import nu.hjemme.persistence.orm.PersistentDataService;
+import nu.hjemme.persistence.facade.PersistentDataService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

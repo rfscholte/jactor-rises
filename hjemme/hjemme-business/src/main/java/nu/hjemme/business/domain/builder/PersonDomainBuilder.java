@@ -3,7 +3,7 @@ package nu.hjemme.business.domain.builder;
 import nu.hjemme.business.domain.AddressDomain;
 import nu.hjemme.business.domain.PersonDomain;
 import nu.hjemme.persistence.client.PersonEntity;
-import nu.hjemme.persistence.orm.PersistentDataService;
+import nu.hjemme.persistence.facade.PersistentDataService;
 
 import java.util.Optional;
 

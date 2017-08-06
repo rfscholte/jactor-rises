@@ -3,7 +3,7 @@ package nu.hjemme.facade.config;
 import nu.hjemme.business.facade.UserFacadeImpl;
 import nu.hjemme.client.facade.UserFacade;
 import nu.hjemme.persistence.client.dao.UserDao;
-import nu.hjemme.persistence.orm.PersistentDataService;
+import nu.hjemme.persistence.facade.PersistentDataService;
 import nu.hjemme.persistence.orm.dao.DefaultUserDao;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
