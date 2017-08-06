@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.orm;
+package nu.hjemme.persistence.facade;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.User;

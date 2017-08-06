@@ -1,4 +1,4 @@
-package nu.hjemme.persistence.orm;
+package nu.hjemme.persistence.facade;
 
 import nu.hjemme.persistence.client.AddressEntity;
 import nu.hjemme.persistence.client.BlogEntity;

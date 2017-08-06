@@ -1,7 +1,7 @@
 package nu.hjemme.business.domain.builder;
 
 import nu.hjemme.business.domain.builder.FieldValidator.ValidateField;
-import nu.hjemme.persistence.orm.PersistentDataService;
+import nu.hjemme.persistence.facade.PersistentDataService;
 
 import java.util.List;
 
