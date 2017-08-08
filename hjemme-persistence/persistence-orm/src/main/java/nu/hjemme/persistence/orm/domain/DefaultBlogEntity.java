@@ -31,11 +31,9 @@ public class DefaultBlogEntity extends DefaultPersistentEntity implements BlogEn
     }
 
     public DefaultBlogEntity(BlogEntity blogEntity) {
-        if (blogEntity != null) {
-            created = convertFrom(blogEntity.getCreated(), LocalDate.class);
-            title = blogEntity.getTitle();
-            userEntity = constructCopy(blogEntity.getUser(), DefaultUserEntity.class);
-        }
+        created = convertFrom(blogEntity.getCreated(), LocalDate.class);
+        title = blogEntity.getTitle();
+        userEntity = constructCopy(blogEntity.getUser(), DefaultUserEntity.class);
     }
 
     @Override public boolean equals(Object o) {
@@ -50,7 +48,7 @@ public class DefaultBlogEntity extends DefaultPersistentEntity implements BlogEn
     }
 
     @Override public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .appendSuper(super.toString())
                 .append(getCreated())
                 .append(getTitle())

@@ -98,7 +98,7 @@ public abstract class DefaultPersistentEntity implements Persistent<Long> {
     }
 
     private boolean isCorrectParameterType(Class<?> aClass, Class<?> entityClass) {
-        return aClass.equals(entityClass);
+        return aClass.isAssignableFrom(entityClass);
     }
 
     private <E extends I, I> E constructCopy(I iFace, Class<E> implementation, Constructor<?> constructor) {

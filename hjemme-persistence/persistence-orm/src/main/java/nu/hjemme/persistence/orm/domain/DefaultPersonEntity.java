@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.util.Locale;
 import java.util.Objects;
 
 import static java.util.Objects.hash;
@@ -33,6 +34,7 @@ public class DefaultPersonEntity extends DefaultPersistentEntity implements Pers
     @OneToOne(mappedBy = "personEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL) private DefaultUserEntity userEntity;
     @Transient private String firstName;
     @Transient private String lastName;
+    @Transient private Locale locale;
 
     public DefaultPersonEntity() {
     }
@@ -43,6 +45,7 @@ public class DefaultPersonEntity extends DefaultPersistentEntity implements Pers
         firstName = convertFrom(person.getFirstName(), Name.class);
         lastName = convertFrom(person.getLastName(), Name.class);
         userEntity = person.getUser() != null ? new DefaultUserEntity(person.getUser()) : null;
+        locale = person.getLocale();
     }
 
     @Override public boolean equals(Object o) {
@@ -52,15 +55,16 @@ public class DefaultPersonEntity extends DefaultPersistentEntity implements Pers
                 Objects.equals(description, ((DefaultPersonEntity) o).description) &&
                 Objects.equals(firstName, ((DefaultPersonEntity) o).firstName) &&
                 Objects.equals(lastName, ((DefaultPersonEntity) o).lastName) &&
-                Objects.equals(userEntity, ((DefaultPersonEntity) o).userEntity);
+                Objects.equals(userEntity, ((DefaultPersonEntity) o).userEntity) &&
+                Objects.equals(locale, ((DefaultPersonEntity) o).locale);
     }
 
     @Override public int hashCode() {
-        return hash(addressEntity, description, firstName, lastName, userEntity);
+        return hash(addressEntity, description, firstName, lastName, userEntity, locale);
     }
 
     @Override public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .appendSuper(super.toString()).append(firstName).append(lastName).append(userEntity).append(addressEntity).toString();
     }
 
@@ -74,6 +78,10 @@ public class DefaultPersonEntity extends DefaultPersistentEntity implements Pers
 
     @Override public Name getLastName() {
         return convertTo(lastName, Name.class);
+    }
+
+    @Override public Locale getLocale() {
+        return locale;
     }
 
     @Override public Description getDescription() {
@@ -102,5 +110,9 @@ public class DefaultPersonEntity extends DefaultPersistentEntity implements Pers
 
     @Override public void setUserEntity(UserEntity userEntity) {
         this.userEntity = castOrInitializeCopyWith(userEntity, DefaultUserEntity.class);
+    }
+
+    @Override public void setLocale(Locale locale) {
+        this.locale = locale;
     }
 }

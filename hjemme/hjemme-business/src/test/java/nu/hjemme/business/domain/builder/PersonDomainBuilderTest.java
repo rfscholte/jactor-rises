@@ -25,7 +25,7 @@ class PersonDomainBuilderTest {
                 .with(anAddress()
                         .withAddressLine1As("somewhere")
                         .withZipCodeAs(1234)
-                        .withCountryAs("no", "NO")
+                        .withCountryAs("NO")
                 ).withDescriptionAs("description field only for coverage")
                 .build();
 

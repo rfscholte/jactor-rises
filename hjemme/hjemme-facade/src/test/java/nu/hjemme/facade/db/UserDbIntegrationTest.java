@@ -6,9 +6,6 @@ import nu.hjemme.client.datatype.EmailAddress;
 import nu.hjemme.client.domain.Address;
 import nu.hjemme.facade.config.HjemmeDbContext;
 import nu.hjemme.persistence.client.UserEntity;
-
-import javax.annotation.Resource;
-
 import org.assertj.core.api.SoftAssertions;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,6 +14,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 import static nu.hjemme.business.domain.AddressDomain.anAddress;
 import static nu.hjemme.business.domain.PersonDomain.aPerson;
@@ -40,7 +39,7 @@ public class UserDbIntegrationTest {
                         .with(aPerson().withDescriptionAs("description")
                                 .with(anAddress().withAddressLine1As("Hjemme")
                                         .withCityAs("Dirdal")
-                                        .withCountryAs("no", "NO")
+                                        .withCountryAs("NO")
                                         .withZipCodeAs(1234)
                                 )
                         ).build().getEntity()
@@ -66,7 +65,7 @@ public class UserDbIntegrationTest {
                         .with(aPerson().withDescriptionAs("description")
                                 .with(anAddress().withAddressLine1As("Hjemme")
                                         .withCityAs("Dirdal")
-                                        .withCountryAs("no", "NO")
+                                        .withCountryAs("NO")
                                         .withZipCodeAs(1234)
                                 )
                         ).build().getEntity()
@@ -83,7 +82,7 @@ public class UserDbIntegrationTest {
             softly.assertThat(address.getAddressLine2()).as("address line 2").isNull();
             softly.assertThat(address.getAddressLine3()).as("address line 3").isNull();
             softly.assertThat(address.getCity()).as("city").isEqualTo("Dirdal");
-            softly.assertThat(address.getCountry()).as("country").isEqualTo(new Country("no", "NO"));
+            softly.assertThat(address.getCountry()).as("country").isEqualTo(new Country("NO"));
             softly.assertThat(address.getZipCode()).as("zip code").isEqualTo(1234);
         });
     }

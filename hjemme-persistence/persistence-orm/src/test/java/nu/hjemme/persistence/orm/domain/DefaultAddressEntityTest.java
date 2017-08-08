@@ -1,6 +1,5 @@
 package nu.hjemme.persistence.orm.domain;
 
-import nu.hjemme.persistence.client.converter.CountryConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ class DefaultAddressEntityTest {
         DefaultAddressEntity base = defaultAddressEntityToTest;
         base.setAddressLine1("somewhere");
         base.setZipCode(1234);
-        base.setCountry("no" + CountryConverter.SPLITTER + "NO");
+        base.setCountry("NO");
         base.setCity("some city");
         base.setAddressLine2("somewhere else");
         base.setAddressLine3("way out there");
@@ -32,7 +31,7 @@ class DefaultAddressEntityTest {
         DefaultAddressEntity notEqual = new DefaultAddressEntity();
         notEqual.setAddressLine1("somewhere else");
         notEqual.setZipCode(5678);
-        notEqual.setCountry("SE" + CountryConverter.SPLITTER + "se");
+        notEqual.setCountry("SE");
         notEqual.setCity("some other city");
         notEqual.setAddressLine2("some place");
         notEqual.setAddressLine3("in the distance");
@@ -49,7 +48,7 @@ class DefaultAddressEntityTest {
         DefaultAddressEntity base = defaultAddressEntityToTest;
         base.setAddressLine1("somewhere");
         base.setZipCode(1234);
-        base.setCountry("no" + CountryConverter.SPLITTER + "NO");
+        base.setCountry("NO");
         base.setCity("some city");
         base.setAddressLine2("somewhere else");
         base.setAddressLine3("way out there");
@@ -59,7 +58,7 @@ class DefaultAddressEntityTest {
         DefaultAddressEntity notEqual = new DefaultAddressEntity();
         notEqual.setAddressLine1("somewhere else");
         notEqual.setZipCode(5678);
-        notEqual.setCountry("SE" + CountryConverter.SPLITTER + "se");
+        notEqual.setCountry("SE");
         notEqual.setCity("some other city");
         notEqual.setAddressLine2("some place");
         notEqual.setAddressLine3("in the distance");

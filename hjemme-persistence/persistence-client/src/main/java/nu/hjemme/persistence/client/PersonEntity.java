@@ -2,6 +2,8 @@ package nu.hjemme.persistence.client;
 
 import nu.hjemme.client.domain.Person;
 
+import java.util.Locale;
+
 public interface PersonEntity extends Person {
     @Override UserEntity getUser();
 
@@ -14,4 +16,6 @@ public interface PersonEntity extends Person {
     void setLastName(String lastName);
 
     void setUserEntity(UserEntity userEntity);
+
+    void setLocale(Locale locale);
 }

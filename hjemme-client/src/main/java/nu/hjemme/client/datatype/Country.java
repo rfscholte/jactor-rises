@@ -11,17 +11,15 @@ import static org.apache.commons.lang.Validate.notEmpty;
 /**
  * Representing a country according to the ISO 3166 standard. In addition, the country code will together with the language code represent specific {@link Locale}.
  */
-public class Country extends Language {
+public class Country {
     private static final String VALID_COUNTRY_CODES = ", valid codes: ";
     static final String NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166 = " is not a valid countryCode according to ISO 3166";
     static final String THE_COUNTRY_CODE_CANNOT_BE_EMPTY = "The country code cannot be empty";
+    private String countryCode;
 
-    private final Locale locale;
-
-    public Country(String languageCode, String countryCode) {
-        super(languageCode);
+    public Country(String countryCode) {
+        this.countryCode = countryCode;
         validate(countryCode);
-        locale = new Locale(languageCode, countryCode);
     }
 
     private void validate(String countryCode) {
@@ -39,25 +37,20 @@ public class Country extends Language {
     }
 
     @Override public boolean equals(Object obj) {
-        return this == obj || obj != null && getClass() == obj.getClass() && ((Country) obj).getLocale().equals(locale);
+        return this == obj || obj != null && getClass() == obj.getClass() && ((Country) obj).getCountryCode().equals(countryCode);
     }
 
     @Override public int hashCode() {
-        return locale.hashCode();
+        return countryCode.hashCode();
     }
 
     @Override public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append(locale.toString())
+                .append(countryCode)
                 .toString();
     }
 
-    public String asString() {
-        return locale.toString();
-    }
-
-    @Override
-    public Locale getLocale() {
-        return locale;
+    public String getCountryCode() {
+        return countryCode;
     }
 }
