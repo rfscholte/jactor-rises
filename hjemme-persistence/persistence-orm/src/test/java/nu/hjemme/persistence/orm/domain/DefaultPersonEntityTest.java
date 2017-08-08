@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -25,6 +27,7 @@ class DefaultPersonEntityTest {
         base.setFirstName("ola");
         base.setLastName("norman");
         base.setUserEntity(new DefaultUserEntity());
+        base.setLocale(new Locale("no"));
 
         DefaultPersonEntity equal = new DefaultPersonEntity(defaultPersonEntityToTest);
 
@@ -33,7 +36,7 @@ class DefaultPersonEntityTest {
         notEqual.setDescription("some other description");
         notEqual.setFirstName("kari");
         notEqual.setLastName("norman");
-
+        notEqual.setLocale(new Locale("se"));
 
         assertAll(
                 () -> assertThat(base.hashCode()).as("(%s).hashCode() is equal to (%s).hashCode()", base, equal).isEqualTo(equal.hashCode()),
@@ -50,6 +53,7 @@ class DefaultPersonEntityTest {
         base.setFirstName("ola");
         base.setLastName("norman");
         base.setUserEntity(new DefaultUserEntity());
+        base.setLocale(new Locale("no"));
 
         DefaultPersonEntity equal = new DefaultPersonEntity(defaultPersonEntityToTest);
 
@@ -58,6 +62,7 @@ class DefaultPersonEntityTest {
         notEqual.setDescription("some other description");
         notEqual.setFirstName("kari");
         notEqual.setLastName("norman");
+        notEqual.setLocale(new Locale("se"));
 
         assertAll(
                 () -> assertThat(base).as("%s is equal to %s", base, equal).isEqualTo(equal),

@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Optional;
 
 import static java.util.Arrays.asList;
-import static nu.hjemme.persistence.client.converter.CountryConverter.SPLITTER;
 
 public final class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
     static final String ADDRESS_LINE_1_CANNOT_BE_EMPTY = "Address line 1 cannot be empty";
@@ -29,8 +28,8 @@ public final class AddressDomainBuilder extends DomainBuilder<AddressDomain> {
         return this;
     }
 
-    public AddressDomainBuilder withCountryAs(String language, String country) {
-        addressEntity.setCountry(language + SPLITTER + country);
+    public AddressDomainBuilder withCountryAs(String country) {
+        addressEntity.setCountry(country);
         return this;
     }
 

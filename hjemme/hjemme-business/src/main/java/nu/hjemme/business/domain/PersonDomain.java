@@ -7,6 +7,8 @@ import nu.hjemme.client.domain.Address;
 import nu.hjemme.client.domain.Person;
 import nu.hjemme.persistence.client.PersonEntity;
 
+import java.util.Locale;
+
 public class PersonDomain extends PersistentDomain<PersonEntity, Long> implements Person {
 
     public PersonDomain(PersonEntity personEntity) {
@@ -27,6 +29,10 @@ public class PersonDomain extends PersistentDomain<PersonEntity, Long> implement
 
     @Override public Name getLastName() {
         return getEntity().getLastName();
+    }
+
+    @Override public Locale getLocale() {
+        return getEntity().getLocale();
     }
 
     @Override public Address getAddress() {

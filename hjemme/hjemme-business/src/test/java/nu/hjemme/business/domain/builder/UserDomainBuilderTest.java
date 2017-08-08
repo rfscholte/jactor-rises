@@ -46,7 +46,7 @@ class UserDomainBuilderTest {
                 .with(anAddress()
                         .withAddressLine1As("out there")
                         .withZipCodeAs(666)
-                        .withCountryAs("nb", "NO")
+                        .withCountryAs("NO")
                 );
     }
 }

@@ -48,7 +48,7 @@ class UserFacadeTest {
                         .with(anAddress()
                                 .withAddressLine1As("on the road")
                                 .withZipCodeAs(69)
-                                .withCountryAs("nb", "NO")
+                                .withCountryAs("NO")
                         )
                 ).withUserNameAs("turbo")
                 .withPasswordAs("something")

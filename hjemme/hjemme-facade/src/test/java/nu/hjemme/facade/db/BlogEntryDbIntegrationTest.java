@@ -61,7 +61,7 @@ public class BlogEntryDbIntegrationTest {
                 .with(aPerson().withDescriptionAs("description")
                         .with(anAddress().withAddressLine1As("Hjemme")
                                 .withCityAs("Dirdal")
-                                .withCountryAs("no", "NO")
+                                .withCountryAs("NO")
                                 .withZipCodeAs(1234)
                         )
                 )
