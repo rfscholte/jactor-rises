@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.Locale;
 
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang.Validate.notEmpty;
+import static org.apache.commons.lang3.Validate.notEmpty;
 
 /**
  * Representing a country according to the ISO 3166 standard. In addition, the country code will together with the language code represent specific {@link Locale}.

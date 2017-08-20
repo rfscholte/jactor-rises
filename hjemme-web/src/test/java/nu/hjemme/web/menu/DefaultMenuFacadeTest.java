@@ -9,6 +9,8 @@ import java.util.List;
 import static nu.hjemme.web.menu.Menu.aMenu;
 import static nu.hjemme.web.menu.MenuItem.aMenuItem;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("A DefaultMenuFacade")
@@ -16,17 +18,15 @@ class DefaultMenuFacadeTest {
 
     @DisplayName("should fail if the menus provided are null")
     @Test void willThrowExceptionIfProvidedMenusAreNull() {
-        assertThatThrownBy(() -> new DefaultMenuFacade((Menu[]) null))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Menus must be provided");
+        assertThatNullPointerException().isThrownBy(() -> new DefaultMenuFacade((Menu[]) null))
+                .withMessage("Menus must be provided");
     }
 
     @DisplayName("should fail if there are no provided menus")
     @Test void willThrowExceptionIfProvidedMenusAreEmpty() {
         Menu[] menus = new Menu[]{};
-        assertThatThrownBy(() -> new DefaultMenuFacade(menus))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Menus must be provided");
+        assertThatIllegalArgumentException().isThrownBy(() -> new DefaultMenuFacade(menus))
+                .withMessage("Menus must be provided");
     }
 
     @DisplayName("should fail if the menu asked for is unknown")

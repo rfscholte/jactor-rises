@@ -24,7 +24,6 @@
     <description>The build for the persistence layer in hjemme.nu</description>
 
     <properties>
-        <commons-lang.version>2.6</commons-lang.version>
         <commons-dbcp.version>2.1.1</commons-dbcp.version>
         <hibernate.version>4.2.0.Final</hibernate.version>
         <javax.persistence.version>1.0.2</javax.persistence.version>
@@ -69,9 +68,9 @@
 
             <!-- third party -->
             <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>${commons-lang.version}</version>
+                <groupId>org.apache.commonsg</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${apache.commons.lang3.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
@@ -131,7 +130,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>${org.mockito.version}</version>
+                <version>${mockito.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

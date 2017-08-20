@@ -5,8 +5,8 @@ import nu.hjemme.client.domain.GuestBookEntry;
 import nu.hjemme.persistence.client.GuestBookEntity;
 import nu.hjemme.persistence.client.GuestBookEntryEntity;
 import nu.hjemme.persistence.orm.meta.GuestBookEntryMetadata;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;

@@ -2,25 +2,25 @@ package nu.hjemme.business.domain;
 
 import nu.hjemme.client.datatype.Name;
 import nu.hjemme.client.domain.Persistent;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 import java.time.LocalDateTime;
 
-public abstract class PersistentDomain<Entity extends Persistent<Id>, Id> implements Persistent<Id> {
+public abstract class PersistentDomain<T extends Persistent<I>, I> implements Persistent<I> {
     static final String THE_ENTITY_ON_THE_DOMAIN_CANNOT_BE_NULL = "The Entity on the domain cannot be null!";
 
-    private final Entity entity;
+    private final T entity;
 
-    protected PersistentDomain(Entity entity) {
+    PersistentDomain(T entity) {
         Validate.notNull(entity, THE_ENTITY_ON_THE_DOMAIN_CANNOT_BE_NULL);
         this.entity = entity;
     }
 
-    public Entity getEntity() {
+    public T getEntity() {
         return entity;
     }
 
-    @Override public Id getId() {
+    @Override public I getId() {
         return entity.getId();
     }
 

@@ -4,8 +4,8 @@ import nu.hjemme.client.datatype.Name;
 import nu.hjemme.persistence.client.BlogEntity;
 import nu.hjemme.persistence.client.BlogEntryEntity;
 import nu.hjemme.persistence.orm.meta.BlogEntryMetadata;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;

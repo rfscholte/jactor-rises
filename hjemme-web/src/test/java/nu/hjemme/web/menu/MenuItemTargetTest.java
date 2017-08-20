@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -46,8 +47,8 @@ class MenuItemTargetTest {
 
     @DisplayName("should not initialize with a target being null")
     @Test void whenInitializingTheTargetCannotBeNull() {
-        assertThat(assertThrows(IllegalArgumentException.class, () -> new MenuItemTarget((String) null)).getMessage())
-                .isEqualTo(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY);
+        assertThatNullPointerException().isThrownBy(() -> new MenuItemTarget((String) null))
+                .withMessage(MenuItemTarget.THE_TARGET_CANNOT_BE_EMPTY);
     }
 
     @DisplayName("should not initialize with a target being null")

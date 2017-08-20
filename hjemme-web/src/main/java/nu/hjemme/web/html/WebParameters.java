@@ -1,6 +1,6 @@
 package nu.hjemme.web.html;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;

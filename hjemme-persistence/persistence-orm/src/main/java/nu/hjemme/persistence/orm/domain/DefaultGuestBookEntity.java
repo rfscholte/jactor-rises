@@ -4,8 +4,8 @@ import nu.hjemme.client.domain.GuestBook;
 import nu.hjemme.client.domain.User;
 import nu.hjemme.persistence.client.GuestBookEntity;
 import nu.hjemme.persistence.client.UserEntity;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,9 +28,12 @@ public class DefaultGuestBookEntity extends DefaultPersistentEntity implements G
     @Column(name = TITLE) private String title;
     @JoinColumn(name = USER) @OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY) private DefaultUserEntity user;
 
-    public DefaultGuestBookEntity() { }
+    public DefaultGuestBookEntity() {
+    }
 
-    /** @param guestBook will be used to copy an instance... */
+    /**
+     * @param guestBook will be used to copy an instance...
+     */
     public DefaultGuestBookEntity(GuestBook guestBook) {
         title = guestBook.getTitle();
         user = castOrInitializeCopyWith(guestBook.getUser(), DefaultUserEntity.class);

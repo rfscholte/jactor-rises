@@ -6,8 +6,8 @@ import nu.hjemme.persistence.client.PersistentEntry;
 import nu.hjemme.persistence.client.converter.LocalDateTimeConverter;
 import nu.hjemme.persistence.client.converter.NameConverter;
 import nu.hjemme.persistence.orm.time.Now;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.Embeddable;
 import java.time.LocalDateTime;

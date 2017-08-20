@@ -4,8 +4,8 @@ import nu.hjemme.client.datatype.Country;
 import nu.hjemme.client.domain.Address;
 import nu.hjemme.persistence.client.AddressEntity;
 import nu.hjemme.persistence.orm.meta.AddressMetadata;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,9 +25,12 @@ public class DefaultAddressEntity extends DefaultPersistentEntity implements Add
     @Column(name = AddressMetadata.ADDRESS_LINE_3) private String addressLine3;
     @Column(name = AddressMetadata.CITY) private String city;
 
-    public DefaultAddressEntity() { }
+    public DefaultAddressEntity() {
+    }
 
-    /** @param address to copy */
+    /**
+     * @param address to copy
+     */
     public DefaultAddressEntity(Address address) {
         if (address != null) {
             addressLine1 = address.getAddressLine1();
