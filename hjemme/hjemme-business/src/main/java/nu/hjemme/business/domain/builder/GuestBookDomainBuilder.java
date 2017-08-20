@@ -3,7 +3,7 @@ package nu.hjemme.business.domain.builder;
 import nu.hjemme.business.domain.GuestBookDomain;
 import nu.hjemme.persistence.client.GuestBookEntity;
 import nu.hjemme.persistence.client.UserEntity;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Optional;
 

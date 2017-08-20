@@ -3,8 +3,8 @@ package nu.hjemme.persistence.orm.domain;
 import nu.hjemme.persistence.client.BlogEntity;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.orm.meta.BlogMetadata;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

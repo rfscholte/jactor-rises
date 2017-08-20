@@ -3,7 +3,7 @@ package nu.hjemme.client.datatype;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import static org.apache.commons.lang.Validate.notEmpty;
+import static org.apache.commons.lang3.Validate.notEmpty;
 
 /** A bean representing a name */
 public class Name implements Comparable<Name> {

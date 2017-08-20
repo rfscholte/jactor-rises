@@ -22,7 +22,6 @@
     </modules>
 
     <properties>
-        <commons-lang.version>2.6</commons-lang.version>
         <commons-dbcp.version>2.1.1</commons-dbcp.version>
         <hibernate.version>4.2.0.Final</hibernate.version>
         <javax.persistence.version>1.0.2</javax.persistence.version>

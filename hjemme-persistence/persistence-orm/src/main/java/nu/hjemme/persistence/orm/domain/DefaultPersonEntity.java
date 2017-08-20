@@ -7,8 +7,8 @@ import nu.hjemme.persistence.client.AddressEntity;
 import nu.hjemme.persistence.client.PersonEntity;
 import nu.hjemme.persistence.client.UserEntity;
 import nu.hjemme.persistence.orm.meta.PersonMetadata;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
