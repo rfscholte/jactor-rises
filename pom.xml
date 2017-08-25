@@ -30,14 +30,14 @@
     </properties>
 
     <modules>
-        <module>hjemme</module>
+        <module>hjemme-module</module>
         <module>hjemme-client</module>
         <module>hjemme-persistence</module>
         <module>hjemme-web</module>
     </modules>
 
-    <name>hjemme-application</name>
-    <description>The build for the sub modules in hjemme-application</description>
+    <name>hjemme</name>
+    <description>The build for the sub modules in hjemme</description>
 
     <dependencies>
         <dependency>
