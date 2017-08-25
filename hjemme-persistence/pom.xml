@@ -24,14 +24,14 @@
     <description>The build for the persistence layer in hjemme.nu</description>
 
     <properties>
+        <aspectj.version>1.8.8</aspectj.version>
         <commons-dbcp.version>2.1.1</commons-dbcp.version>
         <hibernate.version>4.2.0.Final</hibernate.version>
+        <hsqldb.version>2.4.0</hsqldb.version>
         <javax.persistence.version>1.0.2</javax.persistence.version>
         <log4j.version>1.2.17</log4j.version>
-        <org.aspectj.version>1.8.8</org.aspectj.version>
-        <org.hsqldb.version>2.4.0</org.hsqldb.version>
-        <org.slf4j.version>1.7.17</org.slf4j.version>
-        <org.springframework.version>4.2.4.RELEASE</org.springframework.version>
+        <slf4j.version>1.7.17</slf4j.version>
+        <springframework.version>4.2.4.RELEASE</springframework.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -80,27 +80,27 @@
             <dependency>
                 <groupId>org.hsqldb</groupId>
                 <artifactId>hsqldb</artifactId>
-                <version>${org.hsqldb.version}</version>
+                <version>${hsqldb.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>${org.springframework.version}</version>
+                <version>${springframework.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
-                <version>${org.springframework.version}</version>
+                <version>${springframework.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
-                <version>${org.springframework.version}</version>
+                <version>${springframework.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-tx</artifactId>
-                <version>${org.springframework.version}</version>
+                <version>${springframework.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.neo4j</groupId>
@@ -136,7 +136,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>${org.springframework.version}</version>
+                <version>${springframework.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
