@@ -1,4 +1,4 @@
-package nu.hjemme.facade.config;
+package com.github.jactorrises.facade.config;
 
 import nu.hjemme.business.facade.UserFacadeImpl;
 import nu.hjemme.client.facade.UserFacade;
