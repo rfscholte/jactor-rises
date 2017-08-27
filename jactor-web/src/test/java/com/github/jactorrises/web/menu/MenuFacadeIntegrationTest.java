@@ -1,9 +1,9 @@
-package nu.hjemme.web.menu;
+package com.github.jactorrises.web.menu;
 
-import nu.hjemme.client.datatype.Name;
-import nu.hjemme.facade.config.HjemmeBeanContext;
-import nu.hjemme.web.config.HjemmeWebContext;
-import nu.hjemme.web.config.HjemmeWebDbContext;
+import com.github.jactorrises.client.datatype.Name;
+import com.github.jactorrises.facade.config.JactorBeanContext;
+import com.github.jactorrises.web.config.JactorWebContext;
+import com.github.jactorrises.web.config.JactorWebDbContext;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -17,9 +17,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HjemmeBeanContext.class, HjemmeWebContext.class, HjemmeWebContext.class, HjemmeWebDbContext.class})
+@ContextConfiguration(classes = {JactorBeanContext.class, JactorWebContext.class, JactorWebContext.class, JactorWebDbContext.class})
 public class MenuFacadeIntegrationTest {
-    @Resource(name = "hjemme.web.menuFacade") private MenuFacade testMenuFacade;
+    @Resource(name = "jactor.web.menuFacade") private MenuFacade testMenuFacade;
 
     @Rule public ExpectedException expectedException = ExpectedException.none();
 

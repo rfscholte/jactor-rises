@@ -1,4 +1,4 @@
-package nu.hjemme.web.html;
+package com.github.jactorrises.web.html;
 
 public class WebParameter {
 

@@ -1,7 +1,7 @@
-package nu.hjemme.web.menu;
+package com.github.jactorrises.web.menu;
 
-import nu.hjemme.client.datatype.Description;
-import nu.hjemme.web.menu.builder.MenuItemBuilder;
+import com.github.jactorrises.client.datatype.Description;
+import com.github.jactorrises.web.menu.builder.MenuItemBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -27,11 +27,11 @@ public class MenuItem {
         return this;
     }
 
-    public boolean isChosen() {
+    boolean isChosen() {
         return MenuTargetRequest.isRequestFor(menuItemTarget);
     }
 
-    public boolean isChildChosen() {
+    boolean isChildChosen() {
         for (MenuItem menuItem : children) {
             if (menuItem.isChosen()) {
                 return true;
@@ -41,13 +41,11 @@ public class MenuItem {
         return false;
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return hash(getChildren(), getDescription(), getMenuItemTarget());
     }
 
-    @Override
-    public boolean equals(Object o) {
+    @Override public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -72,15 +70,15 @@ public class MenuItem {
                 .toString();
     }
 
-    public List<MenuItem> getChildren() {
+    private List<MenuItem> getChildren() {
         return children;
     }
 
-    public Description getDescription() {
+    Description getDescription() {
         return description;
     }
 
-    public MenuItemTarget getMenuItemTarget() {
+    private MenuItemTarget getMenuItemTarget() {
         return menuItemTarget;
     }
 

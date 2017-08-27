@@ -1,9 +1,9 @@
-package nu.hjemme.web.menu.builder;
+package com.github.jactorrises.web.menu.builder;
 
-import nu.hjemme.client.datatype.Description;
-import nu.hjemme.client.datatype.Name;
-import nu.hjemme.web.menu.MenuItem;
-import nu.hjemme.web.menu.MenuItemTarget;
+import com.github.jactorrises.client.datatype.Description;
+import com.github.jactorrises.client.datatype.Name;
+import com.github.jactorrises.web.menu.MenuItem;
+import com.github.jactorrises.web.menu.MenuItemTarget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +23,10 @@ public class MenuItemBuilder {
     }
 
     public MenuItem build() {
-        Description description = new Description(itemName, this.description);
-        return new MenuItem(description, menuItemTarget).appendChildren(children);
+        return new MenuItem(new Description(itemName, this.description), menuItemTarget).appendChildren(children);
     }
 
-    public MenuItemBuilder add(MenuItem child) {
+    private MenuItemBuilder add(MenuItem child) {
         children.add(child);
         return this;
     }

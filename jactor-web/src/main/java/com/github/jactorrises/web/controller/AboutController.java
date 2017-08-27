@@ -1,10 +1,10 @@
-package nu.hjemme.web.controller;
+package com.github.jactorrises.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import static nu.hjemme.web.controller.ControllerValues.VIEW_ABOUT;
+import static com.github.jactorrises.web.controller.ControllerValues.VIEW_ABOUT;
 
 @Controller
 public class AboutController {

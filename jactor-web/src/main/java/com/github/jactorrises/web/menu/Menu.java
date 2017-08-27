@@ -1,7 +1,7 @@
-package nu.hjemme.web.menu;
+package com.github.jactorrises.web.menu;
 
-import nu.hjemme.client.datatype.Name;
-import nu.hjemme.web.menu.builder.MenuBuilder;
+import com.github.jactorrises.web.menu.builder.MenuBuilder;
+import com.github.jactorrises.client.datatype.Name;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 

@@ -1,6 +1,6 @@
-package nu.hjemme.web.interceptor;
+package com.github.jactorrises.web.interceptor;
 
-import nu.hjemme.client.datatype.Name;
+import com.github.jactorrises.client.datatype.Name;
 
 /** The values used by the interceptors on this web application */
 final class InterceptorValues {

@@ -1,10 +1,10 @@
-package nu.hjemme.web.controller;
+package com.github.jactorrises.web.controller;
 
-import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.client.domain.User;
-import nu.hjemme.client.facade.UserFacade;
-import nu.hjemme.web.dto.UserDto;
-import nu.hjemme.web.dto.UserNameDto;
+import com.github.jactorrises.client.datatype.UserName;
+import com.github.jactorrises.client.domain.User;
+import com.github.jactorrises.client.facade.UserFacade;
+import com.github.jactorrises.web.dto.UserDto;
+import com.github.jactorrises.web.dto.UserNameDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,8 +14,8 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.Optional;
 
-import static nu.hjemme.web.controller.ControllerValues.ATTRIBUTE_USER;
-import static nu.hjemme.web.controller.ControllerValues.VIEW_USER;
+import static com.github.jactorrises.web.controller.ControllerValues.ATTRIBUTE_USER;
+import static com.github.jactorrises.web.controller.ControllerValues.VIEW_USER;
 
 @Controller
 public class UserController {

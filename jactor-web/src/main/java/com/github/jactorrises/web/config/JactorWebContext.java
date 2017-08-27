@@ -1,18 +1,18 @@
-package nu.hjemme.web.config;
+package com.github.jactorrises.web.config;
 
-import nu.hjemme.web.menu.DefaultMenuFacade;
-import nu.hjemme.web.menu.Menu;
-import nu.hjemme.web.menu.MenuFacade;
+import com.github.jactorrises.web.menu.MenuFacade;
+import com.github.jactorrises.web.menu.DefaultMenuFacade;
+import com.github.jactorrises.web.menu.Menu;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static nu.hjemme.web.menu.Menu.aMenu;
-import static nu.hjemme.web.menu.MenuItem.aMenuItem;
+import static com.github.jactorrises.web.menu.Menu.aMenu;
+import static com.github.jactorrises.web.menu.MenuItem.aMenuItem;
 
 @Configuration
-public class HjemmeWebContext {
+public class JactorWebContext {
 
-    @Bean(name = "hjemme.web.menuFacade") public MenuFacade menuFacade() {
+    @Bean(name = "jactor.web.menuFacade") public MenuFacade menuFacade() {
         return new DefaultMenuFacade(mainMenu(), personMenu());
     }
 

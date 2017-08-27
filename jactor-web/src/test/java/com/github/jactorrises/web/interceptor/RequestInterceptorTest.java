@@ -1,6 +1,6 @@
-package nu.hjemme.web.interceptor;
+package com.github.jactorrises.web.interceptor;
 
-import nu.hjemme.web.html.WebParameter;
+import com.github.jactorrises.web.html.WebParameter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_ACTION;
-import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_PARAMETERS;
+import static com.github.jactorrises.web.interceptor.InterceptorValues.ATTRIBUTE_ACTION;
+import static com.github.jactorrises.web.interceptor.InterceptorValues.ATTRIBUTE_PARAMETERS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 

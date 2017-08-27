@@ -1,8 +1,8 @@
-package nu.hjemme.web.menu.builder;
+package com.github.jactorrises.web.menu.builder;
 
-import nu.hjemme.client.datatype.Name;
-import nu.hjemme.web.menu.Menu;
-import nu.hjemme.web.menu.MenuItem;
+import com.github.jactorrises.web.menu.MenuItem;
+import com.github.jactorrises.client.datatype.Name;
+import com.github.jactorrises.web.menu.Menu;
 
 import java.util.ArrayList;
 import java.util.List;

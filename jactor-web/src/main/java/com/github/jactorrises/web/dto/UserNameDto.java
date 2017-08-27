@@ -1,16 +1,15 @@
-package nu.hjemme.web.dto;
+package com.github.jactorrises.web.dto;
 
-import nu.hjemme.client.datatype.UserName;
+import com.github.jactorrises.web.html.ParameterConstants;
+import com.github.jactorrises.client.datatype.UserName;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.WebRequest;
-
-import static nu.hjemme.web.html.ParameterConstants.CHOOSE_USER;
 
 public class UserNameDto {
     private UserName userName;
 
     public UserNameDto(WebRequest webRequest) {
-        String name = webRequest.getParameter(CHOOSE_USER);
+        String name = webRequest.getParameter(ParameterConstants.CHOOSE_USER);
 
         if (StringUtils.isEmpty(name)) {
             return;

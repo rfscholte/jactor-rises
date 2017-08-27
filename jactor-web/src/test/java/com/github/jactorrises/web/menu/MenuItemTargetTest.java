@@ -1,6 +1,6 @@
-package nu.hjemme.web.menu;
+package com.github.jactorrises.web.menu;
 
-import nu.hjemme.client.datatype.Parameter;
+import com.github.jactorrises.client.datatype.Parameter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,14 +1,11 @@
-package nu.hjemme.web.interceptor;
+package com.github.jactorrises.web.interceptor;
 
-import nu.hjemme.web.html.WebParameters;
+import com.github.jactorrises.web.html.WebParameters;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_ACTION;
-import static nu.hjemme.web.interceptor.InterceptorValues.ATTRIBUTE_PARAMETERS;
 
 /**
  * A {@link HandlerInterceptorAdapter} that will give the action attribute to the the requested view and enable any of its views to be able to send an html form action to the same
@@ -22,7 +19,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
             Object handler,
             ModelAndView modelAndView
     ) {
-        modelAndView.addObject(ATTRIBUTE_ACTION, request.getRequestURI());
-        modelAndView.addObject(ATTRIBUTE_PARAMETERS, new WebParameters(request).fetchWebParameters());
+        modelAndView.addObject(InterceptorValues.ATTRIBUTE_ACTION, request.getRequestURI());
+        modelAndView.addObject(InterceptorValues.ATTRIBUTE_PARAMETERS, new WebParameters(request).fetchWebParameters());
     }
 }

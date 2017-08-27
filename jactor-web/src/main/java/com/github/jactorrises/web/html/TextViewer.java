@@ -1,15 +1,15 @@
-package nu.hjemme.web.html;
+package com.github.jactorrises.web.html;
 
 public class TextViewer {
     private static TextViewer instance;
 
-    protected TextViewer() { }
+    TextViewer() { }
 
     static {
         instance = new TextViewer();
     }
 
-    public static String convertTextToHtml(String textToConvert) {
+    static String convertTextToHtml(String textToConvert) {
         String convertedText = getInstance().convertLineBreaks(textToConvert);
         return getInstance().convertTabulators(convertedText);
     }
@@ -26,7 +26,7 @@ public class TextViewer {
         return textToConvert != null ? textToConvert.replace("\t", "&nbsp;&nbsp;&nbsp;") : null;
     }
 
-    protected static void setInstance(TextViewer instance) {
+    static void setInstance(TextViewer instance) {
         TextViewer.instance = instance;
     }
 }

@@ -1,4 +1,4 @@
-package nu.hjemme.web.menu;
+package com.github.jactorrises.web.menu;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,4 +1,4 @@
-package nu.hjemme.web.config;
+package com.github.jactorrises.web.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,8 +19,8 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @PropertySource("classpath:environment.properties")
-@ComponentScan(basePackages = {"nu.hjemme.web.controller", "nu.hjemme.web.config", "nu.hjemme.facade.config"})
-public class HjemmeWebApp extends WebMvcConfigurerAdapter {
+@ComponentScan(basePackages = {"com.github.jactorrises.web.controller", "com.github.jactorrises.web.config", "com.github.jactorrises.facade.config"})
+public class JactorWebApp extends WebMvcConfigurerAdapter {
     @Bean public ViewResolver internalViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);

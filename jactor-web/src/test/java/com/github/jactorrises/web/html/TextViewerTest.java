@@ -1,4 +1,4 @@
-package nu.hjemme.web.html;
+package com.github.jactorrises.web.html;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

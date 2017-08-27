@@ -1,6 +1,6 @@
-package nu.hjemme.web.menu;
+package com.github.jactorrises.web.menu;
 
-import nu.hjemme.client.datatype.Parameter;
+import com.github.jactorrises.client.datatype.Parameter;
 import org.apache.commons.lang3.Validate;
 
 import javax.servlet.http.HttpServletRequest;

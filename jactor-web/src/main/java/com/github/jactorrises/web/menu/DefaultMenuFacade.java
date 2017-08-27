@@ -1,6 +1,6 @@
-package nu.hjemme.web.menu;
+package com.github.jactorrises.web.menu;
 
-import nu.hjemme.client.datatype.Name;
+import com.github.jactorrises.client.datatype.Name;
 
 import java.util.HashMap;
 import java.util.List;

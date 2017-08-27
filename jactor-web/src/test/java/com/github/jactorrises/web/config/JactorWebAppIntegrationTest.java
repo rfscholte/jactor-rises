@@ -1,8 +1,8 @@
-package nu.hjemme.web.config;
+package com.github.jactorrises.web.config;
 
-import nu.hjemme.web.controller.AboutController;
-import nu.hjemme.web.controller.HomeController;
-import nu.hjemme.web.controller.UserController;
+import com.github.jactorrises.web.controller.AboutController;
+import com.github.jactorrises.web.controller.HomeController;
+import com.github.jactorrises.web.controller.UserController;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,9 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(loader = AnnotationConfigWebContextLoader.class, classes = HjemmeWebApp.class)
+@ContextConfiguration(loader = AnnotationConfigWebContextLoader.class, classes = JactorWebApp.class)
 @Ignore("cannot run in ide on mac after upgrade to junit 5, ignored until resolved")
-public class HjemmeWebAppIntegrationTest {
+public class JactorWebAppIntegrationTest {
 
     @Resource private HomeController homeController;
 

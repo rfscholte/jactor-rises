@@ -1,8 +1,9 @@
-package nu.hjemme.web.dto;
+package com.github.jactorrises.web.dto;
 
-import nu.hjemme.client.domain.Address;
-import nu.hjemme.client.domain.Person;
-import nu.hjemme.client.domain.User;
+
+import com.github.jactorrises.client.domain.Address;
+import com.github.jactorrises.client.domain.Person;
+import com.github.jactorrises.client.domain.User;
 
 /** A class for displaying a user on this web application */
 public class UserDto {
@@ -16,35 +17,35 @@ public class UserDto {
         address = person != null ? person.getAddress() : null;
     }
 
-    public String getAddressLine1() {
+    String getAddressLine1() {
         return address != null ? address.getAddressLine1() : null;
     }
 
-    public String getAddressLine2() {
+    String getAddressLine2() {
         return address != null ? address.getAddressLine2() : null;
     }
 
-    public String getCity() {
+    String getCity() {
         return address != null ? address.getCity() : null;
     }
 
-    public Integer getZipCode() {
+    Integer getZipCode() {
         return address != null ? address.getZipCode() : null;
     }
 
-    public String getFirstName() {
+    String getFirstName() {
         return person != null && person.getFirstName() != null ? person.getFirstName().getName() : null;
     }
 
-    public String getLastName() {
+    String getLastName() {
         return person != null && person.getLastName() != null ? person.getLastName().getName() : null;
     }
 
-    public String getUserName() {
+    String getUserName() {
         return user.getUserName().getName();
     }
 
-    public String getDescription() {
+    String getDescription() {
         return person != null ? person.getDescription().toString() : null;
     }
 }

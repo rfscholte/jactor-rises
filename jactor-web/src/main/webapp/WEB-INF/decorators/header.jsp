@@ -9,13 +9,13 @@
 
 <c:choose>
   <c:when test="${language == 'no_NO_no'}">
-    <a href="home.do"><img title="www.hjemme.nu" src="<c:url value="images/icons/holmenkollen.jpeg" />"></a>
+    <a href="home.do"><img title="jactor-rises" src="<c:url value="images/icons/holmenkollen.jpeg" />"></a>
   </c:when>
   <c:when test="${language == 'th_TH'}">
-    <a href="home.do"><img title="www.hjemme.nu" src="<c:url value="images/icons/wat.gif" />"></a>
+    <a href="home.do"><img title="jactor-rises" src="<c:url value="images/icons/wat.gif" />"></a>
   </c:when>
   <c:otherwise>
-    <a href="home.do"><img title="www.hjemme.nu" src="<c:url value="images/icons/bigben.gif" />"></a>
+    <a href="home.do"><img title="jactor-rises" src="<c:url value="images/icons/bigben.gif" />"></a>
   </c:otherwise>
 </c:choose>
 

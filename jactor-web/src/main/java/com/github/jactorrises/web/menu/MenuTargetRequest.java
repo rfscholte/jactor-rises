@@ -1,6 +1,6 @@
-package nu.hjemme.web.menu;
+package com.github.jactorrises.web.menu;
 
-import nu.hjemme.client.datatype.Name;
+import com.github.jactorrises.client.datatype.Name;
 
 public final class MenuTargetRequest {
     private static final ThreadLocal<MenuItemTarget> REQUESTED_BY_THREAD = new ThreadLocal<>();
@@ -11,11 +11,11 @@ public final class MenuTargetRequest {
         REQUESTED_BY_THREAD.set(requestedTarget.getMenuItemTarget());
     }
 
-    public Name getMenuName() {
+    Name getMenuName() {
         return menuName;
     }
 
-    public static boolean isRequestFor(MenuItemTarget menuItemTarget) {
+    static boolean isRequestFor(MenuItemTarget menuItemTarget) {
         return menuItemTarget != null && menuItemTarget.equals(REQUESTED_BY_THREAD.get());
     }
 }

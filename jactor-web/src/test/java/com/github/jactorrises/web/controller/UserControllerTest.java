@@ -1,10 +1,10 @@
-package nu.hjemme.web.controller;
+package com.github.jactorrises.web.controller;
 
-import nu.hjemme.client.datatype.UserName;
-import nu.hjemme.client.domain.User;
-import nu.hjemme.client.facade.UserFacade;
-import nu.hjemme.web.dto.UserDto;
-import nu.hjemme.web.html.ParameterConstants;
+import com.github.jactorrises.web.dto.UserDto;
+import com.github.jactorrises.web.html.ParameterConstants;
+import com.github.jactorrises.client.datatype.UserName;
+import com.github.jactorrises.client.domain.User;
+import com.github.jactorrises.client.facade.UserFacade;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
