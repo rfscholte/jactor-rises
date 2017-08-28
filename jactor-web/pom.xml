@@ -9,8 +9,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>jactor-rises.web</artifactId>
-    <name>jactor-rises-web</name>
+    <artifactId>jactor-web</artifactId>
+    <name>jactor-rises::web</name>
     <packaging>jar</packaging> <!-- TODO #6: create a war -->
     <description>The web module uses jactor-rises-facade to bring jactor-rises-business to life on the web using jactor-rises-persistence</description>
 
