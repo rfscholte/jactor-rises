@@ -3,10 +3,13 @@ package com.github.jactorrises.web.menu;
 import com.github.jactorrises.client.datatype.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+@RunWith(JUnitPlatform.class)
 @DisplayName("A MenuTarget")
 class MenuTargetTest {
 

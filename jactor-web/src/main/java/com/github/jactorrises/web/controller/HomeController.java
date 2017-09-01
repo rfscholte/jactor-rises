@@ -9,6 +9,6 @@ import static com.github.jactorrises.web.controller.ControllerValues.VIEW_HOME;
 @Controller
 public class HomeController {
 
-    @RequestMapping(value = VIEW_HOME, method = {RequestMethod.GET, RequestMethod.POST}) @SuppressWarnings("unused") // used by spring mvc
+    @RequestMapping(value = VIEW_HOME, method = {RequestMethod.GET, RequestMethod.POST})
     public void doHome() { }
 }

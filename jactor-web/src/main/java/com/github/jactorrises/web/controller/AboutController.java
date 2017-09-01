@@ -9,6 +9,6 @@ import static com.github.jactorrises.web.controller.ControllerValues.VIEW_ABOUT;
 @Controller
 public class AboutController {
 
-    @RequestMapping(value = VIEW_ABOUT, method = {RequestMethod.GET, RequestMethod.POST}) @SuppressWarnings("unused") // used by spring mvn
+    @RequestMapping(value = VIEW_ABOUT, method = {RequestMethod.GET, RequestMethod.POST})
     public void doAbout() { }
 }
