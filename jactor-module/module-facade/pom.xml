@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -10,14 +9,14 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.github.jactor-rises</groupId>
-    <artifactId>jactor-web</artifactId>
-    <name>jactor-rises::web</name>
-    <packaging>jar</packaging> <!-- TODO #6: create a war -->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.github.jactor-rises.module</groupId>
+    <artifactId>module-facade</artifactId>
+    <name>jactor-rises::module-facade</name>
+    <packaging>jar</packaging>
 
-    <description>@
-        The web module uses jactor-rises-facade to bring jactor-rises-business to life on the web using
-        jactor-rises-persistence
+    <description>
+        The role of the facade is to make the client come to life with the logic from the business module.
     </description>
 
     <properties>
@@ -38,13 +37,8 @@
             </dependency>
             <dependency>
                 <groupId>com.github.jactor-rises.module</groupId>
-                <artifactId>module-facade</artifactId>
+                <artifactId>module-business</artifactId>
                 <version>${jactor.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${mockito.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -56,14 +50,16 @@
         </dependency>
         <dependency>
             <groupId>com.github.jactor-rises.module</groupId>
-            <artifactId>module-facade</artifactId>
+            <artifactId>module-business</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.flywaydb</groupId>
+                    <artifactId>flyway-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- third party -->
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
@@ -71,14 +67,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <!-- Test scope -->
