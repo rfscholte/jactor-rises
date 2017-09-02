@@ -13,9 +13,9 @@
     <groupId>com.github.jactor-rises</groupId>
     <artifactId>jactor-web</artifactId>
     <name>jactor-rises::web</name>
-    <packaging>jar</packaging> <!-- TODO #6: create a war -->
+    <packaging>jar</packaging>
 
-    <description>@
+    <description>
         The web module uses jactor-rises-facade to bring jactor-rises-business to life on the web using
         jactor-rises-persistence
     </description>
