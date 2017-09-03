@@ -17,7 +17,12 @@ import static com.github.jactorrises.web.controller.ControllerValues.VIEW_USER;
 @Controller
 public class UserController {
 
-    private UserFacade userFacade;
+    private final UserFacade userFacade;
+
+    @Autowired
+    public UserController(UserFacade userFacade) {
+        this.userFacade = userFacade;
+    }
 
     @RequestMapping(value = VIEW_USER, method = {RequestMethod.GET, RequestMethod.POST})
     public void doUser(ModelMap modelMap, WebRequest webRequest) {
@@ -34,10 +39,5 @@ public class UserController {
         UserName userName = userNameDto.getUserName();
         userFacade.findUsing(userName)
                 .ifPresent(user -> modelMap.put(ATTRIBUTE_USER, new UserDto(user)));
-    }
-
-    @Autowired
-    void setUserFacade(UserFacade userFacade) {
-        this.userFacade = userFacade;
     }
 }

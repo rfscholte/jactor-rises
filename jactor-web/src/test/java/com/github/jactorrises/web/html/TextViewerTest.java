@@ -15,7 +15,7 @@ class TextViewerTest {
         assertThat(converted).isEqualTo("<br><br>some.text");
     }
 
-    @DisplayName("should be overridden when watned to")
+    @DisplayName("can be overridden")
     @Test
     void canBeOverridden() {
         new TextViewer() {

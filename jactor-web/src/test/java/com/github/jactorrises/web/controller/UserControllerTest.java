@@ -9,6 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.context.request.WebRequest;
 
@@ -22,21 +25,14 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(JUnitPlatform.class)
+@RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
 
-    private UserFacade mockedUserFacade;
+    @Mock
+    private UserFacade userFacadeMock;
 
+    @InjectMocks
     private UserController testUserController;
-
-    @Before public void mockUserFacade() {
-        mockedUserFacade = mock(UserFacade.class);
-    }
-
-    @Before public void setUpUserController() {
-        testUserController = new UserController();
-        testUserController.setUserFacade(mockedUserFacade);
-    }
 
     @Test public void shouldNotFetchUserByUserNameIfTheUserNameInTheWebRequestIsNullOrAnEmptyString() {
         WebRequest webRequestMock = mock(WebRequest.class);
@@ -44,12 +40,12 @@ public class UserControllerTest {
 
         testUserController.doUser(mock(ModelMap.class), webRequestMock);
 
-        verify(mockedUserFacade, never()).findUsing(any(UserName.class));
+        verify(userFacadeMock, never()).findUsing(any(UserName.class));
         when(webRequestMock.getParameter(ParameterConstants.CHOOSE_USER)).thenReturn(" \n \t");
 
         testUserController.doUser(mock(ModelMap.class), webRequestMock);
 
-        verify(mockedUserFacade, never()).findUsing(any(UserName.class));
+        verify(userFacadeMock, never()).findUsing(any(UserName.class));
     }
 
     @Test public void shouldFetchTheUserIfChooseParameterExist() {
@@ -58,7 +54,7 @@ public class UserControllerTest {
         User mockedUser = mock(User.class);
 
         when(mockedWebRequest.getParameter(ParameterConstants.CHOOSE_USER)).thenReturn("user");
-        when(mockedUserFacade.findUsing(new UserName("user"))).thenReturn(Optional.of(mockedUser));
+        when(userFacadeMock.findUsing(new UserName("user"))).thenReturn(Optional.of(mockedUser));
 
         testUserController.doUser(mockedModelMap, mockedWebRequest);
 

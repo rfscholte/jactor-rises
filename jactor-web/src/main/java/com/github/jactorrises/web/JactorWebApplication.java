@@ -1,16 +1,19 @@
 package com.github.jactorrises.web;
 
+import com.github.jactorrises.JactorModule;
 import com.github.jactorrises.web.menu.DefaultMenuFacade;
 import com.github.jactorrises.web.menu.Menu;
 import com.github.jactorrises.web.menu.MenuFacade;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 
 import static com.github.jactorrises.web.menu.Menu.aMenu;
 import static com.github.jactorrises.web.menu.MenuItem.aMenuItem;
 
 @SpringBootApplication
+@Import(value = JactorModule.class)
 public class JactorWebApplication {
 
     @Bean(name = "jactor.web.menuFacade") public MenuFacade menuFacade() {
@@ -20,10 +23,10 @@ public class JactorWebApplication {
     private Menu mainMenu() {
         return aMenu()
                 .withName("main")
-                .add(
-                        aMenuItem().withName("menu.main.home").withDescription("menu.main.home.desc").withTarget("home.do")
-                                .add(aMenuItem().withName("menu.main.jactor").withDescription("menu.main.jactor.desc").withTarget("home.do?choose=jactor"))
-                                .add(aMenuItem().withName("menu.main.tip").withDescription("menu.main.tip.desc").withTarget("home.do?chooose=tip"))
+                .add(aMenuItem()
+                        .withName("menu.main.home").withDescription("menu.main.home.desc").withTarget("home.do")
+                        .add(aMenuItem().withName("menu.main.jactor").withDescription("menu.main.jactor.desc").withTarget("home.do?choose=jactor"))
+                        .add(aMenuItem().withName("menu.main.tip").withDescription("menu.main.tip.desc").withTarget("home.do?chooose=tip"))
                 ).build();
     }
 

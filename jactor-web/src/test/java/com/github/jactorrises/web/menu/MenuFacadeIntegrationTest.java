@@ -7,15 +7,15 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {JactorWebApplication.class,})
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = JactorWebApplication.class)
 public class MenuFacadeIntegrationTest {
     @Resource(name = "jactor.web.menuFacade") private MenuFacade testMenuFacade;
 
