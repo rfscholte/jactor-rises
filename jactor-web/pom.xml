@@ -15,7 +15,7 @@
     <version>1.0-SNAPSHOT</version>
     <name>jactor-rises::jactor-web</name>
 
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <description>
         The web module for jactor-rises
@@ -28,13 +28,19 @@
         <junit.jupiter.version>5.0.0-RC3</junit.jupiter.version>
         <junit-platform.version>1.0.0-RC3</junit-platform.version>
         <mockito.version>2.9.0</mockito.version>
+        <spring-boot.version>1.5.6.RELEASE</spring-boot.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.github.jactor-rises</groupId>
-                <artifactId>jactor-module</artifactId>
+                <groupId>com.github.jactor-rises.model</groupId>
+                <artifactId>jactor-client</artifactId>
+                <version>${jactor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.jactor-rises.model</groupId>
+                <artifactId>jactor-business</artifactId>
                 <version>${jactor.version}</version>
             </dependency>
             <dependency>
@@ -47,8 +53,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.jactor-rises</groupId>
-            <artifactId>jactor-module</artifactId>
+            <groupId>com.github.jactor-rises.model</groupId>
+            <artifactId>jactor-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jactor-rises.model</groupId>
+            <artifactId>jactor-business</artifactId>
         </dependency>
 
         <!-- third party -->
@@ -73,6 +83,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring-boot.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

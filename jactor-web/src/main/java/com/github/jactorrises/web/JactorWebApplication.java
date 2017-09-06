@@ -1,6 +1,6 @@
 package com.github.jactorrises.web;
 
-import com.github.jactorrises.JactorModule;
+import com.github.jactorrises.model.business.JactorModule;
 import com.github.jactorrises.web.menu.DefaultMenuFacade;
 import com.github.jactorrises.web.menu.Menu;
 import com.github.jactorrises.web.menu.MenuFacade;
