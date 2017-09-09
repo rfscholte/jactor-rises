@@ -11,7 +11,7 @@ public class UserNameDto {
     public UserNameDto(WebRequest webRequest) {
         String name = webRequest.getParameter(ParameterConstants.CHOOSE_USER);
 
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isBlank(name)) {
             return;
         }
 

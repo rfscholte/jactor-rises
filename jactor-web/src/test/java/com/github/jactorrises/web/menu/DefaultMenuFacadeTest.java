@@ -3,6 +3,8 @@ package com.github.jactorrises.web.menu;
 import com.github.jactorrises.client.datatype.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import java.util.List;
 
@@ -13,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@RunWith(JUnitPlatform.class)
 @DisplayName("A DefaultMenuFacade")
 class DefaultMenuFacadeTest {
 

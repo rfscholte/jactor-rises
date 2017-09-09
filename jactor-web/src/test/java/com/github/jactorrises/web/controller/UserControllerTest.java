@@ -1,58 +1,51 @@
 package com.github.jactorrises.web.controller;
 
-import com.github.jactorrises.web.dto.UserDto;
-import com.github.jactorrises.web.html.ParameterConstants;
 import com.github.jactorrises.client.datatype.UserName;
 import com.github.jactorrises.client.domain.User;
 import com.github.jactorrises.client.facade.UserFacade;
+import com.github.jactorrises.web.dto.UserDto;
+import com.github.jactorrises.web.html.ParameterConstants;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
 
-    @Mock private UserFacade mockedUserFacade;
+    @Mock
+    private UserFacade userFacadeMock;
 
+    @InjectMocks
     private UserController testUserController;
 
-    @Before public void setUpUserController() {
-        testUserController = new UserController();
-        testUserController.setUserFacade(mockedUserFacade);
-    }
-
     @Test public void shouldNotFetchUserByUserNameIfTheUserNameInTheWebRequestIsNullOrAnEmptyString() {
-        Map<String, String[]> params = new HashMap<>();
+        WebRequest webRequestMock = mock(WebRequest.class);
+        when(webRequestMock.getParameter(ParameterConstants.CHOOSE_USER)).thenReturn(null);
 
-        WebRequest mockedWebRequest = mock(WebRequest.class);
-        when(mockedWebRequest.getParameterMap()).thenReturn(params);
+        testUserController.doUser(mock(ModelMap.class), webRequestMock);
 
-        testUserController.doUser(mock(ModelMap.class), mockedWebRequest);
+        verify(userFacadeMock, never()).findUsing(any(UserName.class));
+        when(webRequestMock.getParameter(ParameterConstants.CHOOSE_USER)).thenReturn(" \n \t");
 
-        verify(mockedUserFacade, atMost(0)).findUsing(any(UserName.class));
+        testUserController.doUser(mock(ModelMap.class), webRequestMock);
 
-        String[] value = {" \n\t "};
-        params.put("choose", value);
-
-        testUserController.doUser(mock(ModelMap.class), mockedWebRequest);
-
-        verify(mockedUserFacade, atMost(0)).findUsing(any(UserName.class));
+        verify(userFacadeMock, never()).findUsing(any(UserName.class));
     }
 
     @Test public void shouldFetchTheUserIfChooseParameterExist() {
@@ -61,7 +54,7 @@ public class UserControllerTest {
         User mockedUser = mock(User.class);
 
         when(mockedWebRequest.getParameter(ParameterConstants.CHOOSE_USER)).thenReturn("user");
-        when(mockedUserFacade.findUsing(new UserName("user"))).thenReturn(Optional.of(mockedUser));
+        when(userFacadeMock.findUsing(new UserName("user"))).thenReturn(Optional.of(mockedUser));
 
         testUserController.doUser(mockedModelMap, mockedWebRequest);
 
@@ -72,15 +65,8 @@ public class UserControllerTest {
         WebRequest mockedWebRequest = mock(WebRequest.class);
         ModelMap mockedModelMap = mock(ModelMap.class);
 
-        String[] value = {"user"};
-        Map<String, String[]> params = new HashMap<>();
-        params.put("choose", value);
-
-        when(mockedWebRequest.getParameterMap()).thenReturn(params);
-        when(mockedUserFacade.findUsing(new UserName("user"))).thenReturn(null);
-
         testUserController.doUser(mockedModelMap, mockedWebRequest);
 
-        verify(mockedModelMap, atMost(0)).put(eq(ControllerValues.ATTRIBUTE_USER), any(UserDto.class));
+        verify(mockedModelMap, never()).put(eq(ControllerValues.ATTRIBUTE_USER), any(UserDto.class));
     }
 }
