@@ -1,6 +1,5 @@
 package com.github.jactorrises.web.menu.builder;
 
-import com.github.jactorrises.client.datatype.Description;
 import com.github.jactorrises.client.datatype.Name;
 import com.github.jactorrises.web.menu.MenuItem;
 import com.github.jactorrises.web.menu.MenuItemTarget;
@@ -23,7 +22,7 @@ public class MenuItemBuilder {
     }
 
     public MenuItem build() {
-        return new MenuItem(new Description(itemName, this.description), menuItemTarget).appendChildren(children);
+        return new MenuItem(this.itemName, this.description, menuItemTarget).appendChildren(children);
     }
 
     private MenuItemBuilder add(MenuItem child) {

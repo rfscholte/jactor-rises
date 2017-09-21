@@ -34,7 +34,7 @@ public class MenuFacadeIntegrationTest {
         List<MenuItem> menuItems = testMenuFacade.fetchMenuItemBy(menuTargetRequest);
 
         for (MenuItem menuItem : menuItems) {
-            Name itemName = menuItem.getDescription().getItemName();
+            Name itemName = menuItem.getItemName();
             Name chosenName = new Name("menu.main.jactor");
 
             if (new Name("menu.main.home").equals(itemName)) {

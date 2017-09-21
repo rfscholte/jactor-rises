@@ -34,18 +34,18 @@ public class UserDto {
     }
 
     String getFirstName() {
-        return person != null && person.getFirstName() != null ? person.getFirstName().getName() : null;
+        return person != null && person.getFirstName() != null ? person.getFirstName().asString() : null;
     }
 
     String getLastName() {
-        return person != null && person.getLastName() != null ? person.getLastName().getName() : null;
+        return person != null && person.getLastName() != null ? person.getLastName().asString() : null;
     }
 
     String getUserName() {
-        return user.getUserName().getName();
+        return user.getUserName().asString();
     }
 
     String getDescription() {
-        return person != null ? person.getDescription().toString() : null;
+        return person != null ? person.getDescription() : null;
     }
 }

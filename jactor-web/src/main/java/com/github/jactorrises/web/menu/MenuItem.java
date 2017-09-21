@@ -1,6 +1,6 @@
 package com.github.jactorrises.web.menu;
 
-import com.github.jactorrises.client.datatype.Description;
+import com.github.jactorrises.client.datatype.Name;
 import com.github.jactorrises.web.menu.builder.MenuItemBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -13,11 +13,13 @@ import static java.util.Objects.hash;
 
 public class MenuItem {
 
-    private final Description description;
+    private final Name itemName;
+    private final String description;
     private final List<MenuItem> children = new ArrayList<>();
     private final MenuItemTarget menuItemTarget;
 
-    public MenuItem(Description description, MenuItemTarget menuItemTarget) {
+    public MenuItem(Name itemName, String description, MenuItemTarget menuItemTarget) {
+        this.itemName = itemName;
         this.description = description;
         this.menuItemTarget = menuItemTarget;
     }
@@ -42,7 +44,7 @@ public class MenuItem {
     }
 
     @Override public int hashCode() {
-        return hash(getChildren(), getDescription(), getMenuItemTarget());
+        return hash(itemName, getChildren(), getDescription(), getMenuItemTarget());
     }
 
     @Override public boolean equals(Object o) {
@@ -56,7 +58,8 @@ public class MenuItem {
 
         MenuItem other = (MenuItem) o;
 
-        return Objects.equals(getChildren(), other.getChildren()) &&
+        return Objects.equals(getItemName(), other.getItemName()) &&
+                Objects.equals(getChildren(), other.getChildren()) &&
                 Objects.equals(getDescription(), other.getDescription()) &&
                 Objects.equals(getMenuItemTarget(), other.getMenuItemTarget());
     }
@@ -64,6 +67,7 @@ public class MenuItem {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.NO_FIELD_NAMES_STYLE)
+                .append(getItemName())
                 .append(getDescription())
                 .append(getChildren())
                 .append(getMenuItemTarget())
@@ -74,12 +78,16 @@ public class MenuItem {
         return children;
     }
 
-    Description getDescription() {
+    private String getDescription() {
         return description;
     }
 
     private MenuItemTarget getMenuItemTarget() {
         return menuItemTarget;
+    }
+
+    Name getItemName() {
+        return itemName;
     }
 
     public static MenuItemBuilder aMenuItem() {

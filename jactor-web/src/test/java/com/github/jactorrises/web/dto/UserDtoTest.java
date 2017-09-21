@@ -1,6 +1,5 @@
 package com.github.jactorrises.web.dto;
 
-import com.github.jactorrises.client.datatype.Description;
 import com.github.jactorrises.client.datatype.Name;
 import com.github.jactorrises.client.datatype.UserName;
 import com.github.jactorrises.client.domain.Address;
@@ -50,7 +49,7 @@ public class UserDtoTest {
         when(mockedUser.getUserName()).thenReturn(new UserName("user"));
         when(mockedUser.getPerson()).thenReturn(mockedPerson);
         when(mockedPerson.getAddress()).thenReturn(mockedAddress);
-        when(mockedPerson.getDescription()).thenReturn(new Description("description"));
+        when(mockedPerson.getDescription()).thenReturn("description");
         when(mockedPerson.getFirstName()).thenReturn(new Name("John"));
         when(mockedPerson.getLastName()).thenReturn(new Name("Smith"));
         when(mockedAddress.getAddressLine1()).thenReturn("address line 1");

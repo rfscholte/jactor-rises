@@ -52,7 +52,7 @@ class MenuTargetTest {
         MenuTarget menuTarget = new MenuTarget(new MenuItemTarget("a target"), new Name("a menu"));
 
         assertAll(
-                () -> assertThat(menuTarget.getMenuName().getName()).as("menu name").isEqualTo("a menu"),
+                () -> assertThat(menuTarget.getMenuName().asString()).as("menu name").isEqualTo("a menu"),
                 () -> assertThat(menuTarget.getMenuItemTarget().getTarget()).as("menu item target").isEqualTo("a target")
         );
     }
