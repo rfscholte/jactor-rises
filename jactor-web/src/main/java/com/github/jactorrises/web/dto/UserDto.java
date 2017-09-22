@@ -37,8 +37,8 @@ public class UserDto {
         return person != null && person.getFirstName() != null ? person.getFirstName().asString() : null;
     }
 
-    String getLastName() {
-        return person != null && person.getLastName() != null ? person.getLastName().asString() : null;
+    String getSurname() {
+        return person != null && person.getSurname() != null ? person.getSurname().asString() : null;
     }
 
     String getUserName() {

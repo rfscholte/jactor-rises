@@ -14,7 +14,7 @@
 <div id="page.text.left">
   <c:choose>
     <c:when test="${user != null}">
-      <p><fmt:message key="page.user.name" />: ${user.firstName} ${user.lastName}<br/></p>
+      <p><fmt:message key="page.user.name" />: ${user.firstName} ${user.surname}<br/></p>
       <p>
         ${user.addressLine1}<br/>
 
