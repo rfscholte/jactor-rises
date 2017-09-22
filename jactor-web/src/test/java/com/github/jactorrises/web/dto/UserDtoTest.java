@@ -41,7 +41,7 @@ public class UserDtoTest {
         UserDto testUserDto = new UserDto(mockedUser);
 
         assertThat(testUserDto.getFirstName()).isEqualTo("John");
-        assertThat(testUserDto.getLastName()).isEqualTo("Smith");
+        assertThat(testUserDto.getSurname()).isEqualTo("Smith");
         assertThat(testUserDto.getDescription()).isEqualTo("description");
     }
 
@@ -51,7 +51,7 @@ public class UserDtoTest {
         when(mockedPerson.getAddress()).thenReturn(mockedAddress);
         when(mockedPerson.getDescription()).thenReturn("description");
         when(mockedPerson.getFirstName()).thenReturn(new Name("John"));
-        when(mockedPerson.getLastName()).thenReturn(new Name("Smith"));
+        when(mockedPerson.getSurname()).thenReturn(new Name("Smith"));
         when(mockedAddress.getAddressLine1()).thenReturn("address line 1");
         when(mockedAddress.getAddressLine2()).thenReturn("address line 2");
         when(mockedAddress.getCity()).thenReturn("somewhere");
