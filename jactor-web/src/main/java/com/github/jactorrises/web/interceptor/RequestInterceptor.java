@@ -1,6 +1,7 @@
 package com.github.jactorrises.web.interceptor;
 
 import com.github.jactorrises.web.html.WebParameters;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * A {@link HandlerInterceptorAdapter} that will give the action attribute to the the requested view and enable any of its views to be able to send an html form action to the same
  * request. It will also put the requested parameters on the {@link ModelAndView}.
  */
+@Component
 public class RequestInterceptor extends HandlerInterceptorAdapter {
 
     @Override public void postHandle(
