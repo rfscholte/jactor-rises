@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.7.RELEASE</version>
-        <relativePath/>
+        <groupId>com.github.jactor-rises</groupId>
+        <artifactId>jactor-rises</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.github.jactor-rises</groupId>
+    <modelVersion>4.0.0</modelVersion>
     <artifactId>jactor-web</artifactId>
-    <version>1.0-SNAPSHOT</version>
+
     <name>jactor-rises::jactor-web</name>
 
     <packaging>war</packaging>
@@ -23,11 +21,9 @@
         <assertj.version>3.8.0</assertj.version>
         <jactor.version>1.0-SNAPSHOT</jactor.version>
         <java.version>1.8</java.version>
-        <junit.jupiter.version>5.0.1</junit.jupiter.version>
-        <junit-platform.version>1.0.1</junit-platform.version>
-        <junit-vintage.version>4.12.1</junit-vintage.version>
-        <mockito.version>2.10.0</mockito.version>
-        <spring-boot.version>1.5.7.RELEASE</spring-boot.version>
+        <junit-jupiter.version>5.0.2</junit-jupiter.version>
+        <junit-platform.version>1.0.2</junit-platform.version>
+        <junit-vintage.version>${junit.version}.2</junit-vintage.version>
 
         <maven-compiler-plugin.version>3.6.2</maven-compiler-plugin.version>
         <maven-site-plugin.version>3.6</maven-site-plugin.version>
@@ -73,20 +69,12 @@
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
-            <version>${junit-platform.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -94,14 +82,16 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.github.jactor-rises</groupId>
-                <artifactId>jactor-client</artifactId>
-                <version>${jactor.version}</version>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${mockito.version}</version>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-runner</artifactId>
+                <version>${junit-platform.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -160,5 +150,24 @@
             </plugin>
 
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <archive>
+                            <manifest>
+                                <mainClass>${start-class}</mainClass>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
     </build>
 </project>
