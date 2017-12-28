@@ -1,10 +1,12 @@
-package com.github.jactorrises.persistence.entity;
+package com.github.jactorrises.test.extension;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-public final class NowAsPureDate extends Now {
+import com.github.jactorrises.client.time.Noq;
+
+public final class NowAsPureDateExtension extends Now {
 
     private NowAsPureDate() {
     }
