@@ -1,14 +1,17 @@
 package com.github.jactorrises.test.extension;
 
+import com.github.jactorrises.client.time.Now;
+import org.junit.jupiter.api.extension.AfterEachCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-import com.github.jactorrises.client.time.Noq;
+public final class NowAsPureDateExtension extends Now implements BeforeEachCallback, AfterEachCallback {
 
-public final class NowAsPureDateExtension extends Now {
-
-    private NowAsPureDate() {
+    private NowAsPureDateExtension() {
     }
 
     @Override protected LocalDateTime nowAsDateTime() {
@@ -20,11 +23,11 @@ public final class NowAsPureDateExtension extends Now {
         return Date.from(nowAsDateTime().atZone(ZoneId.systemDefault()).toInstant());
     }
 
-    public static void set() {
-        reset(new NowAsPureDate());
+    @Override public void beforeEach(ExtensionContext extensionContext) {
+        reset(new NowAsPureDateExtension());
     }
 
-    public static void remove() {
+    @Override public void afterEach(ExtensionContext extensionContext) {
         reset(new Now());
     }
 }
