@@ -1,4 +1,4 @@
-package com.github.jactorrises.model.domain;
+package com.github.jactorrises.commons.builder;
 
 import java.util.ArrayList;
 import java.util.List;

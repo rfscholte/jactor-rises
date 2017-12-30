@@ -1,4 +1,4 @@
-package com.github.jactorrises.model.domain;
+package com.github.jactorrises.commons.builder;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,15 +7,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @DisplayName("A DomainBuilder")
-class DomainBuilderTest {
+class AbstractBuilderTest {
 
     @SuppressWarnings("unchecked") @DisplayName("should validate domain being build")
     @Test void shouldBuildDomainWhenBuildMethodIsInvoked() {
-        DomainBuilderTest builderTest = new DomainBuilderTest();
+        AbstractBuilderTest builderTest = new AbstractBuilderTest();
         DomainValidator domainValidatorMock = mock(DomainValidator.class);
 
-        (new DomainBuilder(domainValidatorMock) {
-            @Override protected DomainBuilderTest buildDomain() {
+        (new AbstractBuilder(domainValidatorMock) {
+            @Override protected AbstractBuilderTest buildDomain() {
                 return builderTest;
             }
         }).build();

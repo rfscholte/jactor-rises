@@ -1,4 +1,4 @@
-package com.github.jactorrises.model.domain;
+package com.github.jactorrises.commons.builder;
 
 
 /**
@@ -6,10 +6,10 @@ package com.github.jactorrises.model.domain;
  *
  * @param <T> type of domain to build
  */
-public abstract class DomainBuilder<T> {
+public abstract class AbstractBuilder<T> {
     private final DomainValidator<T> domainValidator;
 
-    protected DomainBuilder(DomainValidator<T> domainValidator) {
+    protected AbstractBuilder(DomainValidator<T> domainValidator) {
         this.domainValidator = domainValidator;
     }
 
