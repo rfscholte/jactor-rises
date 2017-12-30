@@ -1,24 +1,46 @@
 package com.github.jactorrises.commons.builder;
 
 
+import java.util.Optional;
+
 /**
- * A builder which validates fields on a domain before returning the instance using a {@link DomainValidator}
+ * A builder which validates fields on a bean before returning the instance using a {@link ValidInstance}
  *
- * @param <T> type of domain to build
+ * @param <T> type of bean to build
  */
 public abstract class AbstractBuilder<T> {
-    private final DomainValidator<T> domainValidator;
+    private static ValidationRunner validationRunner;
+    private final ValidInstance<T> validInstance;
 
-    protected AbstractBuilder(DomainValidator<T> domainValidator) {
-        this.domainValidator = domainValidator;
+    protected AbstractBuilder(ValidInstance<T> validInstance) {
+        this.validInstance = validInstance;
     }
 
-    protected abstract T buildDomain();
+    protected abstract T buildBean();
 
     public T build() {
-        T domain = buildDomain();
-        domainValidator.runOn(domain);
+        T bean = buildBean();
 
-        return domain;
+        Optional<String> errorMessage = validationRunner.run(validInstance, bean);
+
+        if (errorMessage.isPresent()) {
+            throw new IllegalStateException(errorMessage.get());
+        }
+
+        return bean;
+    }
+
+    protected static void applyValidationRunner(ValidationRunner validationRunner) {
+        AbstractBuilder.validationRunner = validationRunner;
+    }
+
+    public static class ValidationRunner {
+        protected <B> Optional<String> run(ValidInstance<B> validInstance, B bean) {
+            return validInstance.validate(bean);
+        }
+    }
+
+    static {
+        applyValidationRunner(new ValidationRunner());
     }
 }
