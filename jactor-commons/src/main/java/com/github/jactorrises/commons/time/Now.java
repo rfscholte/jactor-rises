@@ -1,4 +1,4 @@
-package com.github.jactorrises.client.time;
+package com.github.jactorrises.commons.time;
 
 import java.time.LocalDateTime;
 import java.util.Date;

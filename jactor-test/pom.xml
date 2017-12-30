@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>com.github.jactor-rises</groupId>
-            <artifactId>jactor-client</artifactId>
+            <artifactId>jactor-commons</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
