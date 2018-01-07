@@ -12,6 +12,10 @@ public abstract class AbstractBuilder<T> {
     private static ValidationRunner validationRunner;
     private final ValidInstance<T> validInstance;
 
+    protected AbstractBuilder() {
+        validInstance = bean -> Optional.empty();
+    }
+
     protected AbstractBuilder(ValidInstance<T> validInstance) {
         this.validInstance = validInstance;
     }
