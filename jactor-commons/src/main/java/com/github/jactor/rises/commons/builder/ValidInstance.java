@@ -1,4 +1,4 @@
-package com.github.jactorrises.commons.builder;
+package com.github.jactor.rises.commons.builder;
 
 import org.apache.commons.lang3.StringUtils;
 
