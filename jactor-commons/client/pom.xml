@@ -5,15 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.jactor-rises.commons</groupId>
+        <groupId>com.github.jactor-rises</groupId>
         <artifactId>jactor-commons</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.github.jactor-rises.commons</groupId>
     <artifactId>client</artifactId>
     <packaging>jar</packaging>
 
-    <name>jactor-rises::commons::client</name>
-
+    <name>jactor-commons::client</name>
     <description>The public and common classes</description>
 </project>
