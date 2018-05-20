@@ -3,8 +3,8 @@ package com.github.jactor.rises.client.dto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public abstract class NewPersistentDto implements Serializable {
-    private Long id;
+public abstract class NewPersistentDto<I extends Serializable> implements Serializable {
+    private I id;
     private String createdBy;
     private LocalDateTime creationTime;
     private String updatedBy;
@@ -17,7 +17,7 @@ public abstract class NewPersistentDto implements Serializable {
         updatedTime = LocalDateTime.now();
     }
 
-    NewPersistentDto(NewPersistentDto persistent) {
+    NewPersistentDto(NewPersistentDto<I> persistent) {
         createdBy = persistent.getCreatedBy();
         creationTime = persistent.getCreationTime();
         id = persistent.getId();
@@ -25,7 +25,7 @@ public abstract class NewPersistentDto implements Serializable {
         updatedTime = persistent.getUpdatedTime();
     }
 
-    public Long getId() {
+    public I getId() {
         return id;
     }
 
@@ -45,7 +45,7 @@ public abstract class NewPersistentDto implements Serializable {
         return updatedTime;
     }
 
-    public void setId(Long id) {
+    public void setId(I id) {
         this.id = id;
     }
 
