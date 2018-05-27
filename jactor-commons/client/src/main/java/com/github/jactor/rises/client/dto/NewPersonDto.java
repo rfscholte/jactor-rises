@@ -8,7 +8,7 @@ public class NewPersonDto extends NewPersistentDto<Long> implements Serializable
     private String firstName;
     private String surname;
     private String description;
-    private UserDto user;
+    private NewUserDto user;
 
     public NewPersonDto() {
         // empty, use setters
@@ -28,7 +28,7 @@ public class NewPersonDto extends NewPersistentDto<Long> implements Serializable
         return description;
     }
 
-    public UserDto getUser() {
+    public NewUserDto getUser() {
         return user;
     }
 
@@ -68,7 +68,7 @@ public class NewPersonDto extends NewPersistentDto<Long> implements Serializable
         this.description = description;
     }
 
-    public void setUser(UserDto user) {
+    public void setUser(NewUserDto user) {
         this.user = user;
     }
 }
