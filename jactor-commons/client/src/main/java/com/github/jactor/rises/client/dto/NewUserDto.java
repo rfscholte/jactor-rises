@@ -1,9 +1,11 @@
 package com.github.jactor.rises.client.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class NewUserDto extends NewPersistentDto<Long> implements Serializable {
-    private BlogDto blog;
+    private Set<NewBlogDto> blogs = new HashSet<>();
     private GuestBookDto guestBook;
     private NewPersonDto person;
     private String emailAddress;
@@ -15,15 +17,15 @@ public class NewUserDto extends NewPersistentDto<Long> implements Serializable {
 
     public NewUserDto(NewUserDto user) {
         super(user);
-        blog = user.getBlog();
+        blogs = user.getBlogs();
         guestBook = user.getGuestBook();
         emailAddress = user.getEmailAddress();
         person = user.getPerson();
         userName = user.getUserName();
     }
 
-    public BlogDto getBlog() {
-        return blog;
+    public Set<NewBlogDto> getBlogs() {
+        return blogs;
     }
 
     public GuestBookDto getGuestBook() {
@@ -42,8 +44,8 @@ public class NewUserDto extends NewPersistentDto<Long> implements Serializable {
         return userName;
     }
 
-    public void setBlog(BlogDto blog) {
-        this.blog = blog;
+    public void addBlog(NewBlogDto blog) {
+        blogs.add(blog);
     }
 
     public void setGuestBook(GuestBookDto guestBook) {
