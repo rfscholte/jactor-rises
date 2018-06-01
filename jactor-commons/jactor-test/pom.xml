@@ -14,7 +14,7 @@
     <artifactId>jactor-test</artifactId>
     <packaging>jar</packaging>
 
-    <name>jactor-commons::test</name>
+    <name>jactor-commons::jactor-test</name>
     <description>custom test helpers</description>
 
     <dependencies>
