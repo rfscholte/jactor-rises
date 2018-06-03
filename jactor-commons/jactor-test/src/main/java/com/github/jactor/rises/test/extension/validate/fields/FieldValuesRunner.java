@@ -1,4 +1,4 @@
-package com.github.jactor.rises.test.extension.fields;
+package com.github.jactor.rises.test.extension.validate.fields;
 
 import com.github.jactor.rises.commons.builder.AbstractBuilder;
 import com.github.jactor.rises.commons.builder.MissingFields;

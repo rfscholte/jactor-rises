@@ -1,6 +1,6 @@
 package com.github.jactor.rises.test.rule;
 
-import com.github.jactor.rises.test.extension.fields.AbstractRequiredFieldsExtension;
+import com.github.jactor.rises.test.extension.validate.fields.AbstractRequiredFieldsExtension;
 import org.junit.rules.ExternalResource;
 
 public abstract class AbstractRequiredFieldsRule extends ExternalResource {
