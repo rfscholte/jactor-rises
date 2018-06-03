@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class NewBlogDto extends NewPersistentDto<Long> implements Serializable {
-    private Set<BlogEntryDto> entries;
+    private Set<NewBlogEntryDto> entries;
     private LocalDate created;
     private String title;
     private NewUserDto user;
@@ -26,7 +26,7 @@ public class NewBlogDto extends NewPersistentDto<Long> implements Serializable {
         return created;
     }
 
-    public Set<BlogEntryDto> getEntries() {
+    public Set<NewBlogEntryDto> getEntries() {
         return entries;
     }
 
@@ -42,7 +42,7 @@ public class NewBlogDto extends NewPersistentDto<Long> implements Serializable {
         this.created = created;
     }
 
-    public void setEntries(Set<BlogEntryDto> entries) {
+    public void setEntries(Set<NewBlogEntryDto> entries) {
         this.entries = entries;
     }
 
