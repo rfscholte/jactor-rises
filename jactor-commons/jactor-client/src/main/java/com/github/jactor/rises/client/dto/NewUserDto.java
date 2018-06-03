@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class NewUserDto extends NewPersistentDto<Long> implements Serializable {
     private Set<NewBlogDto> blogs = new HashSet<>();
-    private GuestBookDto guestBook;
+    private NewGuestBookDto guestBook;
     private NewPersonDto person;
     private String emailAddress;
     private String userName;
@@ -28,7 +28,7 @@ public class NewUserDto extends NewPersistentDto<Long> implements Serializable {
         return blogs;
     }
 
-    public GuestBookDto getGuestBook() {
+    public NewGuestBookDto getGuestBook() {
         return guestBook;
     }
 
@@ -48,7 +48,7 @@ public class NewUserDto extends NewPersistentDto<Long> implements Serializable {
         blogs.add(blog);
     }
 
-    public void setGuestBook(GuestBookDto guestBook) {
+    public void setGuestBook(NewGuestBookDto guestBook) {
         this.guestBook = guestBook;
     }
 
