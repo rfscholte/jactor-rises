@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 public class NewGuestBookDto extends NewPersistentDto<Long> implements Serializable {
-    private Set<GuestBookEntryDto> entries;
+    private Set<NewGuestBookEntryDto> entries;
     private String title;
     private NewUserDto user;
 
@@ -19,7 +19,7 @@ public class NewGuestBookDto extends NewPersistentDto<Long> implements Serializa
         user = guestBookDto.getUser();
     }
 
-    public Set<GuestBookEntryDto> getEntries() {
+    public Set<NewGuestBookEntryDto> getEntries() {
         return entries;
     }
 
@@ -31,7 +31,7 @@ public class NewGuestBookDto extends NewPersistentDto<Long> implements Serializa
         return user;
     }
 
-    public void setEntries(Set<GuestBookEntryDto> entries) {
+    public void setEntries(Set<NewGuestBookEntryDto> entries) {
         this.entries = entries;
     }
 
