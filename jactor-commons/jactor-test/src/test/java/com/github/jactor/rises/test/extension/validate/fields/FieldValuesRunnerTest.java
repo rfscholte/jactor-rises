@@ -33,8 +33,11 @@ class FieldValuesRunnerTest {
 
     @DisplayName("should fail when field missing do not have a value")
     @Test void shouldFailWhenFieldMissingValue() {
-        applyDefaultValues();
         Pojo pojo = new Pojo();
+        AbstractRequiredFieldsExtension.withRequiredFields(Pojo.class, asList(
+                new ClassFieldValue(A_FIELD, Object::new, "setObjField"),
+                new ClassFieldValue(STR_FIELD, () -> "default value")
+        ));
 
         assertThatIllegalStateException().isThrownBy(
                 () -> fieldValuesRunnerToTest.validate((bean, missingFields) -> {
@@ -43,13 +46,16 @@ class FieldValuesRunnerTest {
 
                     return missingFields.presentWhenFieldsAreMissing();
                 }, pojo)
-        ).withMessage("Unknown field value for 'stringField'");
+        ).withMessageContaining("Unknown field value for 'stringField'");
     }
 
     @DisplayName("should add values to fields on beans which lack values")
     @Test void shouldAddValues() {
-        applyDefaultValues();
         Pojo pojo = new Pojo();
+        AbstractRequiredFieldsExtension.withRequiredFields(Pojo.class, asList(
+                new ClassFieldValue(A_FIELD, Object::new, "setObjField"),
+                new ClassFieldValue(STR_FIELD, () -> "default value")
+        ));
 
         fieldValuesRunnerToTest.validate((bean, missingFields) -> {
             missingFields.addInvalidFieldWhenBlank(STR_FIELD, pojo.getStrField());
@@ -62,12 +68,5 @@ class FieldValuesRunnerTest {
                 () -> assertThat(pojo.getObjField()).as(A_FIELD).isNotNull(),
                 () -> assertThat(pojo.getStrField()).as(STR_FIELD).isEqualTo("default value")
         );
-    }
-
-    private void applyDefaultValues() {
-        AbstractRequiredFieldsExtension.withRequiredFields(Pojo.class, asList(
-                new ClassFieldValue(A_FIELD, Object::new, "setObjField"),
-                new ClassFieldValue(STR_FIELD, () -> "default value")
-        ));
     }
 }

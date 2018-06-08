@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
+
 class FieldValuesRunner extends AbstractBuilder.ValidationRunner {
     private DetectMisingFields detectMissingFields;
 
@@ -59,7 +61,11 @@ class FieldValuesRunner extends AbstractBuilder.ValidationRunner {
         }
 
         private IllegalStateException exceptionForUnknown(String field) {
-            return new IllegalStateException(String.format("Unknown field value for '%s'", field));
+            return new IllegalStateException(
+                    String.format("%s: Unknown field value for '%s', known fields '%s'", beanClass.getSimpleName(), field, String.join(
+                            "', '", fieldValuesForClass.stream().map(ClassFieldValue::getFieldName).collect(toList())
+                    ))
+            );
         }
 
         <B> void applyDefaultValuesWhenDetected(B bean) {
@@ -76,7 +82,7 @@ class FieldValuesRunner extends AbstractBuilder.ValidationRunner {
                 statement.execute();
             } catch (Exception exception) {
                 throw new IllegalStateException(String.format(
-                        "On %s: Unable to invoke setter for field (setter: %s, field: %s, value: %s)",
+                        "%s: Unable to invoke setter for field (setter: %s, field: %s, value: %s)",
                         beanClass.getSimpleName(), setterName, classFieldValue.getFieldName(), fieldValue
                 ), exception);
             }

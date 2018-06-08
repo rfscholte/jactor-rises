@@ -2,6 +2,8 @@ package com.github.jactor.rises.client.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class NewBlogDto extends NewPersistentDto<Long> implements Serializable {
@@ -27,7 +29,7 @@ public class NewBlogDto extends NewPersistentDto<Long> implements Serializable {
     }
 
     public Set<NewBlogEntryDto> getEntries() {
-        return entries;
+        return Optional.ofNullable(entries).orElseGet(HashSet::new);
     }
 
     public String getTitle() {
