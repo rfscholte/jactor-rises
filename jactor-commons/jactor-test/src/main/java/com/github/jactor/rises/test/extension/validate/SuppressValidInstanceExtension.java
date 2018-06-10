@@ -44,7 +44,7 @@ public class SuppressValidInstanceExtension extends AbstractBuilder<Object> impl
     private class SuppressValidationRunner extends ValidationRunner {
 
         @Override protected <B> Optional<MissingFields> validate(ValidInstance<B> validInstance, B bean) {
-            if (SUPPRESS_VALIDATIONS.contains(bean.getClass())) {
+            if (SUPPRESS_VALIDATIONS.isEmpty() || SUPPRESS_VALIDATIONS.contains(bean.getClass())) {
                 return Optional.empty();
             }
 
