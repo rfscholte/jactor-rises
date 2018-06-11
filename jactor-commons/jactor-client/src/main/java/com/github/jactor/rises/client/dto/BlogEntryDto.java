@@ -2,9 +2,8 @@ package com.github.jactor.rises.client.dto;
 
 import java.io.Serializable;
 
-public class BlogEntryDto extends PersistentDto implements Serializable {
+public class BlogEntryDto extends PersistentDto<Long> implements Serializable {
     private BlogDto blog;
-    private String createdTime;
     private String creatorName;
     private String entry;
 
@@ -15,7 +14,6 @@ public class BlogEntryDto extends PersistentDto implements Serializable {
     BlogEntryDto(BlogEntryDto blogEntryDto) {
         super(blogEntryDto);
         blog = blogEntryDto.getBlog();
-        createdTime = blogEntryDto.getCreatedTime();
         creatorName = blogEntryDto.getCreatorName();
         entry = blogEntryDto.getEntry();
     }
@@ -28,10 +26,6 @@ public class BlogEntryDto extends PersistentDto implements Serializable {
         return creatorName;
     }
 
-    public String getCreatedTime() {
-        return createdTime;
-    }
-
     public String getEntry() {
         return entry;
     }
@@ -42,10 +36,6 @@ public class BlogEntryDto extends PersistentDto implements Serializable {
 
     public void setCreatorName(String creatorName) {
         this.creatorName = creatorName;
-    }
-
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime;
     }
 
     public void setEntry(String entry) {

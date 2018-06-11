@@ -2,9 +2,8 @@ package com.github.jactor.rises.client.dto;
 
 import java.io.Serializable;
 
-public class GuestBookEntryDto extends PersistentDto implements Serializable {
+public class GuestBookEntryDto extends PersistentDto<Long> implements Serializable {
     private GuestBookDto guestBook;
-    private String createdTime;
     private String creatorName;
     private String entry;
 
@@ -15,7 +14,6 @@ public class GuestBookEntryDto extends PersistentDto implements Serializable {
     GuestBookEntryDto(GuestBookEntryDto guestBookEntryDto) {
         super(guestBookEntryDto);
         guestBook = guestBookEntryDto.getGuestBook();
-        createdTime = guestBookEntryDto.getCreatedTime();
         creatorName = guestBookEntryDto.getCreatorName();
         entry = guestBookEntryDto.getEntry();
     }
@@ -24,20 +22,12 @@ public class GuestBookEntryDto extends PersistentDto implements Serializable {
         return guestBook;
     }
 
-    public String getCreatedTime() {
-        return createdTime;
-    }
-
     public String getCreatorName() {
         return creatorName;
     }
 
     public String getEntry() {
         return entry;
-    }
-
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime;
     }
 
     public void setCreatorName(String creatorNmae) {

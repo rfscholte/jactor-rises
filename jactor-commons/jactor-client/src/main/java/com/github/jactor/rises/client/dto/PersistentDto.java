@@ -1,25 +1,23 @@
 package com.github.jactor.rises.client.dto;
 
-import com.github.jactor.rises.client.converter.FieldConverter;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public abstract class PersistentDto implements Serializable {
-    private Long id;
+public abstract class PersistentDto<I extends Serializable> implements Serializable {
+    private I id;
     private String createdBy;
-    private String creationTime;
+    private LocalDateTime creationTime;
     private String updatedBy;
-    private String updatedTime;
+    private LocalDateTime updatedTime;
 
     PersistentDto() {
         createdBy = "todo: #156";
-        creationTime = FieldConverter.convert(LocalDateTime.now());
+        creationTime = LocalDateTime.now();
         updatedBy = "todo: #156";
-        updatedTime = FieldConverter.convert(LocalDateTime.now());
+        updatedTime = LocalDateTime.now();
     }
 
-    PersistentDto(PersistentDto persistent) {
+    PersistentDto(PersistentDto<I> persistent) {
         createdBy = persistent.getCreatedBy();
         creationTime = persistent.getCreationTime();
         id = persistent.getId();
@@ -27,7 +25,7 @@ public abstract class PersistentDto implements Serializable {
         updatedTime = persistent.getUpdatedTime();
     }
 
-    public Long getId() {
+    public I getId() {
         return id;
     }
 
@@ -35,7 +33,7 @@ public abstract class PersistentDto implements Serializable {
         return createdBy;
     }
 
-    public String getCreationTime() {
+    public LocalDateTime getCreationTime() {
         return creationTime;
     }
 
@@ -43,11 +41,11 @@ public abstract class PersistentDto implements Serializable {
         return updatedBy;
     }
 
-    public String getUpdatedTime() {
+    public LocalDateTime getUpdatedTime() {
         return updatedTime;
     }
 
-    public void setId(Long id) {
+    public void setId(I id) {
         this.id = id;
     }
 
@@ -55,7 +53,7 @@ public abstract class PersistentDto implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public void setCreationTime(String creationTime) {
+    public void setCreationTime(LocalDateTime creationTime) {
         this.creationTime = creationTime;
     }
 
@@ -63,7 +61,7 @@ public abstract class PersistentDto implements Serializable {
         this.updatedBy = updatedBy;
     }
 
-    public void setUpdatedTime(String updatedTime) {
+    public void setUpdatedTime(LocalDateTime updatedTime) {
         this.updatedTime = updatedTime;
     }
 }

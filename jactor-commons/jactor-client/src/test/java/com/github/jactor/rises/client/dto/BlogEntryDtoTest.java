@@ -1,6 +1,5 @@
 package com.github.jactor.rises.client.dto;
 
-import com.github.jactor.rises.client.converter.FieldConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +16,7 @@ class BlogEntryDtoTest {
     void shouldHaveCopyConstructor() {
         BlogEntryDto blogEntryDto = new BlogEntryDto();
         blogEntryDto.setBlog(new BlogDto());
-        blogEntryDto.setCreatedTime(FieldConverter.convert(LocalDateTime.now()));
+        blogEntryDto.setCreationTime(LocalDateTime.now());
         blogEntryDto.setCreatorName("someone");
         blogEntryDto.setEntry("entry");
 
@@ -25,7 +24,7 @@ class BlogEntryDtoTest {
 
         assertAll(
                 () -> assertThat(copied.getBlog()).as("blog").isEqualTo(blogEntryDto.getBlog()),
-                () -> assertThat(copied.getCreatedTime()).as("created time").isEqualTo(blogEntryDto.getCreatedTime()),
+                () -> assertThat(copied.getCreationTime()).as("creation time").isEqualTo(blogEntryDto.getCreationTime()),
                 () -> assertThat(copied.getCreatorName()).as("creator name").isEqualTo(blogEntryDto.getCreatorName()),
                 () -> assertThat(copied.getEntry()).as("entry").isEqualTo(blogEntryDto.getEntry())
         );
@@ -36,10 +35,10 @@ class BlogEntryDtoTest {
     void shouldGiveValuesToPersistentDto() {
         BlogEntryDto persistentDto = new BlogEntryDto();
         persistentDto.setCreatedBy("jactor");
-        persistentDto.setCreationTime(FieldConverter.convert(LocalDateTime.now()));
+        persistentDto.setCreationTime(LocalDateTime.now());
         persistentDto.setId(1L);
         persistentDto.setUpdatedBy("tip");
-        persistentDto.setUpdatedTime(FieldConverter.convert(LocalDateTime.now()));
+        persistentDto.setUpdatedTime(LocalDateTime.now());
 
         PersistentDto copied = new BlogEntryDto(persistentDto);
 

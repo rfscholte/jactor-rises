@@ -1,9 +1,11 @@
 package com.github.jactor.rises.client.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
-public class GuestBookDto extends PersistentDto implements Serializable {
+public class GuestBookDto extends PersistentDto<Long> implements Serializable {
     private Set<GuestBookEntryDto> entries;
     private String title;
     private UserDto user;
@@ -20,7 +22,7 @@ public class GuestBookDto extends PersistentDto implements Serializable {
     }
 
     public Set<GuestBookEntryDto> getEntries() {
-        return entries;
+        return Optional.ofNullable(entries).orElseGet(HashSet::new);
     }
 
     public String getTitle() {

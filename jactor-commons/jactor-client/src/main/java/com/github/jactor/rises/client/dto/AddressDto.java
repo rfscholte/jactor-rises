@@ -2,7 +2,7 @@ package com.github.jactor.rises.client.dto;
 
 import java.io.Serializable;
 
-public class AddressDto extends PersistentDto implements Serializable {
+public class AddressDto extends PersistentDto<Long> implements Serializable {
     private Integer zipCode;
     private String addressLine1;
     private String addressLine2;

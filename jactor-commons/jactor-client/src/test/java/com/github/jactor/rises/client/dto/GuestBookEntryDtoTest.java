@@ -1,6 +1,5 @@
 package com.github.jactor.rises.client.dto;
 
-import com.github.jactor.rises.client.converter.FieldConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ class GuestBookEntryDtoTest {
     @Test
     void shouldHaveCopyConstructor() {
         GuestBookEntryDto guestBookEntryDto = new GuestBookEntryDto();
-        guestBookEntryDto.setCreatedTime(FieldConverter.convert(LocalDateTime.now()));
+        guestBookEntryDto.setCreationTime(LocalDateTime.now());
         guestBookEntryDto.setCreatorName("me");
         guestBookEntryDto.setGuestBook(new GuestBookDto());
         guestBookEntryDto.setEntry("entry");
@@ -24,7 +23,7 @@ class GuestBookEntryDtoTest {
         GuestBookEntryDto copied = new GuestBookEntryDto(guestBookEntryDto);
 
         assertAll(
-                () -> assertThat(copied.getCreatedTime()).as("created time").isEqualTo(guestBookEntryDto.getCreatedTime()),
+                () -> assertThat(copied.getCreationTime()).as("creation time").isEqualTo(guestBookEntryDto.getCreationTime()),
                 () -> assertThat(copied.getCreatorName()).as("creator name").isEqualTo(guestBookEntryDto.getCreatorName()),
                 () -> assertThat(copied.getGuestBook()).as("guest book").isEqualTo(guestBookEntryDto.getGuestBook()),
                 () -> assertThat(copied.getEntry()).as("entry").isEqualTo(guestBookEntryDto.getEntry())
@@ -36,10 +35,10 @@ class GuestBookEntryDtoTest {
     void shouldGiveValuesToPersistentDto() {
         GuestBookEntryDto persistentDto = new GuestBookEntryDto();
         persistentDto.setCreatedBy("jactor");
-        persistentDto.setCreationTime(FieldConverter.convert(LocalDateTime.now()));
+        persistentDto.setCreationTime(LocalDateTime.now());
         persistentDto.setId(1L);
         persistentDto.setUpdatedBy("tip");
-        persistentDto.setUpdatedTime(FieldConverter.convert(LocalDateTime.now()));
+        persistentDto.setUpdatedTime(LocalDateTime.now());
 
         PersistentDto copied = new GuestBookEntryDto(persistentDto);
 

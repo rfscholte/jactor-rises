@@ -1,11 +1,14 @@
 package com.github.jactor.rises.client.dto;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
-public class BlogDto extends PersistentDto implements Serializable {
+public class BlogDto extends PersistentDto<Long> implements Serializable {
     private Set<BlogEntryDto> entries;
-    private String created;
+    private LocalDate created;
     private String title;
     private UserDto user;
 
@@ -21,12 +24,12 @@ public class BlogDto extends PersistentDto implements Serializable {
         user = blogDto.getUser();
     }
 
-    public String getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
     public Set<BlogEntryDto> getEntries() {
-        return entries;
+        return Optional.ofNullable(entries).orElseGet(HashSet::new);
     }
 
     public String getTitle() {
@@ -37,7 +40,7 @@ public class BlogDto extends PersistentDto implements Serializable {
         return user;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 

@@ -3,11 +3,13 @@ package com.github.jactor.rises.client.domain;
 import com.github.jactor.rises.client.datatype.EmailAddress;
 import com.github.jactor.rises.client.datatype.UserName;
 
+import java.util.Set;
+
 public interface User extends Persistent {
 
     UserName getUserName();
 
-    Blog getBlog();
+    Set<? extends Blog> getBlogs();
 
     GuestBook getGuestBook();
 

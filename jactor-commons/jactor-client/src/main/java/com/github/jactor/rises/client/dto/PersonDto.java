@@ -2,7 +2,7 @@ package com.github.jactor.rises.client.dto;
 
 import java.io.Serializable;
 
-public class PersonDto extends PersistentDto implements Serializable {
+public class PersonDto extends PersistentDto<Long> implements Serializable {
     private AddressDto address;
     private String locale;
     private String firstName;

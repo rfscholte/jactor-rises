@@ -81,17 +81,6 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>com.github.jactor-rises.jactor-persistence</groupId>
-                <artifactId>persistence-beans</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.jactor-rises.jactor-persistence</groupId>
-                <artifactId>persistence-orm</artifactId>
-                <version>${project.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>com.github.jactor-rises</groupId>
                 <artifactId>jactor-model</artifactId>
                 <version>${project.version}</version>
