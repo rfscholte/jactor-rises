@@ -11,7 +11,7 @@ public class PersonDto extends PersistentDto<Long> implements Serializable {
     private UserDto user;
 
     public PersonDto() {
-        // empty, use setters
+        // empty, if usage of setters
     }
 
     PersonDto(PersonDto person) {
@@ -70,5 +70,46 @@ public class PersonDto extends PersistentDto<Long> implements Serializable {
 
     public void setUser(UserDto user) {
         this.user = user;
+    }
+
+    public static PersonDtoBuilder aPerson() {
+        return new PersonDtoBuilder();
+    }
+
+    public static class PersonDtoBuilder {
+        private AddressDto.AddressDtoBuilder addressDtoBuilder;
+        private String description;
+        private String surname;
+        private UserDto userDto;
+
+        public PersonDtoBuilder with(AddressDto.AddressDtoBuilder addressDtoBuilder) {
+            this.addressDtoBuilder = addressDtoBuilder;
+            return this;
+        }
+
+        public PersonDtoBuilder with(UserDto userDto) {
+            this.userDto = userDto;
+            return this;
+        }
+
+        public PersonDtoBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public PersonDtoBuilder withSurname(String surname) {
+            this.surname = surname;
+            return this;
+        }
+
+        public PersonDto build() {
+            PersonDto personDto = new PersonDto();
+            personDto.setAddress(addressDtoBuilder.build());
+            personDto.setDescription(description);
+            personDto.setSurname(surname);
+            personDto.setUser(userDto);
+
+            return personDto;
+        }
     }
 }
