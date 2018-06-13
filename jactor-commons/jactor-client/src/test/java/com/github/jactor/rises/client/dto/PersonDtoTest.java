@@ -20,7 +20,6 @@ class PersonDtoTest {
         personDto.setFirstName("first name");
         personDto.setLocale("no");
         personDto.setSurname("surname");
-        personDto.setUser(new UserDto());
 
         PersonDto copied = new PersonDto(personDto);
 
@@ -29,8 +28,7 @@ class PersonDtoTest {
                 () -> assertThat(copied.getDescription()).as("description").isEqualTo(personDto.getDescription()),
                 () -> assertThat(copied.getFirstName()).as("first name").isEqualTo(personDto.getFirstName()),
                 () -> assertThat(copied.getLocale()).as("locale").isEqualTo(personDto.getLocale()),
-                () -> assertThat(copied.getSurname()).as("surname").isEqualTo(personDto.getSurname()),
-                () -> assertThat(copied.getUser()).as("user").isEqualTo(personDto.getUser())
+                () -> assertThat(copied.getSurname()).as("surname").isEqualTo(personDto.getSurname())
         );
     }
 
