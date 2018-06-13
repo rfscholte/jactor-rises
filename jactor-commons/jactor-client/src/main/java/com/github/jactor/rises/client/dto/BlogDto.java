@@ -88,7 +88,6 @@ public class BlogDto extends PersistentDto<Long> implements Serializable {
             BlogDto blogDto = new BlogDto();
             blogDto.setTitle(title);
             blogDto.setUser(userDto);
-            userDto.addBlog(blogDto);
             blogDto.setEntries(blogEntryDtoBuilders.stream()
                     .map(blogEntryDtoBuilder -> blogEntryDtoBuilder.with(blogDto).build())
                     .collect(toSet())
