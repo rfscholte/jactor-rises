@@ -24,10 +24,10 @@ public final class NowAsPureDateExtension extends Now implements BeforeEachCallb
     }
 
     @Override public void beforeEach(ExtensionContext extensionContext) {
-        reset(new NowAsPureDateExtension());
+        Now.reset(new NowAsPureDateExtension());
     }
 
     @Override public void afterEach(ExtensionContext extensionContext) {
-        reset(new Now());
+        Now.reset(new Now());
     }
 }
