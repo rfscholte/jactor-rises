@@ -15,8 +15,6 @@ class UserDtoTest {
     @Test
     void shouldHaveCopyConstructor() {
         UserDto userDto = new UserDto();
-        userDto.addBlog(new BlogDto());
-        userDto.setGuestBook(new GuestBookDto());
         userDto.setEmailAddress("somewhere@time");
         userDto.setPerson(new PersonDto());
         userDto.setUserName("me");
@@ -24,8 +22,6 @@ class UserDtoTest {
         UserDto copied = new UserDto(userDto);
 
         assertAll(
-                () -> assertThat(copied.getBlogs()).as("blogs").hasSize(1),
-                () -> assertThat(copied.getGuestBook()).as("guest book").isEqualTo(userDto.getGuestBook()),
                 () -> assertThat(copied.getEmailAddress()).as("email address").isEqualTo(userDto.getEmailAddress()),
                 () -> assertThat(copied.getPerson()).as("person").isEqualTo(userDto.getPerson()),
                 () -> assertThat(copied.getUserName()).as("user name").isEqualTo(userDto.getUserName())

@@ -8,8 +8,6 @@ public interface Person extends Persistent {
 
     String getDescription();
 
-    User getUser();
-
     Address getAddress();
 
     Name getFirstName();

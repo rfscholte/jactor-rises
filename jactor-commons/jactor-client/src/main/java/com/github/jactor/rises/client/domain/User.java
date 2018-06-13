@@ -9,10 +9,6 @@ public interface User extends Persistent {
 
     UserName getUserName();
 
-    Set<? extends Blog> getBlogs();
-
-    GuestBook getGuestBook();
-
     Person getPerson();
 
     EmailAddress getEmailAddress();
