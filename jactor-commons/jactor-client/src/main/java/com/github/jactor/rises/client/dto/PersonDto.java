@@ -8,7 +8,6 @@ public class PersonDto extends PersistentDto<Long> implements Serializable {
     private String firstName;
     private String surname;
     private String description;
-    private UserDto user;
 
     public PersonDto() {
         // empty, use setters
@@ -21,15 +20,10 @@ public class PersonDto extends PersistentDto<Long> implements Serializable {
         firstName = person.getFirstName();
         surname = person.getSurname();
         description = person.getDescription();
-        user = person.getUser();
     }
 
     public String getDescription() {
         return description;
-    }
-
-    public UserDto getUser() {
-        return user;
     }
 
     public AddressDto getAddress() {
@@ -66,9 +60,5 @@ public class PersonDto extends PersistentDto<Long> implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setUser(UserDto user) {
-        this.user = user;
     }
 }
