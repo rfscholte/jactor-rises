@@ -41,4 +41,38 @@ public class BlogEntryDto extends PersistentDto<Long> implements Serializable {
     public void setEntry(String entry) {
         this.entry = entry;
     }
+
+    public static BlogEntryDtoBuilder aBlogEntry() {
+        return new BlogEntryDtoBuilder();
+    }
+
+    public static class BlogEntryDtoBuilder {
+        private BlogDto blogDto;
+        private String entry;
+        private String creatorName;
+
+        public BlogEntryDtoBuilder with(BlogDto blogDto) {
+            this.blogDto = blogDto;
+            return this;
+        }
+
+       public BlogEntryDtoBuilder withEntry(String entry) {
+            this.entry = entry;
+            return this;
+        }
+
+        public BlogEntryDtoBuilder withCreatorName(String creatorName) {
+            this.creatorName = creatorName;
+            return this;
+        }
+
+        public BlogEntryDto build() {
+            BlogEntryDto blogEntryDto = new BlogEntryDto();
+            blogEntryDto.setBlog(blogDto);
+            blogEntryDto.setCreatorName(creatorName);
+            blogEntryDto.setEntry(entry);
+
+            return blogEntryDto;
+        }
+    }
 }

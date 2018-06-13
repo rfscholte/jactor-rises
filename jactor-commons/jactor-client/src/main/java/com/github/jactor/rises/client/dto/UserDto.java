@@ -12,7 +12,7 @@ public class UserDto extends PersistentDto<Long> implements Serializable {
     private String userName;
 
     public UserDto() {
-        // empty, use setters...
+        // empty, if usage of setters
     }
 
     public UserDto(UserDto user) {
@@ -62,5 +62,39 @@ public class UserDto extends PersistentDto<Long> implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public static UserDtoBuilder aUser() {
+        return new UserDtoBuilder();
+    }
+
+    public static class UserDtoBuilder {
+        private PersonDto.PersonDtoBuilder personDtoBuilder;
+        private String creatorName;
+        private String emailAddress;
+
+        public UserDtoBuilder withUserName(String creatorName) {
+            this.creatorName = creatorName;
+            return this;
+        }
+
+        public UserDtoBuilder withEmailAddress(String emailAddress) {
+            this.emailAddress = emailAddress;
+            return this;
+        }
+
+        public UserDtoBuilder with(PersonDto.PersonDtoBuilder personDtoBuilder) {
+            this.personDtoBuilder = personDtoBuilder;
+            return this;
+        }
+
+        public UserDto build() {
+            UserDto userDto = new UserDto();
+            userDto.setCreatedBy(creatorName);
+            userDto.setEmailAddress(emailAddress);
+             userDto.setPerson(personDtoBuilder.with(userDto).build());
+
+            return userDto;
+        }
     }
 }
