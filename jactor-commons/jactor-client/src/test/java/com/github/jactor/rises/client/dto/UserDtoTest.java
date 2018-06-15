@@ -17,14 +17,14 @@ class UserDtoTest {
         UserDto userDto = new UserDto();
         userDto.setEmailAddress("somewhere@time");
         userDto.setPerson(new PersonDto());
-        userDto.setUserName("me");
+        userDto.setUsername("me");
 
         UserDto copied = new UserDto(userDto);
 
         assertAll(
                 () -> assertThat(copied.getEmailAddress()).as("email address").isEqualTo(userDto.getEmailAddress()),
                 () -> assertThat(copied.getPerson()).as("person").isEqualTo(userDto.getPerson()),
-                () -> assertThat(copied.getUserName()).as("user name").isEqualTo(userDto.getUserName())
+                () -> assertThat(copied.getUsername()).as("user name").isEqualTo(userDto.getUsername())
         );
     }
 
