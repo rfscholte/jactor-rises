@@ -4,8 +4,8 @@ import java.util.Objects;
 
 import static java.util.Objects.hash;
 
-public class UserName extends Name {
-    public UserName(String name) {
+public class Username extends Name {
+    public Username(String name) {
         super(name);
     }
 
@@ -19,7 +19,7 @@ public class UserName extends Name {
         }
 
         String thisName = asString() != null ? asString().toUpperCase() : null;
-        String thatName = ((UserName) obj).asString().toUpperCase();
+        String thatName = ((Username) obj).asString().toUpperCase();
 
         return Objects.equals(thisName, thatName);
     }

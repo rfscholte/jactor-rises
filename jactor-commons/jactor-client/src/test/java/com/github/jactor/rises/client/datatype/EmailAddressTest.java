@@ -86,7 +86,7 @@ class EmailAddressTest {
     @DisplayName("should check if it is equal as given user name")
     @Test
     void shouldCheckIfEqualToUserName() {
-        assertThat(new EmailAddress("way", "out.there").isSameAs(new UserName("way@out.there")))
+        assertThat(new EmailAddress("way", "out.there").isSameAs(new Username("way@out.there")))
                 .as("An email address can be equal to user name")
                 .isEqualTo(true);
     }

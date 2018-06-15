@@ -36,8 +36,8 @@ public class EmailAddress {
         this.suffix = suffix;
     }
 
-    public boolean isSameAs(UserName userName) {
-        return userName != null && userName.equals(new UserName(asString()));
+    public boolean isSameAs(Username username) {
+        return username != null && username.equals(new Username(asString()));
     }
 
     @Override public int hashCode() {
@@ -52,12 +52,12 @@ public class EmailAddress {
         return Objects.equals(prefix, obj.prefix) && Objects.equals(suffix, obj.suffix);
     }
 
-
-    public String asString() {
-        return prefix + AT + suffix;
-    }
-
     @Override public String toString() {
         return EmailAddress.class.getSimpleName() + "[" + asString() + "]";
     }
+
+    private String asString() {
+        return prefix + AT + suffix;
+    }
+
 }

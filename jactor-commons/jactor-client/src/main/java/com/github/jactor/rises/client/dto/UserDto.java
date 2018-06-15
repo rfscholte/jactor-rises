@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class UserDto extends PersistentDto<Long> implements Serializable {
     private PersonDto person;
     private String emailAddress;
-    private String userName;
+    private String username;
 
     public UserDto() {
         // empty, if usage of setters
@@ -15,7 +15,7 @@ public class UserDto extends PersistentDto<Long> implements Serializable {
         super(user);
         emailAddress = user.getEmailAddress();
         person = user.getPerson();
-        userName = user.getUserName();
+        username = user.getUsername();
     }
 
     public PersonDto getPerson() {
@@ -26,8 +26,8 @@ public class UserDto extends PersistentDto<Long> implements Serializable {
         return emailAddress;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     public void setEmailAddress(String emailAddress) {
@@ -38,8 +38,8 @@ public class UserDto extends PersistentDto<Long> implements Serializable {
         this.person = person;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public static UserDtoBuilder aUser() {
