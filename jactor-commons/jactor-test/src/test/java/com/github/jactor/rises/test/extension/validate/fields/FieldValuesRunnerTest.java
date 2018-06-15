@@ -31,7 +31,7 @@ class FieldValuesRunnerTest {
         ).withMessageContaining("Unknown class for field values");
     }
 
-    @DisplayName("should fail when field missing do not have a value")
+    @DisplayName("should fail when field missing is not provider with a value")
     @Test void shouldFailWhenFieldMissingValue() {
         Pojo pojo = new Pojo();
         AbstractRequiredFieldsExtension.withRequiredFields(Pojo.class, asList(

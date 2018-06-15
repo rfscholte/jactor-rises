@@ -1,6 +1,7 @@
 package com.github.jactor.rises.client.dto;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 public class UserDto extends PersistentDto<Long> implements Serializable {
     private PersonDto person;
@@ -47,11 +48,17 @@ public class UserDto extends PersistentDto<Long> implements Serializable {
     }
 
     public static class UserDtoBuilder {
-        private String creatorName;
+        private PersonDto.PersonDtoBuilder personDtoBuilder;
+        private String username;
         private String emailAddress;
 
-        public UserDtoBuilder withUserName(String creatorName) {
-            this.creatorName = creatorName;
+        public UserDtoBuilder with(PersonDto.PersonDtoBuilder personDtoBuilder) {
+            this.personDtoBuilder = personDtoBuilder;
+            return this;
+        }
+
+        public UserDtoBuilder withUserName(String username) {
+            this.username = username;
             return this;
         }
 
@@ -62,8 +69,9 @@ public class UserDto extends PersistentDto<Long> implements Serializable {
 
         public UserDto build() {
             UserDto userDto = new UserDto();
-            userDto.setCreatedBy(creatorName);
+            userDto.setUsername(username);
             userDto.setEmailAddress(emailAddress);
+            Optional.ofNullable(personDtoBuilder).ifPresent(builder -> userDto.setPerson(personDtoBuilder.build()));
 
             return userDto;
         }
