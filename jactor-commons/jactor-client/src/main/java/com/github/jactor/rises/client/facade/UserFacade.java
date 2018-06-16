@@ -7,5 +7,7 @@ import java.util.Optional;
 
 public interface UserFacade {
 
+    Optional<User> fetch(Long id);
+
     Optional<User> find(Username username);
 }

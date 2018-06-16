@@ -20,7 +20,6 @@ class BlogDtoTest {
     void shouldHaveCopyConstructor() {
         BlogDto blogDto = new BlogDto();
         blogDto.setCreated(LocalDate.now());
-        blogDto.setEntries(new HashSet<>(singletonList(new BlogEntryDto())));
         blogDto.setTitle("title");
         blogDto.setUser(new UserDto());
 
@@ -28,7 +27,6 @@ class BlogDtoTest {
 
         assertAll(
                 () -> assertThat(copied.getCreated()).as("created").isEqualTo(blogDto.getCreated()),
-                () -> assertThat(copied.getEntries()).as("enties").isEqualTo(blogDto.getEntries()),
                 () -> assertThat(copied.getTitle()).as("title").isEqualTo(blogDto.getTitle()),
                 () -> assertThat(copied.getUser()).as("user").isEqualTo(blogDto.getUser())
         );

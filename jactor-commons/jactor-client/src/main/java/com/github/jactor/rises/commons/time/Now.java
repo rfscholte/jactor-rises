@@ -12,16 +12,8 @@ public class Now {
         return LocalDateTime.now();
     }
 
-    protected Date nowAsDate() {
-        return new Date();
-    }
-
     public static LocalDateTime asDateTime() {
         return instance.nowAsDateTime();
-    }
-
-    public static Date asDate() {
-        return instance.nowAsDate();
     }
 
     protected static void reset(Now instance) {

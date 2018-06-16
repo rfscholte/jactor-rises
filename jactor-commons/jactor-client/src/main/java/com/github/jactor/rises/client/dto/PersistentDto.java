@@ -1,5 +1,7 @@
 package com.github.jactor.rises.client.dto;
 
+import com.github.jactor.rises.commons.time.Now;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -12,9 +14,9 @@ public abstract class PersistentDto<I extends Serializable> implements Serializa
 
     PersistentDto() {
         createdBy = "todo: #156";
-        creationTime = LocalDateTime.now();
+        creationTime = Now.asDateTime();
         updatedBy = "todo: #156";
-        updatedTime = LocalDateTime.now();
+        updatedTime = Now.asDateTime();
     }
 
     PersistentDto(PersistentDto<I> persistent) {
