@@ -1,6 +1,6 @@
-package com.github.jactor.rises.test.extension.time;
+package com.gitlab.jactor.rises.test.extension.time;
 
-import com.github.jactor.rises.commons.time.Now;
+import com.gitlab.jactor.rises.commons.time.Now;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;

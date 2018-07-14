@@ -1,4 +1,4 @@
-package com.github.jactor.rises.client.dto;
+package com.gitlab.jactor.rises.client.dto;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

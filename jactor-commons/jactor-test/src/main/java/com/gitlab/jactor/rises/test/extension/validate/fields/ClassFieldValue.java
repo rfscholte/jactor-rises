@@ -1,4 +1,4 @@
-package com.github.jactor.rises.test.extension.validate.fields;
+package com.gitlab.jactor.rises.test.extension.validate.fields;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

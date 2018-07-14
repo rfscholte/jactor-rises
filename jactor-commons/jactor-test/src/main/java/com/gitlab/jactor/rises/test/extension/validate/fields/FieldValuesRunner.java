@@ -1,8 +1,8 @@
-package com.github.jactor.rises.test.extension.validate.fields;
+package com.gitlab.jactor.rises.test.extension.validate.fields;
 
-import com.github.jactor.rises.commons.builder.AbstractBuilder;
-import com.github.jactor.rises.commons.builder.MissingFields;
-import com.github.jactor.rises.commons.builder.ValidInstance;
+import com.gitlab.jactor.rises.commons.builder.AbstractBuilder;
+import com.gitlab.jactor.rises.commons.builder.MissingFields;
+import com.gitlab.jactor.rises.commons.builder.ValidInstance;
 
 import java.beans.Statement;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package com.github.jactor.rises.client.dto;
+package com.gitlab.jactor.rises.client.dto;
 
-import com.github.jactor.rises.commons.time.Now;
+import com.gitlab.jactor.rises.commons.time.Now;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

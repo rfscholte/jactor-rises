@@ -1,4 +1,4 @@
-package com.github.jactor.rises.client.domain;
+package com.gitlab.jactor.rises.client.domain;
 
 import java.util.Set;
 

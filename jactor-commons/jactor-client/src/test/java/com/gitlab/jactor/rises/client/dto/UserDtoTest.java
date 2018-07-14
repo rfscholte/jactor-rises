@@ -1,4 +1,4 @@
-package com.github.jactor.rises.client.dto;
+package com.gitlab.jactor.rises.client.dto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

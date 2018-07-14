@@ -1,7 +1,7 @@
-package com.github.jactor.rises.client.domain;
+package com.gitlab.jactor.rises.client.domain;
 
-import com.github.jactor.rises.client.datatype.EmailAddress;
-import com.github.jactor.rises.client.datatype.Username;
+import com.gitlab.jactor.rises.client.datatype.EmailAddress;
+import com.gitlab.jactor.rises.client.datatype.Username;
 
 public interface User extends Persistent {
 

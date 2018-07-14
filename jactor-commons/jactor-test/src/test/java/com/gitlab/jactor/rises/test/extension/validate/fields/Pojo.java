@@ -1,4 +1,4 @@
-package com.github.jactor.rises.test.extension.validate.fields;
+package com.gitlab.jactor.rises.test.extension.validate.fields;
 
 public class Pojo {
     private Object aField;

@@ -1,6 +1,6 @@
-package com.github.jactor.rises.test.extension.validate.fields;
+package com.gitlab.jactor.rises.test.extension.validate.fields;
 
-import com.github.jactor.rises.commons.builder.AbstractBuilder;
+import com.gitlab.jactor.rises.commons.builder.AbstractBuilder;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;

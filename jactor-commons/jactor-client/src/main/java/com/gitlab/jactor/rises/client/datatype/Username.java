@@ -1,4 +1,4 @@
-package com.github.jactor.rises.client.datatype;
+package com.gitlab.jactor.rises.client.datatype;
 
 import java.util.Objects;
 

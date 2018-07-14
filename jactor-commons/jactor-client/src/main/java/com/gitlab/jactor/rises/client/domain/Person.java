@@ -1,6 +1,6 @@
-package com.github.jactor.rises.client.domain;
+package com.gitlab.jactor.rises.client.domain;
 
-import com.github.jactor.rises.client.datatype.Name;
+import com.gitlab.jactor.rises.client.datatype.Name;
 
 import java.util.Locale;
 
