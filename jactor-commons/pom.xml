@@ -7,12 +7,12 @@
     <parent>
         <groupId>com.gitlab.rises</groupId>
         <artifactId>rises</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
 
     <groupId>com.gitlab.rises.jactor-commons</groupId>
     <artifactId>jactor-commons</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <name>rises::jactor-commons</name>
     <description>The build of jactor-client and jactor-test</description>
