@@ -33,7 +33,7 @@ public class Country {
             }
         }
 
-        throw new IllegalArgumentException(countryCode + NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166 + VALID_COUNTRY_CODES + asList(isoCountries));
+        throw new IllegalArgumentException(countryCode + NOT_A_VALID_COUNTRY_CODE_ACCORDING_TO_ISO_3166 + VALID_COUNTRY_CODES + String.join(", ", asList(isoCountries)));
     }
 
     @Override public boolean equals(Object obj) {
