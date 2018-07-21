@@ -4,9 +4,7 @@ Source code for jactor-rises (client, model, back-end, and front-end)
 
 ### What is this repository for? ###
 
-* Src code and issues regarding jactor-rises
-* Code can be found on [gitlab](https://gitlab.com/jactor/rises)
-* [GitLab Flavoured Markdown](https://gitlab.com/help/user/markdown)
+* Version 1 of jactor-rises.
 
 ### How do I get set up? ###
 
@@ -16,6 +14,11 @@ Source code for jactor-rises (client, model, back-end, and front-end)
        * it is necessary to run this application to have a user interface in which to interact with
 * these applications can run side by side to get a full working application (using `mvn spring-boot:run` on each application)
 * persistence-orm is using h2 (in-memory database), and is not finite
+
+### Why ###
+
+This is version one of my "sandbox" which I use to learn various aspects of java programming.
+This repository contains code that is evolved from about the year 2004, going through version control systems as CSV, Subversion, and now Git...
 
 ### Some technologies used on jactor-rises ###
 
@@ -27,4 +30,3 @@ Source code for jactor-rises (client, model, back-end, and front-end)
 * [assertj](https://joel-costigliola.github.io/assertj/)
 * [mockito](http://site.mockito.org)
 * [thymeleaf](https://www.thymeleaf.org)
-* [git](https://git-scm.com)
