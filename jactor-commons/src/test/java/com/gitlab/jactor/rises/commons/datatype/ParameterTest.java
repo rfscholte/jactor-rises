@@ -1,4 +1,5 @@
-package com.gitlab.jactor.rises.model.datatype;
+package com.gitlab.jactor.rises.commons.datatype;
+
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -6,24 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("A Username")
-class UsernameTest {
-
-    @DisplayName("should be equal to another user name if the difference is only is case")
-    @Test void willBeEqualIfOnlyDifferenceIsTheCharacterCase() {
-        assertThat(new Username("jactor")).isEqualTo(new Username("JACTOR"));
-    }
-
-    @DisplayName("should have equal hashCode to another user name if the difference is only is case")
-    @Test void willProduceEqualHashCodeIfOnlyDifferenceIsTheCharacterCase() {
-        assertThat(new Username("jactor").hashCode()).isEqualTo(new Username("JACTOR").hashCode());
-    }
-
+@DisplayName("A Parameter")
+class ParameterTest {
     @DisplayName("should have an implementation of the hashCode method")
-    @Test void willImplementHashCodeAccordingToTheJavaSpecifications() {
-        Username base = new Username("someone");
-        Username equal = new Username("SOMEONE");
-        Username notEqual = new Username("SOMEONE else");
+    @Test void whenInvokingHashCodeTheResultShouldBeEqualOnDifferentInstancesThatAreEqual() {
+        Parameter base = new Parameter("param", "value");
+        Parameter equal = new Parameter("param", "value");
+        Parameter notEqual = new Parameter("another param", "value");
 
         assertAll(
                 () -> assertThat(base.hashCode()).as("(%s).hashCode() is equal to (%s).hashCode()", base, equal).isEqualTo(equal.hashCode()),
@@ -33,10 +23,10 @@ class UsernameTest {
     }
 
     @DisplayName("should have an implementation of the equals method")
-    @Test void willImplementEqualsAccordingToTheJavaSpecifications() {
-        Username base = new Username("someone");
-        Username equal = new Username("SOMEONE");
-        Username notEqual = new Username("SOMEONE else");
+    @Test void whenChecksForEqualityIsDoneTheValuesOfThePropertiesMustBeCorrect() {
+        Parameter base = new Parameter("param", "value");
+        Parameter equal = new Parameter("param", "value");
+        Parameter notEqual = new Parameter("another param", "value");
 
         assertAll(
                 () -> assertThat(base).as("%s is equal to %s", base, equal).isEqualTo(equal),
@@ -44,6 +34,21 @@ class UsernameTest {
                 () -> assertThat(base).as("%s is not equal to %s").isNotEqualTo(null),
                 () -> assertThat(base).as("%s is equal to %s").isEqualTo(base),
                 () -> assertThat(base).as("base is not same instance as equal").isNotSameAs(equal)
+        );
+    }
+
+    @DisplayName("should implement toString")
+    @Test void whenInvokingToStringOnTheDataTypeItShouldBeImplementedOnTheDataTypeClass() {
+        assertThat(new Parameter("some", "value").toString()).isEqualTo("some=value");
+    }
+
+    @DisplayName("should split parameter into key and value using the = sign")
+    @Test void whenCreatedWithStringTheParameterShouldSplitKeyValueByAnEqualSign() {
+        Parameter parameter = new Parameter("some=where");
+
+        assertAll(
+                () -> assertThat(parameter.getKey()).isEqualTo("some"),
+                () -> assertThat(parameter.getValue()).isEqualTo("where")
         );
     }
 }

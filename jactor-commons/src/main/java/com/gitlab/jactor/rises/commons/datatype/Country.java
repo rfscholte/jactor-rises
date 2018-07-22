@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.model.datatype;
+package com.gitlab.jactor.rises.commons.datatype;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

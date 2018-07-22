@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.model.datatype;
+package com.gitlab.jactor.rises.commons.datatype;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
