@@ -1,8 +1,6 @@
-module com.gitlab.jactor.rises.client {
-    exports com.gitlab.jactor.rises.client.datatype;
-    exports com.gitlab.jactor.rises.client.domain;
-    exports com.gitlab.jactor.rises.client.dto;
-    exports com.gitlab.jactor.rises.client.facade;
+module com.gitlab.jactor.rises.commons {
+    exports com.gitlab.jactor.rises.io.dto;
+    exports com.gitlab.jactor.rises.io.facade;
     exports com.gitlab.jactor.rises.commons.builder;
     exports com.gitlab.jactor.rises.commons.framework;
     exports com.gitlab.jactor.rises.commons.time;
