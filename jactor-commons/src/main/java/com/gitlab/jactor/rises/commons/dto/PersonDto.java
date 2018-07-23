@@ -1,6 +1,7 @@
 package com.gitlab.jactor.rises.commons.dto;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 public class PersonDto extends PersistentDto<Long> implements Serializable {
     private AddressDto address;
@@ -69,6 +70,7 @@ public class PersonDto extends PersistentDto<Long> implements Serializable {
     public static class PersonDtoBuilder {
         private AddressDto.AddressDtoBuilder addressDtoBuilder;
         private String description;
+        private String firstName;
         private String surname;
 
         public PersonDtoBuilder with(AddressDto.AddressDtoBuilder addressDtoBuilder) {
@@ -81,6 +83,11 @@ public class PersonDto extends PersistentDto<Long> implements Serializable {
             return this;
         }
 
+        public PersonDtoBuilder withFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
         public PersonDtoBuilder withSurname(String surname) {
             this.surname = surname;
             return this;
@@ -88,8 +95,9 @@ public class PersonDto extends PersistentDto<Long> implements Serializable {
 
         public PersonDto build() {
             PersonDto personDto = new PersonDto();
-            personDto.setAddress(addressDtoBuilder.build());
+            personDto.setAddress(Optional.ofNullable(addressDtoBuilder).map(AddressDto.AddressDtoBuilder::build).orElse(null));
             personDto.setDescription(description);
+            personDto.setFirstName(firstName);
             personDto.setSurname(surname);
 
             return personDto;
