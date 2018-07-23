@@ -1,4 +1,4 @@
-module com.gitlab.jactor.rises.commons {
+module jactor.rises.commons {
     exports com.gitlab.jactor.rises.commons.datatype;
     exports com.gitlab.jactor.rises.commons.dto;
     exports com.gitlab.jactor.rises.commons.builder;
