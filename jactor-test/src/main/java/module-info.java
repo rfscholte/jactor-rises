@@ -1,4 +1,4 @@
-module com.gitlab.jactor.rises.test {
+module jactor.rises.test {
     requires jactor.rises.commons;
     requires org.junit.jupiter.api;
 
