@@ -2,9 +2,9 @@
 
 ### What is this repository for? ###
 
-* Src code and issues regarding jactor-rises
+* Src code for jactor-rises
 
-This project is created as microsevices and not as a monolithic client/server applications and are loosely described on this page using [GitLab Flavoured Markdown](https://gitlab.com/help/user/markdown)
+This project is created as microsevices and not as a monolithic client/server applications.
 
 The only hard dependencies between jactor modules are:
 
@@ -14,7 +14,7 @@ graph TD;
     jactor.rises.commons-->jactor.rises.model;
     jactor.rises.commons-->jactor.rises.persistence.orm;
     jactor.rises.commons-->jactor.rises.web;
-    jactor.rises.model->jactor.rises.facade;
+    jactor.rises.model-->jactor.rises.facade;
 ```
 
 ### Set up ###
@@ -45,6 +45,10 @@ There are three microservices in this architecture which all handles all of the 
 * `jactor-persistence-orm` handles persistence of the data
 * `jactor-facade` handles all communication between `jactor-model` and the other microservices
   * this microservice has the actual business logic (`jactor-model`) and this a hard dependency to the service. This single jar-file is therefore free of code regarding infrastructure and can solely focus on the business rules to handle.
+
+### Why ###
+
+This is my "sandbox" which I use to learn various aspects of java programming. This repository contains code that is evolved from about the year 2004, going through version control systems as CSV, Subversion, and now Git...
 
 ### Some technologies used on jactor-rises ###
 

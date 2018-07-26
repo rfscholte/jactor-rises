@@ -4,11 +4,11 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gitlab.rises.jactor-applications</groupId>
+    <groupId>com.github.jactor.rises.jactor-applications</groupId>
     <artifactId>jactor-applications</artifactId>
     <version>1.1</version>
 
-    <name>rises::jactor-applications</name>
+    <name>jactor-rises::jactor-applications</name>
     <packaging>pom</packaging>
 
     <modules>

@@ -11,10 +11,10 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.gitlab.rises.jactor-applications</groupId>
+    <groupId>com.github.jactor.rises.jactor-applications</groupId>
     <artifactId>jactor-facade</artifactId>
 
-    <name>rises::jactor-applications::jactor-facade</name>
+    <name>jactor-rises::jactor-applications::jactor-facade</name>
     <description>A restful application which provides jactor-model</description>
     <version>1.1</version>
 
@@ -27,12 +27,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.gitlab.rises</groupId>
+            <groupId>com.github.jactor.rises</groupId>
             <artifactId>jactor-commons</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.gitlab.rises</groupId>
+            <groupId>com.github.jactor.rises</groupId>
             <artifactId>jactor-model</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -49,7 +49,7 @@
 
         <!-- test -->
         <dependency>
-            <groupId>com.gitlab.rises</groupId>
+            <groupId>com.github.jactor.rises</groupId>
             <artifactId>jactor-test</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
