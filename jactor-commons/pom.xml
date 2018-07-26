@@ -7,19 +7,13 @@
     <parent>
         <groupId>com.gitlab.rises</groupId>
         <artifactId>rises</artifactId>
-        <version>1.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.gitlab.rises.jactor-commons</groupId>
     <artifactId>jactor-commons</artifactId>
-    <version>1.0</version>
+    <packaging>jar</packaging>
 
     <name>rises::jactor-commons</name>
-    <description>The build of jactor-client and jactor-test</description>
-    <packaging>pom</packaging>
+    <description>The commons beans used by more than one microservice</description>
 
-    <modules>
-        <module>jactor-client</module>
-        <module>jactor-test</module>
-    </modules>
 </project>
