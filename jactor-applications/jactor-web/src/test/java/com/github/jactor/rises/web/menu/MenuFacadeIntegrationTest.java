@@ -1,8 +1,8 @@
-package com.gitlab.jactor.rises.web.menu;
+package com.github.jactor.rises.web.menu;
 
-import com.gitlab.jactor.rises.commons.datatype.Name;
-import com.gitlab.jactor.rises.web.JactorWeb;
-import com.gitlab.jactor.rises.web.JactorWebBeans;
+import com.github.jactor.rises.commons.datatype.Name;
+import com.github.jactor.rises.web.JactorWeb;
+import com.github.jactor.rises.web.JactorWebBeans;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

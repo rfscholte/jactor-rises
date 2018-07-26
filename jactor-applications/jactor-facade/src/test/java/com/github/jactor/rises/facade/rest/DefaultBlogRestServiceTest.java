@@ -1,7 +1,7 @@
-package com.gitlab.jactor.rises.facade.rest;
+package com.github.jactor.rises.facade.rest;
 
-import com.gitlab.jactor.rises.commons.dto.BlogDto;
-import com.gitlab.jactor.rises.commons.dto.BlogEntryDto;
+import com.github.jactor.rises.commons.dto.BlogDto;
+import com.github.jactor.rises.commons.dto.BlogEntryDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

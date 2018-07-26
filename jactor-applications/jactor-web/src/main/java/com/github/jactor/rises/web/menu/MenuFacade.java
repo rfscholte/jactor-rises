@@ -1,6 +1,6 @@
-package com.gitlab.jactor.rises.web.menu;
+package com.github.jactor.rises.web.menu;
 
-import com.gitlab.jactor.rises.commons.datatype.Name;
+import com.github.jactor.rises.commons.datatype.Name;
 
 import java.util.List;
 

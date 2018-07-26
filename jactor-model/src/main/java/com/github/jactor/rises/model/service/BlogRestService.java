@@ -1,7 +1,7 @@
-package com.gitlab.jactor.rises.model.service;
+package com.github.jactor.rises.model.service;
 
-import com.gitlab.jactor.rises.commons.dto.BlogDto;
-import com.gitlab.jactor.rises.commons.dto.BlogEntryDto;
+import com.github.jactor.rises.commons.dto.BlogDto;
+import com.github.jactor.rises.commons.dto.BlogEntryDto;
 
 import java.io.Serializable;
 

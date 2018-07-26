@@ -1,10 +1,10 @@
-package com.gitlab.jactor.rises.web.controller;
+package com.github.jactor.rises.web.controller;
 
-import com.gitlab.jactor.rises.commons.datatype.Username;
-import com.gitlab.jactor.rises.web.JactorWebBeans;
-import com.gitlab.jactor.rises.web.dto.UserModel;
-import com.gitlab.jactor.rises.web.menu.MenuFacade;
-import com.gitlab.jactor.rises.web.service.UserRestService;
+import com.github.jactor.rises.commons.datatype.Username;
+import com.github.jactor.rises.web.JactorWebBeans;
+import com.github.jactor.rises.web.dto.UserModel;
+import com.github.jactor.rises.web.menu.MenuFacade;
+import com.github.jactor.rises.web.service.UserRestService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
-import static com.gitlab.jactor.rises.web.menu.MenuItem.aMenuItem;
+import static com.github.jactor.rises.web.menu.MenuItem.aMenuItem;
 import static java.util.Collections.singletonList;
 
 @Controller

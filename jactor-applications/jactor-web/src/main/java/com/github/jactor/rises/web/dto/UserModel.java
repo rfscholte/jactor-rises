@@ -1,9 +1,9 @@
-package com.gitlab.jactor.rises.web.dto;
+package com.github.jactor.rises.web.dto;
 
 
-import com.gitlab.jactor.rises.commons.dto.AddressDto;
-import com.gitlab.jactor.rises.commons.dto.PersonDto;
-import com.gitlab.jactor.rises.commons.dto.UserDto;
+import com.github.jactor.rises.commons.dto.AddressDto;
+import com.github.jactor.rises.commons.dto.PersonDto;
+import com.github.jactor.rises.commons.dto.UserDto;
 
 import java.util.List;
 import java.util.Objects;

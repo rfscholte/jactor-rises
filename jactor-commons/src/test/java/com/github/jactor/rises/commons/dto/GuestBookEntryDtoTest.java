@@ -1,8 +1,8 @@
-package com.gitlab.jactor.rises.commons.dto;
+package com.github.jactor.rises.commons.dto;
 
-import com.gitlab.jactor.rises.commons.dto.GuestBookDto;
-import com.gitlab.jactor.rises.commons.dto.GuestBookEntryDto;
-import com.gitlab.jactor.rises.commons.dto.PersistentDto;
+import com.github.jactor.rises.commons.dto.GuestBookDto;
+import com.github.jactor.rises.commons.dto.GuestBookEntryDto;
+import com.github.jactor.rises.commons.dto.PersistentDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.commons.dto;
+package com.github.jactor.rises.commons.dto;
 
 import java.io.Serializable;
 import java.util.HashSet;

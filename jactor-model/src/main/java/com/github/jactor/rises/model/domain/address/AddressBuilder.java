@@ -1,8 +1,8 @@
-package com.gitlab.jactor.rises.model.domain.address;
+package com.github.jactor.rises.model.domain.address;
 
-import com.gitlab.jactor.rises.commons.dto.AddressDto;
-import com.gitlab.jactor.rises.commons.builder.AbstractBuilder;
-import com.gitlab.jactor.rises.commons.builder.MissingFields;
+import com.github.jactor.rises.commons.dto.AddressDto;
+import com.github.jactor.rises.commons.builder.AbstractBuilder;
+import com.github.jactor.rises.commons.builder.MissingFields;
 
 import java.util.Optional;
 

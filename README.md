@@ -36,6 +36,7 @@ These applications are not 100% finished, but created for my own learning. That 
 * `User` (with `Person` and `Address`) is fully integrated with communications from `jactor-web`, which use `jactor-model` and `jactor-persistence-orm` (through `jactor-facade`).
   * Note! Not all services for a `User` on `jactor-persistence-orm` is used.
 * Persistence in `jactor-persistence-orm` is not satisfactory. There is therefore [an issue](https://github.com/jactor-rises/jactor-rises/issues/1) (help wanted) created for solving a potential "buggy" solution.
+* `jactor.rises.facade` is the only module (and microservice) without any `module-info.java`. Please see [this issue](https://github.com/jactor-rises/jactor-rises/issues/2) (help wanted).
 
 ### Architecture Summary ###
 

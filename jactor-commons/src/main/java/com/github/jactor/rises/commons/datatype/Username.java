@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.commons.datatype;
+package com.github.jactor.rises.commons.datatype;
 
 import java.util.Objects;
 

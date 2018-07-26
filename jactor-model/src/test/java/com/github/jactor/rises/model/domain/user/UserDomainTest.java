@@ -1,6 +1,6 @@
-package com.gitlab.jactor.rises.model.domain.user;
+package com.github.jactor.rises.model.domain.user;
 
-import com.gitlab.jactor.rises.commons.dto.UserDto;
+import com.github.jactor.rises.commons.dto.UserDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

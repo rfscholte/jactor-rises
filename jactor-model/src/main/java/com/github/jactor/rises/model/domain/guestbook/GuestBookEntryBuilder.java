@@ -1,9 +1,9 @@
-package com.gitlab.jactor.rises.model.domain.guestbook;
+package com.github.jactor.rises.model.domain.guestbook;
 
-import com.gitlab.jactor.rises.commons.dto.GuestBookDto;
-import com.gitlab.jactor.rises.commons.dto.GuestBookEntryDto;
-import com.gitlab.jactor.rises.commons.builder.AbstractBuilder;
-import com.gitlab.jactor.rises.commons.builder.MissingFields;
+import com.github.jactor.rises.commons.dto.GuestBookDto;
+import com.github.jactor.rises.commons.dto.GuestBookEntryDto;
+import com.github.jactor.rises.commons.builder.AbstractBuilder;
+import com.github.jactor.rises.commons.builder.MissingFields;
 
 import java.util.Optional;
 

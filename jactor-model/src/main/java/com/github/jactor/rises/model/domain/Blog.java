@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.model.domain;
+package com.github.jactor.rises.model.domain;
 
 import java.time.LocalDate;
 

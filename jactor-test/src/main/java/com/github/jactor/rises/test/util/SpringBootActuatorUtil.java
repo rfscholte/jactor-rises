@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.test.util;
+package com.github.jactor.rises.test.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,7 +1,7 @@
-package com.gitlab.jactor.rises.commons.dto;
+package com.github.jactor.rises.commons.dto;
 
-import com.gitlab.jactor.rises.commons.dto.AddressDto;
-import com.gitlab.jactor.rises.commons.dto.PersistentDto;
+import com.github.jactor.rises.commons.dto.AddressDto;
+import com.github.jactor.rises.commons.dto.PersistentDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

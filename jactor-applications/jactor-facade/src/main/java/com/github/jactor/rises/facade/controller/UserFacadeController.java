@@ -1,8 +1,8 @@
-package com.gitlab.jactor.rises.facade.controller;
+package com.github.jactor.rises.facade.controller;
 
-import com.gitlab.jactor.rises.commons.datatype.Username;
-import com.gitlab.jactor.rises.commons.dto.UserDto;
-import com.gitlab.jactor.rises.model.service.UserDomainService;
+import com.github.jactor.rises.commons.datatype.Username;
+import com.github.jactor.rises.commons.dto.UserDto;
+import com.github.jactor.rises.model.service.UserDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.test.extension.validate.fields;
+package com.github.jactor.rises.test.extension.validate.fields;
 
 @FunctionalInterface
 public interface FieldValue {

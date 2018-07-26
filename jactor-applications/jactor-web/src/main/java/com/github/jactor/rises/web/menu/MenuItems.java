@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.web.menu;
+package com.github.jactor.rises.web.menu;
 
 import java.util.ArrayList;
 import java.util.HashMap;

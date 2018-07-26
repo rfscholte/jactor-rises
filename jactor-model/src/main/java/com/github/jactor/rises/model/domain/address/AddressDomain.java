@@ -1,9 +1,9 @@
-package com.gitlab.jactor.rises.model.domain.address;
+package com.github.jactor.rises.model.domain.address;
 
-import com.gitlab.jactor.rises.commons.datatype.Country;
-import com.gitlab.jactor.rises.model.domain.Address;
-import com.gitlab.jactor.rises.commons.dto.AddressDto;
-import com.gitlab.jactor.rises.model.domain.PersistentDomain;
+import com.github.jactor.rises.commons.datatype.Country;
+import com.github.jactor.rises.model.domain.Address;
+import com.github.jactor.rises.commons.dto.AddressDto;
+import com.github.jactor.rises.model.domain.PersistentDomain;
 
 import java.util.Optional;
 

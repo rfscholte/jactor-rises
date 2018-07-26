@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.facade.rest;
+package com.github.jactor.rises.facade.rest;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;

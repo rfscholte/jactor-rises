@@ -1,16 +1,16 @@
-package com.gitlab.jactor.rises.web;
+package com.github.jactor.rises.web;
 
-import com.gitlab.jactor.rises.commons.datatype.Name;
-import com.gitlab.jactor.rises.web.menu.DefaultMenuFacade;
-import com.gitlab.jactor.rises.web.menu.Menu;
-import com.gitlab.jactor.rises.web.menu.MenuFacade;
-import com.gitlab.jactor.rises.web.service.UserRestService;
+import com.github.jactor.rises.commons.datatype.Name;
+import com.github.jactor.rises.web.menu.DefaultMenuFacade;
+import com.github.jactor.rises.web.menu.Menu;
+import com.github.jactor.rises.web.menu.MenuFacade;
+import com.github.jactor.rises.web.service.UserRestService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-import static com.gitlab.jactor.rises.web.menu.Menu.aMenu;
-import static com.gitlab.jactor.rises.web.menu.MenuItem.aMenuItem;
+import static com.github.jactor.rises.web.menu.Menu.aMenu;
+import static com.github.jactor.rises.web.menu.MenuItem.aMenuItem;
 
 @Configuration
 public class JactorWebBeans {

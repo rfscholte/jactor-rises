@@ -1,9 +1,9 @@
-package com.gitlab.jactor.rises.web.menu;
+package com.github.jactor.rises.web.menu;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.gitlab.jactor.rises.web.menu.MenuItem.aMenuItem;
+import static com.github.jactor.rises.web.menu.MenuItem.aMenuItem;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 

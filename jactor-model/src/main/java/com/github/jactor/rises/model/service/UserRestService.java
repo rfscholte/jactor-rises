@@ -1,7 +1,7 @@
-package com.gitlab.jactor.rises.model.service;
+package com.github.jactor.rises.model.service;
 
-import com.gitlab.jactor.rises.commons.datatype.Username;
-import com.gitlab.jactor.rises.commons.dto.UserDto;
+import com.github.jactor.rises.commons.datatype.Username;
+import com.github.jactor.rises.commons.dto.UserDto;
 
 import java.io.Serializable;
 import java.util.List;

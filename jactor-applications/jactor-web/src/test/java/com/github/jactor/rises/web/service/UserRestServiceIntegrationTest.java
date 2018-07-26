@@ -1,8 +1,8 @@
-package com.gitlab.jactor.rises.web.service;
+package com.github.jactor.rises.web.service;
 
-import com.gitlab.jactor.rises.commons.datatype.Username;
-import com.gitlab.jactor.rises.commons.dto.UserDto;
-import com.gitlab.jactor.rises.test.util.SpringBootActuatorUtil;
+import com.github.jactor.rises.commons.datatype.Username;
+import com.github.jactor.rises.commons.dto.UserDto;
+import com.github.jactor.rises.test.util.SpringBootActuatorUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

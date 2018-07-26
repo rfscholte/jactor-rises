@@ -1,6 +1,6 @@
-package com.gitlab.jactor.rises.web;
+package com.github.jactor.rises.web;
 
-import com.gitlab.jactor.rises.commons.framework.SpringBeanNames;
+import com.github.jactor.rises.commons.framework.SpringBeanNames;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

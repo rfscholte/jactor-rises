@@ -1,7 +1,7 @@
-package com.gitlab.jactor.rises.persistence.entity.blog;
+package com.github.jactor.rises.persistence.entity.blog;
 
-import com.gitlab.jactor.rises.commons.builder.AbstractBuilder;
-import com.gitlab.jactor.rises.commons.builder.MissingFields;
+import com.github.jactor.rises.commons.builder.AbstractBuilder;
+import com.github.jactor.rises.commons.builder.MissingFields;
 
 import java.util.Optional;
 

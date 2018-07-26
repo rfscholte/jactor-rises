@@ -1,6 +1,6 @@
-package com.gitlab.jactor.rises.web.dto;
+package com.github.jactor.rises.web.dto;
 
-import com.gitlab.jactor.rises.test.extension.validate.SuppressValidInstanceExtension;
+import com.github.jactor.rises.test.extension.validate.SuppressValidInstanceExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,9 +8,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.util.List;
 import java.util.Optional;
 
-import static com.gitlab.jactor.rises.commons.dto.AddressDto.anAddress;
-import static com.gitlab.jactor.rises.commons.dto.PersonDto.aPerson;
-import static com.gitlab.jactor.rises.commons.dto.UserDto.aUser;
+import static com.github.jactor.rises.commons.dto.AddressDto.anAddress;
+import static com.github.jactor.rises.commons.dto.PersonDto.aPerson;
+import static com.github.jactor.rises.commons.dto.UserDto.aUser;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 

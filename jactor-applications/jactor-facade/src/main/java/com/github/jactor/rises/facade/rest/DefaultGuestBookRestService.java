@@ -1,9 +1,9 @@
-package com.gitlab.jactor.rises.facade.rest;
+package com.github.jactor.rises.facade.rest;
 
-import com.gitlab.jactor.rises.commons.dto.GuestBookDto;
-import com.gitlab.jactor.rises.commons.dto.GuestBookEntryDto;
+import com.github.jactor.rises.commons.dto.GuestBookDto;
+import com.github.jactor.rises.commons.dto.GuestBookEntryDto;
 
-import com.gitlab.jactor.rises.model.service.GuestBookRestService;
+import com.github.jactor.rises.model.service.GuestBookRestService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;

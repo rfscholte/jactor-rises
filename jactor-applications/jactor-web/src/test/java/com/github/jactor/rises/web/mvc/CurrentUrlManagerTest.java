@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.web.mvc;
+package com.github.jactor.rises.web.mvc;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,11 +1,11 @@
-package com.gitlab.jactor.rises.facade.spring;
+package com.github.jactor.rises.facade.spring;
 
-import com.gitlab.jactor.rises.facade.rest.DefaultBlogRestService;
-import com.gitlab.jactor.rises.facade.rest.DefaultGuestBookRestService;
-import com.gitlab.jactor.rises.facade.rest.DefaultUserRestService;
-import com.gitlab.jactor.rises.model.service.BlogRestService;
-import com.gitlab.jactor.rises.model.service.GuestBookRestService;
-import com.gitlab.jactor.rises.model.service.UserRestService;
+import com.github.jactor.rises.facade.rest.DefaultBlogRestService;
+import com.github.jactor.rises.facade.rest.DefaultGuestBookRestService;
+import com.github.jactor.rises.facade.rest.DefaultUserRestService;
+import com.github.jactor.rises.model.service.BlogRestService;
+import com.github.jactor.rises.model.service.GuestBookRestService;
+import com.github.jactor.rises.model.service.UserRestService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;

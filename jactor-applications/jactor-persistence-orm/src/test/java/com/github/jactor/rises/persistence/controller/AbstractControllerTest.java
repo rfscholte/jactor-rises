@@ -1,6 +1,6 @@
-package com.gitlab.jactor.rises.persistence.controller;
+package com.github.jactor.rises.persistence.controller;
 
-import com.gitlab.jactor.rises.commons.dto.AddressDto;
+import com.github.jactor.rises.commons.dto.AddressDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;

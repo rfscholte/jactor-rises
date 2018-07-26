@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.persistence;
+package com.github.jactor.rises.persistence;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

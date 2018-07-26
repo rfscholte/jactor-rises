@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.commons.framework;
+package com.github.jactor.rises.commons.framework;
 
 import java.util.ArrayList;
 import java.util.List;

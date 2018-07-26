@@ -1,14 +1,14 @@
-package com.gitlab.jactor.rises.web.menu;
+package com.github.jactor.rises.web.menu;
 
-import com.gitlab.jactor.rises.commons.datatype.Name;
+import com.github.jactor.rises.commons.datatype.Name;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.gitlab.jactor.rises.web.menu.Menu.aMenu;
-import static com.gitlab.jactor.rises.web.menu.MenuItem.aMenuItem;
+import static com.github.jactor.rises.web.menu.Menu.aMenu;
+import static com.github.jactor.rises.web.menu.MenuItem.aMenuItem;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 

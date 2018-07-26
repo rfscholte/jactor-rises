@@ -1,9 +1,9 @@
-package com.gitlab.jactor.rises.model.service;
+package com.github.jactor.rises.model.service;
 
-import com.gitlab.jactor.rises.commons.dto.GuestBookDto;
-import com.gitlab.jactor.rises.commons.dto.GuestBookEntryDto;
-import com.gitlab.jactor.rises.model.domain.guestbook.GuestBookDomain;
-import com.gitlab.jactor.rises.model.domain.guestbook.GuestBookEntryDomain;
+import com.github.jactor.rises.commons.dto.GuestBookDto;
+import com.github.jactor.rises.commons.dto.GuestBookEntryDto;
+import com.github.jactor.rises.model.domain.guestbook.GuestBookDomain;
+import com.github.jactor.rises.model.domain.guestbook.GuestBookEntryDomain;
 
 import java.io.Serializable;
 import java.util.Optional;

@@ -1,9 +1,9 @@
-package com.gitlab.jactor.rises.model.domain.blog;
+package com.github.jactor.rises.model.domain.blog;
 
-import com.gitlab.jactor.rises.model.domain.Blog;
-import com.gitlab.jactor.rises.commons.dto.BlogDto;
-import com.gitlab.jactor.rises.model.domain.PersistentDomain;
-import com.gitlab.jactor.rises.model.domain.user.UserDomain;
+import com.github.jactor.rises.model.domain.Blog;
+import com.github.jactor.rises.commons.dto.BlogDto;
+import com.github.jactor.rises.model.domain.PersistentDomain;
+import com.github.jactor.rises.model.domain.user.UserDomain;
 
 import java.time.LocalDate;
 import java.util.Optional;

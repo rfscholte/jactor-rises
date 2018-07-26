@@ -1,10 +1,10 @@
-package com.gitlab.jactor.rises.facade;
+package com.github.jactor.rises.facade;
 
-import com.gitlab.jactor.rises.commons.framework.SpringBeanNames;
-import com.gitlab.jactor.rises.model.service.GuestBookDomainService;
-import com.gitlab.jactor.rises.model.service.GuestBookRestService;
-import com.gitlab.jactor.rises.model.service.UserDomainService;
-import com.gitlab.jactor.rises.model.service.UserRestService;
+import com.github.jactor.rises.commons.framework.SpringBeanNames;
+import com.github.jactor.rises.model.service.GuestBookDomainService;
+import com.github.jactor.rises.model.service.GuestBookRestService;
+import com.github.jactor.rises.model.service.UserDomainService;
+import com.github.jactor.rises.model.service.UserRestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

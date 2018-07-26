@@ -1,8 +1,8 @@
-package com.gitlab.jactor.rises.facade.rest;
+package com.github.jactor.rises.facade.rest;
 
-import com.gitlab.jactor.rises.commons.datatype.Username;
-import com.gitlab.jactor.rises.commons.dto.UserDto;
-import com.gitlab.jactor.rises.model.service.UserRestService;
+import com.github.jactor.rises.commons.datatype.Username;
+import com.github.jactor.rises.commons.dto.UserDto;
+import com.github.jactor.rises.model.service.UserRestService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

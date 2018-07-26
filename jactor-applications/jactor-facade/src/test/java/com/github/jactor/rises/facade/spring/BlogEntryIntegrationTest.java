@@ -1,10 +1,10 @@
-package com.gitlab.jactor.rises.facade.spring;
+package com.github.jactor.rises.facade.spring;
 
-import com.gitlab.jactor.rises.commons.dto.BlogEntryDto;
-import com.gitlab.jactor.rises.commons.dto.UserDto;
-import com.gitlab.jactor.rises.model.service.BlogRestService;
-import com.gitlab.jactor.rises.model.service.UserRestService;
-import com.gitlab.jactor.rises.test.util.SpringBootActuatorUtil;
+import com.github.jactor.rises.commons.dto.BlogEntryDto;
+import com.github.jactor.rises.commons.dto.UserDto;
+import com.github.jactor.rises.model.service.BlogRestService;
+import com.github.jactor.rises.model.service.UserRestService;
+import com.github.jactor.rises.test.util.SpringBootActuatorUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,11 +16,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import static com.gitlab.jactor.rises.commons.dto.AddressDto.anAddress;
-import static com.gitlab.jactor.rises.commons.dto.BlogDto.aBlog;
-import static com.gitlab.jactor.rises.commons.dto.BlogEntryDto.aBlogEntry;
-import static com.gitlab.jactor.rises.commons.dto.PersonDto.aPerson;
-import static com.gitlab.jactor.rises.commons.dto.UserDto.aUser;
+import static com.github.jactor.rises.commons.dto.AddressDto.anAddress;
+import static com.github.jactor.rises.commons.dto.BlogDto.aBlog;
+import static com.github.jactor.rises.commons.dto.BlogEntryDto.aBlogEntry;
+import static com.github.jactor.rises.commons.dto.PersonDto.aPerson;
+import static com.github.jactor.rises.commons.dto.UserDto.aUser;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;

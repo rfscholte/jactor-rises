@@ -1,12 +1,12 @@
-package com.gitlab.jactor.rises.web.controller;
+package com.github.jactor.rises.web.controller;
 
-import com.gitlab.jactor.rises.commons.datatype.Username;
-import com.gitlab.jactor.rises.commons.dto.UserDto;
-import com.gitlab.jactor.rises.web.JactorWeb;
-import com.gitlab.jactor.rises.web.JactorWebBeans;
-import com.gitlab.jactor.rises.web.menu.MenuFacade;
-import com.gitlab.jactor.rises.web.menu.MenuItem;
-import com.gitlab.jactor.rises.web.service.UserRestService;
+import com.github.jactor.rises.commons.datatype.Username;
+import com.github.jactor.rises.commons.dto.UserDto;
+import com.github.jactor.rises.web.JactorWeb;
+import com.github.jactor.rises.web.JactorWebBeans;
+import com.github.jactor.rises.web.menu.MenuFacade;
+import com.github.jactor.rises.web.menu.MenuItem;
+import com.github.jactor.rises.web.service.UserRestService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import static com.gitlab.jactor.rises.web.menu.MenuItem.aMenuItem;
+import static com.github.jactor.rises.web.menu.MenuItem.aMenuItem;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;

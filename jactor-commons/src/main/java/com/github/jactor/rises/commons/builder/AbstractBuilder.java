@@ -1,4 +1,4 @@
-package com.gitlab.jactor.rises.commons.builder;
+package com.github.jactor.rises.commons.builder;
 
 import java.util.Optional;
 

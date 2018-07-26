@@ -1,11 +1,11 @@
-package com.gitlab.jactor.rises.facade.spring;
+package com.github.jactor.rises.facade.spring;
 
-import com.gitlab.jactor.rises.commons.datatype.Username;
-import com.gitlab.jactor.rises.commons.dto.UserDto;
-import com.gitlab.jactor.rises.model.domain.user.UserDomain;
-import com.gitlab.jactor.rises.model.service.UserDomainService;
-import com.gitlab.jactor.rises.test.extension.validate.SuppressValidInstanceExtension;
-import com.gitlab.jactor.rises.test.util.SpringBootActuatorUtil;
+import com.github.jactor.rises.commons.datatype.Username;
+import com.github.jactor.rises.commons.dto.UserDto;
+import com.github.jactor.rises.model.domain.user.UserDomain;
+import com.github.jactor.rises.model.service.UserDomainService;
+import com.github.jactor.rises.test.extension.validate.SuppressValidInstanceExtension;
+import com.github.jactor.rises.test.util.SpringBootActuatorUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,9 +19,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static com.gitlab.jactor.rises.commons.dto.UserDto.aUser;
-import static com.gitlab.jactor.rises.model.domain.address.AddressDomain.anAddress;
-import static com.gitlab.jactor.rises.model.domain.person.PersonDomain.aPerson;
+import static com.github.jactor.rises.commons.dto.UserDto.aUser;
+import static com.github.jactor.rises.model.domain.address.AddressDomain.anAddress;
+import static com.github.jactor.rises.model.domain.person.PersonDomain.aPerson;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;

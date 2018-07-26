@@ -1,7 +1,7 @@
-package com.gitlab.jactor.rises.persistence.entity.address;
+package com.github.jactor.rises.persistence.entity.address;
 
-import com.gitlab.jactor.rises.commons.builder.AbstractBuilder;
-import com.gitlab.jactor.rises.commons.builder.MissingFields;
+import com.github.jactor.rises.commons.builder.AbstractBuilder;
+import com.github.jactor.rises.commons.builder.MissingFields;
 
 import java.util.Optional;
 
